@@ -2,7 +2,7 @@
     "name": "polyglot",
     "title": "Polyglot",
     "description": "Talk to others using a language you can speak and scrambles text you can't understand.",
-    "version": "0.1",
+    "version": "0.2",
     "author": "KaKaRoTo",
     "scripts": ["./polyglot.js"],
     "styles": ["./polyglot.css"],

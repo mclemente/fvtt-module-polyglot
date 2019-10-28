@@ -2,6 +2,7 @@ class PolyGlot {
 
 	constructor() {
 		this.known_languages = [];
+		this.refresh_timeout = null;
 	}
 
 	renderChatLog(chatlog, html, data) {
@@ -17,13 +18,44 @@ class PolyGlot {
 	}
 
 	updateUser(user, data) {
-		if (user.id == game.user.id && data.character !== undefined)
+		if (user.id == game.user.id && data.character !== undefined) {
 			this.updateUserLanguages(ui.chat.element)
+			this.updateChatMessages()
+		}
+	}
+	controlToken() {
+		this.updateUserLanguages(ui.chat.element)
+		this.updateChatMessages()
+	}
+	updateChatMessages() {
+		// Delay refresh because switching tokens could cause a controlToken(false) then controlToken(true) very fast
+		if (this.refresh_timeout)
+			clearTimeout(this.refresh_timeout)
+		this.refresh_timeout = setTimeout(this.updateChatMessagesDelayed.bind(this), 500)
+	}
+	updateChatMessagesDelayed() {
+		this.refresh_timeout = null;
+		// Loop in reverse so later messages get refreshed first.
+		for (let i = game.messages.entities.length - 1; i >= 0; i--) {
+			let message = game.messages.entities[i]
+			if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
+				let lang = message.getFlag("polyglot", "language") || ""
+				let unknown = !this.known_languages.includes(lang);
+				if (unknown != message.polyglot_unknown)
+					ui.chat.updateMessage(message)
+			}
+		}
 	}
 	updateUserLanguages(html) {
-		let actor = game.user.character;
+		let actors = [];
 		this.known_languages = [];
-		if (actor) {
+		for (let token of canvas.tokens.controlledTokens) {
+			if (token.actor)
+				actors.push(token.actor)
+		}
+		if (actors.length == 0 && game.user.character)
+			actors.push(game.user.character);
+		for (let actor of actors) {
 			try {
 				// Don't duplicate the value in case it's a not an array
 				for (let lang of actor.data.data.traits.languages.value)
@@ -55,14 +87,14 @@ class PolyGlot {
 			if (lang != "") {
 				let metadata = html.find(".message-metadata")
 				let language = CONFIG.languages[lang] || lang
-				let unknown = false;
-				if (!this.known_languages.includes(lang)) {
+				message.polyglot_unknown = !this.known_languages.includes(lang);
+				if (message.polyglot_unknown) {
 					let content = html.find(".message-content")
 					let new_content = content.text().replace(/\w/g, this.randomRune)
 					content.text(new_content)
-					unknown = true;
+					message.polyglot_unknown = true;
 				}
-				let color = unknown ? "red" : "green";
+				let color = message.polyglot_unknown ? "red" : "green";
 				metadata.find(".polyglot-message-language").remove()
 				metadata.append($(`<a class="button polyglot-message-language" title="${language}">
 									 <i class="fas fa-globe" style="color:${color}"></i>
@@ -83,5 +115,6 @@ PolyGlotSingleton = new PolyGlot()
 
 Hooks.on('renderChatLog', PolyGlotSingleton.renderChatLog.bind(PolyGlotSingleton))
 Hooks.on('updateUser', PolyGlotSingleton.updateUser.bind(PolyGlotSingleton))
+Hooks.on('controlToken', PolyGlotSingleton.controlToken.bind(PolyGlotSingleton))
 Hooks.on('preCreateChatMessage', PolyGlotSingleton.preCreateChatMessage.bind(PolyGlotSingleton))
 Hooks.on('renderChatMessage', PolyGlotSingleton.renderChatMessage.bind(PolyGlotSingleton))
