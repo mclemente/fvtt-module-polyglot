@@ -35,10 +35,13 @@ class PolyGlot {
 	}
 	updateChatMessagesDelayed() {
 		this.refresh_timeout = null;
-		// Loop in reverse so later messages get refreshed first.
+		let prev_day_timestamp = new Date() - (24 * 60 * 60 * 1000)
+	  
+		// Loop in reverse so most recent messages get refreshed first.
 		for (let i = game.messages.entities.length - 1; i >= 0; i--) {
 			let message = game.messages.entities[i]
-			if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
+			// Only refresh messages from the last 24 hours for performance and for preventing seeing old decrypted messages.
+			if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC && message.data.timestamp > prev_day_timestamp) {
 				let lang = message.getFlag("polyglot", "language") || ""
 				let unknown = !this.known_languages.includes(lang);
 				if (unknown != message.polyglot_unknown)
@@ -88,7 +91,7 @@ class PolyGlot {
 				let metadata = html.find(".message-metadata")
 				let language = CONFIG.languages[lang] || lang
 				message.polyglot_unknown = !this.known_languages.includes(lang);
-				if (message.polyglot_unknown) {
+				if (!message.polyglot_force && message.polyglot_unknown) {
 					let content = html.find(".message-content")
 					let new_content = content.text().replace(/\w/g, this.randomRune)
 					content.text(new_content)
@@ -96,12 +99,23 @@ class PolyGlot {
 				}
 				let color = message.polyglot_unknown ? "red" : "green";
 				metadata.find(".polyglot-message-language").remove()
-				metadata.append($(`<a class="button polyglot-message-language" title="${language}">
-									 <i class="fas fa-globe" style="color:${color}"></i>
-								   </a>`))
+				let button = $(`<a class="button polyglot-message-language" title="${language}">
+									<i class="fas fa-globe" style="color:${color}"></i>
+			  					</a>`)
+				metadata.append(button)
+				if (game.user.isGM) {
+					button.click(this._onGlobeClick.bind(this))
+				}
 			}
 		}
 
+	}
+	_onGlobeClick(event) {
+		event.preventDefault();
+		const li = $(event.currentTarget).parents('.message');
+		const message = Messages.instance.get(li.data("messageId"));
+		message.polyglot_force = true;
+		ui.chat.updateMessage(message)
 	}
 	preCreateChatMessage(messages, data, options) {
 		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
