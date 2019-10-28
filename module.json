@@ -1,0 +1,15 @@
+{
+    "name": "polyglot",
+    "title": "Polyglot",
+    "description": "Talk to others using a language you can speak and scrambles text you can't understand.",
+    "version": "0.1",
+    "author": "KaKaRoTo",
+    "scripts": ["./polyglot.js"],
+    "styles": ["./polyglot.css"],
+    "packs": [],
+    "systems": ["dnd5e", "dnd5eJP"],
+    "url": "https://github.com/kakaroto/fvtt-module-polyglot",
+    "manifest": "https://raw.githubusercontent.com/kakaroto/fvtt-module-polyglot/master/module.json",
+    "download": "https://github.com/kakaroto/fvtt-module-polyglot/archive/master.zip"
+
+}
