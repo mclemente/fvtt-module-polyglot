@@ -69,13 +69,13 @@ class PolyGlot {
 		}
 		if (this.known_languages.length == 0) {
 			if (game.user.isGM)
-				this.known_languages = Object.keys(CONFIG.languages)
+				this.known_languages = Object.keys(CONFIG.DND5E.languages)
 			else
 				this.known_languages.push("common");
 		}
 		let options = ""
 		for (let lang of this.known_languages) {
-			let label = CONFIG.languages[lang] || lang
+			let label = CONFIG.DND5E.languages[lang] || lang
 			options += `<option value="${lang}">${label}</option>`
 		}
 		html.find(".polyglot-lang-select select").html($(options))
@@ -83,13 +83,13 @@ class PolyGlot {
 	randomRune() {
 		return String.fromCharCode(Math.floor(Math.random() * 0x51) + 0x16A0)
 	}
-	renderChatMessage(message, data, html) {
+	renderChatMessage(message, html, data) {
 		// html and data are swapped on 0.3.x in relation to other render<Application> hooks
 		if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
 			let lang = message.getFlag("polyglot", "language") || ""
 			if (lang != "") {
 				let metadata = html.find(".message-metadata")
-				let language = CONFIG.languages[lang] || lang
+				let language = CONFIG.DND5E.languages[lang] || lang
 				message.polyglot_unknown = !this.known_languages.includes(lang);
 				if (!message.polyglot_force && message.polyglot_unknown) {
 					let content = html.find(".message-content")
