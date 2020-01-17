@@ -1,7 +1,7 @@
 class PolyGlot {
 
 	constructor() {
-		this.known_languages = [];
+		this.known_languages = new Set();
 		this.refresh_timeout = null;
 	}
 
@@ -43,7 +43,7 @@ class PolyGlot {
 			// Only refresh messages from the last 24 hours for performance and for preventing seeing old decrypted messages.
 			if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC && message.data.timestamp > prev_day_timestamp) {
 				let lang = message.getFlag("polyglot", "language") || ""
-				let unknown = !this.known_languages.includes(lang);
+				let unknown = !this.known_languages.has(lang);
 				if (unknown != message.polyglot_unknown)
 					ui.chat.updateMessage(message)
 			}
@@ -51,7 +51,7 @@ class PolyGlot {
 	}
 	updateUserLanguages(html) {
 		let actors = [];
-		this.known_languages = [];
+		this.known_languages = new Set();
 		for (let token of canvas.tokens.controlledTokens) {
 			if (token.actor)
 				actors.push(token.actor)
@@ -62,16 +62,16 @@ class PolyGlot {
 			try {
 				// Don't duplicate the value in case it's a not an array
 				for (let lang of actor.data.data.traits.languages.value)
-				this.known_languages.push(lang)
+				this.known_languages.add(lang)
 			} catch (err) { 
 				// Maybe not dnd5e or corrupted actor data?
 			}
 		}
-		if (this.known_languages.length == 0) {
+		if (this.known_languages.size == 0) {
 			if (game.user.isGM)
-				this.known_languages = Object.keys(CONFIG.DND5E.languages)
+				this.known_languages = new Set(Object.keys(CONFIG.DND5E.languages))
 			else
-				this.known_languages.push("common");
+				this.known_languages.add("common");
 		}
 		let options = ""
 		for (let lang of this.known_languages) {
@@ -90,7 +90,7 @@ class PolyGlot {
 			if (lang != "") {
 				let metadata = html.find(".message-metadata")
 				let language = CONFIG.DND5E.languages[lang] || lang
-				message.polyglot_unknown = !this.known_languages.includes(lang);
+				message.polyglot_unknown = !this.known_languages.has(lang);
 				if (!message.polyglot_force && message.polyglot_unknown) {
 					let content = html.find(".message-content")
 					let new_content = content.text().replace(/\w/g, this.randomRune)
