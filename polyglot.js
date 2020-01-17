@@ -122,8 +122,11 @@ class PolyGlot {
 	preCreateChatMessage(messages, data, options) {
 		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
 			let lang = ui.chat.element.find("select[name=polyglot-language]").val()
-			if (lang != "")
+			if (lang != "") {
 				mergeObject(data, { "flags.polyglot.language": lang });
+				// TODO: enable bubbles once there's a hook for it.
+				options.chatBubbles = false;
+			}
 		}
 	}
 }
