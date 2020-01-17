@@ -40,8 +40,10 @@ class PolyGlot {
 		// Loop in reverse so most recent messages get refreshed first.
 		for (let i = game.messages.entities.length - 1; i >= 0; i--) {
 			let message = game.messages.entities[i]
+			// On 0.4.4, timestamp is a string
+			let timestamp = Number(new Date(message.data.timestamp))
 			// Only refresh messages from the last 24 hours for performance and for preventing seeing old decrypted messages.
-			if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC && message.data.timestamp > prev_day_timestamp) {
+			if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC && timestamp > prev_day_timestamp) {
 				let lang = message.getFlag("polyglot", "language") || ""
 				let unknown = !this.known_languages.has(lang);
 				if (unknown != message.polyglot_unknown)
