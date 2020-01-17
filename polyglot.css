@@ -2,3 +2,7 @@
     flex: 0 0 28px;
     margin: 0 6px;
 }
+.polyglot-lang-select select {
+    height: 24px;
+    background: rgba(255, 255, 245, 0.8);
+}
