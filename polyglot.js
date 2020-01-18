@@ -119,14 +119,33 @@ class PolyGlot {
 		message.polyglot_force = true;
 		ui.chat.updateMessage(message)
 	}
+
 	preCreateChatMessage(messages, data, options) {
 		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
 			let lang = ui.chat.element.find("select[name=polyglot-language]").val()
-			if (lang != "") {
+			if (lang != "")
 				mergeObject(data, { "flags.polyglot.language": lang });
-				// TODO: enable bubbles once there's a hook for it.
-				options.chatBubbles = false;
+		}
+	}
+	setup() {
+		const orig = Messages.prototype._sayBubble;
+		// TODO: Switch to hook once there is one for chat bubbles
+		Messages.prototype._sayBubble = (response) => {
+			const message = response.created;
+			if (message.type == CONST.CHAT_MESSAGE_TYPES.IC) {
+				const lang = getProperty(message, "flags.polyglot.language") || ""
+				if (lang != "" && !this.known_languages.has(lang)) {
+					try {
+						const content = message.content.replace(/\w/g, this.randomRune)
+						response = duplicate(response);
+						response.created.content = content;
+					} catch (err) {
+						// In case we can't replace it for some reason, just prevent it from 
+						return;
+					}
+				}
 			}
+			return orig(response);
 		}
 	}
 }
@@ -137,3 +156,4 @@ Hooks.on('updateUser', PolyGlotSingleton.updateUser.bind(PolyGlotSingleton))
 Hooks.on('controlToken', PolyGlotSingleton.controlToken.bind(PolyGlotSingleton))
 Hooks.on('preCreateChatMessage', PolyGlotSingleton.preCreateChatMessage.bind(PolyGlotSingleton))
 Hooks.on('renderChatMessage', PolyGlotSingleton.renderChatMessage.bind(PolyGlotSingleton))
+Hooks.on('setup', PolyGlotSingleton.setup.bind(PolyGlotSingleton))
