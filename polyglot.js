@@ -121,7 +121,7 @@ class PolyGlot {
 		event.preventDefault();
 		const li = $(event.currentTarget).parents('.message');
 		const message = Messages.instance.get(li.data("messageId"));
-		message.polyglot_force = true;
+		message.polyglot_force = !message.polyglot_force;
 		ui.chat.updateMessage(message)
 	}
 
