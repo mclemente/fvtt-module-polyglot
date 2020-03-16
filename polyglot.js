@@ -95,7 +95,7 @@ class PolyGlot {
 				message.polyglot_unknown = !this.known_languages.has(lang);
 				if (!message.polyglot_force && message.polyglot_unknown) {
 					let content = html.find(".message-content")
-					let new_content = content.text().replace(/\w/g, this.randomRune)
+					let new_content = content.text().replace(/\p{Letter}/gu, this.randomRune)
 					content.text(new_content)
 					message.polyglot_unknown = true;
 				}
@@ -136,7 +136,7 @@ class PolyGlot {
 				const lang = getProperty(message, "flags.polyglot.language") || ""
 				if (lang != "" && !this.known_languages.has(lang)) {
 					try {
-						const content = message.content.replace(/\w/g, this.randomRune)
+						const content = message.content.replace(/\p{Letter}/gu, this.randomRune)
 						response = duplicate(response);
 						response.created.content = content;
 					} catch (err) {
