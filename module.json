@@ -12,6 +12,4 @@
     "manifest": "https://raw.githubusercontent.com/kakaroto/fvtt-module-polyglot/master/module.json",
     "download": "https://github.com/kakaroto/fvtt-module-polyglot/archive/master.zip",
     "minimumCoreVersion": "0.4.4",
-    "compatibleCoreVersion": "0.5.1"
-
 }
