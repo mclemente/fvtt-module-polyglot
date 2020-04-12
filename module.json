@@ -10,6 +10,8 @@
     "systems": ["dnd5e", "dnd5eJP"],
     "url": "https://github.com/kakaroto/fvtt-module-polyglot",
     "manifest": "https://raw.githubusercontent.com/kakaroto/fvtt-module-polyglot/master/module.json",
-    "download": "https://github.com/kakaroto/fvtt-module-polyglot/archive/master.zip",
-    "minimumCoreVersion": "0.4.4"
+    "download": "https://github.com/kakaroto/fvtt-module-polyglot/archive/v0.6.zip",
+    "minimumCoreVersion": "0.4.4",
+    "compatibleCoreVersion": "0.5.3"
+
 }
