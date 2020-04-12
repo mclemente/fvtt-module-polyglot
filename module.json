@@ -2,7 +2,7 @@
     "name": "polyglot",
     "title": "Polyglot",
     "description": "Talk to others using a language your selected character can understand and scrambles in-character text you can't understand.",
-    "version": "0.6",
+    "version": "0.7",
     "author": "KaKaRoTo",
     "scripts": ["./polyglot.js"],
     "styles": ["./polyglot.css"],
@@ -10,8 +10,7 @@
     "systems": ["dnd5e", "dnd5eJP"],
     "url": "https://github.com/kakaroto/fvtt-module-polyglot",
     "manifest": "https://raw.githubusercontent.com/kakaroto/fvtt-module-polyglot/master/module.json",
-    "download": "https://github.com/kakaroto/fvtt-module-polyglot/archive/v0.6.zip",
-    "minimumCoreVersion": "0.4.4",
-    "compatibleCoreVersion": "0.5.3"
+    "download": "https://github.com/kakaroto/fvtt-module-polyglot/archive/v0.7.zip",
+    "minimumCoreVersion": "0.5.4"
 
 }

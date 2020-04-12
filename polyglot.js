@@ -125,7 +125,7 @@ class PolyGlot {
 		ui.chat.updateMessage(message)
 	}
 
-	preCreateChatMessage(messages, data, options) {
+	preCreateChatMessage(data, options, userId) {
 		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
 			let lang = ui.chat.element.find("select[name=polyglot-language]").val()
 			if (lang != "")
