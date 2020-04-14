@@ -156,7 +156,30 @@ class PolyGlot {
 			}
 			return orig(response);
 		}
-	}
+    }
+    
+    init() {
+        // custom languages
+        game.settings.register("polyglot", "customLanguages", {
+            name: "Custom Languages",
+            hint: "Define a list of custom, comma separated, languages to add to the system.",
+            scope: "world",
+            config: true,
+            default: "",
+            type: String,
+            onChange: (value) => this.setCustomLanguages(value)
+        });
+        this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
+    }
+
+    setCustomLanguages(languages) {
+        for (let lang of languages.split(",")) {
+            lang = lang.trim();
+            const key = lang.toLowerCase().replace(/ \'/g, "_");
+            PolyGlot.languages[key] = lang;
+        }
+
+    }
 }
 PolyGlotSingleton = new PolyGlot()
 
@@ -166,3 +189,4 @@ Hooks.on('controlToken', PolyGlotSingleton.controlToken.bind(PolyGlotSingleton))
 Hooks.on('preCreateChatMessage', PolyGlotSingleton.preCreateChatMessage.bind(PolyGlotSingleton))
 Hooks.on('renderChatMessage', PolyGlotSingleton.renderChatMessage.bind(PolyGlotSingleton))
 Hooks.on('setup', PolyGlotSingleton.setup.bind(PolyGlotSingleton))
+Hooks.on('init', PolyGlotSingleton.init.bind(PolyGlotSingleton))
