@@ -158,7 +158,7 @@ class PolyGlot {
 		}
     }
     
-    init() {
+    ready() {
         // custom languages
         game.settings.register("polyglot", "customLanguages", {
             name: "Custom Languages",
@@ -178,7 +178,7 @@ class PolyGlot {
             const key = lang.toLowerCase().replace(/ \'/g, "_");
             PolyGlot.languages[key] = lang;
         }
-
+        this.updateUserLanguages(ui.chat.element);
     }
 }
 PolyGlotSingleton = new PolyGlot()
@@ -189,4 +189,4 @@ Hooks.on('controlToken', PolyGlotSingleton.controlToken.bind(PolyGlotSingleton))
 Hooks.on('preCreateChatMessage', PolyGlotSingleton.preCreateChatMessage.bind(PolyGlotSingleton))
 Hooks.on('renderChatMessage', PolyGlotSingleton.renderChatMessage.bind(PolyGlotSingleton))
 Hooks.on('setup', PolyGlotSingleton.setup.bind(PolyGlotSingleton))
-Hooks.on('init', PolyGlotSingleton.init.bind(PolyGlotSingleton))
+Hooks.on('ready', PolyGlotSingleton.ready.bind(PolyGlotSingleton))
