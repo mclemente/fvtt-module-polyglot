@@ -137,24 +137,23 @@ class PolyGlot {
 		}
 	}
 	setup() {
-		const orig = Messages.prototype._sayBubble;
-		// TODO: Switch to hook once there is one for chat bubbles
-		Messages.prototype._sayBubble = (response) => {
-			const message = response.created;
-			if (message.type == CONST.CHAT_MESSAGE_TYPES.IC) {
-				const lang = getProperty(message, "flags.polyglot.language") || ""
+		const orig = Messages.prototype.sayBubble;
+		// TODO: Switch to chatBubble hook once we get the original ChatMessage as part of hook arguments
+		Messages.prototype.sayBubble = (message) => {
+			if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
+				const lang = message.getFlag("polyglot", "language") || ""
 				if (lang != "" && !this.known_languages.has(lang)) {
 					try {
-						const content = message.content.replace(this.regexp_letters, this.randomRune)
-						response = duplicate(response);
-						response.created.content = content;
+                        // Create a new message so we don't modify the original, since we can't change the html itself
+                        message = new ChatMessage(duplicate(message.data));
+						message.data.content = message.data.content.replace(this.regexp_letters, this.randomRune);
 					} catch (err) {
-						// In case we can't replace it for some reason, just prevent it from 
+						// In case we can't replace it for some reason, just prevent it from appearing
 						return;
 					}
 				}
 			}
-			return orig(response);
+			return orig(message);
 		}
     }
     
