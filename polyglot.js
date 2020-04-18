@@ -73,7 +73,7 @@ class PolyGlot {
 			try {
 				// Don't duplicate the value in case it's a not an array
 				for (let lang of actor.data.data.traits.languages.value)
-				    this.known_languages.add(lang)
+				    this.known_languages.add(lang.toLowerCase())
 			} catch (err) { 
 				// Maybe not dnd5e, pf1 or pf2e or corrupted actor data?
 			}
