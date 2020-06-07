@@ -7,7 +7,7 @@
     "scripts": ["./polyglot.js"],
     "styles": ["./polyglot.css"],
     "packs": [],
-    "systems": ["dnd5e", "dnd5eJP", "pf1", "pf2e"],
+    "systems": ["dnd5e", "dnd5eJP", "pf1", "pf2e", "wfrp4e"],
     "url": "https://github.com/kakaroto/fvtt-module-polyglot",
     "manifest": "https://raw.githubusercontent.com/kakaroto/fvtt-module-polyglot/master/module.json",
     "download": "https://github.com/kakaroto/fvtt-module-polyglot/archive/v0.8.3.zip",
