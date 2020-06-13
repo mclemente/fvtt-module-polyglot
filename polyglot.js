@@ -173,7 +173,8 @@ class PolyGlot {
                 }
                 let color = message.polyglot_unknown ? "red" : "green";
                 metadata.find(".polyglot-message-language").remove()
-                let button = $(`<a class="button polyglot-message-language" title="${language}">
+                const title = game.user.isGM ? `title="${language}"` : ""
+                let button = $(`<a class="button polyglot-message-language" ${title}>
                     <i class="fas fa-globe" style="color:${color}"></i>
                 </a>`)
                 metadata.append(button)
