@@ -10,47 +10,50 @@ class PolyGlot {
         }
     }
 
-    static get languages() {
-        switch (game.system.id.toLowerCase()) {
-            default:
+    static async getLanguages() {
+        switch (game.system.id) {
+            case "dnd5e":
+            case "dnd5eJP":
+            case "pf1":
+            case "pf2e":
                 return CONFIG[game.system.id.toUpperCase()].languages;
+                break;
             case "wfrp4e":
-                let re = /Language \((.+)\)/i;
                 const pack = game.packs.get("wfrp4e.skills");
-                return pack.getIndex().then(itemList => {
-                    let langs = {};
-                    for (let item of itemList) {
-                        let found = item.name.match(re);
-                        if (found && found.length > 1 && found[1].length >= 1) {
-                            langs[found[1]] = found[0];
-                        }
-                    }
-                    Promise.resolve(langs);
-                });
+                const itemList = await pack.getIndex();
+                const langs = {};
+                for (let item of itemList) {
+                    const match = item.name.match(/Language \((.+)\)/i);
+                    if (match)
+                        langs[match[1]] = match[1];
+                }
+                return langs;
+                break;
+            default:
+                return [];
+                break;
         }
+    }
+    static get languages() {
+        return this._languages || {};
+    }
+    static set languages(val) {
+        this._languages = val || {};
+    }
+    static get defaultLanguage() {
+        if (game.system.id === "wfrp4e") return "Reikspiel";
+        if (Object.keys(this.languages).includes("common")) return "common";
+        return this.languages[0] || "";
     }
 
     renderChatLog(chatlog, html, data) {
-        let lang_html = ``;
-        switch (game.system.id.toLowerCase()) {
-            default:
-                lang_html = $(`
-                <div id="polyglot"  class="polyglot-lang-select flexrow">
-                        <label>Language : </label>
-                        <select name="polyglot-language">
-                        </select>
-                </div>
-                `);
-                break;
-            case "wfrp4e":
-                lang_html = $(`
-                <div id="polyglot"  class="polyglot-lang-select-wfrp4e flexrow">
-                        <label>Language: </label>
-                        <select name="polyglot-language">
-                        </select>
-                </div>
-                `);
-        }
+        const lang_html = $(`
+        <div id="polyglot"  class="polyglot-lang-select flexrow">
+                <label>Language : </label>
+                <select name="polyglot-language">
+                </select>
+        </div>
+        `);
         html.find("#chat-controls").after(lang_html);
         this.updateUserLanguages(html)
     }
@@ -104,21 +107,19 @@ class PolyGlot {
             actors.push(game.user.character);
         for (let actor of actors) {
             try {
-                switch (game.system.id.toLowerCase()) {
+                switch (game.system.id) {
+                    case "wfrp4e":
+                        for (let item of actor.data.items) {
+                            const match = item.name.match(/Language \((.+)\)/i);
+                            // adding only the descriptive language name, not "Language (XYZ)"
+                            if (match)
+                                this.known_languages.add(match[1]);
+                        }
+                        break;
                     default:
                         // Don't duplicate the value in case it's a not an array
                         for (let lang of actor.data.data.traits.languages.value)
                             this.known_languages.add(lang)
-                        break;
-                    case "wfrp4e":
-                        let re = /Language \((.+)\)/i;
-                        for (let item of actor.data.items) {
-                            let found = item.name.match(re);
-                            if (found) {
-                                // adding only the descriptive language name, not "Language (XYZ)"
-                                this.known_languages.add(found[1]);
-                            }
-                        }
                         break;
                 }
             } catch (err) {
@@ -128,28 +129,15 @@ class PolyGlot {
         if (this.known_languages.size == 0) {
             if (game.user.isGM)
                 this.known_languages = new Set(Object.keys(PolyGlot.languages))
-            else {
-                switch (game.system.id.toLowerCase()) {
-                    default:
-                        this.known_languages.add("common");
-                        break;
-                    case "wfrp4e":
-                        this.known_languages.add("Reikspiel");
-                }
-            }
+            else
+                this.known_languages.add(PolyGlot.defaultLanguage);
         }
         let options = ""
         for (let lang of this.known_languages) {
             let label = PolyGlot.languages[lang] || lang
             options += `<option value="${lang}">${label}</option>`
         }
-        switch (game.system.id.toLowerCase()) {
-            default:
-                html.find(".polyglot-lang-select select").html($(options))
-                break;
-            case "wfrp4e":
-                html.find(".polyglot-lang-select-wfrp4e select").html($(options))
-        }
+        html.find(".polyglot-lang-select select").html($(options));
     }
 
     randomRune() {
@@ -235,7 +223,8 @@ class PolyGlot {
         this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
     }
 
-    setCustomLanguages(languages) {
+    async setCustomLanguages(languages) {
+        PolyGlot.languages = await PolyGlot.getLanguages();
         for (let lang of languages.split(",")) {
             lang = lang.trim();
             const key = lang.toLowerCase().replace(/ \'/g, "_");
