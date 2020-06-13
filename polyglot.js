@@ -55,6 +55,10 @@ class PolyGlot {
         </div>
         `);
         html.find("#chat-controls").after(lang_html);
+        const select = html.find(".polyglot-lang-select select");
+        select.change(e => {
+            this.lastSelection = select.val();
+        })
         this.updateUserLanguages(html)
     }
 
@@ -137,7 +141,16 @@ class PolyGlot {
             let label = PolyGlot.languages[lang] || lang
             options += `<option value="${lang}">${label}</option>`
         }
-        html.find(".polyglot-lang-select select").html($(options));
+        const select = html.find(".polyglot-lang-select select");
+        const prevOption = select.val();
+        select.html($(options));
+        let selectedLanguage = this.lastSelection || prevOption || PolyGlot.defaultLanguage;
+        // known_languages is a Set, so it's weird to access its values
+        if (!this.known_languages.has(selectedLanguage))
+            selectedLanguage = PolyGlot.defaultLanguage;
+        if (!this.known_languages.has(selectedLanguage))
+            selectedLanguage = [...this.known_languages][0];
+        select.val(selectedLanguage);
     }
 
     randomRune() {
