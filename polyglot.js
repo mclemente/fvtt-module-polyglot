@@ -276,6 +276,18 @@ class PolyGlot {
         }
         this.updateUserLanguages(ui.chat.element);
     }
+
+    renderJournalSheet(journalSheet) {
+        if (journalSheet.entity.owner) return;
+        if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) return;
+        const spans = journalSheet.element.find("span.polyglot-journal");
+        for (let span of spans.toArray()) {
+            const lang = span.dataset.language;
+            if (!lang) continue;
+            if (!this.known_languages.has(lang))
+                span.textContent = span.textContent.replace(this.regexp_letters, this.randomRune)
+        }
+    }
 }
 
 PolyGlotSingleton = new PolyGlot()
@@ -285,5 +297,6 @@ Hooks.on('updateUser', PolyGlotSingleton.updateUser.bind(PolyGlotSingleton))
 Hooks.on('controlToken', PolyGlotSingleton.controlToken.bind(PolyGlotSingleton))
 Hooks.on('preCreateChatMessage', PolyGlotSingleton.preCreateChatMessage.bind(PolyGlotSingleton))
 Hooks.on('renderChatMessage', PolyGlotSingleton.renderChatMessage.bind(PolyGlotSingleton))
+Hooks.on('renderJournalSheet', PolyGlotSingleton.renderJournalSheet.bind(PolyGlotSingleton))
 Hooks.on('setup', PolyGlotSingleton.setup.bind(PolyGlotSingleton))
 Hooks.on('ready', PolyGlotSingleton.ready.bind(PolyGlotSingleton))
