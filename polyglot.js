@@ -277,7 +277,88 @@ class PolyGlot {
         this.updateUserLanguages(ui.chat.element);
     }
 
+    _addPolyglotEditor(sheet) {
+        if (sheet._polyglotEditor) return;
+        sheet._polyglot_original_createEditor = sheet._createEditor;
+        const languages = Object.entries(PolyGlot.languages).map(([lang, name]) => {
+            return {
+              title: name,
+              inline: 'span',
+              classes: 'polyglot-journal',
+              attributes: {
+                  title: name,
+                  "data-language": lang
+              }
+            };
+        });
+        sheet._createEditor = function(target, editorOptions, initialContent) {
+            editorOptions.style_formats = [
+              {
+                title: "Custom",
+                items: [
+                  {
+                    title: "Secret",
+                    block: 'section',
+                    classes: 'secret',
+                    wrapper: true
+                  }
+                ]
+              },
+              {
+                title: "Polyglot",
+                items: languages
+              }
+            ];
+            editorOptions.formats = {
+                removeformat: [
+                    // Default remove format configuration from tinyMCE
+                    {
+                      selector: 'b,strong,em,i,font,u,strike,sub,sup,dfn,code,samp,kbd,var,cite,mark,q,del,ins',
+                      remove: 'all',
+                      split: true,
+                      expand: false,
+                      block_expand: true,
+                      deep: true
+                    },
+                    {
+                      selector: 'span',
+                      attributes: [
+                        'style',
+                        'class'
+                      ],
+                      remove: 'empty',
+                      split: true,
+                      expand: false,
+                      deep: true
+                    },
+                    {
+                      selector: '*',
+                      attributes: [
+                        'style',
+                        'class'
+                      ],
+                      split: false,
+                      expand: false,
+                      deep: true
+                    },
+                    // Add custom config to remove spans from polyglot when needed
+                    {
+                        selector: 'span',
+                        classes: 'polyglot-journal',
+                        attributes: ['title', 'class', 'data-language'],
+                        remove: 'all',
+                        split: true,
+                        expand: false,
+                        deep: true
+                    },
+                ]
+            };
+            this._polyglot_original_createEditor(target, editorOptions, initialContent);
+        }
+        sheet._polyglotEditor = true;
+    }
     renderJournalSheet(journalSheet) {
+        this._addPolyglotEditor(journalSheet);
         if (journalSheet.entity.owner) return;
         if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) return;
         const spans = journalSheet.element.find("span.polyglot-journal");
