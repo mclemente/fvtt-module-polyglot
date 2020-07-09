@@ -97,6 +97,13 @@ class PolyGlot {
             if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
                 let lang = message.getFlag("polyglot", "language") || ""
                 let unknown = !this.known_languages.has(lang);
+                if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
+                    // Update globe color
+                    const globe = ui.chat.element.find(`.message[data-message-id="${message.id}"] .message-metadata .polyglot-message-language i`)
+                    const color = unknown ? "red" : "green";
+                    globe.css({color});
+                    unknown = false;
+                }
                 if (unknown != message.polyglot_unknown)
                     ui.chat.updateMessage(message)
             }
@@ -167,14 +174,17 @@ class PolyGlot {
             if (lang != "") {
                 let metadata = html.find(".message-metadata")
                 let language = PolyGlot.languages[lang] || lang
-                message.polyglot_unknown = !this.known_languages.has(lang);
+                const unknown = !this.known_languages.has(lang);
+                message.polyglot_unknown = unknown;
+                if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
+                    message.polyglot_unknown = false;
                 if (!message.polyglot_force && message.polyglot_unknown) {
                     let content = html.find(".message-content")
                     let new_content = content.text().replace(this.regexp_letters, this.randomRune)
                     content.text(new_content)
                     message.polyglot_unknown = true;
                 }
-                let color = message.polyglot_unknown ? "red" : "green";
+                const color = unknown ? "red" : "green";
                 metadata.find(".polyglot-message-language").remove()
                 const title = game.user.isGM ? `title="${language}"` : ""
                 let button = $(`<a class="button polyglot-message-language" ${title}>
@@ -223,6 +233,15 @@ class PolyGlot {
             config: true,
             default: "",
             type: String
+        });
+        game.settings.register("polyglot", "runifyGM", {
+            name: "Scramble for GM",
+            hint: "Disable this option to always show the text for the GM (refer to the globe's color for the token's understanding).",
+            scope: "client",
+            config: true,
+            default: true,
+            type: Boolean,
+            onChange: () => this.updateChatMessages()
         });
         const orig = Messages.prototype.sayBubble;
         // TODO: Switch to chatBubble hook once we get the original ChatMessage as part of hook arguments
