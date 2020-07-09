@@ -41,6 +41,12 @@ class PolyGlot {
         this._languages = val || {};
     }
     static get defaultLanguage() {
+        const defaultLang = game.settings.get("polyglot", "defaultLanguage");
+        if (defaultLang) {
+            if (this.languages[defaultLang]) return defaultLang;
+            const inverted = invertObject(this.languages);
+            if (inverted[defaultLang]) return inverted[defaultLang];
+        }
         if (game.system.id === "wfrp4e") return "Reikspiel";
         if (Object.keys(this.languages).includes("common")) return "common";
         return this.languages[0] || "";
@@ -200,6 +206,24 @@ class PolyGlot {
     }
 
     setup() {
+        // custom languages
+        game.settings.register("polyglot", "customLanguages", {
+            name: "Custom Languages",
+            hint: "Define a list of custom, comma separated, languages to add to the system.",
+            scope: "world",
+            config: true,
+            default: "",
+            type: String,
+            onChange: (value) => this.setCustomLanguages(value)
+        });
+        game.settings.register("polyglot", "defaultLanguage", {
+            name: "Default Language",
+            hint: "Name of the default language to select. Keep empty to use system default.",
+            scope: "client",
+            config: true,
+            default: "",
+            type: String
+        });
         const orig = Messages.prototype.sayBubble;
         // TODO: Switch to chatBubble hook once we get the original ChatMessage as part of hook arguments
         Messages.prototype.sayBubble = (message) => {
@@ -221,16 +245,6 @@ class PolyGlot {
     }
 
     ready() {
-        // custom languages
-        game.settings.register("polyglot", "customLanguages", {
-            name: "Custom Languages",
-            hint: "Define a list of custom, comma separated, languages to add to the system.",
-            scope: "world",
-            config: true,
-            default: "",
-            type: String,
-            onChange: (value) => this.setCustomLanguages(value)
-        });
         this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
     }
 
