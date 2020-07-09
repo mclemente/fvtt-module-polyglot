@@ -83,19 +83,12 @@ class PolyGlot {
 
     updateChatMessagesDelayed() {
         this.refresh_timeout = null;
-        let prev_day_timestamp = new Date() - (24 * 60 * 60 * 1000)
-
+        // Get the last 100 messages
+        const messages = ui.chat.element.find('.message').slice(-100).toArray().map(m => game.messages.get(m.dataset.messageId))
         // Loop in reverse so most recent messages get refreshed first.
-        for (let i = game.messages.entities.length - 1; i >= 0; i--) {
-            let message = game.messages.entities[i]
-            // On 0.4.4, timestamp is a string
-            let timestamp = Number(new Date(message.data.timestamp))
-            // Only refresh messages from the last 24 hours for performance and for preventing seeing old decrypted messages.
-            if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC && timestamp > prev_day_timestamp) {
-                const li = ui.chat.element.find(`.message[data-message-id="${message.id}"]`);
-                // Do not update messages that are not in the chat log, otherwise they get posted at the end of it
-                // while in fact they weren't even loaded because they were too old
-                if (li.length === 0) continue;
+        for (let i = messages.length - 1; i >= 0; i--) {
+            let message = messages[i]
+            if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
                 let lang = message.getFlag("polyglot", "language") || ""
                 let unknown = !this.known_languages.has(lang);
                 if (unknown != message.polyglot_unknown)
