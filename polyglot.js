@@ -92,6 +92,10 @@ class PolyGlot {
             let timestamp = Number(new Date(message.data.timestamp))
             // Only refresh messages from the last 24 hours for performance and for preventing seeing old decrypted messages.
             if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC && timestamp > prev_day_timestamp) {
+                const li = ui.chat.element.find(`.message[data-message-id="${message.id}"]`);
+                // Do not update messages that are not in the chat log, otherwise they get posted at the end of it
+                // while in fact they weren't even loaded because they were too old
+                if (li.length === 0) continue;
                 let lang = message.getFlag("polyglot", "language") || ""
                 let unknown = !this.known_languages.has(lang);
                 if (unknown != message.polyglot_unknown)
