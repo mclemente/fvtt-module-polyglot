@@ -134,7 +134,7 @@ class PolyGlot {
                     case "ose":
                         for (let lang of actor.data.data.languages.value)
                             this.known_languages.add(lang)
-						break;
+                        break;
                     default:
                         // Don't duplicate the value in case it's a not an array
                         for (let lang of actor.data.data.traits.languages.value)
