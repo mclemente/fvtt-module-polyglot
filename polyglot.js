@@ -16,6 +16,7 @@ class PolyGlot {
             case "dnd5eJP":
             case "pf1":
             case "pf2e":
+            case "ose":
                 return CONFIG[game.system.id.toUpperCase()].languages;
                 break;
             case "wfrp4e":
@@ -129,6 +130,10 @@ class PolyGlot {
                             if (match)
                                 this.known_languages.add(match[1]);
                         }
+                        break;
+                    case "ose":
+                        for (let lang of actor.data.data.languages.value)
+                            this.known_languages.add(lang)
                         break;
                     default:
                         // Don't duplicate the value in case it's a not an array
