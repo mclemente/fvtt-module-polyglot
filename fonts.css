@@ -1,0 +1,50 @@
+/* ----------------------------------------- */
+/*  Fonts                                    */
+/*                                           */
+/*  Every font represents an alphabet.       */
+/* ----------------------------------------- */
+
+@font-face {
+    font-family: 'AngloSax';
+    src: url('./fonts/AnglosaxonRunes.ttf');
+}
+@font-face {
+    font-family: 'Ar Ciela';
+    src: url('./fonts/Ar Ciela.ttf');
+}
+@font-face {
+    font-family: 'Celestial';
+    src: url('./fonts/Celestial.ttf');
+}
+@font-face {
+    font-family: 'Dethek';
+    src: url('./fonts/Dethek.otf');
+}
+@font-face {
+    font-family: 'Espruar';
+    src: url('./fonts/Espruar.otf');
+}
+@font-face {
+    font-family: 'HighDrowic';
+    src: url('./fonts/HighDrowic.otf');
+}
+@font-face {
+    font-family: 'Infernal';
+    src: url('./fonts/Infernal.ttf');
+}
+@font-face {
+    font-family: 'Iokharic';
+    src: url('./fonts/Iokharic.otf');
+}
+@font-face {
+    font-family: 'Kargi';
+    src: url('./fonts/Kargi.ttf');
+}
+@font-face {
+    font-family: 'Pulsian';
+    src: url('./fonts/Pulsian.ttf');
+}
+@font-face {
+    font-family: 'Thorass';
+    src: url('./fonts/Thorass.otf');
+}
