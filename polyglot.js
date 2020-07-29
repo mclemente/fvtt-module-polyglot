@@ -438,18 +438,6 @@ class PolyGlot {
             }
         }
     }
-    /*  _setPosition(token, html, dimensions) {
-    let cls = Math.random() > 0.5 ? "left" : "right";
-    html.addClass(cls);
-    const pos = {
-      height: dimensions.height,
-      width: dimensions.width,
-      top: token.y - dimensions.height - 8
-    };
-    if ( cls === "right" ) pos.left = token.x - (dimensions.width - token.w);
-    else pos.left = token.x;
-    html.css(pos);
-  }*/
 }
 
 PolyGlotSingleton = new PolyGlot()
