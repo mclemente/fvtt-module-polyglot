@@ -9,8 +9,12 @@
     src: url('./fonts/AnglosaxonRunes.ttf');
 }
 @font-face {
-    font-family: 'Ar Ciela';
-    src: url('./fonts/Ar Ciela.ttf');
+    font-family: 'ArCiela';
+    src: url('./fonts/ArCiela.ttf');
+}
+@font-face {
+    font-family: 'Barazhad';
+    src: url('./fonts/Barazhad.otf');
 }
 @font-face {
     font-family: 'Celestial';
@@ -25,8 +29,16 @@
     src: url('./fonts/Espruar.otf');
 }
 @font-face {
+    font-family: 'FingerAlphabet';
+    src: url('./fonts/FingerAlphabet.ttf');
+}
+@font-face {
     font-family: 'HighDrowic';
     src: url('./fonts/HighDrowic.otf');
+}
+@font-face {
+    font-family: 'HighschoolRunes';
+    src: url('./fonts/HighschoolRunes.ttf');
 }
 @font-face {
     font-family: 'Infernal';
@@ -37,14 +49,70 @@
     src: url('./fonts/Iokharic.otf');
 }
 @font-face {
+    font-family: 'JungleSlang';
+    src: url('./fonts/JungleSlang.ttf');
+}
+@font-face {
     font-family: 'Kargi';
     src: url('./fonts/Kargi.ttf');
+}
+@font-face {
+    font-family: 'MarasEye';
+    src: url('./fonts/MarasEye.otf');
+}
+@font-face {
+    font-family: 'MeroiticDemotic';
+    src: url('./fonts/MeroiticDemotic.ttf');
+}
+@font-face {
+    font-family: 'OldeEspruar';
+    src: url('./fonts/OldeEspruar.otf');
+}
+@font-face {
+    font-family: 'OldeThorass';
+    src: url('./fonts/OldeThorass.otf');
+}
+@font-face {
+    font-family: 'Ophidian';
+    src: url('./fonts/Ophidian.otf');
 }
 @font-face {
     font-family: 'Pulsian';
     src: url('./fonts/Pulsian.ttf');
 }
 @font-face {
+    font-family: 'Oriental';
+    src: url('./fonts/Oriental.ttf');
+}
+@font-face {
+    font-family: 'Qijomi';
+    src: url('./fonts/Qijomi.otf');
+}
+@font-face {
+    font-family: 'Reanaarian';
+    src: url('./fonts/Reanaarian.otf');
+}
+@font-face {
+    font-family: 'Semphari';
+    src: url('./fonts/Semphari.otf');
+}
+@font-face {
+    font-family: 'Tengwar';
+    src: url('./fonts/Tengwar.ttf');
+}
+@font-face {
+    font-family: 'Thassilonian';
+    src: url('./fonts/Thassilonian.ttf');
+}
+@font-face {
     font-family: 'Thorass';
     src: url('./fonts/Thorass.otf');
+}
+@font-face {
+    font-family: 'Tuzluca';
+    src: url('./fonts/Tuzluca.ttf');
+}
+@font-face {
+    font-family: 'Valmaric';
+    src: url('./fonts/Valmaric.ttf');
 }

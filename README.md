@@ -4,7 +4,8 @@ This module is an adaptation from the original [PolyGlot](https://github.com/kak
 
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.
 
-Currently only supports Forgotten Realms DnD 5e setting.
+Currently supports Forgotten Realms DnD 5e setting, Golarion's Pathfinder and Old-School Essentials.
+Partial support to Warhammer 4k.
 
 ## Usage
 

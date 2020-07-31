@@ -90,7 +90,7 @@ class PolyGlot {
         for (let i = messages.length - 1; i >= 0; i--) {
             let message = messages[i]
             if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
-                let lang = message.getFlag("polyglot", "language") || ""
+                let lang = message.data.flags.polyglot.language || ""
                 let unknown = !this.known_languages.has(lang);
                 if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
                     // Update globe color
@@ -183,7 +183,7 @@ class PolyGlot {
     renderChatMessage(message, html, data) {
         // html and data are swapped on 0.3.x in relation to other render<Application> hooks
         if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
-            let lang = message.getFlag("polyglot", "language") || ""
+            let lang = message.data.flags.polyglot.language || ""
             if (lang != "") {
                 let metadata = html.find(".message-metadata")
                 let language = PolyGlot.languages[lang] || lang
@@ -232,11 +232,21 @@ class PolyGlot {
     setup() {
         switch (game.system.id) {
             case "dnd5e":
-                this.alphabets = {common:'130% Thorass', celestial:'180% Celestial',deep:'200% Ar Ciela',draconic:'170% Iokharic',dwarvish:'120% Dethek',druidic:'100% AngloSax',gnoll:'150% Kargi',elvish:'150% Espruar',infernal:'230% Infernal',tirsu:'250% Pulsian',drowic:'150% HighDrowic'}
-                this.tongues = {_default:'common',abyssal:'infernal',aquan:'dwarvish',auran:'dwarvish',celestial:'celestial',deep:'deep',draconic:'draconic',druidic:'druidic',dwarvish:'dwarvish',elvish:'elvish',giant:'dwarvish',gith:'tirsu',gnoll:'gnoll',gnomish:'dwarvish',goblin:'dwarvish',ignan:'dwarvish',infernal:'infernal',orc:'dwarvish',primordial:'dwarvish',sylvan:'elvish',terran:'dwarvish',undercommon:'drowic'}
+                this.alphabets = {common:'130% Thorass',celestial:'180% Celestial',outwordly:'200% ArCiela',draconic:'170% Iokharic',dwarvish:'120% Dethek',druidic:'100% AngloSax',gnoll:'150% Kargi',elvish:'150% Espruar',infernal:'230% Infernal',tirsu:'250% Pulsian',drowic:'150% HighDrowic'}
+                this.tongues = {_default:'common',abyssal:'infernal',aquan:'dwarvish',auran:'dwarvish',celestial:'celestial',deep:'outwordly',draconic:'draconic',druidic:'druidic',dwarvish:'dwarvish',elvish:'elvish',giant:'dwarvish',gith:'tirsu',gnoll:'gnoll',gnomish:'dwarvish',goblin:'dwarvish',ignan:'dwarvish',infernal:'infernal',orc:'dwarvish',primordial:'dwarvish',sylvan:'elvish',terran:'dwarvish',undercommon:'drowic'}
                 break;
+            case "pf1":
+            case "pf2e":
+                this.alphabets = {common:'130% Thorass',abyssal:'150% Barazhad',auran:'100% OldeThorass',azlanti:'120% Tengwar',boggard:'120% Semphari',celestial:'180% Celestial',outwordly:'200% ArCiela',draconic:'170% Iokharic',dwarvish:'120% Dethek',drowic:'150% HighDrowic',druidic:'100% AngloSax',dziriak:'250% Pulsian',giant:'120% MeroiticDemotic',gnoll:'150% Kargi',elvish:'150% Espruar',erutaki:'120% Tuzluca',garundi:'120% Qijomi',infernal:'230% Infernal',jistka:'120% Valmaric',jungle:'120% JungleSlang',kelish:'170% HighschoolRunes',oriental:'120% Oriental',requian:'150% Reanaarian',serpent:'120% Ophidian',signs:'170% FingerAlphabet',sylvan:'150% OldeEspruar',thassilonian:'150% Thassilonian',utopian:'140% MarasEye'}
+                this.tongues = {_default:'common',aboleth:'outwordly',abyssal:'abyssal',aklo:'serpent',algollthu:'outwordly',anadi:'jungle',aquan:'auran',arboreal:'sylvan',auran:'auran',azlanti:"azlanti",boggard:"boggard",caligni:"drowic",celestial:"celestial",cyclops:"giant",daemonic:"infernal",dark:"drowic",destrachan:"outwordly",draconic:"draconic",drowsign:"signs",druidic:"druidic",dwarven:"dwarvish",dziriak:"dziriak",elven:"elvish",erutaki:"erutaki",garundi:"garundi",giant:"giant",gnoll:"gnoll",gnome:"dwarvish",gnomish:"dwarvish",goblin:"gnoll",grippli:"boggard",hallit:"azlanti",ignan:"dwarvish",iruxi: "boggard",jistkan:"jistka",jotun: "giant",jyoti:"celestial",infernal:"infernal",kelish:"kelish",mwangi:"azlanti",necril:"drowic",orc:"dwarvish",orcish:"dwarvish",polyglot:"azlanti",protean:"abyssal",requian:"requian",shoanti:"azlanti",skald:"jitska",sphinx:"requian",strix:"infernal",sylvan:"sylvan",shoony:"dwarvish",taldane:'azlanti',tengu:"oriental",terran:"dwarvish",thassilonian:"thassilonian",tien:"oriental",treant:"sylvan",undercommon:"drowic",utopian:"utopian",varisian:"azlanti",vegepygmy:"gnoll",vudrani:"garundi"}
+                break;
+            case "ose":
+                this.alphabets = {common:'130% Thorass',lawful:'180% Celestial',chaotic:'150% Barazhad',neutral:'230% Infernal',doppelganger:'250% Pulsian',dwarvish:'120% Dethek',draconic:'170% Iokharic',gargoyle:'150% HighDrowic',gnoll:'150% Kargi',gnomish:'120% Tengwar',harpy:'100% OldeThorass',elvish:'150% Espruar',ogre:'120% MeroiticDemotic',sylvan:'150% OldeEspruar'}
+                this.tongues = {_default:'common',1:'lawful',2:'chaotic',3:'neutral',4:'dwarvish',5:'doppelganger',6:'draconic',7:'dwarvish',8:'elvish',9:'gargoyle',10:'gnoll',11:'gnomish',12:'dwarvish',14:'harpy',15:'dwarvish',16:'draconic',17:'draconic',18:'gargoyle',19:'sylvan',20:'ogre',21:'dwarvish',22:'sylvan'}
+                break;
+            case "wfrp4e":
             default:
-                this.alphabets = {common:'130% Thorass'}
+                this.alphabets = {common:'120% Dethek'}
                 this.tongues = {_default:'common'}
             }
         // custom languages
@@ -438,6 +448,18 @@ class PolyGlot {
             }
         }
     }
+    /*  _setPosition(token, html, dimensions) {
+    let cls = Math.random() > 0.5 ? "left" : "right";
+    html.addClass(cls);
+    const pos = {
+      height: dimensions.height,
+      width: dimensions.width,
+      top: token.y - dimensions.height - 8
+    };
+    if ( cls === "right" ) pos.left = token.x - (dimensions.width - token.w);
+    else pos.left = token.x;
+    html.css(pos);
+  }*/
 }
 
 PolyGlotSingleton = new PolyGlot()
