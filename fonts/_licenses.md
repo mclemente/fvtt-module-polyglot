@@ -9,6 +9,13 @@ The following fonts are owned by Pixel Sagas, check out their [website](http://w
 - HighDrowic
 - Kargi
 - Lokharic
+- MarasEye
+- OldeEspruar
+- OldeThorass
+- Ophidian
+- Qijomi
+- Reanaarian
+- Semphari
 - Thorass
 
 The following font was created by TenkaDigi:
@@ -19,7 +26,16 @@ The following are under [CC BY-SA 3](https://creativecommons.org/licenses/by-sa/
 
 - [Ar Ciela](http://hymmnoserver.uguu.ca/). Hymmnos and HYMMNOSERVER were created by Akira Tsuchiya.
 
-The following does not accompanied license terms:
+The following does not accompanied license terms or were OPL:
 
 - AnglosaxonRunes
+- FingerAlphabet
+- HighschoolRunes
+- JungleSlang
+- MeroiticDemotic
 - Pulsian (Fan Art by Echiceroo)
+- Tengwar (Greifswalder)
+- Oriental
+- Thassilonian (Fan Art)
+- Tuzluca
+- Valmaric
