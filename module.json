@@ -8,6 +8,9 @@
     "styles": ["./polyglot.css","./fonts.css"],
     "packs": [],
     "systems": ["dnd5e", "dnd5eJP", "pf1", "pf2e", "wfrp4e", "ose", "sfrpg"],
+    "url": "https://github.com/kakaroto/fvtt-module-polyglot",
+    "manifest": "https://raw.githubusercontent.com/kakaroto/fvtt-module-polyglot/master/module.json",
+    "download": "https://github.com/kakaroto/fvtt-module-polyglot/archive/v1.0.zip",
     "minimumCoreVersion": "0.6.0",
     "compatibleCoreVersion": "0.7.0"
 }
