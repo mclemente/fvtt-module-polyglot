@@ -2,9 +2,9 @@
 
 If you want to add language systems for new scenario settings just use the json files here as templates.
 
-For every alphabet you need to specify its font and size, as in "120% Dethek".
-
-For every tongue you need to specify wich alphabet it uses.
+- For every alphabet you need to specify its font and size, as in `120% Dethek`;
+- For every tongue you need to specify wich alphabet it uses;
+- Use `_default` to specify the alphabet wich everything non-categorized will fall into.
 
 ## Adding new fonts
 
