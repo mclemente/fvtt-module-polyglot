@@ -12,6 +12,7 @@ class PolyGlot {
             case "pf1":
             case "pf2e":
             case "ose":
+            case "sfrpg":
                 return CONFIG[game.system.id.toUpperCase()].languages;
                 break;
             case "wfrp4e":
@@ -27,6 +28,7 @@ class PolyGlot {
                 break;
             default:
                 return [];
+                break;
         }
     }
     static get languages() {
@@ -90,7 +92,7 @@ class PolyGlot {
         for (let i = messages.length - 1; i >= 0; i--) {
             let message = messages[i]
             if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
-                let lang = message.data.flags.polyglot.language || ""
+                let lang = message.getFlag("polyglot", "language") || ""
                 let unknown = !this.known_languages.has(lang);
                 if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
                     // Update globe color
@@ -162,28 +164,31 @@ class PolyGlot {
         select.val(selectedLanguage);
     }
 
-    generateRune(string,salt) {
-        var hash = 0;
-        salt = string+salt;
-        for (var i = 0; i < salt.length; i++) {
-            var char = salt.charCodeAt(i);
+    // Original code from https://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
+    hashCode(string) {
+        let hash = 0;
+        for (var i = 0; i < string.length; i++) {
+            var char = string.charCodeAt(i);
             hash = ((hash << 5) - hash) + char;
             hash = hash & hash;
         }
-        var randomgen = new MersenneTwister(hash);
-        function randomize() {
-            var char = Math.floor(randomgen.random()*62+48);
-            if (char>57) char+=7;
-            if (char>90) char+=6;
-            return String.fromCharCode(char)
-        }
-        return string.replace(/[^a-zA-Z0-9-_ ]/g, '').replace('  ',' ').replace(/[\S]/gu,randomize)
+        return hash;
+    }
+
+    scrambleString(string, salt) {
+        const salted_string = string + salt;
+        const randomgen = new MersenneTwister(this.hashCode(salted_string));
+        return string.replace(/\S/gu, () => {
+            const c = Math.floor(randomgen.random()*36).toString(36)
+            const upper = Boolean(Math.round(randomgen.random()));
+            return upper ? c.toUpperCase() : c;
+          });
     }
 
     renderChatMessage(message, html, data) {
         // html and data are swapped on 0.3.x in relation to other render<Application> hooks
         if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
-            let lang = message.data.flags.polyglot.language || ""
+            let lang = message.getFlag("polyglot", "language") || ""
             if (lang != "") {
                 let metadata = html.find(".message-metadata")
                 let language = PolyGlot.languages[lang] || lang
@@ -193,12 +198,15 @@ class PolyGlot {
                     message.polyglot_unknown = false;
                 if (!message.polyglot_force && message.polyglot_unknown) {
                     let content = html.find(".message-content")
-                    let new_content = this.generateRune(message.data.content,game.settings.get('polyglot','salt') === true ? message.data._id : lang)
+                    let new_content = this.scrambleString(message.data.content,game.settings.get('polyglot','salt') ? message.data._id : lang)
                     content.text(new_content)
-                    content[0].style = this.tongues[lang] === undefined ? 'font:' + this.alphabets[this.tongues._default] : 'font:' + this.alphabets[this.tongues[lang]]
+                    if (message.getFlag("polyglot", "style") === undefined)
+                        mergeObject(data, { "flags.polyglot.style": content[0].style.font });
+                    content[0].style.font = this._getFontStyle(lang)
                     message.polyglot_unknown = true;
                 }
-                else { html.find(".message-content")[0].style = '' }
+                else
+                    html.find(".message-content")[0].style.font = message.getFlag("polyglot", "style") || "";
                 const color = unknown ? "red" : "green";
                 metadata.find(".polyglot-message-language").remove()
                 const title = game.user.isGM || !unknown ? `title="${language}"` : ""
@@ -229,25 +237,41 @@ class PolyGlot {
         }
     }
 
+    _getFontStyle(lang) {
+        return lang ? this.alphabets[this.tongues[lang]] : this.alphabets[this.tongues._default]
+    }
+
+    async loadLanguages(setting) {
+		const response = await fetch(`modules/polyglot/settings/${setting}.json`);
+		if (response.ok) {
+            const settingInfo = await response.json();
+            this.alphabets = settingInfo.alphabets;
+            this.tongues = settingInfo.tongues;
+            console.log(`Polyglot | Loaded ${setting}.json`);
+		} else {
+			console.error(`Failed to fetch ${setting}.json: ${response.status}`);
+			return;
+		}
+	}
+
     setup() {
         switch (game.system.id) {
             case "dnd5e":
-                this.alphabets = {common:'130% Thorass',celestial:'180% Celestial',outwordly:'200% ArCiela',draconic:'170% Iokharic',dwarvish:'120% Dethek',druidic:'100% AngloSax',gnoll:'150% Kargi',elvish:'150% Espruar',infernal:'230% Infernal',tirsu:'250% Pulsian',drowic:'150% HighDrowic'}
-                this.tongues = {_default:'common',abyssal:'infernal',aquan:'dwarvish',auran:'dwarvish',celestial:'celestial',deep:'outwordly',draconic:'draconic',druidic:'druidic',dwarvish:'dwarvish',elvish:'elvish',giant:'dwarvish',gith:'tirsu',gnoll:'gnoll',gnomish:'dwarvish',goblin:'dwarvish',ignan:'dwarvish',infernal:'infernal',orc:'dwarvish',primordial:'dwarvish',sylvan:'elvish',terran:'dwarvish',undercommon:'drowic'}
+                this.loadLanguages("forgottenrealms");
                 break;
             case "pf1":
             case "pf2e":
-                this.alphabets = {common:'130% Thorass',abyssal:'150% Barazhad',auran:'100% OldeThorass',azlanti:'120% Tengwar',boggard:'120% Semphari',celestial:'180% Celestial',outwordly:'200% ArCiela',draconic:'170% Iokharic',dwarvish:'120% Dethek',drowic:'150% HighDrowic',druidic:'100% AngloSax',dziriak:'250% Pulsian',giant:'120% MeroiticDemotic',gnoll:'150% Kargi',elvish:'150% Espruar',erutaki:'120% Tuzluca',garundi:'120% Qijomi',infernal:'230% Infernal',jistka:'120% Valmaric',jungle:'120% JungleSlang',kelish:'170% HighschoolRunes',oriental:'120% Oriental',requian:'150% Reanaarian',serpent:'120% Ophidian',signs:'170% FingerAlphabet',sylvan:'150% OldeEspruar',thassilonian:'150% Thassilonian',utopian:'140% MarasEye'}
-                this.tongues = {_default:'common',aboleth:'outwordly',abyssal:'abyssal',aklo:'serpent',algollthu:'outwordly',anadi:'jungle',aquan:'auran',arboreal:'sylvan',auran:'auran',azlanti:"azlanti",boggard:"boggard",caligni:"drowic",celestial:"celestial",cyclops:"giant",daemonic:"infernal",dark:"drowic",destrachan:"outwordly",draconic:"draconic",drowsign:"signs",druidic:"druidic",dwarven:"dwarvish",dziriak:"dziriak",elven:"elvish",erutaki:"erutaki",garundi:"garundi",giant:"giant",gnoll:"gnoll",gnome:"dwarvish",gnomish:"dwarvish",goblin:"gnoll",grippli:"boggard",hallit:"azlanti",ignan:"dwarvish",iruxi: "boggard",jistkan:"jistka",jotun: "giant",jyoti:"celestial",infernal:"infernal",kelish:"kelish",mwangi:"azlanti",necril:"drowic",orc:"dwarvish",orcish:"dwarvish",polyglot:"azlanti",protean:"abyssal",requian:"requian",shoanti:"azlanti",skald:"jitska",sphinx:"requian",strix:"infernal",sylvan:"sylvan",shoony:"dwarvish",taldane:'azlanti',tengu:"oriental",terran:"dwarvish",thassilonian:"thassilonian",tien:"oriental",treant:"sylvan",undercommon:"drowic",utopian:"utopian",varisian:"azlanti",vegepygmy:"gnoll",vudrani:"garundi"}
+                this.loadLanguages("golarion");
                 break;
             case "ose":
-                this.alphabets = {common:'130% Thorass',lawful:'180% Celestial',chaotic:'150% Barazhad',neutral:'230% Infernal',doppelganger:'250% Pulsian',dwarvish:'120% Dethek',draconic:'170% Iokharic',gargoyle:'150% HighDrowic',gnoll:'150% Kargi',gnomish:'120% Tengwar',harpy:'100% OldeThorass',elvish:'150% Espruar',ogre:'120% MeroiticDemotic',sylvan:'150% OldeEspruar'}
-                this.tongues = {_default:'common',1:'lawful',2:'chaotic',3:'neutral',4:'dwarvish',5:'doppelganger',6:'draconic',7:'dwarvish',8:'elvish',9:'gargoyle',10:'gnoll',11:'gnomish',12:'dwarvish',14:'harpy',15:'dwarvish',16:'draconic',17:'draconic',18:'gargoyle',19:'sylvan',20:'ogre',21:'dwarvish',22:'sylvan'}
+                this.loadLanguages("ose");
                 break;
             case "wfrp4e":
+            case "sfrpg":
             default:
                 this.alphabets = {common:'120% Dethek'}
                 this.tongues = {_default:'common'}
+                break;
             }
         // custom languages
         game.settings.register("polyglot", "customLanguages", {
@@ -277,8 +301,8 @@ class PolyGlot {
             onChange: () => this.updateChatMessages()
         });
         game.settings.register("polyglot", "salt", {
-            name: "Unique Texts",
-            hint: "Enable this option to make every single text look different.",
+            name: "Randomize Runes",
+            hint: "Enabling this option will cause the scrambled text to appear different every time, even if the same message is repeated.",
             scope: "world",
             config: true,
             default: false,
@@ -381,41 +405,44 @@ class PolyGlot {
         sheet._polyglotEditor = true;
     }
 
-    renderJournalSheet(journalSheet,html) {
+    renderJournalSheet(journalSheet, html) {
         this._addPolyglotEditor(journalSheet);
         if (journalSheet.entity.owner || game.user.isGM) {
             let runes = false;
-            let texts = [];
-            let openBtn = $(`<a class="polyglot-button" title="Toggle Runes"><i class="fas fa-unlink"></i> Runes</a>`);
-            openBtn.click(ev => {
-                let button = html.closest('.app').find('.polyglot-button')[0].firstChild
+            const texts = [];
+            const styles = [];
+            const toggleButton = $(`<a class="polyglot-button" title="Toggle Runes"><i class="fas fa-unlink"></i> Runes</a>`);
+            toggleButton.click(ev => {
+                ev.preventDefault();
+                let button = ev.currentTarget.firstChild
                 runes = !runes
-                button.className = runes === false ? 'fas fa-unlink' : 'fas fa-link';
+                button.className = runes ? 'fas fa-link' : 'fas fa-unlink';
                 if (runes) {
                     const spans = journalSheet.element.find("span.polyglot-journal");
                     for (let span of spans.toArray()) {
                         const lang = span.dataset.language;
                         if (!lang) continue;
                         texts.push(span.textContent)
-                        span.textContent = this.generateRune(span.textContent,game.settings.get('polyglot','salt') === true ? journalSheet._id : lang)
-                        span.style = this.tongues[lang] === undefined ? 'font:' + this.alphabets[this.tongues._default] : 'font:' + this.alphabets[this.tongues[lang]]
+                        styles.push(span.style.font)
+                        span.textContent = this.scrambleString(span.textContent,game.settings.get('polyglot','salt') ? journalSheet._id : lang)
+                        span.style.font = this._getFontStyle(lang)
                     }
                 }
                 else {
                     const spans = journalSheet.element.find("span.polyglot-journal");
-                    var i = 0;
+                    let i = 0;
                     for (let span of spans.toArray()) {
                         const lang = span.dataset.language;
                         if (!lang) continue;
                         span.textContent = texts[i]
-                        span.style = ''
+                        span.style.font = styles[i]
                         i++;
                     }
                 }
             });
             html.closest('.app').find('.polyglot-button').remove();
-            let titleElement = html.closest('.app').find('.window-title');
-            openBtn.insertAfter(titleElement);
+            const titleElement = html.closest('.app').find('.window-title');
+            toggleButton.insertAfter(titleElement);
             return;
         }
         const spans = journalSheet.element.find("span.polyglot-journal");
@@ -424,42 +451,30 @@ class PolyGlot {
             if (!lang) continue;
             if (!this.known_languages.has(lang)) {
                 span.title = "????"
-                span.textContent = this.generateRune(span.textContent,game.settings.get('polyglot','salt') === true ? journalSheet._id : lang)
-                span.style = this.tongues[lang] === undefined ? 'font:' + this.alphabets[this.tongues._default] : 'font:' + this.alphabets[this.tongues[lang]]
+                span.textContent = this.scrambleString(span.textContent,game.settings.get('polyglot','salt') ? journalSheet._id : lang)
+                span.style.font = this._getFontStyle(lang)
             }
         }
     }
     chatBubble (token, html, message, {emote}) {
-        message = game.messages._source[game.messages._source.length-1];
+        message = game.messages.get(game.messages._source[game.messages._source.length-1]._id);
         if (message.type == CONST.CHAT_MESSAGE_TYPES.IC) {
-            let lang = message.flags.polyglot.language || ""
+            let lang = message.getFlag("polyglot", "language") || ""
             if (lang != "") {
                 const unknown = !this.known_languages.has(lang);
                 message.polyglot_unknown = unknown;
                 if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
                     message.polyglot_unknown = false;
                 if (!message.polyglot_force && message.polyglot_unknown) {
-                    let content = html.find(".bubble-content")
-                    let new_content = this.generateRune(message.content,game.settings.get('polyglot','salt') === true ? message._id : lang)
+                    const content = html.find(".bubble-content")
+                    const new_content = this.scrambleString(message.content,game.settings.get('polyglot','salt') ? message._id : lang)
                     content.text(new_content)
-                    content[0].style = this.tongues[lang] === undefined ? 'font:' + this.alphabets[this.tongues._default] : 'font:' + this.alphabets[this.tongues[lang]]
+                    content[0].style.font = this._getFontStyle(lang)
                     message.polyglot_unknown = true;
                 }
             }
         }
     }
-    /*  _setPosition(token, html, dimensions) {
-    let cls = Math.random() > 0.5 ? "left" : "right";
-    html.addClass(cls);
-    const pos = {
-      height: dimensions.height,
-      width: dimensions.width,
-      top: token.y - dimensions.height - 8
-    };
-    if ( cls === "right" ) pos.left = token.x - (dimensions.width - token.w);
-    else pos.left = token.x;
-    html.css(pos);
-  }*/
 }
 
 PolyGlotSingleton = new PolyGlot()

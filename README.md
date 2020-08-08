@@ -1,11 +1,13 @@
-# Polyglot - Fantasy Pack
-
-This module is an adaptation from the original [PolyGlot](https://github.com/kakaroto/fvtt-module-polyglot) by KaKaRoTo.
+# Polyglot
 
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.
 
 Currently supports Forgotten Realms DnD 5e setting, Golarion's Pathfinder and Old-School Essentials.
-Partial support to Warhammer 4k.
+Partial support to Warhammer 4k and Starfinder.
+
+## Installation
+
+In the setup screen, use the URL `https://raw.githubusercontent.com/kakaroto/fvtt-module-polyglot/master/module.json` to install the module.
 
 ## Usage
 
@@ -33,7 +35,7 @@ The owner of a journal and the DM can scramble/unscramble the text in their scre
 
 ## Credit
 
-The original idea for this module was proposed by `@Talwin Greenwood` on the FVTT discord. The original PolyGlot is written by KaKaRoTo. The 'fantasy pack' adaptation is written by elizeuangelo.
+The original idea for this module was proposed by `@Talwin Greenwood` on the FVTT discord. The original PolyGlot is written by KaKaRoTo. The 'fantasy languages' adaptation is written by elizeuangelo.
 
 ## License
 This module is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).

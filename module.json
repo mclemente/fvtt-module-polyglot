@@ -1,13 +1,13 @@
 {
-    "name": "polyglotfp",
-    "title": "PolyGlot - Fantasy Pack",
+    "name": "polyglot",
+    "title": "Polyglot",
     "description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
-    "version": "1.15",
+    "version": "1.2",
     "author": "KaKaRoTo, elizeuangelo",
     "scripts": ["./polyglot.js"],
     "styles": ["./polyglot.css","./fonts.css"],
     "packs": [],
-    "systems": ["dnd5e", "dnd5eJP", "pf1", "pf2e", "wfrp4e", "ose"],
+    "systems": ["dnd5e", "dnd5eJP", "pf1", "pf2e", "wfrp4e", "ose", "sfrpg"],
     "minimumCoreVersion": "0.6.0",
     "compatibleCoreVersion": "0.7.0"
 }
