@@ -16,6 +16,7 @@
         "sylvan": "150% OldeEspruar"
     },
     "tongues": {
+        "_default": "common"
         "1": "lawful",
         "2": "chaotic",
         "3": "neutral",
@@ -37,6 +38,5 @@
         "20": "ogre",
         "21": "dwarvish",
         "22": "sylvan",
-        "_default": "common"
     }
 }
