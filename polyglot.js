@@ -3,6 +3,8 @@ class PolyGlot {
     constructor() {
         this.known_languages = new Set();
         this.refresh_timeout = null;
+        this.alphabets = {common: '120% Dethek'}
+        this.tongues = {_default: 'common'}
         }
 
     static async getLanguages() {
@@ -167,8 +169,8 @@ class PolyGlot {
     // Original code from https://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
     hashCode(string) {
         let hash = 0;
-        for (var i = 0; i < string.length; i++) {
-            var char = string.charCodeAt(i);
+        for (let i = 0; i < string.length; i++) {
+            const char = string.charCodeAt(i);
             hash = ((hash << 5) - hash) + char;
             hash = hash & hash;
         }
@@ -200,13 +202,11 @@ class PolyGlot {
                     let content = html.find(".message-content")
                     let new_content = this.scrambleString(message.data.content,game.settings.get('polyglot','salt') ? message.data._id : lang)
                     content.text(new_content)
-                    if (message.getFlag("polyglot", "style") === undefined)
-                        mergeObject(data, { "flags.polyglot.style": content[0].style.font });
+                    if (message.polyglot_style === undefined)
+                        message.polyglot_style = content[0].style.font;
                     content[0].style.font = this._getFontStyle(lang)
                     message.polyglot_unknown = true;
                 }
-                else
-                    html.find(".message-content")[0].style.font = message.getFlag("polyglot", "style") || "";
                 const color = unknown ? "red" : "green";
                 metadata.find(".polyglot-message-language").remove()
                 const title = game.user.isGM || !unknown ? `title="${language}"` : ""
@@ -238,7 +238,7 @@ class PolyGlot {
     }
 
     _getFontStyle(lang) {
-        return lang ? this.alphabets[this.tongues[lang]] : this.alphabets[this.tongues._default]
+        return this.alphabets[this.tongues[lang]] || this.alphabets[this.tongues._default]
     }
 
     async loadLanguages(setting) {
@@ -248,8 +248,8 @@ class PolyGlot {
             this.alphabets = settingInfo.alphabets;
             this.tongues = settingInfo.tongues;
             console.log(`Polyglot | Loaded ${setting}.json`);
-		} else {
-			console.error(`Failed to fetch ${setting}.json: ${response.status}`);
+        } else {
+			console.error(`Polyglot | Failed to fetch ${setting}.json: ${response.status}`);
 			return;
 		}
 	}
@@ -269,8 +269,6 @@ class PolyGlot {
             case "wfrp4e":
             case "sfrpg":
             default:
-                this.alphabets = {common:'120% Dethek'}
-                this.tongues = {_default:'common'}
                 break;
             }
         // custom languages
@@ -427,8 +425,7 @@ class PolyGlot {
                         span.textContent = this.scrambleString(span.textContent,game.settings.get('polyglot','salt') ? journalSheet._id : lang)
                         span.style.font = this._getFontStyle(lang)
                     }
-                }
-                else {
+                } else {
                     const spans = journalSheet.element.find("span.polyglot-journal");
                     let i = 0;
                     for (let span of spans.toArray()) {
