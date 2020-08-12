@@ -201,8 +201,6 @@ class PolyGlot {
                     let content = html.find(".message-content")
                     let new_content = this.scrambleString(message.data.content,game.settings.get('polyglot','salt') ? message.data._id : lang)
                     content.text(new_content)
-                    if (message.polyglot_style === undefined)
-                        message.polyglot_style = content[0].style.font;
                     content[0].style.font = this._getFontStyle(lang)
                     message.polyglot_unknown = true;
                 }
