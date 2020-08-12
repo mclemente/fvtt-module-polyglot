@@ -239,17 +239,17 @@ class PolyGlot {
     }
 
     async loadLanguages(setting) {
-		const response = await fetch(`modules/polyglot/settings/${setting}.json`);
-		if (response.ok) {
-            const settingInfo = await response.json();
-            this.alphabets = settingInfo.alphabets;
-            this.tongues = settingInfo.tongues;
-            console.log(`Polyglot | Loaded ${setting}.json`);
-        } else {
-			console.error(`Polyglot | Failed to fetch ${setting}.json: ${response.status}`);
-			return;
-		}
+	const response = await fetch(`modules/polyglot/settings/${setting}.json`);
+	if (response.ok) {
+        const settingInfo = await response.json();
+        this.alphabets = settingInfo.alphabets;
+        this.tongues = settingInfo.tongues;
+        console.log(`Polyglot | Loaded ${setting}.json`);
+	} else {
+		console.error(`Polyglot | Failed to fetch ${setting}.json: ${response.status}`);
+		return;
 	}
+    }
 
     setup() {
         switch (game.system.id) {
