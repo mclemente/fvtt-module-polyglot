@@ -14,9 +14,6 @@ class PolyGlot {
             case "pf1":
             case "pf2e":
             case "ose":
-            case "sfrpg":
-                return CONFIG[game.system.id.toUpperCase()].languages;
-                break;
             case "wfrp4e":
                 const pack = game.packs.get("wfrp4e.skills");
                 const itemList = await pack.getIndex();
