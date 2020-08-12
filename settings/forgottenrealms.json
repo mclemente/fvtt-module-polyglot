@@ -1,0 +1,39 @@
+{
+    "alphabets": {
+        "common": "130% Thorass",
+        "celestial": "180% Celestial",
+        "outwordly": "200% ArCiela",
+        "draconic": "170% Iokharic",
+        "dwarvish": "120% Dethek",
+        "druidic": "120% JungleSlang",
+        "gnoll": "150% Kargi",
+        "elvish": "150% Espruar",
+        "infernal": "230% Infernal",
+        "tirsu": "250% Pulsian",
+        "drowic": "150% HighDrowic"
+    },
+    "tongues": {
+        "_default": "common",
+        "abyssal": "infernal",
+        "aquan": "dwarvish",
+        "auran": "dwarvish",
+        "celestial": "celestial",
+        "deep": "outwordly",
+        "draconic": "draconic",
+        "druidic": "druidic",
+        "dwarvish": "dwarvish",
+        "elvish": "elvish",
+        "giant": "dwarvish",
+        "gith": "tirsu",
+        "gnoll": "gnoll",
+        "gnomish": "dwarvish",
+        "goblin": "dwarvish",
+        "ignan": "dwarvish",
+        "infernal": "infernal",
+        "orc": "dwarvish",
+        "primordial": "dwarvish",
+        "sylvan": "elvish",
+        "terran": "dwarvish",
+        "undercommon": "drowic"
+    }
+}
