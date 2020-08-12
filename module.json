@@ -3,7 +3,7 @@
     "title": "Polyglot",
     "description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
     "version": "1.0",
-    "author": "KaKaRoTo, elizeuangelo",
+    "author": ["KaKaRoTo", "elizeuangelo"],
     "scripts": ["./polyglot.js"],
     "styles": ["./polyglot.css","./fonts.css"],
     "packs": [],
