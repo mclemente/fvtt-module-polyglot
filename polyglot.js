@@ -455,7 +455,7 @@ class PolyGlot {
     }
     chatBubble (token, html, message, {emote}) {
         message = game.messages.get(game.messages._source[game.messages._source.length-1]._id);
-        if (message.type == CONST.CHAT_MESSAGE_TYPES.IC) {
+        if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
             let lang = message.getFlag("polyglot", "language") || ""
             if (lang != "") {
                 const unknown = !this.known_languages.has(lang);
@@ -464,7 +464,7 @@ class PolyGlot {
                     message.polyglot_unknown = false;
                 if (!message.polyglot_force && message.polyglot_unknown) {
                     const content = html.find(".bubble-content")
-                    const new_content = this.scrambleString(message.content, game.settings.get('polyglot','useUniqueSalt') ? message._id : lang)
+                    const new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message._id : lang)
                     content.text(new_content)
                     content[0].style.font = this._getFontStyle(lang)
                     message.polyglot_unknown = true;
