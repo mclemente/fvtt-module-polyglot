@@ -453,8 +453,8 @@ class PolyGlot {
             }
         }
     }
-    chatBubble (token, html, message, {emote}) {
-        message = game.messages.get(game.messages._source[game.messages._source.length-1]._id);
+    chatBubble (token, html, messageContent, {emote}) {
+        const message = game.messages.entities.slice(-10).reverse().find(m => m.data.content === messageContent);
         if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
             let lang = message.getFlag("polyglot", "language") || ""
             if (lang != "") {
