@@ -137,6 +137,11 @@ class PolyGlot {
                         // Don't duplicate the value in case it's a not an array
                         for (let lang of actor.data.data.traits.languages.value)
                             this.known_languages.add(lang)
+                        // This condition is needed so an empty language is not loaded
+                        if (actor.data.data.traits.languages.custom != "") {
+                            for (let lang of actor.data.data.traits.languages.custom.split(/[,;]/))
+                                this.known_languages.add(lang)
+                        }
                         break;
                 }
             } catch (err) {
