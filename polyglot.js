@@ -311,6 +311,19 @@ class PolyGlot {
             default: false,
             type: Boolean
         });
+        // Adjust the bubble dimensions so the message is displayed correctly
+        ChatBubbles.prototype._getMessageDimensions = (message) => {
+            let div = $(`<div class="chat-bubble" style="visibility:hidden;font:${this.bubbleFont}">${message}</div>`);
+            $('body').append(div);
+            let dims = {
+                width: div[0].clientWidth + 8,
+                height: div[0].clientHeight
+            };
+            div.css({maxHeight: "none"});
+            dims.unconstrained = div[0].clientHeight;
+            div.remove();
+            return dims;
+        }
     }
 
     ready() {
@@ -471,7 +484,8 @@ class PolyGlot {
                     const content = html.find(".bubble-content")
                     const new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message._id : lang)
                     content.text(new_content)
-                    content[0].style.font = this._getFontStyle(lang)
+                    this.bubbleFont = this._getFontStyle(lang)
+                    content[0].style.font = this.bubbleFont
                     message.polyglot_unknown = true;
                 }
             }
