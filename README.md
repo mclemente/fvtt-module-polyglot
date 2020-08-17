@@ -28,6 +28,8 @@ As GM, you can also click on the language button (colored globe) to unscramble a
 ### Journals
 
 You can write text in a specific script and only players who speak that language will understand it. By hovering the text they can see what language the text is written.
+To write in a specific language, edit the "Source code" of a journal entry using the "< >" button in the text editor.
+Then surround whatever text should be in a specific language with a span, like this: `<span class="polyglot-journal" data-language="draconic">Hello!</span>`
 
 The owner of a journal and the DM can scramble/unscramble the text in their screen to see how it looks.
 
