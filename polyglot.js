@@ -137,6 +137,11 @@ class PolyGlot {
                         // Don't duplicate the value in case it's a not an array
                         for (let lang of actor.data.data.traits.languages.value)
                             this.known_languages.add(lang)
+                        // This condition is needed so an empty language is not loaded
+                        if (actor.data.data.traits.languages.custom != "") {
+                            for (let lang of actor.data.data.traits.languages.custom.split(/[,;]/))
+                                this.known_languages.add(lang)
+                        }
                         break;
                 }
             } catch (err) {
@@ -306,6 +311,19 @@ class PolyGlot {
             default: false,
             type: Boolean
         });
+        // Adjust the bubble dimensions so the message is displayed correctly
+        ChatBubbles.prototype._getMessageDimensions = (message) => {
+            let div = $(`<div class="chat-bubble" style="visibility:hidden;font:${this._bubble.font}">${this._bubble.message || message}</div>`);
+            $('body').append(div);
+            let dims = {
+                width: div[0].clientWidth + 8,
+                height: div[0].clientHeight
+            };
+            div.css({maxHeight: "none"});
+            dims.unconstrained = div[0].clientHeight;
+            div.remove();
+            return dims;
+        }
     }
 
     ready() {
@@ -455,6 +473,7 @@ class PolyGlot {
     }
     chatBubble (token, html, messageContent, {emote}) {
         const message = game.messages.entities.slice(-10).reverse().find(m => m.data.content === messageContent);
+        this._bubble = { font: '', message: '' };
         if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
             let lang = message.getFlag("polyglot", "language") || ""
             if (lang != "") {
@@ -466,7 +485,9 @@ class PolyGlot {
                     const content = html.find(".bubble-content")
                     const new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message._id : lang)
                     content.text(new_content)
-                    content[0].style.font = this._getFontStyle(lang)
+                    this._bubble.font = this._getFontStyle(lang)
+                    this._bubble.message = new_content
+                    content[0].style.font = this._bubble.font
                     message.polyglot_unknown = true;
                 }
             }
