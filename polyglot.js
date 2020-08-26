@@ -52,6 +52,7 @@ class PolyGlot {
     }
 
     renderChatLog(chatlog, html, data) {
+        this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
         const lang_html = $(`
         <div id="polyglot"  class="polyglot-lang-select flexrow">
                 <label>Language : </label>
@@ -326,10 +327,6 @@ class PolyGlot {
         }
     }
 
-    ready() {
-        this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
-    }
-
     async setCustomLanguages(languages) {
         PolyGlot.languages = await PolyGlot.getLanguages();
         for (let lang of languages.split(",")) {
@@ -504,5 +501,4 @@ Hooks.on('preCreateChatMessage', PolyGlotSingleton.preCreateChatMessage.bind(Pol
 Hooks.on('renderChatMessage', PolyGlotSingleton.renderChatMessage.bind(PolyGlotSingleton))
 Hooks.on('renderJournalSheet', PolyGlotSingleton.renderJournalSheet.bind(PolyGlotSingleton))
 Hooks.on('setup', PolyGlotSingleton.setup.bind(PolyGlotSingleton))
-Hooks.on('ready', PolyGlotSingleton.ready.bind(PolyGlotSingleton))
 Hooks.on("chatBubble", PolyGlotSingleton.chatBubble.bind(PolyGlotSingleton)) //token, html, message, {emote}
