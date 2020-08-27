@@ -290,10 +290,11 @@ class PolyGlot {
         game.settings.register("polyglot", "defaultLanguage", {
             name: "Default Language",
             hint: "Name of the default language to select. Keep empty to use system default.",
-            scope: "client",
+            scope: "world",
             config: true,
             default: "",
-            type: String
+            type: String,
+            onChange: () => this.updateUserLanguages(ui.chat.element)
         });
         game.settings.register("polyglot", "runifyGM", {
             name: "Scramble for GM",
