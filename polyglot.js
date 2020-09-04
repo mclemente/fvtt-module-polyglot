@@ -342,12 +342,12 @@ class PolyGlot {
         sheet._polyglot_original_createEditor = sheet._createEditor;
         const languages = Object.entries(PolyGlot.languages).map(([lang, name]) => {
             return {
-              title: name,
+              title: name || "",
               inline: 'span',
               classes: 'polyglot-journal',
               attributes: {
-                  title: name,
-                  "data-language": lang
+                  title: name || "",
+                  "data-language": lang || ""
               }
             };
         });
