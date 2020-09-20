@@ -492,6 +492,24 @@ class PolyGlot {
             }
         }
     }
+    vinoChatRender (chatDisplayData) {
+        const message = chatDisplayData.message;
+
+        let lang = message.getFlag("polyglot", "language") || ""
+        if (lang != "") {
+            const unknown = !this.known_languages.has(lang);
+            message.polyglot_unknown = unknown;
+            if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
+                message.polyglot_unknown = false;
+            if (!message.polyglot_force && message.polyglot_unknown) {
+                const new_content = this.scrambleString(chatDisplayData.text, game.settings.get('polyglot','useUniqueSalt') ? message._id : lang)
+                chatDisplayData.text = new_content;
+                chatDisplayData.font = this._getFontStyle(lang)
+                chatDisplayData.skipAutoQuote = true;
+                message.polyglot_unknown = true;
+            }
+        }
+    }
 }
 
 PolyGlotSingleton = new PolyGlot()
@@ -504,3 +522,4 @@ Hooks.on('renderChatMessage', PolyGlotSingleton.renderChatMessage.bind(PolyGlotS
 Hooks.on('renderJournalSheet', PolyGlotSingleton.renderJournalSheet.bind(PolyGlotSingleton))
 Hooks.on('setup', PolyGlotSingleton.setup.bind(PolyGlotSingleton))
 Hooks.on("chatBubble", PolyGlotSingleton.chatBubble.bind(PolyGlotSingleton)) //token, html, message, {emote}
+Hooks.on("vinoPrepareChatDisplayData", PolyGlotSingleton.vinoChatRender.bind(PolyGlotSingleton))
