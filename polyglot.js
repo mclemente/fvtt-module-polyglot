@@ -275,6 +275,8 @@ class PolyGlot {
                 this.loadLanguages("ose");
                 break;
             case "wfrp4e":
+                this.loadLanguages("wfrp");
+                break;
             case "sfrpg":
             default:
                 break;
