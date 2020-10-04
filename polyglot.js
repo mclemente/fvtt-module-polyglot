@@ -316,6 +316,15 @@ class PolyGlot {
             default: false,
             type: Boolean
         });
+        game.settings.register("polyglot", "exportFonts", {
+            name: "Make fonts available",
+            hint: "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
+            scope: "client",
+            config: true,
+            default: true,
+            type: Boolean,
+            onChange: () => this.updateConfigFonts()
+        });
         // Adjust the bubble dimensions so the message is displayed correctly
         ChatBubbles.prototype._getMessageDimensions = (message) => {
             let div = $(`<div class="chat-bubble" style="visibility:hidden;font:${this._bubble.font}">${this._bubble.message || message}</div>`);
@@ -328,6 +337,18 @@ class PolyGlot {
             dims.unconstrained = div[0].clientHeight;
             div.remove();
             return dims;
+        }
+    }
+    ready() {
+        this.updateConfigFonts();
+    }
+    updateConfigFonts() {
+        // Register fonts so they are available to other elements (such as Drawings)
+        
+        // First, remove all our fonts, then add them again if needed.
+        CONFIG.fontFamilies = CONFIG.fontFamilies.filter(f => !PolyGlot.FONTS.includes(f));
+        if (game.settings.get("polyglot", "exportFonts")) {
+            CONFIG.fontFamilies.push(...PolyGlot.FONTS);
         }
     }
 
@@ -515,6 +536,44 @@ class PolyGlot {
     }
 }
 
+PolyGlot.FONTS = [
+    "ArCiela",
+    "Barazhad", 
+    "Celestial",
+    "DarkEldar", 
+    "Dethek", 
+    "ElderFuthark", 
+    "Eltharin", 
+    "Espruar", 
+    "Floki", 
+    "FingerAlphabet", 
+    "HighDrowic", 
+    "HighschoolRunes", 
+    "Infernal", 
+    "Iokharic", 
+    "JungleSlang", 
+    "Kargi", 
+    "MarasEye", 
+    "MeroiticDemotic", 
+    "MiroslavNormal", 
+    "OldeEspruar", 
+    "OldeThorass", 
+    "Ophidian", 
+    "Pulsian", 
+    "Oriental", 
+    "OrkGlyphs", 
+    "Qijomi", 
+    "Reanaarian", 
+    "Saurian", 
+    "Semphari", 
+    "Skaven", 
+    "Tengwar", 
+    "Thassilonian", 
+    "Thorass", 
+    "Tuzluca", 
+    "Valmaric"
+];
+
 PolyGlotSingleton = new PolyGlot()
 
 Hooks.on('renderChatLog', PolyGlotSingleton.renderChatLog.bind(PolyGlotSingleton))
@@ -524,5 +583,6 @@ Hooks.on('preCreateChatMessage', PolyGlotSingleton.preCreateChatMessage.bind(Pol
 Hooks.on('renderChatMessage', PolyGlotSingleton.renderChatMessage.bind(PolyGlotSingleton))
 Hooks.on('renderJournalSheet', PolyGlotSingleton.renderJournalSheet.bind(PolyGlotSingleton))
 Hooks.on('setup', PolyGlotSingleton.setup.bind(PolyGlotSingleton))
+Hooks.on('ready', PolyGlotSingleton.ready.bind(PolyGlotSingleton))
 Hooks.on("chatBubble", PolyGlotSingleton.chatBubble.bind(PolyGlotSingleton)) //token, html, message, {emote}
 Hooks.on("vinoPrepareChatDisplayData", PolyGlotSingleton.vinoChatRender.bind(PolyGlotSingleton))
