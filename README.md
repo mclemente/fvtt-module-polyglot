@@ -2,8 +2,8 @@
 
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.
 
-Currently supports Forgotten Realms DnD 5e setting, Golarion's Pathfinder and Old-School Essentials.
-Partial support to Warhammer 4k and Starfinder.
+Currently supports Forgotten Realms DnD 5e setting, Golarion's Pathfinder, Old-School Essentials and Warhammer.
+Partial support to Starfinder.
 
 ## Installation
 
@@ -39,6 +39,7 @@ The original idea for this module was proposed by `@Talwin Greenwood` on the FVT
 The original PolyGlot module is written by KaKaRoTo. The 'fantasy languages' adaptation is written by elizeuangelo.
 
 ## License
+
 This module is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
 
 This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agreement for module development v 0.1.6](http://foundryvtt.com/pages/license.html).
