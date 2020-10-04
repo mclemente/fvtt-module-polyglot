@@ -143,7 +143,7 @@ class PolyGlot {
                         // This condition is needed so an empty language is not loaded
                         if (actor.data.data.traits.languages.custom != "") {
                             for (let lang of actor.data.data.traits.languages.custom.split(/[,;]/))
-                                this.known_languages.add(lang)
+                                this.known_languages.add(lang.trim().toLowerCase());
                         }
                         break;
                 }
