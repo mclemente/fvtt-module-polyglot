@@ -1,0 +1,36 @@
+{
+    "alphabets": {
+		"common": "130% Thorass",
+		"reikspiel": "230% Infernal",
+		"druhir": "150% DarkEldar",
+		"eltharin": "130% Eltharin",
+		"kislevien": "110% MiroslavNormal",
+		"norse": "220% ElderFuthark",
+		"orcish": "150% OrkGlyphs",
+		"queekish": "130% Skaven",
+		"slaan": "170% Saurian",
+		"klinkarhun": "110% Floki",
+		"romance": "130% Tengwar",
+		"cathan": "130% Oriental"
+    },
+    "tongues": {
+		"_default": "common",
+		"reikspiel": "reikspiel",
+		"Wastelander": "reikspiel",
+		"Classical": "reikspiel",
+		"Cathan": "cathan",
+		"Tilean": "common",
+		"Estalian": "romance",
+		"Gospodarinyi": "kislevien",
+		"Albion": "norse",
+		"Norse": "norse",
+		"Bretonnian": "romance",
+		"Druhir": "druhir",
+		"Elthárin": "eltharin",
+		"Orcish": "orcish",
+		"Queekish": "queekish",
+		"Slaan": "slaan",
+		"Khazalid": "klinkarhun",
+		"Magick": "eltharin"
+    }
+}
