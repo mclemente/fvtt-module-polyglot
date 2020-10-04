@@ -343,7 +343,8 @@ class PolyGlot {
 
     _addPolyglotEditor(sheet) {
         if (sheet._polyglotEditor) return;
-        sheet._polyglot_original_createEditor = sheet._createEditor;
+        const methodName = sheet.activateEditor ? "activateEditor" : "_createEditor"
+        sheet._polyglot_original_activateEditor = sheet[methodName];
         const languages = Object.entries(PolyGlot.languages).map(([lang, name]) => {
             return {
               title: name || "",
@@ -355,7 +356,7 @@ class PolyGlot {
               }
             };
         });
-        sheet._createEditor = function(target, editorOptions, initialContent) {
+        sheet[methodName] = function(target, editorOptions, initialContent) {
             editorOptions.style_formats = [
               {
                 title: "Custom",
@@ -417,7 +418,7 @@ class PolyGlot {
                     },
                 ]
             };
-            this._polyglot_original_createEditor(target, editorOptions, initialContent);
+            return this._polyglot_original_activateEditor(target, editorOptions, initialContent);
         }
         sheet._polyglotEditor = true;
     }
