@@ -115,9 +115,11 @@ class PolyGlot {
     updateUserLanguages(html) {
         let actors = [];
         this.known_languages = new Set();
-        for (let token of canvas.tokens.controlled) {
-            if (token.actor)
-                actors.push(token.actor)
+        if (canvas) {
+            for (let token of canvas.tokens.controlled) {
+                if (token.actor)
+                    actors.push(token.actor);
+            }
         }
         if (actors.length == 0 && game.user.character)
             actors.push(game.user.character);
