@@ -5,6 +5,7 @@ class PolyGlot {
         this.refresh_timeout = null;
         this.alphabets = {common: '120% Dethek'}
         this.tongues = {_default: 'common'}
+        this.allowOOC = true;
     }
 
     static async getLanguages() {
@@ -96,7 +97,7 @@ class PolyGlot {
         // Loop in reverse so most recent messages get refreshed first.
         for (let i = messages.length - 1; i >= 0; i--) {
             let message = messages[i]
-            if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
+            if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this.allowOOC && message.data.type < 5 && message.data.type > 0)) {
                 let lang = message.getFlag("polyglot", "language") || ""
                 let unknown = !this.known_languages.has(lang);
                 if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
@@ -201,7 +202,7 @@ class PolyGlot {
 
     renderChatMessage(message, html, data) {
         // html and data are swapped on 0.3.x in relation to other render<Application> hooks
-        if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
+        if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this.allowOOC && message.data.type < 5 && message.data.type > 0)) {
             let lang = message.getFlag("polyglot", "language") || ""
             if (lang != "") {
                 let metadata = html.find(".message-metadata")
@@ -240,7 +241,7 @@ class PolyGlot {
     }
 
     preCreateChatMessage(data, options, userId) {
-        if (data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
+        if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this.allowOOC && data.type < 5 && game.user.isGM)) {
             let lang = ui.chat.element.find("select[name=polyglot-language]").val()
             if (lang != "")
                 mergeObject(data, { "flags.polyglot.language": lang });
@@ -340,6 +341,17 @@ class PolyGlot {
             div.remove();
             return dims;
         }
+         // allow OOC talking
+        game.settings.register("polyglot", "allowOOC", {
+            name: "Allow talking OOC",
+            hint: "Lets the GM to use different languages out of character",
+            scope: "world",
+            config: true,
+            default: true,
+            type: Boolean,
+            onChange: (value) => this.setAllowOOC(value)
+        });
+        this.setAllowOOC(game.settings.get("polyglot", "allowOOC"));
     }
     ready() {
         this.updateConfigFonts();
@@ -353,7 +365,9 @@ class PolyGlot {
             CONFIG.fontFamilies.push(...PolyGlot.FONTS);
         }
     }
-
+    setAllowOOC(value) {
+        this.allowOOC = value;
+    }
     async setCustomLanguages(languages) {
         PolyGlot.languages = await PolyGlot.getLanguages();
         for (let lang of languages.split(",")) {
