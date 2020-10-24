@@ -5,9 +5,9 @@ class PolyGlot {
         this.refresh_timeout = null;
         this.alphabets = {common: '120% Dethek'}
         this.tongues = {_default: 'common'}
-        this.allowOOC = true;
+        this.allowOOC = true;     
     }
-
+    
     static async getLanguages() {
         switch (game.system.id) {
             case "dnd5e":
@@ -55,20 +55,23 @@ class PolyGlot {
     }
 
     renderChatLog(chatlog, html, data) {
-        this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
-        const lang_html = $(`
-        <div id="polyglot"  class="polyglot-lang-select flexrow">
-                <label>Language : </label>
-                <select name="polyglot-language">
-                </select>
-        </div>
-        `);
-        html.find("#chat-controls").after(lang_html);
-        const select = html.find(".polyglot-lang-select select");
-        select.change(e => {
-            this.lastSelection = select.val();
-        })
-        this.updateUserLanguages(html)
+        this.setCustomLanguages(game.settings.get("polyglot", "customLanguages")).then(
+            ()=>{
+                const lang_html = $(`
+                <div id="polyglot"  class="polyglot-lang-select flexrow">
+                        <label>Language : </label>
+                        <select name="polyglot-language">
+                        </select>
+                </div>
+                `);
+                html.find("#chat-controls").after(lang_html);
+                const select = html.find(".polyglot-lang-select select");
+                select.change(e => {
+                    this.lastSelection = select.val();
+                })
+                this.updateUserLanguages(html)
+            }
+        );
     }
 
     updateUser(user, data) {
