@@ -90,6 +90,10 @@ class PolyGlot {
         this.refresh_timeout = setTimeout(this.updateChatMessagesDelayed.bind(this), 500)
     }
 
+    _checkDataTypeForOOC(type){
+        return [CONST.CHAT_MESSAGE_TYPES.OOC, CONST.CHAT_MESSAGE_TYPES.EMOTE, CONST.CHAT_MESSAGE_TYPES.WHISPER].includes(type);
+    }
+
     updateChatMessagesDelayed() {
         this.refresh_timeout = null;
         // Get the last 100 messages
@@ -97,7 +101,7 @@ class PolyGlot {
         // Loop in reverse so most recent messages get refreshed first.
         for (let i = messages.length - 1; i >= 0; i--) {
             let message = messages[i]
-            if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC || _checkDataTypeForOOC(message.data.type)) {
+            if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC || this._checkDataTypeForOOC(message.data.type)) {
                 let lang = message.getFlag("polyglot", "language") || ""
                 let unknown = !this.known_languages.has(lang);
                 if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
@@ -230,10 +234,6 @@ class PolyGlot {
                 }
             }
         }
-    }
-
-    _checkDataTypeForOOC(type){
-        return [CONST.CHAT_MESSAGE_TYPES.OOC, CONST.CHAT_MESSAGE_TYPES.EMOTE, CONST.CHAT_MESSAGE_TYPES.WHISPER].includes(type);
     }
 
     _onGlobeClick(event) {
