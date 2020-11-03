@@ -202,7 +202,7 @@ class PolyGlot {
 
     renderChatMessage(message, html, data) {
         // html and data are swapped on 0.3.x in relation to other render<Application> hooks
-        if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this.allowOOC && this._checkDataTypeForOOC(message.data.type))) {
+        if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC || this._checkDataTypeForOOC(message.data.type)) {
             let lang = message.getFlag("polyglot", "language") || ""
             if (lang != "") {
                 let metadata = html.find(".message-metadata")
