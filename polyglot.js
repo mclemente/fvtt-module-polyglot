@@ -353,8 +353,9 @@ class PolyGlot {
             config: true,
             default: false,
             type: Boolean,
-            onChange: () => {this.allowOOC = value}
+            onChange: (value) => {this.allowOOC = value}
         });
+        this.allowOOC = game.settings.get("polyglot","allowOOC");
     }
     ready() {
         this.updateConfigFonts();
