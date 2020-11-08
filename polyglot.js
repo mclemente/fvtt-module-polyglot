@@ -7,7 +7,7 @@ class PolyGlot {
         this.tongues = {_default: 'common'}
         this.allowOOC = false;     
     }
-    
+
     static async getLanguages() {
         switch (game.system.id) {
             case "dnd5e":
@@ -57,12 +57,12 @@ class PolyGlot {
    async renderChatLog(chatlog, html, data) {
         await this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"))
         const lang_html = $(`
-            <div id="polyglot"  class="polyglot-lang-select flexrow">
+        <div id="polyglot"  class="polyglot-lang-select flexrow">
                 <label>Language : </label>
                 <select name="polyglot-language">
                 </select>
-            </div>
-            `);
+        </div>
+        `);
         html.find("#chat-controls").after(lang_html);
         const select = html.find(".polyglot-lang-select select");
         select.change(e => {
@@ -369,6 +369,7 @@ class PolyGlot {
             CONFIG.fontFamilies.push(...PolyGlot.FONTS);
         }
     }
+
     async setCustomLanguages(languages) {
         PolyGlot.languages = await PolyGlot.getLanguages();
         for (let lang of languages.split(",")) {
