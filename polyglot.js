@@ -21,7 +21,7 @@ class PolyGlot {
                 return Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
                 break;
             case "wfrp4e":
-                const pack = game.packs.get("wfrp4e.skills");
+                const pack = game.packs.get("wfrp4e.skills") || game.packs.get("wfrp4e.basic");
                 const itemList = await pack.getIndex();
                 const langs = {};
                 for (let item of itemList) {
