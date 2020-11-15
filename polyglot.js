@@ -206,33 +206,30 @@ class PolyGlot {
 
     renderChatMessage(message, html, data) {
         // html and data are swapped on 0.3.x in relation to other render<Application> hooks
-        if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC || this._checkDataTypeForOOC(message.data.type)) {
-            let lang = message.getFlag("polyglot", "language") || ""
-            if (lang != "") {
-                let metadata = html.find(".message-metadata")
-                let language = PolyGlot.languages[lang] || lang
-                const unknown = !this.known_languages.has(lang);
-                message.polyglot_unknown = unknown;
-                if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
-                    message.polyglot_unknown = false;
-                if (!message.polyglot_force && message.polyglot_unknown) {
-                    let content = html.find(".message-content")
-                    let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
-                    content.text(new_content)
-                    content[0].style.font = this._getFontStyle(lang)
-                    message.polyglot_unknown = true;
-                }
-                const color = unknown ? "red" : "green";
-                metadata.find(".polyglot-message-language").remove()
-                const title = game.user.isGM || !unknown ? `title="${language}"` : ""
-                let button = $(`<a class="button polyglot-message-language" ${title}>
-                    <i class="fas fa-globe" style="color:${color}"></i>
-                </a>`)
-                metadata.append(button)
-                if (game.user.isGM) {
-                    button.click(this._onGlobeClick.bind(this))
-                }
-            }
+        const lang = message.getFlag("polyglot", "language") || ""
+        if (!lang) return;
+        let metadata = html.find(".message-metadata")
+        let language = PolyGlot.languages[lang] || lang
+        const unknown = !this.known_languages.has(lang);
+        message.polyglot_unknown = unknown;
+        if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
+            message.polyglot_unknown = false;
+        if (!message.polyglot_force && message.polyglot_unknown) {
+            let content = html.find(".message-content")
+            let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
+            content.text(new_content)
+            content[0].style.font = this._getFontStyle(lang)
+            message.polyglot_unknown = true;
+        }
+        const color = unknown ? "red" : "green";
+        metadata.find(".polyglot-message-language").remove()
+        const title = game.user.isGM || !unknown ? `title="${language}"` : ""
+        let button = $(`<a class="button polyglot-message-language" ${title}>
+            <i class="fas fa-globe" style="color:${color}"></i>
+        </a>`)
+        metadata.append(button)
+        if (game.user.isGM) {
+            button.click(this._onGlobeClick.bind(this))
         }
     }
 
