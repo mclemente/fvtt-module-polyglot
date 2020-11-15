@@ -25,6 +25,17 @@ As GM, you can also click on the language button (colored globe) to unscramble a
 
 ![img](https://media.discordapp.net/attachments/542495303929036824/737807675290550324/chat.gif)
 
+#### In-Character vs Out-of-Character
+
+In Foundry, when you don't have a token selected, you are speaking "out of character" and when a token is selected, you are speaking "in character". Polyglot only activates on in-character chats.
+
+Speaking "out of character" is reserved for actual out of character speech (i.e: alanguage from this world, in English for example or whichever language you speak), and in-world languages are for in-character speech.
+
+You don't have to hijack a token to speak in character though, what most people though is to create a single Actor called "Narrator" or "GM" and assign it to their GM player (in the "Player Configuration" dialog by right clicking your name in the bottom left corner).
+You can then speak in-character as the GM by simply prefixing your message with the `/ic` command.
+
+Since 1.4.0, GMs have the option to enable Polyglot for out of character speech, by going to the module's configuration settings.
+
 ### Journals
 
 You can write text in a specific script and only players who speak that language will understand it. By hovering the text they can see what language the text is written.
