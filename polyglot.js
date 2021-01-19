@@ -394,17 +394,7 @@ class PolyGlot {
         });
         sheet[methodName] = function(target, editorOptions, initialContent) {
             editorOptions.style_formats = [
-              {
-                title: "Custom",
-                items: [
-                  {
-                    title: "Secret",
-                    block: 'section',
-                    classes: 'secret',
-                    wrapper: true
-                  }
-                ]
-              },
+              ...CONFIG.TinyMCE.style_formats,
               {
                 title: "Polyglot",
                 items: languages
