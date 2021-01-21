@@ -7,7 +7,7 @@ Partial support to Starfinder.
 
 ## Installation
 
-In the setup screen, use the URL `https://raw.githubusercontent.com/kakaroto/fvtt-module-polyglot/master/module.json` to install the module.
+In the setup screen, use the URL `https://raw.githubusercontent.com/League-of-Foundry-Developers/fvtt-module-polyglot/master/module.json` to install the module.
 
 ## Usage
 
