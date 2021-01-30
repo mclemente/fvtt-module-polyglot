@@ -54,6 +54,7 @@ class PolyGlot {
         }
         if (game.system.id === "wfrp4e") return "Reikspiel";
         if (Object.keys(this.languages).includes("common")) return "common";
+        if (game.system.id === "tormenta20") return "Comum";
         return this.languages[0] || "";
     }
 
@@ -378,8 +379,8 @@ class PolyGlot {
     }
 
     async setCustomLanguages(languages) {
-        if (languages == "") return;
         PolyGlot.languages = await PolyGlot.getLanguages();
+        if (languages === "") return;
         for (let lang of languages.split(",")) {
             lang = lang.trim();
             const key = lang.toLowerCase().replace(/ \'/g, "_");
