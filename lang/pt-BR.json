@@ -11,5 +11,7 @@
   "POLYGLOT.ExportFontsHint": "Torna as fontes do Polyglot disponíveis para uso no Foundry (por exemplo, na Ferramenta de Desenhos).",
   "POLYGLOT.AllowOOCTitle": "Embaralhar mensagens de chat Fora de Personagem",
   "POLYGLOT.AllowOOCHint": "Permite que o Mestre embaralhe texto quando enviar mensagens Fora de Personagem.",
-  "POLYGLOT.LanguageLabel": "Idioma"
+  "POLYGLOT.LanguageLabel": "Idioma",
+  "POLYGLOT.ToggleRunes": "Alternar Runas",
+  "POLYGLOT.Runes": "Runas"
 }

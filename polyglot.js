@@ -462,7 +462,8 @@ class PolyGlot {
             let runes = false;
             const texts = [];
             const styles = [];
-            const toggleButton = $(`<a class="polyglot-button" title="Toggle Runes"><i class="fas fa-unlink"></i> Runes</a>`);
+            const toggleString = "<a class='polyglot-button' title='" + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i> "+ game.i18n.localize("POLYGLOT.Runes") + "</a>";
+            const toggleButton = $(toggleString);
             toggleButton.click(ev => {
                 ev.preventDefault();
                 let button = ev.currentTarget.firstChild
