@@ -1,0 +1,15 @@
+{
+  "POLYGLOT.CustomLanguagesTitle": "Idiomas Customizados",
+  "POLYGLOT.CustomLanguagesHint": "Defina uma lista de idiomas customizados para adicionar ao sistema, separados por vírgula.",
+  "POLYGLOT.DefaultLanguageTitle": "Idioma Padrão",
+  "POLYGLOT.DefaultLanguageHint": "Nome do idioma padrão para ser escolhido. Deixe vazio para usar o padrão do sistema.",
+  "POLYGLOT.ScrambleGMTitle": "Embaralhar para o Mestre",
+  "POLYGLOT.ScrambleGMHint": "Desabilite esta opção para sempre mostrar o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
+  "POLYGLOT.RandomizeRunesTitle": "Randomizar Runas",
+  "POLYGLOT.RandomizeRunesHint": "Texto embaralhado sempre irá parecer diferente, mesmo se a mesma mensagem for repetida.",
+  "POLYGLOT.ExportFontsTitle": "Tornar Fontes Disponíveis",
+  "POLYGLOT.ExportFontsHint": "Torna as fontes do Polyglot disponíveis para uso no Foundry (por exemplo, na Ferramenta de Desenhos).",
+  "POLYGLOT.AllowOOCTitle": "Embaralhar mensagens de chat Fora de Personagem",
+  "POLYGLOT.AllowOOCHint": "Permite que o Mestre embaralhe texto quando enviar mensagens Fora de Personagem.",
+  "POLYGLOT.LanguageLabel": "Idioma"
+}

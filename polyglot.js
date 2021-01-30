@@ -60,13 +60,8 @@ class PolyGlot {
 
    async renderChatLog(chatlog, html, data) {
         await this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"))
-        const lang_html = $(`
-        <div id="polyglot"  class="polyglot-lang-select flexrow">
-                <label>Language : </label>
-                <select name="polyglot-language">
-                </select>
-        </div>
-        `);
+        const langString = "<div id='polyglot'  class='polyglot-lang-select flexrow'><label>" + game.i18n.localize("POLYGLOT.LanguageLabel") + ": </label><select name='polyglot-language'></select></div>"
+        const lang_html = $(langString);
         html.find("#chat-controls").after(lang_html);
         const select = html.find(".polyglot-lang-select select");
         select.change(e => {
@@ -298,8 +293,8 @@ class PolyGlot {
             }
         // custom languages
         game.settings.register("polyglot", "customLanguages", {
-            name: "Custom Languages",
-            hint: "Define a list of custom, comma separated, languages to add to the system.",
+            name: game.i18n.localize("POLYGLOT.CustomLanguagesTitle"),
+            hint: game.i18n.localize("POLYGLOT.CustomLanguagesHint"),
             scope: "world",
             config: true,
             default: "",
@@ -307,16 +302,16 @@ class PolyGlot {
             onChange: (value) => this.setCustomLanguages(value)
         });
         game.settings.register("polyglot", "defaultLanguage", {
-            name: "Default Language",
-            hint: "Name of the default language to select. Keep empty to use system default.",
+            name: game.i18n.localize("POLYGLOT.DefaultLanguageTitle"),
+            hint: game.i18n.localize("POLYGLOT.DefaultLanguageHint"),
             scope: "client",
             config: true,
             default: "",
             type: String
         });
         game.settings.register("polyglot", "runifyGM", {
-            name: "Scramble for GM",
-            hint: "Disable this option to always show the text for the GM (refer to the globe's color for the token's understanding).",
+            name: game.i18n.localize("POLYGLOT.ScrambleGMTitle"),
+            hint: game.i18n.localize("POLYGLOT.ScrambleGMHint"),
             scope: "client",
             config: true,
             default: true,
@@ -324,16 +319,16 @@ class PolyGlot {
             onChange: () => this.updateChatMessages()
         });
         game.settings.register("polyglot", "useUniqueSalt", {
-            name: "Randomize Runes",
-            hint: "Enabling this option will cause the scrambled text to appear different every time, even if the same message is repeated.",
+            name: game.i18n.localize("POLYGLOT.RandomizeRunesTitle"),
+            hint: game.i18n.localize("POLYGLOT.RandomizeRunesHint"),
             scope: "world",
             config: true,
             default: false,
             type: Boolean
         });
         game.settings.register("polyglot", "exportFonts", {
-            name: "Make fonts available",
-            hint: "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
+            name: game.i18n.localize("POLYGLOT.ExportFontsTitle"),
+            hint: game.i18n.localize("POLYGLOT.ExportFontsHint"),
             scope: "client",
             config: true,
             default: true,
@@ -355,8 +350,8 @@ class PolyGlot {
         }
          // allow OOC talking
         game.settings.register("polyglot", "allowOOC", {
-            name: "Scramble on OOC chat messages",
-            hint: "Allows the GM to scramble text when sending Out Of Character messages",
+            name: game.i18n.localize("POLYGLOT.AllowOOCTitle"),
+            hint: game.i18n.localize("POLYGLOT.AllowOOCHint"),
             scope: "world",
             config: true,
             default: false,
