@@ -31,6 +31,9 @@ class PolyGlot {
                 }
                 return langs;
                 break;
+            case "tormenta20":
+                return CONFIG.T20.idiomas;
+                break;
             default:
                 return [];
                 break;
@@ -141,6 +144,10 @@ class PolyGlot {
                         break;
                     case "ose":
                         for (let lang of actor.data.data.languages.value)
+                            this.known_languages.add(lang)
+                        break;
+                    case "tormenta20":
+                        for (let lang of actor.data.data.detalhes.idiomas.value)
                             this.known_languages.add(lang)
                         break;
                     default:
@@ -281,6 +288,9 @@ class PolyGlot {
             case "wfrp4e":
                 this.loadLanguages("wfrp");
                 break;
+            case "tormenta20":
+                this.loadLanguages("tormenta20");
+                break;
             case "sfrpg":
             default:
                 break;
@@ -368,6 +378,7 @@ class PolyGlot {
     }
 
     async setCustomLanguages(languages) {
+        if (languages == "") return;
         PolyGlot.languages = await PolyGlot.getLanguages();
         for (let lang of languages.split(",")) {
             lang = lang.trim();
