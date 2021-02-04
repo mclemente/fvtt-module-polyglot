@@ -22,7 +22,7 @@
     ],
     "url": "https://github.com/mclemente/fvtt-poliglota",
     "manifest": "https://raw.githubusercontent.com/mclemente/fvtt-poliglota/master/module.json",
-    "download": "https://github.com/mclemente/fvtt-poliglota/master.zip",
+    "download": "https://github.com/mclemente/fvtt-poliglota/archive/master.zip",
     "minimumCoreVersion": "0.7.6",
     "compatibleCoreVersion": "0.8.0"
 }
