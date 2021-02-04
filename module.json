@@ -2,8 +2,8 @@
     "name": "polyglot",
     "title": "Polyglot",
     "description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
-    "version": "1.4.0",
-    "author": ["KaKaRoTo", "elizeuangelo"],
+    "version": "1.0.0",
+    "author": ["Matheus Clemente (mclemente)"],
     "scripts": ["./polyglot.js"],
     "styles": ["./polyglot.css","./fonts.css"],
     "packs": [],
@@ -16,13 +16,13 @@
       },
       {
         "lang": "pt-BR",
-        "name": "Português (Brasil)",
+        "name": "PortuguÃªs (Brasil)",
         "path": "lang/pt-BR.json"
       }
     ],
-    "url": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot",
-    "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/fvtt-module-polyglot/master/module.json",
-    "download": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/archive/v1.4.0.zip",
+    "url": "https://github.com/mclemente/fvtt-poliglota",
+    "manifest": "https://raw.githubusercontent.com/mclemente/fvtt-poliglota/master/module.json",
+    "download": "https://github.com/mclemente/fvtt-poliglota/master.zip",
     "minimumCoreVersion": "0.7.6",
     "compatibleCoreVersion": "0.8.0"
 }
