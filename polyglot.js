@@ -31,6 +31,9 @@ class PolyGlot {
                 }
                 return langs;
                 break;
+            case "tormenta20":
+                return CONFIG.T20.idiomas;
+                break;
             default:
                 return [];
                 break;
@@ -51,18 +54,14 @@ class PolyGlot {
         }
         if (game.system.id === "wfrp4e") return "Reikspiel";
         if (Object.keys(this.languages).includes("common")) return "common";
+        if (game.system.id === "tormenta20") return "Comum";
         return this.languages[0] || "";
     }
 
    async renderChatLog(chatlog, html, data) {
         await this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"))
-        const lang_html = $(`
-        <div id="polyglot"  class="polyglot-lang-select flexrow">
-                <label>Language : </label>
-                <select name="polyglot-language">
-                </select>
-        </div>
-        `);
+        const langString = "<div id='polyglot'  class='polyglot-lang-select flexrow'><label>" + game.i18n.localize("POLYGLOT.LanguageLabel") + ": </label><select name='polyglot-language'></select></div>"
+        const lang_html = $(langString);
         html.find("#chat-controls").after(lang_html);
         const select = html.find(".polyglot-lang-select select");
         select.change(e => {
@@ -141,6 +140,10 @@ class PolyGlot {
                         break;
                     case "ose":
                         for (let lang of actor.data.data.languages.value)
+                            this.known_languages.add(lang)
+                        break;
+                    case "tormenta20":
+                        for (let lang of actor.data.data.detalhes.idiomas.value)
                             this.known_languages.add(lang)
                         break;
                     default:
@@ -281,14 +284,17 @@ class PolyGlot {
             case "wfrp4e":
                 this.loadLanguages("wfrp");
                 break;
+            case "tormenta20":
+                this.loadLanguages("tormenta20");
+                break;
             case "sfrpg":
             default:
                 break;
             }
         // custom languages
         game.settings.register("polyglot", "customLanguages", {
-            name: "Custom Languages",
-            hint: "Define a list of custom, comma separated, languages to add to the system.",
+            name: game.i18n.localize("POLYGLOT.CustomLanguagesTitle"),
+            hint: game.i18n.localize("POLYGLOT.CustomLanguagesHint"),
             scope: "world",
             config: true,
             default: "",
@@ -296,16 +302,16 @@ class PolyGlot {
             onChange: (value) => this.setCustomLanguages(value)
         });
         game.settings.register("polyglot", "defaultLanguage", {
-            name: "Default Language",
-            hint: "Name of the default language to select. Keep empty to use system default.",
+            name: game.i18n.localize("POLYGLOT.DefaultLanguageTitle"),
+            hint: game.i18n.localize("POLYGLOT.DefaultLanguageHint"),
             scope: "client",
             config: true,
             default: "",
             type: String
         });
         game.settings.register("polyglot", "runifyGM", {
-            name: "Scramble for GM",
-            hint: "Disable this option to always show the text for the GM (refer to the globe's color for the token's understanding).",
+            name: game.i18n.localize("POLYGLOT.ScrambleGMTitle"),
+            hint: game.i18n.localize("POLYGLOT.ScrambleGMHint"),
             scope: "client",
             config: true,
             default: true,
@@ -313,16 +319,16 @@ class PolyGlot {
             onChange: () => this.updateChatMessages()
         });
         game.settings.register("polyglot", "useUniqueSalt", {
-            name: "Randomize Runes",
-            hint: "Enabling this option will cause the scrambled text to appear different every time, even if the same message is repeated.",
+            name: game.i18n.localize("POLYGLOT.RandomizeRunesTitle"),
+            hint: game.i18n.localize("POLYGLOT.RandomizeRunesHint"),
             scope: "world",
             config: true,
             default: false,
             type: Boolean
         });
         game.settings.register("polyglot", "exportFonts", {
-            name: "Make fonts available",
-            hint: "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
+            name: game.i18n.localize("POLYGLOT.ExportFontsTitle"),
+            hint: game.i18n.localize("POLYGLOT.ExportFontsHint"),
             scope: "client",
             config: true,
             default: true,
@@ -344,8 +350,8 @@ class PolyGlot {
         }
          // allow OOC talking
         game.settings.register("polyglot", "allowOOC", {
-            name: "Scramble on OOC chat messages",
-            hint: "Allows the GM to scramble text when sending Out Of Character messages",
+            name: game.i18n.localize("POLYGLOT.AllowOOCTitle"),
+            hint: game.i18n.localize("POLYGLOT.AllowOOCHint"),
             scope: "world",
             config: true,
             default: false,
@@ -369,6 +375,7 @@ class PolyGlot {
 
     async setCustomLanguages(languages) {
         PolyGlot.languages = await PolyGlot.getLanguages();
+        if (languages === "") return;
         for (let lang of languages.split(",")) {
             lang = lang.trim();
             const key = lang.toLowerCase().replace(/ \'/g, "_");
@@ -455,7 +462,8 @@ class PolyGlot {
             let runes = false;
             const texts = [];
             const styles = [];
-            const toggleButton = $(`<a class="polyglot-button" title="Toggle Runes"><i class="fas fa-unlink"></i> Runes</a>`);
+            const toggleString = "<a class='polyglot-button' title='" + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i> "+ game.i18n.localize("POLYGLOT.Runes") + "</a>";
+            const toggleButton = $(toggleString);
             toggleButton.click(ev => {
                 ev.preventDefault();
                 let button = ev.currentTarget.firstChild
