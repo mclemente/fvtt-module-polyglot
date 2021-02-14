@@ -7,7 +7,19 @@
     "scripts": ["./polyglot.js"],
     "styles": ["./polyglot.css","./fonts.css"],
     "packs": [],
-    "systems": ["dnd5e", "dnd5eJP", "pf1", "pf2e", "wfrp4e", "ose", "sfrpg"],
+    "systems": ["dnd5e", "dnd5eJP", "pf1", "pf2e", "wfrp4e", "ose", "sfrpg", "tormenta20"],
+    "languages": [
+      {
+        "lang": "en",
+        "name": "English",
+        "path": "lang/en.json"
+      },
+      {
+        "lang": "pt-BR",
+        "name": "Português (Brasil)",
+        "path": "lang/pt-BR.json"
+      }
+    ],
     "url": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot",
     "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/fvtt-module-polyglot/master/module.json",
     "download": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/archive/v1.4.0.zip",

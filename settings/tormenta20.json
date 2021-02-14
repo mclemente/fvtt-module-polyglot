@@ -1,0 +1,33 @@
+{
+    "alphabets": {
+        "abyssal":"150% Barazhad",
+        "auran":"100% OldeThorass",
+        "common": "130% Thorass",
+        "celestial": "180% Celestial",
+        "draconic": "170% Iokharic",
+        "dwarvish": "120% Dethek",
+        "giant":"120% MeroiticDemotic",
+        "gnoll": "150% Kargi",
+        "elvish": "150% Espruar",
+        "infernal": "230% Infernal",
+        "sylvan":"150% OldeEspruar"
+    },
+    "tongues": {
+        "_default": "common",
+        "abissal": "abyssal",
+        "anao": "dwarvish",
+        "aquan": "auran",
+        "auran": "auran",
+        "celestial": "celestial",
+        "draconico": "draconic",
+        "elfico": "elvish",
+        "gigante": "giant",
+        "gnoll": "gnoll",
+        "goblin": "gnoll",
+        "ignan": "auran",
+        "infernal": "infernal",
+        "orc": "dwarvish",
+        "silvestre": "sylvan",
+        "terran": "auran"
+    }
+}
