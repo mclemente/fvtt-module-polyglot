@@ -1,3 +1,6 @@
+# v1.5.3
+- Fixed a bug that caused the addon to not load on D&D 5e.
+
 # v1.5.2
 - Added D&D 3.5e support.
 - D&D 5e: Added fonts to Aarakocra, Halfling and Thieves' Cant.
