@@ -1,6 +1,3 @@
-# v1.5.4
-- Improved script macro usage. 
-
 # v1.5.3
 - Fixed a bug that caused the addon to not load on D&D 5e.
 - Added Spanish translation (thanks to Juanfrank).
