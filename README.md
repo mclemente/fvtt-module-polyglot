@@ -47,6 +47,7 @@ The owner of a journal and the DM can scramble/unscramble the text in their scre
 
 The original idea for this module was proposed by `@Talwin Greenwood` on the FVTT discord.
 The original PolyGlot module is written by KaKaRoTo. The 'fantasy languages' adaptation is written by elizeuangelo.
+[https://github.com/Juanfrank](Juanfrank) for the Spanish translation.
 
 ## License
 

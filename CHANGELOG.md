@@ -1,5 +1,6 @@
 # v1.5.3
 - Fixed a bug that caused the addon to not load on D&D 5e.
+- Added Spanish translation (thanks to Juanfrank).
 
 # v1.5.2
 - Added D&D 3.5e support.
