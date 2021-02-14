@@ -1,0 +1,17 @@
+{
+  "POLYGLOT.CustomLanguagesTitle": "Idiomas Personalizados",
+  "POLYGLOT.CustomLanguagesHint": "Define una lista de idiomas personalizados, separados mediante coma, para añadir al sistema.",
+  "POLYGLOT.DefaultLanguageTitle": "Idioma por Defecto",
+  "POLYGLOT.DefaultLanguageHint": "Nombre del idioma por defecto seleccionado. Mantener en blanco para mantener el utilizado por defecto.",
+  "POLYGLOT.ScrambleGMTitle": "Codificar para el GM",
+  "POLYGLOT.ScrambleGMHint": "Deshabilita esta opción para mostrar siempre el texto para el GM (refiérase al color del globo para ver la perspectiva de la ficha).",
+  "POLYGLOT.RandomizeRunesTitle": "Aleatorizar las Runas",
+  "POLYGLOT.RandomizeRunesHint": "Habilitar esta opción ocasiona que los textos codificados se vean siempre de forma distinta, aunque se repita el mismo mensaje.",
+  "POLYGLOT.ExportFontsTitle": "Habilitar la tipografía",
+  "POLYGLOT.ExportFontsHint": "Permite que la tipografía de Polyglot esté disponible para ser utilizado en Foundry (por ejemplo, en Dibujos).",
+  "POLYGLOT.AllowOOCTitle": "Aleatorizar en mensajes de chat Fuera de Personaje (OOC)",
+  "POLYGLOT.AllowOOCHint": "Permite que el GM pueda aleatorizar los mensajes cuando utiliza mensajes de chat Fuera de Personaje (OOC).",
+  "POLYGLOT.LanguageLabel": "Idioma",
+  "POLYGLOT.ToggleRunes": "Activar/Desactivar Runas",
+  "POLYGLOT.Runes": "Runas"
+}
