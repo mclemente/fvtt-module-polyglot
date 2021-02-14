@@ -2,12 +2,12 @@
     "name": "polyglot",
     "title": "Polyglot",
     "description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
-    "version": "1.5.1",
+    "version": "1.5.2",
     "author": ["MClemente", "KaKaRoTo", "elizeuangelo"],
     "scripts": ["./src/polyglot.js"],
     "styles": ["./css/polyglot.css","./css/fonts.css"],
     "packs": [],
-    "systems": ["dnd5e", "dnd5eJP", "pf1", "pf2e", "wfrp4e", "ose", "sfrpg", "tormenta20"],
+    "systems": ["D35E", "dnd5e", "dnd5eJP", "pf1", "pf2e", "wfrp4e", "ose", "sfrpg", "tormenta20"],
     "languages": [
       {
         "lang": "en",

@@ -1,6 +1,7 @@
 {
     "alphabets": {
         "common": "130% Thorass",
+        "auran":"100% OldeThorass",
         "celestial": "180% Celestial",
         "outwordly": "200% ArCiela",
         "draconic": "170% Iokharic",
@@ -14,6 +15,7 @@
     },
     "tongues": {
         "_default": "common",
+        "aarakocra": "auran",
         "abyssal": "infernal",
         "aquan": "dwarvish",
         "auran": "dwarvish",
@@ -28,12 +30,14 @@
         "gnoll": "gnoll",
         "gnomish": "dwarvish",
         "goblin": "dwarvish",
+        "halfling": "common",
         "ignan": "dwarvish",
         "infernal": "infernal",
         "orc": "dwarvish",
         "primordial": "dwarvish",
         "sylvan": "elvish",
         "terran": "dwarvish",
+        "cant": ""common",
         "undercommon": "drowic"
     }
 }
