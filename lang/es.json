@@ -2,7 +2,7 @@
   "POLYGLOT.CustomLanguagesTitle": "Idiomas Personalizados",
   "POLYGLOT.CustomLanguagesHint": "Define una lista de idiomas personalizados, separados mediante coma, para añadir al sistema.",
   "POLYGLOT.DefaultLanguageTitle": "Idioma por Defecto",
-  "POLYGLOT.DefaultLanguageHint": "Nombre del idioma por defecto seleccionado. Mantener en blanco para utilizar el utilizado por defecto.",
+  "POLYGLOT.DefaultLanguageHint": "Nombre del idioma por defecto seleccionado. Mantener en blanco para mantener el utilizado por defecto.",
   "POLYGLOT.ScrambleGMTitle": "Codificar para el GM",
   "POLYGLOT.ScrambleGMHint": "Deshabilita esta opción para mostrar siempre el texto para el GM (refiérase al color del globo para ver la perspectiva de la ficha).",
   "POLYGLOT.RandomizeRunesTitle": "Aleatorizar las Runas",
