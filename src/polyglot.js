@@ -58,7 +58,7 @@ class PolyGlot {
 		return this.languages[0] || "";
 	}
 
-   async renderChatLog(chatlog, html, data) {
+  async renderChatLog(chatlog, html, data) {
 		await this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"))
 		const langString = "<div id='polyglot'  class='polyglot-lang-select flexrow'><label>" + game.i18n.localize("POLYGLOT.LanguageLabel") + ": </label><select name='polyglot-language'></select></div>"
 		const lang_html = $(langString);
@@ -292,7 +292,7 @@ class PolyGlot {
 				break;
 			default:
 				break;
-			}
+		}
 		// custom languages
 		game.settings.register("polyglot", "customLanguages", {
 			name: game.i18n.localize("POLYGLOT.CustomLanguagesTitle"),
