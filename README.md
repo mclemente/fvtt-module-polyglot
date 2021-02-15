@@ -2,7 +2,7 @@
 
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.
 
-Currently supports D&D 5e, Pathfinder, Old-School Essentials, Starfinder, Tormenta20 and Warhammer.
+Currently supports D&D 3.5e, D&D 5e, Pathfinder, Pathfinder 2e, Old-School Essentials, Starfinder, Tormenta20 and Warhammer.
 
 ## Installation
 
