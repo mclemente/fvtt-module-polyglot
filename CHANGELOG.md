@@ -1,3 +1,7 @@
+# v1.5.5
+- Fixed Translation Box translating Common.
+- Fixed Spanish translation not showing.
+
 # v1.5.4
 - Added Translation Box setting (thanks to @ironmonk88). Players can now choose between showing the language's script along with a translation box or the original functionality.
 

@@ -54,7 +54,7 @@ class PolyGlot {
 			if (inverted[defaultLang]) return inverted[defaultLang];
 		}
 		if (game.system.id === "wfrp4e") return "Reikspiel";
-		if (Object.keys(this.languages).includes("common")) return "common";
+		if (Object.keys(this.languages).includes("common")) return "Common";
 		if (game.system.id === "tormenta20") return "Comum";
 		return this.languages[0] || "";
 	}
