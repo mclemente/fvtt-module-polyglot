@@ -1,3 +1,13 @@
+![](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/League-of-Foundry-Developers/fvtt-module-polyglot/master/module.json&label=core&query=minimumCoreVersion&suffix=%2B&color=important "Minimum core version") 
+![](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/League-of-Foundry-Developers/fvtt-module-polyglot/master/module.json&label=compatible&query=compatibleCoreVersion&color=important "Latest compatible version") 
+![](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/League-of-Foundry-Developers/fvtt-module-polyglot/master/module.json&label=version&query=version&style=plasticcolor=success)
+
+![GitHub release](https://img.shields.io/github/release-date/League-of-Foundry-Developers/fvtt-module-polyglot)
+![all versions](https://img.shields.io/github/downloads/League-of-Foundry-Developers/fvtt-module-polyglot/total) 
+![the latest version](https://img.shields.io/github/downloads/League-of-Foundry-Developers/fvtt-module-polyglot/latest/total) 
+![Forge installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fpolyglot)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com) 
+
 # Polyglot
 
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.
