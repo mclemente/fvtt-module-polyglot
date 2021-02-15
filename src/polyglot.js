@@ -238,6 +238,7 @@ class PolyGlot {
 			content[0].style.font = this._getFontStyle(lang)
 			message.polyglot_unknown = true;
 		}
+		
 		const color = unknown ? "red" : "green";
 		metadata.find(".polyglot-message-language").remove()
 		const title = game.user.isGM || !unknown ? `title="${language}"` : ""

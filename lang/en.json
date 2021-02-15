@@ -9,6 +9,8 @@
   "POLYGLOT.RandomizeRunesHint": "Enabling this option will cause the scrambled text to appear different every time, even if the same message is repeated.",
   "POLYGLOT.ExportFontsTitle": "Make fonts available",
   "POLYGLOT.ExportFontsHint": "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
+  "POLYGLOT.DisplayTranslatedTitle": "Display translated box",
+  "POLYGLOT.DisplayTranslatedHint": "For languages that are translated in the chat window, display the original text and a translation below.",
   "POLYGLOT.AllowOOCTitle": "Scramble on OOC chat messages",
   "POLYGLOT.AllowOOCHint": "Allows the GM to scramble text when sending Out Of Character messages",
   "POLYGLOT.TranslatedFrom": "Translated from ",
