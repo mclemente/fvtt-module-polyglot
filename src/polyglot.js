@@ -218,13 +218,30 @@ class PolyGlot {
 		message.polyglot_unknown = unknown;
 		if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
 			message.polyglot_unknown = false;
-		if (!message.polyglot_force && message.polyglot_unknown) {
-			let content = html.find(".message-content")
-			let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
-			content.text(new_content)
-			content[0].style.font = this._getFontStyle(lang)
-			message.polyglot_unknown = true;
+		
+		if(game.settings.get('polyglot', 'display-translated')){
+			if(lang != 'common' || unknown){
+				let content = html.find(".message-content");
+				let translation = message.data.content;
+				let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
+				let original = $('<div>').addClass('polyglot-original-text').css({font:this._getFontStyle(lang)}).html(new_content);
+				$(content).empty().append(original);
+				
+				if (message.polyglot_force || !message.polyglot_unknown) {
+					$(content).append($('<div>').addClass('polyglot-translation-text').attr('title', 'Translated from ' + language).html(translation));
+				}else
+					message.polyglot_unknown = true;
+			}
+		}else{
+			if (!message.polyglot_force && message.polyglot_unknown) {
+				let content = html.find(".message-content")
+				let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
+				content.text(new_content)
+				content[0].style.font = this._getFontStyle(lang)
+				message.polyglot_unknown = true;
+			}
 		}
+		
 		const color = unknown ? "red" : "green";
 		metadata.find(".polyglot-message-language").remove()
 		const title = game.user.isGM || !unknown ? `title="${language}"` : ""
@@ -341,6 +358,15 @@ class PolyGlot {
 			type: Boolean,
 			onChange: () => this.updateConfigFonts()
 		});
+		game.settings.register("polyglot", "display-translated", {
+            name: game.i18n.localize("POLYGLOT.DisplayTranslatedTitle"),
+            hint: game.i18n.localize("POLYGLOT.DisplayTranslatedHint"),
+            scope: "client",
+            config: true,
+            default: true,
+            type: Boolean,
+            onChange: () => this.updateChatMessages()
+        });
 		// Adjust the bubble dimensions so the message is displayed correctly
 		ChatBubbles.prototype._getMessageDimensions = (message) => {
 			let div = $(`<div class="chat-bubble" style="visibility:hidden;font:${this._bubble.font}">${this._bubble.message || message}</div>`);
