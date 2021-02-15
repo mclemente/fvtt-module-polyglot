@@ -1,6 +1,9 @@
+# v1.5.4
+- Added Translation Box setting (thanks to @ironmonk88). Players can now choose between showing the language's script along with a translation box or the original functionality.
+
 # v1.5.3
 - Fixed a bug that caused the addon to not load on D&D 5e.
-- Added Spanish translation (thanks to Juanfrank).
+- Added Spanish translation (thanks to @juanfrank).
 
 # v1.5.2
 - Added D&D 3.5e support.

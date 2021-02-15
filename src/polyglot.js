@@ -59,9 +59,9 @@ class PolyGlot {
 		return this.languages[0] || "";
 	}
 
-  async renderChatLog(chatlog, html, data) {
+	async renderChatLog(chatlog, html, data) {
 		await this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"))
-		const langString = "<div id='polyglot'  class='polyglot-lang-select flexrow'><label>" + game.i18n.localize("POLYGLOT.LanguageLabel") + ": </label><select name='polyglot-language'></select></div>"
+		const langString = "<div id='polyglot' class='polyglot-lang-select flexrow'><label>" + game.i18n.localize("POLYGLOT.LanguageLabel") + ": </label><select name='polyglot-language'></select></div>"
 		const lang_html = $(langString);
 		html.find("#chat-controls").after(lang_html);
 		const select = html.find(".polyglot-lang-select select");
@@ -205,7 +205,7 @@ class PolyGlot {
 			const c = Math.floor(rng.random()*36).toString(36)
 			const upper = Boolean(Math.round(rng.random()));
 			return upper ? c.toUpperCase() : c;
-		  });
+			});
 	}
 
 	renderChatMessage(message, html, data) {
@@ -218,7 +218,20 @@ class PolyGlot {
 		message.polyglot_unknown = unknown;
 		if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
 			message.polyglot_unknown = false;
-		if (!message.polyglot_force && message.polyglot_unknown) {
+		
+		if(game.settings.get('polyglot', 'display-translated') && (language != PolyGlot.defaultLanguage || unknown)) {
+			let content = html.find(".message-content");
+			let translation = message.data.content;
+			let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
+			let original = $('<div>').addClass('polyglot-original-text').css({font:this._getFontStyle(lang)}).html(new_content);
+			$(content).empty().append(original);
+			
+			if (message.polyglot_force || !message.polyglot_unknown) {
+				$(content).append($('<div>').addClass('polyglot-translation-text').attr('title', game.i18n.localize("POLYGLOT.TranslatedFrom") + language).html(translation));
+			}
+			else message.polyglot_unknown = true;
+		}
+		else if (!message.polyglot_force && message.polyglot_unknown) {
 			let content = html.find(".message-content")
 			let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
 			content.text(new_content)
@@ -341,6 +354,15 @@ class PolyGlot {
 			type: Boolean,
 			onChange: () => this.updateConfigFonts()
 		});
+		game.settings.register("polyglot", "display-translated", {
+			name: game.i18n.localize("POLYGLOT.DisplayTranslatedTitle"),
+			hint: game.i18n.localize("POLYGLOT.DisplayTranslatedHint"),
+			scope: "client",
+			config: true,
+			default: true,
+			type: Boolean,
+			onChange: () => this.updateChatMessages()
+		});
 		// Adjust the bubble dimensions so the message is displayed correctly
 		ChatBubbles.prototype._getMessageDimensions = (message) => {
 			let div = $(`<div class="chat-bubble" style="visibility:hidden;font:${this._bubble.font}">${this._bubble.message || message}</div>`);
@@ -396,54 +418,54 @@ class PolyGlot {
 		sheet._polyglot_original_activateEditor = sheet[methodName];
 		const languages = Object.entries(PolyGlot.languages).map(([lang, name]) => {
 			return {
-			  title: name || "",
-			  inline: 'span',
-			  classes: 'polyglot-journal',
-			  attributes: {
-				  title: name || "",
-				  "data-language": lang || ""
-			  }
+				title: name || "",
+				inline: 'span',
+				classes: 'polyglot-journal',
+				attributes: {
+					title: name || "",
+					"data-language": lang || ""
+				}
 			};
 		});
 		sheet[methodName] = function(target, editorOptions, initialContent) {
 			editorOptions.style_formats = [
-			  ...CONFIG.TinyMCE.style_formats,
-			  {
+				...CONFIG.TinyMCE.style_formats,
+				{
 				title: "Polyglot",
 				items: languages
-			  }
+				}
 			];
 			editorOptions.formats = {
 				removeformat: [
 					// Default remove format configuration from tinyMCE
 					{
-					  selector: 'b,strong,em,i,font,u,strike,sub,sup,dfn,code,samp,kbd,var,cite,mark,q,del,ins',
-					  remove: 'all',
-					  split: true,
-					  expand: false,
-					  block_expand: true,
-					  deep: true
+						selector: 'b,strong,em,i,font,u,strike,sub,sup,dfn,code,samp,kbd,var,cite,mark,q,del,ins',
+						remove: 'all',
+						split: true,
+						expand: false,
+						block_expand: true,
+						deep: true
 					},
 					{
-					  selector: 'span',
-					  attributes: [
+						selector: 'span',
+						attributes: [
 						'style',
 						'class'
-					  ],
-					  remove: 'empty',
-					  split: true,
-					  expand: false,
-					  deep: true
+						],
+						remove: 'empty',
+						split: true,
+						expand: false,
+						deep: true
 					},
 					{
-					  selector: '*',
-					  attributes: [
+						selector: '*',
+						attributes: [
 						'style',
 						'class'
-					  ],
-					  split: false,
-					  expand: false,
-					  deep: true
+						],
+						split: false,
+						expand: false,
+						deep: true
 					},
 					// Add custom config to remove spans from polyglot when needed
 					{

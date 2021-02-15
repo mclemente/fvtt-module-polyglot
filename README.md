@@ -49,7 +49,9 @@ The original idea for this module was proposed by `@Talwin Greenwood` on the FVT
 
 The original PolyGlot module is written by KaKaRoTo. The 'fantasy languages' adaptation is written by elizeuangelo.
 
-[https://github.com/Juanfrank](Juanfrank) for the Spanish translation.
+@juanfrank for the Spanish translation.
+
+@ironmonk88 for the Translation Box.
 
 ## License
 

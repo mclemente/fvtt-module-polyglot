@@ -9,8 +9,11 @@
   "POLYGLOT.RandomizeRunesHint": "Texto embaralhado sempre irá parecer diferente, mesmo se a mesma mensagem for repetida.",
   "POLYGLOT.ExportFontsTitle": "Tornar Fontes Disponíveis",
   "POLYGLOT.ExportFontsHint": "Torna as fontes do Polyglot disponíveis para uso no Foundry (por exemplo, na Ferramenta de Desenhos).",
+  "POLYGLOT.DisplayTranslatedTitle": "Mostrar Caixa de Tradução",
+  "POLYGLOT.DisplayTranslatedHint": "Para linguagens que são traduzidas no chat, mostrar o texto original e a tradução em seguida.",
   "POLYGLOT.AllowOOCTitle": "Embaralhar mensagens de chat Fora de Personagem",
   "POLYGLOT.AllowOOCHint": "Permite que o Mestre embaralhe texto quando enviar mensagens Fora de Personagem.",
+  "POLYGLOT.TranslatedFrom": "Traduzido do ",
   "POLYGLOT.LanguageLabel": "Idioma",
   "POLYGLOT.ToggleRunes": "Alternar Runas",
   "POLYGLOT.Runes": "Runas"

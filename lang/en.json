@@ -11,6 +11,7 @@
   "POLYGLOT.ExportFontsHint": "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
   "POLYGLOT.AllowOOCTitle": "Scramble on OOC chat messages",
   "POLYGLOT.AllowOOCHint": "Allows the GM to scramble text when sending Out Of Character messages",
+  "POLYGLOT.TranslatedFrom": "Translated from ",
   "POLYGLOT.LanguageLabel": "Language",
   "POLYGLOT.ToggleRunes": "Toggle Runes",
   "POLYGLOT.Runes": "Runes"
