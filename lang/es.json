@@ -9,8 +9,11 @@
   "POLYGLOT.RandomizeRunesHint": "Habilitar esta opción ocasiona que los textos codificados se vean siempre de forma distinta, aunque se repita el mismo mensaje.",
   "POLYGLOT.ExportFontsTitle": "Habilitar la tipografía",
   "POLYGLOT.ExportFontsHint": "Permite que la tipografía de Polyglot esté disponible para ser utilizado en Foundry (por ejemplo, en Dibujos).",
+  "POLYGLOT.DisplayTranslatedTitle": "Mostrar Cuadro de Traducción ",
+  "POLYGLOT.DisplayTranslatedHint": "Para los idiomas que se traducen en el chat, muestra el texto original y la traducción a continuación.",
   "POLYGLOT.AllowOOCTitle": "Aleatorizar en mensajes de chat Fuera de Personaje (OOC)",
   "POLYGLOT.AllowOOCHint": "Permite que el GM pueda aleatorizar los mensajes cuando utiliza mensajes de chat Fuera de Personaje (OOC).",
+  "POLYGLOT.TranslatedFrom": "Traducido del ",
   "POLYGLOT.LanguageLabel": "Idioma",
   "POLYGLOT.ToggleRunes": "Activar/Desactivar Runas",
   "POLYGLOT.Runes": "Runas"
