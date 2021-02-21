@@ -1,0 +1,20 @@
+{
+  "POLYGLOT.CustomLanguagesTitle": "사용자 지정 언어",
+  "POLYGLOT.CustomLanguagesHint": "시스템에 추가할 사용자 정의 언어. 쉼표(,)로 구분하여 목록을 정의한다.",
+  "POLYGLOT.DefaultLanguageTitle": "기본 언어",
+  "POLYGLOT.DefaultLanguageHint": "선택할 기본 언어의 이름이다. 시스템 기본값을 사용하려면 비워둘 것.",
+  "POLYGLOT.ScrambleGMTitle": "GM에게 스크램블",
+  "POLYGLOT.ScrambleGMHint": "GM에게 텍스트를 항상 표시하려면 이 옵션을 비활성화한다. 토큰이 이해하는지는 지구본 색 참조.",
+  "POLYGLOT.RandomizeRunesTitle": "룬 임의화",
+  "POLYGLOT.RandomizeRunesHint": "이 옵션을 활성화하면 동일한 메시지가 반복되더라도 스크램블 텍스트가 다르게 나타난다.",
+  "POLYGLOT.ExportFontsTitle": "글꼴 사용 가능",
+  "POLYGLOT.ExportFontsHint": "Polyglot 글꼴을 Foundry에서 사용할 수 있도록 한다(예: 그리기 도구).",
+  "POLYGLOT.DisplayTranslatedTitle": "번역 상자 표시",
+  "POLYGLOT.DisplayTranslatedHint": "채팅창에서 번역된 언어의 경우 원본 텍스트 밑에 번역을 아래에 표시한다.",
+  "POLYGLOT.AllowOOCTitle": "OOC 채팅 메시지 스크램블",
+  "POLYGLOT.AllowOOCHint": "GM이 OOC 메시지를 보낼 때 스크램블 할 수 있도록 한다.",
+  "POLYGLOT.TranslatedFrom": "다음 언어로부터 번역됨: ",
+  "POLYGLOT.LanguageLabel": "언어",
+  "POLYGLOT.ToggleRunes": "룬 토글",
+  "POLYGLOT.Runes": "룬"
+}
