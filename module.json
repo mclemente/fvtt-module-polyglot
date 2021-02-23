@@ -1,33 +1,35 @@
 {
-    "name": "polyglot",
-    "title": "Polyglot",
-    "description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
-    "version": "1.5.5",
-    "author": ["MClemente", "KaKaRoTo", "elizeuangelo"],
-    "scripts": ["./src/polyglot.js"],
-    "styles": ["./css/polyglot.css","./css/fonts.css"],
-    "packs": [],
-    "systems": ["D35E", "dnd5e", "dnd5eJP", "pf1", "pf2e", "wfrp4e", "ose", "sfrpg", "tormenta20"],
-    "languages": [
-      {
-        "lang": "en",
-        "name": "English",
-        "path": "lang/en.json"
-      },
-      {
-        "lang": "pt-BR",
-        "name": "Português (Brasil)",
-        "path": "lang/pt-BR.json"
-      },
-      {
-        "lang": "es",
-        "name": "Spanish",
-        "path": "lang/es.json"
-      }
-    ],
-    "url": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot",
-    "manifest": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/releases/latest/download/module.json",
-    "download": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/releases/latest/download/module.zip",
-    "minimumCoreVersion": "0.7.6",
-    "compatibleCoreVersion": "0.8.0"
+  "name": "polyglot",
+  "title": "Polyglot",
+  "description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
+  "version": "1.5.5",
+  "author": ["MClemente", "KaKaRoTo", "elizeuangelo"],
+  "scripts": ["./src/polyglot.js"],
+  "styles": ["./css/polyglot.css","./css/fonts.css"],
+  "packs": [],
+  "systems": ["D35E", "dnd5e", "dnd5eJP", "pf1", "pf2e", "wfrp4e", "ose", "sfrpg", "tormenta20"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    },
+    {
+      "lang": "es",
+      "name": "Español",
+      "path": "lang/es.json"
+    }
+  ],
+  "url": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot",
+  "manifest": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/releases/latest/download/module.json",
+  "download": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/releases/latest/download/module.zip",
+  "minimumCoreVersion": "0.7.6",
+  "compatibleCoreVersion": "0.8.0",
+  "bugs": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/issues",
+  "allowBugReporter": true
 }

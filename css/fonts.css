@@ -1,146 +1,146 @@
 /* ----------------------------------------- */
-/*  Fonts                                    */
-/*                                           */
-/*  Every font represents an alphabet.       */
+/*  Fonts                  */
+/*                       */
+/*  Every font represents an alphabet.     */
 /* ----------------------------------------- */
 
 @font-face {
-    font-family: 'ArCiela';
-    src: url('../fonts/ArCiela.ttf');
+  font-family:'ArCiela';
+  src:url('../fonts/ArCiela.ttf');
 }
 @font-face {
-    font-family: 'Barazhad';
-    src: url('../fonts/Barazhad.otf');
+  font-family:'Barazhad';
+  src:url('../fonts/Barazhad.otf');
 }
 @font-face {
-    font-family: 'Celestial';
-    src: url('../fonts/Celestial.ttf');
+  font-family:'Celestial';
+  src:url('../fonts/Celestial.ttf');
 }
 @font-face {
-	font-family: 'DarkEldar';
-	src: url('../fonts/DarkEldar.ttf');
+	font-family:'DarkEldar';
+	src:url('../fonts/DarkEldar.ttf');
 }
 @font-face {
-    font-family: 'Dethek';
-    src: url('../fonts/Dethek.otf');
+  font-family:'Dethek';
+  src:url('../fonts/Dethek.otf');
 }
 @font-face {
-	font-family: 'ElderFuthark';
-	src: url('../fonts/ElderFutharkFS.ttf');
+	font-family:'ElderFuthark';
+	src:url('../fonts/ElderFutharkFS.ttf');
 }
 @font-face {
-	font-family: 'Eltharin';
-	src: url('../fonts/Eltharin.ttf');
+	font-family:'Eltharin';
+	src:url('../fonts/Eltharin.ttf');
 }
 @font-face {
-    font-family: 'Espruar';
-    src: url('../fonts/Espruar.otf');
+  font-family:'Espruar';
+  src:url('../fonts/Espruar.otf');
 }
 @font-face {
-	font-family: 'Floki';
-	src: url('../fonts/Floki.ttf');
+	font-family:'Floki';
+	src:url('../fonts/Floki.ttf');
 }
 @font-face {
-    font-family: 'FingerAlphabet';
-    src: url('../fonts/FingerAlphabet.ttf');
+  font-family:'FingerAlphabet';
+  src:url('../fonts/FingerAlphabet.ttf');
 }
 @font-face {
-    font-family: 'HighDrowic';
-    src: url('../fonts/HighDrowic.otf');
+  font-family:'HighDrowic';
+  src:url('../fonts/HighDrowic.otf');
 }
 @font-face {
-    font-family: 'HighschoolRunes';
-    src: url('../fonts/HighschoolRunes.ttf');
+  font-family:'HighschoolRunes';
+  src:url('../fonts/HighschoolRunes.ttf');
 }
 @font-face {
-    font-family: 'Infernal';
-    src: url('../fonts/Infernal.ttf');
+  font-family:'Infernal';
+  src:url('../fonts/Infernal.ttf');
 }
 @font-face {
-    font-family: 'Iokharic';
-    src: url('../fonts/Iokharic.otf');
+  font-family:'Iokharic';
+  src:url('../fonts/Iokharic.otf');
 }
 @font-face {
-    font-family: 'JungleSlang';
-    src: url('../fonts/JungleSlang.ttf');
+  font-family:'JungleSlang';
+  src:url('../fonts/JungleSlang.ttf');
 }
 @font-face {
-    font-family: 'Kargi';
-    src: url('../fonts/Kargi.ttf');
+  font-family:'Kargi';
+  src:url('../fonts/Kargi.ttf');
 }
 @font-face {
-    font-family: 'MarasEye';
-    src: url('../fonts/MarasEye.otf');
+  font-family:'MarasEye';
+  src:url('../fonts/MarasEye.otf');
 }
 @font-face {
-    font-family: 'MeroiticDemotic';
-    src: url('../fonts/MeroiticDemotic.ttf');
+  font-family:'MeroiticDemotic';
+  src:url('../fonts/MeroiticDemotic.ttf');
 }
 @font-face {
-	font-family: 'MiroslavNormal';
-	src: url('../fonts/MiroslavNormal.ttf');
+	font-family:'MiroslavNormal';
+	src:url('../fonts/MiroslavNormal.ttf');
 }
 @font-face {
-    font-family: 'OldeEspruar';
-    src: url('../fonts/OldeEspruar.otf');
+  font-family:'OldeEspruar';
+  src:url('../fonts/OldeEspruar.otf');
 }
 @font-face {
-    font-family: 'OldeThorass';
-    src: url('../fonts/OldeThorass.otf');
+  font-family:'OldeThorass';
+  src:url('../fonts/OldeThorass.otf');
 }
 @font-face {
-    font-family: 'Ophidian';
-    src: url('../fonts/Ophidian.otf');
+  font-family:'Ophidian';
+  src:url('../fonts/Ophidian.otf');
 }
 @font-face {
-    font-family: 'Pulsian';
-    src: url('../fonts/Pulsian.ttf');
+  font-family:'Pulsian';
+  src:url('../fonts/Pulsian.ttf');
 }
 @font-face {
-    font-family: 'Oriental';
-    src: url('../fonts/Oriental.ttf');
+  font-family:'Oriental';
+  src:url('../fonts/Oriental.ttf');
 }
 @font-face {
-	font-family: 'OrkGlyphs';
-	src: url('../fonts/OrkGlyphs.ttf');
+	font-family:'OrkGlyphs';
+	src:url('../fonts/OrkGlyphs.ttf');
 }
 @font-face {
-    font-family: 'Qijomi';
-    src: url('../fonts/Qijomi.otf');
+  font-family:'Qijomi';
+  src:url('../fonts/Qijomi.otf');
 }
 @font-face {
-    font-family: 'Reanaarian';
-    src: url('../fonts/Reanaarian.otf');
+  font-family:'Reanaarian';
+  src:url('../fonts/Reanaarian.otf');
 }
 @font-face {
-	font-family: 'Saurian';
-	src: url('../fonts/Saurian.ttf');
+	font-family:'Saurian';
+	src:url('../fonts/Saurian.ttf');
 }
 @font-face {
-    font-family: 'Semphari';
-    src: url('../fonts/Semphari.otf');
+  font-family:'Semphari';
+  src:url('../fonts/Semphari.otf');
 }
 @font-face {
-	font-family: 'Skaven';
-	src: url('../fonts/Skaven.ttf');
+	font-family:'Skaven';
+	src:url('../fonts/Skaven.ttf');
 }
 @font-face {
-    font-family: 'Tengwar';
-    src: url('../fonts/Tengwar.ttf');
+  font-family:'Tengwar';
+  src:url('../fonts/Tengwar.ttf');
 }
 @font-face {
-    font-family: 'Thassilonian';
-    src: url('../fonts/Thassilonian.ttf');
+  font-family:'Thassilonian';
+  src:url('../fonts/Thassilonian.ttf');
 }
 @font-face {
-    font-family: 'Thorass';
-    src: url('../fonts/Thorass.otf');
+  font-family:'Thorass';
+  src:url('../fonts/Thorass.otf');
 }
 @font-face {
-    font-family: 'Tuzluca';
-    src: url('../fonts/Tuzluca.ttf');
+  font-family:'Tuzluca';
+  src:url('../fonts/Tuzluca.ttf');
 }
 @font-face {
-    font-family: 'Valmaric';
-    src: url('../fonts/Valmaric.ttf');
+  font-family:'Valmaric';
+  src:url('../fonts/Valmaric.ttf');
 }
