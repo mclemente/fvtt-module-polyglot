@@ -1,13 +1,16 @@
+# v1.5.5.1
+- Added Korean translation (thanks to [https://github.com/drdwing](@drdwing)).
+
 # v1.5.5
 - Fixed Translation Box translating Common.
 - Fixed Spanish translation not showing.
 
 # v1.5.4
-- Added Translation Box setting (thanks to @ironmonk88). Players can now choose between showing the language's script along with a translation box or the original functionality.
+- Added Translation Box setting (thanks to [https://github.com/ironmonk88](@ironmonk88)). Players can now choose between showing the language's script along with a translation box or the original functionality.
 
 # v1.5.3
 - Fixed a bug that caused the addon to not load on D&D 5e.
-- Added Spanish translation (thanks to @juanfrank).
+- Added Spanish translation (thanks to [https://github.com/juanfrank](@juanfrank)).
 
 # v1.5.2
 - Added D&D 3.5e support.

@@ -7,7 +7,6 @@
   "scripts": ["./src/polyglot.js"],
   "styles": ["./css/polyglot.css","./css/fonts.css"],
   "packs": [],
-  "systems": ["D35E", "dnd5e", "dnd5eJP", "pf1", "pf2e", "wfrp4e", "ose", "sfrpg", "tormenta20"],
   "languages": [
     {
       "lang": "en",
