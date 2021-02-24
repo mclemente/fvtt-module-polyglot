@@ -103,7 +103,7 @@ class PolyGlot {
 			let message = messages[i]
 			if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC || this._isMessageTypeOOC(message.data.type)) {
 				let lang = message.getFlag("polyglot", "language") || ""
-				let unknown = !this.known_languages.has(lang);
+				let unknown = (!this.known_languages.has(lang) && !this.known_languages.has("all"));
 				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
 					// Update globe color
 					const globe = ui.chat.element.find(`.message[data-message-id="${message.id}"] .message-metadata .polyglot-message-language i`)
@@ -214,7 +214,7 @@ class PolyGlot {
 		if (!lang) return;
 		let metadata = html.find(".message-metadata")
 		let language = PolyGlot.languages[lang] || lang
-		const unknown = !this.known_languages.has(lang);
+		const unknown = (!this.known_languages.has(lang) && !this.known_languages.has("all"));
 		message.polyglot_unknown = unknown;
 		if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
 			message.polyglot_unknown = false;
@@ -542,7 +542,7 @@ class PolyGlot {
 		if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
 			let lang = message.getFlag("polyglot", "language") || ""
 			if (lang != "") {
-				const unknown = !this.known_languages.has(lang);
+				const unknown = (!this.known_languages.has(lang) && !this.known_languages.has("all"));
 				message.polyglot_unknown = unknown;
 				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
 					message.polyglot_unknown = false;
@@ -563,7 +563,7 @@ class PolyGlot {
 
 		let lang = message.getFlag("polyglot", "language") || ""
 		if (lang != "") {
-			const unknown = !this.known_languages.has(lang);
+			const unknown = (!this.known_languages.has(lang) && !this.known_languages.has("all"));
 			message.polyglot_unknown = unknown;
 			if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
 				message.polyglot_unknown = false;
