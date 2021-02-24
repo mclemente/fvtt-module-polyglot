@@ -1,3 +1,6 @@
+# v1.5.5.2
+- Fixed the module not working with 3.5e.
+
 # v1.5.5.1
 - Added Korean translation (thanks to [https://github.com/drdwing](@drdwing)).
 

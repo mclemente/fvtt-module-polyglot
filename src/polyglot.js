@@ -15,7 +15,7 @@ class PolyGlot {
 			case "pf1":
 			case "pf2e":
 			case "sfrpg":
-			case "d35e":
+			case "D35E":
 				return CONFIG[game.system.id.toUpperCase()].languages;
 				break;
 			case "ose":
@@ -305,8 +305,8 @@ class PolyGlot {
 			case "sfrpg":
 				this.loadLanguages("starfinder");
 				break;
-			case "d35e":
-				this.loadLanguages("d35e");
+			case "D35E":
+				this.loadLanguages("D35E");
 				break;
 			default:
 				break;
