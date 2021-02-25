@@ -1,6 +1,10 @@
 {
   "POLYGLOT.CustomLanguagesTitle": "Idiomas Customizados",
   "POLYGLOT.CustomLanguagesHint": "Defina uma lista de idiomas customizados para adicionar ao sistema, separados por vírgula.",
+  "POLYGLOT.ComprehendLanguagesTitle": "Magia: Compreender Línguas",
+  "POLYGLOT.ComprehendLanguagesHint": "Como a magia Compreender Línguas, do D&D. Coloque um Idioma Customizado que você já criou. Ele não pode ser escrito ou falado, mas permite que todos os outros idiomas sejam entendidos.",
+  "POLYGLOT.TruespeechTitle": "Magia: Idiomas",
+  "POLYGLOT.TruespeechHint": "Como a magia Idiomas, do D&D. Coloque um Idioma Customizado que você já criou. O falante irá entender todas as línguas faladas (mas não escritas em Diários) e será entendido por todas as criaturas.",
   "POLYGLOT.DefaultLanguageTitle": "Idioma Padrão",
   "POLYGLOT.DefaultLanguageHint": "Nome do idioma padrão para ser escolhido. Deixe vazio para usar o padrão do sistema.",
   "POLYGLOT.ScrambleGMTitle": "Embaralhar para o Mestre",
@@ -13,6 +17,7 @@
   "POLYGLOT.DisplayTranslatedHint": "Para linguagens que são traduzidas no chat, mostrar o texto original e a tradução em seguida.",
   "POLYGLOT.AllowOOCTitle": "Embaralhar mensagens de chat Fora de Personagem",
   "POLYGLOT.AllowOOCHint": "Permite que o Mestre embaralhe texto quando enviar mensagens Fora de Personagem.",
+  "POLYGLOT.Translation": "Tradução",
   "POLYGLOT.TranslatedFrom": "Traduzido do ",
   "POLYGLOT.LanguageLabel": "Idioma",
   "POLYGLOT.ToggleRunes": "Alternar Runas",

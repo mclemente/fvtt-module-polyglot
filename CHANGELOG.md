@@ -1,5 +1,10 @@
-# v1.5.5.2
+# v1.5.6
+- Added the Comprehend Languages setting. Input a Custom Language you've already set and it becomes a language that can't be spoken but can understand all languages, written or spoken.
+- Added the Tongues setting. Input a Custom Language you've already set and it becomes a language that can understand all spoken languages and be understood by all actors, but can't be written.
+- Added partial support to SWADE. You have to add a skill like this `Language (Name)` and it'll show up on the menu.
 - Fixed the module not working with 3.5e.
+
+![image](https://user-images.githubusercontent.com/5288872/109089668-61cd3880-76f0-11eb-88ee-57f3e2c00658.png)
 
 # v1.5.5.1
 - Added Korean translation (thanks to [https://github.com/drdwing](@drdwing)).
