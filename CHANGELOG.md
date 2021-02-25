@@ -1,3 +1,7 @@
+# v1.5.6.1
+- Added Babele support to WFRP4.
+- Added a Toggle Runes Text on Journals. It toggles the visibility of the `Runes` text on Journals, so you have some extra space on the header.
+
 # v1.5.6
 - Added the Comprehend Languages setting. Input a Custom Language you've already set and it becomes a language that can't be spoken but can understand all languages, written or spoken.
 - Added the Tongues setting. Input a Custom Language you've already set and it becomes a language that can understand all spoken languages and be understood by all actors, but can't be written.

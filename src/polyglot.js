@@ -134,6 +134,7 @@ class PolyGlot {
 					case "wfrp4e":
 					case "swade":
 						for (let item of actor.data.items) {
+							const name = item?.flags?.babele?.originalName || item.name;
 							const match = item.name.match(/Language \((.+)\)/i);
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
@@ -364,6 +365,14 @@ class PolyGlot {
 			type: Boolean,
 			onChange: () => this.updateChatMessages()
 		});
+		game.settings.register("polyglot", "toggleRuneText", {
+			name: game.i18n.localize("POLYGLOT.toggleRuneTextTitle"),
+			hint: game.i18n.localize("POLYGLOT.toggleRuneTextHint"),
+			scope: "client",
+			config: true,
+			default: true,
+			type: Boolean
+		});
 		game.settings.register("polyglot", "useUniqueSalt", {
 			name: game.i18n.localize("POLYGLOT.RandomizeRunesTitle"),
 			hint: game.i18n.localize("POLYGLOT.RandomizeRunesHint"),
@@ -529,7 +538,8 @@ class PolyGlot {
 			let runes = false;
 			const texts = [];
 			const styles = [];
-			const toggleString = "<a class='polyglot-button' title='" + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i> "+ game.i18n.localize("POLYGLOT.Runes") + "</a>";
+			const runesText = game.settings.get("polyglot", "toggleRuneText") ? game.i18n.localize("POLYGLOT.Runes") : "";
+			const toggleString = "<a class='polyglot-button' title='" + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i> "+ runesText + "</a>";
 			const toggleButton = $(toggleString);
 			toggleButton.click(ev => {
 				ev.preventDefault();
