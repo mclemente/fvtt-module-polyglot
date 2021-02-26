@@ -58,9 +58,16 @@ class PolyGlot {
 			const inverted = invertObject(this.languages);
 			if (inverted[defaultLang]) return inverted[defaultLang];
 		}
-		if (game.system.id === "wfrp4e") return "Reikspiel";
+		switch (game.system.id) {
+			case "wfrp4e":
+				return "Reikspiel";
+			case "dnd5e":
+			case "dnd5eJP":
+				return game.i18n.localize("DND5E.LanguagesCommon");
+			case "tormenta20":
+				return "Comum";
+		}
 		if (Object.keys(this.languages).includes("common")) return "Common";
-		if (game.system.id === "tormenta20") return "Comum";
 		return this.languages[0] || "";
 	}
 
