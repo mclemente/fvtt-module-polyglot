@@ -179,12 +179,13 @@ class PolyGlot {
 		const select = html.find(".polyglot-lang-select select");
 		const prevOption = select.val();
 		select.html($(options));
-		let selectedLanguage = this.lastSelection || prevOption || PolyGlot.defaultLanguage;
+		
+		let defaultLanguage = PolyGlot.defaultLanguage.toLowerCase();
+		let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
 		// known_languages is a Set, so it's weird to access its values
 		if (!this.known_languages.has(selectedLanguage))
-			selectedLanguage = PolyGlot.defaultLanguage;
-		if (!this.known_languages.has(selectedLanguage))
-			selectedLanguage = [...this.known_languages][0];
+			selectedLanguage = (this.known_languages.has(defaultLanguage) ? defaultLanguage : [...this.known_languages][0]);
+
 		select.val(selectedLanguage);
 	}
 
