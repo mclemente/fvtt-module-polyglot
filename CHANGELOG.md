@@ -1,7 +1,7 @@
 # v1.5.6.3
 - Fixed an issue with the Common language being scrambled in D&D 5e games that were using Babele.
-- Improved Babele support to WFRP4 (thanks to [https://github.com/sladecraven](@sladecraven)).
-- Added French translation (thanks to [https://github.com/sladecraven](@sladecraven)).
+- Improved Babele support to WFRP4 (thanks to [@sladecraven](https://github.com/sladecraven)).
+- Added French translation (thanks to [@sladecraven](https://github.com/sladecraven)).
 
 # v1.5.6.2
 - Fixed an issue with the Common language not being properly shown as the default language when selecting a token.
