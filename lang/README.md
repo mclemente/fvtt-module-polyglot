@@ -14,4 +14,4 @@ In case you try to make a translation, here are some hints:
 
 [@juanfrank](https://github.com/juanfrank) for the Spanish translation.
 
-[https://github.com/sladecraven](@sladecraven) for the French translation.
+[@sladecraven](https://github.com/sladecraven) for the French translation.
