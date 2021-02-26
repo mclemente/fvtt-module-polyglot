@@ -162,12 +162,11 @@ class PolyGlot {
 				// Maybe not dnd5e, pf1 or pf2e or corrupted actor data?
 			}
 		}
-		let defaultLanguage = PolyGlot.defaultLanguage?.toLowerCase();
 		if (this.known_languages.size == 0) {
 			if (game.user.isGM)
 				this.known_languages = new Set(Object.keys(PolyGlot.languages))
 			else
-				this.known_languages.add(defaultLanguage);
+				this.known_languages.add(PolyGlot.defaultLanguage);
 		}
 		let options = ""
 		for (let lang of this.known_languages) {
@@ -177,10 +176,12 @@ class PolyGlot {
 		const select = html.find(".polyglot-lang-select select");
 		const prevOption = select.val();
 		select.html($(options));
-		let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
+		let selectedLanguage = this.lastSelection || prevOption || PolyGlot.defaultLanguage;
 		// known_languages is a Set, so it's weird to access its values
 		if (!this.known_languages.has(selectedLanguage))
-			selectedLanguage = defaultLanguage;
+			selectedLanguage = PolyGlot.defaultLanguage;
+		if (!this.known_languages.has(selectedLanguage))
+			selectedLanguage = PolyGlot.defaultLanguage.toLowerCase();
 		if (!this.known_languages.has(selectedLanguage))
 			selectedLanguage = [...this.known_languages][0];
 		select.val(selectedLanguage);
