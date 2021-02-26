@@ -1,3 +1,6 @@
+# v1.5.6.2
+- Fixed an issue with the Common language not being properly shown as the default language when selecting a token.
+
 # v1.5.6.1
 - Added Babele support to WFRP4.
 - Added a Toggle Runes Text on Journals. It toggles the visibility of the `Runes` text on Journals, so you have some extra space on the header.
