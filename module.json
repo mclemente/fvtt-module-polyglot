@@ -27,6 +27,11 @@
       "lang": "ko",
       "name": "Korean",
       "path": "lang/ko.json"
+    },
+    {
+      "lang": "fr",
+      "name": "French",
+      "path": "lang/fr.json"
     }
   ],
   "url": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot",

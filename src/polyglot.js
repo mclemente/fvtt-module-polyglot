@@ -22,13 +22,18 @@ class PolyGlot {
 				return Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
 				break;
 			case "wfrp4e":
-				const pack = game.packs.get("wfrp4e.skills") || game.packs.get("wfrp4e.basic");
+				const pack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
 				const itemList = await pack.getIndex();
 				const langs = {};
 				for (let item of itemList) {
-					const match = item.name.match(/Language \((.+)\)/i);
-					if (match)
-						langs[match[1]] = match[1];
+          let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
+          const match = item.name.match(myRegex);
+					//const match = item.name.match(/Language \((.+)\)/i);
+					if (match) {
+            let key = match[1].trim();
+            console.log("LANGUE", match, match[1])
+						langs[key] = key;
+          }
 				}
 				return langs;
 				break;
@@ -132,13 +137,21 @@ class PolyGlot {
 			try {
 				switch (game.system.id) {
 					case "wfrp4e":
+            for (let item of actor.data.items) {
+              let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
+              const match = item.name.match( myRegex );
+              // adding only the descriptive language name, not "Language (XYZ)"
+              if (match)
+                this.known_languages.add( match[1].trim() );
+              }
+              break;  
 					case "swade":
 						for (let item of actor.data.items) {
-							const name = item?.flags?.babele?.originalName || item.name;
+							const name = item?.flags?.babele?.originalName || item.name;              
 							const match = item.name.match(/Language \((.+)\)/i);
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
-								this.known_languages.add(match[1]);
+								this.known_languages.add(match[1].trim());
 						}
 						break;
 					case "ose":

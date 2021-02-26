@@ -23,5 +23,7 @@
   "POLYGLOT.TranslatedFrom": "Translated from ",
   "POLYGLOT.LanguageLabel": "Language",
   "POLYGLOT.ToggleRunes": "Toggle Runes",
-  "POLYGLOT.Runes": "Runes"
+  "POLYGLOT.Runes": "Runes",
+
+  "POLYGLOT.WFRP4E.LanguageSkills": "Language"
 }
