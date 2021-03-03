@@ -113,7 +113,7 @@ class PolyGlot {
 		// Loop in reverse so most recent messages get refreshed first.
 		for (let i = messages.length - 1; i >= 0; i--) {
 			let message = messages[i]
-			if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC || this._isMessageTypeOOC(message.data.type)) {
+			if (message && (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC || this._isMessageTypeOOC(message.data.type))) {
 				let lang = message.getFlag("polyglot", "language") || ""
 				let unknown = lang != this.truespeech && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
 				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
