@@ -29,7 +29,7 @@ class PolyGlot {
 					let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
 					const match = item.name.match(myRegex);
 					if (match) {
-						let key = match[1].trim();
+						let key = match[1].trim().toLowerCase();
 						langs[key] = key;
 					}
 				}
@@ -147,7 +147,7 @@ class PolyGlot {
 							const match = item.name.match( myRegex );
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
-								this.known_languages.add( match[1].trim() );
+								this.known_languages.add(match[1].trim().toLowerCase());
 							}
 							break;	
 					case "swade":
@@ -156,7 +156,7 @@ class PolyGlot {
 							const match = item.name.match(/Language \((.+)\)/i);
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
-								this.known_languages.add(match[1].trim());
+								this.known_languages.add(match[1].trim().toLowerCase());
 						}
 						break;
 					case "ose":
