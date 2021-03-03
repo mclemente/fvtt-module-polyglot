@@ -1,3 +1,7 @@
+# v1.5.6.4
+- Fixed an issue with the Common language not being set properly.
+- Fixed an edge case where the module would throw errors when a message would be deleted faster than it would translate it.
+
 # v1.5.6.3
 - Fixed an issue with the Common language being scrambled in D&D 5e games that were using Babele.
 - Improved Babele support to WFRP4 (thanks to [@sladecraven](https://github.com/sladecraven)).

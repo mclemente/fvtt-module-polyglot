@@ -26,14 +26,12 @@ class PolyGlot {
 				const itemList = await pack.getIndex();
 				const langs = {};
 				for (let item of itemList) {
-          let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
-          const match = item.name.match(myRegex);
-					//const match = item.name.match(/Language \((.+)\)/i);
+					let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
+					const match = item.name.match(myRegex);
 					if (match) {
-            let key = match[1].trim();
-            console.log("LANGUE", match, match[1])
+						let key = match[1].trim();
 						langs[key] = key;
-          }
+					}
 				}
 				return langs;
 				break;
@@ -54,9 +52,9 @@ class PolyGlot {
 	static get defaultLanguage() {
 		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
 		if (defaultLang) {
-			if (this.languages[defaultLang]) return defaultLang;
+			if (this.languages[defaultLang.toLowerCase()]) return defaultLang;
 			const inverted = invertObject(this.languages);
-			if (inverted[defaultLang]) return inverted[defaultLang];
+			if (inverted[defaultLang]) return inverted[defaultLang.toLowerCase()];
 		}
 		switch (game.system.id) {
 			case "wfrp4e":
@@ -144,17 +142,17 @@ class PolyGlot {
 			try {
 				switch (game.system.id) {
 					case "wfrp4e":
-            for (let item of actor.data.items) {
-              let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
-              const match = item.name.match( myRegex );
-              // adding only the descriptive language name, not "Language (XYZ)"
-              if (match)
-                this.known_languages.add( match[1].trim() );
-              }
-              break;  
+						for (let item of actor.data.items) {
+							let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
+							const match = item.name.match( myRegex );
+							// adding only the descriptive language name, not "Language (XYZ)"
+							if (match)
+								this.known_languages.add( match[1].trim() );
+							}
+							break;	
 					case "swade":
 						for (let item of actor.data.items) {
-							const name = item?.flags?.babele?.originalName || item.name;              
+							const name = item?.flags?.babele?.originalName || item.name;							
 							const match = item.name.match(/Language \((.+)\)/i);
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
@@ -269,7 +267,7 @@ class PolyGlot {
 			message.polyglot_unknown = true;
 		}
 		
-		const color = known ?  "green" : "red";
+		const color = known ?	"green" : "red";
 		metadata.find(".polyglot-message-language").remove()
 		const title = game.user.isGM || !known ? `title="${language}"` : ""
 		let button = $(`<a class="button polyglot-message-language" ${title}>
@@ -464,11 +462,11 @@ class PolyGlot {
 	async setCustomLanguages(languages) {
 		PolyGlot.languages = await PolyGlot.getLanguages();
 		if (languages != "") {
-		for (let lang of languages.split(",")) {
-			lang = lang.trim();
-			const key = lang.toLowerCase().replace(/ \'/g, "_");
-			PolyGlot.languages[key] = lang;
-		}
+			for (let lang of languages.split(",")) {
+				lang = lang.trim();
+				const key = lang.toLowerCase().replace(/ \'/g, "_");
+				PolyGlot.languages[key] = lang;
+			}
 		}
 		this.updateUserLanguages(ui.chat.element);
 	}
