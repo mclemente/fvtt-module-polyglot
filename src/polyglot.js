@@ -250,9 +250,9 @@ class PolyGlot {
 			$(content).empty().append(original);
 			
 			if (message.polyglot_force || !message.polyglot_unknown) {
-				if (lang != this.truespeech && known) {
-				$(content).append($('<div>').addClass('polyglot-translation-text').attr('title', game.i18n.localize("POLYGLOT.TranslatedFrom") + language).html(translation));
-			}
+				if (lang != this.truespeech && known && !game.settings.get('polyglot','hideTranslation')) {
+					$(content).append($('<div>').addClass('polyglot-translation-text').attr('title', game.i18n.localize("POLYGLOT.TranslatedFrom") + language).html(translation));
+				}
 				else {
 					$(content).append($('<div>').addClass('polyglot-translation-text').attr('title', game.i18n.localize("POLYGLOT.Translation")).html(translation));
 				}
@@ -267,13 +267,15 @@ class PolyGlot {
 			message.polyglot_unknown = true;
 		}
 		
-		const color = known ?	"green" : "red";
-		metadata.find(".polyglot-message-language").remove()
-		const title = game.user.isGM || !known ? `title="${language}"` : ""
-		let button = $(`<a class="button polyglot-message-language" ${title}>
-			<i class="fas fa-globe" style="color:${color}"></i>
-		</a>`)
-		metadata.append(button)
+		if (game.user.isGM || !game.settings.get('polyglot','hideTranslation')) {
+			const color = known ?	"green" : "red";
+			metadata.find(".polyglot-message-language").remove()
+			const title = game.user.isGM || !known ? `title="${language}"` : ""
+			let button = $(`<a class="button polyglot-message-language" ${title}>
+				<i class="fas fa-globe" style="color:${color}"></i>
+			</a>`)
+			metadata.append(button)
+		}
 		if (game.user.isGM) {
 			button.click(this._onGlobeClick.bind(this))
 		}
@@ -417,6 +419,14 @@ class PolyGlot {
 			default: true,
 			type: Boolean,
 			onChange: () => this.updateChatMessages()
+		});
+		game.settings.register("polyglot", "hideTranslation", {
+			name: game.i18n.localize("POLYGLOT.HideTranslationTitle"),
+			hint: game.i18n.localize("POLYGLOT.HideTranslationHint"),
+			scope: "world",
+			config: true,
+			default: false,
+			type: Boolean,
 		});
 		// Adjust the bubble dimensions so the message is displayed correctly
 		ChatBubbles.prototype._getMessageDimensions = (message) => {
