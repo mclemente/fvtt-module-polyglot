@@ -275,9 +275,9 @@ class PolyGlot {
 				<i class="fas fa-globe" style="color:${color}"></i>
 			</a>`)
 			metadata.append(button)
-		}
-		if (game.user.isGM) {
-			button.click(this._onGlobeClick.bind(this))
+			if (game.user.isGM) {
+				button.click(this._onGlobeClick.bind(this))
+			}
 		}
 	}
 
