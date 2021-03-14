@@ -384,7 +384,7 @@ class PolyGlot {
 			config: true,
 			default: true,
 			type: Boolean,
-			onChange: () => this.updateChatMessages()
+			onChange: () => location.reload()
 		});
 		game.settings.register("polyglot", "toggleRuneText", {
 			name: game.i18n.localize("POLYGLOT.toggleRuneTextTitle"),
@@ -400,7 +400,8 @@ class PolyGlot {
 			scope: "world",
 			config: true,
 			default: false,
-			type: Boolean
+			type: Boolean,
+			onChange: () => location.reload()
 		});
 		game.settings.register("polyglot", "exportFonts", {
 			name: game.i18n.localize("POLYGLOT.ExportFontsTitle"),
@@ -418,7 +419,7 @@ class PolyGlot {
 			config: true,
 			default: true,
 			type: Boolean,
-			onChange: () => this.updateChatMessages()
+			onChange: () => location.reload()
 		});
 		game.settings.register("polyglot", "hideTranslation", {
 			name: game.i18n.localize("POLYGLOT.HideTranslationTitle"),

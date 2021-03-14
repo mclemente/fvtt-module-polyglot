@@ -1,24 +1,28 @@
 .polyglot-lang-select {
-  flex: 0 0 28px;
-  margin: 0 6px;
+	flex: 0 0 28px;
+	margin: 0 6px;
 }
 .polyglot-lang-select select {
-  height: 24px;
-  background: rgba(255, 255, 245, 0.8);
+	height: 24px;
+	background: rgba(255, 255, 245, 0.8);
 }
 
 span.polyglot-journal {
-  background-color: rgba(255, 180, 0, 0.25)
+	background-color: rgba(255, 180, 0, 0.25)
 }
 
 .polyglot-translation-text{
 	position:relative;
-  padding: 20px 4px 0px 4px;
-  line-height: 24px;
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px solid #999;
-  border-radius: 3px;
-  box-shadow: 0 0 2px #FFF inset;
+	padding: 20px 4px 0px 4px;
+	line-height: 24px;
+	background: rgba(0, 0, 0, 0.1);
+	border: 1px solid #999;
+	border-radius: 3px;
+	box-shadow: 0 0 2px #FFF inset;
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
 }
 
 .polyglot-translation-text:before{
@@ -28,5 +32,5 @@ span.polyglot-journal {
 	top:-2px;
 	left:4px;
 	font-weight: bold;
-  font-style: italic;
+	font-style: italic;
 }

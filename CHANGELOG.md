@@ -1,3 +1,6 @@
+# v1.5.6.7
+- Text inside the Translation Box is now selectable.
+
 # v1.5.6.6
 - Added a "Hide Globe and "Translated From" text from players" so you can hide the language you're speaking on from your players.
 
