@@ -62,10 +62,13 @@ class PolyGlot {
 			case "dnd5e":
 			case "dnd5eJP":
 				return game.i18n.localize("DND5E.LanguagesCommon");
+			case "ose":
+				return "Common";
 			case "tormenta20":
 				return "Comum";
 		}
-		if (Object.keys(this.languages).includes("common")) return "Common";
+		const keys = Object.keys(this.languages)
+		if (keys.includes("common") || keys.includes("Common")) return "Common";
 		return this.languages[0] || "";
 	}
 
