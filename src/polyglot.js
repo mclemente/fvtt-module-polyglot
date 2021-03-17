@@ -236,8 +236,8 @@ class PolyGlot {
 		if (!lang) return;
 		let metadata = html.find(".message-metadata")
 		let language = PolyGlot.languages[lang] || lang
-		const known = this.known_languages.has(lang); //Actor knows the language rather than being affected by Comprehend Languages
-		const unknown = lang != this.truespeech && !known && !this.known_languages.has(this.comprehendLanguages);
+		const known = this.known_languages.has(lang); //Actor knows the language rather than being affected by Comprehend Languages or Tongues
+		const unknown = lang != this.truespeech && !known && !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages);
 		message.polyglot_unknown = unknown;
 		if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
 			message.polyglot_unknown = false;
