@@ -17,6 +17,8 @@
   "POLYGLOT.ExportFontsHint": "Torna as fontes do Polyglot disponíveis para uso no Foundry (por exemplo, na Ferramenta de Desenhos).",
   "POLYGLOT.DisplayTranslatedTitle": "Mostrar Caixa de Tradução",
   "POLYGLOT.DisplayTranslatedHint": "Para linguagens que são traduzidas no chat, mostrar o texto original e a tradução em seguida.",
+  "POLYGLOT.HideTranslationTitle": "Esconder Globo e texto \"Traduzido do\" dos jogadores",
+  "POLYGLOT.HideTranslationHint": "Esconde o Globo e o texto \"Traduzido do\" de mensagens do chat para jogadores. Perfeito para quando você não quer mostrar aos jogadores que língua você está falando.",
   "POLYGLOT.AllowOOCTitle": "Embaralhar mensagens de chat Fora de Personagem",
   "POLYGLOT.AllowOOCHint": "Permite que o Mestre embaralhe texto quando enviar mensagens Fora de Personagem.",
   "POLYGLOT.Translation": "Tradução",

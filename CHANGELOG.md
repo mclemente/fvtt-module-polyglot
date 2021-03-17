@@ -1,3 +1,12 @@
+# v1.5.6.7
+- Text inside the Translation Box is now selectable.
+
+# v1.5.6.6
+- Added a "Hide Globe and "Translated From" text from players" so you can hide the language you're speaking on from your players.
+
+# v1.5.6.5
+- Fixed an issue with setting the Common language on WFRP4 (and possibly SWADE).
+
 # v1.5.6.4
 - Fixed an issue with the Common language not being set properly.
 - Fixed an edge case where the module would throw errors when a message would be deleted faster than it would translate it.

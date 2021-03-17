@@ -29,7 +29,7 @@ class PolyGlot {
 					let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
 					const match = item.name.match(myRegex);
 					if (match) {
-						let key = match[1].trim();
+						let key = match[1].trim().toLowerCase();
 						langs[key] = key;
 					}
 				}
@@ -147,7 +147,7 @@ class PolyGlot {
 							const match = item.name.match( myRegex );
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
-								this.known_languages.add( match[1].trim() );
+								this.known_languages.add(match[1].trim().toLowerCase());
 							}
 							break;	
 					case "swade":
@@ -156,7 +156,7 @@ class PolyGlot {
 							const match = item.name.match(/Language \((.+)\)/i);
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
-								this.known_languages.add(match[1].trim());
+								this.known_languages.add(match[1].trim().toLowerCase());
 						}
 						break;
 					case "ose":
@@ -250,9 +250,9 @@ class PolyGlot {
 			$(content).empty().append(original);
 			
 			if (message.polyglot_force || !message.polyglot_unknown) {
-				if (lang != this.truespeech && known) {
-				$(content).append($('<div>').addClass('polyglot-translation-text').attr('title', game.i18n.localize("POLYGLOT.TranslatedFrom") + language).html(translation));
-			}
+				if (lang != this.truespeech && known && !game.settings.get('polyglot','hideTranslation')) {
+					$(content).append($('<div>').addClass('polyglot-translation-text').attr('title', game.i18n.localize("POLYGLOT.TranslatedFrom") + language).html(translation));
+				}
 				else {
 					$(content).append($('<div>').addClass('polyglot-translation-text').attr('title', game.i18n.localize("POLYGLOT.Translation")).html(translation));
 				}
@@ -267,15 +267,17 @@ class PolyGlot {
 			message.polyglot_unknown = true;
 		}
 		
-		const color = known ?	"green" : "red";
-		metadata.find(".polyglot-message-language").remove()
-		const title = game.user.isGM || !known ? `title="${language}"` : ""
-		let button = $(`<a class="button polyglot-message-language" ${title}>
-			<i class="fas fa-globe" style="color:${color}"></i>
-		</a>`)
-		metadata.append(button)
-		if (game.user.isGM) {
-			button.click(this._onGlobeClick.bind(this))
+		if (game.user.isGM || !game.settings.get('polyglot','hideTranslation')) {
+			const color = known ?	"green" : "red";
+			metadata.find(".polyglot-message-language").remove()
+			const title = game.user.isGM || !known ? `title="${language}"` : ""
+			let button = $(`<a class="button polyglot-message-language" ${title}>
+				<i class="fas fa-globe" style="color:${color}"></i>
+			</a>`)
+			metadata.append(button)
+			if (game.user.isGM) {
+				button.click(this._onGlobeClick.bind(this))
+			}
 		}
 	}
 
@@ -382,7 +384,7 @@ class PolyGlot {
 			config: true,
 			default: true,
 			type: Boolean,
-			onChange: () => this.updateChatMessages()
+			onChange: () => location.reload()
 		});
 		game.settings.register("polyglot", "toggleRuneText", {
 			name: game.i18n.localize("POLYGLOT.toggleRuneTextTitle"),
@@ -398,7 +400,8 @@ class PolyGlot {
 			scope: "world",
 			config: true,
 			default: false,
-			type: Boolean
+			type: Boolean,
+			onChange: () => location.reload()
 		});
 		game.settings.register("polyglot", "exportFonts", {
 			name: game.i18n.localize("POLYGLOT.ExportFontsTitle"),
@@ -416,7 +419,15 @@ class PolyGlot {
 			config: true,
 			default: true,
 			type: Boolean,
-			onChange: () => this.updateChatMessages()
+			onChange: () => location.reload()
+		});
+		game.settings.register("polyglot", "hideTranslation", {
+			name: game.i18n.localize("POLYGLOT.HideTranslationTitle"),
+			hint: game.i18n.localize("POLYGLOT.HideTranslationHint"),
+			scope: "world",
+			config: true,
+			default: false,
+			type: Boolean,
 		});
 		// Adjust the bubble dimensions so the message is displayed correctly
 		ChatBubbles.prototype._getMessageDimensions = (message) => {

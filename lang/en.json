@@ -17,6 +17,8 @@
   "POLYGLOT.ExportFontsHint": "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
   "POLYGLOT.DisplayTranslatedTitle": "Display translated box",
   "POLYGLOT.DisplayTranslatedHint": "For languages that are translated in the chat window, display the original text and a translation below.",
+  "POLYGLOT.HideTranslationTitle": "Hide Globe and \"Translated from\" text from players",
+  "POLYGLOT.HideTranslationHint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Perfect for when you don't want to show players which language you are speaking.",
   "POLYGLOT.AllowOOCTitle": "Scramble on OOC chat messages",
   "POLYGLOT.AllowOOCHint": "Allows the GM to scramble text when sending Out Of Character messages",
   "POLYGLOT.Translation": "Translation",
