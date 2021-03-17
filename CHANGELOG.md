@@ -1,3 +1,7 @@
+# v1.5.6.8
+- Fixed an issue with Tongues feature which couldn't translate languages, only be translated.
+- Fixed an issue with OSE system where the default language wasn't being set properly.
+
 # v1.5.6.7
 - Text inside the Translation Box is now selectable.
 

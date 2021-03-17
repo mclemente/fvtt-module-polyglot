@@ -62,10 +62,13 @@ class PolyGlot {
 			case "dnd5e":
 			case "dnd5eJP":
 				return game.i18n.localize("DND5E.LanguagesCommon");
+			case "ose":
+				return "Common";
 			case "tormenta20":
 				return "Comum";
 		}
-		if (Object.keys(this.languages).includes("common")) return "Common";
+		const keys = Object.keys(this.languages)
+		if (keys.includes("common") || keys.includes("Common")) return "Common";
 		return this.languages[0] || "";
 	}
 
@@ -236,8 +239,8 @@ class PolyGlot {
 		if (!lang) return;
 		let metadata = html.find(".message-metadata")
 		let language = PolyGlot.languages[lang] || lang
-		const known = this.known_languages.has(lang); //Actor knows the language rather than being affected by Comprehend Languages
-		const unknown = lang != this.truespeech && !known && !this.known_languages.has(this.comprehendLanguages);
+		const known = this.known_languages.has(lang); //Actor knows the language rather than being affected by Comprehend Languages or Tongues
+		const unknown = lang != this.truespeech && !known && !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages);
 		message.polyglot_unknown = unknown;
 		if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
 			message.polyglot_unknown = false;
