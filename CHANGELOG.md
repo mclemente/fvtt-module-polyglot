@@ -1,3 +1,6 @@
+# v1.5.6.9
+- Added support to SW5e (thanks to [@mxzf](https://github.com/mxzf)).
+
 # v1.5.6.8
 - Fixed an issue with Tongues feature which couldn't translate languages, only be translated.
 - Fixed an issue with OSE system where the default language wasn't being set properly.

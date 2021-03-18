@@ -15,6 +15,7 @@ class PolyGlot {
 			case "pf1":
 			case "pf2e":
 			case "sfrpg":
+			case "sw5e":
 			case "D35E":
 				return CONFIG[game.system.id.toUpperCase()].languages;
 				break;
@@ -57,15 +58,17 @@ class PolyGlot {
 			if (inverted[defaultLang]) return inverted[defaultLang.toLowerCase()];
 		}
 		switch (game.system.id) {
-			case "wfrp4e":
-				return "Reikspiel";
 			case "dnd5e":
 			case "dnd5eJP":
 				return game.i18n.localize("DND5E.LanguagesCommon");
 			case "ose":
 				return "Common";
+			case "sw5e":
+				return game.i18n.localize("SW5E.LanguagesBasic");
 			case "tormenta20":
 				return "Comum";
+			case "wfrp4e":
+				return "Reikspiel";
 		}
 		const keys = Object.keys(this.languages)
 		if (keys.includes("common") || keys.includes("Common")) return "Common";
@@ -340,6 +343,9 @@ class PolyGlot {
 				break;
 			case "D35E":
 				this.loadLanguages("D35E");
+				break;
+			case "sw5e":
+				this.loadLanguages("sw5e");
 				break;
 			default:
 				break;
