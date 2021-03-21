@@ -1,44 +1,53 @@
 {
-  "name": "polyglot",
-  "title": "Polyglot",
-  "description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
-  "version": "1.5.6.9",
-  "author": ["MClemente", "KaKaRoTo", "elizeuangelo"],
-  "scripts": ["./src/polyglot.js"],
-  "styles": ["./css/polyglot.css","./css/fonts.css"],
-  "packs": [],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    },
-    {
-      "lang": "pt-BR",
-      "name": "Português (Brasil)",
-      "path": "lang/pt-BR.json"
-    },
-    {
-      "lang": "es",
-      "name": "Spanish",
-      "path": "lang/es.json"
-    },
-    {
-      "lang": "ko",
-      "name": "Korean",
-      "path": "lang/ko.json"
-    },
-    {
-      "lang": "fr",
-      "name": "French",
-      "path": "lang/fr.json"
-    }
-  ],
-  "url": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot",
-  "manifest": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/releases/latest/download/module.json",
-  "download": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/releases/latest/download/module.zip",
-  "minimumCoreVersion": "0.7.6",
-  "compatibleCoreVersion": "0.8.0",
-  "bugs": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/issues",
-  "allowBugReporter": true
+    "name": "polyglot",
+    "title": "Polyglot",
+    "description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
+    "version": "1.5.6.10",
+    "author": [
+        "MClemente",
+        "KaKaRoTo",
+        "elizeuangelo"
+    ],
+    "scripts": [
+        "./src/polyglot.js"
+    ],
+    "styles": [
+        "./css/polyglot.css",
+        "./css/fonts.css"
+    ],
+    "packs": [],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        },
+        {
+            "lang": "pt-BR",
+            "name": "Português (Brasil)",
+            "path": "lang/pt-BR.json"
+        },
+        {
+            "lang": "es",
+            "name": "Spanish",
+            "path": "lang/es.json"
+        },
+        {
+            "lang": "ko",
+            "name": "Korean",
+            "path": "lang/ko.json"
+        },
+        {
+            "lang": "fr",
+            "name": "French",
+            "path": "lang/fr.json"
+        }
+    ],
+    "url": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot",
+    "manifest": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/releases/latest/download/module.json",
+    "download": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/releases/download/1.5.6.9/module.zip",
+    "minimumCoreVersion": "0.7.6",
+    "compatibleCoreVersion": "0.8.0",
+    "bugs": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/issues",
+    "allowBugReporter": true
 }
