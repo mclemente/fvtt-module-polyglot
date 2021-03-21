@@ -1,3 +1,6 @@
+# v1.5.6.10
+- SW5e: "Updated fonts to more closely match the languages found on Wookieepedia that have visual references." (thanks to [@whtwlf](https://github.com/whtwlf)).
+
 # v1.5.6.9
 - Added support to SW5e (thanks to [@mxzf](https://github.com/mxzf)).
 
