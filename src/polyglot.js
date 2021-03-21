@@ -194,7 +194,6 @@ class PolyGlot {
 				}
 			}
 			catch (err) {
-				console.error(err.message);
 				// Maybe not dnd5e, pf1 or pf2e or corrupted actor data?
 			}
 		}
