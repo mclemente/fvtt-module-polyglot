@@ -5,7 +5,7 @@ class PolyGlot {
 		this.refresh_timeout = null;
 		this.alphabets = {common: '120% Dethek'}
 		this.tongues = {_default: 'common'}
-		this.allowOOC = false;	 
+		this.allowOOC = false;
 	}
 
 	static async getLanguages() {
