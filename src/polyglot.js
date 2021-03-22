@@ -5,7 +5,7 @@ class PolyGlot {
 		this.refresh_timeout = null;
 		this.alphabets = {common: '120% Dethek'}
 		this.tongues = {_default: 'common'}
-		this.allowOOC = false;
+		this.allowOOC = false;	 
 	}
 
 	static async getLanguages() {
@@ -149,13 +149,18 @@ class PolyGlot {
 				switch (game.system.id) {
 					case "CoC7":
 						for (let item of actor.data.items) {
-							let myRegex = new RegExp( game.i18n.localize("POLYGLOT.COC7.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
-							const match = item.name.match( myRegex );
-							// adding only the descriptive language name, not "Language (XYZ)"
-							if (match)
-								this.known_languages.add(match[1].trim().toLowerCase());
+							if (item.data.specialization == game.i18n.localize("POLYGLOT.COC7.LanguageSkills")) {
+								this.known_languages.add(item.name.trim().toLowerCase());
 							}
-							break;	
+							else {
+								let myRegex = new RegExp( game.i18n.localize("POLYGLOT.COC7.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
+								const match = item.name.match( myRegex );
+								// adding only the descriptive language name, not "Language (XYZ)"
+								if (match)
+									this.known_languages.add(match[1].trim().toLowerCase());
+							}
+						}
+						break;	
 					case "wfrp4e":
 						for (let item of actor.data.items) {
 							let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
@@ -163,8 +168,8 @@ class PolyGlot {
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
 								this.known_languages.add(match[1].trim().toLowerCase());
-							}
-							break;
+						}
+						break;
 					case "swade":
 						for (let item of actor.data.items) {
 							const name = item?.flags?.babele?.originalName || item.name;							
