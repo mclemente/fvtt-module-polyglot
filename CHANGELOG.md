@@ -1,3 +1,6 @@
+# v1.5.6.10
+- Added support to CoC7.
+
 # v1.5.6.9
 - Added support to SW5e (thanks to [@mxzf](https://github.com/mxzf)).
 

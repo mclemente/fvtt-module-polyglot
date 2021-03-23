@@ -7,7 +7,7 @@ In case you try to make a translation, here are some hints:
 
 `POLYGLOT.ToggleRunes` is meant to appear on the header of a Journal window.
 
-`POLYGLOT.WFRP4E.LanguageSkills` needs to use the name used on the translation, otherwise it won't work. For example, the French translation uses `Langue`.
+`POLYGLOT.COC7.LanguageSkills`, `POLYGLOT.SWADE.LanguageSkills`, `POLYGLOT.WFRP4E.LanguageSkills` need to use the name used on their actual translations, otherwise it won't work. For example, COC7's Portuguese translation uses "O`Outros Línguas`, while WFRP4E's French translation uses `Langue`.
 
 # Credit
 [@drdwing](https://github.com/drdwing) for the Korean translation.
