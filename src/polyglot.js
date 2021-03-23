@@ -146,12 +146,38 @@ class PolyGlot {
 			actors.push(game.user.character);
 		for (let actor of actors) {
 			try {
-				let languageSkills = false;
 				switch (game.system.id) {
 					case "CoC7":
+						for (let item of actor.data.items) {
+							if (item.data.specialization == game.i18n.localize("POLYGLOT.COC7.LanguageSkills")) {
+								this.known_languages.add(item.name.trim().toLowerCase());
+							}
+							else {
+								let myRegex = new RegExp( game.i18n.localize("POLYGLOT.COC7.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
+								const match = item.name.match( myRegex );
+								// adding only the descriptive language name, not "Language (XYZ)"
+								if (match)
+									this.known_languages.add(match[1].trim().toLowerCase());
+							}
+						}
+						break;	
 					case "wfrp4e":
+						for (let item of actor.data.items) {
+							let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
+							const match = item.name.match( myRegex );
+							// adding only the descriptive language name, not "Language (XYZ)"
+							if (match)
+								this.known_languages.add(match[1].trim().toLowerCase());
+						}
+						break;
 					case "swade":
-						languageSkills = true;
+						for (let item of actor.data.items) {
+							const name = item?.flags?.babele?.originalName || item.name;							
+							const match = item.name.match(/Language \((.+)\)/i);
+							// adding only the descriptive language name, not "Language (XYZ)"
+							if (match)
+								this.known_languages.add(match[1].trim().toLowerCase());
+						}
 						break;
 					case "ose":
 						for (let lang of actor.data.data.languages.value)
@@ -172,29 +198,7 @@ class PolyGlot {
 						}
 						break;
 				}
-				if (languageSkills) {
-					let name;
-					switch (game.system.id) {
-						case "CoC7":
-							name = new RegExp(game.i18n.localize("POLYGLOT.COC7.LanguageSkills")+'\\s*\\((.+)\\)', 'i');
-							break;
-						case "swade":
-							name = new RegExp(game.i18n.localize("POLYGLOT.SWADE.LanguageSkills")+'\\s*\\((.+)\\)', 'i');
-							break;
-						case "wfrp4e":
-							name = new RegExp(game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i');
-							break;
-					}
-					for (let item of actor.data.items) {
-						const match = item.name.match(name);
-						// adding only the descriptive language name, not "Language (XYZ)"
-						if (match)
-							this.known_languages.add(match[1].trim().toLowerCase());
-					}
-				}
-			}
-			catch (err) {
-				console.error(err.message);
+			} catch (err) {
 				// Maybe not dnd5e, pf1 or pf2e or corrupted actor data?
 			}
 		}
