@@ -27,7 +27,10 @@
   "POLYGLOT.ToggleRunes": "Toggle Runes",
   "POLYGLOT.Runes": "Runes",
   
-  "POLYGLOT.COC7.LanguageSkills": "Language",
+  "POLYGLOT.COC7.LanguageOwn": "Language",
+  "POLYGLOT.COC7.LanguageAny": "Language",
+  "POLYGLOT.COC7.LanguageOther": "Language",
+  "POLYGLOT.COC7.LanguageSpec": "Language",
   "POLYGLOT.SWADE.LanguageSkills": "Language",
   "POLYGLOT.WFRP4E.LanguageSkills": "Language"
 }

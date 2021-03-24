@@ -149,18 +149,17 @@ class PolyGlot {
 				switch (game.system.id) {
 					case "CoC7":
 						for (let item of actor.data.items) {
-							if (item.data.specialization == game.i18n.localize("POLYGLOT.COC7.LanguageSkills")) {
+							const match = 
+								item.name.match( game.i18n.localize("POLYGLOT.COC7.LanguageOwn")+'\\s*\\((.+)\\)', 'i' )
+								|| item.name.match( game.i18n.localize("POLYGLOT.COC7.LanguageAny")+'\\s*\\((.+)\\)', 'i' )
+								|| item.name.match( game.i18n.localize("POLYGLOT.COC7.LanguageOther")+'\\s*\\((.+)\\)', 'i' );
+							// adding only the descriptive language name, not "Language (XYZ)"
+							if (match)
+								this.known_languages.add(match[1].trim().toLowerCase());
+							else if ([game.i18n.localize("POLYGLOT.COC7.LanguageSpec"), game.i18n.localize("CoC7.language"), "Language"].contains(item.data.specialization))
 								this.known_languages.add(item.name.trim().toLowerCase());
-							}
-							else {
-								let myRegex = new RegExp( game.i18n.localize("POLYGLOT.COC7.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
-								const match = item.name.match( myRegex );
-								// adding only the descriptive language name, not "Language (XYZ)"
-								if (match)
-									this.known_languages.add(match[1].trim().toLowerCase());
-							}
 						}
-						break;	
+						break;
 					case "wfrp4e":
 						for (let item of actor.data.items) {
 							let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
@@ -172,7 +171,7 @@ class PolyGlot {
 						break;
 					case "swade":
 						for (let item of actor.data.items) {
-							const name = item?.flags?.babele?.originalName || item.name;							
+							const name = item?.flags?.babele?.originalName || item.name;
 							const match = item.name.match(/Language \((.+)\)/i);
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
