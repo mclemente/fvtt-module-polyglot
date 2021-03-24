@@ -156,7 +156,7 @@ class PolyGlot {
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
 								this.known_languages.add(match[1].trim().toLowerCase());
-							else if ([game.i18n.localize("POLYGLOT.COC7.LanguageSpec"), game.i18n.localize("CoC7.language"), "Language"].contains(item.data.specialization))
+							else if ([game.i18n.localize("POLYGLOT.COC7.LanguageSpec"), game.i18n.localize("POLYGLOT.COC7.LanguageOwn"), game.i18n.localize("POLYGLOT.COC7.LanguageAny"), game.i18n.localize("POLYGLOT.COC7.LanguageOther"), game.i18n.localize("CoC7.language"), "Language"].contains(item.data.specialization))
 								this.known_languages.add(item.name.trim().toLowerCase());
 						}
 						break;
