@@ -5,7 +5,7 @@ class PolyGlot {
 		this.refresh_timeout = null;
 		this.alphabets = {common: '120% Dethek'}
 		this.tongues = {_default: 'common'}
-		this.allowOOC = false;	 
+		this.allowOOC = false;
 	}
 
 	static async getLanguages() {
@@ -147,6 +147,19 @@ class PolyGlot {
 		for (let actor of actors) {
 			try {
 				switch (game.system.id) {
+					case "CoC7":
+						for (let item of actor.data.items) {
+							const match = 
+								item.name.match( game.i18n.localize("POLYGLOT.COC7.LanguageOwn")+'\\s*\\((.+)\\)', 'i' )
+								|| item.name.match( game.i18n.localize("POLYGLOT.COC7.LanguageAny")+'\\s*\\((.+)\\)', 'i' )
+								|| item.name.match( game.i18n.localize("POLYGLOT.COC7.LanguageOther")+'\\s*\\((.+)\\)', 'i' );
+							// adding only the descriptive language name, not "Language (XYZ)"
+							if (match)
+								this.known_languages.add(match[1].trim().toLowerCase());
+							else if ([game.i18n.localize("POLYGLOT.COC7.LanguageSpec"), game.i18n.localize("POLYGLOT.COC7.LanguageOwn"), game.i18n.localize("POLYGLOT.COC7.LanguageAny"), game.i18n.localize("POLYGLOT.COC7.LanguageOther"), game.i18n.localize("CoC7.language"), "Language", "Language (Own)", "Language (Other)"].includes(item.data.specialization))
+								this.known_languages.add(item.name.trim().toLowerCase());
+						}
+						break;
 					case "wfrp4e":
 						for (let item of actor.data.items) {
 							let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
@@ -154,11 +167,11 @@ class PolyGlot {
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
 								this.known_languages.add(match[1].trim().toLowerCase());
-							}
-							break;	
+						}
+						break;
 					case "swade":
 						for (let item of actor.data.items) {
-							const name = item?.flags?.babele?.originalName || item.name;							
+							const name = item?.flags?.babele?.originalName || item.name;
 							const match = item.name.match(/Language \((.+)\)/i);
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)

@@ -25,5 +25,10 @@
   "POLYGLOT.TranslatedFrom": "Traduzido do ",
   "POLYGLOT.LanguageLabel": "Idioma",
   "POLYGLOT.ToggleRunes": "Alternar Runas",
-  "POLYGLOT.Runes": "Runas"
+  "POLYGLOT.Runes": "Runas",
+  
+  "POLYGLOT.COC7.LanguageOwn": "Língua Nativa",
+  "POLYGLOT.COC7.LanguageAny": "Outra Língua",
+  "POLYGLOT.COC7.LanguageOther": "Outra Língua",
+  "POLYGLOT.COC7.LanguageSpec": "Línguas"
 }

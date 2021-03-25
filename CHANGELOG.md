@@ -1,3 +1,8 @@
+# v1.5.6.11
+- Added support to CoC7.
+- Updated Spanish translation (thanks to [@lozalojo](https://github.com/lozalojo)).
+- Added Czech translation (thanks to [@KarelZavicak](https://github.com/KarelZavicak)).
+
 # v1.5.6.10
 - SW5e: "Updated fonts to more closely match the languages found on Wookieepedia that have visual references." (thanks to [@whtwlf](https://github.com/whtwlf)).
 
