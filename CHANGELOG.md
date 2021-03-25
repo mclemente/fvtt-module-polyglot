@@ -1,5 +1,7 @@
 # v1.5.6.10
 - Added support to CoC7.
+- Updated Spanish translation (thanks to [@lozalojo](https://github.com/lozalojo)).
+- Added Czech language (thanks to [@KarelZavicak](https://github.com/KarelZavicak)).
 
 # v1.5.6.9
 - Added support to SW5e (thanks to [@mxzf](https://github.com/mxzf)).

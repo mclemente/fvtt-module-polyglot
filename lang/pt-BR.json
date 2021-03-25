@@ -27,8 +27,8 @@
   "POLYGLOT.ToggleRunes": "Alternar Runas",
   "POLYGLOT.Runes": "Runas",
   
-  "POLYGLOT.COC7.LanguageOwn": "Língua Própria",
-  "POLYGLOT.COC7.LanguageAny": "Outras Linguas",
-  "POLYGLOT.COC7.LanguageOther": "Linguagem",
-  "POLYGLOT.COC7.LanguageSpec": "Linguas"
+  "POLYGLOT.COC7.LanguageOwn": "Língua Nativa",
+  "POLYGLOT.COC7.LanguageAny": "Outra Língua",
+  "POLYGLOT.COC7.LanguageOther": "Outra Língua",
+  "POLYGLOT.COC7.LanguageSpec": "Línguas"
 }
