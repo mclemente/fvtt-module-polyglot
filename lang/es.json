@@ -30,7 +30,10 @@
   "POLYGLOT.ToggleRunes": "Activar/desactivar runas",
   "POLYGLOT.Runes": "Runas",
 
-  "POLYGLOT.COC7.LanguageSkills": "Lengua",
+  "POLYGLOT.COC7.LanguageOwn": "Lengua propia",
+  "POLYGLOT.COC7.LanguageAny": "Otras lenguas (Genérica)",
+  "POLYGLOT.COC7.LanguageOther": "Otras lenguas",
+  "POLYGLOT.COC7.LanguageSpec": "Lengua",
   "POLYGLOT.SWADE.LanguageSkills": "Idioma",
   "POLYGLOT.WFRP4E.LanguageSkills": "Idioma"
 }
