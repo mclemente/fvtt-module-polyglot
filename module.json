@@ -32,6 +32,11 @@
       "lang": "fr",
       "name": "French",
       "path": "lang/fr.json"
+    },
+    {
+      "lang": "cs",
+      "name": "Česky",
+      "path": "lang/cs.json"
     }
   ],
   "url": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot",
