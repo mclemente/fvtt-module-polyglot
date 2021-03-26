@@ -6,7 +6,9 @@
 ![all versions](https://img.shields.io/github/downloads/League-of-Foundry-Developers/fvtt-module-polyglot/total) 
 ![the latest version](https://img.shields.io/github/downloads/League-of-Foundry-Developers/fvtt-module-polyglot/latest/total) 
 ![Forge installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fpolyglot)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com) 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X742NL3)
 
 # Polyglot
 
