@@ -10,15 +10,6 @@ class PolyGlot {
 
 	static async getLanguages() {
 		switch (game.system.id) {
-			case "dnd5e":
-			case "dnd5eJP":
-			case "pf1":
-			case "pf2e":
-			case "sfrpg":
-			case "sw5e":
-			case "D35E":
-				return CONFIG[game.system.id.toUpperCase()].languages;
-				break;
 			case "ose":
 				return Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
 				break;
@@ -40,7 +31,7 @@ class PolyGlot {
 				return CONFIG.T20.idiomas;
 				break;
 			default:
-				return [];
+				return CONFIG[game.system.id.toUpperCase()]?.languages ? CONFIG[game.system.id.toUpperCase()].languages : [];
 				break;
 		}
 	}
