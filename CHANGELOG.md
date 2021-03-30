@@ -1,3 +1,6 @@
+# v1.5.6.12
+- Any system with languages set up as `CONFIG.SYSTEMNAME.languages` (e.g. dnd5e's is CONFIG.DND5E.languages) should show the languages without needing to make changes to the module. Adding a font to each language still requires changing the module, though.
+
 # v1.5.6.11
 - Added support to CoC7.
 - Updated Spanish translation (thanks to [@lozalojo](https://github.com/lozalojo)).
