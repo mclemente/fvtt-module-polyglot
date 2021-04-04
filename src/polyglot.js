@@ -300,7 +300,7 @@ class PolyGlot {
 	}
 
 	preCreateChatMessage(data, options, userId) {
-		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this.allowOOC && this._isMessageTypeOOC(data.type) && game.user.isGM)) {
+		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || ((this.allowOOC && this._isMessageTypeOOC(data.type) && game.user.isGM) && (game.system.id != "pf2e" || data.type != CONST.CHAT_MESSAGE_TYPES.EMOTE))) {
 			let lang = ui.chat.element.find("select[name=polyglot-language]").val()
 			if (lang != "")
 				mergeObject(data, { "flags.polyglot.language": lang });
