@@ -1,3 +1,7 @@
+# v1.5.7.0
+- Settings were reordered. Settings related to Languages or Chat are separated into their own menu to save space and keep things ordered.
+- Added a Replace System's Languages setting, which removes every default language from the dropdown menu.
+
 # v1.5.6.13
 - Fixed an issue in Pathfinder 2e where the damage message outputted by NPCs would be translated if the Scramble on OOC chat messages setting was enabled. 
 

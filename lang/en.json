@@ -1,4 +1,6 @@
 {
+  "POLYGLOT.LanguageSettings": "Language Settings",
+  "POLYGLOT.ChatSettings": "Chat Settings",
   "POLYGLOT.CustomLanguagesTitle": "Custom Languages",
   "POLYGLOT.CustomLanguagesHint": "Define a list of custom, comma separated, languages to add to the system.",
   "POLYGLOT.ComprehendLanguagesTitle": "Comprehend Languages Spell",
@@ -7,6 +9,8 @@
   "POLYGLOT.TruespeechHint": "Like the Tongues spell from D&D. Input a custom language you have already set. Its speaker understands all spoken languages (can't read Journals) and is understood by all creatures.",
   "POLYGLOT.DefaultLanguageTitle": "Default Language",
   "POLYGLOT.DefaultLanguageHint": "Name of the default language to select. Keep empty to use system default.",
+  "POLYGLOT.ReplaceLanguagesTitle": "Replace System's Languages",
+  "POLYGLOT.ReplaceLanguagesHint": "Replaces the system's default languages with your Custom Languages. The first language on the list becomes the new default language.",
   "POLYGLOT.ScrambleGMTitle": "Scramble for GM",
   "POLYGLOT.ScrambleGMHint": "Disable this option to always show the text for the GM (refer to the globe's color for the token's understanding).",
   "POLYGLOT.toggleRuneTextTitle": "Toggle Runes Text on Journals",

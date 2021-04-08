@@ -1,0 +1,63 @@
+<form autocomplete="off" style="padding: 0 2.5%" onsubmit="event.preventDefault()" style="display: flex;flex-direction: column;">
+	<div class="form-group">
+		{{#with replaceLanguages}}
+			<label for="replaceLanguages">{{localize name}}</label>
+			<input type="checkbox" name="replaceLanguages" id="replaceLanguages" {{#if value}}checked{{/if}}>
+			<p class="notes">{{localize hint}}</p>
+		{{/with}}
+	</div>
+	<div class="form-group">
+		{{#with customLanguages}}
+			<label for="customLanguages">{{localize name}}</label>
+			<input type="text" name="customLanguages" id="customLanguages" value="{{value}}">
+			<p class="notes">{{localize hint}}</p>
+		{{/with}}
+	</div>
+	<div class="form-group">
+		{{#with comprehendLanguages}}
+			<label for="comprehendLanguages">{{localize name}}</label>
+			<input type="text" name="comprehendLanguages" id="comprehendLanguages" value="{{value}}">
+			<p class="notes">{{localize hint}}</p>
+		{{/with}}
+	</div>
+	<div class="form-group">
+		{{#with truespeech}}
+			<label for="truespeech">{{localize name}}</label>
+			<input type="text" name="truespeech" id="truespeech" value="{{value}}">
+			<p class="notes">{{localize hint}}</p>
+		{{/with}}
+	</div>
+	<div class="form-group">
+		{{#with displayTranslated}}
+			<label for="display-translated">{{localize name}}</label>
+			<input type="checkbox" name="display-translated" id="display-translated" {{#if value}}checked{{/if}}>
+			<p class="notes">{{localize hint}}</p>
+		{{/with}}
+	</div>
+	<div class="form-group">
+		{{#with hideTranslation}}
+			<label for="hideTranslation">{{localize name}}</label>
+			<input type="checkbox" name="hideTranslation" id="hideTranslation" {{#if value}}checked{{/if}}>
+			<p class="notes">{{localize hint}}</p>
+		{{/with}}
+	</div>
+	<div class="form-group">
+		{{#with allowOOC}}
+			<label for="allowOOC">{{localize name}}</label>
+			<input type="checkbox" name="allowOOC" id="allowOOC" {{#if value}}checked{{/if}}>
+			<p class="notes">{{localize hint}}</p>
+		{{/with}}
+	</div>
+	<div class="form-group">
+		{{#with runifyGM}}
+			<label for="runifyGM">{{localize name}}</label>
+			<input type="checkbox" name="runifyGM" id="runifyGM" {{#if value}}checked{{/if}}>
+			<p class="notes">{{localize hint}}</p>
+		{{/with}}
+	</div>
+	<footer class="sheet-footer flexrow" style="margin-top: auto">
+		<button type="submit" name="submit">
+			<i class="far fa-save"></i> {{localize 'SETTINGS.Save'}}
+		</button>
+	</footer>
+</form>
