@@ -1,3 +1,21 @@
+# v1.5.7.0
+- Settings were reordered. Settings related to Languages or Chat are separated into their own menu to save space and keep things ordered.
+- Added a Replace System's Languages setting, which removes every default language from the dropdown menu.
+
+# v1.5.6.13
+- Fixed an issue in Pathfinder 2e where the damage message outputted by NPCs would be translated if the Scramble on OOC chat messages setting was enabled. 
+
+# v1.5.6.12
+- Any system with languages set up as `CONFIG.SYSTEMNAME.languages` (e.g. dnd5e's is CONFIG.DND5E.languages) should show the languages without needing to make changes to the module. Adding a font to each language still requires changing the module, though.
+
+# v1.5.6.11
+- Added support to CoC7.
+- Updated Spanish translation (thanks to [@lozalojo](https://github.com/lozalojo)).
+- Added Czech translation (thanks to [@KarelZavicak](https://github.com/KarelZavicak)).
+
+# v1.5.6.10
+- SW5e: "Updated fonts to more closely match the languages found on Wookieepedia that have visual references." (thanks to [@whtwlf](https://github.com/whtwlf)).
+
 # v1.5.6.9
 - Added support to SW5e (thanks to [@mxzf](https://github.com/mxzf)).
 
