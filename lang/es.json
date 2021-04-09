@@ -2,6 +2,8 @@
   "I18N.LANGUAGE": "Español",
   "I18N.MAINTAINERS": "@Viriato139ac#0342, Juanfrank",
 
+  "POLYGLOT.LanguageSettings": "Ajustes de idiomas",
+  "POLYGLOT.ChatSettings": "Ajustes del chat",
   "POLYGLOT.CustomLanguagesTitle": "Idiomas personalizados",
   "POLYGLOT.CustomLanguagesHint": "Define una lista de idiomas personalizados, separados mediante coma, para que sean añadidos al sistema",
   "POLYGLOT.ComprehendLanguagesTitle": "Hechizo Comprender Idiomas",
@@ -10,6 +12,8 @@
   "POLYGLOT.TruespeechHint": "Tal y como funciona el hechizo de D&D Idiomas. Ponga uno de los idiomas que haya añadido al sistema. El que lo posea podrá entender todos los idiomas hablados (pero no podrá leer diarios) y también le entenderán todas las criaturas",
   "POLYGLOT.DefaultLanguageTitle": "Idioma por defecto",
   "POLYGLOT.DefaultLanguageHint": "Nombre del idioma que se selecciona por defecto. Dejar en blanco para utilizar el valor por defecto del sistema",
+  "POLYGLOT.ReplaceLanguagesTitle": "Reemplazar idiomas del sistema",
+  "POLYGLOT.ReplaceLanguagesHint": "Reemplaza el idioma por defecto del sistema por sus idiomas personalizados. El primer idioma personalizado de la lista se convertirá en el nuevo idioma por defecto",
   "POLYGLOT.ScrambleGMTitle": "Codificar para el GM",
   "POLYGLOT.ScrambleGMHint": "Deshabilite esta opción para mostrar siempre el texto para el GM (remítase al color del globo para ver la perspectiva del icono)",
   "POLYGLOT.toggleRuneTextTitle": "Activar/desactivar texto en runas para los diarios",
