@@ -12,14 +12,20 @@ class PolyGlot {
 
 	static async getLanguages() {
 		if (game.settings.get("polyglot", "replaceLanguages")) return [];
+		const langs = {};
 		switch (game.system.id) {
 			case "ose":
 				return Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
 				break;
+			case "dcc":
+				for (let item in CONFIG.DCC.languages) {
+					langs[item] = game.i18n.localize(CONFIG.DCC.languages[item]);
+				}
+				return langs;
+				break;
 			case "wfrp4e":
 				const pack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
 				const itemList = await pack.getIndex();
-				const langs = {};
 				for (let item of itemList) {
 					let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
 					const match = item.name.match(myRegex);
@@ -45,17 +51,19 @@ class PolyGlot {
 		this._languages = val || {};
 	}
 	static get defaultLanguage() {
+		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
+		if (defaultLang) {
+			if (this.languages[defaultLang.toLowerCase()]) return defaultLang;
+			const inverted = invertObject(this.languages);
+			if (inverted[defaultLang]) return inverted[defaultLang.toLowerCase()];
+		}
 		if (!game.settings.get("polyglot", "replaceLanguages")) {
-			const defaultLang = game.settings.get("polyglot", "defaultLanguage");
-			if (defaultLang) {
-				if (this.languages[defaultLang.toLowerCase()]) return defaultLang;
-				const inverted = invertObject(this.languages);
-				if (inverted[defaultLang]) return inverted[defaultLang.toLowerCase()];
-			}
 			switch (game.system.id) {
 				case "dnd5e":
 				case "dnd5eJP":
 					return game.i18n.localize("DND5E.LanguagesCommon");
+				case "dcc":
+					return game.i18n.localize("DCC.LanguagesCommon");
 				case "ose":
 					return "Common";
 				case "sw5e":
@@ -173,6 +181,10 @@ class PolyGlot {
 							if (match)
 								this.known_languages.add(match[1].trim().toLowerCase());
 						}
+						break;
+					case "dcc":
+						for (let lang of actor.data.data.details.languages.split(/[,;]/))
+							this.known_languages.add(lang.trim().toLowerCase());
 						break;
 					case "ose":
 						for (let lang of actor.data.data.languages.value)
@@ -331,15 +343,18 @@ class PolyGlot {
 
 	setup() {
 		switch (game.system.id) {
+			case "dcc":
+				this.loadLanguages("dcc");
+				break;
 			case "dnd5e":
 				this.loadLanguages("forgottenrealms");
+				break;
+			case "ose":
+				this.loadLanguages("ose");
 				break;
 			case "pf1":
 			case "pf2e":
 				this.loadLanguages("golarion");
-				break;
-			case "ose":
-				this.loadLanguages("ose");
 				break;
 			case "wfrp4e":
 				this.loadLanguages("wfrp");

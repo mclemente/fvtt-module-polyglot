@@ -1,0 +1,21 @@
+{
+    "alphabets": {
+        "common": "130% Thorass",
+        "draconic": "170% Iokharic",
+        "dwarvish": "120% Dethek",
+        "elvish": "150% Espruar",
+        "gnoll": "150% Kargi"
+    },
+    "tongues": {
+        "_default": "common",
+        "draconic": "draconic",
+        "dwarvish": "dwarvish",
+        "elvish": "elvish",
+        "giant": "dwarvish",
+        "gnoll": "gnoll",
+        "goblin": "dwarvish",
+        "halfling": "common",
+        "orc": "dwarvish",
+        "cant": "common"
+    }
+}
