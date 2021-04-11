@@ -10,7 +10,7 @@ In case you try to make a translation, here are some hints:
 # System Specific Translations
 `POLYGLOT.COC7.LanguageOwn`, `POLYGLOT.COC7.LanguageAny`, `POLYGLOT.COC7.LanguageOther` and `POLYGLOT.COC7.LanguageSpec` should use their equivalents on your language's Babele translation.
 
-`POLYGLOT.SWADE.LanguageSkills`, `POLYGLOT.WFRP4E.LanguageSkills` need to use the name used on their actual translations, otherwise it won't work. For example, COC7's Portuguese translation uses "O`Outros Línguas`, while WFRP4E's French translation uses `Langue`.
+`POLYGLOT.SWADE.LanguageSkills`, `POLYGLOT.WFRP4E.LanguageSkills` need to use the name used on their actual translations, otherwise it won't work. For example, COC7's Portuguese translation uses `Outros LÃ­nguas`, while WFRP4E's French translation uses `Langue`.
 
 # Credit
 [@drdwing](https://github.com/drdwing) for the Korean translation.
