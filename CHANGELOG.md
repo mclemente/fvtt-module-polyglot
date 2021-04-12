@@ -1,3 +1,9 @@
+# v1.5.7.1
+- Added support to DCC.
+- Added partial support to DSA5.
+- Added Japanese translation (thanks to [Touge](https://github.com/BrotherSharper)).
+- Updated Spanish translation.
+
 # v1.5.7.0
 - Settings were reordered. Settings related to Languages or Chat are separated into their own menu to save space and keep things ordered.
 - Added a Replace System's Languages setting, which removes every default language from the dropdown menu.

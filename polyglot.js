@@ -186,6 +186,12 @@ class PolyGlot {
 						for (let lang of actor.data.data.details.languages.split(/[,;]/))
 							this.known_languages.add(lang.trim().toLowerCase());
 						break;
+					case "dsa5":
+						for (let item of actor.data.items) {
+							if (item.data.category?.value === "language")
+								this.known_languages.add(item.name);
+						}
+						break;
 					case "ose":
 						for (let lang of actor.data.data.languages.value)
 							this.known_languages.add(lang)
