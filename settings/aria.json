@@ -1,0 +1,31 @@
+{
+    "alphabets": {
+        "common": "130% Thorass",
+        "kohestien":"130% Tuzluca",
+        "aqab": "130% ArCiela",
+        "staum": "130% Floki",
+        "osmanlien": "130% Eltharin",
+        "mon": "130% Valmaric",
+        "nok": "130% DarkEldar",
+        "carredass": "130% Celestial",
+        "blanc": "130% OrkGlyphs",
+        "knigien": "130% Tengwar",
+        "esperan": "130% Thassilonian",
+        "alta": "130% Espruar"
+    },
+    "tongues": {
+        "_default": "common",
+        "kohestien": "kohestien",
+        "aqab": "aqab",
+        "staum": "staum",
+        "osmanlien": "osmanlien",
+        "mon": "mon",
+        "nok": "nok",
+        "carredass": "carredass",
+        "blanc": "blanc",
+        "knigien": "knigien",
+        "esperan": "esperan",
+        "altabiancais": "alta",
+        "altanegrais": "alta"
+    }
+}

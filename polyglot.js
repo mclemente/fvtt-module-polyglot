@@ -59,6 +59,8 @@ class PolyGlot {
 		}
 		if (!game.settings.get("polyglot", "replaceLanguages")) {
 			switch (game.system.id) {
+				case "aria":
+					return game.i18n.localize("ARIA.languages.Common");
 				case "dnd5e":
 				case "dnd5eJP":
 					return game.i18n.localize("DND5E.LanguagesCommon");
@@ -151,6 +153,14 @@ class PolyGlot {
 		for (let actor of actors) {
 			try {
 				switch (game.system.id) {
+					case "aria":
+						this.known_languages.add(game.i18n.localize("ARIA.languages.Common"));
+						for (let lang of actor.data.items)
+						{
+							if (lang.data.language)
+								this.known_languages.add(lang.name.toLowerCase())
+						}
+						break;
 					case "CoC7":
 						for (let item of actor.data.items) {
 							const match = 
@@ -349,6 +359,9 @@ class PolyGlot {
 
 	setup() {
 		switch (game.system.id) {
+			case "aria":
+				this.loadLanguages("aria");
+				break;
 			case "dcc":
 				this.loadLanguages("dcc");
 				break;
