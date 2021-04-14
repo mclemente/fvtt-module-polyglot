@@ -12,8 +12,9 @@
 
 # Polyglot
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.  
-Currently supports DCC, D&D 3.5e, D&D 5e, Pathfinder, Pathfinder 2e, Old-School Essentials, Starfinder, Tormenta20, Warhammer and HavlockV/CoC7.
-Partial support to SWADE.
+Currently supports Aria, Call of Cthulhu (HavelockV's), Dungeon Crawl Classics, D&D 3.5e, D&D 5e, Pathfinder, Pathfinder 2e, Old-School Essentials, Starfinder, Tormenta20 and Warhammer.  
+Partial support to Das Schwarze Auge and SWADE.  
+This module might work with non-supported systems, but it depends on how the languages are implemented in the system.
 
 ## Installation
 In the setup screen, use the URL `https://raw.githubusercontent.com/League-of-Foundry-Developers/fvtt-module-polyglot/master/module.json` to install the module.

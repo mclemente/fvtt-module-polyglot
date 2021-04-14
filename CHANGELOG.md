@@ -1,3 +1,7 @@
+# v1.5.7.2
+- Added support to Aria (thanks to [@Dilomos](https://github.com/Dilomos)).
+- Added German translation (thanks to [@Nyhles](https://github.com/Nyhles)).
+
 # v1.5.7.1
 - Added support to DCC.
 - Added partial support to DSA5.

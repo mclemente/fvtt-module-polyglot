@@ -22,3 +22,5 @@ In case you try to make a translation, here are some hints:
 [@KarelZavicak](https://github.com/KarelZavicak) for the Czech translation.
 
 [Touge](https://github.com/BrotherSharper) for the Japanese translation.
+
+[@Nyhles](https://github.com/Nyhles) for the German translation.
