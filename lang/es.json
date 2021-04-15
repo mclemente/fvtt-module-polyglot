@@ -22,7 +22,7 @@
   "POLYGLOT.RandomizeRunesHint": "Habilitar esta opción ocasiona que los textos codificados se vean siempre de forma distinta, aunque se repita el mismo mensaje",
   "POLYGLOT.ExportFontsTitle": "Habilitar la tipografía",
   "POLYGLOT.ExportFontsHint": "Permite que Foundry pueda usar la tipografía de Polyglot (por ejemplo, al crear dibujos)",
-  "POLYGLOT.DisplayTranslatedTitle": "Mostrar cuadro de traducción",
+  "POLYGLOT.DisplayTranslatedTitle": "Mostrar traduccións",
   "POLYGLOT.DisplayTranslatedHint": "Para los idiomas que se traducen en el chat, muestra el texto original y a continuación la traducción",
   "POLYGLOT.HideTranslationTitle": "Ocultar a los jugadores los globos y el texto \"Traducido del\"",
   "POLYGLOT.HideTranslationHint": "Oculta el globo y el texto \"Traducido del\" del chat a los jugadores. Se usa para cuando no se quiere que los jugadores sepan en qué idioma se está hablando",

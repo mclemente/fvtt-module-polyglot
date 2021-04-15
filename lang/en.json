@@ -19,7 +19,7 @@
   "POLYGLOT.RandomizeRunesHint": "Enabling this option will cause the scrambled text to appear different every time, even if the same message is repeated.",
   "POLYGLOT.ExportFontsTitle": "Make fonts available",
   "POLYGLOT.ExportFontsHint": "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
-  "POLYGLOT.DisplayTranslatedTitle": "Display translated box",
+  "POLYGLOT.DisplayTranslatedTitle": "Display translations",
   "POLYGLOT.DisplayTranslatedHint": "For languages that are translated in the chat window, display the original text and a translation below.",
   "POLYGLOT.HideTranslationTitle": "Hide Globe and \"Translated from\" text from players",
   "POLYGLOT.HideTranslationHint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Perfect for when you don't want to show players which language you are speaking.",
