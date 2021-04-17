@@ -12,8 +12,8 @@
 
 # Polyglot
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.  
-Currently supports Aria, Call of Cthulhu (HavelockV's), Dungeon Crawl Classics, D&D 3.5e, D&D 5e, Pathfinder, Pathfinder 2e, Old-School Essentials, Starfinder, Tormenta20 and Warhammer.  
-Partial support to Das Schwarze Auge and SWADE.  
+Systems supported: Aria, Call of Cthulhu (HavelockV's), DCC, D&D 3.5e, D&D 5e, Pathfinder, Pathfinder 2e, OSE, Starfinder, Tormenta20 and WFRP4.  
+Systems partially supported: Das Schwarze Auge and SWADE.  
 This module might work with non-supported systems, but it depends on how the languages are implemented in the system.
 
 ## Installation

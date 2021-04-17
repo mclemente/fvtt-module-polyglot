@@ -1,3 +1,7 @@
+# v1.5.7.3
+- Replaced the translation box with a horizontal line.
+- Added language fonts for DSA5.
+
 # v1.5.7.2
 - Added support to Aria (thanks to [@Dilomos](https://github.com/Dilomos)).
 - Added German translation (thanks to [@Nyhles](https://github.com/Nyhles)).
