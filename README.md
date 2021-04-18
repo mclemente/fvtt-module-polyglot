@@ -11,10 +11,12 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X742NL3)
 
 # Polyglot
-Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.  
-Systems supported: Aria, Call of Cthulhu (HavelockV's), DCC, D&D 3.5e, D&D 5e, Pathfinder, Pathfinder 2e, OSE, Starfinder, Tormenta20 and WFRP4.  
-Systems partially supported: Das Schwarze Auge and SWADE.  
-This module might work with non-supported systems, but it depends on how the languages are implemented in the system.
+Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.
+
+## Supported Systems
+Aria, Call of Cthulhu (HavelockV's), DCC, D&D 3.5e, D&D 5e, Pathfinder, Pathfinder 2e, OSE, Starfinder, Tormenta20 and WFRP4.  
+Partially supports Das Schwarze Auge and SWADE.  
+It may work with non-supported systems, see [Generic System Support](https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/wiki/Generic-System-Support) for more info.
 
 ## Installation
 In the setup screen, use the URL `https://raw.githubusercontent.com/League-of-Foundry-Developers/fvtt-module-polyglot/master/module.json` to install the module.
