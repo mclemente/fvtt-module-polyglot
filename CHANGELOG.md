@@ -1,3 +1,6 @@
+# v1.5.8
+- Fixed DSA5 fonts not being shown.
+
 # v1.5.7.3
 - Replaced the translation box with a horizontal line.
 - Added language fonts for DSA5.

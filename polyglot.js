@@ -368,6 +368,9 @@ class PolyGlot {
 			case "dnd5e":
 				this.loadLanguages("forgottenrealms");
 				break;
+			case "dsa5":
+				this.loadLanguages("dsa5");
+				break;
 			case "ose":
 				this.loadLanguages("ose");
 				break;
