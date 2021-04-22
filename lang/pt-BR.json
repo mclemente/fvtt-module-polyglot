@@ -12,7 +12,7 @@
   "POLYGLOT.ReplaceLanguagesTitle": "Substituir Idiomas do Sistema",
   "POLYGLOT.ReplaceLanguagesHint": "Substitui os idiomas do sistema com os seus Idiomas Customizados. O primeiro idioma da lista se tornará o novo idioma padrão.",
   "POLYGLOT.ScrambleGMTitle": "Embaralhar para o Mestre",
-  "POLYGLOT.ScrambleGMHint": "Desabilite esta opção para sempre mostrar o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
+  "POLYGLOT.ScrambleGMHint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
   "POLYGLOT.toggleRuneTextTitle": "Alternar Visibilidade do texto das Runas em Diários",
   "POLYGLOT.toggleRuneTextHint": "Alterna a visibilidade do texto \"Runas\" nos Registros de Diário.",
   "POLYGLOT.RandomizeRunesTitle": "Randomizar Runas",

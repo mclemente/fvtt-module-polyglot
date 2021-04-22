@@ -1,3 +1,7 @@
+# v1.5.10
+- When the `Display translations` setting is on and the `Scramble for GM` setting is off, it'll show "Translated from *language*" instead of just "Translation".
+- Fixed DSA5 fonts for the Premium Content.
+
 # v1.5.9
 - Added support to Shadow of the Demon Lord (thanks to [@Patrick Porto](https://github.com/patrickporto)).
 

@@ -16,13 +16,11 @@ class PolyGlot {
 		switch (game.system.id) {
 			case "ose":
 				return Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
-				break;
 			case "dcc":
 				for (let item in CONFIG.DCC.languages) {
 					langs[item] = game.i18n.localize(CONFIG.DCC.languages[item]);
 				}
 				return langs;
-				break;
 			case "demonlord":
 				for (let language of Object.values(game.data.items)) {
 					langs[language.name] = game.i18n.localize(language.name);
@@ -40,13 +38,10 @@ class PolyGlot {
 					}
 				}
 				return langs;
-				break;
 			case "tormenta20":
 				return CONFIG.T20.idiomas;
-				break;
 			default:
 				return CONFIG[game.system.id.toUpperCase()]?.languages ? CONFIG[game.system.id.toUpperCase()].languages : [];
-				break;
 		}
 	}
 	static get languages() {
@@ -210,8 +205,20 @@ class PolyGlot {
 						break;
 					case "dsa5":
 						for (let item of actor.data.items) {
-							if (item.data.category?.value === "language")
-								this.known_languages.add(item.name);
+							if (item.data.category?.value === "language") {
+								let myRegex = new RegExp( game.i18n.localize("LocalizedIDs.language")+'\\s*\\((.+)\\)', 'i' );
+								let match = item.name.match( myRegex );
+								if (match) {
+									this.known_languages.add(match[1].trim());
+								}
+								else {
+									myRegex = new RegExp( game.i18n.localize("LocalizedIDs.literacy")+'\\s*\\((.+)\\)', 'i' );
+									match = item.name.match( myRegex );
+									if (match) {
+										this.known_languages.add(match[1].trim());
+									}
+								}
+							}
 						}
 						break;
 					case "ose":
@@ -292,37 +299,38 @@ class PolyGlot {
 		let metadata = html.find(".message-metadata")
 		let language = PolyGlot.languages[lang] || lang
 		const known = this.known_languages.has(lang); //Actor knows the language rather than being affected by Comprehend Languages or Tongues
-		const unknown = lang != this.truespeech && !known && !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages);
-		message.polyglot_unknown = unknown;
-		if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
+		const runifyGM = game.settings.get("polyglot", "runifyGM");
+		const displayTranslated = game.settings.get('polyglot', 'display-translated');
+		const hideTranslation = game.settings.get('polyglot','hideTranslation');
+		if (game.user.isGM && !runifyGM)
 			message.polyglot_unknown = false;
+		else
+			message.polyglot_unknown = lang != this.truespeech && !known && !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages);
 		
-		if(game.settings.get('polyglot', 'display-translated') && (language != PolyGlot.defaultLanguage || unknown)) {
+		let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
+		if(displayTranslated && (language != PolyGlot.defaultLanguage || message.polyglot_unknown)) {
 			let content = html.find(".message-content");
 			let translation = message.data.content;
-			let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
 			let original = $('<div>').addClass('polyglot-original-text').css({font:this._getFontStyle(lang)}).html(new_content);
 			$(content).empty().append(original);
 			
 			if (message.polyglot_force || !message.polyglot_unknown) {
-				if (lang != this.truespeech && known && !game.settings.get('polyglot','hideTranslation')) {
+				if (message.polyglot_force || (lang != this.truespeech && !message.polyglot_unknown && (game.user.isGM || !hideTranslation))) {
 					$(content).append($('<div>').addClass('polyglot-translation-text').attr('title', game.i18n.localize("POLYGLOT.TranslatedFrom") + language).html(translation));
 				}
 				else {
 					$(content).append($('<div>').addClass('polyglot-translation-text').attr('title', game.i18n.localize("POLYGLOT.Translation")).html(translation));
 				}
 			}
-			else message.polyglot_unknown = true;
 		}
 		else if (!message.polyglot_force && message.polyglot_unknown) {
 			let content = html.find(".message-content")
-			let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
 			content.text(new_content)
 			content[0].style.font = this._getFontStyle(lang)
 			message.polyglot_unknown = true;
 		}
 		
-		if (game.user.isGM || !game.settings.get('polyglot','hideTranslation')) {
+		if (game.user.isGM || !hideTranslation) {
 			const color = known ?	"green" : "red";
 			metadata.find(".polyglot-message-language").remove()
 			const title = game.user.isGM || !known ? `title="${language}"` : ""
@@ -330,7 +338,7 @@ class PolyGlot {
 				<i class="fas fa-globe" style="color:${color}"></i>
 			</a>`)
 			metadata.append(button)
-			if (game.user.isGM) {
+			if (game.user.isGM && (runifyGM || !displayTranslated)) {
 				button.click(this._onGlobeClick.bind(this))
 			}
 		}
