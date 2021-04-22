@@ -23,6 +23,11 @@ class PolyGlot {
 				}
 				return langs;
 				break;
+			case "demonlord":
+				for (let language of Object.values(game.data.items)) {
+					langs[language.name] = game.i18n.localize(language.name);
+				}
+				return langs;
 			case "wfrp4e":
 				const pack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
 				const itemList = await pack.getIndex();
@@ -196,6 +201,13 @@ class PolyGlot {
 						for (let lang of actor.data.data.details.languages.split(/[,;]/))
 							this.known_languages.add(lang.trim().toLowerCase());
 						break;
+					case "demonlord":
+						for (let item of actor.data.items) {
+							if (item.type === "language") {
+								this.known_languages.add(item.name);
+							}
+						}
+						break;
 					case "dsa5":
 						for (let item of actor.data.items) {
 							if (item.data.category?.value === "language")
@@ -367,6 +379,9 @@ class PolyGlot {
 				break;
 			case "dnd5e":
 				this.loadLanguages("forgottenrealms");
+				break;
+			case "demonlord":
+				this.loadLanguages("demonlord");
 				break;
 			case "dsa5":
 				this.loadLanguages("dsa5");

@@ -1,0 +1,38 @@
+{
+  "alphabets": {
+    "common": "130% Thorass",
+    "elemental": "150% HighDrowic",
+    "trollish": "200% ArCiela",
+    "dwarvish": "120% Dethek",
+    "woad": "120% JungleSlang",
+    "elvish": "150% Espruar",
+    "infernal": "250% Infernal",
+    "secret": "200% Thassilonian",
+    "balgrennish": "150% Tengwar",
+    "exotic": "200% Barazhad"
+  },
+  "tongues": {
+    "_default": "exotic",
+    "Common Tongue": "common",
+    "Dark Speech": "infernal",
+    "High Archaic": "common",
+    "Elvish": "elvish",
+    "Dwarvish": "dwarvish",
+    "Secret Language": "secret",
+    "Trollish": "trollish",
+    "Centauri": "elemental",
+    "Gnomish": "elemental",
+    "Amrin": "common",
+    "Balgrennish": "balgrennish",
+    "Bhali": "balgrennish",
+    "Edene": "common",
+    "Erath": "common",
+    "Grennish": "balgrennish",
+    "Kalasan": "common",
+    "Woad": "woad",
+    "Sylphen": "elemental",
+    "Molekin": "exotic",
+    "Naga": "exotic",
+    "Yerath": "exotic"
+  }
+}
