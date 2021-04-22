@@ -2,7 +2,7 @@
    "name": "polyglot",
   "title": "Polyglot",
   "description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "author": ["MClemente", "KaKaRoTo", "elizeuangelo"],
   "esmodules": ["./polyglot.js"],
   "styles": ["./css/polyglot.css","./css/fonts.css"],

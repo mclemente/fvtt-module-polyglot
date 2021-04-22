@@ -1,3 +1,6 @@
+# v1.5.9
+- Added support to Shadow of the Demon Lord (thanks to [@Patrick Porto](https://github.com/patrickporto)).
+
 # v1.5.8
 - Fixed DSA5 fonts not being shown.
 
