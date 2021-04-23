@@ -22,7 +22,8 @@ class PolyGlot {
 				}
 				return langs;
 			case "demonlord":
-				for (let language of Object.values(game.data.items)) {
+				const languages = game.data.items.filter(item => item.type === "language");
+				for (let language of languages) {
 					langs[language.name] = game.i18n.localize(language.name);
 				}
 				return langs;
