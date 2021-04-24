@@ -4,6 +4,7 @@ class PolyGlot {
 
 	constructor() {
 		this.known_languages = new Set();
+		this.literate_languages = new Set();
 		this.refresh_timeout = null;
 		this.alphabets = {common: '120% Dethek'}
 		this.tongues = {_default: 'common'}
@@ -201,6 +202,8 @@ class PolyGlot {
 						for (let item of actor.data.items) {
 							if (item.type === "language") {
 								this.known_languages.add(item.name);
+								if (item.data.read)
+									this.literate_languages.add(item.name);
 							}
 						}
 						break;
@@ -217,6 +220,7 @@ class PolyGlot {
 									match = item.name.match( myRegex );
 									if (match) {
 										this.known_languages.add(match[1].trim());
+										this.literate_languages.add(match[1].trim());
 									}
 								}
 							}
@@ -416,8 +420,6 @@ class PolyGlot {
 				break;
 			case "sw5e":
 				this.loadLanguages("sw5e");
-				break;
-			default:
 				break;
 		}
 		game.settings.register('polyglot', "defaultLanguage", {
@@ -658,8 +660,8 @@ class PolyGlot {
 				let button = ev.currentTarget.firstChild
 				runes = !runes
 				button.className = runes ? 'fas fa-link' : 'fas fa-unlink';
+				const spans = journalSheet.element.find("span.polyglot-journal");
 				if (runes) {
-					const spans = journalSheet.element.find("span.polyglot-journal");
 					for (let span of spans.toArray()) {
 						const lang = span.dataset.language;
 						if (!lang) continue;
@@ -668,8 +670,8 @@ class PolyGlot {
 						span.textContent = this.scrambleString(span.textContent, game.settings.get('polyglot','useUniqueSalt') ? journalSheet._id : lang)
 						span.style.font = this._getFontStyle(lang)
 					}
-				} else {
-					const spans = journalSheet.element.find("span.polyglot-journal");
+				}
+				else {
 					let i = 0;
 					for (let span of spans.toArray()) {
 						const lang = span.dataset.language;
@@ -689,7 +691,17 @@ class PolyGlot {
 		for (let span of spans.toArray()) {
 			const lang = span.dataset.language;
 			if (!lang) continue;
-			if (lang != this.truespeech && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages)) {
+			let conditions = lang != this.truespeech  && !this.known_languages.has(this.comprehendLanguages);
+			switch (game.system.id) {
+				case "demonlord":
+				case "dsa5":
+					conditions = conditions && !this.literate_languages.has(lang);
+					break;
+				default:
+					conditions = conditions && !this.known_languages.has(lang);
+					break;
+			}
+			if (conditions) {
 				span.title = "????"
 				span.textContent = this.scrambleString(span.textContent,game.settings.get('polyglot','useUniqueSalt') ? journalSheet._id : lang)
 				span.style.font = this._getFontStyle(lang)

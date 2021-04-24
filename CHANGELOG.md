@@ -1,3 +1,6 @@
+# v1.5.12
+- Support for literacy for DSA5 and SOTDL. Characters will need the Literacy skill (DSA5) or the Read value on the language (SOTDL) to read text on journal entries.
+
 # v1.5.11
 - Added more DSA5 fonts.
 - Fixed Shadow of the Demon Lord languages.
