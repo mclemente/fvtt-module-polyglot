@@ -1,3 +1,9 @@
+# v1.5.13
+- Added full support to DSA5. If you have the [DSA5 Core Rules](https://foundryvtt.com/packages/dsa5-core), the languages are now shown in the language selector.
+- Changed how Shadow of the Demon Lord languages are selected:
+- - Before: Languages were loaded from your Items Directory.
+- - Now: Languages are loaded from the Languages Compendium, any additional languages should be input into the Custom Languages setting.
+
 # v1.5.12
 - Support for literacy for DSA5 and SOTDL. Characters will need the Literacy skill (DSA5) or the Read value on the language (SOTDL) to read text on journal entries.
 

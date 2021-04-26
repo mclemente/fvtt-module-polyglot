@@ -23,16 +23,41 @@ class PolyGlot {
 				}
 				return langs;
 			case "demonlord":
-				const languages = game.data.items.filter(item => item.type === "language");
-				for (let language of languages) {
-					langs[language.name] = game.i18n.localize(language.name);
+				const demonlordPack = game.packs.get("demonlord.languages");
+				const demonlordItemList = await demonlordPack.getIndex();
+				for (let item of demonlordItemList) {
+					langs[item.name] = game.i18n.localize(item.name);
+				}
+				return langs;
+			case "dsa5":
+				if (game.modules.get("dsa5-core")) {
+					const dsa5Pack = game.packs.get("dsa5-core.corespecialabilites");
+					const dsa5ItemList = await dsa5Pack.getIndex();
+					for (let item of dsa5ItemList) {
+						if (item.data.category?.value === "language") {
+							let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language")+'\\s*\\((.+)\\)', 'i');
+							let match = item.name.match(myRegex);
+							if (match) {
+								let key = match[1].trim();
+								langs[key] = key;
+							}
+							else {
+								myRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy")+'\\s*\\((.+)\\)', 'i');
+								match = item.name.match(myRegex);
+								if (match) {
+									let key = match[1].trim();
+									langs[key] = key;
+								}
+							}
+						}
+					}
 				}
 				return langs;
 			case "wfrp4e":
-				const pack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
-				const itemList = await pack.getIndex();
-				for (let item of itemList) {
-					let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
+				const wfrp4ePack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
+				const wfrp4eItemList = await wfrp4ePack.getIndex();
+				for (let item of wfrp4eItemList) {
+					let myRegex = new RegExp(game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i');
 					const match = item.name.match(myRegex);
 					if (match) {
 						let key = match[1].trim().toLowerCase();
@@ -167,9 +192,9 @@ class PolyGlot {
 					case "CoC7":
 						for (let item of actor.data.items) {
 							const match = 
-								item.name.match( game.i18n.localize("POLYGLOT.COC7.LanguageOwn")+'\\s*\\((.+)\\)', 'i' )
-								|| item.name.match( game.i18n.localize("POLYGLOT.COC7.LanguageAny")+'\\s*\\((.+)\\)', 'i' )
-								|| item.name.match( game.i18n.localize("POLYGLOT.COC7.LanguageOther")+'\\s*\\((.+)\\)', 'i' );
+								item.name.match(game.i18n.localize("POLYGLOT.COC7.LanguageOwn")+'\\s*\\((.+)\\)', 'i')
+								|| item.name.match(game.i18n.localize("POLYGLOT.COC7.LanguageAny")+'\\s*\\((.+)\\)', 'i')
+								|| item.name.match(game.i18n.localize("POLYGLOT.COC7.LanguageOther")+'\\s*\\((.+)\\)', 'i');
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
 								this.known_languages.add(match[1].trim().toLowerCase());
@@ -179,8 +204,8 @@ class PolyGlot {
 						break;
 					case "wfrp4e":
 						for (let item of actor.data.items) {
-							let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
-							const match = item.name.match( myRegex );
+							let myRegex = new RegExp(game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i');
+							const match = item.name.match(myRegex);
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
 								this.known_languages.add(match[1].trim().toLowerCase());
@@ -211,14 +236,14 @@ class PolyGlot {
 					case "dsa5":
 						for (let item of actor.data.items) {
 							if (item.data.category?.value === "language") {
-								let myRegex = new RegExp( game.i18n.localize("LocalizedIDs.language")+'\\s*\\((.+)\\)', 'i' );
-								let match = item.name.match( myRegex );
+								let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language")+'\\s*\\((.+)\\)', 'i');
+								let match = item.name.match(myRegex);
 								if (match) {
 									this.known_languages.add(match[1].trim());
 								}
 								else {
-									myRegex = new RegExp( game.i18n.localize("LocalizedIDs.literacy")+'\\s*\\((.+)\\)', 'i' );
-									match = item.name.match( myRegex );
+									myRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy")+'\\s*\\((.+)\\)', 'i');
+									match = item.name.match(myRegex);
 									if (match) {
 										this.known_languages.add(match[1].trim());
 										this.literate_languages.add(match[1].trim());
