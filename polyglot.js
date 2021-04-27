@@ -54,8 +54,9 @@ class PolyGlot {
 				}
 				return langs;
 			case "pf2e":
+				const replaceLangs = {"algollthu":game.i18n.localize("PF2E.LanguageAlghollthu"),"migo":game.i18n.localize("PF2E.LanguageMiGo")};
 				for (let lang in CONFIG.PF2E.languages) {
-					langs[lang] = game.i18n.localize(`PF2E.Language${lang.charAt(0).toUpperCase() + lang.slice(1)}`);
+					langs[lang] = replaceLangs[lang] || game.i18n.localize(`PF2E.Language${lang.charAt(0).toUpperCase() + lang.slice(1)}`);
 				}
 				return langs;
 			case "wfrp4e":
