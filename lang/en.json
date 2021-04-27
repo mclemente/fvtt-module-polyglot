@@ -13,8 +13,6 @@
   "POLYGLOT.ReplaceLanguagesHint": "Replaces the system's default languages with your Custom Languages. The first language on the list becomes the new default language.",
   "POLYGLOT.ScrambleGMTitle": "Scramble for GM",
   "POLYGLOT.ScrambleGMHint": "Don't translate the text for show the text for the GM (refer to the globe's color for the token's understanding).",
-  "POLYGLOT.toggleRuneTextTitle": "Toggle Runes Text on Journals",
-  "POLYGLOT.toggleRuneTextHint": "Toggles the visibility of \"Runes\" in the Journal.",
   "POLYGLOT.RandomizeRunesTitle": "Randomize Runes",
   "POLYGLOT.RandomizeRunesHint": "Enabling this option will cause the scrambled text to appear different every time, even if the same message is repeated.",
   "POLYGLOT.ExportFontsTitle": "Make fonts available",

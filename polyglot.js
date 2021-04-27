@@ -34,20 +34,18 @@ class PolyGlot {
 					const dsa5Pack = game.packs.get("dsa5-core.corespecialabilites");
 					const dsa5ItemList = await dsa5Pack.getIndex();
 					for (let item of dsa5ItemList) {
-						if (item.data.category?.value === "language") {
-							let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language")+'\\s*\\((.+)\\)', 'i');
-							let match = item.name.match(myRegex);
+						let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language")+'\\s*\\((.+)\\)', 'i');
+						let match = item.name.match(myRegex);
+						if (match) {
+							let key = match[1].trim();
+							langs[key] = key;
+						}
+						else {
+							myRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy")+'\\s*\\((.+)\\)', 'i');
+							match = item.name.match(myRegex);
 							if (match) {
 								let key = match[1].trim();
 								langs[key] = key;
-							}
-							else {
-								myRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy")+'\\s*\\((.+)\\)', 'i');
-								match = item.name.match(myRegex);
-								if (match) {
-									let key = match[1].trim();
-									langs[key] = key;
-								}
 							}
 						}
 					}
@@ -101,6 +99,8 @@ class PolyGlot {
 					return game.i18n.localize("DCC.LanguagesCommon");
 				case "ose":
 					return "Common";
+				case "pf2e":
+					return "common";
 				case "sw5e":
 					return game.i18n.localize("SW5E.LanguagesBasic");
 				case "tormenta20":
@@ -233,7 +233,8 @@ class PolyGlot {
 					case "demonlord":
 						for (let item of actor.data.items) {
 							if (item.type === "language") {
-								this.known_languages.add(item.name);
+								if (item.data.speak)
+									this.known_languages.add(item.name);
 								if (item.data.read)
 									this.literate_languages.add(item.name);
 							}
@@ -251,7 +252,6 @@ class PolyGlot {
 									myRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy")+'\\s*\\((.+)\\)', 'i');
 									match = item.name.match(myRegex);
 									if (match) {
-										this.known_languages.add(match[1].trim());
 										this.literate_languages.add(match[1].trim());
 									}
 								}
@@ -462,12 +462,6 @@ class PolyGlot {
 			default: "",
 			type: String
 		});
-		addSetting("toggleRuneText", {
-			name: game.i18n.localize("POLYGLOT.toggleRuneTextTitle"),
-			hint: game.i18n.localize("POLYGLOT.toggleRuneTextHint"),
-			default: true,
-			type: Boolean
-		});
 		addSetting("useUniqueSalt", {
 			name: game.i18n.localize("POLYGLOT.RandomizeRunesTitle"),
 			hint: game.i18n.localize("POLYGLOT.RandomizeRunesHint"),
@@ -572,10 +566,12 @@ class PolyGlot {
 		this.comprehendLanguages = game.settings.get("polyglot","comprehendLanguages").trim().toLowerCase().replace(/ \'/g, "_");
 		this.truespeech = game.settings.get("polyglot","truespeech").trim().toLowerCase().replace(/ \'/g, "_");
 	}
+	
 	ready() {
 		this.updateConfigFonts();
 		this.setCustomLanguages(game.settings.get("polyglot","customLanguages"));
 	}
+	
 	updateConfigFonts() {
 		// Register fonts so they are available to other elements (such as Drawings)
 		
@@ -602,7 +598,17 @@ class PolyGlot {
 		if (sheet._polyglotEditor) return;
 		const methodName = sheet.activateEditor ? "activateEditor" : "_createEditor"
 		sheet._polyglot_original_activateEditor = sheet[methodName];
-		const languages = Object.entries(PolyGlot.languages).map(([lang, name]) => {
+		let langs = PolyGlot.languages;
+		if (!game.user.isGM) {
+			langs = {};
+			for (let lang of this.known_languages) {
+				langs[lang] = PolyGlot.languages[lang];
+			}
+			for (let lang of this.literate_languages) {
+				langs[lang] = PolyGlot.languages[lang];
+			}
+		}
+		const languages = Object.entries(langs).map(([lang, name]) => {
 			return {
 				title: name || "",
 				inline: 'span',
@@ -684,8 +690,7 @@ class PolyGlot {
 			let runes = false;
 			const texts = [];
 			const styles = [];
-			const runesText = game.settings.get("polyglot", "toggleRuneText") ? game.i18n.localize("POLYGLOT.Runes") : "";
-			const toggleString = "<a class='polyglot-button' title='" + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i> "+ runesText + "</a>";
+			const toggleString = "<a class='polyglot-button' title='Polyglot: " + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i></a>";
 			const toggleButton = $(toggleString);
 			toggleButton.click(ev => {
 				ev.preventDefault();
@@ -723,7 +728,7 @@ class PolyGlot {
 		for (let span of spans.toArray()) {
 			const lang = span.dataset.language;
 			if (!lang) continue;
-			let conditions = lang != this.truespeech  && !this.known_languages.has(this.comprehendLanguages);
+			let conditions = lang != this.truespeech && !this.known_languages.has(this.comprehendLanguages);
 			switch (game.system.id) {
 				case "demonlord":
 				case "dsa5":
@@ -740,6 +745,7 @@ class PolyGlot {
 			}
 		}
 	}
+	
 	chatBubble (token, html, messageContent, {emote}) {
 		const message = game.messages.entities.slice(-10).reverse().find(m => m.data.content === messageContent);
 		this._bubble = { font: '', message: '' };
@@ -762,6 +768,7 @@ class PolyGlot {
 			}
 		}
 	}
+	
 	vinoChatRender (chatDisplayData) {
 		const message = chatDisplayData.message;
 
