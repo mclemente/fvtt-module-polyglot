@@ -1,3 +1,6 @@
+# v1.5.14
+- Fixed PF2E's languages.
+
 # v1.5.13
 - Added full support to DSA5. If you have the [DSA5 Core Rules](https://foundryvtt.com/packages/dsa5-core), the languages are now shown in the language selector.
 - Changed how Shadow of the Demon Lord languages are selected:

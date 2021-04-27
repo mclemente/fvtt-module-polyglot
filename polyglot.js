@@ -53,6 +53,11 @@ class PolyGlot {
 					}
 				}
 				return langs;
+			case "pf2e":
+				for (let lang in CONFIG.PF2E.languages) {
+					langs[lang] = game.i18n.localize(`PF2E.Language${lang.charAt(0).toUpperCase() + lang.slice(1)}`);
+				}
+				return langs;
 			case "wfrp4e":
 				const wfrp4ePack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
 				const wfrp4eItemList = await wfrp4ePack.getIndex();
