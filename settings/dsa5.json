@@ -1,6 +1,6 @@
 {
-    "alphabets": {
-        "Altes Alaani": "150% HighschoolRunes",
+	"alphabets": {
+		"Altes Alaani": "150% HighschoolRunes",
 		"Amulashtra": "150% Qijomi",
 		"Angram-Bilderschrift": "150% Skaven",
 		"Arkanil": "170% ArCiela",
@@ -32,8 +32,8 @@
 		"Oloarkh": "150% OrkGlyphs",
 		"Ologhaijan": "150% OrkGlyphs",
 		"Rabensprache": "150% Valmaric"
-    },
-    "tongues": {
+	},
+	"tongues": {
 		"_default": "unbekannt",
 		"Altes Alaani": "Altes Alaani",
 		"Amulashtra": "Amulashtra",
@@ -66,7 +66,7 @@
 		"Fjarningsch": "Fjarningsch",
 		"Garethi": "Kusliker Zeichen",
 		"Goblinisch": "Goblinisch",
-		"Isdira": "Isdira-Zeichen",
+		"Isdira": "Isdira- und Asdharia-Zeichen",
 		"Mohisch": "Mohisch",
 		"Nujuka": "Nujuka",
 		"Ogrisch": "Ogrisch",
@@ -85,5 +85,5 @@
 		"Zelemja": "Chrmk",
 		"Zhayad": "Zhayad-Zeichen",
 		"Zyklopäisch": "Kusliker Zeichen"
-    }
+	}
 }

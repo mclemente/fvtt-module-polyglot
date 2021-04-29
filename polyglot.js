@@ -97,6 +97,8 @@ class PolyGlot {
 					return game.i18n.localize("DND5E.LanguagesCommon");
 				case "dcc":
 					return game.i18n.localize("DCC.LanguagesCommon");
+				case "dsa5":
+					return "Garethi";
 				case "ose":
 					return "Common";
 				case "pf2e":
@@ -330,7 +332,6 @@ class PolyGlot {
 	}
 
 	renderChatMessage(message, html, data) {
-		// html and data are swapped on 0.3.x in relation to other render<Application> hooks
 		const lang = message.getFlag("polyglot", "language") || ""
 		if (!lang) return;
 		let metadata = html.find(".message-metadata")
@@ -561,7 +562,7 @@ class PolyGlot {
 			div.remove();
 			return dims;
 		}
-		 // allow OOC talking
+		// allow OOC talking
 		this.allowOOC = game.settings.get("polyglot","allowOOC");
 		this.comprehendLanguages = game.settings.get("polyglot","comprehendLanguages").trim().toLowerCase().replace(/ \'/g, "_");
 		this.truespeech = game.settings.get("polyglot","truespeech").trim().toLowerCase().replace(/ \'/g, "_");

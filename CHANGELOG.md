@@ -1,3 +1,8 @@
+# v1.5.16
+- Das Schwarze Auge: Added Garethi as the default language.
+- Das Schwarze Auge: Fixed Isdira not having a proper font.
+- Updated Spanish translation.
+
 # v1.5.15
 - Removed the Toggle Runes Text on Journals setting.
 - Fixed journal owners being able to write in languages they didn't know.
