@@ -13,12 +13,13 @@ span.polyglot-journal {
 
 .polyglot-translation-text{
 	position:relative;
-	padding: 20px 4px 0px 4px;
-	line-height: 24px;
-	background: rgba(0, 0, 0, 0.1);
-	border: 1px solid #999;
-	border-radius: 3px;
-	box-shadow: 0 0 2px #FFF inset;
+	padding-top: 16px;
+	/* line-height: 24px; */
+	/* background: rgba(0, 0, 0, 0.1); */
+	/* border: 1px solid #999; */
+	/* border-radius: 3px; */
+	/* box-shadow: 0 0 2px #FFF inset; */
+  border-top: 1px solid #999;
 	-webkit-user-select: text;
 	-moz-user-select: text;
 	-ms-user-select: text;
@@ -26,11 +27,11 @@ span.polyglot-journal {
 }
 
 .polyglot-translation-text:before{
-	position:absolute;
+	position: absolute;
 	content: attr(title);
-	font-size:12px;
-	top:-2px;
-	left:4px;
+	font-size: 14px;
+	top: 0px;
+	/* left: 4px; */
 	font-weight: bold;
 	font-style: italic;
 }

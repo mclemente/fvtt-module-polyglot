@@ -1,3 +1,50 @@
+# v1.5.15
+- Removed the Toggle Runes Text on Journals setting.
+- Fixed journal owners being able to write in languages they didn't know.
+- Das Schwarze Auge: Fixed languages not being loaded properly.
+- Das Schwarze Auge: Fixed literacy languages being shown in the dropdown menu.
+- Shadow of the Demon Lord: Fixed characters being able to speak languages they could only read.
+
+# v1.5.14
+- Fixed PF2E's languages.
+
+# v1.5.13
+- Added full support to Das Schwarze Auge. If you have the [DSA5 Core Rules](https://foundryvtt.com/packages/dsa5-core), the languages are now shown in the language selector.
+- Changed how Shadow of the Demon Lord languages are selected:
+- - Before: Languages were loaded from your Items Directory.
+- - Now: Languages are loaded from the Languages Compendium, any additional languages should be input into the Custom Languages setting.
+
+# v1.5.12
+- Support for literacy for Das Schwarze Auge and Shadow of the Demon Lord. Characters will need the Literacy skill (DSA) or the Read value on the language (SOTDL) to read text on journal entries.
+
+# v1.5.11
+- Added more Das Schwarze Auge fonts.
+- Fixed Shadow of the Demon Lord languages.
+
+# v1.5.10
+- When the `Display translations` setting is on and the `Scramble for GM` setting is off, it'll show "Translated from *language*" instead of just "Translation".
+- Fixed Das Schwarze Auge fonts for the Premium Content.
+
+# v1.5.9
+- Added support to Shadow of the Demon Lord (thanks to [@Patrick Porto](https://github.com/patrickporto)).
+
+# v1.5.8
+- Fixed Das Schwarze Auge fonts not being shown.
+
+# v1.5.7.3
+- Replaced the translation box with a horizontal line.
+- Added language fonts for Das Schwarze Auge.
+
+# v1.5.7.2
+- Added support to Aria (thanks to [@Dilomos](https://github.com/Dilomos)).
+- Added German translation (thanks to [@Nyhles](https://github.com/Nyhles)).
+
+# v1.5.7.1
+- Added support to DCC.
+- Added partial support to Das Schwarze Auge.
+- Added Japanese translation (thanks to [Touge](https://github.com/BrotherSharper)).
+- Updated Spanish translation.
+
 # v1.5.7.0
 - Settings were reordered. Settings related to Languages or Chat are separated into their own menu to save space and keep things ordered.
 - Added a Replace System's Languages setting, which removes every default language from the dropdown menu.

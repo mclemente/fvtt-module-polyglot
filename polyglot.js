@@ -4,6 +4,7 @@ class PolyGlot {
 
 	constructor() {
 		this.known_languages = new Set();
+		this.literate_languages = new Set();
 		this.refresh_timeout = null;
 		this.alphabets = {common: '120% Dethek'}
 		this.tongues = {_default: 'common'}
@@ -12,16 +13,55 @@ class PolyGlot {
 
 	static async getLanguages() {
 		if (game.settings.get("polyglot", "replaceLanguages")) return [];
+		const langs = {};
 		switch (game.system.id) {
 			case "ose":
 				return Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
-				break;
+			case "dcc":
+				for (let item in CONFIG.DCC.languages) {
+					langs[item] = game.i18n.localize(CONFIG.DCC.languages[item]);
+				}
+				return langs;
+			case "demonlord":
+				const demonlordPack = game.packs.get("demonlord.languages");
+				const demonlordItemList = await demonlordPack.getIndex();
+				for (let item of demonlordItemList) {
+					langs[item.name] = game.i18n.localize(item.name);
+				}
+				return langs;
+			case "dsa5":
+				if (game.modules.get("dsa5-core")) {
+					const dsa5Pack = game.packs.get("dsa5-core.corespecialabilites");
+					const dsa5ItemList = await dsa5Pack.getIndex();
+					for (let item of dsa5ItemList) {
+						let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language")+'\\s*\\((.+)\\)', 'i');
+						let match = item.name.match(myRegex);
+						if (match) {
+							let key = match[1].trim();
+							langs[key] = key;
+						}
+						else {
+							myRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy")+'\\s*\\((.+)\\)', 'i');
+							match = item.name.match(myRegex);
+							if (match) {
+								let key = match[1].trim();
+								langs[key] = key;
+							}
+						}
+					}
+				}
+				return langs;
+			case "pf2e":
+				const replaceLangs = {"algollthu":game.i18n.localize("PF2E.LanguageAlghollthu"),"migo":game.i18n.localize("PF2E.LanguageMiGo")};
+				for (let lang in CONFIG.PF2E.languages) {
+					langs[lang] = replaceLangs[lang] || game.i18n.localize(`PF2E.Language${lang.charAt(0).toUpperCase() + lang.slice(1)}`);
+				}
+				return langs;
 			case "wfrp4e":
-				const pack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
-				const itemList = await pack.getIndex();
-				const langs = {};
-				for (let item of itemList) {
-					let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
+				const wfrp4ePack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
+				const wfrp4eItemList = await wfrp4ePack.getIndex();
+				for (let item of wfrp4eItemList) {
+					let myRegex = new RegExp(game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i');
 					const match = item.name.match(myRegex);
 					if (match) {
 						let key = match[1].trim().toLowerCase();
@@ -29,13 +69,10 @@ class PolyGlot {
 					}
 				}
 				return langs;
-				break;
 			case "tormenta20":
 				return CONFIG.T20.idiomas;
-				break;
 			default:
 				return CONFIG[game.system.id.toUpperCase()]?.languages ? CONFIG[game.system.id.toUpperCase()].languages : [];
-				break;
 		}
 	}
 	static get languages() {
@@ -45,19 +82,25 @@ class PolyGlot {
 		this._languages = val || {};
 	}
 	static get defaultLanguage() {
+		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
+		if (defaultLang) {
+			if (this.languages[defaultLang.toLowerCase()]) return defaultLang;
+			const inverted = invertObject(this.languages);
+			if (inverted[defaultLang]) return inverted[defaultLang.toLowerCase()];
+		}
 		if (!game.settings.get("polyglot", "replaceLanguages")) {
-			const defaultLang = game.settings.get("polyglot", "defaultLanguage");
-			if (defaultLang) {
-				if (this.languages[defaultLang.toLowerCase()]) return defaultLang;
-				const inverted = invertObject(this.languages);
-				if (inverted[defaultLang]) return inverted[defaultLang.toLowerCase()];
-			}
 			switch (game.system.id) {
+				case "aria":
+					return game.i18n.localize("ARIA.languages.Common");
 				case "dnd5e":
 				case "dnd5eJP":
 					return game.i18n.localize("DND5E.LanguagesCommon");
+				case "dcc":
+					return game.i18n.localize("DCC.LanguagesCommon");
 				case "ose":
 					return "Common";
+				case "pf2e":
+					return "common";
 				case "sw5e":
 					return game.i18n.localize("SW5E.LanguagesBasic");
 				case "tormenta20":
@@ -132,6 +175,7 @@ class PolyGlot {
 	updateUserLanguages(html) {
 		let actors = [];
 		this.known_languages = new Set();
+		this.literate_languages = new Set();
 		if (canvas && canvas.tokens) {
 			for (let token of canvas.tokens.controlled) {
 				if (token.actor)
@@ -143,12 +187,20 @@ class PolyGlot {
 		for (let actor of actors) {
 			try {
 				switch (game.system.id) {
+					case "aria":
+						this.known_languages.add(game.i18n.localize("ARIA.languages.Common"));
+						for (let lang of actor.data.items)
+						{
+							if (lang.data.language)
+								this.known_languages.add(lang.name.toLowerCase())
+						}
+						break;
 					case "CoC7":
 						for (let item of actor.data.items) {
 							const match = 
-								item.name.match( game.i18n.localize("POLYGLOT.COC7.LanguageOwn")+'\\s*\\((.+)\\)', 'i' )
-								|| item.name.match( game.i18n.localize("POLYGLOT.COC7.LanguageAny")+'\\s*\\((.+)\\)', 'i' )
-								|| item.name.match( game.i18n.localize("POLYGLOT.COC7.LanguageOther")+'\\s*\\((.+)\\)', 'i' );
+								item.name.match(game.i18n.localize("POLYGLOT.COC7.LanguageOwn")+'\\s*\\((.+)\\)', 'i')
+								|| item.name.match(game.i18n.localize("POLYGLOT.COC7.LanguageAny")+'\\s*\\((.+)\\)', 'i')
+								|| item.name.match(game.i18n.localize("POLYGLOT.COC7.LanguageOther")+'\\s*\\((.+)\\)', 'i');
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
 								this.known_languages.add(match[1].trim().toLowerCase());
@@ -158,8 +210,8 @@ class PolyGlot {
 						break;
 					case "wfrp4e":
 						for (let item of actor.data.items) {
-							let myRegex = new RegExp( game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i' );
-							const match = item.name.match( myRegex );
+							let myRegex = new RegExp(game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills")+'\\s*\\((.+)\\)', 'i');
+							const match = item.name.match(myRegex);
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
 								this.known_languages.add(match[1].trim().toLowerCase());
@@ -172,6 +224,38 @@ class PolyGlot {
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
 								this.known_languages.add(match[1].trim().toLowerCase());
+						}
+						break;
+					case "dcc":
+						for (let lang of actor.data.data.details.languages.split(/[,;]/))
+							this.known_languages.add(lang.trim().toLowerCase());
+						break;
+					case "demonlord":
+						for (let item of actor.data.items) {
+							if (item.type === "language") {
+								if (item.data.speak)
+									this.known_languages.add(item.name);
+								if (item.data.read)
+									this.literate_languages.add(item.name);
+							}
+						}
+						break;
+					case "dsa5":
+						for (let item of actor.data.items) {
+							if (item.data.category?.value === "language") {
+								let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language")+'\\s*\\((.+)\\)', 'i');
+								let match = item.name.match(myRegex);
+								if (match) {
+									this.known_languages.add(match[1].trim());
+								}
+								else {
+									myRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy")+'\\s*\\((.+)\\)', 'i');
+									match = item.name.match(myRegex);
+									if (match) {
+										this.literate_languages.add(match[1].trim());
+									}
+								}
+							}
 						}
 						break;
 					case "ose":
@@ -252,37 +336,38 @@ class PolyGlot {
 		let metadata = html.find(".message-metadata")
 		let language = PolyGlot.languages[lang] || lang
 		const known = this.known_languages.has(lang); //Actor knows the language rather than being affected by Comprehend Languages or Tongues
-		const unknown = lang != this.truespeech && !known && !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages);
-		message.polyglot_unknown = unknown;
-		if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
+		const runifyGM = game.settings.get("polyglot", "runifyGM");
+		const displayTranslated = game.settings.get('polyglot', 'display-translated');
+		const hideTranslation = game.settings.get('polyglot','hideTranslation');
+		if (game.user.isGM && !runifyGM)
 			message.polyglot_unknown = false;
+		else
+			message.polyglot_unknown = lang != this.truespeech && !known && !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages);
 		
-		if(game.settings.get('polyglot', 'display-translated') && (language != PolyGlot.defaultLanguage || unknown)) {
+		let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
+		if(displayTranslated && (language != PolyGlot.defaultLanguage || message.polyglot_unknown)) {
 			let content = html.find(".message-content");
 			let translation = message.data.content;
-			let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
 			let original = $('<div>').addClass('polyglot-original-text').css({font:this._getFontStyle(lang)}).html(new_content);
 			$(content).empty().append(original);
 			
 			if (message.polyglot_force || !message.polyglot_unknown) {
-				if (lang != this.truespeech && known && !game.settings.get('polyglot','hideTranslation')) {
+				if (message.polyglot_force || (lang != this.truespeech && !message.polyglot_unknown && (game.user.isGM || !hideTranslation))) {
 					$(content).append($('<div>').addClass('polyglot-translation-text').attr('title', game.i18n.localize("POLYGLOT.TranslatedFrom") + language).html(translation));
 				}
 				else {
 					$(content).append($('<div>').addClass('polyglot-translation-text').attr('title', game.i18n.localize("POLYGLOT.Translation")).html(translation));
 				}
 			}
-			else message.polyglot_unknown = true;
 		}
 		else if (!message.polyglot_force && message.polyglot_unknown) {
 			let content = html.find(".message-content")
-			let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
 			content.text(new_content)
 			content[0].style.font = this._getFontStyle(lang)
 			message.polyglot_unknown = true;
 		}
 		
-		if (game.user.isGM || !game.settings.get('polyglot','hideTranslation')) {
+		if (game.user.isGM || !hideTranslation) {
 			const color = known ?	"green" : "red";
 			metadata.find(".polyglot-message-language").remove()
 			const title = game.user.isGM || !known ? `title="${language}"` : ""
@@ -290,7 +375,7 @@ class PolyGlot {
 				<i class="fas fa-globe" style="color:${color}"></i>
 			</a>`)
 			metadata.append(button)
-			if (game.user.isGM) {
+			if (game.user.isGM && (runifyGM || !displayTranslated)) {
 				button.click(this._onGlobeClick.bind(this))
 			}
 		}
@@ -331,15 +416,27 @@ class PolyGlot {
 
 	setup() {
 		switch (game.system.id) {
+			case "aria":
+				this.loadLanguages("aria");
+				break;
+			case "dcc":
+				this.loadLanguages("dcc");
+				break;
 			case "dnd5e":
 				this.loadLanguages("forgottenrealms");
+				break;
+			case "demonlord":
+				this.loadLanguages("demonlord");
+				break;
+			case "dsa5":
+				this.loadLanguages("dsa5");
+				break;
+			case "ose":
+				this.loadLanguages("ose");
 				break;
 			case "pf1":
 			case "pf2e":
 				this.loadLanguages("golarion");
-				break;
-			case "ose":
-				this.loadLanguages("ose");
 				break;
 			case "wfrp4e":
 				this.loadLanguages("wfrp");
@@ -356,8 +453,6 @@ class PolyGlot {
 			case "sw5e":
 				this.loadLanguages("sw5e");
 				break;
-			default:
-				break;
 		}
 		game.settings.register('polyglot', "defaultLanguage", {
 			name: game.i18n.localize("POLYGLOT.DefaultLanguageTitle"),
@@ -366,12 +461,6 @@ class PolyGlot {
 			config: true,
 			default: "",
 			type: String
-		});
-		addSetting("toggleRuneText", {
-			name: game.i18n.localize("POLYGLOT.toggleRuneTextTitle"),
-			hint: game.i18n.localize("POLYGLOT.toggleRuneTextHint"),
-			default: true,
-			type: Boolean
 		});
 		addSetting("useUniqueSalt", {
 			name: game.i18n.localize("POLYGLOT.RandomizeRunesTitle"),
@@ -477,10 +566,12 @@ class PolyGlot {
 		this.comprehendLanguages = game.settings.get("polyglot","comprehendLanguages").trim().toLowerCase().replace(/ \'/g, "_");
 		this.truespeech = game.settings.get("polyglot","truespeech").trim().toLowerCase().replace(/ \'/g, "_");
 	}
+	
 	ready() {
 		this.updateConfigFonts();
 		this.setCustomLanguages(game.settings.get("polyglot","customLanguages"));
 	}
+	
 	updateConfigFonts() {
 		// Register fonts so they are available to other elements (such as Drawings)
 		
@@ -507,7 +598,17 @@ class PolyGlot {
 		if (sheet._polyglotEditor) return;
 		const methodName = sheet.activateEditor ? "activateEditor" : "_createEditor"
 		sheet._polyglot_original_activateEditor = sheet[methodName];
-		const languages = Object.entries(PolyGlot.languages).map(([lang, name]) => {
+		let langs = PolyGlot.languages;
+		if (!game.user.isGM) {
+			langs = {};
+			for (let lang of this.known_languages) {
+				langs[lang] = PolyGlot.languages[lang];
+			}
+			for (let lang of this.literate_languages) {
+				langs[lang] = PolyGlot.languages[lang];
+			}
+		}
+		const languages = Object.entries(langs).map(([lang, name]) => {
 			return {
 				title: name || "",
 				inline: 'span',
@@ -589,16 +690,15 @@ class PolyGlot {
 			let runes = false;
 			const texts = [];
 			const styles = [];
-			const runesText = game.settings.get("polyglot", "toggleRuneText") ? game.i18n.localize("POLYGLOT.Runes") : "";
-			const toggleString = "<a class='polyglot-button' title='" + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i> "+ runesText + "</a>";
+			const toggleString = "<a class='polyglot-button' title='Polyglot: " + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i></a>";
 			const toggleButton = $(toggleString);
 			toggleButton.click(ev => {
 				ev.preventDefault();
 				let button = ev.currentTarget.firstChild
 				runes = !runes
 				button.className = runes ? 'fas fa-link' : 'fas fa-unlink';
+				const spans = journalSheet.element.find("span.polyglot-journal");
 				if (runes) {
-					const spans = journalSheet.element.find("span.polyglot-journal");
 					for (let span of spans.toArray()) {
 						const lang = span.dataset.language;
 						if (!lang) continue;
@@ -607,8 +707,8 @@ class PolyGlot {
 						span.textContent = this.scrambleString(span.textContent, game.settings.get('polyglot','useUniqueSalt') ? journalSheet._id : lang)
 						span.style.font = this._getFontStyle(lang)
 					}
-				} else {
-					const spans = journalSheet.element.find("span.polyglot-journal");
+				}
+				else {
 					let i = 0;
 					for (let span of spans.toArray()) {
 						const lang = span.dataset.language;
@@ -628,13 +728,24 @@ class PolyGlot {
 		for (let span of spans.toArray()) {
 			const lang = span.dataset.language;
 			if (!lang) continue;
-			if (lang != this.truespeech && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages)) {
+			let conditions = lang != this.truespeech && !this.known_languages.has(this.comprehendLanguages);
+			switch (game.system.id) {
+				case "demonlord":
+				case "dsa5":
+					conditions = conditions && !this.literate_languages.has(lang);
+					break;
+				default:
+					conditions = conditions && !this.known_languages.has(lang);
+					break;
+			}
+			if (conditions) {
 				span.title = "????"
 				span.textContent = this.scrambleString(span.textContent,game.settings.get('polyglot','useUniqueSalt') ? journalSheet._id : lang)
 				span.style.font = this._getFontStyle(lang)
 			}
 		}
 	}
+	
 	chatBubble (token, html, messageContent, {emote}) {
 		const message = game.messages.entities.slice(-10).reverse().find(m => m.data.content === messageContent);
 		this._bubble = { font: '', message: '' };
@@ -657,6 +768,7 @@ class PolyGlot {
 			}
 		}
 	}
+	
 	vinoChatRender (chatDisplayData) {
 		const message = chatDisplayData.message;
 

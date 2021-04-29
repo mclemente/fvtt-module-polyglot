@@ -2,7 +2,7 @@
    "name": "polyglot",
   "title": "Polyglot",
   "description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
-  "version": "1.5.7.0",
+  "version": "1.5.15",
   "author": ["MClemente", "KaKaRoTo", "elizeuangelo"],
   "esmodules": ["./polyglot.js"],
   "styles": ["./css/polyglot.css","./css/fonts.css"],
@@ -37,6 +37,11 @@
       "lang": "cs",
       "name": "Česky",
       "path": "lang/cs.json"
+    },
+    {
+      "lang": "ja",
+      "name": "日本語",
+      "path": "lang/ja.json"
     }
   ],
   "url": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot",
