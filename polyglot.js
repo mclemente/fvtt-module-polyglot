@@ -52,9 +52,8 @@ class PolyGlot {
 				}
 				return langs;
 			case "pf2e":
-				const replaceLangs = {"algollthu":game.i18n.localize("PF2E.LanguageAlghollthu"),"migo":game.i18n.localize("PF2E.LanguageMiGo")};
 				for (let lang in CONFIG.PF2E.languages) {
-					langs[lang] = replaceLangs[lang] || game.i18n.localize(`PF2E.Language${lang.charAt(0).toUpperCase() + lang.slice(1)}`);
+					langs[lang] = game.i18n.localize(CONFIG.PF2E.languages[lang]);
 				}
 				return langs;
 			case "wfrp4e":
@@ -423,7 +422,10 @@ class PolyGlot {
 			case "dcc":
 				this.loadLanguages("dcc");
 				break;
+			case "D35E":
 			case "dnd5e":
+			case "dnd5eJP":
+			case "kryx_rpg":
 				this.loadLanguages("forgottenrealms");
 				break;
 			case "demonlord":
@@ -447,9 +449,6 @@ class PolyGlot {
 				break;
 			case "sfrpg":
 				this.loadLanguages("starfinder");
-				break;
-			case "D35E":
-				this.loadLanguages("D35E");
 				break;
 			case "sw5e":
 				this.loadLanguages("sw5e");

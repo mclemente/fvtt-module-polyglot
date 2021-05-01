@@ -10,7 +10,7 @@
         "gnoll": "150% Kargi",
         "elvish": "150% Espruar",
         "infernal": "230% Infernal",
-        "sylvan":"150% OldeEspruar"
+        "sylvan":"200% OldeEspruar"
     },
     "tongues": {
         "_default": "common",
