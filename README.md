@@ -14,7 +14,7 @@
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.
 
 ## Supported Systems
-Aria, Call of Cthulhu (HavelockV's), Das Schwarze Auge, DCC, D&D 3.5e, D&D 5e, Pathfinder, Pathfinder 2e, OSE, Savage Worlds, Shadow of the Demon Lord,Starfinder, Tormenta20 and Warhammer Fantasy Roleplay.  
+Aria, Call of Cthulhu (HavelockV's), Das Schwarze Auge, DCC, D&D 3.5e, D&D 5e, Pathfinder, Pathfinder 2e, OSE, Savage Worlds, Shadow of the Demon Lord, Starfinder, Tormenta20 and Warhammer Fantasy Roleplay.  
 It may work with non-supported systems, see [Generic System Support](https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/wiki/Generic-System-Support) for more info.
 
 ## Installation
