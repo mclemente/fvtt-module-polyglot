@@ -52,9 +52,8 @@ class PolyGlot {
 				}
 				return langs;
 			case "pf2e":
-				const replaceLangs = {"algollthu":game.i18n.localize("PF2E.LanguageAlghollthu"),"migo":game.i18n.localize("PF2E.LanguageMiGo")};
 				for (let lang in CONFIG.PF2E.languages) {
-					langs[lang] = replaceLangs[lang] || game.i18n.localize(`PF2E.Language${lang.charAt(0).toUpperCase() + lang.slice(1)}`);
+					langs[lang] = game.i18n.localize(CONFIG.PF2E.languages[lang]);
 				}
 				return langs;
 			case "wfrp4e":
@@ -97,6 +96,8 @@ class PolyGlot {
 					return game.i18n.localize("DND5E.LanguagesCommon");
 				case "dcc":
 					return game.i18n.localize("DCC.LanguagesCommon");
+				case "dsa5":
+					return "Garethi";
 				case "ose":
 					return "Common";
 				case "pf2e":
@@ -330,7 +331,6 @@ class PolyGlot {
 	}
 
 	renderChatMessage(message, html, data) {
-		// html and data are swapped on 0.3.x in relation to other render<Application> hooks
 		const lang = message.getFlag("polyglot", "language") || ""
 		if (!lang) return;
 		let metadata = html.find(".message-metadata")
@@ -422,7 +422,10 @@ class PolyGlot {
 			case "dcc":
 				this.loadLanguages("dcc");
 				break;
+			case "D35E":
 			case "dnd5e":
+			case "dnd5eJP":
+			case "kryx_rpg":
 				this.loadLanguages("forgottenrealms");
 				break;
 			case "demonlord":
@@ -446,9 +449,6 @@ class PolyGlot {
 				break;
 			case "sfrpg":
 				this.loadLanguages("starfinder");
-				break;
-			case "D35E":
-				this.loadLanguages("D35E");
 				break;
 			case "sw5e":
 				this.loadLanguages("sw5e");
@@ -561,7 +561,7 @@ class PolyGlot {
 			div.remove();
 			return dims;
 		}
-		 // allow OOC talking
+		// allow OOC talking
 		this.allowOOC = game.settings.get("polyglot","allowOOC");
 		this.comprehendLanguages = game.settings.get("polyglot","comprehendLanguages").trim().toLowerCase().replace(/ \'/g, "_");
 		this.truespeech = game.settings.get("polyglot","truespeech").trim().toLowerCase().replace(/ \'/g, "_");

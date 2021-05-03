@@ -1,3 +1,13 @@
+# v1.5.17
+- PF2E: Fixed custom languages being show as as "PF2E.Language" followed by a unintelligible string of characters.
+- Merged D&D 3.5e and D&D 5e's fonts into a single file.
+- Increased Sylvan (OldeEspruar) font size from 150% to 200% on all font files for better readability.
+
+# v1.5.16
+- Das Schwarze Auge: Added Garethi as the default language.
+- Das Schwarze Auge: Fixed Isdira not having a proper font.
+- Updated Spanish translation.
+
 # v1.5.15
 - Removed the Toggle Runes Text on Journals setting.
 - Fixed journal owners being able to write in languages they didn't know.
