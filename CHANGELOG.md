@@ -1,3 +1,8 @@
+# v1.5.18
+- Reordered settings.
+- Replace Languages setting now removes original languages from menus (like D&D 5e and PF2e).
+- PF2e: Custom Languages are added to the Languages menu..
+
 # v1.5.17
 - PF2E: Fixed custom languages being show as as "PF2E.Language" followed by a unintelligible string of characters.
 - Merged D&D 3.5e and D&D 5e's fonts into a single file.
