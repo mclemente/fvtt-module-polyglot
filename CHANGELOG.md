@@ -1,6 +1,10 @@
-# v1.5.18
+# v1.5.19
 - FoundryVTT 0.8.x compatibility.
-- Redone the settings again.
+
+# v1.5.18
+- Reordered settings.
+- Replace Languages setting now removes original languages from menus (like D&D 5e and PF2e).
+- PF2e: Custom Languages are added to the Languages menu..
 
 # v1.5.17
 - PF2E: Fixed custom languages being show as as "PF2E.Language" followed by a unintelligible string of characters.

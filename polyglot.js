@@ -25,23 +25,23 @@ class Polyglot {
 	}
 
 	static async getLanguages() {
-		if (game.settings.get("polyglot", "replaceLanguages")) return [];
+		const replaceLanguages = game.settings.get("polyglot","replaceLanguages");
 		const langs = {};
 		switch (game.system.id) {
 			case "ose":
-				return Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
+				return replaceLanguages ? [] : Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
 			case "dcc":
 				for (let item in CONFIG.DCC.languages) {
 					langs[item] = game.i18n.localize(CONFIG.DCC.languages[item]);
 				}
-				return langs;
+				return replaceLanguages ? {} : langs;
 			case "demonlord":
 				const demonlordPack = game.packs.get("demonlord.languages");
 				const demonlordItemList = await demonlordPack.getIndex();
 				for (let item of demonlordItemList) {
 					langs[item.name] = game.i18n.localize(item.name);
 				}
-				return langs;
+				return replaceLanguages ? {} : langs;
 			case "dsa5":
 				if (game.modules.get("dsa5-core")) {
 					const dsa5Pack = game.packs.get("dsa5-core.corespecialabilites");
@@ -63,10 +63,15 @@ class Polyglot {
 						}
 					}
 				}
-				return langs;
+				return replaceLanguages ? {} : langs;
 			case "pf2e":
-				for (let lang in CONFIG.PF2E.languages) {
-					langs[lang] = game.i18n.localize(CONFIG.PF2E.languages[lang]);
+				if (replaceLanguages) {
+					CONFIG.PF2E.languages = {};
+				}
+				else {
+					for (let lang in CONFIG.PF2E.languages) {
+						langs[lang] = game.i18n.localize(CONFIG.PF2E.languages[lang]);
+					}
 				}
 				return langs;
 			case "wfrp4e":
@@ -80,11 +85,19 @@ class Polyglot {
 						langs[key] = key;
 					}
 				}
-				return langs;
+				return replaceLanguages ? {} : langs;
 			case "tormenta20":
+				if (replaceLanguages) {
+					CONFIG.T20.idiomas = {};
+				}
 				return CONFIG.T20.idiomas;
 			default:
-				return CONFIG[game.system.id.toUpperCase()]?.languages ? CONFIG[game.system.id.toUpperCase()].languages : [];
+				if (CONFIG[game.system.id.toUpperCase()]?.languages) {
+					if (replaceLanguages)
+						CONFIG[game.system.id.toUpperCase()].languages = {};
+					return CONFIG[game.system.id.toUpperCase()].languages;
+				}
+				return [];
 		}
 	}
 	static get languages() {
@@ -493,7 +506,7 @@ class Polyglot {
 		addSetting("replaceLanguages", {
 			name: game.i18n.localize("POLYGLOT.ReplaceLanguagesTitle"),
 			hint: game.i18n.localize("POLYGLOT.ReplaceLanguagesHint"),
-			default: "",
+			default: false,
 			type: Boolean,
 			onChange: () => location.reload()
 		});
@@ -587,7 +600,10 @@ class Polyglot {
 			for (let lang of languages.split(",")) {
 				lang = lang.trim();
 				const key = lang.toLowerCase().replace(/ \'/g, "_");
-				Polyglot.languages[key] = lang;
+				if (game.system.id === "pf2e") {
+					CONFIG.PF2E.languages[key] = lang;
+				}
+				PolyGlot.languages[key] = lang;
 			}
 		}
 		this.updateUserLanguages(ui.chat.element);
