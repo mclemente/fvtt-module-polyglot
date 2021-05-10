@@ -603,7 +603,7 @@ class Polyglot {
 				if (game.system.id === "pf2e") {
 					CONFIG.PF2E.languages[key] = lang;
 				}
-				PolyGlot.languages[key] = lang;
+				Polyglot.languages[key] = lang;
 			}
 		}
 		this.updateUserLanguages(ui.chat.element);
