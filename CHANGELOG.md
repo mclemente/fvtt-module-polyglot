@@ -1,4 +1,4 @@
-# v1.5.19
+# v1.6.0
 - FoundryVTT 0.8.x compatibility.
 
 # v1.5.18
