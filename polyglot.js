@@ -9,18 +9,18 @@ function addSetting (key, data) {
 	const commonData = {
 		scope: 'world',
 		config: true
-	}
-	game.settings.register('polyglot', key, Object.assign(commonData, data))
+	};
+	game.settings.register('polyglot', key, Object.assign(commonData, data));
 }
 
-class PolyGlot {
+class Polyglot {
 
 	constructor() {
 		this.known_languages = new Set();
 		this.literate_languages = new Set();
 		this.refresh_timeout = null;
-		this.alphabets = {common: '120% Dethek'}
-		this.tongues = {_default: 'common'}
+		this.alphabets = {common: '120% Dethek'};
+		this.tongues = {_default: 'common'};
 		this.allowOOC = false;
 	}
 
@@ -118,7 +118,6 @@ class PolyGlot {
 				case "aria":
 					return game.i18n.localize("ARIA.languages.Common");
 				case "dnd5e":
-				case "dnd5eJP":
 					return game.i18n.localize("DND5E.LanguagesCommon");
 				case "dcc":
 					return game.i18n.localize("DCC.LanguagesCommon");
@@ -135,41 +134,41 @@ class PolyGlot {
 				case "wfrp4e":
 					return "Reikspiel";
 			}
-			const keys = Object.keys(this.languages)
+			const keys = Object.keys(this.languages);
 			if (keys.includes("common") || keys.includes("Common")) return "Common";
 		}
 		return this.languages[0] || "";
 	}
 
 	async renderChatLog(chatlog, html, data) {
-		await this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"))
-		const langString = "<div id='polyglot' class='polyglot-lang-select flexrow'><label>" + game.i18n.localize("POLYGLOT.LanguageLabel") + ": </label><select name='polyglot-language'></select></div>"
+		await this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
+		const langString = "<div id='polyglot' class='polyglot-lang-select flexrow'><label>" + game.i18n.localize("POLYGLOT.LanguageLabel") + ": </label><select name='polyglot-language'></select></div>";
 		const lang_html = $(langString);
 		html.find("#chat-controls").after(lang_html);
 		const select = html.find(".polyglot-lang-select select");
 		select.change(e => {
 			this.lastSelection = select.val();
-		})
+		});
 		this.updateUserLanguages(html);
 	}
 
 	updateUser(user, data) {
 		if (user.id == game.user.id && data.character !== undefined) {
-			this.updateUserLanguages(ui.chat.element)
-			this.updateChatMessages()
+			this.updateUserLanguages(ui.chat.element);
+			this.updateChatMessages();
 		}
 	}
 
 	controlToken() {
-		this.updateUserLanguages(ui.chat.element)
-		this.updateChatMessages()
+		this.updateUserLanguages(ui.chat.element);
+		this.updateChatMessages();
 	}
 
 	updateChatMessages() {
 		// Delay refresh because switching tokens could cause a controlToken(false) then controlToken(true) very fast
 		if (this.refresh_timeout)
-			clearTimeout(this.refresh_timeout)
-		this.refresh_timeout = setTimeout(this.updateChatMessagesDelayed.bind(this), 500)
+			clearTimeout(this.refresh_timeout);
+		this.refresh_timeout = setTimeout(this.updateChatMessagesDelayed.bind(this), 500);
 	}
 
 	_isMessageTypeOOC(type){
@@ -179,22 +178,22 @@ class PolyGlot {
 	updateChatMessagesDelayed() {
 		this.refresh_timeout = null;
 		// Get the last 100 messages
-		const messages = ui.chat.element.find('.message').slice(-100).toArray().map(m => game.messages.get(m.dataset.messageId))
+		const messages = ui.chat.element.find('.message').slice(-100).toArray().map(m => game.messages.get(m.dataset.messageId));
 		// Loop in reverse so most recent messages get refreshed first.
 		for (let i = messages.length - 1; i >= 0; i--) {
-			let message = messages[i]
+			let message = messages[i];
 			if (message && (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC || this._isMessageTypeOOC(message.data.type))) {
-				let lang = message.getFlag("polyglot", "language") || ""
+				let lang = message.getFlag("polyglot", "language") || "";
 				let unknown = lang != this.truespeech && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
 				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
 					// Update globe color
-					const globe = ui.chat.element.find(`.message[data-message-id="${message.id}"] .message-metadata .polyglot-message-language i`)
+					const globe = ui.chat.element.find(`.message[data-message-id="${message.id}"] .message-metadata .polyglot-message-language i`);
 					const color = unknown ? "red" : "green";
 					globe.css({color});
 					unknown = false;
 				}
 				if (unknown != message.polyglot_unknown)
-					ui.chat.updateMessage(message)
+					ui.chat.updateMessage(message);
 			}
 		}
 	}
@@ -219,7 +218,7 @@ class PolyGlot {
 						for (let lang of actor.data.items)
 						{
 							if (lang.data.language)
-								this.known_languages.add(lang.name.toLowerCase())
+								this.known_languages.add(lang.name.toLowerCase());
 						}
 						break;
 					case "CoC7":
@@ -310,21 +309,21 @@ class PolyGlot {
 		}
 		if (this.known_languages.size == 0) {
 			if (game.user.isGM)
-				this.known_languages = new Set(Object.keys(PolyGlot.languages))
+				this.known_languages = new Set(Object.keys(Polyglot.languages))
 			else
-				this.known_languages.add(PolyGlot.defaultLanguage);
+				this.known_languages.add(Polyglot.defaultLanguage);
 		}
 		let options = ""
 		for (let lang of this.known_languages) {
 			if (lang != this.truespeech && lang === this.comprehendLanguages) continue;
-			let label = PolyGlot.languages[lang] || lang
+			let label = Polyglot.languages[lang] || lang
 			options += `<option value="${lang}">${label}</option>`
 		}
 		const select = html.find(".polyglot-lang-select select");
 		const prevOption = select.val();
 		select.html($(options));
 		
-		let defaultLanguage = PolyGlot.defaultLanguage.toLowerCase();
+		let defaultLanguage = Polyglot.defaultLanguage.toLowerCase();
 		let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
 		// known_languages is a Set, so it's weird to access its values
 		if (!this.known_languages.has(selectedLanguage))
@@ -357,10 +356,10 @@ class PolyGlot {
 	}
 
 	renderChatMessage(message, html, data) {
-		const lang = message.getFlag("polyglot", "language") || ""
+		const lang = message.getFlag("polyglot", "language") || "";
 		if (!lang) return;
 		let metadata = html.find(".message-metadata")
-		let language = PolyGlot.languages[lang] || lang
+		let language = Polyglot.languages[lang] || lang
 		const known = this.known_languages.has(lang); //Actor knows the language rather than being affected by Comprehend Languages or Tongues
 		const runifyGM = game.settings.get("polyglot", "runifyGM");
 		const displayTranslated = game.settings.get('polyglot', 'display-translated');
@@ -371,7 +370,7 @@ class PolyGlot {
 			message.polyglot_unknown = lang != this.truespeech && !known && !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages);
 		
 		let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
-		if(displayTranslated && (language != PolyGlot.defaultLanguage || message.polyglot_unknown)) {
+		if(displayTranslated && (language != Polyglot.defaultLanguage || message.polyglot_unknown)) {
 			let content = html.find(".message-content");
 			let translation = message.data.content;
 			let original = $('<div>').addClass('polyglot-original-text').css({font:this._getFontStyle(lang)}).html(new_content);
@@ -415,11 +414,12 @@ class PolyGlot {
 		ui.chat.updateMessage(message)
 	}
 
-	preCreateChatMessage(data, options, userId) {
+	preCreateChatMessage(document, data, options, userId) {
 		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this.allowOOC && this._isMessageTypeOOC(data.type) && game.user.isGM)) {
 			let lang = ui.chat.element.find("select[name=polyglot-language]").val()
 			if (lang != "")
 				mergeObject(data, { "flags.polyglot.language": lang });
+				// document.setFlag("polyglot", "language", lang);
 		}
 	}
 
@@ -450,7 +450,6 @@ class PolyGlot {
 				break;
 			case "D35E":
 			case "dnd5e":
-			case "dnd5eJP":
 			case "kryx_rpg":
 				this.loadLanguages("forgottenrealms");
 				break;
@@ -589,14 +588,14 @@ class PolyGlot {
 		// Register fonts so they are available to other elements (such as Drawings)
 		
 		// First, remove all our fonts, then add them again if needed.
-		CONFIG.fontFamilies = CONFIG.fontFamilies.filter(f => !PolyGlot.FONTS.includes(f));
+		CONFIG.fontFamilies = CONFIG.fontFamilies.filter(f => !Polyglot.FONTS.includes(f));
 		if (game.settings.get("polyglot", "exportFonts")) {
-			CONFIG.fontFamilies.push(...PolyGlot.FONTS);
+			CONFIG.fontFamilies.push(...Polyglot.FONTS);
 		}
 	}
 
 	async setCustomLanguages(languages) {
-		PolyGlot.languages = await PolyGlot.getLanguages();
+		Polyglot.languages = await Polyglot.getLanguages();
 		if (languages != "") {
 			for (let lang of languages.split(",")) {
 				lang = lang.trim();
@@ -604,7 +603,7 @@ class PolyGlot {
 				if (game.system.id === "pf2e") {
 					CONFIG.PF2E.languages[key] = lang;
 				}
-				PolyGlot.languages[key] = lang;
+				Polyglot.languages[key] = lang;
 			}
 		}
 		this.updateUserLanguages(ui.chat.element);
@@ -614,14 +613,14 @@ class PolyGlot {
 		if (sheet._polyglotEditor) return;
 		const methodName = sheet.activateEditor ? "activateEditor" : "_createEditor"
 		sheet._polyglot_original_activateEditor = sheet[methodName];
-		let langs = PolyGlot.languages;
+		let langs = Polyglot.languages;
 		if (!game.user.isGM) {
 			langs = {};
 			for (let lang of this.known_languages) {
-				langs[lang] = PolyGlot.languages[lang];
+				langs[lang] = Polyglot.languages[lang];
 			}
 			for (let lang of this.literate_languages) {
-				langs[lang] = PolyGlot.languages[lang];
+				langs[lang] = Polyglot.languages[lang];
 			}
 		}
 		const languages = Object.entries(langs).map(([lang, name]) => {
@@ -702,7 +701,7 @@ class PolyGlot {
 
 	renderJournalSheet(journalSheet, html) {
 		this._addPolyglotEditor(journalSheet);
-		if (journalSheet.entity.owner || game.user.isGM) {
+		if (journalSheet.document.isOwner || game.user.isGM) {
 			let runes = false;
 			const texts = [];
 			const styles = [];
@@ -805,7 +804,7 @@ class PolyGlot {
 	}
 }
 
-PolyGlot.FONTS = [
+Polyglot.FONTS = [
 	"ArCiela",
 	"Barazhad", 
 	"Celestial",
@@ -843,18 +842,19 @@ PolyGlot.FONTS = [
 	"Valmaric"
 ];
 
-let PolyGlotSingleton = new PolyGlot()
+let PolyglotSingleton = new Polyglot()
 
-Hooks.on('renderChatLog', PolyGlotSingleton.renderChatLog.bind(PolyGlotSingleton))
-Hooks.on('updateUser', PolyGlotSingleton.updateUser.bind(PolyGlotSingleton))
-Hooks.on('controlToken', PolyGlotSingleton.controlToken.bind(PolyGlotSingleton))
-Hooks.on('preCreateChatMessage', PolyGlotSingleton.preCreateChatMessage.bind(PolyGlotSingleton))
-Hooks.on('renderChatMessage', PolyGlotSingleton.renderChatMessage.bind(PolyGlotSingleton))
-Hooks.on('renderJournalSheet', PolyGlotSingleton.renderJournalSheet.bind(PolyGlotSingleton))
-Hooks.on('setup', PolyGlotSingleton.setup.bind(PolyGlotSingleton))
-Hooks.on('ready', PolyGlotSingleton.ready.bind(PolyGlotSingleton))
-Hooks.on("chatBubble", PolyGlotSingleton.chatBubble.bind(PolyGlotSingleton)) //token, html, message, {emote}
-Hooks.on("vinoPrepareChatDisplayData", PolyGlotSingleton.vinoChatRender.bind(PolyGlotSingleton))
+Hooks.on('renderChatLog', PolyglotSingleton.renderChatLog.bind(PolyglotSingleton))
+Hooks.on('updateUser', PolyglotSingleton.updateUser.bind(PolyglotSingleton))
+Hooks.on('controlToken', PolyglotSingleton.controlToken.bind(PolyglotSingleton))
+Hooks.on('controlToken5e', PolyglotSingleton.controlToken.bind(PolyglotSingleton))
+Hooks.on('preCreateChatMessage', PolyglotSingleton.preCreateChatMessage.bind(PolyglotSingleton))
+Hooks.on('renderChatMessage', PolyglotSingleton.renderChatMessage.bind(PolyglotSingleton))
+Hooks.on('renderJournalSheet', PolyglotSingleton.renderJournalSheet.bind(PolyglotSingleton))
+Hooks.on('setup', PolyglotSingleton.setup.bind(PolyglotSingleton))
+Hooks.on('ready', PolyglotSingleton.ready.bind(PolyglotSingleton))
+Hooks.on("chatBubble", PolyglotSingleton.chatBubble.bind(PolyglotSingleton)) //token, html, message, {emote}
+Hooks.on("vinoPrepareChatDisplayData", PolyglotSingleton.vinoChatRender.bind(PolyglotSingleton))
 Hooks.on("renderSettingsConfig", (app, html, data) => {
     $('<div>').addClass('form-group polyglot-group-header').html(game.i18n.localize("POLYGLOT.LanguageSettings")).insertBefore($('[name="polyglot.replaceLanguages"]').parents('div.form-group:first'));
     $('<div>').addClass('form-group polyglot-group-header').html(game.i18n.localize("POLYGLOT.ChatSettings")).insertBefore($('[name="polyglot.display-translated"]').parents('div.form-group:first'));

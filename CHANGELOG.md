@@ -1,3 +1,6 @@
+# v1.6.0
+- FoundryVTT 0.8.x compatibility.
+
 # v1.5.18
 - Reordered settings.
 - Replace Languages setting now removes original languages from menus (like D&D 5e and PF2e).
