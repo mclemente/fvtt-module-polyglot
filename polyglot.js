@@ -432,29 +432,18 @@ class Polyglot {
 	async loadLanguages(setting) {
 		const response = await fetch(`modules/polyglot/settings/${setting}.json`);
 		if (response.ok) {
-			const replaceLanguages = game.settings.get("polyglot","replaceLanguages");
 			const settingInfo = await response.json();
 			this.alphabets = settingInfo.alphabets;
-			this.tongues = settingInfo.tongues;
 			let langSettings = game.settings.get("polyglot", "Languages");
-			if (langSettings == {} && !replaceLanguages) {
-				langSettings = this.tongues;
-				for (let lang in langSettings) {
-					langSettings[lang]["default"] = true;
-				}
-				game.settings.set("polyglot", "Languages", this.tongues);
-			}
-			// In case Replace Languages setting was disabled OR a new language was added to the json file
-			else if (!replaceLanguages) {
-				for (let tongue in this.tongues) {
+			this.tongues = langSettings ?? settingInfo.tongues;
+			if (!game.settings.get("polyglot","replaceLanguages")) {
+				for (let tongue in settingInfo.tongues) {
 					if (!(tongue in langSettings)) {
-						langSettings[tongue] = this.tongues[tongue];
+						langSettings[tongue] = settingInfo.tongues[tongue];
 					}
 				}
 				this.tongues = langSettings;
-				game.settings.set("polyglot", "Languages", this.tongues);
 			}
-			game.settings.set("polyglot", "Alphabets", this.alphabets);
 			console.log(`Polyglot | Loaded ${setting}.json`);
 		}
 		else {
@@ -464,7 +453,47 @@ class Polyglot {
 	}
 
 	setup() {
-		
+		switch (game.system.id) {
+			case "aria":
+				this.loadLanguages("aria");
+				break;
+			case "dcc":
+				this.loadLanguages("dcc");
+				break;
+			case "D35E":
+			case "dnd5e":
+			case "kryx_rpg":
+				this.loadLanguages("forgottenrealms");
+				break;
+			case "demonlord":
+				this.loadLanguages("demonlord");
+				break;
+			case "dsa5":
+				this.loadLanguages("dsa5");
+				break;
+			case "ose":
+				this.loadLanguages("ose");
+				break;
+			case "pf1":
+			case "pf2e":
+				this.loadLanguages("golarion");
+				break;
+			case "wfrp4e":
+				this.loadLanguages("wfrp");
+				break;
+			case "tormenta20":
+				this.loadLanguages("tormenta20");
+				break;
+			case "sfrpg":
+				this.loadLanguages("starfinder");
+				break;
+			case "sw5e":
+				this.loadLanguages("sw5e");
+				break;
+			default:
+				this.loadLanguages("generic");
+				break;
+		}
 		game.settings.registerMenu('polyglot', 'LanguageSettings', {
 			name: 'Language Settings',
 			label: 'Language Settings',
@@ -473,16 +502,16 @@ class Polyglot {
 			restricted: true
 		});
 		game.settings.register('polyglot', "Alphabets", {
-			name: game.i18n.localize("POLYGLOT.AlphabetsTitle"), //Not actually set
-			hint: game.i18n.localize("POLYGLOT.AlphabetsHint"), //Not actually set
+			name: game.i18n.localize("POLYGLOT.AlphabetsTitle"),
+			hint: game.i18n.localize("POLYGLOT.AlphabetsHint"),
 			scope: 'world',
 			config: false,
 			default: {},
 			type: Object
 		});
 		game.settings.register('polyglot', "Languages", {
-			name: game.i18n.localize("POLYGLOT.LanguagesTitle"), //Not actually set
-			hint: game.i18n.localize("POLYGLOT.LanguagesHint"), //Not actually set
+			name: game.i18n.localize("POLYGLOT.LanguagesTitle"),
+			hint: game.i18n.localize("POLYGLOT.LanguagesHint"),
 			scope: 'world',
 			config: false,
 			default: {},
@@ -589,47 +618,8 @@ class Polyglot {
 	}
 	
 	ready() {
-		switch (game.system.id) {
-			case "aria":
-				this.loadLanguages("aria");
-				break;
-			case "dcc":
-				this.loadLanguages("dcc");
-				break;
-			case "D35E":
-			case "dnd5e":
-			case "kryx_rpg":
-				this.loadLanguages("forgottenrealms");
-				break;
-			case "demonlord":
-				this.loadLanguages("demonlord");
-				break;
-			case "dsa5":
-				this.loadLanguages("dsa5");
-				break;
-			case "ose":
-				this.loadLanguages("ose");
-				break;
-			case "pf1":
-			case "pf2e":
-				this.loadLanguages("golarion");
-				break;
-			case "wfrp4e":
-				this.loadLanguages("wfrp");
-				break;
-			case "tormenta20":
-				this.loadLanguages("tormenta20");
-				break;
-			case "sfrpg":
-				this.loadLanguages("starfinder");
-				break;
-			case "sw5e":
-				this.loadLanguages("sw5e");
-				break;
-			default:
-				this.loadLanguages("generic");
-				break;
-		}
+		game.settings.set("polyglot", "Languages", this.tongues);
+		game.settings.set("polyglot", "Alphabets", this.alphabets);
 		this.updateConfigFonts();
 		this.setCustomLanguages(game.settings.get("polyglot","customLanguages"));
 	}

@@ -38,13 +38,13 @@ export class PolyglotLanguageSettings extends FormApplication {
 	}
 	
 	activateListeners(html) {
-			super.activateListeners(html);
-			html.find('button').on('click', async (event) => {
-					if (event.currentTarget?.dataset?.action === 'reset') {
-							await game.settings.set("polyglot", "Languages", {});
-							window.location.reload();
-					}
-			});
+		super.activateListeners(html);
+		html.find('button').on('click', async (event) => {
+			if (event.currentTarget?.dataset?.action === 'reset') {
+				await game.settings.set("polyglot", "Languages", {});
+				window.location.reload();
+			}
+		});
 	}
 
 	/**
@@ -54,11 +54,12 @@ export class PolyglotLanguageSettings extends FormApplication {
 	 */
 	async _updateObject(ev, formData) {
 		let langSettings = game.settings.get("polyglot", "Languages");
-		const iterableSettings = Object.values(formData);
+		const iterableSettings = Object.values(formData)[0];
 		let i = 0;
 		for (let lang in langSettings) {
 			langSettings[lang] = iterableSettings[i];
 			i++;
 		}
+		game.settings.set("polyglot", "Languages", langSettings);
 	}
 }

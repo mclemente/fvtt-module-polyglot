@@ -1,9 +1,9 @@
 {
   "POLYGLOT.LanguageSettings": "Language Settings",
-  "POLYGLOT.Languages": "Languages",
-  "POLYGLOT.Alphabet": "Alphabet",
-  "POLYGLOT.LatinAlphabet": "Latin Alphabet",
-  "POLYGLOT.Fonts": "Fonts",
+  "POLYGLOT.LanguagesTitle": "Languages",
+  "POLYGLOT.LanguagesHint": "Changes the alphabet used for the languages. Requires reload, but won't reload on Save. Reseting to defaults will reload.",
+  "POLYGLOT.AlphabetsTitle": "Fonts",
+  "POLYGLOT.AlphabetsHint": "",
   "POLYGLOT.CustomLanguagesTitle": "Custom Languages",
   "POLYGLOT.CustomLanguagesHint": "Define a list of custom, comma separated, languages to add to the system.",
   "POLYGLOT.ComprehendLanguagesTitle": "Comprehend Languages Spell",
@@ -26,9 +26,12 @@
   "POLYGLOT.HideTranslationHint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Perfect for when you don't want to show players which language you are speaking. Requires reload.",
   "POLYGLOT.AllowOOCTitle": "Scramble on OOC chat messages",
   "POLYGLOT.AllowOOCHint": "Allows the GM to scramble text when sending Out Of Character messages",
+  
   "POLYGLOT.Translation": "Translation",
   "POLYGLOT.TranslatedFrom": "Translated from ",
   "POLYGLOT.LanguageLabel": "Language",
+  "POLYGLOT.AlphabetLabel": "Alphabet",
+  "POLYGLOT.LatinAlphabet": "Latin Alphabet",
   "POLYGLOT.ToggleRunes": "Toggle Runes",
   "POLYGLOT.Runes": "Runes",
   
