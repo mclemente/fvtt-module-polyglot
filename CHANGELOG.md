@@ -1,3 +1,6 @@
+# v1.6.1
+- Added Font selection for languages (default and custom). Known issue: To remove default languages from the list Replace Languages is enabled, you'll have to Reset Defaults (and it will remove any alphabet settings you already had).
+
 # v1.6.0
 - FoundryVTT 0.8.x compatibility.
 

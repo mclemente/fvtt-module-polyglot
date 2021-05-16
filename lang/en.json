@@ -1,6 +1,9 @@
 {
   "POLYGLOT.LanguageSettings": "Language Settings",
-  "POLYGLOT.ChatSettings": "Chat Settings",
+  "POLYGLOT.Languages": "Languages",
+  "POLYGLOT.Alphabet": "Alphabet",
+  "POLYGLOT.LatinAlphabet": "Latin Alphabet",
+  "POLYGLOT.Fonts": "Fonts",
   "POLYGLOT.CustomLanguagesTitle": "Custom Languages",
   "POLYGLOT.CustomLanguagesHint": "Define a list of custom, comma separated, languages to add to the system.",
   "POLYGLOT.ComprehendLanguagesTitle": "Comprehend Languages Spell",

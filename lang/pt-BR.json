@@ -1,6 +1,8 @@
 {
   "POLYGLOT.LanguageSettings": "Configurações de Idioma",
-  "POLYGLOT.ChatSettings": "Configurações de Chat",
+  "POLYGLOT.Languages": "Idiomas",
+  "POLYGLOT.Alphabet": "Alfabeto",
+  "POLYGLOT.LatinAlphabet": "Alfabeto Latino",
   "POLYGLOT.CustomLanguagesTitle": "Idiomas Customizados",
   "POLYGLOT.CustomLanguagesHint": "Defina uma lista de idiomas customizados para adicionar ao sistema, separados por vírgula.",
   "POLYGLOT.ComprehendLanguagesTitle": "Magia: Compreender Idiomas",

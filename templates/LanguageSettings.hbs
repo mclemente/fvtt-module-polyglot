@@ -1,0 +1,45 @@
+<form autocomplete="off" style="padding: 0 2.5%" onsubmit="event.preventDefault()" style="display: flex;flex-direction: column;">
+	<div>
+		<ul style="list-style: none;">
+			<li style="display: flex;">
+				<div style="flex: 1;">{{localize "POLYGLOT.Languages"}}</div>
+				<div style="flex: 1;">{{localize "POLYGLOT.Alphabet"}}</div>
+			</li>
+			<hr>
+			{{#each languages.value as |key val|}}
+			<li style="display: flex;">
+				<div style="flex: 1; text-transform: capitalize;">{{#if (eq val "_default")}}default{{else}}{{val}}{{/if}}</div>
+				<select class="selectatr" name="language.alphabet" value={{key}} data-dtype="String" style="flex: 1; text-transform: capitalize;">
+				{{#select key}}
+					{{#each ../alphabets.value as |font alphabet|}}
+						<option value="{{alphabet}}" style="text-transform: capitalize;">{{alphabet}}</option>
+					{{/each}}
+				{{/select}}
+				</select>
+			</li>
+			{{/each}}
+		</ul>
+	</div>
+	<div>
+		<label>{{localize "POLYGLOT.Fonts"}}</label>
+		<ul style="list-style: none;">
+			<li style="display: flex;">
+				<div style="flex: 1;">{{localize "POLYGLOT.LatinAlphabet"}}</div><div style="flex: 2;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz</div>
+			</li>
+			<hr>
+			{{#each alphabets.value as |font alphabet|}}
+			<li style="display: flex;">
+				<div style="flex:1; text-transform: capitalize;">{{alphabet}}:</div><div style="flex: 2; font:{{font}}">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz</div>
+			</li>
+			{{/each}}
+		</ul>
+	</div>
+	<footer class="sheet-footer flexrow" style="margin-top: auto">
+		<button type="submit" name="submit">
+			<i class="far fa-save"></i> {{localize 'SETTINGS.Save'}}
+		</button>
+		<button type="button" data-action="reset">
+			<i class="fas fa-undo"></i> {{localize 'SETTINGS.Reset'}}
+		</button>
+	</footer>
+</form>

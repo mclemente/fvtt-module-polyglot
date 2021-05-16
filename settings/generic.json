@@ -1,0 +1,43 @@
+{
+    "alphabets": {
+        "arciela": "200% ArCiela",
+        "barazhad": "200% Barazhad",
+        "celestial": "200% Celestial",
+        "darkeldar": "200% DarkEldar",
+        "dethek": "200% Dethek",
+        "elderfutharkfs": "200% ElderFutharkFS",
+        "eltharin": "200% Eltharin",
+        "espruar": "150% Espruar",
+        "fingeralphabet": "150% FingerAlphabet",
+        "floki": "200% Floki",
+        "highdrowic": "150% HighDrowic",
+        "highschoolrunes": "200% HighschoolRunes",
+        "infernal": "230% Infernal",
+        "iokharic": "170% Iokharic",
+        "jungleslang": "180% JungleSlang",
+        "kargi": "150% Kargi",
+        "maraseye": "200% MarasEye",
+        "meroiticdemotic": "200% MeroiticDemotic",
+        "miroslavnormal": "200% MiroslavNormal",
+        "oldeespruar": "200% OldeEspruar",
+        "oldethorass": "200% OldeThorass",
+        "oldtongue": "150% OldTongue",
+        "ophidian": "250% Ophidian",
+        "oriental": "100% Oriental",
+        "orkglyphs": "200% OrkGlyphs",
+        "pulsian": "270% Pulsian",
+        "qijomi": "200% Qijomi",
+        "reanaarian": "200% Reanaarian",
+        "saurian": "200% Saurian",
+        "semphari": "200% Semphari",
+        "skaven": "200% Skaven",
+        "tengwar": "200% Tengwar",
+        "thassilonian": "200% Thassilonian",
+        "thorass": "200% Thorass",
+        "tuzluca": "200% Tuzluca",
+        "valmaric": "200% Valmaric"
+    },
+    "tongues": {
+      "_default": "thorass"
+    }
+}

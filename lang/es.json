@@ -3,7 +3,9 @@
   "I18N.MAINTAINERS": "@Viriato139ac#0342, Juanfrank",
 
   "POLYGLOT.LanguageSettings": "Ajustes de idiomas",
-  "POLYGLOT.ChatSettings": "Ajustes del chat",
+  "POLYGLOT.Languages": "Idiomas",
+  "POLYGLOT.Alphabet": "Alfabeto",
+  "POLYGLOT.LatinAlphabet": "Alfabeto Latino",
   "POLYGLOT.CustomLanguagesTitle": "Idiomas personalizados",
   "POLYGLOT.CustomLanguagesHint": "Define una lista de idiomas personalizados, separados mediante coma, para que sean añadidos al sistema",
   "POLYGLOT.ComprehendLanguagesTitle": "Hechizo Comprender Idiomas",
