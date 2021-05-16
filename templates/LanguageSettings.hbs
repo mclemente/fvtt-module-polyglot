@@ -27,15 +27,15 @@
 		<ul style="list-style: none;">
 			<li style="display: flex;">
 				<div style="flex: 1;">{{localize "POLYGLOT.AlphabetLabel"}}</div>
-				<div style="flex: 1;">{{localize "POLYGLOT.Fonts"}}</div>
-			</li>
-			<li style="display: flex;">
-				<div style="flex: 1;">{{localize "POLYGLOT.LatinAlphabet"}}</div><div style="flex: 2;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz</div>
+				<div style="flex: 2;">{{localize "POLYGLOT.Fonts"}}</div>
 			</li>
 			<hr>
+			<li style="display: flex;">
+				<div style="flex: 1;">{{localize "POLYGLOT.LatinAlphabet"}}</div><div style="flex: 2;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+			</li>
 			{{#each alphabets.value as |font alphabet|}}
 			<li style="display: flex;">
-				<div style="flex:1; text-transform: capitalize;">{{alphabet}}:</div><div style="flex: 2; font:{{font}}">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz</div>
+				<div style="flex:1; text-transform: capitalize;">{{alphabet}}:</div><div style="flex: 2; font:{{font}}">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
 			</li>
 			{{/each}}
 		</ul>
