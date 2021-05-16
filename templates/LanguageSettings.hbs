@@ -5,7 +5,7 @@
 		<ul style="list-style: none;">
 			<li style="display: flex;">
 				<div style="flex: 1;">{{localize "POLYGLOT.LanguageLabel"}}</div>
-				<div style="flex: 1;">{{localize "POLYGLOT.Alphabet"}}</div>
+				<div style="flex: 1;">{{localize "POLYGLOT.AlphabetLabel"}}</div>
 			</li>
 			<hr>
 			{{#each languages.value as |key val|}}
@@ -25,6 +25,10 @@
 	<div>
 		<label>{{localize "POLYGLOT.Fonts"}}</label>
 		<ul style="list-style: none;">
+			<li style="display: flex;">
+				<div style="flex: 1;">{{localize "POLYGLOT.AlphabetLabel"}}</div>
+				<div style="flex: 1;">{{localize "POLYGLOT.Fonts"}}</div>
+			</li>
 			<li style="display: flex;">
 				<div style="flex: 1;">{{localize "POLYGLOT.LatinAlphabet"}}</div><div style="flex: 2;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz</div>
 			</li>
