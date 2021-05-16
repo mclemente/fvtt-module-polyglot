@@ -435,7 +435,7 @@ class Polyglot {
 			const settingInfo = await response.json();
 			this.alphabets = settingInfo.alphabets;
 			let langSettings = game.settings.get("polyglot", "Languages");
-			this.tongues = langSettings ?? settingInfo.tongues;
+			this.tongues = Object.keys(langSettings).length ? langSettings : settingInfo.tongues;
 			if (!game.settings.get("polyglot","replaceLanguages")) {
 				for (let tongue in settingInfo.tongues) {
 					if (!(tongue in langSettings)) {
