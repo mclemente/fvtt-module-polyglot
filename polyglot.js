@@ -455,24 +455,16 @@ class Polyglot {
 	setup() {
 		switch (game.system.id) {
 			case "aria":
-				this.loadLanguages("aria");
-				break;
 			case "dcc":
-				this.loadLanguages("dcc");
-				break;
 			case "D35E":
 			case "dnd5e":
 			case "kryx_rpg":
-				this.loadLanguages("forgottenrealms");
-				break;
 			case "demonlord":
-				this.loadLanguages("demonlord");
-				break;
 			case "dsa5":
-				this.loadLanguages("dsa5");
-				break;
 			case "ose":
-				this.loadLanguages("ose");
+			case "sw5e":
+			case "tormenta20":
+				this.loadLanguages(game.system.id);
 				break;
 			case "pf1":
 			case "pf2e":
@@ -481,14 +473,8 @@ class Polyglot {
 			case "wfrp4e":
 				this.loadLanguages("wfrp");
 				break;
-			case "tormenta20":
-				this.loadLanguages("tormenta20");
-				break;
 			case "sfrpg":
 				this.loadLanguages("starfinder");
-				break;
-			case "sw5e":
-				this.loadLanguages("sw5e");
 				break;
 			default:
 				this.loadLanguages("generic");
