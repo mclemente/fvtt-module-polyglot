@@ -23,7 +23,6 @@ class Polyglot {
 		this.refresh_timeout = null;
 		this.alphabets = {common: '120% Dethek'};
 		this.tongues = {_default: 'common'};
-		this.allowOOC = false;
 	}
 
 	static async getLanguages() {
@@ -417,11 +416,22 @@ class Polyglot {
 	}
 
 	preCreateChatMessage(document, data, options, userId) {
-		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this.allowOOC && this._isMessageTypeOOC(data.type) && game.user.isGM)) {
+		let allowOOC = false;
+		switch (game.settings.get("polyglot","allowOOC")) {
+			case "a":
+				allowOOC = true;
+				break;
+			case "b":
+				allowOOC = game.user.isGM;
+				break;
+			case "c":
+				allowOOC = [CONST.USER_ROLES.TRUSTED, CONST.USER_ROLES.PLAYER].includes(game.user.role);
+				break;
+		}
+		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (allowOOC && this._isMessageTypeOOC(data.type))) {
 			let lang = ui.chat.element.find("select[name=polyglot-language]").val()
 			if (lang != "")
 				mergeObject(data, { "flags.polyglot.language": lang });
-				// document.setFlag("polyglot", "language", lang);
 		}
 	}
 
@@ -573,9 +583,14 @@ class Polyglot {
 		addSetting("allowOOC", {
 			name: game.i18n.localize("POLYGLOT.AllowOOCTitle"),
 			hint: game.i18n.localize("POLYGLOT.AllowOOCHint"),
-			default: false,
-			type: Boolean,
-			onChange: (value) => this.allowOOC = value
+			choices: {
+				"a" : game.i18n.localize("POLYGLOT.AllowOOCOptions.a"),
+				"b" : game.i18n.localize("POLYGLOT.AllowOOCOptions.b"),
+				"c" : game.i18n.localize("POLYGLOT.AllowOOCOptions.c"),
+				"d" : game.i18n.localize("POLYGLOT.AllowOOCOptions.d")
+			},
+			default: "b",
+			type: String
 		});
 		addSetting("runifyGM", {
 			name: game.i18n.localize("POLYGLOT.ScrambleGMTitle"),
@@ -597,8 +612,6 @@ class Polyglot {
 			div.remove();
 			return dims;
 		}
-		// allow OOC talking
-		this.allowOOC = game.settings.get("polyglot","allowOOC");
 		this.comprehendLanguages = game.settings.get("polyglot","comprehendLanguages").trim().toLowerCase().replace(/ \'/g, "_");
 		this.truespeech = game.settings.get("polyglot","truespeech").trim().toLowerCase().replace(/ \'/g, "_");
 	}
@@ -791,7 +804,7 @@ class Polyglot {
 	}
 	
 	chatBubble (token, html, messageContent, {emote}) {
-		const message = game.messages.entities.slice(-10).reverse().find(m => m.data.content === messageContent);
+		const message = game.messages.contents.slice(-10).reverse().find(m => m.data.content === messageContent);
 		this._bubble = { font: '', message: '' };
 		if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
 			let lang = message.getFlag("polyglot", "language") || ""
