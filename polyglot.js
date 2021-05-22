@@ -143,9 +143,7 @@ class Polyglot {
 
 	async renderChatLog(chatlog, html, data) {
 		await this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
-		const langString = "<div id='polyglot' class='polyglot-lang-select flexrow'><label>" + game.i18n.localize("POLYGLOT.LanguageLabel") + ": </label><select name='polyglot-language'></select></div>";
-		const lang_html = $(langString);
-		html.find("#chat-controls").after(lang_html);
+		html.find("#chat-controls").after(`<div id='polyglot' class='polyglot-lang-select flexrow'><label>${game.i18n.localize("POLYGLOT.LanguageLabel")}:</label><select name='polyglot-language'></select></div>`);
 		const select = html.find(".polyglot-lang-select select");
 		select.change(e => {
 			this.lastSelection = select.val();
