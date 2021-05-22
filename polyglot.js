@@ -431,7 +431,7 @@ class Polyglot {
 		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (allowOOC && this._isMessageTypeOOC(data.type))) {
 			let lang = ui.chat.element.find("select[name=polyglot-language]").val()
 			if (lang != "")
-				mergeObject(data, { "flags.polyglot.language": lang });
+				document.data.update({ "flags.polyglot.language": lang });
 		}
 	}
 
