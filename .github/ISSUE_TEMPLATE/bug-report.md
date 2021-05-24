@@ -24,7 +24,7 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
  - Game System and version [e.g. D&D 5e 1.2.4]
- - Polyglot Version [e.g. 1.5.6.9]
+ - Polyglot Version [e.g. 1.6.2]
  - Are you using Babele? [Yes/No]
 
 **Additional context**
