@@ -197,27 +197,27 @@ class Polyglot {
 		}
 	}
 
-	updateUserLanguages(html) {
-		let actors = [];
-		this.known_languages = new Set();
-		this.literate_languages = new Set();
-		if (canvas && canvas.tokens) {
-			for (let token of canvas.tokens.controlled) {
-				if (token.actor)
-					actors.push(token.actor);
+	getUserLanguages(actors = []) {
+		let known_languages = new Set();
+		let literate_languages = new Set();
+		if (actors.length == 0) {
+			if (canvas && canvas.tokens) {
+				for (let token of canvas.tokens.controlled) {
+					if (token.actor)
+						actors.push(token.actor);
+				}
 			}
+			if (actors.length == 0 && game.user.character)
+				actors.push(game.user.character);
 		}
-		if (actors.length == 0 && game.user.character)
-			actors.push(game.user.character);
 		for (let actor of actors) {
 			try {
 				switch (game.system.id) {
 					case "aria":
-						this.known_languages.add(game.i18n.localize("ARIA.languages.Common"));
-						for (let lang of actor.data.items)
-						{
+						known_languages.add(game.i18n.localize("ARIA.languages.Common"));
+						for (let lang of actor.data.items) {
 							if (lang.data.language)
-								this.known_languages.add(lang.name.toLowerCase());
+								known_languages.add(lang.name.toLowerCase());
 						}
 						break;
 					case "CoC7":
@@ -228,9 +228,9 @@ class Polyglot {
 								|| item.name.match(game.i18n.localize("POLYGLOT.COC7.LanguageOther")+'\\s*\\((.+)\\)', 'i');
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
-								this.known_languages.add(match[1].trim().toLowerCase());
+								known_languages.add(match[1].trim().toLowerCase());
 							else if ([game.i18n.localize("POLYGLOT.COC7.LanguageSpec"), game.i18n.localize("POLYGLOT.COC7.LanguageOwn"), game.i18n.localize("POLYGLOT.COC7.LanguageAny"), game.i18n.localize("POLYGLOT.COC7.LanguageOther"), game.i18n.localize("CoC7.language"), "Language", "Language (Own)", "Language (Other)"].includes(item.data.specialization))
-								this.known_languages.add(item.name.trim().toLowerCase());
+								known_languages.add(item.name.trim().toLowerCase());
 						}
 						break;
 					case "wfrp4e":
@@ -239,7 +239,7 @@ class Polyglot {
 							const match = item.name.match(myRegex);
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
-								this.known_languages.add(match[1].trim().toLowerCase());
+								known_languages.add(match[1].trim().toLowerCase());
 						}
 						break;
 					case "swade":
@@ -248,20 +248,20 @@ class Polyglot {
 							const match = item.name.match(/Language \((.+)\)/i);
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
-								this.known_languages.add(match[1].trim().toLowerCase());
+								known_languages.add(match[1].trim().toLowerCase());
 						}
 						break;
 					case "dcc":
 						for (let lang of actor.data.data.details.languages.split(/[,;]/))
-							this.known_languages.add(lang.trim().toLowerCase());
+							known_languages.add(lang.trim().toLowerCase());
 						break;
 					case "demonlord":
 						for (let item of actor.data.items) {
 							if (item.type === "language") {
 								if (item.data.speak)
-									this.known_languages.add(item.name);
+									known_languages.add(item.name);
 								if (item.data.read)
-									this.literate_languages.add(item.name);
+									literate_languages.add(item.name);
 							}
 						}
 						break;
@@ -271,13 +271,13 @@ class Polyglot {
 								let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language")+'\\s*\\((.+)\\)', 'i');
 								let match = item.name.match(myRegex);
 								if (match) {
-									this.known_languages.add(match[1].trim());
+									known_languages.add(match[1].trim());
 								}
 								else {
 									myRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy")+'\\s*\\((.+)\\)', 'i');
 									match = item.name.match(myRegex);
 									if (match) {
-										this.literate_languages.add(match[1].trim());
+										literate_languages.add(match[1].trim());
 									}
 								}
 							}
@@ -285,20 +285,20 @@ class Polyglot {
 						break;
 					case "ose":
 						for (let lang of actor.data.data.languages.value)
-							this.known_languages.add(lang)
+							known_languages.add(lang)
 						break;
 					case "tormenta20":
 						for (let lang of actor.data.data.detalhes.idiomas.value)
-							this.known_languages.add(lang)
+							known_languages.add(lang)
 						break;
 					default:
 						// Don't duplicate the value in case it's a not an array
 						for (let lang of actor.data.data.traits.languages.value)
-							this.known_languages.add(lang)
+							known_languages.add(lang)
 						// This condition is needed so an empty language is not loaded
 						if (actor.data.data.traits.languages.custom != "") {
 							for (let lang of actor.data.data.traits.languages.custom.split(/[,;]/))
-								this.known_languages.add(lang.trim().toLowerCase());
+								known_languages.add(lang.trim().toLowerCase());
 						}
 						break;
 				}
@@ -306,17 +306,45 @@ class Polyglot {
 				// Maybe not dnd5e, pf1 or pf2e or corrupted actor data?
 			}
 		}
+		return [known_languages, literate_languages];
+	}
+
+	updateUserLanguages(html) {
+		const userLanguages = this.getUserLanguages();
+		this.known_languages = userLanguages[0];
+		this.literate_languages = userLanguages[1];
 		if (this.known_languages.size == 0) {
 			if (game.user.isGM)
 				this.known_languages = new Set(Object.keys(Polyglot.languages))
 			else
 				this.known_languages.add(Polyglot.defaultLanguage);
 		}
-		let options = ""
+		let options = "";
+		let playerCharacters = [];
+		if (game.user.isGM) {
+			playerCharacters = game.actors.filter(a => a.hasPlayerOwner);
+			for (let i = 0; i < playerCharacters.length; i++) {
+				let known_languages = this.getUserLanguages([playerCharacters[i]])[0];
+				playerCharacters[i].known_languages = known_languages;
+			}
+		}
 		for (let lang of this.known_languages) {
 			if (lang != this.truespeech && lang === this.comprehendLanguages) continue;
-			let label = Polyglot.languages[lang] || lang
-			options += `<option value="${lang}">${label}</option>`
+			let label = Polyglot.languages[lang] || lang;
+			if (game.user.isGM && playerCharacters.length) {
+				let title = `title="PCs that know ${label}:\n`;
+				for (let actor of playerCharacters) {
+					if (actor.known_languages.has(lang)) {
+						title += `${actor.name}\n`;
+					}
+				}
+				title += `"`;
+				if (title == `title="PCs that know ${label}:\n"`) title = ``;
+				options += `<option ${title.trim()} value="${lang}">${label}</option>`;
+			}
+			else {
+				options += `<option value="${lang}">${label}</option>`;
+			}
 		}
 		const select = html.find(".polyglot-lang-select select");
 		const prevOption = select.val();
