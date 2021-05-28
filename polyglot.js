@@ -31,6 +31,26 @@ class Polyglot {
 		switch (game.system.id) {
 			case "ose":
 				return replaceLanguages ? [] : Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
+			case "dark-heresy":
+				let specialities = {
+					"chapterRunes": "Chapter Runes",
+					"chaosMarks": "Chaos Marks",
+					"eldar": "Eldar",
+					"highGothic": "High Gothic",
+					"imperialCodes": "Imperial Codes",
+					"lowGothic": "Low Gothic",
+					"mercenary": "Mercenary",
+					"necrontyr": "Necrontyr",
+					"ork": "Ork",
+					"tau": "Tau",
+					"technaLingua": "Techna-Lingua",
+					"underworld": "Underworld",
+					"xenosMarkings": "Xenos Markings"
+				};
+				for (let item in specialities) {
+					langs[item] = specialities[item];
+				}
+				return replaceLanguages ? {} : langs;
 			case "dcc":
 				for (let item in CONFIG.DCC.languages) {
 					langs[item] = game.i18n.localize(CONFIG.DCC.languages[item]);
@@ -116,27 +136,19 @@ class Polyglot {
 		}
 		if (!game.settings.get("polyglot", "replaceLanguages")) {
 			switch (game.system.id) {
-				case "aria":
-					return game.i18n.localize("ARIA.languages.Common");
-				case "dnd5e":
-					return game.i18n.localize("DND5E.LanguagesCommon");
-				case "dcc":
-					return game.i18n.localize("DCC.LanguagesCommon");
+				case "dark-heresy":
+					return "lowGothic";
 				case "dsa5":
 					return "Garethi";
-				case "ose":
-					return "Common";
-				case "pf2e":
-					return "common";
 				case "sw5e":
-					return game.i18n.localize("SW5E.LanguagesBasic");
+					return "basic"
 				case "tormenta20":
-					return "Comum";
+					return "comum";
 				case "wfrp4e":
-					return "Reikspiel";
+					return "reikspiel";
 			}
 			const keys = Object.keys(this.languages);
-			if (keys.includes("common") || keys.includes("Common")) return "Common";
+			if (keys.includes("common")) return "common";
 		}
 		return this.languages[0] || "";
 	}
@@ -251,6 +263,12 @@ class Polyglot {
 								known_languages.add(match[1].trim().toLowerCase());
 						}
 						break;
+					case "dark-heresy":
+						for (let lang in actor.data.data.skills.linguistics.specialities) {
+							if (actor.data.data.skills.linguistics.specialities[lang]["advance"] >= 0)
+								known_languages.add(lang);
+						}
+						break;
 					case "dcc":
 						for (let lang of actor.data.data.details.languages.split(/[,;]/))
 							known_languages.add(lang.trim().toLowerCase());
@@ -350,7 +368,7 @@ class Polyglot {
 		const prevOption = select.val();
 		select.html($(options));
 		
-		let defaultLanguage = Polyglot.defaultLanguage.toLowerCase();
+		let defaultLanguage = Polyglot.defaultLanguage;
 		let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
 		// known_languages is a Set, so it's weird to access its values
 		if (!this.known_languages.has(selectedLanguage))
@@ -491,6 +509,7 @@ class Polyglot {
 	setup() {
 		switch (game.system.id) {
 			case "aria":
+			case "dark-heresy":
 			case "dcc":
 			case "D35E":
 			case "dnd5e":

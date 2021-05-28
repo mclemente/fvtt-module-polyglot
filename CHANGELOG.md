@@ -1,3 +1,6 @@
+# v1.6.3
+- Added support for Dark Heresy 2e.
+
 # v1.6.2
 - Changed the Scramble OOC Chat Messages setting. It is now a choice between [All, GM, Players, None] instead of a toggle. This change is due to an edge case where players without characters on the map couldn't speak In Character.
 
