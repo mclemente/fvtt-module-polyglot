@@ -1,3 +1,6 @@
+# v1.6.4
+- Fixed a bug with setting custom fonts.
+
 # v1.6.3
 - Added support for Dark Heresy 2e.
 
