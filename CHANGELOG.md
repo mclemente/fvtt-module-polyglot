@@ -1,3 +1,6 @@
+# v1.6.5
+- Fixed Default Language showing its font.
+
 # v1.6.4
 - Fixed a bug with setting custom fonts.
 

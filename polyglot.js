@@ -416,7 +416,7 @@ class Polyglot {
 			message.polyglot_unknown = lang != this.truespeech && !known && (game.user.character ? !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages) : true);
 		
 		let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
-		if(displayTranslated && (language != Polyglot.defaultLanguage || message.polyglot_unknown)) {
+		if(displayTranslated && (lang != Polyglot.defaultLanguage || message.polyglot_unknown)) {
 			let content = html.find(".message-content");
 			let translation = message.data.content;
 			let original = $('<div>').addClass('polyglot-original-text').css({font:this._getFontStyle(lang)}).html(new_content);
@@ -439,7 +439,7 @@ class Polyglot {
 		}
 		
 		if (game.user.isGM || (known && !hideTranslation)) {
-			const color = known ?	"green" : "red";
+			const color = known ? "green" : "red";
 			metadata.find(".polyglot-message-language").remove()
 			const title = game.user.isGM || known ? `title="${language}"` : ""
 			let button = $(`<a class="button polyglot-message-language" ${title}>
