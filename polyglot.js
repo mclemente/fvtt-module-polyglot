@@ -400,10 +400,11 @@ class Polyglot {
 			});
 	}
 
-	renderChatMessage(message, html, data) {
+	async renderChatMessage(message, html, data) {
 		const lang = message.getFlag("polyglot", "language") || "";
 		if (!lang) return;
 		let metadata = html.find(".message-metadata")
+		if (!Object.keys(Polyglot.languages).length) await this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
 		let language = Polyglot.languages[lang] || lang
 		const known = this.known_languages.has(lang); //Actor knows the language rather than being affected by Comprehend Languages or Tongues
 		const runifyGM = game.settings.get("polyglot", "runifyGM");
@@ -412,7 +413,7 @@ class Polyglot {
 		if (game.user.isGM && !runifyGM)
 			message.polyglot_unknown = false;
 		else
-			message.polyglot_unknown = lang != this.truespeech && !known && !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages);
+			message.polyglot_unknown = lang != this.truespeech && !known && (game.user.character ? !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages) : true);
 		
 		let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot','useUniqueSalt') ? message.data._id : lang)
 		if(displayTranslated && (language != Polyglot.defaultLanguage || message.polyglot_unknown)) {
@@ -437,10 +438,10 @@ class Polyglot {
 			message.polyglot_unknown = true;
 		}
 		
-		if (game.user.isGM || !hideTranslation) {
+		if (game.user.isGM || (known && !hideTranslation)) {
 			const color = known ?	"green" : "red";
 			metadata.find(".polyglot-message-language").remove()
-			const title = game.user.isGM || !known ? `title="${language}"` : ""
+			const title = game.user.isGM || known ? `title="${language}"` : ""
 			let button = $(`<a class="button polyglot-message-language" ${title}>
 				<i class="fas fa-globe" style="color:${color}"></i>
 			</a>`)
@@ -662,10 +663,12 @@ class Polyglot {
 	}
 	
 	ready() {
-		game.settings.set("polyglot", "Languages", this.tongues);
-		game.settings.set("polyglot", "Alphabets", this.alphabets);
-		this.updateConfigFonts();
-		this.setCustomLanguages(game.settings.get("polyglot","customLanguages"));
+		if (game.user.isGM) {
+			game.settings.set("polyglot", "Languages", this.tongues);
+			game.settings.set("polyglot", "Alphabets", this.alphabets);
+			this.updateConfigFonts();
+			this.setCustomLanguages(game.settings.get("polyglot","customLanguages"));
+		}
 	}
 	
 	updateConfigFonts() {
@@ -689,8 +692,10 @@ class Polyglot {
 					CONFIG.PF2E.languages[key] = lang;
 				}
 				Polyglot.languages[key] = lang;
-				langSettings[key] = this.tongues["_default"];
-				if (game.ready) game.settings.set("polyglot", "Languages", langSettings);
+				if (!(key in langSettings)) {
+					langSettings[key] = this.tongues["_default"];
+				}
+				if (game.ready && game.user.isGM) game.settings.set("polyglot", "Languages", langSettings);
 			}
 		}
 		this.updateUserLanguages(ui.chat.element);
