@@ -1,0 +1,42 @@
+{
+    "alphabets": {
+        "common": "130% Thorass",
+        "lawful": "180% Celestial",
+        "chaotic": "150% Barazhad",
+        "neutral": "230% Infernal",
+        "doppelganger": "250% Pulsian",
+        "dwarvish": "120% Dethek",
+        "draconic": "170% Iokharic",
+        "gargoyle": "150% HighDrowic",
+        "gnoll": "150% Kargi",
+        "gnomish": "120% Tengwar",
+        "harpy": "100% OldeThorass",
+        "elvish": "150% Espruar",
+        "ogre": "120% MeroiticDemotic",
+        "sylvan": "200% OldeEspruar"
+    },
+    "tongues": {
+        "_default": "common",
+        "1": "lawful",
+        "2": "chaotic",
+        "3": "neutral",
+        "4": "dwarvish",
+        "5": "doppelganger",
+        "6": "draconic",
+        "7": "dwarvish",
+        "8": "elvish",
+        "9": "gargoyle",
+        "10": "gnoll",
+        "11": "gnomish",
+        "12": "dwarvish",
+        "14": "harpy",
+        "15": "dwarvish",
+        "16": "draconic",
+        "17": "draconic",
+        "18": "gargoyle",
+        "19": "sylvan",
+        "20": "ogre",
+        "21": "dwarvish",
+        "22": "sylvan"
+    }
+}

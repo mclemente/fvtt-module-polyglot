@@ -1,22 +1,6 @@
-import {PolyglotLanguageSettings} from "./module/LanguageSettings.js"
-
-/**
- * Shorthand for game.settings.register.
- * Default data: {scope: "world", config: true}
- * @function addSetting
- * @param {string} key
- * @param {object} data
- */
-function addSetting (key, data) {
-	const commonData = {
-		scope: 'world',
-		config: true
-	};
-	game.settings.register('polyglot', key, Object.assign(commonData, data));
-}
+import {registerSettings} from "./module/settings.js";
 
 class Polyglot {
-
 	constructor() {
 		this.known_languages = new Set();
 		this.literate_languages = new Set();
@@ -484,8 +468,15 @@ class Polyglot {
 		return this.alphabets[this.tongues[lang]] || this.alphabets[this.tongues._default]
 	}
 
-	async loadLanguages(setting) {
-		const response = await fetch(`modules/polyglot/settings/${setting}.json`);
+	async loadLanguages() {
+		let system = "generic";
+		if (["aria", "dark-heresy", "dcc", "D35E", "dnd5e", "demonlord", "dsa5", "kryx_rpg", "ose", "sfrpg", "sw5e", "tormenta20", "wfrp4e"].includes(game.system.id)) {
+			system = game.system.id;
+		}
+		else if (["pf1", "pf2e"].includes(game.system.id)) {
+			system = "golarion";
+		}
+		const response = await fetch(`modules/polyglot/module/systems/${system}.json`);
 		if (response.ok) {
 			const settingInfo = await response.json();
 			this.alphabets = settingInfo.alphabets;
@@ -499,152 +490,16 @@ class Polyglot {
 				}
 				this.tongues = langSettings;
 			}
-			console.log(`Polyglot | Loaded ${setting}.json`);
 		}
 		else {
-			console.error(`Polyglot | Failed to fetch ${setting}.json: ${response.status}`);
+			console.error(`Polyglot | Failed to fetch ${system}.json: ${response.status}`);
 			return;
 		}
 	}
 
 	setup() {
-		switch (game.system.id) {
-			case "aria":
-			case "dark-heresy":
-			case "dcc":
-			case "D35E":
-			case "dnd5e":
-			case "kryx_rpg":
-			case "demonlord":
-			case "dsa5":
-			case "ose":
-			case "sw5e":
-			case "tormenta20":
-				this.loadLanguages(game.system.id);
-				break;
-			case "pf1":
-			case "pf2e":
-				this.loadLanguages("golarion");
-				break;
-			case "wfrp4e":
-				this.loadLanguages("wfrp");
-				break;
-			case "sfrpg":
-				this.loadLanguages("starfinder");
-				break;
-			default:
-				this.loadLanguages("generic");
-				break;
-		}
-		game.settings.registerMenu('polyglot', 'LanguageSettings', {
-			name: 'Language Settings',
-			label: 'Language Settings',
-			icon: 'fas fa-globe',
-			type: PolyglotLanguageSettings,
-			restricted: true
-		});
-		game.settings.register('polyglot', "Alphabets", {
-			name: game.i18n.localize("POLYGLOT.AlphabetsTitle"),
-			hint: game.i18n.localize("POLYGLOT.AlphabetsHint"),
-			scope: 'world',
-			config: false,
-			default: {},
-			type: Object
-		});
-		game.settings.register('polyglot', "Languages", {
-			name: game.i18n.localize("POLYGLOT.LanguagesTitle"),
-			hint: game.i18n.localize("POLYGLOT.LanguagesHint"),
-			scope: 'world',
-			config: false,
-			default: {},
-			type: Object
-		});
-		game.settings.register('polyglot', "defaultLanguage", {
-			name: game.i18n.localize("POLYGLOT.DefaultLanguageTitle"),
-			hint: game.i18n.localize("POLYGLOT.DefaultLanguageHint"),
-			scope: "client",
-			config: true,
-			default: "",
-			type: String
-		});
-		addSetting("useUniqueSalt", {
-			name: game.i18n.localize("POLYGLOT.RandomizeRunesTitle"),
-			hint: game.i18n.localize("POLYGLOT.RandomizeRunesHint"),
-			default: false,
-			type: Boolean,
-			onChange: () => location.reload()
-		});
-		addSetting("exportFonts", {
-			name: game.i18n.localize("POLYGLOT.ExportFontsTitle"),
-			hint: game.i18n.localize("POLYGLOT.ExportFontsHint"),
-			default: true,
-			type: Boolean,
-			onChange: () => this.updateConfigFonts()
-		});
-		
-		//Language Settings
-		addSetting("replaceLanguages", {
-			name: game.i18n.localize("POLYGLOT.ReplaceLanguagesTitle"),
-			hint: game.i18n.localize("POLYGLOT.ReplaceLanguagesHint"),
-			default: false,
-			type: Boolean,
-			onChange: () => location.reload()
-		});
-		addSetting("customLanguages", {
-			name: game.i18n.localize("POLYGLOT.CustomLanguagesTitle"),
-			hint: game.i18n.localize("POLYGLOT.CustomLanguagesHint"),
-			default: "",
-			type: String,
-			onChange: (value) => this.setCustomLanguages(value)
-		});
-		addSetting("comprehendLanguages", {
-			name: game.i18n.localize("POLYGLOT.ComprehendLanguagesTitle"),
-			hint: game.i18n.localize("POLYGLOT.ComprehendLanguagesHint"),
-			default: "",
-			type: String,
-			onChange: (value) => this.comprehendLanguages = value.trim().toLowerCase().replace(/ \'/g, "_")
-		});
-		addSetting("truespeech", {
-			name: game.i18n.localize("POLYGLOT.TruespeechTitle"),
-			hint: game.i18n.localize("POLYGLOT.TruespeechHint"),
-			default: "",
-			type: String,
-			onChange: (value) => this.truespeech = game.settings.get("polyglot","truespeech").trim().toLowerCase().replace(/ \'/g, "_")
-		});
-
-		//Chat Settings
-		addSetting("display-translated", {
-			name: game.i18n.localize("POLYGLOT.DisplayTranslatedTitle"),
-			hint: game.i18n.localize("POLYGLOT.DisplayTranslatedHint"),
-			default: true,
-			type: Boolean
-		});
-		addSetting("hideTranslation", {
-			name: game.i18n.localize("POLYGLOT.HideTranslationTitle"),
-			hint: game.i18n.localize("POLYGLOT.HideTranslationHint"),
-			default: false,
-			type: Boolean,
-			onChange: () => location.reload()
-		});
-		addSetting("allowOOC", {
-			name: game.i18n.localize("POLYGLOT.AllowOOCTitle"),
-			hint: game.i18n.localize("POLYGLOT.AllowOOCHint"),
-			choices: {
-				"a" : game.i18n.localize("POLYGLOT.AllowOOCOptions.a"),
-				"b" : game.i18n.localize("POLYGLOT.AllowOOCOptions.b"),
-				"c" : game.i18n.localize("POLYGLOT.AllowOOCOptions.c"),
-				"d" : game.i18n.localize("POLYGLOT.AllowOOCOptions.d")
-			},
-			default: "b",
-			type: String
-		});
-		addSetting("runifyGM", {
-			name: game.i18n.localize("POLYGLOT.ScrambleGMTitle"),
-			hint: game.i18n.localize("POLYGLOT.ScrambleGMHint"),
-			default: true,
-			type: Boolean,
-			onChange: () => location.reload()
-		});
+		this.loadLanguages();
+		registerSettings(PolyglotSingleton);
 		// Adjust the bubble dimensions so the message is displayed correctly
 		ChatBubbles.prototype._getMessageDimensions = (message) => {
 			let div = $(`<div class="chat-bubble" style="visibility:hidden;font:${this._bubble.font}">${this._bubble.message || message}</div>`);
