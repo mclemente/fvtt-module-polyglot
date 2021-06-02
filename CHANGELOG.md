@@ -1,3 +1,6 @@
+# v1.6.6
+- Updated Portuguese and Japanese translations.
+
 # v1.6.5
 - Fixed Default Language showing its font.
 
