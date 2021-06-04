@@ -4,7 +4,7 @@
 ![the latest version](https://img.shields.io/github/downloads/League-of-Foundry-Developers/fvtt-module-polyglot/latest/total) 
 ![Forge installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fpolyglot)
 
-[![ko-fi](https://img.shields.io/badge/ko--fi-Support%20Me-red?style=flat-square&logo=ko-fi)](ko-fi.com/mclemente)
+[![ko-fi](https://img.shields.io/badge/ko--fi-Support%20Me-red?style=flat-square&logo=ko-fi)](https://ko-fi.com/mclemente)
 
 # Polyglot
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.
