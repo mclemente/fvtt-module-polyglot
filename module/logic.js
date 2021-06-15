@@ -269,7 +269,7 @@ export class Polyglot {
 						break;
 					case "dsa5":
 						for (let item of actor.data.items) {
-							if (item.data.category?.value === "language") {
+							if (item.data.data.category?.value === "language") {
 								let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language")+'\\s*\\((.+)\\)', 'i');
 								let match = item.name.match(myRegex);
 								if (match) {

@@ -1,3 +1,7 @@
+# v1.6.7
+- DSA5: Fixed characters' languages not being parsed on the 2.0 version.
+- Updated Spanish translation.
+
 # v1.6.6
 - Updated Portuguese and Japanese translations.
 
