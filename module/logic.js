@@ -114,9 +114,9 @@ export class Polyglot {
 	static get defaultLanguage() {
 		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
 		if (defaultLang) {
-			if (this.languages[defaultLang.toLowerCase()]) return defaultLang;
+			if (this.languages[defaultLang.toLowerCase()]) return defaultLang.toLowerCase();
 			const inverted = invertObject(this.languages);
-			if (inverted[defaultLang]) return inverted[defaultLang.toLowerCase()];
+			if (inverted[defaultLang]) return inverted[defaultLang];
 		}
 		if (!game.settings.get("polyglot", "replaceLanguages")) {
 			switch (game.system.id) {
