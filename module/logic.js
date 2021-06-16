@@ -134,7 +134,8 @@ export class Polyglot {
 			const keys = Object.keys(this.languages);
 			if (keys.includes("common")) return "common";
 		}
-		return this.languages[0] || "";
+		// array || set || none
+		return this.languages[0] || Object.keys(this.languages)[0] || "";
 	}
 
 	async renderChatLog(chatlog, html, data) {
