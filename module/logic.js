@@ -213,7 +213,7 @@ export class Polyglot {
 					case "aria":
 						known_languages.add(game.i18n.localize("ARIA.languages.Common"));
 						for (let lang of actor.data.items) {
-							if (lang.data.language)
+							if (lang.data.data.language)
 								known_languages.add(lang.name.toLowerCase());
 						}
 						break;
