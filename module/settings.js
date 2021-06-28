@@ -60,7 +60,7 @@ export function registerSettings(PolyglotSingleton) {
 		type: Boolean,
 		onChange: () => PolyglotSingleton.updateConfigFonts()
 	});
-	
+
 	//Language Settings
 	addSetting("replaceLanguages", {
 		name: game.i18n.localize("POLYGLOT.ReplaceLanguagesTitle"),
