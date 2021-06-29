@@ -1,4 +1,4 @@
-import { getSystem } from "./logic.js";
+import { getSystemResponse } from "./logic.js";
 
 export class PolyglotLanguageSettings extends FormApplication {
 
@@ -11,11 +11,11 @@ export class PolyglotLanguageSettings extends FormApplication {
 	 */
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
-			id: 'polyglot-death-form',
+			id: 'polyglot-language-form',
 			title: 'Polyglot Language Settings',
 			template: './modules/polyglot/templates/LanguageSettings.hbs',
 			classes: ['sheet'],
-			width: "auto",
+			width: 800,
 			height: 600,
 			closeOnSubmit: true
 		});
@@ -40,25 +40,15 @@ export class PolyglotLanguageSettings extends FormApplication {
 
 	async activateListeners(html) {
 		super.activateListeners(html);
-		const system = getSystem();
-
-		if (system) {
-			const response = await fetch(`modules/polyglot/module/systems/${system}.json`)
-			if (response.ok) {
-				const settingInfo = await response.json();
-				html.find('.selectatr').each(function () {
-					const font = this.value;
-					this.style.font = settingInfo.alphabets[font];
-				})
-				html.find('.selectatr').on('change', async (event) => {
-					const font = event.target.value;
-					event.target.style.font = settingInfo.alphabets[font];
-				});
-			} else {
-				console.error(`Polyglot | Failed to fetch ${system}.json: ${response.status}`);
-				return;
-			}
-		}
+		const settingInfo = await getSystemResponse();
+		html.find('.polyglot-alphabet').each(function () {
+			const font = this.previousSibling.previousSibling.value; //selectatr's value
+			this.style.font = settingInfo.alphabets[font];
+		})
+		html.find('.selectatr').on('change', async (event) => {
+			const font = event.target.value;
+			event.target.nextSibling.nextSibling.style.font = settingInfo.alphabets[font];
+		});
 		html.find('button').on('click', async (event) => {
 			if (event.currentTarget?.dataset?.action === 'reset') {
 				await game.settings.set("polyglot", "Languages", {});

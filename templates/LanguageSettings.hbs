@@ -4,38 +4,22 @@
 		<p class="notes">{{localize "POLYGLOT.LanguagesHint"}}</p>
 		<ul style="list-style: none;">
 			<li style="display: flex;">
-				<div style="flex: 1;">{{localize "POLYGLOT.LanguageLabel"}}</div>
+				<div style="flex: 0 0 150px;">{{localize "POLYGLOT.LanguageLabel"}}</div>
 				<div style="flex: 1;">{{localize "POLYGLOT.AlphabetLabel"}}</div>
+				<div style="flex: 2;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
 			</li>
 			<hr>
 			{{#each languages.value as |key val|}}
 			<li style="display: flex;">
-				<div style="flex: 1; text-transform: capitalize;">{{#if (eq val "_default")}}default{{else}}{{val}}{{/if}}</div>
+				<div style="flex: 0 0 150px; text-transform: capitalize;">{{#if (eq val "_default")}}{{localize "POLYGLOT.DefaultAlphabet"}}{{else}}{{val}}{{/if}}</div>
 				<select class="selectatr" name="language.alphabet" value={{key}} data-dtype="String" style="flex: 1; text-transform: capitalize;">
 				{{#select key}}
 					{{#each ../alphabets.value as |font alphabet|}}
-						<option value="{{alphabet}}" style="text-transform: capitalize;">{{alphabet}}</option>
+						<option class="alphabet-option" value="{{alphabet}}" style="text-transform: capitalize;">{{alphabet}}</option>
 					{{/each}}
 				{{/select}}
 				</select>
-			</li>
-			{{/each}}
-		</ul>
-	</div>
-	<div>
-		<label>{{localize "POLYGLOT.Fonts"}}</label>
-		<ul style="list-style: none;">
-			<li style="display: flex;">
-				<div style="flex: 1;">{{localize "POLYGLOT.AlphabetLabel"}}</div>
-				<div style="flex: 2;">{{localize "POLYGLOT.Fonts"}}</div>
-			</li>
-			<hr>
-			<li style="display: flex;">
-				<div style="flex: 1;">{{localize "POLYGLOT.LatinAlphabet"}}</div><div style="flex: 2;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
-			</li>
-			{{#each alphabets.value as |font alphabet|}}
-			<li style="display: flex;">
-				<div style="flex:1; text-transform: capitalize;">{{alphabet}}:</div><div style="flex: 2; font:{{font}}">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+				<div class="polyglot-alphabet" style="flex: 2;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
 			</li>
 			{{/each}}
 		</ul>

@@ -12,6 +12,15 @@ export function getSystem() {
 	return system;
 }
 
+export async function getSystemResponse() {
+	const system = getSystem();
+	const response = await fetch(`./modules/polyglot/module/systems/${system}.json`);
+	if (response.ok) {
+		return response.json();
+	}
+	throw Error(`Polyglot | Failed to fetch ${system}.json: ${response.status}`);
+}
+
 export class Polyglot {
 	constructor() {
 		this.known_languages = new Set();
@@ -482,25 +491,17 @@ export class Polyglot {
 	}
 
 	async loadLanguages() {
-		const system = getSystem();
-		const response = await fetch(`./modules/polyglot/module/systems/${system}.json`);
-		if (response.ok) {
-			const settingInfo = await response.json();
-			this.alphabets = settingInfo.alphabets;
-			let langSettings = game.settings.get("polyglot", "Languages");
-			this.tongues = Object.keys(langSettings).length ? langSettings : settingInfo.tongues;
-			if (!game.settings.get("polyglot", "replaceLanguages")) {
-				for (let tongue in settingInfo.tongues) {
-					if (!(tongue in langSettings)) {
-						langSettings[tongue] = settingInfo.tongues[tongue];
-					}
+		const settingInfo = await getSystemResponse();
+		this.alphabets = settingInfo.alphabets;
+		let langSettings = game.settings.get("polyglot", "Languages");
+		this.tongues = Object.keys(langSettings).length ? langSettings : settingInfo.tongues;
+		if (!game.settings.get("polyglot", "replaceLanguages")) {
+			for (let tongue in settingInfo.tongues) {
+				if (!(tongue in langSettings)) {
+					langSettings[tongue] = settingInfo.tongues[tongue];
 				}
-				this.tongues = langSettings;
 			}
-		}
-		else {
-			console.error(`Polyglot | Failed to fetch ${system}.json: ${response.status}`);
-			return;
+			this.tongues = langSettings;
 		}
 	}
 
