@@ -47,12 +47,12 @@ export class Polyglot {
 	 */
 	static async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		let langs = {};
+		const langs = {};
 		switch (game.system.id) {
 			case "ose":
 				return replaceLanguages ? [] : Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
 			case "dark-heresy":
-				langs = {
+				const specialities = {
 					"chapterRunes": "Chapter Runes",
 					"chaosMarks": "Chaos Marks",
 					"eldar": "Eldar",
@@ -67,6 +67,9 @@ export class Polyglot {
 					"underworld": "Underworld",
 					"xenosMarkings": "Xenos Markings"
 				};
+				for (let item in specialities) {
+					langs[item] = specialities[item];
+				}
 				return replaceLanguages ? {} : langs;
 			case "dcc":
 				for (let item in CONFIG.DCC.languages) {
