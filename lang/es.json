@@ -3,7 +3,7 @@
   "I18N.MAINTAINERS": "@Viriato139ac#0342, Juanfrank",
 
   "POLYGLOT": {
-	"DefaultAlphabet": "Alfabeto por defecto",
+    "DefaultAlphabet": "Alfabeto por defecto",
     "LanguageSettings": "Ajustes de idiomas",
     "ChatSettings": "Ajustes del chat",
     "LanguagesTitle": "Idiomas",
