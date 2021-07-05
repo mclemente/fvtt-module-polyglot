@@ -783,6 +783,7 @@ export class Polyglot {
 			languages.splice(comprehendLanguagesIndex, 1);
 		}
 		sheet[methodName] = function (target, editorOptions, initialContent) {
+			if (!editorOptions) editorOptions = {};
 			editorOptions.style_formats = [
 				...CONFIG.TinyMCE.style_formats,
 				{
