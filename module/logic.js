@@ -329,13 +329,11 @@ export class Polyglot {
 						break;
 					case "uesrpg-d100":
 						for (let item of actor.data.items) {
-							const match =
-								item.name.match("Language" + '\\s*\\((.+)\\)', 'i');
+							let myRegex = new RegExp(game.i18n.localize("POLYGLOT.UESRPG.Language") + '\\s*\\((.+)\\)', 'i');
+							const match = item.name.match(myRegex);
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
 								known_languages.add(match[1].trim().toLowerCase());
-							else if ([game.i18n.localize("POLYGLOT.COC7.LanguageSpec"), game.i18n.localize("POLYGLOT.COC7.LanguageOwn"), game.i18n.localize("POLYGLOT.COC7.LanguageAny"), game.i18n.localize("POLYGLOT.COC7.LanguageOther"), game.i18n.localize("CoC7.language"), "Language", "Language (Own)", "Language (Other)"].includes(item.data.specialization))
-								known_languages.add(item.name.trim().toLowerCase());
 						}
 						break;
 					case "dark-heresy":
