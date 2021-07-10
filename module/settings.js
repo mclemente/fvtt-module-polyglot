@@ -53,6 +53,13 @@ export function registerSettings(PolyglotSingleton) {
 		type: Boolean,
 		onChange: () => location.reload()
 	});
+	addSetting("enableAllFonts", {
+		name: game.i18n.localize("POLYGLOT.enableAllFontsTitle"),
+		hint: game.i18n.localize("POLYGLOT.enableAllFontsHint"),
+		default: false,
+		type: Boolean,
+		onChange: () => location.reload()
+	});
 	addSetting("exportFonts", {
 		name: game.i18n.localize("POLYGLOT.ExportFontsTitle"),
 		hint: game.i18n.localize("POLYGLOT.ExportFontsHint"),

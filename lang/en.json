@@ -1,6 +1,7 @@
 {
   "POLYGLOT": {
     "DefaultAlphabet": "Default Alphabet",
+    "FontSettings": "Font Settings",
     "LanguageSettings": "Language Settings",
     "ChatSettings": "Chat Settings",
     "LanguagesTitle": "Languages",
@@ -18,6 +19,8 @@
     "ReplaceLanguagesHint": "Replaces the system's default languages with your Custom Languages. The first language on the list becomes the new default language. Requires reload.",
     "ScrambleGMTitle": "Scramble Messages for GM",
     "ScrambleGMHint": "Don't translate the text for show the text for the GM (refer to the globe's color for the token's understanding). Requires reload.",
+    "enableAllFontsTitle": "Add All Fonts on Language Settings",
+    "enableAllFontsHint": "Makes the Polyglot fonts avilable in the Language Settings. Requires reload.",
     "RandomizeRunesTitle": "Randomize Runes",
     "RandomizeRunesHint": "Enabling this option will cause the scrambled text to appear different every time, even if the same message is repeated. Requires reload.",
     "ExportFontsTitle": "Make Fonts Available",

@@ -1,0 +1,32 @@
+{
+	"alphabets": {
+		"cyrodilic": "130% Thorass",
+		"aldmeri": "150% Espruar",
+		"ayleidoon": "230% OldeEspruar",
+		"bosmeri": "200% MageScript",
+		"daedric": "200% Daedra",
+		"dovah": "170% Dovahkiin",
+		"dunmeri": "150% HighDrowic",
+		"dwemeris": "120% Dethek",
+		"falmer": "200% ArCiela",
+		"jel": "120% Ophidian",
+		"nordic": "160% NyStormning",
+		"taagra": "120% JungleSlang",
+		"yoku": "130% Oriental"
+	},
+	"tongues": {
+		"_default": "cyrodilic",
+		"aldmeri": "aldmeri",
+		"ayleidoon": "aldmeri",
+		"bosmeri": "bosmeri",
+		"daedric": "daedric",
+		"dovah": "dovah",
+		"dunmeri": "dunmeri",
+		"dwemeris": "dwemeris",
+		"falmer": "falmer",
+		"jel": "jel",
+		"nordic": "nordic",
+		"taagra": "taagra",
+		"yoku": "yoku"
+	}
+}

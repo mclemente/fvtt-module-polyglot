@@ -17,12 +17,20 @@
   src:url('../fonts/Celestial.ttf');
 }
 @font-face {
+	font-family:'Daedra';
+	src:url('../fonts/Daedra.otf');
+}
+@font-face {
 	font-family:'DarkEldar';
 	src:url('../fonts/DarkEldar.ttf');
 }
 @font-face {
   font-family:'Dethek';
   src:url('../fonts/Dethek.otf');
+}
+@font-face {
+  font-family:'Dovahkiin';
+  src:url('../fonts/Dovahkiin.otf');
 }
 @font-face {
 	font-family:'ElderFuthark';
@@ -69,6 +77,10 @@
   src:url('../fonts/Kargi.ttf');
 }
 @font-face {
+  font-family:'MageScript';
+  src:url('../fonts/MageScript.otf');
+}
+@font-face {
   font-family:'MarasEye';
   src:url('../fonts/MarasEye.otf');
 }
@@ -79,6 +91,10 @@
 @font-face {
 	font-family:'MiroslavNormal';
 	src:url('../fonts/MiroslavNormal.ttf');
+}
+@font-face {
+	font-family:'NyStormning';
+	src:url('../fonts/NyStormning.otf');
 }
 @font-face {
   font-family:'OldeEspruar';

@@ -8,7 +8,7 @@ import { registerSettings } from "./settings.js";
 export function getSystem() {
 	let system = "generic";
 
-	if (["aria", "dark-heresy", "dcc", "D35E", "dnd5e", "demonlord", "dsa5", "kryx_rpg", "ose", "sfrpg", "sw5e", "tormenta20", "wfrp4e"].includes(game.system.id)) {
+	if (["aria", "dark-heresy", "dcc", "D35E", "dnd5e", "demonlord", "dsa5", "kryx_rpg", "ose", "sfrpg", "sw5e", "tormenta20", "uesrpg-d100", "wfrp4e"].includes(game.system.id)) {
 		system = game.system.id;
 	}
 	else if (["pf1", "pf2e"].includes(game.system.id)) {
@@ -22,8 +22,8 @@ export function getSystem() {
  * 
  * @returns {Promise<any>}
  */
-export async function getSystemResponse() {
-	const system = getSystem();
+export async function getSystemResponse(force=false) {
+	const system = force ? "generic" : getSystem();
 	const response = await fetch(`./modules/polyglot/module/systems/${system}.json`);
 	if (response.ok) {
 		return response.json();
@@ -132,6 +132,27 @@ export class Polyglot {
 					CONFIG.T20.idiomas = {};
 				}
 				return CONFIG.T20.idiomas;
+			case "uesrpg-d100":
+				const uesrpgLanguages = {
+					"aldmeri": "Aldmeri",
+					"ayleidoon": "Ayleidoon",
+					"bosmeri": "Bosmeri",
+					"cyrodilic": "Cyrodilic",
+					"daedric": "Daedric",
+					"dovah": "Dovah",
+					"dunmeri": "Dunmeri",
+					"dwemeris": "Dwemeris",
+					"falmer": "Falmer",
+					"jel": "Jel",
+					"nordic": "Nordic",
+					"taagra": "Ta'Agra",
+					"yoku": "Yoku"
+				};
+				for (let item in uesrpgLanguages) {
+					langs[item] = uesrpgLanguages[item];
+				}
+				return replaceLanguages ? {} : langs;
+				return;
 			default:
 				if (CONFIG[game.system.id.toUpperCase()]?.languages) {
 					if (replaceLanguages)
@@ -175,6 +196,8 @@ export class Polyglot {
 					return "basic"
 				case "tormenta20":
 					return "comum";
+				case "uesrpg-d100":
+					return "cyrodilic";
 				case "wfrp4e":
 					return "reikspiel";
 			}
@@ -302,6 +325,17 @@ export class Polyglot {
 							// adding only the descriptive language name, not "Language (XYZ)"
 							if (match)
 								known_languages.add(match[1].trim().toLowerCase());
+						}
+						break;
+					case "uesrpg-d100":
+						for (let item of actor.data.items) {
+							const match =
+								item.name.match("Language" + '\\s*\\((.+)\\)', 'i');
+							// adding only the descriptive language name, not "Language (XYZ)"
+							if (match)
+								known_languages.add(match[1].trim().toLowerCase());
+							else if ([game.i18n.localize("POLYGLOT.COC7.LanguageSpec"), game.i18n.localize("POLYGLOT.COC7.LanguageOwn"), game.i18n.localize("POLYGLOT.COC7.LanguageAny"), game.i18n.localize("POLYGLOT.COC7.LanguageOther"), game.i18n.localize("CoC7.language"), "Language", "Language (Own)", "Language (Other)"].includes(item.data.specialization))
+								known_languages.add(item.name.trim().toLowerCase());
 						}
 						break;
 					case "dark-heresy":
@@ -538,11 +572,18 @@ export class Polyglot {
 	async loadLanguages() {
 		const settingInfo = await getSystemResponse();
 		this.alphabets = settingInfo.alphabets;
+		if (game.settings.get("polyglot", "enableAllFonts")) {
+			const defaultAlphabets = (await getSystemResponse(true)).alphabets;
+			for (let alp in defaultAlphabets) {
+				const invertedThis = invertObject(this.alphabets);
+				if (!invertedThis[defaultAlphabets[alp]]) this.alphabets[alp] = defaultAlphabets[alp];
+			}
+		}
 		let langSettings = game.settings.get("polyglot", "Languages");
 		this.tongues = Object.keys(langSettings).length ? langSettings : settingInfo.tongues;
 		if (!game.settings.get("polyglot", "replaceLanguages")) {
 			for (let tongue in settingInfo.tongues) {
-				if (!(tongue in langSettings)) {
+				if (!(tongue in langSettings) || tongue === "_default") {
 					langSettings[tongue] = settingInfo.tongues[tongue];
 				}
 			}

@@ -1,6 +1,7 @@
 {
   "POLYGLOT": {
     "DefaultAlphabet": "Alfabeto Padrão",
+    "FontSettings": "Configurações de Fonte",
     "LanguageSettings": "Configurações de Idioma",
     "ChatSettings": "Configurações de Chat",
     "Languages": "Idiomas",
@@ -18,6 +19,8 @@
     "ReplaceLanguagesHint": "Substitui os idiomas do sistema com os seus Idiomas Customizados. O primeiro idioma da lista se tornará o novo idioma padrão. Recarregará o programa.",
     "ScrambleGMTitle": "Embaralhar para o Mestre",
     "ScrambleGMHint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende). Recarregará o programa.",
+    "enableAllFontsTitle": "Adicionar Fontes às Configurações de Idioma",
+    "enableAllFontsHint": "Torna as fontes do Polyglot disponíveis nas Configurações de Idioma. Recarregará o programa.",
     "RandomizeRunesTitle": "Randomizar Runas",
     "RandomizeRunesHint": "Texto embaralhado sempre irá parecer diferente, mesmo se a mesma mensagem for repetida. Recarregará o programa.",
     "ExportFontsTitle": "Tornar Fontes Disponíveis",

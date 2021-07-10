@@ -4,11 +4,14 @@ The following fonts are owned by Pixel Sagas, check out their [website](http://w
 
 - Barazhad
 - Celestial
+- Daedra
 - Dethek
+- Dovahkiin
 - Espruar
 - HighDrowic
 - Kargi
 - Lokharic
+- MageScript
 - MarasEye
 - OldeEspruar
 - OldeThorass
@@ -21,6 +24,10 @@ The following fonts are owned by Pixel Sagas, check out their [website](http://w
 The following font was created by TenkaDigi:
 
 - Infernal (Fan Art)
+
+The following font is under [SIL OPEN FONT LICENSE Version 1.1](https://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web):
+
+- [Ny Stormning](https://www.fontspace.com/ny-stormning-font-f23289). Copyright (c) 2016, Mew Too, Robert Jablonski (Cannot Into Space Fonts) (cannotintospacefonts@gmail.com).
 
 The following are under [CC BY-SA 3](https://creativecommons.org/licenses/by-sa/3.0/):
 
