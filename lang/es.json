@@ -4,6 +4,7 @@
 
   "POLYGLOT": {
     "DefaultAlphabet": "Alfabeto por defecto",
+    "FontSettings": "Ajustes de fuentes",
     "LanguageSettings": "Ajustes de idiomas",
     "ChatSettings": "Ajustes del chat",
     "LanguagesTitle": "Idiomas",
@@ -21,6 +22,8 @@
     "ReplaceLanguagesHint": "Reemplaza el idioma por defecto del sistema por sus idiomas personalizados. El primer idioma personalizado de la lista se convertirá en el nuevo idioma por defecto",
     "ScrambleGMTitle": "Codificar para el GM",
     "ScrambleGMHint": "Deshabilite esta opción para mostrar siempre el texto para el GM (remítase al color del globo para ver la perspectiva del icono)",
+    "enableAllFontsTitle": "Añadir fuentes de los ajustes de idioma",
+    "enableAllFontsHint": "Habilita las fuentes Polyglot en los ajustes de idioma. Requiere reinicio",
     "RandomizeRunesTitle": "Aleatorizar las runas",
     "RandomizeRunesHint": "Habilitar esta opción ocasiona que los textos codificados se vean siempre de forma distinta, aunque se repita el mismo mensaje",
     "ExportFontsTitle": "Habilitar la tipografía",
@@ -45,6 +48,8 @@
     "LatinAlphabet": "Alfabeto latino",
     "ToggleRunes": "Activar/desactivar runas",
     "Runes": "Runas",
+    
+    "UESRPG.Language": "Idioma",
 
     "COC7": {
       "LanguageOwn": "Lengua propia",
