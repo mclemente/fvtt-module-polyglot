@@ -9,6 +9,10 @@
   src:url('../fonts/ArCiela.ttf');
 }
 @font-face {
+  font-family:'Aztec';
+  src:url('../fonts/Aztec.ttf');
+}
+@font-face {
   font-family:'Barazhad';
   src:url('../fonts/Barazhad.otf');
 }
@@ -77,6 +81,10 @@
   src:url('../fonts/Kargi.ttf');
 }
 @font-face {
+  font-family:'KremlinPremier';
+  src:url('../fonts/KremlinPremier.ttf');
+}
+@font-face {
   font-family:'MageScript';
   src:url('../fonts/MageScript.otf');
 }
@@ -131,6 +139,10 @@
 @font-face {
 	font-family:'Saurian';
 	src:url('../fonts/Saurian.ttf');
+}
+@font-face {
+	font-family:'ScrapbookChinese';
+	src:url('../fonts/ScrapbookChinese.ttf');
 }
 @font-face {
   font-family:'Semphari';

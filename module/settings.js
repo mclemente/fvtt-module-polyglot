@@ -1,4 +1,6 @@
 import {PolyglotLanguageSettings} from "./LanguageSettings.js"
+import {getSystem} from "./logic.js"
+
 /**
  * Shorthand for game.settings.register.
  * Default data: {scope: "world", config: true}
@@ -53,9 +55,11 @@ export function registerSettings(PolyglotSingleton) {
 		type: Boolean,
 		onChange: () => location.reload()
 	});
-	addSetting("enableAllFonts", {
+	game.settings.register('polyglot', "enableAllFonts", {
 		name: game.i18n.localize("POLYGLOT.enableAllFontsTitle"),
 		hint: game.i18n.localize("POLYGLOT.enableAllFontsHint"),
+		scope: 'world',
+		config: getSystem() !== "generic",
 		default: false,
 		type: Boolean,
 		onChange: () => location.reload()

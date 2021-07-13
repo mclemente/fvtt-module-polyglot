@@ -1,0 +1,29 @@
+{
+	"alphabets": {
+    "aztec": "200% Aztec",
+    "chinese": "130% ScrapbookChinese",
+		"common": "130% Thorass",
+    "cyrillic": "130% KremlinPremier",
+		"elvish": "150% Espruar",
+    "orcish": "150% OrkGlyphs",
+    "oriental":"130% Oriental"
+	},
+	"tongues": {
+		"_default": "common",
+    "cityspeak": "common",
+		"spanish": "common",
+		"lakota": "common",
+		"dakota": "common",
+		"navajo": "common",
+		"russian": "cyrillic",
+		"french": "common",
+		"italian": "common",
+		"german": "common",
+		"aztlaner": "aztec",
+    "sperethiel": "elvish",
+    "orzet": "orcish",
+    "english": "common",
+    "japanese": "oriental",
+    "mandarin": "chinese"
+	}
+}

@@ -25,6 +25,18 @@ The following font was created by TenkaDigi:
 
 - Infernal (Fan Art)
 
+The follow font was created by Helena Jole:
+
+- ScrapbookChinese
+
+The following font was created by Levi:
+
+- Aztec
+
+The following font is under [GNU GENERAL PUBLIC LICENSE v3](https://www.gnu.org/licenses/gpl-3.0.en.html):
+
+- KremlinPremier
+
 The following font is under [SIL OPEN FONT LICENSE Version 1.1](https://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web):
 
 - [Ny Stormning](https://www.fontspace.com/ny-stormning-font-f23289). Copyright (c) 2016, Mew Too, Robert Jablonski (Cannot Into Space Fonts) (cannotintospacefonts@gmail.com).

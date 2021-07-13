@@ -1,8 +1,11 @@
 {
     "alphabets": {
         "arciela": "200% ArCiela",
+        "aztec": "200% Aztec",
         "barazhad": "200% Barazhad",
         "celestial": "200% Celestial",
+        "chinese": "130% ScrapbookChinese",
+        "cyrillic": "130% KremlinPremier",
         "daedra": "200% Daedra",
         "darkeldar": "200% DarkEldar",
         "dethek": "200% Dethek",

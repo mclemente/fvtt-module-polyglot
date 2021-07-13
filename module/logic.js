@@ -8,7 +8,7 @@ import { registerSettings } from "./settings.js";
 export function getSystem() {
 	let system = "generic";
 
-	if (["aria", "dark-heresy", "dcc", "D35E", "dnd5e", "demonlord", "dsa5", "kryx_rpg", "ose", "sfrpg", "sw5e", "tormenta20", "uesrpg-d100", "wfrp4e"].includes(game.system.id)) {
+	if (["aria", "dark-heresy", "dcc", "D35E", "dnd5e", "demonlord", "dsa5", "kryx_rpg", "ose", "sfrpg", "shadowrun5e", "sw5e", "tormenta20", "uesrpg-d100", "wfrp4e"].includes(game.system.id)) {
 		system = game.system.id;
 	}
 	else if (["pf1", "pf2e"].includes(game.system.id)) {
@@ -115,6 +115,28 @@ export class Polyglot {
 					}
 				}
 				return langs;
+			case "shadowrun5e":
+				const sr5eLanguages = {
+					"cityspeak": "Cityspeak",
+					"spanish": "Spanish",
+					"lakota": "Lakota",
+					"dakota": "Dakota",
+					"navajo": "Navajo",
+					"russian": "Russian",
+					"french": "French",
+					"italian": "Italian",
+					"german": "German",
+					"aztlaner": "Aztlaner Spanish",
+					"sperethiel": "Sperethiel",
+					"orzet": "Or'zet",
+					"english": "English",
+					"japanese": "Japanese",
+					"mandarin": "Mandarin"
+				}
+				for (let item in sr5eLanguages) {
+					langs[item] = sr5eLanguages[item];
+				}
+				return replaceLanguages ? {} : langs;
 			case "wfrp4e":
 				const wfrp4ePack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
 				const wfrp4eItemList = await wfrp4ePack.getIndex();
@@ -192,6 +214,8 @@ export class Polyglot {
 					return "lowGothic";
 				case "dsa5":
 					return "Garethi";
+				case "shadowrun5e":
+					return "cityspeak";
 				case "sw5e":
 					return "basic"
 				case "tormenta20":
@@ -377,6 +401,10 @@ export class Polyglot {
 					case "ose":
 						for (let lang of actor.data.data.languages.value)
 							known_languages.add(lang)
+						break;
+					case "shadowrun5e":
+						for (let lang in actor.data.data.skills.language.value)
+							known_languages.add(actor.data.data.skills.language.value[lang].name.toLowerCase())
 						break;
 					case "tormenta20":
 						for (let lang of actor.data.data.detalhes.idiomas.value)

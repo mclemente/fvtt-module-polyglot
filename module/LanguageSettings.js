@@ -16,7 +16,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 			template: './modules/polyglot/templates/LanguageSettings.hbs',
 			classes: ['sheet'],
 			width: 800,
-			height: 600,
+			height: "fit-content",
 			closeOnSubmit: true
 		});
 	}
