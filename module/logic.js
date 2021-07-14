@@ -600,8 +600,8 @@ export class Polyglot {
 		this.alphabets = settingInfo.alphabets;
 		if (game.settings.get("polyglot", "enableAllFonts")) {
 			const defaultAlphabets = (await getSystemResponse(true)).alphabets;
+			const invertedThis = invertObject(this.alphabets);
 			for (let alp in defaultAlphabets) {
-				const invertedThis = invertObject(this.alphabets);
 				if (!invertedThis[defaultAlphabets[alp]]) this.alphabets[alp] = defaultAlphabets[alp];
 			}
 		}
@@ -622,7 +622,6 @@ export class Polyglot {
 	 * and loads the current languages set for Comprehend Languages Spells and Tongues Spell settings.
 	 */
 	setup() {
-		this.loadLanguages();
 		registerSettings(this);
 		ChatBubbles.prototype._getMessageDimensions = (message) => {
 			let div = $(`<div class="chat-bubble" style="visibility:hidden;font:${this._bubble.font}">${this._bubble.message || message}</div>`);
@@ -643,7 +642,8 @@ export class Polyglot {
 	/**
 	 * Sets the settings for the Language Settings menu, updates the fonts and set the Custom Languages.
 	 */
-	ready() {
+	async ready() {
+		await this.loadLanguages();
 		if (game.user.isGM) {
 			game.settings.set("polyglot", "Languages", this.tongues);
 			game.settings.set("polyglot", "Alphabets", this.alphabets);
