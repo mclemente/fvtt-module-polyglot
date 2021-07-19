@@ -20,7 +20,7 @@ The original idea for this module was proposed by `@Talwin Greenwood` on the FVT
 The original PolyGlot module is written by KaKaRoTo. The 'fantasy languages' adaptation is written by elizeuangelo.  
 [@ironmonk88](https://github.com/ironmonk88) for the Translation Box.  
 [@manuelVo](https://github.com/manuelVo) for the API code.  
-Check the [translations' README](https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/blob/master/lang/README.md) for translator's credits.
+Check the [translations' README](lang/README.md) for translator's credits.
 
 # License
 This module is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).  
