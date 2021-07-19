@@ -1,7 +1,6 @@
 /**
- * Base class for all speed providers.
- * If you want to offer a speed provider in your system/module you must derive this class.
- * Each speed provider must at least implement
+ * Base class for all language providers.
+ * If you want to offer a language provider in your system/module you must derive this class.
  */
 export class LanguageProvider {
 	constructor(id) {
@@ -61,8 +60,8 @@ export class LanguageProvider {
 	}
 	getSystemDefaultLanguage() {
 		const keys = Object.keys(this.languages);
-		if (keys.includes("common")) this.defaultLanguage = "common";
-		else this.defaultLanguage = this.languages[0] || Object.keys(this.languages)[0] || "";
+		if (keys.includes("common")) return "common";
+		else return this.languages[0] || Object.keys(this.languages)[0] || "";
 	}
 	getDefaultLanguage() {
 		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
@@ -73,7 +72,7 @@ export class LanguageProvider {
 			if (inverted[defaultLang]) this.defaultLanguage = inverted[defaultLang];
 		}
 		else if (!replaceLanguages) {
-			this.getSystemDefaultLanguage();
+			this.defaultLanguage = this.getSystemDefaultLanguage();
 		}
 	}
 
@@ -95,7 +94,7 @@ export class LanguageProvider {
 		if (CONFIG[game.system.id.toUpperCase()]?.languages) {
 			if (replaceLanguages)
 				CONFIG[game.system.id.toUpperCase()].languages = {};
-				this.languages = CONFIG[game.system.id.toUpperCase()].languages;
+			this.languages = CONFIG[game.system.id.toUpperCase()].languages;
 		}
 	}
 	loadAlphabet() {
@@ -301,7 +300,7 @@ export class darkHeresyLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get defaultLanguage() {
+	getSystemDefaultLanguage() {
 		return "lowGothic";
 	}
 
@@ -326,7 +325,7 @@ export class darkHeresyLanguageProvider extends LanguageProvider {
 		for (let item in specialities) {
 			langs[item] = specialities[item];
 		}
-		return replaceLanguages ? {} : langs;
+		this.languages = replaceLanguages ? {} : langs;
 	}
 
 	getUserLanguages(actor) {
@@ -372,7 +371,7 @@ export class dccLanguageProvider extends LanguageProvider {
 		for (let item in CONFIG.DCC.languages) {
 			langs[item] = game.i18n.localize(CONFIG.DCC.languages[item]);
 		}
-		return replaceLanguages ? {} : langs;
+		this.languages =  replaceLanguages ? {} : langs;
 	}
 
 	getUserLanguages(actor) {
@@ -435,7 +434,7 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		for (let item of demonlordItemList) {
 			langs[item.name] = game.i18n.localize(item.name);
 		}
-		return replaceLanguages ? {} : langs;
+		this.languages = replaceLanguages ? {} : langs;
 	}
 
 	getUserLanguages(actor) {
@@ -597,7 +596,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get defaultLanguage() {
+	getSystemDefaultLanguage() {
 		return "Garethi";
 	}
 
@@ -624,7 +623,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 				}
 			}
 		}
-		return replaceLanguages ? {} : langs;
+		this.languages = replaceLanguages ? {} : langs;
 	}
 
 	getUserLanguages(actor) {
@@ -752,7 +751,7 @@ export class oseLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		return replaceLanguages ? [] : Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
+		this.languages = replaceLanguages ? [] : Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
 	}
 
 	getUserLanguages(actor) {
@@ -877,7 +876,7 @@ export class pf2eLanguageProvider extends pf1LanguageProvider {
 				langs[lang] = game.i18n.localize(CONFIG.PF2E.languages[lang]);
 			}
 		}
-		return langs;
+		this.languages = langs;
 	}
 
 	loadTongues() {
@@ -1000,7 +999,7 @@ export class shadowrun5eLanguageProvider extends LanguageProvider {
 		};
 	}
 	
-	get defaultLanguage() {
+	getSystemDefaultLanguage() {
 		return "cityspeak";
 	}
 
@@ -1027,7 +1026,7 @@ export class shadowrun5eLanguageProvider extends LanguageProvider {
 		for (let item in sr5eLanguages) {
 			langs[item] = sr5eLanguages[item];
 		}
-		return replaceLanguages ? {} : langs;
+		this.languages = replaceLanguages ? {} : langs;
 	}
 
 	getUserLanguages(actor) {
@@ -1167,7 +1166,7 @@ export class sw5eLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get defaultLanguage() {
+	getSystemDefaultLanguage() {
 		return "basic";
 	}
 }
@@ -1210,7 +1209,7 @@ export class tormenta20LanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get defaultLanguage() {
+	getSystemDefaultLanguage() {
 		return "comum";
 	}
 
@@ -1219,7 +1218,7 @@ export class tormenta20LanguageProvider extends LanguageProvider {
 		if (replaceLanguages) {
 			CONFIG.T20.idiomas = {};
 		}
-		return CONFIG.T20.idiomas;
+		this.languages = CONFIG.T20.idiomas;
 	}
 
 	getUserLanguages(actor) {
@@ -1268,7 +1267,7 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get defaultLanguage() {
+	getSystemDefaultLanguage() {
 		return "cyrodilic";
 	}
 
@@ -1293,7 +1292,7 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 		for (let item in uesrpgLanguages) {
 			langs[item] = uesrpgLanguages[item];
 		}
-		return replaceLanguages ? {} : langs;
+		this.languages = replaceLanguages ? {} : langs;
 	}
 
 	getUserLanguages(actor) {
@@ -1351,7 +1350,7 @@ export class warhammerLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get defaultLanguage() {
+	getSystemDefaultLanguage() {
 		return "reikspiel";
 	}
 
@@ -1368,7 +1367,7 @@ export class warhammerLanguageProvider extends LanguageProvider {
 				langs[key] = key;
 			}
 		}
-		return replaceLanguages ? {} : langs;
+		this.languages = replaceLanguages ? {} : langs;
 	}
 
 	getUserLanguages(actor) {
