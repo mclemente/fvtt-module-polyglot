@@ -21,17 +21,6 @@ export class Polyglot {
 	}
 
 	/**
-	 * Gets the game system's languages.
-	 * 
-	 * @returns {object|array}
-	 */
-	static async getLanguages() {
-		const languages = await currentLanguageProvider.getLanguages();
-		Polyglot.defaultLanguage = await this.getDefaultLanguage();
-		return languages;
-	}
-
-	/**
 	 * Returns an object or array, based on the game system's own data structure.
 	 * 
 	 * @returns {object|array}
@@ -48,27 +37,6 @@ export class Polyglot {
 	static set defaultLanguage(val) {
 		this._defaultLanguage = val || "";
 	}
-	/**
-	 * Returns the default language for a character.
-	 * If none is set, returns the system's default language, if any.
-	 * Otherwise, returns the first language in this.languages (it takes into account if it's an array or a set) or an empty string.
-	 */
-	static async getDefaultLanguage() {
-		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
-		const languages = await currentLanguageProvider.getLanguages();
-		const providerDefaultLanguage = await currentLanguageProvider.defaultLanguage;
-		if (defaultLang) {
-			if (languages[defaultLang.toLowerCase()]) return defaultLang.toLowerCase();
-			const inverted = invertObject(languages);
-			if (inverted[defaultLang]) return inverted[defaultLang];
-		}
-		if (!game.settings.get("polyglot", "replaceLanguages")) {
-			if (providerDefaultLanguage) return providerDefaultLanguage;
-			const keys = Object.keys(languages);
-			if (keys.includes("common")) return "common";
-		}
-		return languages[0] || Object.keys(languages)[0] || "";
-	}
 
 	/* -------------------------------------------- */
 	/*  Hooks	                                    */
@@ -77,8 +45,7 @@ export class Polyglot {
 	/**
 	 * Adds the Languages selector to the chatlog.
 	 */
-	async renderChatLog(chatlog, html, data) {
-		await this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
+	renderChatLog(chatlog, html, data) {
 		html.find("#chat-controls").after(`<div id='polyglot' class='polyglot-lang-select flexrow'><label>${game.i18n.localize("POLYGLOT.LanguageLabel")}:</label><select name='polyglot-language'></select></div>`);
 		const select = html.find(".polyglot-lang-select select");
 		select.change(e => {
@@ -167,9 +134,9 @@ export class Polyglot {
 		this.literate_languages = userLanguages[1];
 		if (this.known_languages.size == 0) {
 			if (game.user.isGM)
-				this.known_languages = new Set(Object.keys(Polyglot.languages))
+				this.known_languages = new Set(Object.keys(currentLanguageProvider.languages))
 			else
-				this.known_languages.add(Polyglot.defaultLanguage);
+				this.known_languages.add(currentLanguageProvider.defaultLanguage);
 		}
 		let options = "";
 		let playerCharacters = [];
@@ -182,7 +149,7 @@ export class Polyglot {
 		}
 		for (let lang of this.known_languages) {
 			if (!this._isTruespeech(lang) && lang === this.comprehendLanguages) continue;
-			let label = Polyglot.languages[lang] || lang;
+			let label = currentLanguageProvider.languages[lang] || lang;
 			if (game.user.isGM && playerCharacters.length) {
 				let title = `title="PCs that know ${label}:\n`;
 				for (let actor of playerCharacters) {
@@ -202,7 +169,7 @@ export class Polyglot {
 		const prevOption = select.val();
 		select.html($(options));
 
-		let defaultLanguage = Polyglot.defaultLanguage;
+		let defaultLanguage = currentLanguageProvider.defaultLanguage;
 		let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
 		if (!this.known_languages.has(selectedLanguage))
 			selectedLanguage = (this.known_languages.has(defaultLanguage) ? defaultLanguage : [...this.known_languages][0]);
@@ -242,8 +209,7 @@ export class Polyglot {
 		const lang = message.getFlag("polyglot", "language") || "";
 		if (!lang) return;
 		let metadata = html.find(".message-metadata")
-		if (!Object.keys(Polyglot.languages).length) await this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
-		let language = Polyglot.languages[lang] || lang
+		let language = currentLanguageProvider.languages[lang] || lang
 		const known = this.known_languages.has(lang);
 		const runifyGM = game.settings.get("polyglot", "runifyGM");
 		const displayTranslated = game.settings.get('polyglot', 'display-translated');
@@ -254,7 +220,7 @@ export class Polyglot {
 			message.polyglot_unknown = !this._isTruespeech(lang) && !known && (game.user.character ? !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages) : true);
 
 		let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot', 'useUniqueSalt') ? message.data._id : lang)
-		if (displayTranslated && (lang != Polyglot.defaultLanguage || message.polyglot_unknown)) {
+		if (displayTranslated && (lang != currentLanguageProvider.defaultLanguage || message.polyglot_unknown)) {
 			let content = html.find(".message-content");
 			let translation = message.data.content;
 			let original = $('<div>').addClass('polyglot-original-text').css({ font: this._getFontStyle(lang) }).html(new_content);
@@ -320,13 +286,6 @@ export class Polyglot {
 	}
 
 	/**
-	 * Loads the game system's alphabets and tongues that are set on the polyglot/module/systems folder.
-	 */
-	loadLanguages() {
-		currentLanguageProvider.loadLanguages();
-	}
-
-	/**
 	 * Registers settings, adjusts the bubble dimensions so the message is displayed correctly,
 	 * and loads the current languages set for Comprehend Languages Spells and Tongues Spell settings.
 	 */
@@ -348,19 +307,6 @@ export class Polyglot {
 	}
 
 	/**
-	 * Sets the settings for the Language Settings menu, updates the fonts and set the Custom Languages.
-	 */
-	ready() {
-		this.loadLanguages();
-		if (game.user.isGM) {
-			game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
-			game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
-			this.updateConfigFonts();
-			this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
-		}
-	}
-
-	/**
 	 * Register fonts so they are available to other elements (such as Drawings)
 	 * First, remove all our fonts, then add them again if needed.
 	 */
@@ -369,26 +315,6 @@ export class Polyglot {
 		if (game.settings.get("polyglot", "exportFonts")) {
 			CONFIG.fontFamilies.push(...Polyglot.FONTS);
 		}
-	}
-
-	async setCustomLanguages(languages) {
-		Polyglot.languages = await Polyglot.getLanguages();
-		let langSettings = game.settings.get("polyglot", "Languages");
-		if (languages != "") {
-			for (let lang of languages.split(",")) {
-				lang = lang.trim();
-				const key = lang.toLowerCase().replace(/ \'/g, "_");
-				if (game.system.id === "pf2e") {
-					CONFIG.PF2E.languages[key] = lang;
-				}
-				Polyglot.languages[key] = lang;
-				if (!(key in langSettings)) {
-					langSettings[key] = currentLanguageProvider.tongues["_default"];
-				}
-			}
-		}
-		if (game.ready && game.user.isGM) game.settings.set("polyglot", "Languages", langSettings);
-		this.updateUserLanguages(ui.chat.element);
 	}
 
 	/**
@@ -519,14 +445,14 @@ export class Polyglot {
 		if (sheet._polyglotEditor) return;
 		const methodName = sheet.activateEditor ? "activateEditor" : "_createEditor"
 		sheet._polyglot_original_activateEditor = sheet[methodName];
-		let langs = Polyglot.languages;
+		let langs = currentLanguageProvider.languages;
 		if (!game.user.isGM) {
 			langs = {};
 			for (let lang of this.known_languages) {
-				langs[lang] = Polyglot.languages[lang];
+				langs[lang] = currentLanguageProvider.languages[lang];
 			}
 			for (let lang of this.literate_languages) {
-				langs[lang] = Polyglot.languages[lang];
+				langs[lang] = currentLanguageProvider.languages[lang];
 			}
 		}
 		const languages = Object.entries(langs).map(([lang, name]) => {

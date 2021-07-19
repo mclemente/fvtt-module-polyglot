@@ -21,7 +21,7 @@ export class LanguageProvider {
 			"daedra": "200% Daedra",
 			"darkeldar": "200% DarkEldar",
 			"dethek": "200% Dethek",
-			"dovah": "170% Dovahkiin",
+			"dovah": "170% DragonAlphabet",
 			"elderfuthark": "350% ElderFuthark",
 			"eltharin": "200% Eltharin",
 			"espruar": "150% Espruar",
@@ -59,26 +59,68 @@ export class LanguageProvider {
 	get originalTongues() {
 		return { "_default": "thorass" };
 	}
-	get defaultLanguage() {
-		return;
+	getSystemDefaultLanguage() {
+		const keys = Object.keys(this.languages);
+		if (keys.includes("common")) this.defaultLanguage = "common";
+		else this.defaultLanguage = this.languages[0] || Object.keys(this.languages)[0] || "";
 	}
+	getDefaultLanguage() {
+		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
+		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+		if (defaultLang) {
+			if (this.languages[defaultLang.toLowerCase()]) this.defaultLanguage = defaultLang.toLowerCase();
+			const inverted = invertObject(this.languages);
+			if (inverted[defaultLang]) this.defaultLanguage = inverted[defaultLang];
+		}
+		else if (!replaceLanguages) {
+			this.getSystemDefaultLanguage();
+		}
+	}
+
+	/**
+	 * Loads everything that can't be loaded on the constructor due to async/await.
+	 */
+	async setup() {
+		await this.getLanguages();
+		this.loadAlphabet();
+		this.loadTongues();
+		this.getDefaultLanguage();
+	}
+
+	/**
+	 * Even though the base method doesn't have an await, some providers might need it to look into compendiums.
+	 */
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		if (CONFIG[game.system.id.toUpperCase()]?.languages) {
 			if (replaceLanguages)
 				CONFIG[game.system.id.toUpperCase()].languages = {};
-			return CONFIG[game.system.id.toUpperCase()].languages;
+				this.languages = CONFIG[game.system.id.toUpperCase()].languages;
 		}
-		return [];
 	}
-
-	/**
-	 * If your system requires the language to be added to the CONFIG's language object.
-	 * @param {string} key
-	 * @param {string} lang
-	 */
-	setCustomLanguages(key, lang) {
-		return;
+	loadAlphabet() {
+		this.alphabets = this.originalAlphabets;
+		if (game.settings.get("polyglot", "enableAllFonts")) {
+			const defaultAlphabets = new LanguageProvider().originalAlphabets;
+			const invertedThis = invertObject(this.alphabets);
+			for (let alp in defaultAlphabets) {
+				if (!invertedThis[defaultAlphabets[alp]]) this.alphabets[alp] = defaultAlphabets[alp];
+			}
+		}
+	}
+	loadTongues() {
+		this.tongues = this.originalTongues;
+		const customLanguages = game.settings.get("polyglot", "customLanguages");
+		if (customLanguages != "") {
+			for (let lang of customLanguages.split(",")) {
+				lang = lang.trim();
+				const key = lang.toLowerCase().replace(/ \'/g, "_");
+				this.languages[key] = lang;
+				if (!(key in this.tongues)) {
+					this.tongues[key] = this.tongues["_default"];
+				}
+			}
+		}
 	}
 
 	getUserLanguages(actor) {
@@ -101,27 +143,6 @@ export class LanguageProvider {
 	 */
 	conditions(polyglot, lang) {
 		return polyglot.known_languages.has(lang);
-	}
-	
-	loadLanguages() {
-		this.alphabets = this.originalAlphabets;
-		if (game.settings.get("polyglot", "enableAllFonts")) {
-			const defaultAlphabets = new LanguageProvider().originalAlphabets;
-			const invertedThis = invertObject(this.alphabets);
-			for (let alp in defaultAlphabets) {
-				if (!invertedThis[defaultAlphabets[alp]]) this.alphabets[alp] = defaultAlphabets[alp];
-			}
-		}
-		let langSettings = game.settings.get("polyglot", "Languages");
-		this.tongues = Object.keys(langSettings).length ? langSettings : this.originalTongues;
-		if (!game.settings.get("polyglot", "replaceLanguages")) {
-			for (let tongue in this.tongues) {
-				if (!(tongue in langSettings)) {
-					langSettings[tongue] = this.tongues[tongue];
-				}
-			}
-			this.tongues = langSettings;
-		}
 	}
 }
 
@@ -859,8 +880,20 @@ export class pf2eLanguageProvider extends pf1LanguageProvider {
 		return langs;
 	}
 
-	setCustomLanguages(key, lang) {
-		CONFIG.PF2E.languages[key] = lang;
+	loadTongues() {
+		this.tongues = this.originalTongues;
+		const customLanguages = game.settings.get("polyglot", "customLanguages");
+		if (customLanguages != "") {
+			for (let lang of customLanguages.split(",")) {
+				lang = lang.trim();
+				const key = lang.toLowerCase().replace(/ \'/g, "_");
+				CONFIG.PF2E.languages[key] = lang;
+				this.languages[key] = lang;
+				if (!(key in this.tongues)) {
+					this.tongues[key] = this.tongues["_default"];
+				}
+			}
+		}
 	}
 }
 
@@ -1206,7 +1239,7 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 			"ayleidoon": "230% OldeEspruar",
 			"bosmeri": "200% MageScript",
 			"daedric": "200% Daedra",
-			"dovah": "170% Dovahkiin",
+			"dovah": "170% DragonAlphabet",
 			"dunmeri": "150% HighDrowic",
 			"dwemeris": "120% Dethek",
 			"falmer": "200% ArCiela",

@@ -1,4 +1,4 @@
-import { getDefaultLanguageProvider, updateLanguageProvider } from "./api.js"
+import { currentLanguageProvider, getDefaultLanguageProvider, updateLanguageProvider } from "./api.js"
 import { PolyglotLanguageSettings } from "./LanguageSettings.js"
 import { legacyGenericSystem } from "./logic.js"
 
@@ -94,7 +94,7 @@ export function registerSettings() {
 		hint: game.i18n.localize("POLYGLOT.CustomLanguagesHint"),
 		default: "",
 		type: String,
-		onChange: (value) => window.polyglot.polyglot.setCustomLanguages(value)
+		onChange: () => location.reload()
 	});
 	addSetting("comprehendLanguages", {
 		name: game.i18n.localize("POLYGLOT.ComprehendLanguagesTitle"),
@@ -140,7 +140,7 @@ export function registerSettings() {
 	addSetting("runifyGM", {
 		name: game.i18n.localize("POLYGLOT.ScrambleGMTitle"),
 		hint: game.i18n.localize("POLYGLOT.ScrambleGMHint"),
-		default: true,
+		default: false,
 		type: Boolean,
 		onChange: () => location.reload()
 	});

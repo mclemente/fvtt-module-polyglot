@@ -6,7 +6,6 @@ The following fonts are owned by Pixel Sagas, check out their [website](http://w
 - Celestial
 - Daedra
 - Dethek
-- Dovahkiin
 - Espruar
 - HighDrowic
 - Kargi
@@ -32,6 +31,10 @@ The follow font was created by Helena Jole:
 The following font was created by Levi:
 
 - Aztec
+
+The following font is under [1001Fonts Free For Personal Use License (FFP)](https://www.1001fonts.com/licenses/ffp.html):
+
+- Dragon Alphabet
 
 The following font is under [GNU GENERAL PUBLIC LICENSE v3](https://www.gnu.org/licenses/gpl-3.0.en.html):
 

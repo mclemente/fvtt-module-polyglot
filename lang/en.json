@@ -8,7 +8,7 @@
     "LanguagesHint": "Changes the alphabet used for the languages. Requires reload, but won't reload on Save. Reseting to defaults will reload.",
     "Fonts": "Fonts",
     "CustomLanguagesTitle": "Custom Languages",
-    "CustomLanguagesHint": "Define a list of custom, comma separated, languages to add to the system.",
+    "CustomLanguagesHint": "Define a list of custom, comma separated, languages to add to the system. Requires reload.",
     "ComprehendLanguagesTitle": "Comprehend Languages Spell",
     "ComprehendLanguagesHint": "Like the Comprehend Languages spell from D&D. Input a custom language you have already set. It won't be able to be spoken or written but allows to understand all other languages.",
     "TruespeechTitle": "Tongues Spell",

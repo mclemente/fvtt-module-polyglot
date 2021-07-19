@@ -1,4 +1,4 @@
-import { initApi, registerModule, registerSystem } from "./module/api.js"
+import { currentLanguageProvider, initApi, registerModule, registerSystem } from "./module/api.js"
 import { LanguageProvider } from "./module/LanguageProvider.js";
 import { Polyglot } from "./module/logic.js";
 import { registerSettings } from "./module/settings.js"
@@ -10,7 +10,7 @@ Polyglot.FONTS = [
 	"DarkEldar",
 	"Daedra",
 	"Dethek",
-	"Dovahkiin",
+	"DragonAlphabet",
 	"ElderFuthark",
 	"Eltharin",
 	"Espruar",
@@ -45,7 +45,7 @@ Polyglot.FONTS = [
 	"Valmaric"
 ];
 
-window.polyglot = { polyglot: new Polyglot(), registerModule, registerSystem };
+window.polyglot = { polyglot: new Polyglot(), fonts: Polyglot.FONTS, registerModule, registerSystem };
 
 Hooks.once("init", () => {
 	registerSettings();
@@ -59,10 +59,14 @@ Hooks.on('controlToken5e', window.polyglot.polyglot.controlToken.bind(window.pol
 Hooks.on('preCreateChatMessage', window.polyglot.polyglot.preCreateChatMessage.bind(window.polyglot.polyglot))
 Hooks.on('renderChatMessage', window.polyglot.polyglot.renderChatMessage.bind(window.polyglot.polyglot))
 Hooks.on('renderJournalSheet', window.polyglot.polyglot.renderJournalSheet.bind(window.polyglot.polyglot))
-Hooks.on('setup', window.polyglot.polyglot.setup.bind(window.polyglot.polyglot))
+Hooks.on('setup', async () => {
+	await currentLanguageProvider.setup();
+	window.polyglot.polyglot.setup.bind(window.polyglot.polyglot)
+});
 Hooks.on('ready', () => {
-	// window.polyglot.polyglot.ready.bind(window.polyglot.polyglot)
-	window.polyglot.polyglot.ready()
+	game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
+	game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
+	window.polyglot.polyglot.updateConfigFonts();
 	Hooks.callAll("polyglot.ready", LanguageProvider)
 });
 Hooks.on("chatBubble", window.polyglot.polyglot.chatBubble.bind(window.polyglot.polyglot)) //token, html, message, {emote}
