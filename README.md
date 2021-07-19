@@ -10,7 +10,10 @@
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.
 
 ## Usage
-Check the [wiki](https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/wiki).
+Check the [wiki](../../wiki).
+
+## API
+If you want to implement Polyglot into your system, check out the [API wiki](../../wiki/API)
 
 # Credit
 The original idea for this module was proposed by `@Talwin Greenwood` on the FVTT discord.  
