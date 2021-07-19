@@ -110,8 +110,8 @@ export class LanguageProvider {
 	loadTongues() {
 		this.tongues = this.originalTongues;
 		const customLanguages = game.settings.get("polyglot", "customLanguages");
-		if (customLanguages != "") {
-			for (let lang of customLanguages.split(",")) {
+		if (customLanguages) {
+			for (let lang of customLanguages.split(/[,;]/)) {
 				lang = lang.trim();
 				const key = lang.toLowerCase().replace(/ \'/g, "_");
 				this.languages[key] = lang;
@@ -127,8 +127,7 @@ export class LanguageProvider {
 		let literate_languages = new Set();
 		for (let lang of actor.data.data.traits.languages.value)
 			known_languages.add(lang)
-		// This condition is needed so an empty language is not loaded
-		if (actor.data.data.traits.languages.custom != "") {
+		if (actor.data.data.traits.languages.custom) {
 			for (let lang of actor.data.data.traits.languages.custom.split(/[,;]/))
 				known_languages.add(lang.trim().toLowerCase());
 		}

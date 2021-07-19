@@ -25,17 +25,14 @@ export class Polyglot {
 	 * 
 	 * @returns {object|array}
 	 */
-	static get languages() {
-		return this._languages || {};
+	get languages() {
+		return currentLanguageProvider.languages;
 	}
-	static set languages(val) {
-		this._languages = val || {};
+	get defaultLanguage() {
+		return currentLanguageProvider.defaultLanguage;
 	}
-	static get defaultLanguage() {
-		return this._defaultLanguage || "";
-	}
-	static set defaultLanguage(val) {
-		this._defaultLanguage = val || "";
+	get LanguageProvider() {
+		return currentLanguageProvider;
 	}
 
 	/* -------------------------------------------- */

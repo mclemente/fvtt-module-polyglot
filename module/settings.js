@@ -46,7 +46,7 @@ export function registerSettings() {
 		config: false,
 		type: String,
 		default: getDefaultLanguageProvider(),
-		onChange: updateLanguageProvider,
+		onChange: updateLanguageProvider
 	})
 
 	game.settings.register("polyglot", "defaultLanguage", {
