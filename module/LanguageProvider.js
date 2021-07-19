@@ -347,6 +347,7 @@ export class dccLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+		const langs = {};
 		for (let item in CONFIG.DCC.languages) {
 			langs[item] = game.i18n.localize(CONFIG.DCC.languages[item]);
 		}
@@ -581,6 +582,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+		const langs = {};
 		if (game.modules.get("dsa5-core")) {
 			const dsa5Pack = game.packs.get("dsa5-core.corespecialabilites");
 			const dsa5ItemList = await dsa5Pack.getIndex();
@@ -971,6 +973,7 @@ export class shadowrun5eLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+		const langs = {};
 		const sr5eLanguages = {
 			"cityspeak": "Cityspeak",
 			"spanish": "Spanish",
@@ -1238,6 +1241,7 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+		const langs = {};
 		const uesrpgLanguages = {
 			"aldmeri": "Aldmeri",
 			"ayleidoon": "Ayleidoon",
