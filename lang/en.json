@@ -37,6 +37,15 @@
       "c": "Players Only",
       "d": "None"
     },
+    "LanguageProvider": {
+      "name": "Language Settings Provider",
+      "hint": "Select who provides language information for alphabets and languages. More language providers can be made available via game systems and installed modules. The options below are dependent upon the language provider selected here. ⚠️ If you change the provider, you have to save and reopen these settings.",
+      "choices": {
+        "module": "Module {name}",
+        "native": "Generic",
+        "system": "System {name}"
+      }
+    },
     
     "Translation": "Translation",
     "TranslatedFrom": "Translated from ",

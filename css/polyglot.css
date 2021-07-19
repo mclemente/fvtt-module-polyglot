@@ -7,6 +7,10 @@
 	background: rgba(255, 255, 245, 0.8);
 }
 
+.polyglot-language-settings {
+  max-width: 800px;
+}
+
 span.polyglot-journal {
 	background-color: rgba(255, 180, 0, 0.25)
 }

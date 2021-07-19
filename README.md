@@ -9,22 +9,16 @@
 # Polyglot
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.
 
-## Supported Systems
-Aria, Call of Cthulhu, Dark Heresy, Das Schwarze Auge, DCC, D&D 3.5e, D&D 5e, Pathfinder, Pathfinder 2e, OSE, Savage Worlds, Shadow of the Demon Lord, Starfinder, Tormenta20 and Warhammer Fantasy Roleplay.  
-It may work with non-supported systems, see [Generic System Support](https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/wiki/Generic-System-Support) for more info.
-
-## Installation
-In the setup screen, use the URL `https://raw.githubusercontent.com/League-of-Foundry-Developers/fvtt-module-polyglot/master/module.json` to install the module.
-
 ## Usage
 Check the [wiki](https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/wiki).
 
-## Credit
+# Credit
 The original idea for this module was proposed by `@Talwin Greenwood` on the FVTT discord.  
 The original PolyGlot module is written by KaKaRoTo. The 'fantasy languages' adaptation is written by elizeuangelo.  
 [@ironmonk88](https://github.com/ironmonk88) for the Translation Box.  
+[@manuelVo](https://github.com/manuelVo) for the API code.  
 Check the [translations' README](https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/blob/master/lang/README.md) for translator's credits.
 
-## License
+# License
 This module is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).  
 This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agreement for Module Development v 0.1.6](https://foundryvtt.com/article/license/).

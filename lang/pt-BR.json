@@ -37,6 +37,15 @@
       "c": "Apenas Jogadores",
       "d": "Ninguém"
     },
+    "LanguageProvider": {
+      "name": "Provedor de Configuração de Idioma",
+      "hint": "Escolha quem providencia a informação de idioma para Alfabetos e Idiomas. Mais provedores de idioma podem ser disponibilizados por sistemas de jogo ou módulos instalados. As opções abaixo dependem do provedor escolhido aqui. ⚠️ Se você mudar o provedor, você precisa salvar e reabrir esta configuração.",
+      "choices": {
+        "module": "Module {name}",
+        "native": "Generic",
+        "system": "System {name}"
+      }
+    },
     
     "Translation": "Tradução",
     "TranslatedFrom": "Traduzido do ",

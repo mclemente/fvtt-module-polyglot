@@ -1,5 +1,6 @@
-import {PolyglotLanguageSettings} from "./LanguageSettings.js"
-import {getSystem} from "./logic.js"
+import { getDefaultLanguageProvider, updateLanguageProvider } from "./api.js"
+import { PolyglotLanguageSettings } from "./LanguageSettings.js"
+import { legacyGenericSystem } from "./logic.js"
 
 /**
  * Shorthand for game.settings.register.
@@ -10,37 +11,45 @@ import {getSystem} from "./logic.js"
  */
 function addSetting (key, data) {
 	const commonData = {
-		scope: 'world',
+		scope: "world",
 		config: true
 	};
-	game.settings.register('polyglot', key, Object.assign(commonData, data));
+	game.settings.register("polyglot", key, Object.assign(commonData, data));
 }
 
-export function registerSettings(PolyglotSingleton) {
-	game.settings.registerMenu('polyglot', 'LanguageSettings', {
-		name: 'Language Settings',
-		label: 'Language Settings',
-		icon: 'fas fa-globe',
+export function registerSettings() {
+	game.settings.registerMenu("polyglot", "LanguageSettings", {
+		name: "Language Settings",
+		label: "Language Settings",
+		icon: "fas fa-globe",
 		type: PolyglotLanguageSettings,
 		restricted: true
 	});
-	game.settings.register('polyglot', "Alphabets", {
+	game.settings.register("polyglot", "Alphabets", {
 		name: game.i18n.localize("POLYGLOT.AlphabetsTitle"),
 		hint: game.i18n.localize("POLYGLOT.AlphabetsHint"),
-		scope: 'world',
+		scope: "world",
 		config: false,
 		default: {},
 		type: Object
 	});
-	game.settings.register('polyglot', "Languages", {
+	game.settings.register("polyglot", "Languages", {
 		name: game.i18n.localize("POLYGLOT.LanguagesTitle"),
 		hint: game.i18n.localize("POLYGLOT.LanguagesHint"),
-		scope: 'world',
+		scope: "world",
 		config: false,
 		default: {},
 		type: Object
 	});
-	game.settings.register('polyglot', "defaultLanguage", {
+	game.settings.register("polyglot", "languageProvider", {
+		scope: "world",
+		config: false,
+		type: String,
+		default: getDefaultLanguageProvider(),
+		onChange: updateLanguageProvider,
+	})
+
+	game.settings.register("polyglot", "defaultLanguage", {
 		name: game.i18n.localize("POLYGLOT.DefaultLanguageTitle"),
 		hint: game.i18n.localize("POLYGLOT.DefaultLanguageHint"),
 		scope: "client",
@@ -55,11 +64,11 @@ export function registerSettings(PolyglotSingleton) {
 		type: Boolean,
 		onChange: () => location.reload()
 	});
-	game.settings.register('polyglot', "enableAllFonts", {
+	game.settings.register("polyglot", "enableAllFonts", {
 		name: game.i18n.localize("POLYGLOT.enableAllFontsTitle"),
 		hint: game.i18n.localize("POLYGLOT.enableAllFontsHint"),
-		scope: 'world',
-		config: getSystem() !== "generic",
+		scope: "world",
+		config: legacyGenericSystem(),
 		default: false,
 		type: Boolean,
 		onChange: () => location.reload()
@@ -69,7 +78,7 @@ export function registerSettings(PolyglotSingleton) {
 		hint: game.i18n.localize("POLYGLOT.ExportFontsHint"),
 		default: true,
 		type: Boolean,
-		onChange: () => PolyglotSingleton.updateConfigFonts()
+		onChange: () => window.polyglot.polyglot.updateConfigFonts()
 	});
 
 	//Language Settings
@@ -85,21 +94,21 @@ export function registerSettings(PolyglotSingleton) {
 		hint: game.i18n.localize("POLYGLOT.CustomLanguagesHint"),
 		default: "",
 		type: String,
-		onChange: (value) => PolyglotSingleton.setCustomLanguages(value)
+		onChange: (value) => window.polyglot.polyglot.setCustomLanguages(value)
 	});
 	addSetting("comprehendLanguages", {
 		name: game.i18n.localize("POLYGLOT.ComprehendLanguagesTitle"),
 		hint: game.i18n.localize("POLYGLOT.ComprehendLanguagesHint"),
 		default: "",
 		type: String,
-		onChange: (value) => PolyglotSingleton.comprehendLanguages = value.trim().toLowerCase().replace(/ \'/g, "_")
+		onChange: (value) => window.polyglot.polyglot.comprehendLanguages = value.trim().toLowerCase().replace(/ \'/g, "_")
 	});
 	addSetting("truespeech", {
 		name: game.i18n.localize("POLYGLOT.TruespeechTitle"),
 		hint: game.i18n.localize("POLYGLOT.TruespeechHint"),
 		default: "",
 		type: String,
-		onChange: (value) => PolyglotSingleton.truespeech = game.settings.get("polyglot","truespeech").trim().toLowerCase().replace(/ \'/g, "_")
+		onChange: (value) => window.polyglot.polyglot.truespeech = game.settings.get("polyglot","truespeech").trim().toLowerCase().replace(/ \'/g, "_")
 	});
 
 	//Chat Settings

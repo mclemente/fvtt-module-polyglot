@@ -1,34 +1,16 @@
-import { registerSettings } from "./settings.js";
+import { currentLanguageProvider } from "./api.js";
 
 /**
- * Returns the name of the .json file to be read with the alphabets and tongues of the system.
+ * Returns if the system is one of the systems that were originally supported prior to 1.7.2.
  * 
- * @returns {String}
+ * @returns {Boolean}
  */
-export function getSystem() {
-	let system = "generic";
-
-	if (["aria", "dark-heresy", "dcc", "D35E", "dnd5e", "demonlord", "dsa5", "kryx_rpg", "ose", "sfrpg", "shadowrun5e", "sw5e", "tormenta20", "uesrpg-d100", "wfrp4e"].includes(game.system.id)) {
-		system = game.system.id;
-	}
-	else if (["pf1", "pf2e"].includes(game.system.id)) {
-		system = "golarion";
-	}
-	return system;
-}
-
-/**
- * Returns the alphabets and tongues of a system.
- * 
- * @returns {Promise<any>}
- */
-export async function getSystemResponse(force=false) {
-	const system = force ? "generic" : getSystem();
-	const response = await fetch(`./modules/polyglot/module/systems/${system}.json`);
-	if (response.ok) {
-		return response.json();
-	}
-	throw Error(`Polyglot | Failed to fetch ${system}.json: ${response.status}`);
+export function legacyGenericSystem() {
+	const systems = [
+		"aria", "dark-heresy", "dcc", "D35E", "dnd5e", "demonlord", "dsa5", "kryx_rpg", "ose",
+		"pf1", "pf2e", "sfrpg", "shadowrun5e", "sw5e", "tormenta20", "uesrpg-d100", "wfrp4e"
+	];
+	return systems.includes(game.system.id);
 }
 
 export class Polyglot {
@@ -36,8 +18,6 @@ export class Polyglot {
 		this.known_languages = new Set();
 		this.literate_languages = new Set();
 		this.refresh_timeout = null;
-		this.alphabets = { common: '120% Dethek' };
-		this.tongues = { _default: 'common' };
 	}
 
 	/**
@@ -46,143 +26,9 @@ export class Polyglot {
 	 * @returns {object|array}
 	 */
 	static async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const langs = {};
-		switch (game.system.id) {
-			case "ose":
-				return replaceLanguages ? [] : Object.fromEntries(CONFIG.OSE.languages.map(l => [l, l]));
-			case "dark-heresy":
-				const specialities = {
-					"chapterRunes": "Chapter Runes",
-					"chaosMarks": "Chaos Marks",
-					"eldar": "Eldar",
-					"highGothic": "High Gothic",
-					"imperialCodes": "Imperial Codes",
-					"lowGothic": "Low Gothic",
-					"mercenary": "Mercenary",
-					"necrontyr": "Necrontyr",
-					"ork": "Ork",
-					"tau": "Tau",
-					"technaLingua": "Techna-Lingua",
-					"underworld": "Underworld",
-					"xenosMarkings": "Xenos Markings"
-				};
-				for (let item in specialities) {
-					langs[item] = specialities[item];
-				}
-				return replaceLanguages ? {} : langs;
-			case "dcc":
-				for (let item in CONFIG.DCC.languages) {
-					langs[item] = game.i18n.localize(CONFIG.DCC.languages[item]);
-				}
-				return replaceLanguages ? {} : langs;
-			case "demonlord":
-				const demonlordPack = game.packs.get("demonlord.languages");
-				const demonlordItemList = await demonlordPack.getIndex();
-				for (let item of demonlordItemList) {
-					langs[item.name] = game.i18n.localize(item.name);
-				}
-				return replaceLanguages ? {} : langs;
-			case "dsa5":
-				if (game.modules.get("dsa5-core")) {
-					const dsa5Pack = game.packs.get("dsa5-core.corespecialabilites");
-					const dsa5ItemList = await dsa5Pack.getIndex();
-					for (let item of dsa5ItemList) {
-						let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language") + '\\s*\\((.+)\\)', 'i');
-						let match = item.name.match(myRegex);
-						if (match) {
-							let key = match[1].trim();
-							langs[key] = key;
-						}
-						else {
-							myRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy") + '\\s*\\((.+)\\)', 'i');
-							match = item.name.match(myRegex);
-							if (match) {
-								let key = match[1].trim();
-								langs[key] = key;
-							}
-						}
-					}
-				}
-				return replaceLanguages ? {} : langs;
-			case "pf2e":
-				if (replaceLanguages) {
-					CONFIG.PF2E.languages = {};
-				}
-				else {
-					for (let lang in CONFIG.PF2E.languages) {
-						langs[lang] = game.i18n.localize(CONFIG.PF2E.languages[lang]);
-					}
-				}
-				return langs;
-			case "shadowrun5e":
-				const sr5eLanguages = {
-					"cityspeak": "Cityspeak",
-					"spanish": "Spanish",
-					"lakota": "Lakota",
-					"dakota": "Dakota",
-					"navajo": "Navajo",
-					"russian": "Russian",
-					"french": "French",
-					"italian": "Italian",
-					"german": "German",
-					"aztlaner": "Aztlaner Spanish",
-					"sperethiel": "Sperethiel",
-					"orzet": "Or'zet",
-					"english": "English",
-					"japanese": "Japanese",
-					"mandarin": "Mandarin"
-				}
-				for (let item in sr5eLanguages) {
-					langs[item] = sr5eLanguages[item];
-				}
-				return replaceLanguages ? {} : langs;
-			case "wfrp4e":
-				const wfrp4ePack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
-				const wfrp4eItemList = await wfrp4ePack.getIndex();
-				for (let item of wfrp4eItemList) {
-					let myRegex = new RegExp(game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills") + '\\s*\\((.+)\\)', 'i');
-					const match = item.name.match(myRegex);
-					if (match) {
-						let key = match[1].trim().toLowerCase();
-						langs[key] = key;
-					}
-				}
-				return replaceLanguages ? {} : langs;
-			case "tormenta20":
-				if (replaceLanguages) {
-					CONFIG.T20.idiomas = {};
-				}
-				return CONFIG.T20.idiomas;
-			case "uesrpg-d100":
-				const uesrpgLanguages = {
-					"aldmeri": "Aldmeri",
-					"ayleidoon": "Ayleidoon",
-					"bosmeri": "Bosmeri",
-					"cyrodilic": "Cyrodilic",
-					"daedric": "Daedric",
-					"dovah": "Dovah",
-					"dunmeri": "Dunmeri",
-					"dwemeris": "Dwemeris",
-					"falmer": "Falmer",
-					"jel": "Jel",
-					"nordic": "Nordic",
-					"taagra": "Ta'Agra",
-					"yoku": "Yoku"
-				};
-				for (let item in uesrpgLanguages) {
-					langs[item] = uesrpgLanguages[item];
-				}
-				return replaceLanguages ? {} : langs;
-				return;
-			default:
-				if (CONFIG[game.system.id.toUpperCase()]?.languages) {
-					if (replaceLanguages)
-						CONFIG[game.system.id.toUpperCase()].languages = {};
-					return CONFIG[game.system.id.toUpperCase()].languages;
-				}
-				return [];
-		}
+		const languages = await currentLanguageProvider.getLanguages();
+		Polyglot.defaultLanguage = await this.getDefaultLanguage();
+		return languages;
 	}
 
 	/**
@@ -196,39 +42,32 @@ export class Polyglot {
 	static set languages(val) {
 		this._languages = val || {};
 	}
+	static get defaultLanguage() {
+		return this._defaultLanguage || "";
+	}
+	static set defaultLanguage(val) {
+		this._defaultLanguage = val || "";
+	}
 	/**
 	 * Returns the default language for a character.
 	 * If none is set, returns the system's default language, if any.
 	 * Otherwise, returns the first language in this.languages (it takes into account if it's an array or a set) or an empty string.
 	 */
-	static get defaultLanguage() {
+	static async getDefaultLanguage() {
 		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
+		const languages = await currentLanguageProvider.getLanguages();
+		const providerDefaultLanguage = await currentLanguageProvider.defaultLanguage;
 		if (defaultLang) {
-			if (this.languages[defaultLang.toLowerCase()]) return defaultLang.toLowerCase();
-			const inverted = invertObject(this.languages);
+			if (languages[defaultLang.toLowerCase()]) return defaultLang.toLowerCase();
+			const inverted = invertObject(languages);
 			if (inverted[defaultLang]) return inverted[defaultLang];
 		}
 		if (!game.settings.get("polyglot", "replaceLanguages")) {
-			switch (game.system.id) {
-				case "dark-heresy":
-					return "lowGothic";
-				case "dsa5":
-					return "Garethi";
-				case "shadowrun5e":
-					return "cityspeak";
-				case "sw5e":
-					return "basic"
-				case "tormenta20":
-					return "comum";
-				case "uesrpg-d100":
-					return "cyrodilic";
-				case "wfrp4e":
-					return "reikspiel";
-			}
-			const keys = Object.keys(this.languages);
+			if (providerDefaultLanguage) return providerDefaultLanguage;
+			const keys = Object.keys(languages);
 			if (keys.includes("common")) return "common";
 		}
-		return this.languages[0] || Object.keys(this.languages)[0] || "";
+		return languages[0] || Object.keys(languages)[0] || "";
 	}
 
 	/* -------------------------------------------- */
@@ -311,119 +150,7 @@ export class Polyglot {
 				actors.push(game.user.character);
 		}
 		for (let actor of actors) {
-			try {
-				switch (game.system.id) {
-					case "aria":
-						known_languages.add(game.i18n.localize("ARIA.languages.Common"));
-						for (let lang of actor.data.items) {
-							if (lang.data.data.language)
-								known_languages.add(lang.name.toLowerCase());
-						}
-						break;
-					case "CoC7":
-						for (let item of actor.data.items) {
-							const match =
-								item.name.match(game.i18n.localize("POLYGLOT.COC7.LanguageOwn") + '\\s*\\((.+)\\)', 'i')
-								|| item.name.match(game.i18n.localize("POLYGLOT.COC7.LanguageAny") + '\\s*\\((.+)\\)', 'i')
-								|| item.name.match(game.i18n.localize("POLYGLOT.COC7.LanguageOther") + '\\s*\\((.+)\\)', 'i');
-							// adding only the descriptive language name, not "Language (XYZ)"
-							if (match)
-								known_languages.add(match[1].trim().toLowerCase());
-							else if ([game.i18n.localize("POLYGLOT.COC7.LanguageSpec"), game.i18n.localize("POLYGLOT.COC7.LanguageOwn"), game.i18n.localize("POLYGLOT.COC7.LanguageAny"), game.i18n.localize("POLYGLOT.COC7.LanguageOther"), game.i18n.localize("CoC7.language"), "Language", "Language (Own)", "Language (Other)"].includes(item.data.specialization))
-								known_languages.add(item.name.trim().toLowerCase());
-						}
-						break;
-					case "wfrp4e":
-						for (let item of actor.data.items) {
-							let myRegex = new RegExp(game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills") + '\\s*\\((.+)\\)', 'i');
-							const match = item.name.match(myRegex);
-							// adding only the descriptive language name, not "Language (XYZ)"
-							if (match)
-								known_languages.add(match[1].trim().toLowerCase());
-						}
-						break;
-					case "swade":
-						for (let item of actor.data.items) {
-							const name = item?.flags?.babele?.originalName || item.name;
-							const match = item.name.match(/Language \((.+)\)/i);
-							// adding only the descriptive language name, not "Language (XYZ)"
-							if (match)
-								known_languages.add(match[1].trim().toLowerCase());
-						}
-						break;
-					case "uesrpg-d100":
-						for (let item of actor.data.items) {
-							let myRegex = new RegExp(game.i18n.localize("POLYGLOT.UESRPG.Language") + '\\s*\\((.+)\\)', 'i');
-							const match = item.name.match(myRegex);
-							// adding only the descriptive language name, not "Language (XYZ)"
-							if (match)
-								known_languages.add(match[1].trim().toLowerCase());
-						}
-						break;
-					case "dark-heresy":
-						for (let lang in actor.data.data.skills.linguistics.specialities) {
-							if (actor.data.data.skills.linguistics.specialities[lang]["advance"] >= 0)
-								known_languages.add(lang);
-						}
-						break;
-					case "dcc":
-						for (let lang of actor.data.data.details.languages.split(/[,;]/))
-							known_languages.add(lang.trim().toLowerCase());
-						break;
-					case "demonlord":
-						for (let item of actor.data.items) {
-							if (item.type === "language") {
-								if (item.data.speak)
-									known_languages.add(item.name);
-								if (item.data.read)
-									literate_languages.add(item.name);
-							}
-						}
-						break;
-					case "dsa5":
-						for (let item of actor.data.items) {
-							if (item.data.data.category?.value === "language") {
-								let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language") + '\\s*\\((.+)\\)', 'i');
-								let match = item.name.match(myRegex);
-								if (match) {
-									known_languages.add(match[1].trim());
-								}
-								else {
-									myRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy") + '\\s*\\((.+)\\)', 'i');
-									match = item.name.match(myRegex);
-									if (match) {
-										literate_languages.add(match[1].trim());
-									}
-								}
-							}
-						}
-						break;
-					case "ose":
-						for (let lang of actor.data.data.languages.value)
-							known_languages.add(lang)
-						break;
-					case "shadowrun5e":
-						for (let lang in actor.data.data.skills.language.value)
-							known_languages.add(actor.data.data.skills.language.value[lang].name.toLowerCase())
-						break;
-					case "tormenta20":
-						for (let lang of actor.data.data.detalhes.idiomas.value)
-							known_languages.add(lang)
-						break;
-					default:
-						// Don't duplicate the value in case it's a not an array
-						for (let lang of actor.data.data.traits.languages.value)
-							known_languages.add(lang)
-						// This condition is needed so an empty language is not loaded
-						if (actor.data.data.traits.languages.custom != "") {
-							for (let lang of actor.data.data.traits.languages.custom.split(/[,;]/))
-								known_languages.add(lang.trim().toLowerCase());
-						}
-						break;
-				}
-			} catch (err) {
-				// Maybe not dnd5e, pf1 or pf2e or corrupted actor data?
-			}
+			[known_languages, literate_languages] = currentLanguageProvider.getUserLanguages(actor);
 		}
 		return [known_languages, literate_languages];
 	}
@@ -595,26 +322,8 @@ export class Polyglot {
 	/**
 	 * Loads the game system's alphabets and tongues that are set on the polyglot/module/systems folder.
 	 */
-	async loadLanguages() {
-		const settingInfo = await getSystemResponse();
-		this.alphabets = settingInfo.alphabets;
-		if (game.settings.get("polyglot", "enableAllFonts")) {
-			const defaultAlphabets = (await getSystemResponse(true)).alphabets;
-			const invertedThis = invertObject(this.alphabets);
-			for (let alp in defaultAlphabets) {
-				if (!invertedThis[defaultAlphabets[alp]]) this.alphabets[alp] = defaultAlphabets[alp];
-			}
-		}
-		let langSettings = game.settings.get("polyglot", "Languages");
-		this.tongues = Object.keys(langSettings).length ? langSettings : settingInfo.tongues;
-		if (!game.settings.get("polyglot", "replaceLanguages")) {
-			for (let tongue in settingInfo.tongues) {
-				if (!(tongue in langSettings) || tongue === "_default") {
-					langSettings[tongue] = settingInfo.tongues[tongue];
-				}
-			}
-			this.tongues = langSettings;
-		}
+	loadLanguages() {
+		currentLanguageProvider.loadLanguages();
 	}
 
 	/**
@@ -622,7 +331,6 @@ export class Polyglot {
 	 * and loads the current languages set for Comprehend Languages Spells and Tongues Spell settings.
 	 */
 	setup() {
-		registerSettings(this);
 		ChatBubbles.prototype._getMessageDimensions = (message) => {
 			let div = $(`<div class="chat-bubble" style="visibility:hidden;font:${this._bubble.font}">${this._bubble.message || message}</div>`);
 			$('body').append(div);
@@ -642,11 +350,11 @@ export class Polyglot {
 	/**
 	 * Sets the settings for the Language Settings menu, updates the fonts and set the Custom Languages.
 	 */
-	async ready() {
-		await this.loadLanguages();
+	ready() {
+		this.loadLanguages();
 		if (game.user.isGM) {
-			game.settings.set("polyglot", "Languages", this.tongues);
-			game.settings.set("polyglot", "Alphabets", this.alphabets);
+			game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
+			game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
 			this.updateConfigFonts();
 			this.setCustomLanguages(game.settings.get("polyglot", "customLanguages"));
 		}
@@ -665,8 +373,8 @@ export class Polyglot {
 
 	async setCustomLanguages(languages) {
 		Polyglot.languages = await Polyglot.getLanguages();
+		let langSettings = game.settings.get("polyglot", "Languages");
 		if (languages != "") {
-			let langSettings = game.settings.get("polyglot", "Languages");
 			for (let lang of languages.split(",")) {
 				lang = lang.trim();
 				const key = lang.toLowerCase().replace(/ \'/g, "_");
@@ -675,11 +383,11 @@ export class Polyglot {
 				}
 				Polyglot.languages[key] = lang;
 				if (!(key in langSettings)) {
-					langSettings[key] = this.tongues["_default"];
+					langSettings[key] = currentLanguageProvider.tongues["_default"];
 				}
-				if (game.ready && game.user.isGM) game.settings.set("polyglot", "Languages", langSettings);
 			}
 		}
+		if (game.ready && game.user.isGM) game.settings.set("polyglot", "Languages", langSettings);
 		this.updateUserLanguages(ui.chat.element);
 	}
 
@@ -734,16 +442,7 @@ export class Polyglot {
 		for (let span of spans.toArray()) {
 			const lang = span.dataset.language;
 			if (!lang) continue;
-			let conditions = !this._isTruespeech(lang) && !this.known_languages.has(this.comprehendLanguages);
-			switch (game.system.id) {
-				case "demonlord":
-				case "dsa5":
-					conditions = conditions && !this.literate_languages.has(lang);
-					break;
-				default:
-					conditions = conditions && !this.known_languages.has(lang);
-					break;
-			}
+			let conditions = !this._isTruespeech(lang) && !this.known_languages.has(this.comprehendLanguages) && !currentLanguageProvider.conditions(this, lang);
 			if (conditions) {
 				span.title = "????"
 				span.textContent = this.scrambleString(span.textContent, game.settings.get('polyglot', 'useUniqueSalt') ? journalSheet._id : lang)
@@ -956,6 +655,6 @@ export class Polyglot {
 	 * @returns 				The alphabet of the lang or the default alphabet.
 	 */
 	_getFontStyle(lang) {
-		return this.alphabets[this.tongues[lang]] || this.alphabets[this.tongues._default]
+		return currentLanguageProvider.alphabets[currentLanguageProvider.tongues[lang]] || currentLanguageProvider.alphabets[currentLanguageProvider.tongues._default]
 	}
 }
