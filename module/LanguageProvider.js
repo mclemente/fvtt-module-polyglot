@@ -899,7 +899,7 @@ export class pf2eLanguageProvider extends pf1LanguageProvider {
 	loadTongues() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const customLanguages = game.settings.get("polyglot", "customLanguages");
-		this.tongues = !replaceLanguages ? this.originalTongues : {};
+		this.tongues = !replaceLanguages ? this.originalTongues : {"_default": this.originalTongues["_default"]};
 		if (customLanguages) {
 			for (let lang of customLanguages.split(/[,;]/)) {
 				lang = lang.trim();
