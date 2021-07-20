@@ -5,7 +5,7 @@
     "LanguageSettings": "Configurações de Idioma",
     "ChatSettings": "Configurações de Chat",
     "Languages": "Idiomas",
-    "LanguagesHint": "Muta o alfabeto usado para os idiomas. Resetar irá recarregar.",
+    "LanguagesHint": "Muda o alfabeto dos idiomas. Resetar irá recarregar.",
     "Fonts": "Fontes",
     "CustomLanguagesTitle": "Idiomas Customizados",
     "CustomLanguagesHint": "Defina uma lista de idiomas customizados para adicionar ao sistema, separados por vírgula.",
