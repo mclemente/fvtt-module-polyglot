@@ -23,8 +23,8 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
- - Game System and version [e.g. D&D 5e 1.2.4]
- - Polyglot Version [e.g. 1.6.2]
+ - Game System and version [e.g. dnd5e 1.3.6]
+ - Polyglot Version [e.g. 1.7.3]
  - Are you using Babele? [Yes/No]
 
 **Additional context**
