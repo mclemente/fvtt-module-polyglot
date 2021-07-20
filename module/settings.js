@@ -94,7 +94,11 @@ export function registerSettings() {
 		hint: game.i18n.localize("POLYGLOT.CustomLanguagesHint"),
 		default: "",
 		type: String,
-		onChange: () => location.reload()
+		onChange: () => {
+			currentLanguageProvider.loadTongues();
+			currentLanguageProvider.reloadLanguages();
+			location.reload();
+		}
 	});
 	addSetting("comprehendLanguages", {
 		name: game.i18n.localize("POLYGLOT.ComprehendLanguagesTitle"),

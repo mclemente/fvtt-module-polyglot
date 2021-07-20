@@ -7,6 +7,7 @@ export class LanguageProvider {
 		this.id = id
 		this.alphabets = this.originalAlphabets;
 		this.tongues = this.originalTongues;
+		this.languages = {};
 	}
 
 	get originalAlphabets() {
@@ -120,6 +121,23 @@ export class LanguageProvider {
 				}
 			}
 		}
+	}
+	/**
+	 * Called when Custom Languages setting is changed.
+	 */
+	reloadLanguages() {
+		let langSettings = game.settings.get("polyglot", "Languages");
+		for (let lang in langSettings) {
+			if (!(lang in this.tongues)) {
+				delete langSettings[lang];
+			}
+		}
+		for (let lang in this.tongues) {
+			if (!(lang in langSettings)) {
+				langSettings[lang] = this.tongues["_default"];
+			}
+		}
+		game.settings.set("polyglot", "Languages", langSettings);
 	}
 
 	getUserLanguages(actor) {

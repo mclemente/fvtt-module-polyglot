@@ -64,7 +64,7 @@ Hooks.on('setup', async () => {
 	window.polyglot.polyglot.setup.bind(window.polyglot.polyglot)
 });
 Hooks.on('ready', () => {
-	game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
+	if (!Object.keys(game.settings.get("polyglot", "Languages")).length) game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
 	game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
 	window.polyglot.polyglot.updateConfigFonts();
 	Hooks.callAll("polyglot.ready", LanguageProvider)
