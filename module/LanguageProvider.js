@@ -109,8 +109,9 @@ export class LanguageProvider {
 		}
 	}
 	loadTongues() {
-		this.tongues = this.originalTongues;
+		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const customLanguages = game.settings.get("polyglot", "customLanguages");
+		this.tongues = !replaceLanguages ? this.originalTongues : {};
 		if (customLanguages) {
 			for (let lang of customLanguages.split(/[,;]/)) {
 				lang = lang.trim();
@@ -895,12 +896,12 @@ export class pf2eLanguageProvider extends pf1LanguageProvider {
 		}
 		this.languages = langs;
 	}
-
 	loadTongues() {
-		this.tongues = this.originalTongues;
+		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const customLanguages = game.settings.get("polyglot", "customLanguages");
-		if (customLanguages != "") {
-			for (let lang of customLanguages.split(",")) {
+		this.tongues = !replaceLanguages ? this.originalTongues : {};
+		if (customLanguages) {
+			for (let lang of customLanguages.split(/[,;]/)) {
 				lang = lang.trim();
 				const key = lang.toLowerCase().replace(/ \'/g, "_");
 				CONFIG.PF2E.languages[key] = lang;
