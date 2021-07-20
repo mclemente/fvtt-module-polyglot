@@ -22,7 +22,6 @@ Polyglot.FONTS = [
 	"Iokharic",
 	"JungleSlang",
 	"Kargi",
-	"MageScript",
 	"MarasEye",
 	"MeroiticDemotic",
 	"MiroslavNormal",

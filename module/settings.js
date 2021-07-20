@@ -61,8 +61,7 @@ export function registerSettings() {
 		name: game.i18n.localize("POLYGLOT.RandomizeRunesTitle"),
 		hint: game.i18n.localize("POLYGLOT.RandomizeRunesHint"),
 		default: false,
-		type: Boolean,
-		onChange: () => location.reload()
+		type: Boolean
 	});
 	game.settings.register("polyglot", "enableAllFonts", {
 		name: game.i18n.localize("POLYGLOT.enableAllFontsTitle"),
@@ -71,7 +70,10 @@ export function registerSettings() {
 		config: legacyGenericSystem(),
 		default: false,
 		type: Boolean,
-		onChange: () => location.reload()
+		onChange: () => {
+			currentLanguageProvider.loadAlphabet();
+			game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets)
+		}
 	});
 	addSetting("exportFonts", {
 		name: game.i18n.localize("POLYGLOT.ExportFontsTitle"),
@@ -87,7 +89,11 @@ export function registerSettings() {
 		hint: game.i18n.localize("POLYGLOT.ReplaceLanguagesHint"),
 		default: false,
 		type: Boolean,
-		onChange: () => location.reload()
+		onChange: async () => {
+			await currentLanguageProvider.getLanguages();
+			currentLanguageProvider.loadTongues();
+			currentLanguageProvider.reloadLanguages();
+		} 
 	});
 	addSetting("customLanguages", {
 		name: game.i18n.localize("POLYGLOT.CustomLanguagesTitle"),
@@ -97,7 +103,6 @@ export function registerSettings() {
 		onChange: () => {
 			currentLanguageProvider.loadTongues();
 			currentLanguageProvider.reloadLanguages();
-			location.reload();
 		}
 	});
 	addSetting("comprehendLanguages", {
@@ -112,7 +117,7 @@ export function registerSettings() {
 		hint: game.i18n.localize("POLYGLOT.TruespeechHint"),
 		default: "",
 		type: String,
-		onChange: (value) => window.polyglot.polyglot.truespeech = game.settings.get("polyglot","truespeech").trim().toLowerCase().replace(/ \'/g, "_")
+		onChange: (value) => window.polyglot.polyglot.truespeech = value.trim().toLowerCase().replace(/ \'/g, "_")
 	});
 
 	//Chat Settings

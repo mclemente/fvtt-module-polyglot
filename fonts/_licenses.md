@@ -10,7 +10,6 @@ The following fonts are owned by Pixel Sagas, check out their [website](http://w
 - HighDrowic
 - Kargi
 - Lokharic
-- MageScript
 - MarasEye
 - OldeEspruar
 - OldeThorass

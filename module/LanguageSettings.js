@@ -113,6 +113,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 			langSettings[lang] = iterableSettings[i];
 			i++;
 		}
+		currentLanguageProvider.tongues = langSettings;
 		game.settings.set("polyglot", "Languages", langSettings);
 		game.settings.set("polyglot", "languageProvider", formData.languageProvider);
 		updateLanguageProvider();

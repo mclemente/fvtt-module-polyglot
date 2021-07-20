@@ -33,7 +33,6 @@ export class LanguageProvider {
 			"iokharic": "170% Iokharic",
 			"jungleslang": "180% JungleSlang",
 			"kargi": "150% Kargi",
-			"magescript": "200% MageScript",
 			"maraseye": "200% MarasEye",
 			"meroiticdemotic": "200% MeroiticDemotic",
 			"miroslavnormal": "200% MiroslavNormal",
@@ -111,7 +110,7 @@ export class LanguageProvider {
 	loadTongues() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const customLanguages = game.settings.get("polyglot", "customLanguages");
-		this.tongues = !replaceLanguages ? this.originalTongues : {};
+		this.tongues = !replaceLanguages ? this.originalTongues : {"_default": this.originalTongues["_default"]};
 		if (customLanguages) {
 			for (let lang of customLanguages.split(/[,;]/)) {
 				lang = lang.trim();
@@ -138,6 +137,7 @@ export class LanguageProvider {
 				langSettings[lang] = this.tongues["_default"];
 			}
 		}
+		this.tongues = langSettings;
 		game.settings.set("polyglot", "Languages", langSettings);
 	}
 
@@ -1254,7 +1254,6 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 			"cyrodilic": "130% Thorass",
 			"aldmeri": "150% Espruar",
 			"ayleidoon": "230% OldeEspruar",
-			"bosmeri": "200% MageScript",
 			"daedric": "200% Daedra",
 			"dovah": "170% DragonAlphabet",
 			"dunmeri": "150% HighDrowic",
@@ -1272,7 +1271,7 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 			"_default": "cyrodilic",
 			"aldmeri": "aldmeri",
 			"ayleidoon": "aldmeri",
-			"bosmeri": "bosmeri",
+			"bosmeri": "aldmeri",
 			"daedric": "daedric",
 			"dovah": "dovah",
 			"dunmeri": "dunmeri",

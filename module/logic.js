@@ -240,7 +240,7 @@ export class Polyglot {
 		}
 
 		if (game.user.isGM || (known && !hideTranslation)) {
-			const color = known ? "green" : "red";
+			const color = (game.user.isGM && !runifyGM || known) ? "green" : "red";
 			metadata.find(".polyglot-message-language").remove()
 			const title = game.user.isGM || known ? `title="${language}"` : ""
 			let button = $(`<a class="button polyglot-message-language" ${title}>
