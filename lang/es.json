@@ -40,6 +40,15 @@
       "c": "Solo jugadores",
       "d": "Ninguno"
 	},
+    "LanguageProvider": {
+      "name": "Proveedor de ajustes de idioma",
+      "hint": "Seleccione quien provee información de alfabetos e idiomas. Se pueden habilitar más proveedores instalando módulos y sistemas. Las opciones que aparecen más abajo dependerán del proveedor seleccionado. ⚠️ Si cambia el proveedor, deberá guardar los cambios y volver a abrir la ventana de configuración",
+      "choices": {
+        "module": "Módulo {name}",
+        "native": "Genérico",
+        "system": "Sistema {name}"
+      }
+    },
   
     "Translation": "Traducción",
     "TranslatedFrom": "Traducido del ",
