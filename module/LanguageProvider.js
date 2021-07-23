@@ -447,14 +447,22 @@ export class demonlordLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const langs = {};
-		const demonlordPack = game.packs.get("demonlord.languages");
-		const demonlordItemList = await demonlordPack.getIndex();
-		for (let item of demonlordItemList) {
-			langs[item.name] = game.i18n.localize(item.name);
+		if (game.ready) {
+			const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+			const langs = {};
+			const demonlordPack = game.packs.get("demonlord.languages");
+			const demonlordItemList = await demonlordPack.getIndex();
+			for (let item of demonlordItemList) {
+				langs[item.name] = game.i18n.localize(item.name);
+			}
+			this.languages = replaceLanguages ? {} : langs;
 		}
-		this.languages = replaceLanguages ? {} : langs;
+		else {
+			Hooks.once('ready', () => {
+				this.getLanguages();
+				this.loadTongues();
+			});
+		}
 	}
 
 	getUserLanguages(actor) {
@@ -621,29 +629,37 @@ export class dsa5LanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const langs = {};
-		if (game.modules.get("dsa5-core")) {
-			const dsa5Pack = game.packs.get("dsa5-core.corespecialabilites");
-			const dsa5ItemList = await dsa5Pack.getIndex();
-			for (let item of dsa5ItemList) {
-				let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language") + '\\s*\\((.+)\\)', 'i');
-				let match = item.name.match(myRegex);
-				if (match) {
-					let key = match[1].trim();
-					langs[key] = key;
-				}
-				else {
-					myRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy") + '\\s*\\((.+)\\)', 'i');
-					match = item.name.match(myRegex);
+		if (game.ready) {
+			const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+			const langs = {};
+			if (game.modules.get("dsa5-core")) {
+				const dsa5Pack = game.packs.get("dsa5-core.corespecialabilites");
+				const dsa5ItemList = await dsa5Pack.getIndex();
+				for (let item of dsa5ItemList) {
+					let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language") + '\\s*\\((.+)\\)', 'i');
+					let match = item.name.match(myRegex);
 					if (match) {
 						let key = match[1].trim();
 						langs[key] = key;
 					}
+					else {
+						myRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy") + '\\s*\\((.+)\\)', 'i');
+						match = item.name.match(myRegex);
+						if (match) {
+							let key = match[1].trim();
+							langs[key] = key;
+						}
+					}
 				}
 			}
+			this.languages = replaceLanguages ? {} : langs;
 		}
-		this.languages = replaceLanguages ? {} : langs;
+		else {
+			Hooks.once('ready', () => {
+				this.getLanguages();
+				this.loadTongues();
+			});
+		}
 	}
 
 	getUserLanguages(actor) {
@@ -1374,19 +1390,27 @@ export class warhammerLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const langs = {};
-		const wfrp4ePack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
-		const wfrp4eItemList = await wfrp4ePack.getIndex();
-		for (let item of wfrp4eItemList) {
-			let myRegex = new RegExp(game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills") + '\\s*\\((.+)\\)', 'i');
-			const match = item.name.match(myRegex);
-			if (match) {
-				let key = match[1].trim().toLowerCase();
-				langs[key] = key;
+		if (game.ready) {
+			const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+			const langs = {};
+			const wfrp4ePack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
+			const wfrp4eItemList = await wfrp4ePack.getIndex();
+			for (let item of wfrp4eItemList) {
+				let myRegex = new RegExp(game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills") + '\\s*\\((.+)\\)', 'i');
+				const match = item.name.match(myRegex);
+				if (match) {
+					let key = match[1].trim().toLowerCase();
+					langs[key] = key;
+				}
 			}
+			this.languages = replaceLanguages ? {} : langs;
 		}
-		this.languages = replaceLanguages ? {} : langs;
+		else {
+			Hooks.once('ready', () => {
+				this.getLanguages();
+				this.loadTongues();
+			});
+		}
 	}
 
 	getUserLanguages(actor) {
