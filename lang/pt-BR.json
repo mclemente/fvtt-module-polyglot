@@ -11,6 +11,8 @@
     "CustomLanguagesHint": "Defina uma lista de idiomas customizados para adicionar ao sistema, separados por vírgula.",
     "ComprehendLanguagesTitle": "Magia: Compreender Idiomas",
     "ComprehendLanguagesHint": "Como a magia Compreender Idiomas, do D&D. Coloque um Idioma Customizado que você já criou. Ele não pode ser escrito ou falado, mas permite que todos os outros idiomas sejam entendidos.",
+    "JournalHighlightTitle": "Opacidade do Marcador do Diário (%)",
+    "JournalHighlightHint": "Define a opacidade do marcador sobre as fontes no diário.",
     "TruespeechTitle": "Magia: Línguas",
     "TruespeechHint": "Como a magia Línguas, do D&D. Coloque um Idioma Customizado que você já criou. O falante irá entender todas as línguas faladas (mas não escritas em Diários) e será entendido por todas as criaturas.",
     "DefaultLanguageTitle": "Idioma Padrão",

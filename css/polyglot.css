@@ -1,3 +1,8 @@
+:root {
+	--polyglot-journal-color: 255, 180, 0;
+	--polyglot-journal-opacity: 0.25;
+}
+
 .polyglot-lang-select {
 	flex: 0 0 28px;
 	margin: 0 6px;
@@ -12,7 +17,7 @@
 }
 
 span.polyglot-journal {
-	background-color: rgba(255, 180, 0, 0.25)
+	background-color: rgba(var(--polyglot-journal-color), var(--polyglot-journal-opacity))
 }
 
 .polyglot-translation-text{

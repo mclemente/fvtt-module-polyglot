@@ -203,6 +203,7 @@ export class Polyglot {
 	 * @var {Boolean} known				Determines if the actor actually knows the language, rather than being affected by Comprehend Languages or Tongues
 	 */
 	async renderChatMessage(message, html, data) {
+		if (!this.known_languages.size) this.updateUserLanguages(ui.chat.element);
 		const lang = message.getFlag("polyglot", "language") || "";
 		if (!lang) return;
 		let metadata = html.find(".message-metadata")
@@ -276,8 +277,14 @@ export class Polyglot {
 				break;
 		}
 		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (allowOOC && this._isMessageTypeOOC(data.type))) {
-			let lang = ui.chat.element.find("select[name=polyglot-language]").val()
-			if (lang != "")
+			let lang;
+			if (data.lang) {
+				const invertedLanguages = invertObject(currentLanguageProvider.languages);
+				if (currentLanguageProvider.languages[data.lang]) lang = data.lang;
+				else if (invertedLanguages[data.lang]) lang = invertedLanguages[data.lang];
+			}
+			else if (!lang) lang = ui.chat.element.find("select[name=polyglot-language]").val();
+			if (lang)
 				document.data.update({ "flags.polyglot.language": lang });
 		}
 	}

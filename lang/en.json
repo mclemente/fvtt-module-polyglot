@@ -11,6 +11,8 @@
     "CustomLanguagesHint": "Define a list of custom, comma separated, languages to add to the system.",
     "ComprehendLanguagesTitle": "Comprehend Languages Spell",
     "ComprehendLanguagesHint": "Like the Comprehend Languages spell from D&D. Input a custom language you have already set. It won't be able to be spoken or written but allows to understand all other languages.",
+    "JournalHighlightTitle": "Journal Highlight Opacity (%)",
+    "JournalHighlightHint": "Defines the opacity of the highlight over fonts on the journal.",
     "TruespeechTitle": "Tongues Spell",
     "TruespeechHint": "Like the Tongues spell from D&D. Input a custom language you have already set. Its speaker understands all spoken languages (can't read Journals) and is understood by all creatures.",
     "DefaultLanguageTitle": "Default Language",

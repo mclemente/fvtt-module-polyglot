@@ -57,6 +57,8 @@ export function registerSettings() {
 		default: "",
 		type: String
 	});
+
+	//Font Settings
 	addSetting("useUniqueSalt", {
 		name: game.i18n.localize("POLYGLOT.RandomizeRunesTitle"),
 		hint: game.i18n.localize("POLYGLOT.RandomizeRunesHint"),
@@ -81,6 +83,13 @@ export function registerSettings() {
 		default: true,
 		type: Boolean,
 		onChange: () => window.polyglot.polyglot.updateConfigFonts()
+	});
+	addSetting("exportFonts", {
+		name: game.i18n.localize("POLYGLOT.JournalHighlightTitle"),
+		hint: game.i18n.localize("POLYGLOT.JournalHighlightHint"),
+		default: 25,
+		type: Number,
+		onChange: (value) => document.documentElement.style.setProperty('--polyglot-journal-opacity', value/100)
 	});
 
 	//Language Settings
