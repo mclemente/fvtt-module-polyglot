@@ -1,5 +1,7 @@
 {
   "POLYGLOT": {
+    "DefaultAlphabet": "標準文字",
+    "FontSettings": "フォント設定",
     "LanguageSettings": "言語設定",
     "ChatSettings": "チャット設定",
     "LanguagesTitle": "言語",
@@ -17,6 +19,8 @@
     "ReplaceLanguagesHint": "システムのデフォルト言語をカスタム言語に置き換えます。リストの最初の言語が新しいデフォルト言語になります。",
     "ScrambleGMTitle": "GMもスクランブル化する",
     "ScrambleGMHint": "無効にすると、GMはテキストの内容を常に確認できるようになります。選択したコマが言語を理解しているかは、翻訳アイコン（地球儀マーク）の色を確認する必要があります。",
+    "enableAllFontsTitle": "言語設定ですべてのフォントを追加する",
+    "enableAllFontsHint": "言語設定でPolyglotフォントが使用できるようなります。",
     "RandomizeRunesTitle": "ルーンのランダム化",
     "RandomizeRunesHint": "有効にすると、同じメッセージを繰り返し発言したとしても、スクランブル後のテキストが別の文字列になります。",
     "ExportFontsTitle": "フォントを使用可能にする",
@@ -33,13 +37,26 @@
       "c": "プレイヤーのみ",
       "d": "なし"
     },
+    "LanguageProvider": {
+      "name": "言語設定の提供元",
+      "hint": "アルファベットや言語情報の提供元を選択できるようになりました。ゲームシステムやインストールされたモジュールによって、より多くの提供元が利用できます。以下のオプションは、ここで選択した言語の提供元によって変化します。⚠️提供元を変更したときは、保存後に再度設定を開き直す必要があります。",
+      "choices": {
+        "module": "モジュール {name}",
+        "native": "標準設定",
+        "system": "システム {name}"
+      }
+    },
 
     "Translation": "翻訳",
     "TranslatedFrom": "翻訳元：",
     "LanguageLabel": "言語",
+    "AlphabetLabel": "文字体系",
+    "LatinAlphabet": "ラテン文字",
     "ToggleRunes": "ルーンの切替",
     "Runes": "ルーン",
-  
+
+    "UESRPG.Language": "言語",
+ 
     "COC7": {
       "LanguageOwn": "言語",
       "LanguageAny": "言語",
