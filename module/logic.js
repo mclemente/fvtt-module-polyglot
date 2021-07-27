@@ -383,6 +383,7 @@ export class Polyglot {
 
 	/**
 	 * Renders a chat bubble, scrambling its text.
+	 * It checks for emote.language in case a bubble is sent without a message (e.g. calling canvas.hud.bubbles.say()).
 	 * 
 	 * @param {Token} token 
 	 * @param {*} html 
@@ -390,23 +391,39 @@ export class Polyglot {
 	 * @param {*} emote 
 	 */
 	chatBubble(token, html, messageContent, { emote }) {
-		const message = game.messages.contents.slice(-10).reverse().find(m => m.data.content === messageContent);
 		this._bubble = { font: '', message: '' };
-		if (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
-			let lang = message.getFlag("polyglot", "language") || ""
-			if (lang != "") {
-				const unknown = !this._isTruespeech(lang) && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
-				message.polyglot_unknown = unknown;
-				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
-					message.polyglot_unknown = false;
-				if (!message.polyglot_force && message.polyglot_unknown) {
-					const content = html.find(".bubble-content")
-					const new_content = this.scrambleString(message.data.content, game.settings.get('polyglot', 'useUniqueSalt') ? message._id : lang)
-					content.text(new_content)
-					this._bubble.font = this._getFontStyle(lang)
-					this._bubble.message = new_content
-					content[0].style.font = this._bubble.font
-					message.polyglot_unknown = true;
+		if (emote.language) {
+			let lang = invertObject(currentLanguageProvider.languages)[emote.language] || emote.language || "";
+			const unknown = !this._isTruespeech(lang) && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
+			if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
+				return;
+			if (unknown) {
+				const content = html.find(".bubble-content")
+				const new_content = this.scrambleString(messageContent, game.settings.get('polyglot', 'useUniqueSalt') ? message._id : lang)
+				content.text(new_content)
+				this._bubble.font = this._getFontStyle(lang)
+				this._bubble.message = new_content
+				content[0].style.font = this._bubble.font
+			}
+		}
+		else {
+			const message = game.messages.contents.slice(-10).reverse().find(m => m.data.content === messageContent);
+			if (message?.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
+				let lang = message.getFlag("polyglot", "language") || "";
+				if (lang) {
+					const unknown = !this._isTruespeech(lang) && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
+					message.polyglot_unknown = unknown;
+					if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
+						message.polyglot_unknown = false;
+					if (!message.polyglot_force && message.polyglot_unknown) {
+						const content = html.find(".bubble-content")
+						const new_content = this.scrambleString(message.data.content, game.settings.get('polyglot', 'useUniqueSalt') ? message._id : lang)
+						content.text(new_content)
+						this._bubble.font = this._getFontStyle(lang)
+						this._bubble.message = new_content
+						content[0].style.font = this._bubble.font
+						message.polyglot_unknown = true;
+					}
 				}
 			}
 		}
