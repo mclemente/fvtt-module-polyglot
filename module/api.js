@@ -89,8 +89,8 @@ export function initApi() {
 		case "sfrpg":
 			languageProviders.push(new sfrpgLanguageProvider("native.sfrpg"));
 			break;
-		case "sr5e":
-			languageProviders.push(new shadowrun5eLanguageProvider("native.sr5e"));
+		case "shadowrun5e":
+			languageProviders.push(new shadowrun5eLanguageProvider("native.shadowrun5e"));
 			break;
 		case "swade":
 			languageProviders.push(new swadeLanguageProvider("native.swade"));
@@ -104,8 +104,8 @@ export function initApi() {
 		case "uesrpg-d100":
 			languageProviders.push(new uesrpgLanguageProvider("native.uesrpg-d100"));
 			break;
-		case "wfrp4":
-			languageProviders.push(new warhammerLanguageProvider("native.wfrp4"));
+		case "wfrp4e":
+			languageProviders.push(new warhammerLanguageProvider("native.wfrp4e"));
 			break;
 		default:
 			languageProviders.push(new LanguageProvider("native"));

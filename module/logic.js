@@ -126,9 +126,7 @@ export class Polyglot {
 	 * @var {Set} this.known_languages
 	 */
 	updateUserLanguages(html) {
-		const userLanguages = this.getUserLanguages();
-		this.known_languages = userLanguages[0];
-		this.literate_languages = userLanguages[1];
+		[this.known_languages, this.literate_languages]  = this.getUserLanguages();
 		if (this.known_languages.size == 0) {
 			if (game.user.isGM)
 				this.known_languages = new Set(Object.keys(currentLanguageProvider.languages))
@@ -293,7 +291,7 @@ export class Polyglot {
 	 * Registers settings, adjusts the bubble dimensions so the message is displayed correctly,
 	 * and loads the current languages set for Comprehend Languages Spells and Tongues Spell settings.
 	 */
-	setup() {
+	ready() {
 		ChatBubbles.prototype._getMessageDimensions = (message) => {
 			let div = $(`<div class="chat-bubble" style="visibility:hidden;font:${this._bubble.font}">${this._bubble.message || message}</div>`);
 			$('body').append(div);
@@ -308,6 +306,8 @@ export class Polyglot {
 		}
 		this.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages").trim().toLowerCase().replace(/ \'/g, "_");
 		this.truespeech = game.settings.get("polyglot", "truespeech").trim().toLowerCase().replace(/ \'/g, "_");
+		game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
+		this.updateConfigFonts();
 	}
 
 	/**
