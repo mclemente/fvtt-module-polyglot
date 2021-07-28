@@ -48,7 +48,6 @@ export class Polyglot {
 		select.change(e => {
 			this.lastSelection = select.val();
 		});
-		this.updateUserLanguages(html);
 	}
 
 	/**
@@ -304,6 +303,7 @@ export class Polyglot {
 			div.remove();
 			return dims;
 		}
+		this.updateUserLanguages(ui.chat.element);
 		this.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages").trim().toLowerCase().replace(/ \'/g, "_");
 		this.truespeech = game.settings.get("polyglot", "truespeech").trim().toLowerCase().replace(/ \'/g, "_");
 		game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
