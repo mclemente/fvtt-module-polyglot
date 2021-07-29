@@ -162,11 +162,11 @@ export class LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		if (actor.data.data.traits.languages) {
+		if (actor.data.data?.traits?.languages) {
 			for (let lang of actor.data.data.traits.languages.value)
 				known_languages.add(lang)
 			if (actor.data.data.traits.languages.custom) {
-				for (let lang of actor.data.data.traits.languages.custom.split(/[,;]/))
+				for (let lang of actor.data.data.traits.languages?.custom.split(/[,;]/))
 					known_languages.add(lang.trim().toLowerCase());
 			}
 		}

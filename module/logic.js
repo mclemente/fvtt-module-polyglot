@@ -114,7 +114,12 @@ export class Polyglot {
 				actors.push(game.user.character);
 		}
 		for (let actor of actors) {
-			[known_languages, literate_languages] = currentLanguageProvider.getUserLanguages(actor);
+			try {
+				[known_languages, literate_languages] = currentLanguageProvider.getUserLanguages(actor);
+			}
+			catch (err) {
+				console.error(`Polyglot | Failed to get languages from actor ${actor.name}. ${err.message}`);
+			}
 		}
 		return [known_languages, literate_languages];
 	}
