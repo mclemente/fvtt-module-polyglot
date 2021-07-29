@@ -48,6 +48,7 @@ export class Polyglot {
 		select.change(e => {
 			this.lastSelection = select.val();
 		});
+		this.updateUserLanguages(html);
 	}
 
 	/**
@@ -200,6 +201,12 @@ export class Polyglot {
 	 * @var {Boolean} known				Determines if the actor actually knows the language, rather than being affected by Comprehend Languages or Tongues
 	 */
 	async renderChatMessage(message, html, data) {
+		if (currentLanguageProvider.requiresReady && !game.ready) {
+			Hooks.on('polyglot.languageProvider.ready', async () => {
+				await this.renderChatMessage(message, html, data);
+			});
+			return;
+		}
 		if (!this.known_languages.size) this.updateUserLanguages(ui.chat.element);
 		const lang = message.getFlag("polyglot", "language") || "";
 		if (!lang) return;
@@ -303,11 +310,15 @@ export class Polyglot {
 			div.remove();
 			return dims;
 		}
-		this.updateUserLanguages(ui.chat.element);
 		this.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages").trim().toLowerCase().replace(/ \'/g, "_");
 		this.truespeech = game.settings.get("polyglot", "truespeech").trim().toLowerCase().replace(/ \'/g, "_");
 		game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
 		this.updateConfigFonts();
+		if (currentLanguageProvider.requiresReady) {
+			Hooks.on('polyglot.languageProvider.ready', () => {
+				this.updateUserLanguages(ui.chat.element);
+			});
+		}
 	}
 
 	/**

@@ -57,8 +57,10 @@ Hooks.on('controlToken', window.polyglot.polyglot.controlToken.bind(window.polyg
 Hooks.on('preCreateChatMessage', window.polyglot.polyglot.preCreateChatMessage.bind(window.polyglot.polyglot));
 Hooks.on('renderChatMessage', window.polyglot.polyglot.renderChatMessage.bind(window.polyglot.polyglot));
 Hooks.on('renderJournalSheet', window.polyglot.polyglot.renderJournalSheet.bind(window.polyglot.polyglot));
-Hooks.on('ready', async () => {
-	await currentLanguageProvider.ready();
+Hooks.on('setup', async () => {
+	await currentLanguageProvider.setup();
+});
+Hooks.on('ready', () => {
 	window.polyglot.polyglot.ready();
 	if (!Object.keys(game.settings.get("polyglot", "Languages")).length) game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
 	Hooks.callAll("polyglot.ready", LanguageProvider);

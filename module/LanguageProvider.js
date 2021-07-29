@@ -58,6 +58,13 @@ export class LanguageProvider {
 	get originalTongues() {
 		return { "_default": "thorass" };
 	}
+
+	/**
+	 * This is needed if the LanguageProvider gets languages from compendiums, since they require the game state to be ready.
+	 */
+	get requiresReady() {
+		return false;
+	}
 	getSystemDefaultLanguage() {
 		const keys = Object.keys(this.languages);
 		if (keys.includes("common")) return "common";
@@ -79,11 +86,22 @@ export class LanguageProvider {
 	/**
 	 * Loads everything that can't be loaded on the constructor due to async/await.
 	 */
-	async ready() {
-		await this.getLanguages();
-		this.loadAlphabet();
-		this.loadTongues();
-		this.getDefaultLanguage();
+	async setup() {
+		if (this.requiresReady) {
+			Hooks.on("ready", async () => {
+				await this.getLanguages();
+				this.loadAlphabet();
+				this.loadTongues();
+				this.getDefaultLanguage();
+				Hooks.callAll("polyglot.languageProvider.ready");
+			});
+		}
+		else {
+			await this.getLanguages();
+			this.loadAlphabet();
+			this.loadTongues();
+			this.getDefaultLanguage();
+		}
 	}
 
 	/**
@@ -442,6 +460,10 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		};
 	}
 
+	get requiresReady() {
+		return true;
+	}
+
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const langs = {};
@@ -610,6 +632,10 @@ export class dsa5LanguageProvider extends LanguageProvider {
 			"Zhayad": "Zhayad-Zeichen",
 			"Zyklopäisch": "Kusliker Zeichen"
 		};
+	}
+	
+	get requiresReady() {
+		return true;
 	}
 
 	getSystemDefaultLanguage() {
@@ -1357,6 +1383,10 @@ export class warhammerLanguageProvider extends LanguageProvider {
 			"Khazalid": "klinkarhun",
 			"Magick": "eltharin"
 		};
+	}
+	
+	get requiresReady() {
+		return true;
 	}
 
 	getSystemDefaultLanguage() {
