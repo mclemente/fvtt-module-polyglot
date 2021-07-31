@@ -488,6 +488,10 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		}
 		return [known_languages, literate_languages];
 	}
+
+	conditions(polyglot, lang) {
+		return polyglot.literate_languages.has(lang);
+	}
 }
 
 export class dnd5eLanguageProvider extends LanguageProvider {
@@ -690,6 +694,10 @@ export class dsa5LanguageProvider extends LanguageProvider {
 			}
 		}
 		return [known_languages, literate_languages];
+	}
+
+	conditions(polyglot, lang) {
+		return polyglot.literate_languages.has(lang);
 	}
 }
 
@@ -1312,35 +1320,26 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const langs = {
-			"aldmeri": "Aldmeri",
-			"ayleidoon": "Ayleidoon",
-			"bosmeri": "Bosmeri",
-			"cyrodilic": "Cyrodilic",
-			"daedric": "Daedric",
-			"dovah": "Dovah",
-			"dunmeri": "Dunmeri",
-			"dwemeris": "Dwemeris",
-			"falmer": "Falmer",
-			"jel": "Jel",
-			"nordic": "Nordic",
-			"taagra": "Ta'Agra",
-			"yoku": "Yoku"
-		};
-		this.languages = replaceLanguages ? {} : langs;
+		if (replaceLanguages) {
+			CONFIG.UESRPG.languages = {};
+		}
+		this.languages = replaceLanguages ? {} : CONFIG.UESRPG.languages;
 	}
 
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
 		for (let item of actor.data.items) {
-			let myRegex = new RegExp(game.i18n.localize("POLYGLOT.UESRPG.Language") + '\\s*\\((.+)\\)', 'i');
-			const match = item.name.match(myRegex);
-			// adding only the descriptive language name, not "Language (XYZ)"
-			if (match)
-				known_languages.add(match[1].trim().toLowerCase());
+			if (item.type == "language") {
+				if (item.data.data.speak) known_languages.add(item.name.trim().toLowerCase());
+				if (item.data.data.readWrite) literate_languages.add(item.name.trim().toLowerCase());
+			}
 		}
 		return [known_languages, literate_languages];
+	}
+
+	conditions(polyglot, lang) {
+		return polyglot.literate_languages.has(lang);
 	}
 }
 
