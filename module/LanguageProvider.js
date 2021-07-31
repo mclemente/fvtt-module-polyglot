@@ -480,9 +480,9 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		let literate_languages = new Set();
 		for (let item of actor.data.items) {
 			if (item.type === "language") {
-				if (item.data.speak)
+				if (item.data.data.speak)
 					known_languages.add(item.name);
-				if (item.data.read)
+				if (item.data.data.read)
 					literate_languages.add(item.name);
 			}
 		}
