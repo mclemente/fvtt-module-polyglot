@@ -173,7 +173,6 @@ export class LanguageProvider {
 			}
 		}
 		this.tongues = langSettings;
-		game.settings.set("polyglot", "Languages", langSettings);
 	}
 
 	getUserLanguages(actor) {

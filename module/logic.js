@@ -317,12 +317,17 @@ export class Polyglot {
 		}
 		this.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages").trim().toLowerCase().replace(/ \'/g, "_");
 		this.truespeech = game.settings.get("polyglot", "truespeech").trim().toLowerCase().replace(/ \'/g, "_");
-		game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
 		this.updateConfigFonts();
 		if (currentLanguageProvider.requiresReady) {
 			Hooks.on('polyglot.languageProvider.ready', () => {
 				this.updateUserLanguages(ui.chat.element);
+				game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
+				game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
 			});
+		}
+		else {
+			game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
+			game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
 		}
 	}
 
