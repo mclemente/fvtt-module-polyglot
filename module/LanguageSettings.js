@@ -94,7 +94,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 		});
 		html.find('button').on('click', async (event) => {
 			if (event.currentTarget?.dataset?.action === 'reset') {
-				game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
+				game.settings.set("polyglot", "Languages", currentLanguageProvider.originalTongues);
 				this.close();
 			}
 		});

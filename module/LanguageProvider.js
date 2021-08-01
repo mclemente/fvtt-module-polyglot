@@ -92,6 +92,8 @@ export class LanguageProvider {
 				await this.getLanguages();
 				this.loadAlphabet();
 				this.loadTongues();
+				this.loadCustomFonts();
+				this.reloadLanguages();
 				this.getDefaultLanguage();
 				Hooks.callAll("polyglot.languageProvider.ready");
 			});
@@ -100,6 +102,8 @@ export class LanguageProvider {
 			await this.getLanguages();
 			this.loadAlphabet();
 			this.loadTongues();
+			this.loadCustomFonts();
+			this.reloadLanguages();
 			this.getDefaultLanguage();
 		}
 	}
@@ -141,10 +145,23 @@ export class LanguageProvider {
 		}
 	}
 	/**
+	 * Replaces this.tongues's fonts with the Languages setting's fonts.
+	 */
+	loadCustomFonts() {
+		let langSettings = game.settings.get("polyglot", "Languages");
+		if (this.tongues == langSettings) return;
+		for (let lang in langSettings) {
+			if (lang in this.tongues && this.tongues[lang] != langSettings[lang]) {
+				this.tongues[lang] = langSettings[lang];
+			}
+		}
+	}
+	/**
 	 * Called when Custom Languages setting is changed.
 	 */
 	reloadLanguages() {
 		let langSettings = game.settings.get("polyglot", "Languages");
+		if (this.tongues == langSettings) return;
 		for (let lang in langSettings) {
 			if (!(lang in this.tongues)) {
 				delete langSettings[lang];
@@ -551,18 +568,26 @@ export class dsa5LanguageProvider extends LanguageProvider {
 			"Amulashtra": "150% Qijomi",
 			"Angram-Bilderschrift": "150% Skaven",
 			"Arkanil": "170% ArCiela",
+			"Atak": "150% FingerAlphabet",
 			"Chrmk": "150% Iokharic",
 			"Chuchas": "150% Kargi",
-			"Protozelemja": "150% Kargi",
-			"Yash-Hualay-Glyphen": "150% Kargi",
 			"Drakhard-Zinken": "150% Celestial",
+			"Fjarningsch": "150% Dethek",
 			"Geheiligte Glyphen von Unau": "150% HighDrowic",
 			"Gimaril-Glyphen": "150% Semphari",
+			"Goblinisch": "150% OrkGlyphs",
 			"Hjaldingsche Runen": "140% OldeThorass",
 			"Imperiale Zeichen": "160% Infernal",
 			"Isdira- und Asdharia-Zeichen": "150% Tengwar",
 			"Kusliker Zeichen": "150% MiroslavNormal",
+			"Mohisch": "150% JungleSlang",
 			"Nanduria-Zeichen": "150% Espruar",
+			"Nujuka": "150% Reanaarian",
+			// "Ogrisch": "150% OrkGlyphs",
+			// "Oloarkh": "150% OrkGlyphs",
+			// "Ologhaijan": "150% OrkGlyphs",
+			// "Protozelemja": "150% Kargi",
+			// "Rabensprache": "150% Valmaric"
 			"Rogolan-Runen": "350% ElderFuthark",
 			"Thorwalsche Runen": "150% Floki",
 			"Trollische Raumbildschrift": "150% Eltharin",
@@ -570,70 +595,62 @@ export class dsa5LanguageProvider extends LanguageProvider {
 			"Ur-Tulamidya-Zeichen": "150% OldeEspruar",
 			"Zhayad-Zeichen": "200% Pulsian",
 			"unbekannt": "150% Ophidian",
-			"Atak": "150% FingerAlphabet",
-			"Fjarningsch": "150% Dethek",
-			"Goblinisch": "150% OrkGlyphs",
-			"Mohisch": "150% JungleSlang",
-			"Nujuka": "150% Reanaarian",
-			"Ogrisch": "150% OrkGlyphs",
-			"Oloarkh": "150% OrkGlyphs",
-			"Ologhaijan": "150% OrkGlyphs",
-			"Rabensprache": "150% Valmaric"
+			// "Yash-Hualay-Glyphen": "150% Kargi",
 		};
 	}
 	
 	get originalTongues() {
 		return {
 			"_default": "unbekannt",
+			"Alaani": "Kusliker Zeichen",
 			"Altes Alaani": "Altes Alaani",
 			"Amulashtra": "Amulashtra",
+			"Angram": "Angram-Bilderschrift",
 			"Angram-Bilderschrift": "Angram-Bilderschrift",
 			"Arkanil": "Arkanil",
-			"Chrmk": "Chrmk",
-			"Chuchas": "Chuchas",
-			"Protozelemja": "Protozelemja",
-			"Yash-Hualay-Glyphen": "Yash-Hualay-Glyphen",
-			"Drakhard-Zinken": "Drakhard-Zinken",
-			"Geheiligte Glyphen von Unau": "Geheiligte Glyphen von Unau",
-			"Gimaril-Glyphen": "Gimaril-Glyphen",
-			"Hjaldingsche Runen": "Hjaldingsche Runen",
-			"Imperiale Zeichen": "Imperiale Zeichen",
-			"Isdira- und Asdharia-Zeichen": "Isdira- und Asdharia-Zeichen",
-			"Kusliker Zeichen": "Kusliker Zeichen",
-			"Nanduria-Zeichen": "Nanduria-Zeichen",
-			"Rogolan-Runen": "Rogolan-Runen",
-			"Thorwalsche Runen": "Thorwalsche Runen",
-			"Trollische Raumbildschrift": "Trollische Raumbildschrift",
-			"Tulamidya-Zeichen": "Tulamidya-Zeichen",
-			"Ur-Tulamidya-Zeichen": "Ur-Tulamidya-Zeichen",
-			"Zhayad-Zeichen": "Zhayad-Zeichen",
-			"Alaani": "Kusliker Zeichen",
-			"Angram": "Angram-Bilderschrift",
 			"Asdharia": "Isdira- und Asdharia-Zeichen",
 			"Atak": "Atak",
 			"Aureliani": "Imperiale Zeichen",
 			"Bosparano": "Kusliker Zeichen",
+			"Chrmk": "Chrmk",
+			"Chuchas": "Chuchas",
+			"Drakhard-Zinken": "Drakhard-Zinken",
 			"Fjarningsch": "Fjarningsch",
 			"Garethi": "Kusliker Zeichen",
+			"Geheiligte Glyphen von Unau": "Geheiligte Glyphen von Unau",
+			"Gimaril-Glyphen": "Gimaril-Glyphen",
 			"Goblinisch": "Goblinisch",
+			"Hjaldingsche Runen": "Hjaldingsche Runen",
+			"Imperiale Zeichen": "Imperiale Zeichen",
 			"Isdira": "Isdira- und Asdharia-Zeichen",
+			"Isdira- und Asdharia-Zeichen": "Isdira- und Asdharia-Zeichen",
+			"Kusliker Zeichen": "Kusliker Zeichen",
 			"Mohisch": "Mohisch",
+			"Nanduria-Zeichen": "Nanduria-Zeichen",
 			"Nujuka": "Nujuka",
-			"Ogrisch": "Ogrisch",
-			"Oloarkh": "Oloarkh",
-			"Ologhaijan": "Ologhaijan",
-			"Rabensprache": "Rabensprache",
+			"Ogrisch": "Goblinisch",
+			"Oloarkh": "Goblinisch",
+			"Ologhaijan": "Goblinisch",
+			"Protozelemja": "Chuchas",
+			"Rabensprache": "Tulamidya-Zeichen",
 			"Rogolan": "Rogolan-Runen",
+			"Rogolan-Runen": "Rogolan-Runen",
 			"Rssahh": "Chrmk",
 			"Ruuz": "Tulamidya-Zeichen",
 			"Saga-Thorwalsch": "Hjaldingsche Runen",
 			"Tahaya": "Mohisch",
 			"Thorwalsch": "Thorwalsche Runen",
+			"Thorwalsche Runen": "Thorwalsche Runen",
 			"Trollisch": "Trollische Raumbildschrift",
+			"Trollische Raumbildschrift": "Trollische Raumbildschrift",
 			"Tulamidya": "Tulamidya-Zeichen",
+			"Tulamidya-Zeichen": "Tulamidya-Zeichen",
 			"Ur-Tulamidya": "Ur-Tulamidya-Zeichen",
+			"Ur-Tulamidya-Zeichen": "Ur-Tulamidya-Zeichen",
+			"Yash-Hualay-Glyphen": "Chuchas",
 			"Zelemja": "Chrmk",
 			"Zhayad": "Zhayad-Zeichen",
+			"Zhayad-Zeichen": "Zhayad-Zeichen",
 			"Zyklopäisch": "Kusliker Zeichen"
 		};
 	}
