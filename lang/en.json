@@ -21,7 +21,7 @@
     "ReplaceLanguagesHint": "Replaces the system's default languages with your Custom Languages. The first language on the list becomes the new default language.",
     "ScrambleGMTitle": "Scramble Messages for GM",
     "ScrambleGMHint": "Don't translate the text for the GM (refer to the globe's color for the token's understanding). Requires reload.",
-    "enableAllFontsTitle": "Add All Fonts on Language Settings",
+    "enableAllFontsTitle": "Use All Fonts",
     "enableAllFontsHint": "Makes the Polyglot fonts avilable in the Language Settings.",
     "RandomizeRunesTitle": "Randomize Runes",
     "RandomizeRunesHint": "Enabling this option will cause the scrambled text to appear different every time, even if the same message is repeated.",
