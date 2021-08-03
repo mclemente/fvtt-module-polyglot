@@ -1435,22 +1435,22 @@ export class warhammerLanguageProvider extends LanguageProvider {
 		return {
 			"_default": "common",
 			"reikspiel": "reikspiel",
-			"Wastelander": "reikspiel",
-			"Classical": "reikspiel",
-			"Cathan": "cathan",
-			"Tilean": "common",
-			"Estalian": "romance",
-			"Gospodarinyi": "kislevien",
-			"Albion": "norse",
-			"Norse": "norse",
-			"Bretonnian": "romance",
-			"Druhir": "druhir",
-			"Elthárin": "eltharin",
-			"Orcish": "orcish",
-			"Queekish": "queekish",
-			"Slaan": "slaan",
-			"Khazalid": "klinkarhun",
-			"Magick": "eltharin"
+			"wastelander": "reikspiel",
+			"classical": "reikspiel",
+			"cathan": "cathan",
+			"tilean": "common",
+			"estalian": "romance",
+			"gospodarinyi": "kislevien",
+			"albion": "norse",
+			"norse": "norse",
+			"bretonnian": "romance",
+			"druhir": "druhir",
+			"elthárin": "eltharin",
+			"orcish": "orcish",
+			"queekish": "queekish",
+			"slaan": "slaan",
+			"khazalid": "klinkarhun",
+			"magick": "eltharin"
 		};
 	}
 	
