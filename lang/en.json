@@ -13,6 +13,8 @@
     "ComprehendLanguagesHint": "Like the Comprehend Languages spell from D&D. Input a custom language you have already set. It won't be able to be spoken or written but allows to understand all other languages.",
     "JournalHighlightTitle": "Journal Highlight Opacity (%)",
     "JournalHighlightHint": "Defines the opacity of the highlight over fonts on the journal.",
+    "logographicalFontToggleTitle": "Logographical Fonts",
+    "logographicalFontToggleHint": "Halves the size of phrases using Logographical fonts (e.g. Japanese, Chinese characters).",
     "TruespeechTitle": "Tongues Spell",
     "TruespeechHint": "Like the Tongues spell from D&D. Input a custom language you have already set. Its speaker understands all spoken languages (can't read Journals) and is understood by all creatures.",
     "DefaultLanguageTitle": "Default Language",
@@ -24,7 +26,12 @@
     "enableAllFontsTitle": "Use All Fonts",
     "enableAllFontsHint": "Makes the Polyglot fonts avilable in the Language Settings.",
     "RandomizeRunesTitle": "Randomize Runes",
-    "RandomizeRunesHint": "Enabling this option will cause the scrambled text to appear different every time, even if the same message is repeated.",
+    "RandomizeRunesHint": "This determines which type of RNG is used to generate a phrase. ⚠️ The \"None\" option only supports Alphanumeric characters (no accents).",
+    "RandomizeRunesOptions": {
+      "a": "Default",
+      "b": "Unique phrases",
+      "c": "None ⚠️"
+    },
     "ExportFontsTitle": "Make Fonts Available",
     "ExportFontsHint": "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
     "DisplayTranslatedTitle": "Display Translations",

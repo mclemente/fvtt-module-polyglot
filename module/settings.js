@@ -62,7 +62,18 @@ export function registerSettings() {
 	addSetting("useUniqueSalt", {
 		name: game.i18n.localize("POLYGLOT.RandomizeRunesTitle"),
 		hint: game.i18n.localize("POLYGLOT.RandomizeRunesHint"),
-		default: false,
+		default: "a",
+		type: String,
+		choices: {
+			"a" : game.i18n.localize("POLYGLOT.RandomizeRunesOptions.a"),
+			"b" : game.i18n.localize("POLYGLOT.RandomizeRunesOptions.b"),
+			"c" : game.i18n.localize("POLYGLOT.RandomizeRunesOptions.c")
+		},
+	});
+	addSetting("logographicalFontToggle", {
+		name: game.i18n.localize("POLYGLOT.logographicalFontToggleTitle"),
+		hint: game.i18n.localize("POLYGLOT.logographicalFontToggleHint"),
+		default: true,
 		type: Boolean
 	});
 	game.settings.register("polyglot", "enableAllFonts", {
@@ -84,7 +95,7 @@ export function registerSettings() {
 		type: Boolean,
 		onChange: () => window.polyglot.polyglot.updateConfigFonts()
 	});
-	addSetting("exportFonts", {
+	addSetting("JournalHighlight", {
 		name: game.i18n.localize("POLYGLOT.JournalHighlightTitle"),
 		hint: game.i18n.localize("POLYGLOT.JournalHighlightHint"),
 		default: 25,

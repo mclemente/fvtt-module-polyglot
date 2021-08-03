@@ -25,6 +25,7 @@ Polyglot.FONTS = [
 	"Kargi",
 	"KremlinPremier",
 	"MarasEye",
+	"MageScript",
 	"MeroiticDemotic",
 	"MiroslavNormal",
 	"NyStormning",

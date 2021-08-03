@@ -9,7 +9,8 @@ The following fonts are owned by Pixel Sagas, check out their [website](http://w
 - Espruar
 - HighDrowic
 - Kargi
-- Lokharic
+- Iokharic
+- MageScript
 - MarasEye
 - OldeEspruar
 - OldeThorass

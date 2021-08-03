@@ -85,6 +85,10 @@
   src:url('../fonts/KremlinPremier.ttf');
 }
 @font-face {
+  font-family:'MageScript';
+  src:url('../fonts/MageScript.otf');
+}
+@font-face {
   font-family:'MarasEye';
   src:url('../fonts/MarasEye.otf');
 }

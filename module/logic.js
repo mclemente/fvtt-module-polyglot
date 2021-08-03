@@ -1,6 +1,20 @@
 import { currentLanguageProvider } from "./api.js";
 
 /**
+ * Font sets that don't have Numeric characters.
+ */
+const FONTS_26 = [
+	"ArCiela", "FingerAlphabet", "MageScript"
+];
+
+/**
+ * Font sets that use Logographic characters (e.g. Ancient Egyptian, Mandarin, Japanese)
+ */
+const LOGOGRAPHICAL_FONTS = [
+	"Aztec", "DarkEldar", "Eltharin", "FingerAlphabet", "HighschoolRunes", "JungleSlang", "MageScript", "Oriental", "Saurian", "ScrapbookChinese", "Skaven", "Thassilonian"
+];
+
+/**
  * Returns if the system is one of the systems that were originally supported prior to 1.7.2.
  * 
  * @returns {Boolean}
@@ -185,11 +199,20 @@ export class Polyglot {
 	 * @param {string} salt		The message's id, if Randomize Runes setting is enabled (to make no two messages equal), or its language.
 	 * @return {string}			The message's text with its characters scrambled by the PRNG.
 	 */
-	scrambleString(string, salt) {
+	scrambleString(string, salt, lang) {
+		const font = this._getFontStyle(lang).split(" ")[1];
+		if (!game.settings.get('polyglot', 'logographicalFontToggle') && LOGOGRAPHICAL_FONTS.includes(font)) {
+			string = string.substr(0, Math.round(string.length/2));
+		}
+		const uniqueSalt = game.settings.get('polyglot', 'useUniqueSalt');
+		if (uniqueSalt == "c") return string;
+		if (uniqueSalt == "a") salt = lang;
 		const salted_string = string + salt;
 		const rng = new MersenneTwister(this._hashCode(salted_string));
+		let characters = "abcdefghijklmnopqrstuvwxyz";
+		if (!FONTS_26.includes(font)) characters += "0123456789";
 		return string.replace(/\S/gu, () => {
-			const c = Math.floor(rng.random() * 36).toString(36)
+			const c = characters.charAt(Math.floor(rng.random() * characters.length)) //.toString(num)
 			const upper = Boolean(Math.round(rng.random()));
 			return upper ? c.toUpperCase() : c;
 		});
@@ -225,8 +248,8 @@ export class Polyglot {
 			message.polyglot_unknown = false;
 		else
 			message.polyglot_unknown = !this._isTruespeech(lang) && !known && (game.user.character ? !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages) : true);
-
-		let new_content = this.scrambleString(message.data.content, game.settings.get('polyglot', 'useUniqueSalt') ? message.data._id : lang)
+		
+		let new_content = this.scrambleString(message.data.content, message.data._id, lang);
 		if (displayTranslated && (lang != currentLanguageProvider.defaultLanguage || message.polyglot_unknown)) {
 			let content = html.find(".message-content");
 			let translation = message.data.content;
@@ -369,7 +392,7 @@ export class Polyglot {
 						if (!lang) continue;
 						texts.push(span.textContent)
 						styles.push(span.style.font)
-						span.textContent = this.scrambleString(span.textContent, game.settings.get('polyglot', 'useUniqueSalt') ? journalSheet._id : lang)
+						span.textContent = this.scrambleString(span.textContent, journalSheet._id, lang)
 						span.style.font = this._getFontStyle(lang)
 					}
 				}
@@ -396,7 +419,7 @@ export class Polyglot {
 			let conditions = !this._isTruespeech(lang) && !this.known_languages.has(this.comprehendLanguages) && !currentLanguageProvider.conditions(this, lang);
 			if (conditions) {
 				span.title = "????"
-				span.textContent = this.scrambleString(span.textContent, game.settings.get('polyglot', 'useUniqueSalt') ? journalSheet._id : lang)
+				span.textContent = this.scrambleString(span.textContent, journalSheet._id, lang)
 				span.style.font = this._getFontStyle(lang)
 			}
 		}
@@ -420,7 +443,7 @@ export class Polyglot {
 				return;
 			if (unknown) {
 				const content = html.find(".bubble-content")
-				const new_content = this.scrambleString(messageContent, game.settings.get('polyglot', 'useUniqueSalt') ? message._id : lang)
+				const new_content = this.scrambleString(messageContent, message._id, lang)
 				content.text(new_content)
 				this._bubble.font = this._getFontStyle(lang)
 				this._bubble.message = new_content
@@ -438,7 +461,7 @@ export class Polyglot {
 						message.polyglot_unknown = false;
 					if (!message.polyglot_force && message.polyglot_unknown) {
 						const content = html.find(".bubble-content")
-						const new_content = this.scrambleString(message.data.content, game.settings.get('polyglot', 'useUniqueSalt') ? message._id : lang)
+						const new_content = this.scrambleString(message.data.content, message._id, lang)
 						content.text(new_content)
 						this._bubble.font = this._getFontStyle(lang)
 						this._bubble.message = new_content
@@ -464,7 +487,7 @@ export class Polyglot {
 			if (game.user.isGM && !game.settings.get("polyglot", "runifyGM"))
 				message.polyglot_unknown = false;
 			if (!message.polyglot_force && message.polyglot_unknown) {
-				const new_content = this.scrambleString(chatDisplayData.text, game.settings.get('polyglot', 'useUniqueSalt') ? message._id : lang)
+				const new_content = this.scrambleString(chatDisplayData.text, message._id, lang)
 				chatDisplayData.text = new_content;
 				chatDisplayData.font = this._getFontStyle(lang)
 				chatDisplayData.skipAutoQuote = true;
