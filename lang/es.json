@@ -25,7 +25,7 @@
     "ScrambleGMTitle": "Codificar para el GM",
     "ScrambleGMHint": "Deshabilite esta opción para mostrar siempre el texto para el GM (remítase al color del globo para ver la perspectiva del icono)",
     "enableAllFontsTitle": "Añadir fuentes de los ajustes de idioma",
-    "enableAllFontsHint": "Habilita las fuentes Polyglot en los ajustes de idioma.",
+    "enableAllFontsHint": "Se usarán todas las fuentes",
     "RandomizeRunesTitle": "Aleatorizar las runas",
     "RandomizeRunesHint": "Habilitar esta opción ocasiona que los textos codificados se vean siempre de forma distinta, aunque se repita el mismo mensaje",
     "ExportFontsTitle": "Habilitar la tipografía",
