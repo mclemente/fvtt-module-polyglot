@@ -9,19 +9,30 @@
 # Polyglot
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.
 
-## Usage
-Check the [wiki](../../wiki).
+## Chat
+A language selection dropbox is available above the chat text box so you can select which language you want your character to speak in.  
+When loading a world, only the last 100 messages are scrambled to avoid making load times insane on a big chat log.
+
+## Polyglot and FVTT Behavior
+- **Actor Permissions:** If a player has Owner/Observer permission for a character, they will be able to read messages as that character ([example gif](https://media.discordapp.net/attachments/542495303929036824/737807675290550324/chat.gif)).
+- **Out of Character vs In Character:** By default, Polyglot only activates on in-character messages, which can be changed on a setting.
+
+## Journal
+You can write text in a specific script and only players who speak that language will understand it. By hovering the text they can see what language the text is written.  
+The owner of a journal and the GM can scramble/unscramble the text in their screen to see how it looks.  
+
+## Item Descriptions
+Item descriptions are not supported by Polyglot because they are implemented differently on each system. Also, the item's owner would be able to edit the translation, which might have voided the entire point of putting text they can't read.
 
 ## API
 If you want to implement Polyglot into your system, check out the [API wiki](../../wiki/API)
 
-# Credit
+## Credit
 The original idea for this module was proposed by `@Talwin Greenwood` on the FVTT discord.  
 The original PolyGlot module is written by KaKaRoTo. The 'fantasy languages' adaptation is written by elizeuangelo.  
 [@ironmonk88](https://github.com/ironmonk88) for the Translation Box.  
 [@manuelVo](https://github.com/manuelVo) for the API code.  
-Check the [translations' README](lang/README.md) for translator's credits.
 
-# License
+## License
 This module is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).  
 This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agreement for Module Development v 0.1.6](https://foundryvtt.com/article/license/).
