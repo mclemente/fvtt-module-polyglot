@@ -13,6 +13,9 @@ Talk to others using a language you can speak and scrambles text you can't under
 A language selection dropbox is available above the chat text box so you can select which language you want your character to speak in.  
 When loading a world, only the last 100 messages are scrambled to avoid making load times insane on a big chat log.
 
+## Macros
+Check out the [Macros wiki](../../wiki/Macros).
+
 ## Polyglot and FVTT Behavior
 - **Actor Permissions:** If a player has Owner/Observer permission for a character, they will be able to read messages as that character ([example gif](https://media.discordapp.net/attachments/542495303929036824/737807675290550324/chat.gif)).
 - **Out of Character vs In Character:** By default, Polyglot only activates on in-character messages, which can be changed on a setting.
@@ -25,7 +28,7 @@ The owner of a journal and the GM can scramble/unscramble the text in their scre
 Item descriptions are not supported by Polyglot because they are implemented differently on each system. Also, on systems where it has a Journal editor, its owner would be able to remove the translation, which might have voided the entire point of putting text they can't read.
 
 ## API
-If you want to implement Polyglot into your system, check out the [API wiki](../../wiki/API)
+If you want to implement Polyglot into your system, check out the [API wiki](../../wiki/API).
 
 ## Credit
 The original idea for this module was proposed by `@Talwin Greenwood` on the FVTT discord.  
