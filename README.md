@@ -22,7 +22,7 @@ You can write text in a specific script and only players who speak that language
 The owner of a journal and the GM can scramble/unscramble the text in their screen to see how it looks.  
 
 ## Item Descriptions
-Item descriptions are not supported by Polyglot because they are implemented differently on each system. Also, the item's owner would be able to edit the translation, which might have voided the entire point of putting text they can't read.
+Item descriptions are not supported by Polyglot because they are implemented differently on each system. Also, on systems where it has a Journal editor, its owner would be able to remove the translation, which might have voided the entire point of putting text they can't read.
 
 ## API
 If you want to implement Polyglot into your system, check out the [API wiki](../../wiki/API)
