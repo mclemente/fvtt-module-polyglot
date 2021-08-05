@@ -63,6 +63,7 @@ The following does not accompanied license terms, were OPL or their license have
 - Pulsian (Fan Art by Echiceroo)
 - Skaven
 - Tengwar (Greifswalder)
+- OldeEnglish
 - Oriental
 - OrkGlyphs
 - Thassilonian (Fan Art)

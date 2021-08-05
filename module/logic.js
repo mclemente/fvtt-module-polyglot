@@ -4,7 +4,7 @@ import { currentLanguageProvider } from "./api.js";
  * Font sets that don't have Numeric characters.
  */
 const FONTS_26 = [
-	"ArCiela", "FingerAlphabet", "MageScript"
+	"ArCiela", "FingerAlphabet", "KremlinPremier", "MageScript", "MeroiticDemotic", "OldeEnglish", "Pulsian", "Semphari", "Tuzluca"
 ];
 
 /**

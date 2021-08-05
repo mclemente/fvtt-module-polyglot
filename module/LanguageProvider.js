@@ -38,6 +38,7 @@ export class LanguageProvider {
 			"meroiticdemotic": "200% MeroiticDemotic",
 			"miroslavnormal": "200% MiroslavNormal",
 			"nordic": "160% NyStormning",
+			"oldeenglish": "150% OldeEnglish",
 			"oldeespruar": "200% OldeEspruar",
 			"oldethorass": "200% OldeThorass",
 			"ophidian": "250% Ophidian",
