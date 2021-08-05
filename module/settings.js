@@ -2,6 +2,10 @@ import { currentLanguageProvider, getDefaultLanguageProvider, updateLanguageProv
 import { PolyglotLanguageSettings } from "./LanguageSettings.js"
 import { legacyGenericSystem } from "./logic.js"
 
+const debouncedReload = foundry.utils.debounce(() => {
+	window.location.reload();
+}, 100);
+
 /**
  * Shorthand for game.settings.register.
  * Default data: {scope: "world", config: true}
@@ -152,7 +156,7 @@ export function registerSettings() {
 		hint: game.i18n.localize("POLYGLOT.HideTranslationHint"),
 		default: false,
 		type: Boolean,
-		onChange: () => location.reload()
+		onChange: () => debouncedReload()
 	});
 	addSetting("allowOOC", {
 		name: game.i18n.localize("POLYGLOT.AllowOOCTitle"),
@@ -171,6 +175,6 @@ export function registerSettings() {
 		hint: game.i18n.localize("POLYGLOT.ScrambleGMHint"),
 		default: false,
 		type: Boolean,
-		onChange: () => location.reload()
+		onChange: () => debouncedReload()
 	});
 }
