@@ -105,6 +105,10 @@
 	src:url('../fonts/NyStormning.otf');
 }
 @font-face {
+  font-family:'OldeEnglish';
+  src:url('../fonts/OldeEnglish.ttf');
+}
+@font-face {
   font-family:'OldeEspruar';
   src:url('../fonts/OldeEspruar.otf');
 }
