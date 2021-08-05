@@ -1,7 +1,7 @@
 import {LanguageProvider, ariaLanguageProvider, coc7LanguageProvider, 
 	d35eLanguageProvider, darkHeresyLanguageProvider, dccLanguageProvider, 
-	demonlordLanguageProvider, dnd5eLanguageProvider,
-	dsa5LanguageProvider, kryxrpgLanguageProvider, oseLanguageProvider, 
+	demonlordLanguageProvider, dnd5eLanguageProvider, dsa5LanguageProvider,
+	gurpsLanguageProvider, kryxrpgLanguageProvider, oseLanguageProvider, 
 	pf1LanguageProvider, pf2eLanguageProvider, sfrpgLanguageProvider, 
 	shadowrun5eLanguageProvider, swadeLanguageProvider, sw5eLanguageProvider,
 	tormenta20LanguageProvider, uesrpgLanguageProvider, warhammerLanguageProvider
@@ -73,6 +73,9 @@ export function initApi() {
 			break;
 		case "dnd5e":
 			languageProviders.push(new dnd5eLanguageProvider("native.dnd5e"));
+			break;
+		case "gurps":
+			languageProviders.push(new gurpsLanguageProvider("native.gurps"));
 			break;
 		case "kryx_rpg":
 			languageProviders.push(new kryxrpgLanguageProvider("native.kryx_rpg"));

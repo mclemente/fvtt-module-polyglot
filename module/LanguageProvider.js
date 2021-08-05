@@ -771,6 +771,20 @@ export class dsa5LanguageProvider extends LanguageProvider {
 	}
 }
 
+export class gurpsLanguageProvider extends LanguageProvider {
+	getUserLanguages(actor) {
+		let known_languages = new Set();
+		let literate_languages = new Set();
+		for (let item in actor.data.data.ads) {
+			const match = actor.data.data.ads[item].name.match(/Language \((.+)\)/i);
+			// adding only the descriptive language name, not "Language (XYZ)"
+			if (match)
+				known_languages.add(match[1].trim().toLowerCase());
+		}
+		return [known_languages, literate_languages];
+	}
+}
+
 export class kryxrpgLanguageProvider extends LanguageProvider {
 	get originalAlphabets() {
 		return {
