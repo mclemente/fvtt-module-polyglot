@@ -72,8 +72,3 @@ Hooks.on('ready', () => {
 });
 Hooks.on("chatBubble", window.polyglot.polyglot.chatBubble.bind(window.polyglot.polyglot)); //token, html, message, {emote}
 Hooks.on("vinoPrepareChatDisplayData", window.polyglot.polyglot.vinoChatRender.bind(window.polyglot.polyglot));
-Hooks.on("renderSettingsConfig", (app, html, data) => {
-    $('<div>').addClass('form-group polyglot-group-header').html(game.i18n.localize("POLYGLOT.FontSettings")).insertBefore($('[name="polyglot.useUniqueSalt"]').parents('div.form-group:first'));
-    $('<div>').addClass('form-group polyglot-group-header').html(game.i18n.localize("POLYGLOT.LanguageSettings")).insertBefore($('[name="polyglot.replaceLanguages"]').parents('div.form-group:first'));
-    $('<div>').addClass('form-group polyglot-group-header').html(game.i18n.localize("POLYGLOT.ChatSettings")).insertBefore($('[name="polyglot.display-translated"]').parents('div.form-group:first'));
-});
