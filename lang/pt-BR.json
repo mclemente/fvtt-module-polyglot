@@ -13,6 +13,8 @@
     "ComprehendLanguagesHint": "Como a magia Compreender Idiomas, do D&D. Coloque um Idioma Customizado que você já criou. Ele não pode ser escrito ou falado, mas permite que todos os outros idiomas sejam entendidos.",
     "JournalHighlightTitle": "Opacidade do Marcador do Diário (%)",
     "JournalHighlightHint": "Define a opacidade do marcador sobre as fontes no diário.",
+    "logographicalFontToggleTitle": "Fontes Logográficas",
+    "logographicalFontToggleHint": "Reduz pela metade o tamanho de frases usando fontes logográficas (ex.: caracteres japoneses ou chineses).",
     "TruespeechTitle": "Magia: Línguas",
     "TruespeechHint": "Como a magia Línguas, do D&D. Coloque um Idioma Customizado que você já criou. O falante irá entender todas as línguas faladas (mas não escritas em Diários) e será entendido por todas as criaturas.",
     "DefaultLanguageTitle": "Idioma Padrão",
@@ -24,7 +26,12 @@
     "enableAllFontsTitle": "Adicionar Fontes às Configurações de Idioma",
     "enableAllFontsHint": "Torna as fontes do Polyglot disponíveis nas Configurações de Idioma.",
     "RandomizeRunesTitle": "Randomizar Runas",
-    "RandomizeRunesHint": "Texto embaralhado sempre irá parecer diferente, mesmo se a mesma mensagem for repetida.",
+    "RandomizeRunesHint": "Texto embaralhado sempre irá parecer diferente, mesmo se a mesma mensagem for repetida.  ⚠️ A opção \"Nenhum\" suporta apenas caracteres alfanuméricos (sem acentos).",
+    "RandomizeRunesOptions": {
+      "a": "Padrão",
+      "b": "Frases únicas",
+      "c": "Nenhum ⚠️"
+    },
     "ExportFontsTitle": "Tornar Fontes Disponíveis",
     "ExportFontsHint": "Torna as fontes do Polyglot disponíveis para uso no Foundry (por exemplo, na Ferramenta de Desenhos).",
     "DisplayTranslatedTitle": "Mostrar traduções",
