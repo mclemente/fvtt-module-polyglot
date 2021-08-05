@@ -1,7 +1,8 @@
 {
-  "I18N.LANGUAGE": "Español",
-  "I18N.MAINTAINERS": "@Viriato139ac#0342, Juanfrank",
-
+  "I18N": {
+    "LANGUAGE": "Español",
+    "MAINTAINERS": "@Viriato139ac#0342, Juanfrank"
+  },
   "POLYGLOT": {
     "DefaultAlphabet": "Alfabeto por defecto",
     "FontSettings": "Ajustes de fuentes",
@@ -16,6 +17,8 @@
     "ComprehendLanguagesHint": "Tal y como funciona el hechizo de D&D Comprender Idiomas. Ponga uno de los idiomas que haya añadido al sistema. No se podrá usar ni para hablar ni para leer, pero permitirá a quien lo posea entender todos los idiomas disponibles",
     "JournalHighlightTitle": "Opacidad del resaltado en los diarios (%)",
     "JournalHighlightHint": "Define la opacidad del resaltado de las fuentes en el diario",
+    "logographicalFontToggleTitle": "Fuentes logográficas",
+    "logographicalFontToggleHint": "Reduce a la mitad el tamaño de las frases usando fuentes logográficas (p.ej. caracteres japoneseso chinos)",
     "TruespeechTitle": "Hechizo Idiomas",
     "TruespeechHint": "Tal y como funciona el hechizo de D&D Idiomas. Ponga uno de los idiomas que haya añadido al sistema. El que lo posea podrá entender todos los idiomas hablados (pero no podrá leer diarios) y también le entenderán todas las criaturas",
     "DefaultLanguageTitle": "Idioma por defecto",
@@ -28,6 +31,11 @@
     "enableAllFontsHint": "Se usarán todas las fuentes",
     "RandomizeRunesTitle": "Aleatorizar las runas",
     "RandomizeRunesHint": "Habilitar esta opción ocasiona que los textos codificados se vean siempre de forma distinta, aunque se repita el mismo mensaje",
+    "RandomizeRunesOptions": {
+      "a": "Por defecto",
+      "b": "Frases únicas",
+      "c": "Ninguna ⚠️"
+    },
     "ExportFontsTitle": "Habilitar la tipografía",
     "ExportFontsHint": "Permite que Foundry pueda usar la tipografía de Polyglot (por ejemplo, al crear dibujos)",
     "DisplayTranslatedTitle": "Mostrar traducciones",
