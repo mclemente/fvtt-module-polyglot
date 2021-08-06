@@ -85,6 +85,15 @@ export class LanguageProvider {
 		}
 	}
 
+	addLanguage(lang) {
+		if (!lang) return;
+		const key = lang.trim().toLowerCase().replace(/ \'/g, "_");
+		this.languages[key] = lang;
+		CONFIG[game.system.id.toUpperCase()].languages[key] = lang;
+		if (!(key in this.tongues)) {
+			this.tongues[key] = this.tongues["_default"];
+		}
+	}
 	/**
 	 * Loads everything that can't be loaded on the constructor due to async/await.
 	 */

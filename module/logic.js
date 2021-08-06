@@ -48,7 +48,23 @@ export class Polyglot {
 	get LanguageProvider() {
 		return currentLanguageProvider;
 	}
-
+	
+	get comprehendLanguages() {
+		return this._comprehendLanguages;
+	}
+	get truespeech() {
+		return this._truespeech;
+	}
+	
+	set comprehendLanguages(lang) {
+		currentLanguageProvider.addLanguage(lang);
+		this._comprehendLanguages = lang.trim().toLowerCase().replace(/ \'/g, "_");
+	}
+	
+	set truespeech(lang) {
+		currentLanguageProvider.addLanguage(lang);
+		this._truespeech = lang.trim().toLowerCase().replace(/ \'/g, "_");
+	}
 	/* -------------------------------------------- */
 	/*  Hooks	                                    */
 	/* -------------------------------------------- */
