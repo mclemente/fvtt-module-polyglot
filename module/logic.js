@@ -233,6 +233,10 @@ export class Polyglot {
 			return upper ? c.toUpperCase() : c;
 		});
 	}
+	
+	understands(lang) {
+		return this.known_languages.has(lang) || this.known_languages.has(this.comprehendLanguages) || this.known_languages.has(this.truespeech);
+	}
 
 	createChatMessage(chatEntity, _, userId) {
 		const chatData = chatEntity.data;
