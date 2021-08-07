@@ -80,7 +80,7 @@ export class LanguageProvider {
 			const inverted = invertObject(this.languages);
 			if (inverted[defaultLang]) this.defaultLanguage = inverted[defaultLang];
 		}
-		else if (!replaceLanguages) {
+		else {
 			this.defaultLanguage = this.getSystemDefaultLanguage();
 		}
 	}
