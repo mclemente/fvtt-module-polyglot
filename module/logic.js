@@ -234,6 +234,10 @@ export class Polyglot {
 		});
 	}
 
+	createChatMessage(chatEntity, _, userId) {
+		const chatData = chatEntity.data;
+		if (chatData.content.startsWith("<") || (chatData.type == CONST.CHAT_MESSAGE_TYPES.OOC && !this._allowOOC())) return;
+	}
 	/**
      * Renders the messages, scrambling the text if it is not known by the user (or currently selected character)
 	 * and adding the indicators ("Translated From" text and the globe icon).
@@ -312,19 +316,7 @@ export class Polyglot {
 	 * @param {*} userId 
 	 */
 	preCreateChatMessage(document, data, options, userId) {
-		let allowOOC = false;
-		switch (game.settings.get("polyglot", "allowOOC")) {
-			case "a":
-				allowOOC = true;
-				break;
-			case "b":
-				allowOOC = game.user.isGM;
-				break;
-			case "c":
-				allowOOC = [CONST.USER_ROLES.TRUSTED, CONST.USER_ROLES.PLAYER].includes(game.user.role);
-				break;
-		}
-		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (allowOOC && this._isMessageTypeOOC(data.type))) {
+		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this._allowOOC() && this._isMessageTypeOOC(data.type))) {
 			let lang;
 			if (data.lang) {
 				const invertedLanguages = invertObject(currentLanguageProvider.languages);
@@ -611,6 +603,18 @@ export class Polyglot {
 			return this._polyglot_original_activateEditor(target, editorOptions, initialContent);
 		}
 		sheet._polyglotEditor = true;
+	}
+	
+	_allowOOC() {
+		switch (game.settings.get("polyglot", "allowOOC")) {
+			case "a":
+				return true;
+			case "b":
+				return game.user.isGM;
+			case "c":
+				return [CONST.USER_ROLES.TRUSTED, CONST.USER_ROLES.PLAYER].includes(game.user.role);
+		}
+		return false;
 	}
 
 	/**

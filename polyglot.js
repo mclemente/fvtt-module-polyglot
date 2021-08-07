@@ -60,6 +60,7 @@ Hooks.on('renderChatLog', window.polyglot.polyglot.renderChatLog.bind(window.pol
 Hooks.on('updateUser', window.polyglot.polyglot.updateUser.bind(window.polyglot.polyglot));
 Hooks.on('controlToken', window.polyglot.polyglot.controlToken.bind(window.polyglot.polyglot));
 Hooks.on('preCreateChatMessage', window.polyglot.polyglot.preCreateChatMessage.bind(window.polyglot.polyglot));
+Hooks.on('createChatMessage', window.polyglot.polyglot.createChatMessage.bind(window.polyglot.polyglot));
 Hooks.on('renderChatMessage', window.polyglot.polyglot.renderChatMessage.bind(window.polyglot.polyglot));
 Hooks.on('renderJournalSheet', window.polyglot.polyglot.renderJournalSheet.bind(window.polyglot.polyglot));
 Hooks.on('setup', async () => {
