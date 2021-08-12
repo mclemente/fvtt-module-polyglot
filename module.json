@@ -4,6 +4,14 @@
   "description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
   "version": "1.7",
   "author": ["MClemente", "KaKaRoTo", "elizeuangelo"],
+  "authors": [
+    {
+      "name": "Matheus Clemente",
+      "discord": "mclemente#5524",
+      "ko-fi": "mclemente",
+      "patreon": "mclemente"
+    }
+  ]
   "esmodules": ["./polyglot.js"],
   "styles": ["./css/polyglot.css","./css/fonts.css"],
   "packs": [],
