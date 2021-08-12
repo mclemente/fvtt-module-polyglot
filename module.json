@@ -11,7 +11,7 @@
       "ko-fi": "mclemente",
       "patreon": "mclemente"
     }
-  ]
+  ],
   "esmodules": ["./polyglot.js"],
   "styles": ["./css/polyglot.css","./css/fonts.css"],
   "packs": [],
