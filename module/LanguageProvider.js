@@ -244,6 +244,7 @@ export class LanguageProvider {
 		for (let lang in langSettings) {
 			if (!(lang in this.tongues)) {
 				delete langSettings[lang];
+				this.removeFromConfig(lang);
 			}
 		}
 		for (let lang in this.tongues) {
