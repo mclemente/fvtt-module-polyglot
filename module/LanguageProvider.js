@@ -3,13 +3,22 @@
  * If you want to offer a language provider in your system/module you must derive this class.
  */
 export class LanguageProvider {
+	/**
+	 * @param {String} id 
+	 * @var this.alphabets	The fonts' size and family.
+	 * @var this.languages	The language's names.
+	 * @var this.tongues	The language : font pair.
+	 */
 	constructor(id) {
-		this.id = id
+		this.id = id;
 		this.alphabets = this.originalAlphabets;
-		this.tongues = this.originalTongues;
 		this.languages = {};
+		this.tongues = this.originalTongues;
 	}
 
+	/**
+	 * The system's original fonts.
+	 */
 	get originalAlphabets() {
 		return {
 			"arciela": "200% ArCiela",
@@ -57,6 +66,9 @@ export class LanguageProvider {
 			"valmaric": "200% Valmaric"
 		};
 	}
+	/**
+	 * The system's original language : font pairing.
+	 */
 	get originalTongues() {
 		return { "_default": "thorass" };
 	}
@@ -67,14 +79,21 @@ export class LanguageProvider {
 	get requiresReady() {
 		return false;
 	}
+	/**
+	 * Returns the system's default language if it exists.
+	 * @returns {String}
+	 */
 	getSystemDefaultLanguage() {
 		const keys = Object.keys(this.languages);
 		if (keys.includes("common")) return "common";
 		else return this.languages[0] || Object.keys(this.languages)[0] || "";
 	}
+	/**
+	 * Returns defaultLang if it exists and is either a key or value on this.languages.
+	 * Otherwise, returns the system's default language.
+	 */
 	getDefaultLanguage() {
 		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		if (defaultLang) {
 			if (this.languages[defaultLang]) this.defaultLanguage = defaultLang;
 			const inverted = invertObject(this.languages);
@@ -85,17 +104,56 @@ export class LanguageProvider {
 		}
 	}
 
+	/**
+	 * Adds a language to the Provider.
+	 * @param {String} lang 
+	 */
 	addLanguage(lang) {
 		if (!lang) return;
-		const key = lang.trim().toLowerCase().replace(/ \'/g, "_");
+		lang = lang.trim();
+		const key = lang.toLowerCase().replace(/ \'/g, "_");
 		this.languages[key] = lang;
-		CONFIG[game.system.id.toUpperCase()].languages[key] = lang;
+		this.addToConfig(key, lang);
 		if (!(key in this.tongues)) {
 			this.tongues[key] = this.tongues["_default"];
 		}
 	}
 	/**
+	 * Removes a language from the Provider if it isn't set a Custom Language.
+	 * Generally called when Comprehend Languages or Tongues setting are changed.
+	 * @param {String} lang 
+	 */
+	removeLanguage(lang) {
+		if (!lang) return;
+		const customLanguages = game.settings.get("polyglot", "customLanguages");
+		if (customLanguages.includes(lang)) return;
+		const key = lang.trim().toLowerCase().replace(/ \'/g, "_");
+		delete this.languages[key];
+		this.removeFromConfig(key);
+		if (key in this.tongues) {
+			delete this.tongues[key];
+		}
+	}
+
+	/**
+	 * Adds a key to the languages object.
+	 * Important for systems that read it for their language selector.
+	 * @param {String} key 
+	 * @param {String} lang 
+	 */
+	addToConfig(key, lang) {
+		if (CONFIG[game.system.id.toUpperCase()].languages) CONFIG[game.system.id.toUpperCase()].languages[key] = lang;
+	}
+	/**
+	 * Removes a key from the languages object.
+	 * @param {String} key 
+	 */
+	removeFromConfig(key) {
+		if (CONFIG[game.system.id.toUpperCase()].languages) delete CONFIG[game.system.id.toUpperCase()].languages[key];
+	}
+	/**
 	 * Loads everything that can't be loaded on the constructor due to async/await.
+	 * It Hooks on ready if the system depends on reading compendiums.
 	 */
 	async setup() {
 		if (this.requiresReady) {
@@ -130,6 +188,9 @@ export class LanguageProvider {
 			this.languages = CONFIG[game.system.id.toUpperCase()].languages;
 		}
 	}
+	/**
+	 * Sets the fonts that will be available to choose on the settings.
+	 */
 	loadAlphabet() {
 		this.alphabets = this.originalAlphabets;
 		if (game.settings.get("polyglot", "enableAllFonts")) {
@@ -140,19 +201,26 @@ export class LanguageProvider {
 			}
 		}
 	}
+	/**
+	 * Adds languages from the settings to this.languages.
+	 * Add tongues to this.tongues.
+	 */
 	loadTongues() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const customLanguages = game.settings.get("polyglot", "customLanguages");
+		const comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
+		const truespeech = game.settings.get("polyglot", "truespeech");
 		this.tongues = !replaceLanguages ? this.originalTongues : {"_default": this.originalTongues["_default"]};
 		if (customLanguages) {
 			for (let lang of customLanguages.split(/[,;]/)) {
-				lang = lang.trim();
-				const key = lang.toLowerCase().replace(/ \'/g, "_");
-				this.languages[key] = lang;
-				if (!(key in this.tongues)) {
-					this.tongues[key] = this.tongues["_default"];
-				}
+				this.addLanguage(lang);
 			}
+		}
+		if (comprehendLanguages && !customLanguages.includes(comprehendLanguages)) {
+			this.addLanguage(comprehendLanguages);
+		}
+		if (truespeech && !customLanguages.includes(truespeech)) {
+			this.addLanguage(truespeech);
 		}
 	}
 	/**
@@ -186,6 +254,12 @@ export class LanguageProvider {
 		this.tongues = langSettings;
 	}
 
+	/**
+	 * Gets an actor's languages.
+	 * @param {Document} actor 
+	 * @var literate_languages	For systems that support literacy (e.g. reading journals).
+	 * @returns [Set, Set]
+	 */
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
@@ -1022,22 +1096,6 @@ export class pf2eLanguageProvider extends pf1LanguageProvider {
 			}
 		}
 		this.languages = langs;
-	}
-	loadTongues() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const customLanguages = game.settings.get("polyglot", "customLanguages");
-		this.tongues = !replaceLanguages ? this.originalTongues : {"_default": this.originalTongues["_default"]};
-		if (customLanguages) {
-			for (let lang of customLanguages.split(/[,;]/)) {
-				lang = lang.trim();
-				const key = lang.toLowerCase().replace(/ \'/g, "_");
-				CONFIG.PF2E.languages[key] = lang;
-				this.languages[key] = lang;
-				if (!(key in this.tongues)) {
-					this.tongues[key] = this.tongues["_default"];
-				}
-			}
-		}
 	}
 }
 

@@ -134,14 +134,14 @@ export function registerSettings() {
 		hint: game.i18n.localize("POLYGLOT.ComprehendLanguagesHint"),
 		default: "",
 		type: String,
-		onChange: (value) => window.polyglot.polyglot.comprehendLanguages = value.trim().toLowerCase().replace(/ \'/g, "_")
+		onChange: (value) => window.polyglot.polyglot.comprehendLanguages = value.trim().replace(/ \'/g, "_")
 	});
 	addSetting("truespeech", {
 		name: game.i18n.localize("POLYGLOT.TruespeechTitle"),
 		hint: game.i18n.localize("POLYGLOT.TruespeechHint"),
 		default: "",
 		type: String,
-		onChange: (value) => window.polyglot.polyglot.truespeech = value.trim().toLowerCase().replace(/ \'/g, "_")
+		onChange: (value) => window.polyglot.polyglot.truespeech = value.trim().replace(/ \'/g, "_")
 	});
 
 	//Chat Settings

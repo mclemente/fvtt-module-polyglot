@@ -1,4 +1,5 @@
 import { currentLanguageProvider } from "./api.js";
+import { LanguageProvider } from "./LanguageProvider.js";
 
 /**
  * Font sets that don't have Numeric characters.
@@ -42,27 +43,42 @@ export class Polyglot {
 	get languages() {
 		return currentLanguageProvider.languages;
 	}
+	/**
+	 * @returns {String}
+	 */
 	get defaultLanguage() {
 		return currentLanguageProvider.defaultLanguage;
 	}
+	/**
+	 * @returns {LanguageProvider}
+	 */
 	get LanguageProvider() {
 		return currentLanguageProvider;
 	}
-	
+	/**
+	 * @returns {String}
+	 */
 	get comprehendLanguages() {
 		return this._comprehendLanguages;
 	}
+	/**
+	 * @returns {String}
+	 */
 	get truespeech() {
 		return this._truespeech;
 	}
 	
 	set comprehendLanguages(lang) {
 		currentLanguageProvider.addLanguage(lang);
+		if (lang == this._comprehendLanguages) return;
+		currentLanguageProvider.removeLanguage(this._comprehendLanguages);
 		this._comprehendLanguages = lang.trim().toLowerCase().replace(/ \'/g, "_");
 	}
 	
 	set truespeech(lang) {
 		currentLanguageProvider.addLanguage(lang);
+		if (lang == this._truespeech) return;
+		currentLanguageProvider.removeLanguage(this._truespeech);
 		this._truespeech = lang.trim().toLowerCase().replace(/ \'/g, "_");
 	}
 	/* -------------------------------------------- */
@@ -350,8 +366,8 @@ export class Polyglot {
 			div.remove();
 			return dims;
 		}
-		this.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages").trim().toLowerCase().replace(/ \'/g, "_");
-		this.truespeech = game.settings.get("polyglot", "truespeech").trim().toLowerCase().replace(/ \'/g, "_");
+		this.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
+		this.truespeech = game.settings.get("polyglot", "truespeech");
 		this.updateConfigFonts();
 		if (currentLanguageProvider.requiresReady) {
 			Hooks.on('polyglot.languageProvider.ready', () => {
