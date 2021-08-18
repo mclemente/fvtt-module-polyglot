@@ -9,16 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with:
-        submodules: 'recursive'
-
-    # get part of the tag after the `v`
-    - name: Extract tag version number
-      id: get_version
-      uses: battila7/get-version-action@v2
-
-    - name: Echo tag output
-      run: echo ${{ steps.get_version.outputs.version-without-v }}
 
     # Substitute the Manifest and Download URLs in the module.json
     - name: Substitute Manifest and Download Links For Versioned Ones
@@ -27,28 +17,12 @@ jobs:
       with:
         files: 'module.json'
       env:
-        version: ${{steps.get_version.outputs.version-without-v}}
+        version: ${{github.event.release.tag_name}}
         url: https://github.com/${{github.repository}}
         manifest: https://github.com/${{github.repository}}/releases/latest/download/module.json
-        download: https://github.com/${{github.repository}}/releases/download/${{steps.get_version.outputs.version-without-v}}/module.zip
-
-    - name: Commit changed manifest
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        # Optional but recommended
-        # Defaults to "Apply automatic changes"
-        commit_message: release version ${{ steps.get_version.outputs.version-without-v }}
-
-        # Optional branch name where commit should be pushed to
-        # Defaults to the current branch
-        branch: ${{ github.event.release.target_commitish }}
-
-    - name: Checkout new commit
-      run: git checkout HEAD^
+        download: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/module.zip
 
     # Create a zip file with all files required by the module to add to the release
-    - name: Create download zip
-
     - run: zip -r ./module.zip module.json polyglot.js README.md css/ fonts/ lang/ module/ templates/
 
     # Create a release for this specific version
@@ -56,11 +30,10 @@ jobs:
       id: create_version_release
       uses: ncipollo/release-action@v1
       with:
-        allowUpdates: true
+        allowUpdates: true # Set this to false if you want to prevent updating existing releases
         name: ${{ github.event.release.name }}
-        draft: ${{ github.event.release.draft }}
-        prerelease: ${{ github.event.release.prerelease }}
-        commit: HEAD^
+        draft: false
+        prerelease: false
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: './module.json, ./module.zip'
         tag: ${{ github.event.release.tag_name }}
