@@ -213,6 +213,7 @@ export class LanguageProvider {
 		this.tongues = !replaceLanguages ? this.originalTongues : {"_default": this.originalTongues["_default"]};
 		if (customLanguages) {
 			for (let lang of customLanguages.split(/[,;]/)) {
+				lang = lang.trim();
 				this.addLanguage(lang);
 			}
 		}
@@ -1097,6 +1098,23 @@ export class pf2eLanguageProvider extends pf1LanguageProvider {
 			}
 		}
 		this.languages = langs;
+	}
+	addLanguage(lang) {
+		if (!lang) return;
+		lang = lang.trim();
+		let key = lang.toLowerCase().replace(/ \'/g, "_");
+		const homebrewLanguagesObj = game.settings.get("pf2e", "homebrew.languages");
+		const homebrewLanguagesKeys = homebrewLanguagesObj.map(a => a.id);
+		const homebrewLanguagesValues = homebrewLanguagesObj.map(a => a.value);
+		if (homebrewLanguagesValues.includes(lang)) {
+			const index = homebrewLanguagesValues.indexOf(lang);
+			key = homebrewLanguagesKeys[index]
+		}
+		this.languages[key] = lang;
+		this.addToConfig(key, lang);
+		if (!(key in this.tongues)) {
+			this.tongues[key] = this.tongues["_default"];
+		}
 	}
 }
 
