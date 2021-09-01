@@ -56,7 +56,10 @@
     "LatinAlphabet": "라틴 알파벳",
     "ToggleRunes": "룬 토글",
     "Runes": "룬",
-
+    
+    "Generic": {
+      "Language": "언어"
+    },
     "UESRPG.Language": "언어",
 
     "COC7": {  

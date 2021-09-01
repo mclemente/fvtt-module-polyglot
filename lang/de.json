@@ -31,6 +31,9 @@
   "POLYGLOT.ToggleRunes": "Umschalten Runen",
   "POLYGLOT.Runes": "Runen",
   
+  "POLYGLOT.Generic": {
+    "Language": "Fremdsprache"
+  },
   "POLYGLOT.COC7.LanguageOwn": "Muttersprache",
   "POLYGLOT.COC7.LanguageAny": "Fremdsprache",
   "POLYGLOT.COC7.LanguageOther": "Fremdsprache",

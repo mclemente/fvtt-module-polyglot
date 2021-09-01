@@ -142,14 +142,14 @@ export class LanguageProvider {
 	 * @param {String} lang 
 	 */
 	addToConfig(key, lang) {
-		if (CONFIG[game.system.id.toUpperCase()].languages) CONFIG[game.system.id.toUpperCase()].languages[key] = lang;
+		if (CONFIG[game.system.id.toUpperCase()]?.languages) CONFIG[game.system.id.toUpperCase()].languages[key] = lang;
 	}
 	/**
 	 * Removes a key from the languages object.
 	 * @param {String} key 
 	 */
 	removeFromConfig(key) {
-		if (CONFIG[game.system.id.toUpperCase()].languages) delete CONFIG[game.system.id.toUpperCase()].languages[key];
+		if (CONFIG[game.system.id.toUpperCase()]?.languages) delete CONFIG[game.system.id.toUpperCase()].languages[key];
 	}
 	/**
 	 * Loads everything that can't be loaded on the constructor due to async/await.
@@ -271,6 +271,15 @@ export class LanguageProvider {
 			if (actor.data.data.traits.languages.custom) {
 				for (let lang of actor.data.data.traits.languages?.custom.split(/[,;]/))
 					known_languages.add(lang.trim().toLowerCase());
+			}
+		}
+		else {
+			for (let item of actor.data.items) {
+				const name = item?.flags?.babele?.originalName || item.name;
+				const match = name.match(game.i18n.localize("POLYGLOT.Generic.Language") + '\\s*\\((.+)\\)', 'i');
+				// adding only the descriptive language name, not "Language (XYZ)"
+				if (match)
+					known_languages.add(match[1].trim().toLowerCase());
 			}
 		}
 		return [known_languages, literate_languages];

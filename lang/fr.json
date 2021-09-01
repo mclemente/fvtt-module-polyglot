@@ -25,5 +25,8 @@
   "POLYGLOT.ToggleRunes": "Activer/Desactiver les Runes",
   "POLYGLOT.Runes": "Runes",
   
+  "POLYGLOT.Generic": {
+      "Language": "Langue"
+    },
   "POLYGLOT.WFRP4E.LanguageSkills": "Langue"
 }

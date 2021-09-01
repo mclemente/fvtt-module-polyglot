@@ -68,6 +68,9 @@
     "ToggleRunes": "Activar/desactivar runas",
     "Runes": "Runas",
     
+    "Generic": {
+      "Language": "Idioma"
+    },
     "UESRPG.Language": "Idioma",
 
     "COC7": {
@@ -75,12 +78,12 @@
       "LanguageAny": "Otras lenguas",
       "LanguageOther": "Otras lenguas",
       "LanguageSpec": "Lengua"
-	},
-	"SWADE" : {
-      "LanguageSkills": "Idioma"
-	},
-	"WFRP4E" : {
-      "LanguageSkills": "Idioma"
-	}
+    },
+    "SWADE" : {
+        "LanguageSkills": "Idioma"
+    },
+    "WFRP4E" : {
+        "LanguageSkills": "Idioma"
+    }
   }
 }

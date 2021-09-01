@@ -66,6 +66,9 @@
     
     "UESRPG.Language": "Language",
     
+    "Generic": {
+      "Language": "Language"
+    },
     "COC7": {
       "LanguageOwn": "Language",
       "LanguageAny": "Language",

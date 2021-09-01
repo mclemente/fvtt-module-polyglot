@@ -27,5 +27,8 @@
   "POLYGLOT.ToggleRunes": "Přepnout Runy",
   "POLYGLOT.Runes": "Runy",
 
+  "POLYGLOT.Generic": {
+    "Language": "Jazyk"
+  },
   "POLYGLOT.WFRP4E.LanguageSkills": "Jazyk"
 }

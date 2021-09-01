@@ -54,7 +54,10 @@
     "LatinAlphabet": "ラテン文字",
     "ToggleRunes": "ルーンの切替",
     "Runes": "ルーン",
-
+    
+    "Generic": {
+      "Language": "言語"
+    },
     "UESRPG.Language": "言語",
  
     "COC7": {
