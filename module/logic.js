@@ -328,7 +328,7 @@ export class Polyglot {
 
 	/**
 	 * Adds the selected language to the message's flag.
-	 * Since FVTT 0.8, it has to use Document#Update instead of Document#SetFlag because Document#SetFlag can't be call use during the preCreate stage.
+	 * Since FVTT 0.8, it has to use Document#Update instead of Document#SetFlag because Document#SetFlag can't be called during the preCreate stage.
 	 * 
 	 * @param {*} document 
 	 * @param {*} data 
