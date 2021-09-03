@@ -9,7 +9,7 @@ Polyglot is available in the follwing languages:
 - German, thanks to [@Nyhles](https://github.com/Nyhles)
 - Japanese, thanks to [BrotherSharper](https://github.com/BrotherSharper)
 - Korean, thanks to [@drdwing](https://github.com/drdwing)
-- Polsih, thanks to [MichalGolaszewski](https://github.com/MichalGolaszewski)
+- Polish, thanks to [MichalGolaszewski](https://github.com/MichalGolaszewski)
 - Spanish, thanks to [@juanfrank](https://github.com/juanfrank) and [@lozalojo](https://github.com/lozalojo)
 
 # Contributing
