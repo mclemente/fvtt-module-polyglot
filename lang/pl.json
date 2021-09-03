@@ -1,0 +1,82 @@
+{
+  "POLYGLOT": {
+    "DefaultAlphabet": "Domyślny Alfabet",
+    "FontSettings": "Ustawienia Czcionek",
+    "LanguageSettings": "Ustawienia Języków",
+    "ChatSettings": "Ustawienia Czatu",
+    "LanguagesTitle": "Języki",
+    "LanguagesHint": "Zmienia alfabety wykorzystywane dla poszczególnych języków. Zresetowanie ustawień będzie wymagało przeładowania.",
+    "Fonts": "Czcionki",
+    "CustomLanguagesTitle": "Własne Języki",
+    "CustomLanguagesHint": "Zdefiniuj listę oddzielonych przecinkami niestandardowych języków, które dodane zostaną do systemu.",
+    "ComprehendLanguagesTitle": "Zaklęcie Rozumienie Języków",
+    "ComprehendLanguagesHint": "Ustaw język, którego użytkownik rozumie wszystkie inne języki, ale w którym nie można mówić czy pisać.",
+    "TruespeechTitle": "Zaklęcie Języki",
+    "TruespeechHint": "Ustal język, którego użytkownik rozumie wszystkie mówione języki (nie może czytać dzienników), i który rozumiany jest przez wszystkie istoty.",
+    "JournalHighlightTitle": "Nieprzezroczystość Podświetleń Dziennika (%)",
+    "JournalHighlightHint": "Określa stopień nieprzezroczystości podświetleń nad czcionkami w dzienniku.",
+    "logographicalFontToggleTitle": "Pismo Logograficzne",
+    "logographicalFontToggleHint": "Zmniejsza rozmiar fraz używających pisma Logograficznego (np. Japoński, Chiński).",
+    "DefaultLanguageTitle": "Domyślny Język",
+    "DefaultLanguageHint": "Nazwa języka wybranego jako domyślny. Pozostaw puste, aby wybrać domyślny język systemu.",
+    "ReplaceLanguagesTitle": "Nadpisz Języki Systemu",
+    "ReplaceLanguagesHint": "Zastępuje wszystkie domyślne języki systemowe podaną listą Własnych Języków. Pierwszy język na liście staje się nowym językiem domyślnym.",
+    "ScrambleGMTitle": "Szyfruj Wiadomości dla MG",
+    "ScrambleGMHint": "Nie tłumacz języków dla MG (aby określić zrozumienie języka przez żeton, odnieś się koloru ikonki globu). Wymaga przeładowania.",
+    "enableAllFontsTitle": "Używaj Wszystkich Czcionek",
+    "enableAllFontsHint": "Udostępnia czcionki zapewniane przez Polyglot w Ustawieniach Języka.",
+    "RandomizeRunesTitle": "Randomizacja Run",
+    "RandomizeRunesHint": "Określa jaki rodzaj randomizacji używany jest do tworzenia fraz. ⚠️ Opcja \"Brak\" wspiera tylko znaki alfanumeryczne (bez akcentów).",
+    "RandomizeRunesOptions": {
+      "a": "Domyślna",
+      "b": "Unikalne frazy",
+      "c": "Brak ⚠️"
+    },
+    "ExportFontsTitle": "Udostępnij Czcionki",
+    "ExportFontsHint": "Udostępnij czcionki Polyglot do użytku w Foundry (na przykład w Rysunkach).",
+    "DisplayTranslatedTitle": "Wyświetlaj Tłumaczenia",
+    "DisplayTranslatedHint": "Dla języków, które zostaną przetłumaczone na czacie, wyświetlaj tekst oryginalny oraz tłumaczenie pod spodem.",
+    "HideTranslationTitle": "Usuń powiadomienia dla Graczy",
+    "HideTranslationHint": "Usuwa ikonę globu i tekst \"Przetłumaczono z:\" z wiadomości czatu. Idealne kiedy nie chcesz zdradzać graczom języka, którym się porozumiewasz. Wymaga przeładowania.",
+    "AllowOOCTitle": "Szyfruj Wiadomości Czatu Poza Rolą",
+    "AllowOOCHint": "Wybierz użytkowników, których wiadomości mają być szyfrowane przy mówieniu Poza Rolą.",
+    "AllowOOCOptions": {
+      "a": "Wszyscy",
+      "b": "Tylko MG",
+      "c": "Tylko Gracze",
+      "d": "Nikt"
+    },
+    "LanguageProvider": {
+      "name": "Źródło Ustawień Języków",
+      "hint": "Wybierz źródło informacji o językach i alfabetach. Systemy Gry i Moduły mogą dostarczać dodatkowych danych językowych. Poniższe opcje zależą od wybranego w tym miejscu źródła języków. ⚠️ Jeśli źródło zostanie zmienione, konieczne będzie zapisanie i ponowne otwarcie tego okna ustawień.",
+      "choices": {
+        "module": "Moduł {name}",
+        "native": "Standardowy",
+        "system": "System {name}"
+      }
+    },
+    "Translation": "Tłumaczenie",
+    "TranslatedFrom": "Przetłumaczono z:",
+    "LanguageLabel": "Język",
+    "AlphabetLabel": "Alfabet",
+    "LatinAlphabet": "Alfabet Łaciński",
+    "ToggleRunes": "Przełącz Runy",
+    "Runes": "Runy",
+    "UESRPG.Language": "Język",
+    "Generic": {
+      "Language": "Język"
+    },
+    "COC7": {
+      "LanguageOwn": "Język",
+      "LanguageAny": "Język",
+      "LanguageOther": "Język",
+      "LanguageSpec": "Język"
+    },
+    "SWADE": {
+      "LanguageSkills": "Język"
+    },
+    "WFRP4E": {
+      "LanguageSkills": "Język"
+    }
+  }
+}
