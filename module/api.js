@@ -1,10 +1,25 @@
-import {LanguageProvider, ariaLanguageProvider, coc7LanguageProvider, 
-	d35eLanguageProvider, darkHeresyLanguageProvider, dccLanguageProvider, 
-	demonlordLanguageProvider, dnd5eLanguageProvider, dsa5LanguageProvider,
-	gurpsLanguageProvider, kryxrpgLanguageProvider, oseLanguageProvider, 
-	pf1LanguageProvider, pf2eLanguageProvider, sfrpgLanguageProvider, 
-	shadowrun5eLanguageProvider, swadeLanguageProvider, sw5eLanguageProvider,
-	tormenta20LanguageProvider, uesrpgLanguageProvider, warhammerLanguageProvider
+import {
+	LanguageProvider,
+	ariaLanguageProvider,
+	coc7LanguageProvider,
+	d35eLanguageProvider,
+	darkHeresyLanguageProvider,
+	dccLanguageProvider,
+	demonlordLanguageProvider,
+	dnd5eLanguageProvider,
+	dsa5LanguageProvider,
+	gurpsLanguageProvider,
+	kryxrpgLanguageProvider,
+	oseLanguageProvider,
+	pf1LanguageProvider,
+	pf2eLanguageProvider,
+	sfrpgLanguageProvider,
+	shadowrun5eLanguageProvider,
+	swadeLanguageProvider,
+	sw5eLanguageProvider,
+	tormenta20LanguageProvider,
+	uesrpgLanguageProvider,
+	warhammerLanguageProvider,
 } from "./LanguageProvider.js";
 
 export const availableLanguageProviders = {};
@@ -26,16 +41,14 @@ export function getDefaultLanguageProvider() {
 	const providerIds = Object.keys(availableLanguageProviders);
 	if (!providerIds.length) return;
 	// Game systems take the highest precedence for the being the default
-	const gameSystem = providerIds.find(key => key.startsWith("system.") || key.includes(game.system.id));
-	if (gameSystem)
-		return gameSystem;
+	const gameSystem = providerIds.find((key) => key.startsWith("system.") || key.includes(game.system.id));
+	if (gameSystem) return gameSystem;
 
 	// If no game system is registered modules are next up.
 	// For lack of a method to select the best module we're just falling back to taking the next best module
 	// settingKeys should always be sorted the same way so this should achive a stable default
-	const module = providerIds.find(key => key.startsWith("module."));
-	if (module)
-		return module;
+	const module = providerIds.find((key) => key.startsWith("module."));
+	if (module) return module;
 
 	// If neither a game system or a module is found fall back to the native implementation
 	return providerIds[0];
@@ -48,8 +61,8 @@ export function updateLanguageProvider() {
 }
 
 export function initApi() {
-	const languageProviders = []
-	switch(game.system.id) {
+	const languageProviders = [];
+	switch (game.system.id) {
 		case "aria":
 			languageProviders.push(new ariaLanguageProvider("native.aria"));
 			break;
@@ -114,8 +127,7 @@ export function initApi() {
 			languageProviders.push(new LanguageProvider("native"));
 			break;
 	}
-	for (let languageProvider of languageProviders)
-		availableLanguageProviders[languageProvider.id] = languageProvider;
+	for (let languageProvider of languageProviders) availableLanguageProviders[languageProvider.id] = languageProvider;
 	game.settings.settings.get("polyglot.languageProvider").default = getDefaultLanguageProvider();
 	updateLanguageProvider();
 }
@@ -127,17 +139,18 @@ export function registerModule(moduleId, languageProvider) {
 	if (!module) {
 		console.warn(
 			`Polyglot | A module tried to register with the id "${moduleId}". However no active module with this id was found.` +
-			"This api registration call was ignored. " +
-			"If you are the author of that module please check that the id passed to `registerModule` matches the id in your manifest exactly." +
-			"If this call was made form a game system instead of a module please use `registerSystem` instead.");
+				"This api registration call was ignored. " +
+				"If you are the author of that module please check that the id passed to `registerModule` matches the id in your manifest exactly." +
+				"If this call was made form a game system instead of a module please use `registerSystem` instead."
+		);
 		return;
 	}
 	// Using Polyglot's id is not allowed
 	if (moduleId === "polyglot") {
 		console.warn(
 			`Polyglot | A module tried to register with the id "${moduleId}", which is not allowed. This api registration call was ignored. ` +
-			"If you're the author of the module please use the id of your own module as it's specified in your manifest to register to this api. " +
-			"If this call was made form a game system instead of a module please use `registerSystem` instead."
+				"If you're the author of the module please use the id of your own module as it's specified in your manifest to register to this api. " +
+				"If this call was made form a game system instead of a module please use `registerSystem` instead."
 		);
 		return;
 	}
@@ -151,9 +164,10 @@ export function registerSystem(systemId, languageProvider) {
 	if (system.id != systemId) {
 		console.warn(
 			`Polyglot | A system tried to register with the id "${systemId}". However the active system has a different id.` +
-			"This api registration call was ignored. " +
-			"If you are the author of that system please check that the id passed to `registerSystem` matches the id in your manifest exactly." +
-			"If this call was made form a module instead of a game system please use `registerModule` instead.");
+				"This api registration call was ignored. " +
+				"If you are the author of that system please check that the id passed to `registerSystem` matches the id in your manifest exactly." +
+				"If this call was made form a module instead of a game system please use `registerModule` instead."
+		);
 		return;
 	}
 
