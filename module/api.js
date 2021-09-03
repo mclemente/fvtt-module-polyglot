@@ -1,25 +1,9 @@
+// prettier-ignore
 import {
-	LanguageProvider,
-	ariaLanguageProvider,
-	coc7LanguageProvider,
-	d35eLanguageProvider,
-	darkHeresyLanguageProvider,
-	dccLanguageProvider,
-	demonlordLanguageProvider,
-	dnd5eLanguageProvider,
-	dsa5LanguageProvider,
-	gurpsLanguageProvider,
-	kryxrpgLanguageProvider,
-	oseLanguageProvider,
-	pf1LanguageProvider,
-	pf2eLanguageProvider,
-	sfrpgLanguageProvider,
-	shadowrun5eLanguageProvider,
-	swadeLanguageProvider,
-	sw5eLanguageProvider,
-	tormenta20LanguageProvider,
-	uesrpgLanguageProvider,
-	warhammerLanguageProvider,
+	LanguageProvider, ariaLanguageProvider, coc7LanguageProvider, d35eLanguageProvider, darkHeresyLanguageProvider, dccLanguageProvider,
+	demonlordLanguageProvider, dnd5eLanguageProvider, dsa5LanguageProvider, gurpsLanguageProvider, kryxrpgLanguageProvider, oseLanguageProvider,
+	pf1LanguageProvider, pf2eLanguageProvider, sfrpgLanguageProvider, shadowrun5eLanguageProvider, swadeLanguageProvider, sw5eLanguageProvider,
+	tormenta20LanguageProvider, uesrpgLanguageProvider, warhammerLanguageProvider,
 } from "./LanguageProvider.js";
 
 export const availableLanguageProviders = {};
