@@ -52,7 +52,7 @@ Polyglot.CustomFonts = [];
 
 window.polyglot = { polyglot: new Polyglot(), fonts: Polyglot.FONTS, registerModule, registerSystem };
 
-export async function getSounds() {
+export async function getFonts() {
 	var source = game.settings.get("polyglot", "source");
 	var directory = game.settings.get("polyglot", "polyglotDirectory");
 	if (directory === "") return;
@@ -139,7 +139,7 @@ export async function getSounds() {
 		var sheet = window.document.styleSheets;
 		var fontNames = [];
 		for (let s of sheet) {
-			if (s.href.includes("polyglot") && s.href.includes("fonts")) {
+			if (s.href && s.href.includes("polyglot") && s.href.includes("fonts")) {
 				sheet = s;
 				break;
 			}
@@ -147,7 +147,7 @@ export async function getSounds() {
 		for (const dir in FONTS) {
 			for (const font of FONTS[dir]) {
 				fontNames.push(font.name);
-				if (source === "forge") sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(${font.identifyingPath});}`, sheet.cssRules.length);
+				if (source === "forgevtt") sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(${font.identifyingPath});}`, sheet.cssRules.length);
 				else sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(../../../${font.identifyingPath});}`, sheet.cssRules.length);
 			}
 		}
@@ -194,7 +194,7 @@ Hooks.on("createChatMessage", window.polyglot.polyglot.createChatMessage.bind(wi
 Hooks.on("renderChatMessage", window.polyglot.polyglot.renderChatMessage.bind(window.polyglot.polyglot));
 Hooks.on("renderJournalSheet", window.polyglot.polyglot.renderJournalSheet.bind(window.polyglot.polyglot));
 Hooks.on("setup", async () => {
-	await getSounds();
+	await getFonts();
 	await currentLanguageProvider.setup();
 });
 Hooks.on("ready", () => {
