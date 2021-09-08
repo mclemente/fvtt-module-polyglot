@@ -92,7 +92,6 @@ export async function getSounds() {
 						case ".otf":
 							return true;
 						default:
-							SoundBoard.log(`${file} ${game.i18n.localize("SOUNDBOARD.log.invalidSound")}`, SoundBoard.LOGTYPE.WARN);
 							return false;
 					}
 				});
@@ -114,7 +113,6 @@ export async function getSounds() {
 						break;
 
 					default:
-						SoundBoard.log(`${file} ${game.i18n.localize("SOUNDBOARD.log.invalidSound")}`, SoundBoard.LOGTYPE.WARN);
 						break;
 				}
 			}
@@ -132,13 +130,11 @@ export async function getSounds() {
 					break;
 
 				default:
-					SoundBoard.log(`${file} ${game.i18n.localize("SOUNDBOARD.log.invalidSound")}`, SoundBoard.LOGTYPE.WARN);
 					break;
 			}
 		}
 	} catch (error) {
 		console.error(error);
-		// SoundBoard.log(error, SoundBoard.LOGTYPE.ERR);
 	} finally {
 		var sheet = window.document.styleSheets;
 		var fontNames = [];
@@ -151,7 +147,8 @@ export async function getSounds() {
 		for (const dir in FONTS) {
 			for (const font of FONTS[dir]) {
 				fontNames.push(font.name);
-				sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(../../../${font.identifyingPath});}`, sheet.cssRules.length);
+				if (source === "forge") sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(${font.identifyingPath});}`, sheet.cssRules.length);
+				else sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(../../../${font.identifyingPath});}`, sheet.cssRules.length);
 			}
 		}
 		Polyglot.FONTS = Polyglot.FONTS.concat(fontNames);
