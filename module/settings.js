@@ -1,7 +1,7 @@
 import { currentLanguageProvider, getDefaultLanguageProvider, updateLanguageProvider } from "./api.js";
 import { PolyglotLanguageSettings } from "./LanguageSettings.js";
 import { legacyGenericSystem } from "./logic.js";
-import { getSounds } from "../polyglot.js";
+import { getFonts } from "../polyglot.js";
 
 const debouncedReload = foundry.utils.debounce(() => {
 	window.location.reload();
@@ -78,7 +78,7 @@ export function registerSettings() {
 		},
 		default: "data",
 		onChange: (value) => {
-			getSounds();
+			getFonts();
 		},
 	});
 	game.settings.register("polyglot", "defaultLanguage", {
