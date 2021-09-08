@@ -13,29 +13,29 @@
 }
 
 .polyglot-language-settings {
-  max-width: 800px;
+	max-width: 800px;
 }
 
 span.polyglot-journal {
-	background-color: rgba(var(--polyglot-journal-color), var(--polyglot-journal-opacity))
+	background-color: rgba(var(--polyglot-journal-color), var(--polyglot-journal-opacity));
 }
 
-.polyglot-translation-text{
-	position:relative;
+.polyglot-translation-text {
+	position: relative;
 	padding-top: 16px;
 	/* line-height: 24px; */
 	/* background: rgba(0, 0, 0, 0.1); */
 	/* border: 1px solid #999; */
 	/* border-radius: 3px; */
 	/* box-shadow: 0 0 2px #FFF inset; */
-  border-top: 1px solid #999;
+	border-top: 1px solid #999;
 	-webkit-user-select: text;
 	-moz-user-select: text;
 	-ms-user-select: text;
 	user-select: text;
 }
 
-.polyglot-translation-text:before{
+.polyglot-translation-text:before {
 	position: absolute;
 	content: attr(title);
 	font-size: 14px;
@@ -46,7 +46,7 @@ span.polyglot-journal {
 }
 
 .polyglot-group-header {
-    font-weight: bold;
-    padding: 8px 20px;
-    background-color: rgba(255, 255, 255, 0.4);
+	font-weight: bold;
+	padding: 8px 20px;
+	background-color: rgba(255, 255, 255, 0.4);
 }
