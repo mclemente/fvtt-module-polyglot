@@ -22,10 +22,6 @@ export class LanguageProvider {
 	 * The system's original fonts.
 	 */
 	get originalAlphabets() {
-		const customFonts = {};
-		for (const font of Polyglot.CustomFonts) {
-			customFonts[font] = `100% ${font}`;
-		}
 		return {
 			arciela: "200% ArCiela",
 			aztec: "200% Aztec",
@@ -70,7 +66,6 @@ export class LanguageProvider {
 			thorass: "200% Thorass",
 			tuzluca: "200% Tuzluca",
 			valmaric: "200% Valmaric",
-			...customFonts,
 		};
 	}
 	/**
@@ -203,6 +198,9 @@ export class LanguageProvider {
 			for (let alp in defaultAlphabets) {
 				if (!invertedThis[defaultAlphabets[alp]]) this.alphabets[alp] = defaultAlphabets[alp];
 			}
+		}
+		for (const font of Polyglot.CustomFonts) {
+			this.alphabets[font] = `100% ${font}`;
 		}
 	}
 	/**
