@@ -1,3 +1,5 @@
+import { Polyglot } from "./logic.js";
+
 /**
  * Base class for all language providers.
  * If you want to offer a language provider in your system/module you must derive this class.
@@ -20,6 +22,10 @@ export class LanguageProvider {
 	 * The system's original fonts.
 	 */
 	get originalAlphabets() {
+		const customFonts = {};
+		for (const font of Polyglot.CustomFonts) {
+			customFonts[font] = `100% ${font}`;
+		}
 		return {
 			arciela: "200% ArCiela",
 			aztec: "200% Aztec",
@@ -64,6 +70,7 @@ export class LanguageProvider {
 			thorass: "200% Thorass",
 			tuzluca: "200% Tuzluca",
 			valmaric: "200% Valmaric",
+			...customFonts,
 		};
 	}
 	/**

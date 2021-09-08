@@ -89,11 +89,11 @@ export class Polyglot {
 	 * Adds the Languages selector to the chatlog.
 	 */
 	renderChatLog(chatlog, html, data) {
-		html
-			.find("#chat-controls")
-			.after(
-				`<div id='polyglot' class='polyglot-lang-select flexrow'><label>${game.i18n.localize("POLYGLOT.LanguageLabel")}:</label><select name='polyglot-language'></select></div>`
-			);
+		html.find("#chat-controls").after(
+			`<div id='polyglot' class='polyglot-lang-select flexrow'><label>${game.i18n.localize(
+				"POLYGLOT.LanguageLabel"
+			)}:</label><select name='polyglot-language'></select></div>`
+		);
 		const select = html.find(".polyglot-lang-select select");
 		select.change((e) => {
 			this.lastSelection = select.val();
@@ -286,7 +286,9 @@ export class Polyglot {
 		if (game.user.isGM && !runifyGM) message.polyglot_unknown = false;
 		else
 			message.polyglot_unknown =
-				!this._isTruespeech(lang) && !known && (game.user.character ? !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages) : true);
+				!this._isTruespeech(lang) &&
+				!known &&
+				(game.user.character ? !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages) : true);
 
 		let new_content = this.scrambleString(message.data.content, message.data._id, lang);
 		if (displayTranslated && (lang != currentLanguageProvider.defaultLanguage || message.polyglot_unknown)) {

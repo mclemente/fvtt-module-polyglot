@@ -1,85 +1,97 @@
 {
-  "POLYGLOT": {
-    "DefaultAlphabet": "Default Alphabet",
-    "FontSettings": "Font Settings",
-    "LanguageSettings": "Language Settings",
-    "ChatSettings": "Chat Settings",
-    "LanguagesTitle": "Languages",
-    "LanguagesHint": "Changes the alphabet used for the languages. Reseting to defaults will reload.",
-    "Fonts": "Fonts",
-    "CustomLanguagesTitle": "Custom Languages",
-    "CustomLanguagesHint": "Define a list of custom, comma separated, languages to add to the system.",
-    "ComprehendLanguagesTitle": "Comprehend Languages Spell",
-    "ComprehendLanguagesHint": "Set a language whose speaker understands all other languages, but that can't be spoken or written.",
-    "TruespeechTitle": "Tongues Spell",
-    "TruespeechHint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures.",
-    "JournalHighlightTitle": "Journal Highlight Opacity (%)",
-    "JournalHighlightHint": "Defines the opacity of the highlight over fonts on the journal.",
-    "logographicalFontToggleTitle": "Logographical Fonts",
-    "logographicalFontToggleHint": "Halves the size of phrases using Logographical fonts (e.g. Japanese, Chinese characters).",
-    "DefaultLanguageTitle": "Default Language",
-    "DefaultLanguageHint": "Name of the default language to select. Keep empty to use system default.",
-    "ReplaceLanguagesTitle": "Replace System's Languages",
-    "ReplaceLanguagesHint": "Replaces the system's default languages with your Custom Languages. The first language on the list becomes the new default language.",
-    "ScrambleGMTitle": "Scramble Messages for GM",
-    "ScrambleGMHint": "Don't translate the text for the GM (refer to the globe's color for the token's understanding). Requires reload.",
-    "enableAllFontsTitle": "Use All Fonts",
-    "enableAllFontsHint": "Makes the Polyglot fonts avilable in the Language Settings.",
-    "RandomizeRunesTitle": "Randomize Runes",
-    "RandomizeRunesHint": "This determines which type of RNG is used to generate a phrase. ⚠️ The \"None\" option only supports Alphanumeric characters (no accents).",
-    "RandomizeRunesOptions": {
-      "a": "Default",
-      "b": "Unique phrases",
-      "c": "None ⚠️"
-    },
-    "ExportFontsTitle": "Make Fonts Available",
-    "ExportFontsHint": "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
-    "DisplayTranslatedTitle": "Display Translations",
-    "DisplayTranslatedHint": "For languages that are translated in the chat window, display the original text and a translation below.",
-    "HideTranslationTitle": "Hide Indicators from Players",
-    "HideTranslationHint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Perfect for when you don't want to show players which language you are speaking. Requires reload.",
-    "AllowOOCTitle": "Scramble OOC Chat Messages",
-    "AllowOOCHint": "Choose whose users should have their messages scrambled. OOC = Out of Character.",
-    "AllowOOCOptions": {
-      "a": "All",
-      "b": "GM Only",
-      "c": "Players Only",
-      "d": "None"
-    },
-    "LanguageProvider": {
-      "name": "Language Settings Provider",
-      "hint": "Select who provides language information for alphabets and languages. More language providers can be made available via game systems and installed modules. The options below are dependent upon the language provider selected here. ⚠️ If you change the provider, you have to save and reopen these settings.",
-      "choices": {
-        "module": "Module {name}",
-        "native": "Generic",
-        "system": "System {name}"
-      }
-    },
-    
-    "Translation": "Translation",
-    "TranslatedFrom": "Translated from ",
-    "LanguageLabel": "Language",
-    "AlphabetLabel": "Alphabet",
-    "LatinAlphabet": "Latin Alphabet",
-    "ToggleRunes": "Toggle Runes",
-    "Runes": "Runes",
-    
-    "UESRPG.Language": "Language",
-    
-    "Generic": {
-      "Language": "Language"
-    },
-    "COC7": {
-      "LanguageOwn": "Language",
-      "LanguageAny": "Language",
-      "LanguageOther": "Language",
-      "LanguageSpec": "Language"
-    },
-    "SWADE" : {
-      "LanguageSkills": "Language"
-    },
-    "WFRP4E" : {
-      "LanguageSkills": "Language"
-    }
-  }
+	"POLYGLOT": {
+		"DefaultAlphabet": "Default Alphabet",
+		"FontSettings": "Font Settings",
+		"LanguageSettings": "Language Settings",
+		"ChatSettings": "Chat Settings",
+		"LanguagesTitle": "Languages",
+		"LanguagesHint": "Changes the alphabet used for the languages. Reseting to defaults will reload.",
+		"Fonts": "Fonts",
+
+		"CustomLanguagesTitle": "Custom Languages",
+		"CustomLanguagesHint": "Define a list of custom, comma separated, languages to add to the system.",
+		"ComprehendLanguagesTitle": "Comprehend Languages Spell",
+		"ComprehendLanguagesHint": "Set a language whose speaker understands all other languages, but that can't be spoken or written.",
+		"directory": {
+			"name": "Custom Font Directory",
+			"hint": "Set to a folder outside the \"modules\" folder containing font files."
+		},
+		"source": {
+			"name": "Source Type",
+			"hint": "If your fonts are stored in your Forge Assets, select Forge. If they are stored in an S3 bucket, select S3.",
+			"data": "Data",
+			"forgevtt": "Forge",
+			"s3": "S3"
+		},
+		"TruespeechTitle": "Tongues Spell",
+		"TruespeechHint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures.",
+		"JournalHighlightTitle": "Journal Highlight Opacity (%)",
+		"JournalHighlightHint": "Defines the opacity of the highlight over fonts on the journal.",
+		"logographicalFontToggleTitle": "Logographical Fonts",
+		"logographicalFontToggleHint": "Halves the size of phrases using Logographical fonts (e.g. Japanese, Chinese characters).",
+		"DefaultLanguageTitle": "Default Language",
+		"DefaultLanguageHint": "Name of the default language to select. Keep empty to use system default.",
+		"ReplaceLanguagesTitle": "Replace System's Languages",
+		"ReplaceLanguagesHint": "Replaces the system's default languages with your Custom Languages. The first language on the list becomes the new default language.",
+		"ScrambleGMTitle": "Scramble Messages for GM",
+		"ScrambleGMHint": "Don't translate the text for the GM (refer to the globe's color for the token's understanding). Requires reload.",
+		"enableAllFontsTitle": "Use All Fonts",
+		"enableAllFontsHint": "Makes the Polyglot fonts avilable in the Language Settings.",
+		"RandomizeRunesTitle": "Randomize Runes",
+		"RandomizeRunesHint": "This determines which type of RNG is used to generate a phrase. ⚠️ The \"None\" option only supports Alphanumeric characters (no accents).",
+		"RandomizeRunesOptions": {
+			"a": "Default",
+			"b": "Unique phrases",
+			"c": "None ⚠️"
+		},
+		"ExportFontsTitle": "Make Fonts Available",
+		"ExportFontsHint": "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
+		"DisplayTranslatedTitle": "Display Translations",
+		"DisplayTranslatedHint": "For languages that are translated in the chat window, display the original text and a translation below.",
+		"HideTranslationTitle": "Hide Indicators from Players",
+		"HideTranslationHint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Perfect for when you don't want to show players which language you are speaking. Requires reload.",
+		"AllowOOCTitle": "Scramble OOC Chat Messages",
+		"AllowOOCHint": "Choose whose users should have their messages scrambled. OOC = Out of Character.",
+		"AllowOOCOptions": {
+			"a": "All",
+			"b": "GM Only",
+			"c": "Players Only",
+			"d": "None"
+		},
+		"LanguageProvider": {
+			"name": "Language Settings Provider",
+			"hint": "Select who provides language information for alphabets and languages. More language providers can be made available via game systems and installed modules. The options below are dependent upon the language provider selected here. ⚠️ If you change the provider, you have to save and reopen these settings.",
+			"choices": {
+				"module": "Module {name}",
+				"native": "Generic",
+				"system": "System {name}"
+			}
+		},
+
+		"Translation": "Translation",
+		"TranslatedFrom": "Translated from ",
+		"LanguageLabel": "Language",
+		"AlphabetLabel": "Alphabet",
+		"LatinAlphabet": "Latin Alphabet",
+		"ToggleRunes": "Toggle Runes",
+		"Runes": "Runes",
+
+		"UESRPG.Language": "Language",
+
+		"Generic": {
+			"Language": "Language"
+		},
+		"COC7": {
+			"LanguageOwn": "Language",
+			"LanguageAny": "Language",
+			"LanguageOther": "Language",
+			"LanguageSpec": "Language"
+		},
+		"SWADE": {
+			"LanguageSkills": "Language"
+		},
+		"WFRP4E": {
+			"LanguageSkills": "Language"
+		}
+	}
 }

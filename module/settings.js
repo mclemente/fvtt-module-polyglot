@@ -1,6 +1,7 @@
 import { currentLanguageProvider, getDefaultLanguageProvider, updateLanguageProvider } from "./api.js";
 import { PolyglotLanguageSettings } from "./LanguageSettings.js";
 import { legacyGenericSystem } from "./logic.js";
+import { getSounds } from "../polyglot.js";
 
 const debouncedReload = foundry.utils.debounce(() => {
 	window.location.reload();
@@ -22,6 +23,7 @@ function addSetting(key, data) {
 }
 
 export function registerSettings() {
+	//Menu
 	game.settings.registerMenu("polyglot", "LanguageSettings", {
 		name: "Language Settings",
 		label: "Language Settings",
@@ -53,6 +55,32 @@ export function registerSettings() {
 		onChange: updateLanguageProvider,
 	});
 
+	//Actual Settings
+	game.settings.register("polyglot", "polyglotDirectory", {
+		name: game.i18n.localize("POLYGLOT.directory.name"),
+		hint: game.i18n.localize("POLYGLOT.directory.hint"),
+		scope: "world",
+		config: true,
+		default: "",
+		type: String,
+		filePicker: true,
+	});
+	game.settings.register("polyglot", "source", {
+		name: game.i18n.localize("POLYGLOT.source.name"),
+		hint: game.i18n.localize("POLYGLOT.source.hint"),
+		scope: "world",
+		config: true,
+		type: String,
+		choices: {
+			data: game.i18n.localize("POLYGLOT.source.data"),
+			forgevtt: game.i18n.localize("POLYGLOT.source.forgevtt"),
+			s3: game.i18n.localize("POLYGLOT.source.s3"),
+		},
+		default: "data",
+		onChange: (value) => {
+			getSounds();
+		},
+	});
 	game.settings.register("polyglot", "defaultLanguage", {
 		name: game.i18n.localize("POLYGLOT.DefaultLanguageTitle"),
 		hint: game.i18n.localize("POLYGLOT.DefaultLanguageHint"),
