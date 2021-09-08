@@ -14,7 +14,7 @@
 		},
 		"source": {
 			"name": "Tipo de Armazenamento",
-			"hint": "",
+			"hint": "Se as suas fontes estão armazenadas no Forge Assets, selecione Forge. Se estiverem no S3 bucket, selecione S3.",
 			"data": "Data",
 			"forgevtt": "Forge",
 			"s3": "S3"
