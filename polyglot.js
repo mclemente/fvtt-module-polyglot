@@ -147,7 +147,12 @@ export async function getFonts() {
 		for (const dir in FONTS) {
 			for (const font of FONTS[dir]) {
 				fontNames.push(font.name);
-				if (source === "forgevtt") sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(${font.identifyingPath});}`, sheet.cssRules.length);
+				if (source === "forgevtt") {
+					var style = document.createElement("style");
+					style.appendChild(document.createTextNode(""));
+					(document.head || document.documentElement).appendChild(style);
+					style.sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(${font.identifyingPath});}`, 0);
+				}
 				else sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(../../../${font.identifyingPath});}`, sheet.cssRules.length);
 			}
 		}
