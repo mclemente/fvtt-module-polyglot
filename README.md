@@ -22,6 +22,10 @@ Remember to add the languages to the Custom Languages setting to be able to chan
 A language selection dropbox is available above the chat text box so you can select which language you want your character to speak in.  
 When loading a world, only the last 100 messages are scrambled to avoid making load times insane on a big chat log.
 
+### Custom Fonts
+
+Check out the [Custom Fonts wiki](../../wiki/Custom-Fonts).
+
 ### Macros
 
 Check out the [Macros wiki](../../wiki/Macros).
