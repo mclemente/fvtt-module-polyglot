@@ -1447,7 +1447,7 @@ export class tormenta20LanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		for (let lang of actor.data.data.detalhes.idiomas.value) known_languages.add(lang);
+		for (let lang of actor.data.data.tracos.idiomas.value) known_languages.add(lang);
 		return [known_languages, literate_languages];
 	}
 }
