@@ -7,14 +7,28 @@
     "LanguagesTitle": "언어",
     "LanguagesHint": "언어에 사용될 알파벳을 변경한다. 기본값으로 재설정하면 새로고침된다.",
     "Fonts": "글꼴",
+
     "CustomLanguagesTitle": "사용자 지정 언어",
     "CustomLanguagesHint": "시스템에 추가할 사용자 정의 언어. 쉼표(,)로 구분하여 목록을 정의한다.",
     "ComprehendLanguagesTitle": "언어 변환 주문",
     "ComprehendLanguagesHint": "D&D의 언어 변환 주문과 같이, 설정한 사용자 지정 언어를 입력하면 말하거나 쓰진 못하지만 다른 언어를 이해할 수 있게 해준다.",
-    "JournalHighlightTitle": "저널 하이라이트 불투명도(%)",
-    "JournalHighlightHint": "저널의 글씨 위 하이라이트 표시의 불투명도를 정의한다.",
+    "directory": {
+			"name": "사용자 지정 폰트 디렉토리",
+			"hint": "폰트 파일을 포함하는 \"modules\" 폴더 외부 폴더로 설정한다."
+		},
+		"source": {
+			"name": "소스 유형",
+			"hint": "폰트가 Forge 어셋에 저장되어 있다면 Forge를 선택한다. S3 버킷에 저장된 경우 S3을 선택한다.",
+			"data": "데이터",
+			"forgevtt": "Forge",
+			"s3": "S3"
+		},
     "TruespeechTitle": "언어 구사 주문",
     "TruespeechHint": "D&D의 언어 구사 주문과 같이, 설정한 사용자 지정 언어를 입력하면 화자는 언어를 듣고 이해할 수 있으며(저널은 읽지 못함), 모든 생물의 언어를 이해할 수 있다.",
+    "JournalHighlightTitle": "저널 하이라이트 불투명도(%)",
+    "JournalHighlightHint": "저널의 글씨 위 하이라이트 표시의 불투명도를 정의한다.",
+    "logographicalFontToggleTitle": "로고그래픽 폰트",
+		"logographicalFontToggleHint": "로고그래픽 폰트(e.g.:일본어, 한자)를 사용하여 구절의 크기를 절반으로 줄인다.",
     "DefaultLanguageTitle": "기본 언어",
     "DefaultLanguageHint": "선택할 기본 언어의 이름이다. 시스템 기본값을 사용하려면 비워둘 것.",
     "ReplaceLanguagesTitle": "시스템 언어 대체",
@@ -25,6 +39,11 @@
     "enableAllFontsHint": "언어 설정에서 Polyglot 글꼴을 사용가능하게 한다.",
     "RandomizeRunesTitle": "룬 임의화",
     "RandomizeRunesHint": "이 옵션을 활성화하면 동일한 메시지가 반복되더라도 스크램블 텍스트가 다르게 나타난다.",
+    "RandomizeRunesOptions": {
+			"a": "기본값",
+			"b": "고유 문구",
+			"c": "없음 ⚠️"
+		},    
     "ExportFontsTitle": "글꼴 사용 가능",
     "ExportFontsHint": "Polyglot 글꼴을 Foundry에서 사용할 수 있도록 한다(예: 그리기 도구).",
     "DisplayTranslatedTitle": "번역 상자 표시",
