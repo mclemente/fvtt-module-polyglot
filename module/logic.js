@@ -232,7 +232,7 @@ export class Polyglot {
 	 */
 	scrambleString(string, salt, lang) {
 		const font = this._getFontStyle(lang).split(" ")[1];
-		if (!game.settings.get("polyglot", "logographicalFontToggle") && LOGOGRAPHICAL_FONTS.includes(font)) {
+		if (game.settings.get("polyglot", "logographicalFontToggle") && LOGOGRAPHICAL_FONTS.includes(font)) {
 			string = string.substr(0, Math.round(string.length / 2));
 		}
 		const uniqueSalt = game.settings.get("polyglot", "useUniqueSalt");
