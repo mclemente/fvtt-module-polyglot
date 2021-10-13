@@ -35,6 +35,10 @@ export class Polyglot {
 		this.refresh_timeout = null;
 	}
 
+	get chatElement() {
+		return ui.sidebar.popouts.chat?.element || ui.chat.element;
+	}
+
 	/**
 	 * Returns an object or array, based on the game system's own data structure.
 	 *
@@ -106,13 +110,13 @@ export class Polyglot {
 	 */
 	updateUser(user, data) {
 		if (user.id == game.user.id && data.character !== undefined) {
-			this.updateUserLanguages(ui.chat.element);
+			this.updateUserLanguages(this.chatElement);
 			this.updateChatMessages();
 		}
 	}
 
 	controlToken() {
-		this.updateUserLanguages(ui.chat.element);
+		this.updateUserLanguages(this.chatElement);
 		this.updateChatMessages();
 	}
 
@@ -130,7 +134,7 @@ export class Polyglot {
 	 */
 	updateChatMessagesDelayed() {
 		this.refresh_timeout = null;
-		const messages = ui.chat.element
+		const messages = this.chatElement
 			.find(".message")
 			.slice(-100)
 			.toArray()
@@ -142,7 +146,7 @@ export class Polyglot {
 				let unknown = !this._isTruespeech(lang) && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
 				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
 					// Update globe color
-					const globe = ui.chat.element.find(`.message[data-message-id="${message.id}"] .message-metadata .polyglot-message-language i`);
+					const globe = this.chatElement.find(`.message[data-message-id="${message.id}"] .message-metadata .polyglot-message-language i`);
 					const color = unknown ? "red" : "green";
 					globe.css({ color });
 					unknown = false;
@@ -274,7 +278,7 @@ export class Polyglot {
 			});
 			return;
 		}
-		if (!this.known_languages.size) this.updateUserLanguages(ui.chat.element);
+		if (!this.known_languages.size) this.updateUserLanguages(this.chatElement);
 		const lang = message.getFlag("polyglot", "language") || "";
 		if (!lang) return;
 		let metadata = html.find(".message-metadata");
@@ -349,7 +353,7 @@ export class Polyglot {
 				const invertedLanguages = invertObject(currentLanguageProvider.languages);
 				if (currentLanguageProvider.languages[data.lang]) lang = data.lang;
 				else if (invertedLanguages[data.lang]) lang = invertedLanguages[data.lang];
-			} else if (!lang) lang = ui.chat.element.find("select[name=polyglot-language]").val();
+			} else if (!lang) lang = this.chatElement.find("select[name=polyglot-language]").val();
 			if (lang) document.data.update({ "flags.polyglot.language": lang });
 		}
 	}
@@ -376,7 +380,7 @@ export class Polyglot {
 		this.updateConfigFonts();
 		if (currentLanguageProvider.requiresReady) {
 			Hooks.on("polyglot.languageProvider.ready", () => {
-				this.updateUserLanguages(ui.chat.element);
+				this.updateUserLanguages(this.chatElement);
 				game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
 				game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
 			});
