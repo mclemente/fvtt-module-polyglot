@@ -50,3 +50,11 @@ span.polyglot-journal {
 	padding: 8px 20px;
 	background-color: rgba(255, 255, 255, 0.4);
 }
+
+input.selectatr[type="number"] {
+	width: 30px;
+}
+
+div.fontName {
+	flex: 0 0 210px;
+}

@@ -49,6 +49,7 @@ Polyglot.FONTS = [
 	"Valmaric",
 ];
 Polyglot.CustomFonts = [];
+Polyglot.CustomFontsSize = {};
 
 window.polyglot = { polyglot: new Polyglot(), fonts: Polyglot.FONTS, registerModule, registerSystem };
 
@@ -152,13 +153,12 @@ export async function getFonts() {
 					style.appendChild(document.createTextNode(""));
 					(document.head || document.documentElement).appendChild(style);
 					style.sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(${font.identifyingPath});}`, 0);
-				}
-				else sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(../../../${font.identifyingPath});}`, sheet.cssRules.length);
+				} else sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(../../../${font.identifyingPath});}`, sheet.cssRules.length);
 			}
 		}
 		Polyglot.FONTS = Polyglot.FONTS.concat(fontNames);
 		Polyglot.CustomFonts = Polyglot.CustomFonts.concat(fontNames);
-		window.polyglot.fonts = Polyglot.FONTS;
+		Polyglot.CustomFontsSize = game.settings.get("polyglot", "CustomFontSizes");
 	}
 }
 

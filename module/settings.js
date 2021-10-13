@@ -1,5 +1,6 @@
 import { currentLanguageProvider, getDefaultLanguageProvider, updateLanguageProvider } from "./api.js";
 import { PolyglotLanguageSettings } from "./LanguageSettings.js";
+import { PolyglotFontSettings } from "./FontSettings.js";
 import { legacyGenericSystem } from "./logic.js";
 import { getFonts } from "../polyglot.js";
 
@@ -23,10 +24,27 @@ function addSetting(key, data) {
 }
 
 export function registerSettings() {
-	//Menu
+	//Font Settings Menu
+	game.settings.registerMenu("polyglot", "FontSettings", {
+		name: game.i18n.localize("POLYGLOT.FontSettings"),
+		label: game.i18n.localize("POLYGLOT.FontSettings"),
+		icon: "fas fa-font",
+		type: PolyglotFontSettings,
+		restricted: true,
+	});
+	game.settings.register("polyglot", "CustomFontSizes", {
+		name: game.i18n.localize("POLYGLOT.CustomFontSizesTitle"),
+		hint: game.i18n.localize("POLYGLOT.CustomFontSizesHint"),
+		scope: "world",
+		config: false,
+		default: {},
+		type: Object,
+	});
+
+	//Language Settings Menu
 	game.settings.registerMenu("polyglot", "LanguageSettings", {
-		name: "Language Settings",
-		label: "Language Settings",
+		name: game.i18n.localize("POLYGLOT.LanguageSettings"),
+		label: game.i18n.localize("POLYGLOT.LanguageSettings"),
 		icon: "fas fa-globe",
 		type: PolyglotLanguageSettings,
 		restricted: true,

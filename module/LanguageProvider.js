@@ -200,7 +200,8 @@ export class LanguageProvider {
 			}
 		}
 		for (const font of Polyglot.CustomFonts) {
-			this.alphabets[font] = `100% ${font}`;
+			let size = Polyglot.CustomFontsSize[font] ?? 100;
+			this.alphabets[font] = `${size}% ${font}`;
 		}
 	}
 	/**

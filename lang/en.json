@@ -6,7 +6,9 @@
 		"ChatSettings": "Chat Settings",
 		"LanguagesTitle": "Languages",
 		"LanguagesHint": "Changes the alphabet used for the languages. Reseting to defaults will reload.",
+		"Font": "Font",
 		"Fonts": "Fonts",
+		"FontSize": "Font Size (%)",
 
 		"CustomLanguagesTitle": "Custom Languages",
 		"CustomLanguagesHint": "Define a list of custom, comma separated, languages to add to the system.",

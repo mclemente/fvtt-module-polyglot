@@ -1,0 +1,61 @@
+{{#*inline "settingPartial"}}
+	<div class="form-group">
+		<label>{{this.name}}</label>
+		<div class="form-fields">
+			{{#if this.isCheckbox}}
+				<input type="checkbox" name="{{this.id}}" data-dtype="Boolean" {{checked this.value}} />
+			{{else if this.isSelect}}
+				<select name="{{this.id}}">
+					{{#select this.value}}
+						{{#each this.choices as |name k|}}
+							<option value="{{k}}">{{localize name}}</option>
+						{{/each}}
+					{{/select}}
+				</select>
+			{{else if this.isRange}}
+				<input type="range" name="{{this.id}}" data-dtype="Number" value="{{ this.value }}"
+					min="{{ this.range.min }}" max="{{ this.range.max }}" step="{{ this.range.step }}" />
+				<span class="range-value">{{this.value}}</span>
+			{{else if this.isColor}}
+				<input type="color" name="{{this.id}}" value="{{this.value}}" data-dtype="{{this.type}}" />
+			{{else}}
+				<input type="text" name="{{this.id}}" value="{{this.value}}" data-dtype="{{this.type}}" />
+			{{/if}}
+		</div>
+		<p class="notes">{{this.hint}}</p>
+	</div>
+{{/inline}}
+
+<form class="flexcol" autocomplete="off" onsubmit="event.preventDefault()">
+	<section class="content">
+		<div class="settings-list">
+			<h2 class="module-header">{{localize "POLYGLOT.Fonts"}}</h2>
+			<ul style="list-style: none; padding: 0;">
+				<li style="display: flex;">
+					<div class="fontName">{{localize "POLYGLOT.Font"}}</div>
+					<div style="flex: 0 0 90px;">{{localize "POLYGLOT.FontSize"}}</div>
+					<div style="flex: 2;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+				</li>
+				<hr>
+				{{#each fontSize as |font alphabet|}}
+				<li style="display: flex;">
+					<div class="fontName">{{alphabet}}</div>
+					<div style="flex: 0 0 90px">
+						<input class="selectatr" type="number" value="{{font}}" min="100" max="500"></input>
+					</div>
+					<div class="polyglot-alphabet" style="flex: 2;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+	</section>
+
+	<footer class="sheet-footer flexrow" style="margin-top: auto">
+		<button type="submit" name="submit">
+			<i class="far fa-save"></i> {{localize 'SETTINGS.Save'}}
+		</button>
+		<button type="button" data-action="reset">
+			<i class="fas fa-undo"></i> {{localize 'SETTINGS.Reset'}}
+		</button>
+	</footer>
+</form>
