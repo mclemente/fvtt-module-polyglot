@@ -10,7 +10,10 @@
     "ChatSettings": "Ajustes del chat",
     "LanguagesTitle": "Idiomas",
     "LanguagesHint": "Cambia el alfabeto de los idiomas. Volver a los valores por defecto recargará",
+    "Font": "Fuente",
     "Fonts": "Fuentes",
+    "FontSize": "Tamaño de fuente (%)",
+
     "CustomLanguagesTitle": "Idiomas personalizados",
     "CustomLanguagesHint": "Define una lista de idiomas personalizados, separados mediante coma, para que sean añadidos al sistema",
     "ComprehendLanguagesTitle": "Hechizo Comprender Idiomas",
