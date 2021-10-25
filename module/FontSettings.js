@@ -23,6 +23,10 @@ export class PolyglotFontSettings extends FormApplication {
 
 	getData(options) {
 		const fonts = Polyglot.CustomFonts;
+		const fontSizes = Polyglot.CustomFontsSize;
+		for (let key in fontSizes) {
+			if (!fonts.includes(key)) delete Polyglot.CustomFontsSize[key];
+		}
 		for (let key of fonts) {
 			Polyglot.CustomFontsSize[key] = Polyglot.CustomFontsSize[key] ?? "100";
 		}
