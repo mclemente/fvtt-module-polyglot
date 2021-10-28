@@ -1,7 +1,7 @@
 import { currentLanguageProvider, initApi, registerModule, registerSystem } from "./module/api.js";
 import { LanguageProvider } from "./module/LanguageProvider.js";
 import { Polyglot } from "./module/logic.js";
-import { registerSettings } from "./module/settings.js";
+import { registerSettings, registerProviderSettings } from "./module/settings.js";
 
 Polyglot.FONTS = [
 	"ArCiela",
@@ -189,6 +189,7 @@ function formatName(name, shouldStripFileName = true) {
 Hooks.once("init", () => {
 	registerSettings();
 	initApi();
+	registerProviderSettings();
 });
 
 Hooks.on("renderChatLog", window.polyglot.polyglot.renderChatLog.bind(window.polyglot.polyglot));

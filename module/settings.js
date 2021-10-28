@@ -17,6 +17,8 @@ const debouncedReload = foundry.utils.debounce(() => {
  */
 function addSetting(key, data) {
 	const commonData = {
+		name: game.i18n.localize(`POLYGLOT.${key}Title`),
+		hint: game.i18n.localize(`POLYGLOT.${key}Hint`),
 		scope: "world",
 		config: true,
 	};
@@ -32,10 +34,7 @@ export function registerSettings() {
 		type: PolyglotFontSettings,
 		restricted: true,
 	});
-	game.settings.register("polyglot", "CustomFontSizes", {
-		name: game.i18n.localize("POLYGLOT.CustomFontSizesTitle"),
-		hint: game.i18n.localize("POLYGLOT.CustomFontSizesHint"),
-		scope: "world",
+	addSetting("CustomFontSizes", {
 		config: false,
 		default: {},
 		type: Object,
@@ -49,24 +48,18 @@ export function registerSettings() {
 		type: PolyglotLanguageSettings,
 		restricted: true,
 	});
-	game.settings.register("polyglot", "Alphabets", {
-		name: game.i18n.localize("POLYGLOT.AlphabetsTitle"),
-		hint: game.i18n.localize("POLYGLOT.AlphabetsHint"),
-		scope: "world",
+	addSetting("Alphabets", {
 		config: false,
 		default: {},
 		type: Object,
 	});
-	game.settings.register("polyglot", "Languages", {
-		name: game.i18n.localize("POLYGLOT.LanguagesTitle"),
-		hint: game.i18n.localize("POLYGLOT.LanguagesHint"),
-		scope: "world",
+	addSetting("Languages", {
 		config: false,
 		default: {},
 		type: Object,
 	});
-	game.settings.register("polyglot", "languageProvider", {
-		scope: "world",
+	addSetting("languageProvider", {
+		//Has no name or hint
 		config: false,
 		type: String,
 		default: getDefaultLanguageProvider(),
@@ -74,20 +67,16 @@ export function registerSettings() {
 	});
 
 	//Actual Settings
-	game.settings.register("polyglot", "polyglotDirectory", {
+	addSetting("polyglotDirectory", {
 		name: game.i18n.localize("POLYGLOT.directory.name"),
 		hint: game.i18n.localize("POLYGLOT.directory.hint"),
-		scope: "world",
-		config: true,
 		default: "",
 		type: String,
 		filePicker: true,
 	});
-	game.settings.register("polyglot", "source", {
+	addSetting("source", {
 		name: game.i18n.localize("POLYGLOT.source.name"),
 		hint: game.i18n.localize("POLYGLOT.source.hint"),
-		scope: "world",
-		config: true,
 		type: String,
 		choices: {
 			data: game.i18n.localize("POLYGLOT.source.data"),
@@ -99,11 +88,10 @@ export function registerSettings() {
 			getFonts();
 		},
 	});
-	game.settings.register("polyglot", "defaultLanguage", {
+	addSetting("defaultLanguage", {
 		name: game.i18n.localize("POLYGLOT.DefaultLanguageTitle"),
 		hint: game.i18n.localize("POLYGLOT.DefaultLanguageHint"),
 		scope: "client",
-		config: true,
 		default: "",
 		type: String,
 	});
@@ -126,10 +114,7 @@ export function registerSettings() {
 		default: true,
 		type: Boolean,
 	});
-	game.settings.register("polyglot", "enableAllFonts", {
-		name: game.i18n.localize("POLYGLOT.enableAllFontsTitle"),
-		hint: game.i18n.localize("POLYGLOT.enableAllFontsHint"),
-		scope: "world",
+	addSetting("enableAllFonts", {
 		config: legacyGenericSystem(),
 		default: false,
 		type: Boolean,
@@ -223,4 +208,14 @@ export function registerSettings() {
 		type: Boolean,
 		onChange: () => debouncedReload(),
 	});
+}
+
+//Language Provider Settings
+export function registerProviderSettings() {
+	const systemSpecificSettings = currentLanguageProvider.settings;
+	if (Object.keys(systemSpecificSettings).length) {
+		for (let [key, data] of Object.entries(systemSpecificSettings)) {
+			addSetting(key, data);
+		}
+	}
 }

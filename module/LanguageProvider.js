@@ -81,6 +81,11 @@ export class LanguageProvider {
 	get requiresReady() {
 		return false;
 	}
+
+	get settings() {
+		return {};
+	}
+
 	/**
 	 * Returns the system's default language if it exists.
 	 * @returns {String}
@@ -658,6 +663,48 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 			undercommon: "drowic",
 		};
 	}
+	/**
+	 * Gets an actor's languages.
+	 * @param {Document} actor
+	 * @var literate_languages	For systems that support literacy (e.g. reading journals).
+	 * @returns [Set, Set]
+	 */
+	getUserLanguages(actor) {
+		let known_languages = new Set();
+		let literate_languages = new Set();
+		for (let lang of actor.data.data.traits.languages.value) known_languages.add(lang);
+		if (actor.data.data.traits.languages.custom) {
+			const defaultSpecialLanguage = game.settings.get("polyglot", "DND5E.SpecialLanguages").trim().toLowerCase();
+			for (let lang of actor.data.data.traits.languages?.custom.split(/[;]/)) {
+				lang = lang.trim().toLowerCase();
+				if (lang.includes("usually common") || lang.includes("in life") || lang.includes("its creator")) {
+					known_languages.add(defaultSpecialLanguage);
+				} else if (lang.includes("usually")) {
+					lang = lang.match(/(?<=usually)(.*)(?=\))/g)[0].trim();
+					known_languages.add(lang);
+				} else if (lang.match(/(?<=any)(.*)(?=language)/g)) {
+					lang = lang.match(/(?<=any)(.*)(?=language)/g)[0].trim();
+					known_languages.add(defaultSpecialLanguage);
+				} else if (lang.match(/(?<=understands)(.*)(?=but can't speak it)/g)) {
+					lang = lang.match(/(?<=understands)(.*)(?=but can't speak it)/g)[0].trim();
+					known_languages.add(lang);
+				} else if (lang.match(/(.*)(?=plus)/)) {
+					lang = lang.match(/(.*)(?=plus)/)[0].trim();
+					known_languages.add(lang);
+				} else known_languages.add(lang);
+			}
+		}
+		return [known_languages, literate_languages];
+	}
+
+	get settings() {
+		return {
+			"DND5E.SpecialLanguages": {
+				type: String,
+				default: "Common",
+			},
+		};
+	}
 }
 
 export class dsa5LanguageProvider extends LanguageProvider {
@@ -1094,7 +1141,105 @@ export class pf1LanguageProvider extends LanguageProvider {
 	}
 }
 
-export class pf2eLanguageProvider extends pf1LanguageProvider {
+export class pf2eLanguageProvider extends LanguageProvider {
+	get originalAlphabets() {
+		return {
+			common: "130% Thorass",
+			abyssal: "150% Barazhad",
+			auran: "200% OldeThorass",
+			azlanti: "120% Tengwar",
+			boggard: "120% Semphari",
+			celestial: "180% Celestial",
+			outwordly: "200% ArCiela",
+			draconic: "170% Iokharic",
+			dwarvish: "120% Dethek",
+			drowic: "150% HighDrowic",
+			dziriak: "250% Pulsian",
+			giant: "120% MeroiticDemotic",
+			gnoll: "150% Kargi",
+			elvish: "150% Espruar",
+			erutaki: "120% Tuzluca",
+			garundi: "120% Qijomi",
+			infernal: "230% Infernal",
+			jistka: "120% Valmaric",
+			jungle: "120% JungleSlang",
+			kelish: "170% HighschoolRunes",
+			oriental: "130% Oriental",
+			requian: "150% Reanaarian",
+			serpent: "120% Ophidian",
+			signs: "170% FingerAlphabet",
+			sylvan: "200% OldeEspruar",
+			thassilonian: "150% Thassilonian",
+			utopian: "140% MarasEye",
+		};
+	}
+	get originalTongues() {
+		return {
+			_default: "common",
+			aboleth: "outwordly",
+			abyssal: "abyssal",
+			aklo: "serpent",
+			algollthu: "outwordly",
+			anadi: "jungle",
+			aquan: "auran",
+			arboreal: "sylvan",
+			auran: "auran",
+			azlanti: "azlanti",
+			boggard: "boggard",
+			caligni: "drowic",
+			celestial: "celestial",
+			cyclops: "giant",
+			daemonic: "infernal",
+			dark: "drowic",
+			destrachan: "outwordly",
+			draconic: "draconic",
+			drowsign: "signs",
+			druidic: "jungle",
+			dwarven: "dwarvish",
+			dziriak: "dziriak",
+			elven: "elvish",
+			erutaki: "erutaki",
+			garundi: "garundi",
+			giant: "giant",
+			gnoll: "gnoll",
+			gnome: "dwarvish",
+			gnomish: "dwarvish",
+			goblin: "gnoll",
+			grippli: "boggard",
+			hallit: "azlanti",
+			ignan: "dwarvish",
+			iruxi: "boggard",
+			jistkan: "jistka",
+			jotun: "giant",
+			jyoti: "celestial",
+			infernal: "infernal",
+			kelish: "kelish",
+			mwangi: "azlanti",
+			necril: "drowic",
+			orc: "dwarvish",
+			orcish: "dwarvish",
+			polyglot: "azlanti",
+			protean: "abyssal",
+			requian: "requian",
+			shoanti: "azlanti",
+			skald: "jitska",
+			sphinx: "requian",
+			strix: "infernal",
+			sylvan: "sylvan",
+			shoony: "dwarvish",
+			taldane: "azlanti",
+			tengu: "oriental",
+			terran: "dwarvish",
+			thassilonian: "thassilonian",
+			tien: "oriental",
+			treant: "sylvan",
+			undercommon: "drowic",
+			utopian: "utopian",
+			varisian: "azlanti",
+			vegepygmy: "gnoll",
+			vudrani: "garundi",
+		};
+	}
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const langs = {};
