@@ -663,6 +663,15 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 			undercommon: "drowic",
 		};
 	}
+	get settings() {
+		return {
+			"DND5E.SpecialLanguages": {
+				type: String,
+				default: "Common",
+			},
+		};
+	}
+
 	/**
 	 * Gets an actor's languages.
 	 * @param {Document} actor
@@ -672,38 +681,31 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		for (let lang of actor.data.data.traits.languages.value) known_languages.add(lang);
-		if (actor.data.data.traits.languages.custom) {
-			const defaultSpecialLanguage = game.settings.get("polyglot", "DND5E.SpecialLanguages").trim().toLowerCase();
-			for (let lang of actor.data.data.traits.languages?.custom.split(/[;]/)) {
-				lang = lang.trim().toLowerCase();
-				if (lang.includes("usually common") || lang.includes("in life") || lang.includes("its creator")) {
-					known_languages.add(defaultSpecialLanguage);
-				} else if (lang.includes("usually")) {
-					lang = lang.match(/(?<=usually)(.*)(?=\))/g)[0].trim();
-					known_languages.add(lang);
-				} else if (lang.match(/(?<=any)(.*)(?=language)/g)) {
-					lang = lang.match(/(?<=any)(.*)(?=language)/g)[0].trim();
-					known_languages.add(defaultSpecialLanguage);
-				} else if (lang.match(/(?<=understands)(.*)(?=but can't speak it)/g)) {
-					lang = lang.match(/(?<=understands)(.*)(?=but can't speak it)/g)[0].trim();
-					known_languages.add(lang);
-				} else if (lang.match(/(.*)(?=plus)/)) {
-					lang = lang.match(/(.*)(?=plus)/)[0].trim();
-					known_languages.add(lang);
-				} else known_languages.add(lang);
+		if (actor.data.data?.traits?.languages) {
+			for (let lang of actor.data.data.traits.languages.value) known_languages.add(lang);
+			if (actor.data.data.traits.languages.custom) {
+				const defaultSpecialLanguage = game.settings.get("polyglot", "DND5E.SpecialLanguages").trim().toLowerCase();
+				for (let lang of actor.data.data.traits.languages?.custom.split(/[;]/)) {
+					lang = lang.trim().toLowerCase();
+					if (lang.includes("usually common") || lang.includes("in life") || lang.includes("its creator")) {
+						known_languages.add(defaultSpecialLanguage);
+					} else if (lang.includes("usually")) {
+						lang = lang.match(/(?<=usually)(.*)(?=\))/g)[0].trim();
+						known_languages.add(lang);
+					} else if (lang.match(/(?<=any)(.*)(?=language)/g)) {
+						lang = lang.match(/(?<=any)(.*)(?=language)/g)[0].trim();
+						known_languages.add(defaultSpecialLanguage);
+					} else if (lang.match(/(?<=understands)(.*)(?=but can't speak it)/g)) {
+						lang = lang.match(/(?<=understands)(.*)(?=but can't speak it)/g)[0].trim();
+						known_languages.add(lang);
+					} else if (lang.match(/(.*)(?=plus)/)) {
+						lang = lang.match(/(.*)(?=plus)/)[0].trim();
+						known_languages.add(lang);
+					} else known_languages.add(lang);
+				}
 			}
 		}
 		return [known_languages, literate_languages];
-	}
-
-	get settings() {
-		return {
-			"DND5E.SpecialLanguages": {
-				type: String,
-				default: "Common",
-			},
-		};
 	}
 }
 
