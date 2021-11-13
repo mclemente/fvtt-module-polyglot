@@ -599,6 +599,10 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		return true;
 	}
 
+	getSystemDefaultLanguage() {
+		return "Common Tongue"
+	}
+
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const langs = {};
