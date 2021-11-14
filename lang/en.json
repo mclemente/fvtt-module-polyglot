@@ -89,6 +89,10 @@
 			"LanguageOther": "Language",
 			"LanguageSpec": "Language"
 		},
+		"DND5E": {
+			"SpecialLanguagesTitle": "Replace Special Languages",
+			"SpecialLanguagesHint": "Name of the language that will replace \"languages\" such as \"all the languages it knew in life\"."
+		},
 		"SWADE": {
 			"LanguageSkills": "Language"
 		},
