@@ -163,15 +163,27 @@ export class LanguageProvider {
 	 */
 	async setup() {
 		if (this.requiresReady) {
-			Hooks.on("ready", async () => {
-				await this.getLanguages();
-				this.loadAlphabet();
-				this.loadTongues();
-				this.loadCustomFonts();
-				this.reloadLanguages();
-				this.getDefaultLanguage();
-				Hooks.callAll("polyglot.languageProvider.ready");
-			});
+			if (game.modules.get("babele")?.active) {
+				Hooks.on("babele.ready", async () => {
+					await this.getLanguages();
+					this.loadAlphabet();
+					this.loadTongues();
+					this.loadCustomFonts();
+					this.reloadLanguages();
+					this.getDefaultLanguage();
+					Hooks.callAll("polyglot.languageProvider.ready");
+				});
+			} else {
+				Hooks.on("ready", async () => {
+					await this.getLanguages();
+					this.loadAlphabet();
+					this.loadTongues();
+					this.loadCustomFonts();
+					this.reloadLanguages();
+					this.getDefaultLanguage();
+					Hooks.callAll("polyglot.languageProvider.ready");
+				});
+			}
 		} else {
 			await this.getLanguages();
 			this.loadAlphabet();
@@ -587,13 +599,18 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		return true;
 	}
 
+	getSystemDefaultLanguage() {
+		return "Common Tongue"
+	}
+
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const langs = {};
 		const demonlordPack = game.packs.get("demonlord.languages");
 		const demonlordItemList = await demonlordPack.getIndex();
 		for (let item of demonlordItemList) {
-			langs[item.name] = game.i18n.localize(item.name);
+			const originalName = item?.flags?.babele?.originalName || item.name
+			langs[originalName] = item.name;
 		}
 		this.languages = replaceLanguages ? {} : langs;
 	}
@@ -603,8 +620,9 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		let literate_languages = new Set();
 		for (let item of actor.data.items) {
 			if (item.type === "language") {
-				if (item.data.data.speak) known_languages.add(item.name);
-				if (item.data.data.read) literate_languages.add(item.name);
+				const name = item.getFlag("babele", "originalName") || item.name
+				if (item.data.data.speak) known_languages.add(name);
+				if (item.data.data.read) literate_languages.add(name);
 			}
 		}
 		return [known_languages, literate_languages];
