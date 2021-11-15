@@ -190,6 +190,7 @@ Hooks.once("init", () => {
 	registerSettings();
 	initApi();
 	registerProviderSettings();
+	Hooks.callAll("polyglot.init", LanguageProvider);
 });
 
 Hooks.on("renderChatLog", window.polyglot.polyglot.renderChatLog.bind(window.polyglot.polyglot));
