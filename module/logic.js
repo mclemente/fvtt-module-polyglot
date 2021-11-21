@@ -348,10 +348,9 @@ export class Polyglot {
 	 */
 	preCreateChatMessage(document, data, options, userId) {
 		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this._allowOOC() && this._isMessageTypeOOC(data.type))) {
-			let lang;
 			if (data.lang) {
 				const invertedLanguages = invertObject(currentLanguageProvider.languages);
-				if (currentLanguageProvider.languages[data.lang]) lang = data.lang;
+				if (currentLanguageProvider.languages[data.lang]) var lang = data.lang;
 				else if (invertedLanguages[data.lang]) lang = invertedLanguages[data.lang];
 			} else if (!lang) lang = this.chatElement.find("select[name=polyglot-language]").val();
 			if (lang) document.data.update({ "flags.polyglot.language": lang });
