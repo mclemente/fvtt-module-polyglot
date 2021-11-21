@@ -1762,3 +1762,151 @@ export class warhammerLanguageProvider extends LanguageProvider {
 		return [known_languages, literate_languages];
 	}
 }
+
+export class cyberpunkRedLanguageProvider extends LanguageProvider {
+	get originalAlphabets() {
+		return {
+			common: "130% Thorass",
+			cyrillic: "130% KremlinPremier",
+			miroslavnormal: "200% MiroslavNormal",
+			arciela: "200% ArCiela",
+			oriental: "130% Oriental",
+		};
+	}
+
+	get originalTongues() {
+		return {
+			_default: "common",
+			streetslang: "common",
+			arabic: "arciela",
+			bengali: "common",
+			berber: "common",
+			burmese: "arciela",
+			cantonese: "oriental",
+			chinese: "oriental",
+			cree: "common",
+			creole: "common",
+			dari: "common",
+			dutch: "common",
+			english: "common",
+			farsi: "arciela",
+			filipino: "arciela",
+			finnish: "cyrillic",
+			french: "common",
+			german: "miroslavnormal",
+			guarani: "common",
+			hausa: "common",
+			hawaiian: "common",
+			hebrew: "common",
+			hindi: "arciela",
+			indonesian: "arciela",
+			italian: "common",
+			japanese: "oriental",
+			khmer: "arciela",
+			korean: "oriental",
+			lingala: "common",
+			malayan: "arciela",
+			mandarin: "oriental",
+			maori: "common",
+			mayan: "common",
+			mongolian: "arciela",
+			navajo: "common",
+			nepali: "arciela",
+			norwegian: "miroslavnormal",
+			oromo: "common",
+			pamanyungan: "common",
+			polish: "cyrillic",
+			portuguese: "common",
+			quechua: "common",
+			romanian: "cyrillic",
+			russian: "cyrillic",
+			sinhalese: "common",
+			spanish: "common",
+			swahili: "common",
+			tahitian: "common",
+			tamil: "common",
+			turkish: "arciela",
+			twi: "common",
+			ukrainian: "cyrillic",
+			urdu: "arciela",
+			vietnamese: "arciela",
+			yoruba: "common",
+		};
+	}
+
+	async getLanguages() {
+		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+		const langs = {
+			streetslang: "Streetslang",
+			arabic: "Arabic",
+			bengali: "Bengali",
+			berber: "Berber",
+			burmese: "Burmese",
+			cantonese: "Cantonese",
+			chinese: "Chinese",
+			cree: "Cree",
+			creole: "Creole",
+			dari: "Dari",
+			dutch: "Dutch",
+			english: "English",
+			farsi: "Farsi",
+			filipino: "Filipino",
+			finnish: "Finnish",
+			french: "French",
+			german: "German",
+			guarani: "Guarani",
+			hausa: "Hausa",
+			hawaiian: "Hawaiian",
+			hebrew: "Hebrew",
+			hindi: "Hindi",
+			indonesian: "Indonesian",
+			italian: "Italian",
+			japanese: "Japanese",
+			khmer: "Khmer",
+			korean: "Korean",
+			lingala: "Lingala",
+			malayan: "Malayan",
+			mandarin: "Mandarin",
+			maori: "Maori",
+			mayan: "Mayan",
+			mongolian: "Mongolian",
+			navajo: "Navajo",
+			nepali: "Nepali",
+			norwegian: "Norwegian",
+			oromo: "Oromo",
+			pamanyungan: "Pama-nyungan",
+			polish: "Polish",
+			portuguese: "Portuguese",
+			quechua: "Quechua",
+			romanian: "Romanian",
+			russian: "Russian",
+			sinhalese: "Sinhalese",
+			spanish: "Spanish",
+			swahili: "Swahili",
+			tahitian: "Tahitian",
+			tamil: "Tamil",
+			turkish: "Turkish",
+			twi: "Twi",
+			ukrainian: "Ukrainian",
+			urdu: "Urdu",
+			vietnamese: "Vietnamese",
+			yoruba: "Yoruba",
+		};
+		this.languages = replaceLanguages ? {} : langs;
+	}
+
+	getUserLanguages(actor) {
+		let known_languages = new Set();
+		let literate_languages = new Set();
+		for (let item of actor.data.items) {
+			if (item.type == "skill") {
+				let myRegex = new RegExp("Language" + "\\s*\\((.+)\\)", "i");
+				const match = item.data.name.match(myRegex);
+				if (match) {
+					known_languages.add(match[1].trim().toLowerCase());
+				}
+			}
+		}
+		return [known_languages, literate_languages];
+	}
+}
