@@ -3,7 +3,7 @@ import {
 	LanguageProvider, ariaLanguageProvider, coc7LanguageProvider, d35eLanguageProvider, darkHeresyLanguageProvider, dccLanguageProvider,
 	demonlordLanguageProvider, dnd5eLanguageProvider, dsa5LanguageProvider, gurpsLanguageProvider, kryxrpgLanguageProvider, oseLanguageProvider,
 	pf1LanguageProvider, pf2eLanguageProvider, sfrpgLanguageProvider, shadowrun5eLanguageProvider, swadeLanguageProvider, sw5eLanguageProvider,
-	tormenta20LanguageProvider, uesrpgLanguageProvider, warhammerLanguageProvider,
+	tormenta20LanguageProvider, uesrpgLanguageProvider, warhammerLanguageProvider,cyberpunkRedLanguageProvider,
 } from "./LanguageProvider.js";
 
 export const availableLanguageProviders = {};
@@ -106,6 +106,9 @@ export function initApi() {
 			break;
 		case "wfrp4e":
 			languageProviders.push(new warhammerLanguageProvider("native.wfrp4e"));
+			break;
+		case "cyberpunk-red-core":
+			languageProviders.push(new cyberpunkRedLanguageProvider("native.cyberpunk-red-core"));
 			break;
 		default:
 			languageProviders.push(new LanguageProvider("native"));
