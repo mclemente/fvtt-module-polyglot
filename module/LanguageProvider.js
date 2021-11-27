@@ -261,7 +261,7 @@ export class LanguageProvider {
 	 */
 	reloadLanguages() {
 		let langSettings = game.settings.get("polyglot", "Languages");
-		if (this.tongues == langSettings) return;
+		if (this.tongues == langSettings || !Object.keys(langSettings).length) return;
 		for (let lang in langSettings) {
 			if (!(lang in this.tongues)) {
 				delete langSettings[lang];
