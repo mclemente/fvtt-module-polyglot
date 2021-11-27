@@ -600,7 +600,7 @@ export class demonlordLanguageProvider extends LanguageProvider {
 	}
 
 	getSystemDefaultLanguage() {
-		return "Common Tongue"
+		return "Common Tongue";
 	}
 
 	async getLanguages() {
@@ -609,7 +609,7 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		const demonlordPack = game.packs.get("demonlord.languages");
 		const demonlordItemList = await demonlordPack.getIndex();
 		for (let item of demonlordItemList) {
-			const originalName = item?.flags?.babele?.originalName || item.name
+			const originalName = item?.flags?.babele?.originalName || item.name;
 			langs[originalName] = item.name;
 		}
 		this.languages = replaceLanguages ? {} : langs;
@@ -620,7 +620,7 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		let literate_languages = new Set();
 		for (let item of actor.data.items) {
 			if (item.type === "language") {
-				const name = item.getFlag("babele", "originalName") || item.name
+				const name = item.getFlag("babele", "originalName") || item.name;
 				if (item.data.data.speak) known_languages.add(name);
 				if (item.data.data.read) literate_languages.add(name);
 			}
