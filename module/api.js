@@ -1,6 +1,6 @@
 // prettier-ignore
 import {
-	LanguageProvider, ariaLanguageProvider, coc7LanguageProvider, d35eLanguageProvider, darkHeresyLanguageProvider, dccLanguageProvider,
+	LanguageProvider, a5eLanguageProvider, ariaLanguageProvider, coc7LanguageProvider, d35eLanguageProvider, darkHeresyLanguageProvider, dccLanguageProvider,
 	demonlordLanguageProvider, dnd5eLanguageProvider, dsa5LanguageProvider, gurpsLanguageProvider, kryxrpgLanguageProvider, oseLanguageProvider,
 	pf1LanguageProvider, pf2eLanguageProvider, sfrpgLanguageProvider, shadowrun5eLanguageProvider, swadeLanguageProvider, sw5eLanguageProvider,
 	tormenta20LanguageProvider, uesrpgLanguageProvider, warhammerLanguageProvider,cyberpunkRedLanguageProvider,
@@ -47,6 +47,9 @@ export function updateLanguageProvider() {
 export function initApi() {
 	const languageProviders = [];
 	switch (game.system.id) {
+		case "a5e": 
+			languageProviders.push(new a5eLanguageProvider("native.a5e"));
+			break;
 		case "aria":
 			languageProviders.push(new ariaLanguageProvider("native.aria"));
 			break;
