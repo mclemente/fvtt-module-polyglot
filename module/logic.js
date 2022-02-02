@@ -294,7 +294,7 @@ export class Polyglot {
 				!known &&
 				(game.user.character ? !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages) : true);
 
-		let new_content = this.scrambleString(message.data.content, message.data._id, lang);
+		let new_content = this.scrambleString(message.data.content, message.data.id, lang);
 		if (displayTranslated && (lang != currentLanguageProvider.defaultLanguage || message.polyglot_unknown)) {
 			let content = html.find(".message-content");
 			let translation = message.data.content;
@@ -427,7 +427,7 @@ export class Polyglot {
 						if (!lang) continue;
 						texts.push(span.textContent);
 						styles.push(span.style.font);
-						span.textContent = this.scrambleString(span.textContent, journalSheet._id, lang);
+						span.textContent = this.scrambleString(span.textContent, journalSheet.id, lang);
 						span.style.font = this._getFontStyle(lang);
 					}
 				} else {
@@ -453,7 +453,7 @@ export class Polyglot {
 			let conditions = !this._isTruespeech(lang) && !this.known_languages.has(this.comprehendLanguages) && !currentLanguageProvider.conditions(this, lang);
 			if (conditions) {
 				span.title = "????";
-				span.textContent = this.scrambleString(span.textContent, journalSheet._id, lang);
+				span.textContent = this.scrambleString(span.textContent, journalSheet.id, lang);
 				span.style.font = this._getFontStyle(lang);
 			}
 		}
@@ -476,7 +476,7 @@ export class Polyglot {
 			if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) return;
 			if (unknown) {
 				const content = html.find(".bubble-content");
-				const new_content = this.scrambleString(messageContent, message._id, lang);
+				const new_content = this.scrambleString(messageContent, foundry.utils.randomID(16), lang);
 				content.text(new_content);
 				this._bubble.font = this._getFontStyle(lang);
 				this._bubble.message = new_content;
@@ -495,7 +495,7 @@ export class Polyglot {
 					if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) message.polyglot_unknown = false;
 					if (!message.polyglot_force && message.polyglot_unknown) {
 						const content = html.find(".bubble-content");
-						const new_content = this.scrambleString(message.data.content, message._id, lang);
+						const new_content = this.scrambleString(message.data.content, message.id, lang);
 						content.text(new_content);
 						this._bubble.font = this._getFontStyle(lang);
 						this._bubble.message = new_content;
@@ -520,7 +520,7 @@ export class Polyglot {
 			message.polyglot_unknown = unknown;
 			if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) message.polyglot_unknown = false;
 			if (!message.polyglot_force && message.polyglot_unknown) {
-				const new_content = this.scrambleString(chatDisplayData.text, message._id, lang);
+				const new_content = this.scrambleString(chatDisplayData.text, message.id, lang);
 				chatDisplayData.text = new_content;
 				chatDisplayData.font = this._getFontStyle(lang);
 				chatDisplayData.skipAutoQuote = true;
