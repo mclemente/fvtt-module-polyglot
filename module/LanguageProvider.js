@@ -1512,6 +1512,19 @@ export class shadowrun5eLanguageProvider extends LanguageProvider {
 	}
 }
 
+export class splittermondLanguageProvider extends LanguageProvider {
+	getUserLanguages(actor) {
+		let known_languages = new Set();
+		let literate_languages = new Set();
+		actor.data.items
+			.filter((item) => item.type == "language")
+			.forEach((item) => {
+				known_languages.add(item.name.trim().toLowerCase());
+			});
+		return [known_languages, literate_languages];
+	}
+}
+
 export class swadeLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();

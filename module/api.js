@@ -1,9 +1,9 @@
 // prettier-ignore
 import {
-	LanguageProvider, a5eLanguageProvider, ariaLanguageProvider, coc7LanguageProvider, d35eLanguageProvider, darkHeresyLanguageProvider, dccLanguageProvider,
-	demonlordLanguageProvider, dnd5eLanguageProvider, dsa5LanguageProvider, gurpsLanguageProvider, kryxrpgLanguageProvider, oseLanguageProvider,
-	pf1LanguageProvider, pf2eLanguageProvider, sfrpgLanguageProvider, shadowrun5eLanguageProvider, swadeLanguageProvider, sw5eLanguageProvider,
-	tormenta20LanguageProvider, uesrpgLanguageProvider, warhammerLanguageProvider,cyberpunkRedLanguageProvider,
+	LanguageProvider, a5eLanguageProvider, ariaLanguageProvider, coc7LanguageProvider, cyberpunkRedLanguageProvider, d35eLanguageProvider, darkHeresyLanguageProvider,
+	dccLanguageProvider, demonlordLanguageProvider, dnd5eLanguageProvider, dsa5LanguageProvider, gurpsLanguageProvider, kryxrpgLanguageProvider, oseLanguageProvider,
+	pf1LanguageProvider, pf2eLanguageProvider, sfrpgLanguageProvider, shadowrun5eLanguageProvider, splittermondLanguageProvider, swadeLanguageProvider, 
+	sw5eLanguageProvider, tormenta20LanguageProvider, uesrpgLanguageProvider, warhammerLanguageProvider,
 } from "./LanguageProvider.js";
 
 export const availableLanguageProviders = {};
@@ -47,7 +47,7 @@ export function updateLanguageProvider() {
 export function initApi() {
 	const languageProviders = [];
 	switch (game.system.id) {
-		case "a5e": 
+		case "a5e":
 			languageProviders.push(new a5eLanguageProvider("native.a5e"));
 			break;
 		case "aria":
@@ -94,6 +94,9 @@ export function initApi() {
 			break;
 		case "shadowrun5e":
 			languageProviders.push(new shadowrun5eLanguageProvider("native.shadowrun5e"));
+			break;
+		case "splittermond":
+			languageProviders.push(new splittermondLanguageProvider("native.shadowrun5e"));
 			break;
 		case "swade":
 			languageProviders.push(new swadeLanguageProvider("native.swade"));
