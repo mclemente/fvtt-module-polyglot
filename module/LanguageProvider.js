@@ -317,7 +317,7 @@ export class a5eLanguageProvider extends LanguageProvider {
 			common: "130% Thorass",
 			abyssal: "150% Barazhad",
 			auran: "200% OldeThorass",
-			celestial: '180% Celestial',
+			celestial: "180% Celestial",
 			elvish: "150% Espruar",
 			outwordly: "200% ArCiela",
 			draconic: "170% Iokharic",
@@ -376,8 +376,8 @@ export class a5eLanguageProvider extends LanguageProvider {
 	}
 
 	/**
-	 * Get an actor's languages 
-	 * @param {Document} actor 
+	 * Get an actor's languages
+	 * @param {Document} actor
 	 * @returns [Set, Set]
 	 */
 	getUserLanguages(actor) {
@@ -387,10 +387,10 @@ export class a5eLanguageProvider extends LanguageProvider {
 		const langs = actor.data.data.proficiencies?.languages;
 		if (!langs) return [known_languages, literate_languages];
 
-		langs.forEach( lang =>  {
+		langs.forEach((lang) => {
 			if (this.languages[lang]) known_languages.add(lang);
 		});
-		
+
 		return [known_languages, literate_languages];
 	}
 }
