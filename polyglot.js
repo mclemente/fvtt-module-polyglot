@@ -1,4 +1,4 @@
-import { currentLanguageProvider, initApi, registerModule, registerSystem } from "./module/api.js";
+import { currentLanguageProvider, initApi } from "./module/api.js";
 import { LanguageProvider } from "./module/LanguageProvider.js";
 import { Polyglot } from "./module/logic.js";
 import { registerSettings, registerProviderSettings } from "./module/settings.js";
@@ -50,8 +50,6 @@ Polyglot.FONTS = [
 ];
 Polyglot.CustomFonts = [];
 Polyglot.CustomFontsSize = {};
-
-window.polyglot = { polyglot: new Polyglot(), fonts: Polyglot.FONTS, registerModule, registerSystem };
 
 export async function getFonts() {
 	var source = game.settings.get("polyglot", "source");
@@ -135,7 +133,7 @@ export async function getFonts() {
 			}
 		}
 	} catch (error) {
-		console.error(error);
+		console.error(`Polyglot | Error while loading fonts.`, error);
 	} finally {
 		var sheet = window.document.styleSheets;
 		var fontNames = [];
@@ -159,6 +157,7 @@ export async function getFonts() {
 		Polyglot.FONTS = Polyglot.FONTS.concat(fontNames);
 		Polyglot.CustomFonts = Polyglot.CustomFonts.concat(fontNames);
 		Polyglot.CustomFontsSize = game.settings.get("polyglot", "CustomFontSizes");
+		console.debug(`Polyglot | Loaded fonts.`, fontNames);
 	}
 }
 
@@ -193,21 +192,14 @@ Hooks.once("init", () => {
 	Hooks.callAll("polyglot.init", LanguageProvider);
 });
 
-Hooks.on("renderChatLog", window.polyglot.polyglot.renderChatLog.bind(window.polyglot.polyglot));
-Hooks.on("updateUser", window.polyglot.polyglot.updateUser.bind(window.polyglot.polyglot));
-Hooks.on("controlToken", window.polyglot.polyglot.controlToken.bind(window.polyglot.polyglot));
-Hooks.on("preCreateChatMessage", window.polyglot.polyglot.preCreateChatMessage.bind(window.polyglot.polyglot));
-Hooks.on("createChatMessage", window.polyglot.polyglot.createChatMessage.bind(window.polyglot.polyglot));
-Hooks.on("renderChatMessage", window.polyglot.polyglot.renderChatMessage.bind(window.polyglot.polyglot));
-Hooks.on("renderJournalSheet", window.polyglot.polyglot.renderJournalSheet.bind(window.polyglot.polyglot));
 Hooks.on("setup", async () => {
 	await getFonts();
 	await currentLanguageProvider.setup();
 });
 Hooks.on("ready", () => {
-	window.polyglot.polyglot.ready();
+	game.polyglot = new Polyglot();
+	game.polyglot.init();
+	game.polyglot.ready();
 	if (!Object.keys(game.settings.get("polyglot", "Languages")).length) game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
 	Hooks.callAll("polyglot.ready", LanguageProvider);
 });
-Hooks.on("chatBubble", window.polyglot.polyglot.chatBubble.bind(window.polyglot.polyglot)); //token, html, message, {emote}
-Hooks.on("vinoPrepareChatDisplayData", window.polyglot.polyglot.vinoChatRender.bind(window.polyglot.polyglot));

@@ -1,6 +1,5 @@
-import { currentLanguageProvider } from "./api.js";
+import { currentLanguageProvider, registerModule, registerSystem } from "./api.js";
 import { LanguageProvider } from "./LanguageProvider.js";
-
 /**
  * Font sets that don't have Numeric characters.
  */
@@ -14,21 +13,21 @@ const LOGOGRAPHICAL_FONTS = [
 	"Aztec", "DarkEldar", "Eltharin", "FingerAlphabet", "HighschoolRunes", "JungleSlang", "MageScript", "Oriental", "Saurian", "ScrapbookChinese", "Skaven", "Thassilonian"
 ];
 
-/**
- * Returns if the system is one of the systems that were originally supported prior to 1.7.2.
- *
- * @returns {Boolean}
- */
-// prettier-ignore
-export function legacyGenericSystem() {
-	const systems = [
-		"aria", "dark-heresy", "dcc", "D35E", "dnd5e", "demonlord", "dsa5", "kryx_rpg", "ose",
-		"pf1", "pf2e", "sfrpg", "shadowrun5e", "sw5e", "tormenta20", "uesrpg-d100", "wfrp4e"
-	];
-	return systems.includes(game.system.id);
-}
-
 export class Polyglot {
+	init() {
+		this.FONTS = Polyglot.FONTS;
+		this.registerModule = registerModule;
+		this.registerSystem = registerSystem;
+		Hooks.on("renderChatLog", this.renderChatLog.bind(this));
+		Hooks.on("updateUser", this.updateUser.bind(this));
+		Hooks.on("controlToken", this.controlToken.bind(this));
+		Hooks.on("preCreateChatMessage", this.preCreateChatMessage.bind(this));
+		Hooks.on("createChatMessage", this.createChatMessage.bind(this));
+		Hooks.on("renderChatMessage", this.renderChatMessage.bind(this));
+		Hooks.on("renderJournalSheet", this.renderJournalSheet.bind(this));
+		Hooks.on("chatBubble", this.chatBubble.bind(this)); //token, html, message, {emote}
+		Hooks.on("vinoPrepareChatDisplayData", this.vinoChatRender.bind(this));
+	}
 	constructor() {
 		this.known_languages = new Set();
 		this.literate_languages = new Set();
@@ -171,7 +170,7 @@ export class Polyglot {
 			try {
 				[known_languages, literate_languages] = currentLanguageProvider.getUserLanguages(actor);
 			} catch (err) {
-				console.error(`Polyglot | Failed to get languages from actor ${actor.name}. ${err.message}`);
+				console.error(`Polyglot | Failed to get languages from actor "${actor.name}".`, err);
 			}
 		}
 		return [known_languages, literate_languages];

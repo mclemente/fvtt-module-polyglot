@@ -1,12 +1,25 @@
 import { currentLanguageProvider, getDefaultLanguageProvider, updateLanguageProvider } from "./api.js";
 import { PolyglotLanguageSettings } from "./LanguageSettings.js";
 import { PolyglotFontSettings } from "./FontSettings.js";
-import { legacyGenericSystem } from "./logic.js";
 import { getFonts } from "../polyglot.js";
 
 const debouncedReload = foundry.utils.debounce(() => {
 	window.location.reload();
 }, 100);
+
+/**
+ * Returns if the system is one of the systems that were originally supported prior to 1.7.2.
+ *
+ * @returns {Boolean}
+ */
+// prettier-ignore
+function legacyGenericSystem() {
+	const systems = [
+		"aria", "dark-heresy", "dcc", "D35E", "dnd5e", "demonlord", "dsa5", "kryx_rpg", "ose",
+		"pf1", "pf2e", "sfrpg", "shadowrun5e", "sw5e", "tormenta20", "uesrpg-d100", "wfrp4e"
+	];
+	return systems.includes(game.system.id);
+}
 
 /**
  * Shorthand for game.settings.register.
@@ -128,7 +141,7 @@ export function registerSettings() {
 		hint: game.i18n.localize("POLYGLOT.ExportFontsHint"),
 		default: true,
 		type: Boolean,
-		onChange: () => window.polyglot.polyglot.updateConfigFonts(),
+		onChange: () => game.polyglot.updateConfigFonts(),
 	});
 	addSetting("JournalHighlight", {
 		name: game.i18n.localize("POLYGLOT.JournalHighlightTitle"),
@@ -165,14 +178,14 @@ export function registerSettings() {
 		hint: game.i18n.localize("POLYGLOT.ComprehendLanguagesHint"),
 		default: "",
 		type: String,
-		onChange: (value) => (window.polyglot.polyglot.comprehendLanguages = value.trim().replace(/ \'/g, "_")),
+		onChange: (value) => (game.polyglot.comprehendLanguages = value.trim().replace(/ \'/g, "_")),
 	});
 	addSetting("truespeech", {
 		name: game.i18n.localize("POLYGLOT.TruespeechTitle"),
 		hint: game.i18n.localize("POLYGLOT.TruespeechHint"),
 		default: "",
 		type: String,
-		onChange: (value) => (window.polyglot.polyglot.truespeech = value.trim().replace(/ \'/g, "_")),
+		onChange: (value) => (game.polyglot.truespeech = value.trim().replace(/ \'/g, "_")),
 	});
 
 	//Chat Settings
