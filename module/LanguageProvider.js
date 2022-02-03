@@ -1513,15 +1513,45 @@ export class shadowrun5eLanguageProvider extends LanguageProvider {
 }
 
 export class splittermondLanguageProvider extends LanguageProvider {
+	get originalTongues() {
+		return this.languages;
+	}
+
+	get requiresReady() {
+		return true;
+	}
+
+	async getLanguages() {
+		const langs = {};
+		game.actors
+			.filter((actor) => actor.data.items.filter((item) => item.type == "language").length > 0)
+			.forEach((actor) => {
+				actor.data.items
+					.filter((item) => item.type == "language")
+					.forEach((item) => {
+						const name = item.name.trim();
+						langs[name.toLowerCase()] = name;
+					});
+			});
+		this.languages = langs;
+	}
+
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
+		const isLiterate = actor.data.items.filter((item) => item.name == "Literat" && item.type == "strength").length > 0;
 		actor.data.items
 			.filter((item) => item.type == "language")
 			.forEach((item) => {
-				known_languages.add(item.name.trim().toLowerCase());
+				const name = item.name.trim();
+				known_languages.add(name.toLowerCase());
+				if (isLiterate) literate_languages.add(name.toLowerCase());
 			});
 		return [known_languages, literate_languages];
+	}
+
+	conditions(polyglot, lang) {
+		return polyglot.literate_languages.has(lang);
 	}
 }
 

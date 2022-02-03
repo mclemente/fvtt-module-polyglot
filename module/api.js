@@ -96,7 +96,7 @@ export function initApi() {
 			languageProviders.push(new shadowrun5eLanguageProvider("native.shadowrun5e"));
 			break;
 		case "splittermond":
-			languageProviders.push(new splittermondLanguageProvider("native.shadowrun5e"));
+			languageProviders.push(new splittermondLanguageProvider("native.splittermond"));
 			break;
 		case "swade":
 			languageProviders.push(new swadeLanguageProvider("native.swade"));
