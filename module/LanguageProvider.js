@@ -1556,6 +1556,42 @@ export class splittermondLanguageProvider extends LanguageProvider {
 }
 
 export class swadeLanguageProvider extends LanguageProvider {
+	get originalTongues() {
+		return this.languages;
+	}
+
+	get requiresReady() {
+		return true;
+	}
+
+	async getLanguages() {
+		const langs = {};
+		game.actors
+			.filter(
+				(actor) =>
+					actor.data.items.filter((item) => {
+						const name = item?.flags?.babele?.originalName || item.name;
+						const match = name.match(/Language \((.+)\)/i);
+						return match;
+					}).length > 0
+			)
+			.forEach((actor) => {
+				actor.data.items
+					.filter((item) => {
+						const name = item?.flags?.babele?.originalName || item.name;
+						const match = name.match(/Language \((.+)\)/i);
+						return match;
+					})
+					.forEach((item) => {
+						const name = item?.flags?.babele?.originalName || item.name;
+						const match = name.match(/Language \((.+)\)/i);
+						if (match) langs[match[1].trim().toLowerCase()] = match[1].trim();
+					});
+			});
+
+		this.languages = langs;
+	}
+
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
