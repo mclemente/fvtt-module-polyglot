@@ -189,6 +189,8 @@ Hooks.once("init", () => {
 	registerSettings();
 	initApi();
 	registerProviderSettings();
+	game.polyglot = new Polyglot();
+	game.polyglot.init();
 	Hooks.callAll("polyglot.init", LanguageProvider);
 });
 
@@ -197,8 +199,6 @@ Hooks.on("setup", async () => {
 	await currentLanguageProvider.setup();
 });
 Hooks.on("ready", () => {
-	game.polyglot = new Polyglot();
-	game.polyglot.init();
 	game.polyglot.ready();
 	if (!Object.keys(game.settings.get("polyglot", "Languages")).length) game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
 	Hooks.callAll("polyglot.ready", LanguageProvider);
