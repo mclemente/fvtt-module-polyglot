@@ -30,8 +30,8 @@ function legacyGenericSystem() {
  */
 function addSetting(key, data) {
 	const commonData = {
-		name: game.i18n.localize(`POLYGLOT.${key}Title`),
-		hint: game.i18n.localize(`POLYGLOT.${key}Hint`),
+		name: `POLYGLOT.${key}Title`,
+		hint: `POLYGLOT.${key}Hint`,
 		scope: "world",
 		config: true,
 	};
@@ -41,7 +41,7 @@ function addSetting(key, data) {
 export function registerSettings() {
 	//Font Settings Menu
 	game.settings.registerMenu("polyglot", "FontSettings", {
-		name: game.i18n.localize("POLYGLOT.FontSettings"),
+		name: "POLYGLOT.FontSettings",
 		label: game.i18n.localize("POLYGLOT.FontSettings"),
 		icon: "fas fa-font",
 		type: PolyglotFontSettings,
@@ -55,7 +55,7 @@ export function registerSettings() {
 
 	//Language Settings Menu
 	game.settings.registerMenu("polyglot", "LanguageSettings", {
-		name: game.i18n.localize("POLYGLOT.LanguageSettings"),
+		name: "POLYGLOT.LanguageSettings",
 		label: game.i18n.localize("POLYGLOT.LanguageSettings"),
 		icon: "fas fa-globe",
 		type: PolyglotLanguageSettings,
@@ -81,15 +81,15 @@ export function registerSettings() {
 
 	//Actual Settings
 	addSetting("polyglotDirectory", {
-		name: game.i18n.localize("POLYGLOT.directory.name"),
-		hint: game.i18n.localize("POLYGLOT.directory.hint"),
+		name: "POLYGLOT.directory.name",
+		hint: "POLYGLOT.directory.hint",
 		default: "",
 		type: String,
 		filePicker: true,
 	});
 	addSetting("source", {
-		name: game.i18n.localize("POLYGLOT.source.name"),
-		hint: game.i18n.localize("POLYGLOT.source.hint"),
+		name: "POLYGLOT.source.name",
+		hint: "POLYGLOT.source.hint",
 		type: String,
 		choices: {
 			data: game.i18n.localize("POLYGLOT.source.data"),
@@ -102,8 +102,8 @@ export function registerSettings() {
 		},
 	});
 	addSetting("defaultLanguage", {
-		name: game.i18n.localize("POLYGLOT.DefaultLanguageTitle"),
-		hint: game.i18n.localize("POLYGLOT.DefaultLanguageHint"),
+		name: "POLYGLOT.DefaultLanguageTitle",
+		hint: "POLYGLOT.DefaultLanguageHint",
 		scope: "client",
 		default: "",
 		type: String,
@@ -111,8 +111,8 @@ export function registerSettings() {
 
 	//Font Settings
 	addSetting("useUniqueSalt", {
-		name: game.i18n.localize("POLYGLOT.RandomizeRunesTitle"),
-		hint: game.i18n.localize("POLYGLOT.RandomizeRunesHint"),
+		name: "POLYGLOT.RandomizeRunesTitle",
+		hint: "POLYGLOT.RandomizeRunesHint",
 		default: "a",
 		type: String,
 		choices: {
@@ -122,8 +122,8 @@ export function registerSettings() {
 		},
 	});
 	addSetting("logographicalFontToggle", {
-		name: game.i18n.localize("POLYGLOT.logographicalFontToggleTitle"),
-		hint: game.i18n.localize("POLYGLOT.logographicalFontToggleHint"),
+		name: "POLYGLOT.logographicalFontToggleTitle",
+		hint: "POLYGLOT.logographicalFontToggleHint",
 		default: true,
 		type: Boolean,
 	});
@@ -137,15 +137,15 @@ export function registerSettings() {
 		},
 	});
 	addSetting("exportFonts", {
-		name: game.i18n.localize("POLYGLOT.ExportFontsTitle"),
-		hint: game.i18n.localize("POLYGLOT.ExportFontsHint"),
+		name: "POLYGLOT.ExportFontsTitle",
+		hint: "POLYGLOT.ExportFontsHint",
 		default: true,
 		type: Boolean,
 		onChange: () => game.polyglot.updateConfigFonts(),
 	});
 	addSetting("JournalHighlight", {
-		name: game.i18n.localize("POLYGLOT.JournalHighlightTitle"),
-		hint: game.i18n.localize("POLYGLOT.JournalHighlightHint"),
+		name: "POLYGLOT.JournalHighlightTitle",
+		hint: "POLYGLOT.JournalHighlightHint",
 		default: 25,
 		type: Number,
 		onChange: (value) => document.documentElement.style.setProperty("--polyglot-journal-opacity", value / 100),
@@ -153,8 +153,8 @@ export function registerSettings() {
 
 	//Language Settings
 	addSetting("replaceLanguages", {
-		name: game.i18n.localize("POLYGLOT.ReplaceLanguagesTitle"),
-		hint: game.i18n.localize("POLYGLOT.ReplaceLanguagesHint"),
+		name: "POLYGLOT.ReplaceLanguagesTitle",
+		hint: "POLYGLOT.ReplaceLanguagesHint",
 		default: false,
 		type: Boolean,
 		onChange: async () => {
@@ -164,8 +164,8 @@ export function registerSettings() {
 		},
 	});
 	addSetting("customLanguages", {
-		name: game.i18n.localize("POLYGLOT.CustomLanguagesTitle"),
-		hint: game.i18n.localize("POLYGLOT.CustomLanguagesHint"),
+		name: "POLYGLOT.CustomLanguagesTitle",
+		hint: "POLYGLOT.CustomLanguagesHint",
 		default: "",
 		type: String,
 		onChange: () => {
@@ -174,15 +174,15 @@ export function registerSettings() {
 		},
 	});
 	addSetting("comprehendLanguages", {
-		name: game.i18n.localize("POLYGLOT.ComprehendLanguagesTitle"),
-		hint: game.i18n.localize("POLYGLOT.ComprehendLanguagesHint"),
+		name: "POLYGLOT.ComprehendLanguagesTitle",
+		hint: "POLYGLOT.ComprehendLanguagesHint",
 		default: "",
 		type: String,
 		onChange: (value) => (game.polyglot.comprehendLanguages = value.trim().replace(/ \'/g, "_")),
 	});
 	addSetting("truespeech", {
-		name: game.i18n.localize("POLYGLOT.TruespeechTitle"),
-		hint: game.i18n.localize("POLYGLOT.TruespeechHint"),
+		name: "POLYGLOT.TruespeechTitle",
+		hint: "POLYGLOT.TruespeechHint",
 		default: "",
 		type: String,
 		onChange: (value) => (game.polyglot.truespeech = value.trim().replace(/ \'/g, "_")),
@@ -190,21 +190,21 @@ export function registerSettings() {
 
 	//Chat Settings
 	addSetting("display-translated", {
-		name: game.i18n.localize("POLYGLOT.DisplayTranslatedTitle"),
-		hint: game.i18n.localize("POLYGLOT.DisplayTranslatedHint"),
+		name: "POLYGLOT.DisplayTranslatedTitle",
+		hint: "POLYGLOT.DisplayTranslatedHint",
 		default: true,
 		type: Boolean,
 	});
 	addSetting("hideTranslation", {
-		name: game.i18n.localize("POLYGLOT.HideTranslationTitle"),
-		hint: game.i18n.localize("POLYGLOT.HideTranslationHint"),
+		name: "POLYGLOT.HideTranslationTitle",
+		hint: "POLYGLOT.HideTranslationHint",
 		default: false,
 		type: Boolean,
 		onChange: () => debouncedReload(),
 	});
 	addSetting("allowOOC", {
-		name: game.i18n.localize("POLYGLOT.AllowOOCTitle"),
-		hint: game.i18n.localize("POLYGLOT.AllowOOCHint"),
+		name: "POLYGLOT.AllowOOCTitle",
+		hint: "POLYGLOT.AllowOOCHint",
 		choices: {
 			a: game.i18n.localize("POLYGLOT.AllowOOCOptions.a"),
 			b: game.i18n.localize("POLYGLOT.AllowOOCOptions.b"),
@@ -215,8 +215,8 @@ export function registerSettings() {
 		type: String,
 	});
 	addSetting("runifyGM", {
-		name: game.i18n.localize("POLYGLOT.ScrambleGMTitle"),
-		hint: game.i18n.localize("POLYGLOT.ScrambleGMHint"),
+		name: "POLYGLOT.ScrambleGMTitle",
+		hint: "POLYGLOT.ScrambleGMHint",
 		default: false,
 		type: Boolean,
 		onChange: () => debouncedReload(),
