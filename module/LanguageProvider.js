@@ -1513,29 +1513,6 @@ export class shadowrun5eLanguageProvider extends LanguageProvider {
 }
 
 export class splittermondLanguageProvider extends LanguageProvider {
-	get originalTongues() {
-		return this.languages;
-	}
-
-	get requiresReady() {
-		return true;
-	}
-
-	async getLanguages() {
-		const langs = {};
-		game.actors
-			.filter((actor) => actor.data.items.filter((item) => item.type == "language").length > 0)
-			.forEach((actor) => {
-				actor.data.items
-					.filter((item) => item.type == "language")
-					.forEach((item) => {
-						const name = item.name.trim();
-						langs[name.toLowerCase()] = name;
-					});
-			});
-		this.languages = langs;
-	}
-
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
@@ -1543,9 +1520,9 @@ export class splittermondLanguageProvider extends LanguageProvider {
 		actor.data.items
 			.filter((item) => item.type == "language")
 			.forEach((item) => {
-				const name = item.name.trim();
-				known_languages.add(name.toLowerCase());
-				if (isLiterate) literate_languages.add(name.toLowerCase());
+				const name = item.name.trim().toLowerCase();
+				known_languages.add(name);
+				if (isLiterate) literate_languages.add(name);
 			});
 		return [known_languages, literate_languages];
 	}
