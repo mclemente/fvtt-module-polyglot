@@ -1,107 +1,107 @@
 {
-  "I18N": {
-    "LANGUAGE": "Español",
-    "MAINTAINERS": "@Viriato139ac#0342, Juanfrank"
-  },
-  "POLYGLOT": {
-    "DefaultAlphabet": "Alfabeto por defecto",
-    "FontSettings": "Ajustes de fuentes",
-    "LanguageSettings": "Ajustes de idiomas",
-    "ChatSettings": "Ajustes del chat",
-    "LanguagesTitle": "Idiomas",
-    "LanguagesHint": "Cambia el alfabeto de los idiomas. Volver a los valores por defecto recargará",
-    "Font": "Fuente",
-    "Fonts": "Fuentes",
-    "FontSize": "Tamaño de fuente (%)",
+	"I18N": {
+		"LANGUAGE": "Español",
+		"MAINTAINERS": "@Viriato139ac#0342, Juanfrank"
+	},
+	"POLYGLOT": {
+		"DefaultAlphabet": "Alfabeto por defecto",
+		"FontSettings": "Ajustes de fuentes",
+		"LanguageSettings": "Ajustes de idiomas",
+		"ChatSettings": "Ajustes del chat",
+		"Languages.title": "Idiomas",
+		"Languages.hint": "Cambia el alfabeto de los idiomas. Volver a los valores por defecto recargará",
+		"Font": "Fuente",
+		"Fonts": "Fuentes",
+		"FontSize": "Tamaño de fuente (%)",
 
-    "CustomLanguagesTitle": "Idiomas personalizados",
-    "CustomLanguagesHint": "Define una lista de idiomas personalizados, separados mediante coma, para que sean añadidos al sistema",
-    "ComprehendLanguagesTitle": "Hechizo Comprender Idiomas",
-    "ComprehendLanguagesHint": "Tal y como funciona el hechizo de D&D Comprender Idiomas. No se podrá usar ni para hablar ni para leer, pero permitirá a quien lo posea entender todos los idiomas disponibles",
+		"CustomLanguages.title": "Idiomas personalizados",
+		"CustomLanguages.hint": "Define una lista de idiomas personalizados, separados mediante coma, para que sean añadidos al sistema",
+		"ComprehendLanguages.title": "Hechizo Comprender Idiomas",
+		"ComprehendLanguages.hint": "Tal y como funciona el hechizo de D&D Comprender Idiomas. No se podrá usar ni para hablar ni para leer, pero permitirá a quien lo posea entender todos los idiomas disponibles",
 		"directory": {
 			"name": "Directorio de fuentes personalizadas",
-			"hint": "Seleccione un directorio fuera de \"modules\" que contenta ficheros de fuentes"
+			".hint": "Seleccione un directorio fuera de \"modules\" que contenta ficheros de fuentes"
 		},
 		"source": {
 			"name": "Tipo de fuente",
-			"hint": "Si las fuentes están almacenadas como recursos (Assets) de Forge, seleccione Forge. Si están en un S3 bucket, seleccione S3",
+			".hint": "Si las fuentes están almacenadas como recursos (Assets) de Forge, seleccione Forge. Si están en un S3 bucket, seleccione S3",
 			"data": "Datos",
 			"forgevtt": "Forge",
 			"s3": "S3"
 		},
-    "JournalHighlightTitle": "Opacidad del resaltado en los diarios (%)",
-    "JournalHighlightHint": "Define la opacidad del resaltado de las fuentes en el diario",
-    "logographicalFontToggleTitle": "Fuentes logográficas",
-    "logographicalFontToggleHint": "Reduce a la mitad el tamaño de las frases usando fuentes logográficas (p.ej. caracteres japoneseso chinos)",
-    "TruespeechTitle": "Hechizo Idiomas",
-    "TruespeechHint": "Tal y como funciona el hechizo de D&D Idiomas. El que lo posea podrá entender todos los idiomas hablados (pero no podrá leer diarios) y también le entenderán todas las criaturas",
-    "DefaultLanguageTitle": "Idioma por defecto",
-    "DefaultLanguageHint": "Nombre del idioma que se selecciona por defecto. Dejar en blanco para utilizar el valor por defecto del sistema",
-    "ReplaceLanguagesTitle": "Reemplazar idiomas del sistema",
-    "ReplaceLanguagesHint": "Reemplaza el idioma por defecto del sistema por sus idiomas personalizados. El primer idioma personalizado de la lista se convertirá en el nuevo idioma por defecto",
-    "ScrambleGMTitle": "Codificar para el GM",
-    "ScrambleGMHint": "Deshabilite esta opción para mostrar siempre el texto para el GM (remítase al color del globo para ver la perspectiva del icono)",
-    "enableAllFontsTitle": "Añadir fuentes de los ajustes de idioma",
-    "enableAllFontsHint": "Se usarán todas las fuentes",
-    "RandomizeRunesTitle": "Aleatorizar las runas",
-    "RandomizeRunesHint": "Habilitar esta opción ocasiona que los textos codificados se vean siempre de forma distinta, aunque se repita el mismo mensaje",
-    "RandomizeRunesOptions": {
-      "a": "Por defecto",
-      "b": "Frases únicas",
-      "c": "Ninguna ⚠️"
-    },
-    "ExportFontsTitle": "Habilitar la tipografía",
-    "ExportFontsHint": "Permite que Foundry pueda usar la tipografía de Polyglot (por ejemplo, al crear dibujos)",
-    "DisplayTranslatedTitle": "Mostrar traducciones",
-    "DisplayTranslatedHint": "Para los idiomas que se traducen en el chat, muestra el texto original y a continuación la traducción",
-    "HideTranslationTitle": "Ocultar a los jugadores los globos y el texto \"Traducido del\"",
-    "HideTranslationHint": "Oculta el globo y el texto \"Traducido del\" del chat a los jugadores. Se usa para cuando no se quiere que los jugadores sepan en qué idioma se está hablando",
-    "AllowOOCTitle": "Aleatorizar en mensajes Como Jugador (OOC)",
-    "AllowOOCHint": "Permite que el GM pueda aleatorizar los mensajes cuando utiliza mensajes de chat Como Jugador (OOC)",
-	"AllowOOCOptions": {
-      "a": "Todos",
-      "b": "Solo GM",
-      "c": "Solo jugadores",
-      "d": "Ninguno"
-	},
-    "LanguageProvider": {
-      "name": "Proveedor de ajustes de idioma",
-      "hint": "Seleccione quien provee información de alfabetos e idiomas. Se pueden habilitar más proveedores instalando módulos y sistemas. Las opciones que aparecen más abajo dependerán del proveedor seleccionado. ⚠️ Si cambia el proveedor, deberá guardar los cambios y volver a abrir la ventana de configuración",
-      "choices": {
-        "module": "Módulo {name}",
-        "native": "Genérico",
-        "system": "Sistema {name}"
-      }
-    },
-  
-    "Translation": "Traducción",
-    "TranslatedFrom": "Traducido del ",
-    "LanguageLabel": "Idioma",
-    "AlphabetLabel": "Alfabeto",
-    "LatinAlphabet": "Alfabeto latino",
-    "ToggleRunes": "Activar/desactivar runas",
-    "Runes": "Runas",
-    
-    "Generic": {
-      "Language": "Idioma"
-    },
-    "UESRPG.Language": "Idioma",
+		"JournalHighlight.title": "Opacidad del resaltado en los diarios (%)",
+		"JournalHighlight.hint": "Define la opacidad del resaltado de las fuentes en el diario",
+		"logographicalFontToggle.title": "Fuentes logográficas",
+		"logographicalFontToggle.hint": "Reduce a la mitad el tamaño de las frases usando fuentes logográficas (p.ej. caracteres japoneseso chinos)",
+		"Truespeech.title": "Hechizo Idiomas",
+		"Truespeech.hint": "Tal y como funciona el hechizo de D&D Idiomas. El que lo posea podrá entender todos los idiomas hablados (pero no podrá leer diarios) y también le entenderán todas las criaturas",
+		"DefaultLanguage.title": "Idioma por defecto",
+		"DefaultLanguage.hint": "Nombre del idioma que se selecciona por defecto. Dejar en blanco para utilizar el valor por defecto del sistema",
+		"ReplaceLanguages.title": "Reemplazar idiomas del sistema",
+		"ReplaceLanguages.hint": "Reemplaza el idioma por defecto del sistema por sus idiomas personalizados. El primer idioma personalizado de la lista se convertirá en el nuevo idioma por defecto",
+		"ScrambleGM.title": "Codificar para el GM",
+		"ScrambleGM.hint": "Deshabilite esta opción para mostrar siempre el texto para el GM (remítase al color del globo para ver la perspectiva del icono)",
+		"enableAllFonts.title": "Añadir fuentes de los ajustes de idioma",
+		"enableAllFonts.hint": "Se usarán todas las fuentes",
+		"RandomizeRunes.title": "Aleatorizar las runas",
+		"RandomizeRunes.hint": "Habilitar esta opción ocasiona que los textos codificados se vean siempre de forma distinta, aunque se repita el mismo mensaje",
+		"RandomizeRunesOptions": {
+			"a": "Por defecto",
+			"b": "Frases únicas",
+			"c": "Ninguna ⚠️"
+		},
+		"ExportFonts.title": "Habilitar la tipografía",
+		"ExportFonts.hint": "Permite que Foundry pueda usar la tipografía de Polyglot (por ejemplo, al crear dibujos)",
+		"DisplayTranslated.title": "Mostrar traducciones",
+		"DisplayTranslated.hint": "Para los idiomas que se traducen en el chat, muestra el texto original y a continuación la traducción",
+		"HideTranslation.title": "Ocultar a los jugadores los globos y el texto \"Traducido del\"",
+		"HideTranslation.hint": "Oculta el globo y el texto \"Traducido del\" del chat a los jugadores. Se usa para cuando no se quiere que los jugadores sepan en qué idioma se está hablando",
+		"AllowOOC.title": "Aleatorizar en mensajes Como Jugador (OOC)",
+		"AllowOOC.hint": "Permite que el GM pueda aleatorizar los mensajes cuando utiliza mensajes de chat Como Jugador (OOC)",
+		"AllowOOCOptions": {
+			"a": "Todos",
+			"b": "Solo GM",
+			"c": "Solo jugadores",
+			"d": "Ninguno"
+		},
+		"LanguageProvider": {
+			"name": "Proveedor de ajustes de idioma",
+			".hint": "Seleccione quien provee información de alfabetos e idiomas. Se pueden habilitar más proveedores instalando módulos y sistemas. Las opciones que aparecen más abajo dependerán del proveedor seleccionado. ⚠️ Si cambia el proveedor, deberá guardar los cambios y volver a abrir la ventana de configuración",
+			"choices": {
+				"module": "Módulo {name}",
+				"native": "Genérico",
+				"system": "Sistema {name}"
+			}
+		},
 
-    "COC7": {
-      "LanguageOwn": "Lengua propia",
-      "LanguageAny": "Otras lenguas",
-      "LanguageOther": "Otras lenguas",
-      "LanguageSpec": "Lengua"
-    },
-	"DND5E": {
-		"SpecialLanguagesTitle": "Reemplazar idiomas especiales",
-		"SpecialLanguagesHint": "Nombre del idioma que reemplazará \"languages\" tales como \"all the languages it knew in life\"."
-	},
-    "SWADE" : {
-        "LanguageSkills": "Idioma"
-    },
-    "WFRP4E" : {
-        "LanguageSkills": "Idioma"
-    }
-  }
+		"Translation": "Traducción",
+		"TranslatedFrom": "Traducido del ",
+		"LanguageLabel": "Idioma",
+		"AlphabetLabel": "Alfabeto",
+		"LatinAlphabet": "Alfabeto latino",
+		"ToggleRunes": "Activar/desactivar runas",
+		"Runes": "Runas",
+
+		"Generic": {
+			"Language": "Idioma"
+		},
+		"UESRPG.Language": "Idioma",
+
+		"COC7": {
+			"LanguageOwn": "Lengua propia",
+			"LanguageAny": "Otras lenguas",
+			"LanguageOther": "Otras lenguas",
+			"LanguageSpec": "Lengua"
+		},
+		"DND5E": {
+			"SpecialLanguages.title": "Reemplazar idiomas especiales",
+			"SpecialLanguages.hint": "Nombre del idioma que reemplazará \"languages\" tales como \"all the languages it knew in life\"."
+		},
+		"SWADE": {
+			"LanguageSkills": "Idioma"
+		},
+		"WFRP4E": {
+			"LanguageSkills": "Idioma"
+		}
+	}
 }

@@ -4,56 +4,56 @@
 		"FontSettings": "Font Settings",
 		"LanguageSettings": "Language Settings",
 		"ChatSettings": "Chat Settings",
-		"LanguagesTitle": "Languages",
-		"LanguagesHint": "Changes the alphabet used for the languages. Reseting to defaults will reload.",
+		"Languages.title": "Languages",
+		"Languages.hint": "Changes the alphabet used for the languages. Reseting to defaults will reload.",
 		"Font": "Font",
 		"Fonts": "Fonts",
 		"FontSize": "Font Size (%)",
 
-		"CustomLanguagesTitle": "Custom Languages",
-		"CustomLanguagesHint": "Define a list of custom, comma separated, languages to add to the system.",
-		"ComprehendLanguagesTitle": "Comprehend Languages Spell",
-		"ComprehendLanguagesHint": "Set a language whose speaker understands all other languages, but that can't be spoken or written.",
+		"CustomLanguages.title": "Custom Languages",
+		"CustomLanguages.hint": "Define a list of custom, comma separated, languages to add to the system.",
+		"ComprehendLanguages.title": "Comprehend Languages Spell",
+		"ComprehendLanguages.hint": "Set a language whose speaker understands all other languages, but that can't be spoken or written.",
 		"directory": {
 			"name": "Custom Font Directory",
-			"hint": "Set to a folder outside the \"modules\" folder containing font files."
+			".hint": "Set to a folder outside the \"modules\" folder containing font files."
 		},
 		"source": {
 			"name": "Source Type",
-			"hint": "If your fonts are stored in your Forge Assets, select Forge. If they are stored in an S3 bucket, select S3.",
+			".hint": "If your fonts are stored in your Forge Assets, select Forge. If they are stored in an S3 bucket, select S3.",
 			"data": "Data",
 			"forgevtt": "Forge",
 			"s3": "S3"
 		},
-		"TruespeechTitle": "Tongues Spell",
-		"TruespeechHint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures.",
-		"JournalHighlightTitle": "Journal Highlight Opacity (%)",
-		"JournalHighlightHint": "Defines the opacity of the highlight over fonts on the journal.",
-		"logographicalFontToggleTitle": "Logographical Fonts",
-		"logographicalFontToggleHint": "Halves the size of phrases using Logographical fonts (e.g. Japanese, Chinese characters).",
-		"DefaultLanguageTitle": "Default Language",
-		"DefaultLanguageHint": "Name of the default language to select. Keep empty to use system default.",
-		"ReplaceLanguagesTitle": "Replace System's Languages",
-		"ReplaceLanguagesHint": "Replaces the system's default languages with your Custom Languages. The first language on the list becomes the new default language.",
-		"ScrambleGMTitle": "Scramble Messages for GM",
-		"ScrambleGMHint": "Don't translate the text for the GM (refer to the globe's color for the token's understanding). Requires reload.",
-		"enableAllFontsTitle": "Use All Fonts",
-		"enableAllFontsHint": "Makes the Polyglot fonts avilable in the Language Settings.",
-		"RandomizeRunesTitle": "Randomize Runes",
-		"RandomizeRunesHint": "This determines which type of RNG is used to generate a phrase. ⚠️ The \"None\" option only supports Alphanumeric characters (no accents).",
+		"Truespeech.title": "Tongues Spell",
+		"Truespeech.hint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures.",
+		"JournalHighlight.title": "Journal Highlight Opacity (%)",
+		"JournalHighlight.hint": "Defines the opacity of the highlight over fonts on the journal.",
+		"logographicalFontToggle.title": "Logographical Fonts",
+		"logographicalFontToggle.hint": "Halves the size of phrases using Logographical fonts (e.g. Japanese, Chinese characters).",
+		"DefaultLanguage.title": "Default Language",
+		"DefaultLanguage.hint": "Name of the default language to select. Keep empty to use system default.",
+		"ReplaceLanguages.title": "Replace System's Languages",
+		"ReplaceLanguages.hint": "Replaces the system's default languages with your Custom Languages. The first language on the list becomes the new default language.",
+		"ScrambleGM.title": "Scramble Messages for GM",
+		"ScrambleGM.hint": "Don't translate the text for the GM (refer to the globe's color for the token's understanding). Requires reload.",
+		"enableAllFonts.title": "Use All Fonts",
+		"enableAllFonts.hint": "Makes the Polyglot fonts avilable in the Language Settings.",
+		"RandomizeRunes.title": "Randomize Runes",
+		"RandomizeRunes.hint": "This determines which type of RNG is used to generate a phrase. ⚠️ The \"None\" option only supports Alphanumeric characters (no accents).",
 		"RandomizeRunesOptions": {
 			"a": "Default",
 			"b": "Unique phrases",
 			"c": "None ⚠️"
 		},
-		"ExportFontsTitle": "Make Fonts Available",
-		"ExportFontsHint": "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
-		"DisplayTranslatedTitle": "Display Translations",
-		"DisplayTranslatedHint": "For languages that are translated in the chat window, display the original text and a translation below.",
-		"HideTranslationTitle": "Hide Indicators from Players",
-		"HideTranslationHint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Perfect for when you don't want to show players which language you are speaking. Requires reload.",
-		"AllowOOCTitle": "Scramble OOC Chat Messages",
-		"AllowOOCHint": "Choose whose users should have their messages scrambled. OOC = Out of Character.",
+		"ExportFonts.title": "Make Fonts Available",
+		"ExportFonts.hint": "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
+		"DisplayTranslated.title": "Display Translations",
+		"DisplayTranslated.hint": "For languages that are translated in the chat window, display the original text and a translation below.",
+		"HideTranslation.title": "Hide Indicators from Players",
+		"HideTranslation.hint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Perfect for when you don't want to show players which language you are speaking. Requires reload.",
+		"AllowOOC.title": "Scramble OOC Chat Messages",
+		"AllowOOC.hint": "Choose whose users should have their messages scrambled. OOC = Out of Character.",
 		"AllowOOCOptions": {
 			"a": "All",
 			"b": "GM Only",
@@ -68,6 +68,10 @@
 				"native": "Generic",
 				"system": "System {name}"
 			}
+		},
+		"LanguageRegex": {
+			"title": "Language RegEx",
+			"hint": "You can use this to change the term searched on items from \"Languages\" to something else. For example, \"Idioma\" for Portuguese/Spanish, or \"Sprache\" for German. This setting is more useful for non-English speakers."
 		},
 
 		"Translation": "Translation",
@@ -90,8 +94,8 @@
 			"LanguageSpec": "Language"
 		},
 		"DND5E": {
-			"SpecialLanguagesTitle": "Replace Special Languages",
-			"SpecialLanguagesHint": "Name of the language that will replace \"languages\" such as \"all the languages it knew in life\"."
+			"SpecialLanguages.title": "Replace Special Languages",
+			"SpecialLanguages.hint": "Name of the language that will replace \"languages\" such as \"all the languages it knew in life\"."
 		},
 		"SWADE": {
 			"LanguageSkills": "Language"

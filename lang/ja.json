@@ -1,76 +1,76 @@
 {
-  "POLYGLOT": {
-    "DefaultAlphabet": "標準文字",
-    "FontSettings": "フォント設定",
-    "LanguageSettings": "言語設定",
-    "ChatSettings": "チャット設定",
-    "LanguagesTitle": "言語",
-    "LanguagesHint": "言語のアルファベットを変更します。セーブ後に再読み込みが必要です。デフォルトに戻すと自動で再読み込みされます。",
-    "Fonts": "フォント",
-    "CustomLanguagesTitle": "カスタム言語",
-    "CustomLanguagesHint": "システムに追加するカスタム言語のリストをカンマ区切りで指定します。",
-    "ComprehendLanguagesTitle": "コンプリヘンド・ランゲージズ呪文",
-    "ComprehendLanguagesHint": "D&Dにおけるコンプリヘンド・ランゲージズに相当する呪文。設定済のカスタム言語を入力します。その習得者は話したり書いたりはできませんが、すべての言語が理解できるようになります。",
-    "TruespeechTitle": "タンズ呪文",
-    "TruespeechHint": "D&Dにおけるタンズに相当する呪文。設定済のカスタム言語を入力します。その話者はすべての“話し言葉”を理解し（つまり資料は読めない）、すべてのクリーチャーが理解できる発言が行えるようになります。",
-    "DefaultLanguageTitle": "デフォルトの言語",
-    "DefaultLanguageHint": "デフォルト選択される言語の名称を入力します。空にすると、システムのデフォルトが使用されます。",
-    "ReplaceLanguagesTitle": "システム言語を置き換える",
-    "ReplaceLanguagesHint": "システムのデフォルト言語をカスタム言語に置き換えます。リストの最初の言語が新しいデフォルト言語になります。",
-    "ScrambleGMTitle": "GMもスクランブル化する",
-    "ScrambleGMHint": "無効にすると、GMはテキストの内容を常に確認できるようになります。選択したコマが言語を理解しているかは、翻訳アイコン（地球儀マーク）の色を確認する必要があります。",
-    "enableAllFontsTitle": "言語設定ですべてのフォントを追加する",
-    "enableAllFontsHint": "言語設定でPolyglotフォントが使用できるようなります。",
-    "RandomizeRunesTitle": "ルーンのランダム化",
-    "RandomizeRunesHint": "有効にすると、同じメッセージを繰り返し発言したとしても、スクランブル後のテキストが別の文字列になります。",
-    "ExportFontsTitle": "フォントを使用可能にする",
-    "ExportFontsHint": "PolyglotフォントをFoundryのシステム（例えば図形描画ツールなど）で使用できるようなります。",
-    "DisplayTranslatedTitle": "翻訳ボックスを表示する",
-    "DisplayTranslatedHint": "チャットログ内で翻訳が行われるとき、翻訳文と原文が併記されるようになります。",
-    "HideTranslationTitle": "翻訳アイコンと翻訳元の表示を隠す",
-    "HideTranslationHint": "チャットに表示される翻訳アイコン（地球儀マーク）と、翻訳ボックス内に表示される「翻訳元」の表示をプレイヤーに隠します。何の言語を話しているかをプレイヤーに伏せたいときに適しています。",
-    "AllowOOCTitle": "OOCチャットのスクランブル化",
-    "AllowOOCHint": "キャラクターの発言ではないメッセージ（OOC：Out Of Character）であっても、GMは言語をスクランブルできるようになります。",
-    "AllowOOCOptions": {
-      "a": "全員",
-      "b": "GMのみ",
-      "c": "プレイヤーのみ",
-      "d": "なし"
-    },
-    "LanguageProvider": {
-      "name": "言語設定の提供元",
-      "hint": "アルファベットや言語情報の提供元を選択できるようになりました。ゲームシステムやインストールされたモジュールによって、より多くの提供元が利用できます。以下のオプションは、ここで選択した言語の提供元によって変化します。⚠️提供元を変更したときは、保存後に再度設定を開き直す必要があります。",
-      "choices": {
-        "module": "モジュール {name}",
-        "native": "標準設定",
-        "system": "システム {name}"
-      }
-    },
+	"POLYGLOT": {
+		"DefaultAlphabet": "標準文字",
+		"FontSettings": "フォント設定",
+		"LanguageSettings": "言語設定",
+		"ChatSettings": "チャット設定",
+		"Languages.title": "言語",
+		"Languages.hint": "言語のアルファベットを変更します。セーブ後に再読み込みが必要です。デフォルトに戻すと自動で再読み込みされます。",
+		"Fonts": "フォント",
+		"CustomLanguages.title": "カスタム言語",
+		"CustomLanguages.hint": "システムに追加するカスタム言語のリストをカンマ区切りで指定します。",
+		"ComprehendLanguages.title": "コンプリヘンド・ランゲージズ呪文",
+		"ComprehendLanguages.hint": "D&Dにおけるコンプリヘンド・ランゲージズに相当する呪文。設定済のカスタム言語を入力します。その習得者は話したり書いたりはできませんが、すべての言語が理解できるようになります。",
+		"Truespeech.title": "タンズ呪文",
+		"Truespeech.hint": "D&Dにおけるタンズに相当する呪文。設定済のカスタム言語を入力します。その話者はすべての“話し言葉”を理解し（つまり資料は読めない）、すべてのクリーチャーが理解できる発言が行えるようになります。",
+		"DefaultLanguage.title": "デフォルトの言語",
+		"DefaultLanguage.hint": "デフォルト選択される言語の名称を入力します。空にすると、システムのデフォルトが使用されます。",
+		"ReplaceLanguages.title": "システム言語を置き換える",
+		"ReplaceLanguages.hint": "システムのデフォルト言語をカスタム言語に置き換えます。リストの最初の言語が新しいデフォルト言語になります。",
+		"ScrambleGM.title": "GMもスクランブル化する",
+		"ScrambleGM.hint": "無効にすると、GMはテキストの内容を常に確認できるようになります。選択したコマが言語を理解しているかは、翻訳アイコン（地球儀マーク）の色を確認する必要があります。",
+		"enableAllFonts.title": "言語設定ですべてのフォントを追加する",
+		"enableAllFonts.hint": "言語設定でPolyglotフォントが使用できるようなります。",
+		"RandomizeRunes.title": "ルーンのランダム化",
+		"RandomizeRunes.hint": "有効にすると、同じメッセージを繰り返し発言したとしても、スクランブル後のテキストが別の文字列になります。",
+		"ExportFonts.title": "フォントを使用可能にする",
+		"ExportFonts.hint": "PolyglotフォントをFoundryのシステム（例えば図形描画ツールなど）で使用できるようなります。",
+		"DisplayTranslated.title": "翻訳ボックスを表示する",
+		"DisplayTranslated.hint": "チャットログ内で翻訳が行われるとき、翻訳文と原文が併記されるようになります。",
+		"HideTranslation.title": "翻訳アイコンと翻訳元の表示を隠す",
+		"HideTranslation.hint": "チャットに表示される翻訳アイコン（地球儀マーク）と、翻訳ボックス内に表示される「翻訳元」の表示をプレイヤーに隠します。何の言語を話しているかをプレイヤーに伏せたいときに適しています。",
+		"AllowOOC.title": "OOCチャットのスクランブル化",
+		"AllowOOC.hint": "キャラクターの発言ではないメッセージ（OOC：Out Of Character）であっても、GMは言語をスクランブルできるようになります。",
+		"AllowOOCOptions": {
+			"a": "全員",
+			"b": "GMのみ",
+			"c": "プレイヤーのみ",
+			"d": "なし"
+		},
+		"LanguageProvider": {
+			"name": "言語設定の提供元",
+			".hint": "アルファベットや言語情報の提供元を選択できるようになりました。ゲームシステムやインストールされたモジュールによって、より多くの提供元が利用できます。以下のオプションは、ここで選択した言語の提供元によって変化します。⚠️提供元を変更したときは、保存後に再度設定を開き直す必要があります。",
+			"choices": {
+				"module": "モジュール {name}",
+				"native": "標準設定",
+				"system": "システム {name}"
+			}
+		},
 
-    "Translation": "翻訳",
-    "TranslatedFrom": "翻訳元：",
-    "LanguageLabel": "言語",
-    "AlphabetLabel": "文字体系",
-    "LatinAlphabet": "ラテン文字",
-    "ToggleRunes": "ルーンの切替",
-    "Runes": "ルーン",
-    
-    "Generic": {
-      "Language": "言語"
-    },
-    "UESRPG.Language": "言語",
- 
-    "COC7": {
-      "LanguageOwn": "言語",
-      "LanguageAny": "言語",
-      "LanguageOther": "言語",
-      "LanguageSpec": "言語"
-    },
-    "SWADE" : {
-      "LanguageSkills": "言語"
-    },
-    "WFRP4E" : {
-      "LanguageSkills": "言語"
-    }
-  }
+		"Translation": "翻訳",
+		"TranslatedFrom": "翻訳元：",
+		"LanguageLabel": "言語",
+		"AlphabetLabel": "文字体系",
+		"LatinAlphabet": "ラテン文字",
+		"ToggleRunes": "ルーンの切替",
+		"Runes": "ルーン",
+
+		"Generic": {
+			"Language": "言語"
+		},
+		"UESRPG.Language": "言語",
+
+		"COC7": {
+			"LanguageOwn": "言語",
+			"LanguageAny": "言語",
+			"LanguageOther": "言語",
+			"LanguageSpec": "言語"
+		},
+		"SWADE": {
+			"LanguageSkills": "言語"
+		},
+		"WFRP4E": {
+			"LanguageSkills": "言語"
+		}
+	}
 }

@@ -1,97 +1,97 @@
 {
-  "POLYGLOT": {
-    "DefaultAlphabet": "기본 문자",
-    "FontSettings": "글꼴 설정",
-    "LanguageSettings": "언어 설정",
-    "ChatSettings": "채팅 설정",
-    "LanguagesTitle": "언어",
-    "LanguagesHint": "언어에 사용될 알파벳을 변경한다. 기본값으로 재설정하면 새로고침된다.",
-    "Fonts": "글꼴",
+	"POLYGLOT": {
+		"DefaultAlphabet": "기본 문자",
+		"FontSettings": "글꼴 설정",
+		"LanguageSettings": "언어 설정",
+		"ChatSettings": "채팅 설정",
+		"Languages.title": "언어",
+		"Languages.hint": "언어에 사용될 알파벳을 변경한다. 기본값으로 재설정하면 새로고침된다.",
+		"Fonts": "글꼴",
 
-    "CustomLanguagesTitle": "사용자 지정 언어",
-    "CustomLanguagesHint": "시스템에 추가할 사용자 정의 언어. 쉼표(,)로 구분하여 목록을 정의한다.",
-    "ComprehendLanguagesTitle": "언어 변환 주문",
-    "ComprehendLanguagesHint": "D&D의 언어 변환 주문과 같이, 설정한 사용자 지정 언어를 입력하면 말하거나 쓰진 못하지만 다른 언어를 이해할 수 있게 해준다.",
-    "directory": {
+		"CustomLanguages.title": "사용자 지정 언어",
+		"CustomLanguages.hint": "시스템에 추가할 사용자 정의 언어. 쉼표(,)로 구분하여 목록을 정의한다.",
+		"ComprehendLanguages.title": "언어 변환 주문",
+		"ComprehendLanguages.hint": "D&D의 언어 변환 주문과 같이, 설정한 사용자 지정 언어를 입력하면 말하거나 쓰진 못하지만 다른 언어를 이해할 수 있게 해준다.",
+		"directory": {
 			"name": "사용자 지정 폰트 디렉토리",
-			"hint": "폰트 파일을 포함하는 \"modules\" 폴더 외부 폴더로 설정한다."
+			".hint": "폰트 파일을 포함하는 \"modules\" 폴더 외부 폴더로 설정한다."
 		},
 		"source": {
 			"name": "소스 유형",
-			"hint": "폰트가 Forge 어셋에 저장되어 있다면 Forge를 선택한다. S3 버킷에 저장된 경우 S3을 선택한다.",
+			".hint": "폰트가 Forge 어셋에 저장되어 있다면 Forge를 선택한다. S3 버킷에 저장된 경우 S3을 선택한다.",
 			"data": "데이터",
 			"forgevtt": "Forge",
 			"s3": "S3"
 		},
-    "TruespeechTitle": "언어 구사 주문",
-    "TruespeechHint": "D&D의 언어 구사 주문과 같이, 설정한 사용자 지정 언어를 입력하면 화자는 언어를 듣고 이해할 수 있으며(저널은 읽지 못함), 모든 생물의 언어를 이해할 수 있다.",
-    "JournalHighlightTitle": "저널 하이라이트 불투명도(%)",
-    "JournalHighlightHint": "저널의 글씨 위 하이라이트 표시의 불투명도를 정의한다.",
-    "logographicalFontToggleTitle": "로고그래픽 폰트",
-		"logographicalFontToggleHint": "로고그래픽 폰트(e.g.:일본어, 한자)를 사용하여 구절의 크기를 절반으로 줄인다.",
-    "DefaultLanguageTitle": "기본 언어",
-    "DefaultLanguageHint": "선택할 기본 언어의 이름이다. 시스템 기본값을 사용하려면 비워둘 것.",
-    "ReplaceLanguagesTitle": "시스템 언어 대체",
-    "ReplaceLanguagesHint": "시스템의 기본 언어를 사용자 지정 언어로 바꾼다. 목록의 첫번째 언어가 새 기본 언어가 된다.",
-    "ScrambleGMTitle": "GM에게 스크램블",
-    "ScrambleGMHint": "GM에게 텍스트를 항상 표시하려면 이 옵션을 비활성화한다. 토큰이 이해하는지는 지구본 색 참조.",
-    "enableAllFontsTitle": "모든 글꼴 사용",
-    "enableAllFontsHint": "언어 설정에서 Polyglot 글꼴을 사용가능하게 한다.",
-    "RandomizeRunesTitle": "룬 임의화",
-    "RandomizeRunesHint": "이 옵션을 활성화하면 동일한 메시지가 반복되더라도 스크램블 텍스트가 다르게 나타난다.",
-    "RandomizeRunesOptions": {
+		"Truespeech.title": "언어 구사 주문",
+		"Truespeech.hint": "D&D의 언어 구사 주문과 같이, 설정한 사용자 지정 언어를 입력하면 화자는 언어를 듣고 이해할 수 있으며(저널은 읽지 못함), 모든 생물의 언어를 이해할 수 있다.",
+		"JournalHighlight.title": "저널 하이라이트 불투명도(%)",
+		"JournalHighlight.hint": "저널의 글씨 위 하이라이트 표시의 불투명도를 정의한다.",
+		"logographicalFontToggle.title": "로고그래픽 폰트",
+		"logographicalFontToggle.hint": "로고그래픽 폰트(e.g.:일본어, 한자)를 사용하여 구절의 크기를 절반으로 줄인다.",
+		"DefaultLanguage.title": "기본 언어",
+		"DefaultLanguage.hint": "선택할 기본 언어의 이름이다. 시스템 기본값을 사용하려면 비워둘 것.",
+		"ReplaceLanguages.title": "시스템 언어 대체",
+		"ReplaceLanguages.hint": "시스템의 기본 언어를 사용자 지정 언어로 바꾼다. 목록의 첫번째 언어가 새 기본 언어가 된다.",
+		"ScrambleGM.title": "GM에게 스크램블",
+		"ScrambleGM.hint": "GM에게 텍스트를 항상 표시하려면 이 옵션을 비활성화한다. 토큰이 이해하는지는 지구본 색 참조.",
+		"enableAllFonts.title": "모든 글꼴 사용",
+		"enableAllFonts.hint": "언어 설정에서 Polyglot 글꼴을 사용가능하게 한다.",
+		"RandomizeRunes.title": "룬 임의화",
+		"RandomizeRunes.hint": "이 옵션을 활성화하면 동일한 메시지가 반복되더라도 스크램블 텍스트가 다르게 나타난다.",
+		"RandomizeRunesOptions": {
 			"a": "기본값",
 			"b": "고유 문구",
 			"c": "없음 ⚠️"
-		},    
-    "ExportFontsTitle": "글꼴 사용 가능",
-    "ExportFontsHint": "Polyglot 글꼴을 Foundry에서 사용할 수 있도록 한다(예: 그리기 도구).",
-    "DisplayTranslatedTitle": "번역 상자 표시",
-    "DisplayTranslatedHint": "채팅창에서 번역된 언어의 경우 원본 텍스트 밑에 번역을 아래에 표시한다.",
-    "HideTranslationTitle": "지구본을 숨기고 \"다음 언어로부터 번역됨\" 텍스트를 플레이어에게 보임",
-    "HideTranslationHint": "지구본을 숨기고 \"다음 언어로부터 번역됨\" 채팅 메시지를 플레이어에게 보여준다. 플레이어에게 어떤 언어를 사용하는지 보여주고 싶지 않을 때 이상적이다.",
-    "AllowOOCTitle": "OOC 채팅 메시지 스크램블",
-    "AllowOOCHint": "GM이 OOC 메시지를 보낼 때 스크램블 할 수 있도록 한다.",
-    "AllowOOCOptions": {
-      "a": "모두",
-      "b": "GM만",
-      "c": "PL만",
-      "d": "없음"
-    },
-    "LanguageProvider": {
-      "name": "언어 설정 공급자",
-      "hint": "문자 및 언어 정보를 제공하는 공급자를 선택한다. 게임 시스템과 설치된 모듈을 통해 더 많은 언어 공급자를 이용할 수 있다. 아래 옵션은 여기서 선택한 언어 공급자에 따라 달라진다. ⚠️공급자를 변경할 경우 설정을 저장하고 다시 열어야 한다.",
-      "choices": {
-        "module": "모듈 {name}",
-        "native": "일반적",
-        "system": "시스템 {name}"
-      }
-    },
+		},
+		"ExportFonts.title": "글꼴 사용 가능",
+		"ExportFonts.hint": "Polyglot 글꼴을 Foundry에서 사용할 수 있도록 한다(예: 그리기 도구).",
+		"DisplayTranslated.title": "번역 상자 표시",
+		"DisplayTranslated.hint": "채팅창에서 번역된 언어의 경우 원본 텍스트 밑에 번역을 아래에 표시한다.",
+		"HideTranslation.title": "지구본을 숨기고 \"다음 언어로부터 번역됨\" 텍스트를 플레이어에게 보임",
+		"HideTranslation.hint": "지구본을 숨기고 \"다음 언어로부터 번역됨\" 채팅 메시지를 플레이어에게 보여준다. 플레이어에게 어떤 언어를 사용하는지 보여주고 싶지 않을 때 이상적이다.",
+		"AllowOOC.title": "OOC 채팅 메시지 스크램블",
+		"AllowOOC.hint": "GM이 OOC 메시지를 보낼 때 스크램블 할 수 있도록 한다.",
+		"AllowOOCOptions": {
+			"a": "모두",
+			"b": "GM만",
+			"c": "PL만",
+			"d": "없음"
+		},
+		"LanguageProvider": {
+			"name": "언어 설정 공급자",
+			".hint": "문자 및 언어 정보를 제공하는 공급자를 선택한다. 게임 시스템과 설치된 모듈을 통해 더 많은 언어 공급자를 이용할 수 있다. 아래 옵션은 여기서 선택한 언어 공급자에 따라 달라진다. ⚠️공급자를 변경할 경우 설정을 저장하고 다시 열어야 한다.",
+			"choices": {
+				"module": "모듈 {name}",
+				"native": "일반적",
+				"system": "시스템 {name}"
+			}
+		},
 
-    "Translation": "번역",
-    "TranslatedFrom": "다음 언어로부터 번역됨: ",
-    "LanguageLabel": "언어",
-    "AlphabetLabel": "문자",
-    "LatinAlphabet": "라틴 알파벳",
-    "ToggleRunes": "룬 토글",
-    "Runes": "룬",
-    
-    "Generic": {
-      "Language": "언어"
-    },
-    "UESRPG.Language": "언어",
+		"Translation": "번역",
+		"TranslatedFrom": "다음 언어로부터 번역됨: ",
+		"LanguageLabel": "언어",
+		"AlphabetLabel": "문자",
+		"LatinAlphabet": "라틴 알파벳",
+		"ToggleRunes": "룬 토글",
+		"Runes": "룬",
 
-    "COC7": {  
-      "LanguageOwn": "언어",
-      "LanguageAny": "언어",
-      "LanguageOther": "언어",
-      "LanguageSpec": "언어"
-    },
-    "SWADE" : {
-      "LanguageSkills": "언어"
-    },
-    "WFRP4E" : {
-      "LanguageSkills": "언어"
-    }
-  }
+		"Generic": {
+			"Language": "언어"
+		},
+		"UESRPG.Language": "언어",
+
+		"COC7": {
+			"LanguageOwn": "언어",
+			"LanguageAny": "언어",
+			"LanguageOther": "언어",
+			"LanguageSpec": "언어"
+		},
+		"SWADE": {
+			"LanguageSkills": "언어"
+		},
+		"WFRP4E": {
+			"LanguageSkills": "언어"
+		}
+	}
 }
