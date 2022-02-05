@@ -1533,40 +1533,13 @@ export class splittermondLanguageProvider extends LanguageProvider {
 }
 
 export class swadeLanguageProvider extends LanguageProvider {
-	get originalTongues() {
-		return this.languages;
-	}
-
-	get requiresReady() {
-		return true;
-	}
-
-	async getLanguages() {
-		const langs = {};
-		game.actors
-			.filter(
-				(actor) =>
-					actor.data.items.filter((item) => {
-						const name = item?.flags?.babele?.originalName || item.name;
-						const match = name.match(/Language \((.+)\)/i);
-						return match;
-					}).length > 0
-			)
-			.forEach((actor) => {
-				actor.data.items
-					.filter((item) => {
-						const name = item?.flags?.babele?.originalName || item.name;
-						const match = name.match(/Language \((.+)\)/i);
-						return match;
-					})
-					.forEach((item) => {
-						const name = item?.flags?.babele?.originalName || item.name;
-						const match = name.match(/Language \((.+)\)/i);
-						if (match) langs[match[1].trim().toLowerCase()] = match[1].trim();
-					});
-			});
-
-		this.languages = langs;
+	get settings() {
+		return {
+			LanguageRegex: {
+				type: String,
+				default: "",
+			},
+		};
 	}
 
 	getUserLanguages(actor) {
@@ -1574,7 +1547,9 @@ export class swadeLanguageProvider extends LanguageProvider {
 		let literate_languages = new Set();
 		for (let item of actor.data.items) {
 			const name = item?.flags?.babele?.originalName || item.name;
-			const match = name.match(/Language \((.+)\)/i);
+			const languageRegex = game.settings.get("polyglot", "LanguageRegex") || game.i18n.localize("POLYGLOT.SWADE.LanguageSkills");
+			let myRegex = new RegExp(languageRegex + " \\((.+)\\)", "i");
+			const match = name.match(myRegex);
 			// adding only the descriptive language name, not "Language (XYZ)"
 			if (match) known_languages.add(match[1].trim().toLowerCase());
 		}
@@ -1974,6 +1949,15 @@ export class cyberpunkRedLanguageProvider extends LanguageProvider {
 		};
 	}
 
+	get settings() {
+		return {
+			LanguageRegex: {
+				type: String,
+				default: "",
+			},
+		};
+	}
+
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const langs = {
@@ -2038,9 +2022,10 @@ export class cyberpunkRedLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
+		const languageRegex = game.settings.get("polyglot", "LanguageRegex");
 		for (let item of actor.data.items) {
 			if (item.type == "skill") {
-				let myRegex = new RegExp("Language" + "\\s*\\((.+)\\)", "i");
+				let myRegex = new RegExp(languageRegex + "\\s*\\((.+)\\)", "i");
 				const match = item.data.name.match(myRegex);
 				if (match) {
 					known_languages.add(match[1].trim().toLowerCase());
