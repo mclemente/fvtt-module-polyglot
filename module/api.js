@@ -12,10 +12,6 @@ export let currentLanguageProvider = undefined;
 function register(module, type, languageProvider) {
 	const id = `${type}.${module.id}`;
 	let providerInstance = new languageProvider(id);
-	if (!providerInstance.title) {
-		providerInstance.title = providerInstance.constructor.name.replace(/languageprovider/i, "");
-	}
-	providerInstance.id += `: ${providerInstance.title}`;
 	setupProvider(providerInstance);
 }
 
