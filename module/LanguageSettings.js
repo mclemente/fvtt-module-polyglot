@@ -62,6 +62,8 @@ export class PolyglotLanguageSettings extends FormApplication {
 			isRange: false,
 		};
 
+		this.languageProvider = data.providerSelection.value;
+
 		function prepSetting(key) {
 			let settingData = game.settings.settings.get(`polyglot.${key}`);
 			return {
@@ -90,6 +92,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 		});
 		html.find("button").on("click", async (event) => {
 			if (event.currentTarget?.dataset?.action === "reset") {
+				game.settings.set("polyglot", "Alphabets", currentLanguageProvider.originalAlphabets);
 				game.settings.set("polyglot", "Languages", currentLanguageProvider.originalTongues);
 				this.close();
 			}
@@ -102,16 +105,22 @@ export class PolyglotLanguageSettings extends FormApplication {
 	 * @param {Object} formData - the form data
 	 */
 	async _updateObject(ev, formData) {
-		let langSettings = game.settings.get("polyglot", "Languages");
-		const iterableSettings = formData["language.alphabet"];
-		let i = 0;
-		for (let lang in langSettings) {
-			langSettings[lang] = iterableSettings[i];
-			i++;
+		const languageProvider = game.settings.get("polyglot", "languageProvider");
+		if (languageProvider != formData.languageProvider) {
+			await game.settings.set("polyglot", "languageProvider", formData.languageProvider);
+			updateLanguageProvider();
+			await game.settings.set("polyglot", "Alphabets", currentLanguageProvider.originalAlphabets);
+			await game.settings.set("polyglot", "Languages", currentLanguageProvider.originalTongues);
+		} else {
+			let langSettings = game.settings.get("polyglot", "Languages");
+			const iterableSettings = formData["language.alphabet"];
+			let i = 0;
+			for (let lang in langSettings) {
+				langSettings[lang] = iterableSettings[i];
+				i++;
+			}
+			currentLanguageProvider.tongues = langSettings;
+			await game.settings.set("polyglot", "Languages", langSettings);
 		}
-		currentLanguageProvider.tongues = langSettings;
-		game.settings.set("polyglot", "Languages", langSettings);
-		game.settings.set("polyglot", "languageProvider", formData.languageProvider);
-		updateLanguageProvider();
 	}
 }
