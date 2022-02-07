@@ -82,6 +82,17 @@ export class PolyglotLanguageSettings extends FormApplication {
 
 	async activateListeners(html) {
 		super.activateListeners(html);
+		html.find(".polyglot-languageProvider").on("change", (event) => {
+			const list = html.find(".polyglot-languages-list")[0];
+			const warning = html.find(".polyglot-languages-warn")[0];
+			if (this.languageProvider == event.target.value) {
+				list.style.display = "block";
+				warning.style.display = "none";
+			} else {
+				list.style.display = "none";
+				warning.style.display = "block";
+			}
+		});
 		html.find(".polyglot-alphabet").each(function () {
 			const font = this.previousSibling.previousSibling.value; //selectatr's value
 			this.style.font = currentLanguageProvider.alphabets[font];

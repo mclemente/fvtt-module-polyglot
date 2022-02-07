@@ -5,7 +5,7 @@
 			{{#if this.isCheckbox}}
 				<input type="checkbox" name="{{this.id}}" data-dtype="Boolean" {{checked this.value}} />
 			{{else if this.isSelect}}
-				<select name="{{this.id}}">
+				<select class="polyglot-{{this.id}}" name="{{this.id}}">
 					{{#select this.value}}
 						{{#each this.choices as |name k|}}
 							<option value="{{k}}">{{localize name}}</option>
@@ -36,7 +36,7 @@
 
 			<label>{{localize "POLYGLOT.Languages.title"}}</label>
 			<p class="notes">{{localize "POLYGLOT.Languages.hint"}}</p>
-			<ul style="list-style: none; padding: 0;">
+			<ul class="polyglot-languages-list" style="list-style: none; padding: 0;">
 				<li style="display: flex;">
 					<div style="flex: 0 0 150px;">{{localize "POLYGLOT.LanguageLabel"}}</div>
 					<div style="flex: 1;">{{localize "POLYGLOT.AlphabetLabel"}}</div>
@@ -57,6 +57,9 @@
 				</li>
 				{{/each}}
 			</ul>
+			<div class="polyglot-languages-warn" style="display: none">
+				⚠️ If you change the provider, you have to save and reopen these settings.
+			</div>
 		</div>
 	</section>
 
