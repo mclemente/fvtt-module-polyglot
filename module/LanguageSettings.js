@@ -29,15 +29,17 @@ export class PolyglotLanguageSettings extends FormApplication {
 			provider.id = languageProvider.id;
 			let dotPosition = provider.id.indexOf(".");
 			if (dotPosition === -1) dotPosition = provider.id.length;
+			let colonPosition = provider.id.indexOf(":");
+			if (colonPosition === -1) colonPosition = provider.id.length;
 			const type = provider.id.substring(0, dotPosition);
-			const id = provider.id.substring(dotPosition + 1);
+			const id = provider.id.substring(dotPosition + 1, colonPosition);
 			if (type === "native") {
 				let title = id == game.system.id ? game.system.data.title : id;
 				provider.selectTitle = (game.i18n.localize("POLYGLOT.LanguageProvider.choices.native") + " " + title).trim();
 			} else {
 				let name;
 				if (type === "module") {
-					name = game.modules.get(id).data.title;
+					name = `${game.modules.get(id).data.title}: ${languageProvider.title}`;
 				} else {
 					name = game.system.data.title;
 				}
