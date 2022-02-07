@@ -48,11 +48,11 @@
 		},
 		"LanguageProvider": {
 			"name": "Źródło Ustawień Języków",
-			".hint": "Wybierz źródło informacji o językach i alfabetach. Systemy Gry i Moduły mogą dostarczać dodatkowych danych językowych. Poniższe opcje zależą od wybranego w tym miejscu źródła języków. ⚠️ Jeśli źródło zostanie zmienione, konieczne będzie zapisanie i ponowne otwarcie tego okna ustawień.",
+			"hint": "Wybierz źródło informacji o językach i alfabetach. Systemy Gry i Moduły mogą dostarczać dodatkowych danych językowych. Poniższe opcje zależą od wybranego w tym miejscu źródła języków. ⚠️ Jeśli źródło zostanie zmienione, konieczne będzie zapisanie i ponowne otwarcie tego okna ustawień.",
 			"choices": {
-				"module": "Moduł {name}",
+				"module": "[Moduł] {name}",
 				"native": "Standardowy",
-				"system": "System {name}"
+				"system": "[System] {name}"
 			}
 		},
 		"Translation": "Tłumaczenie",
