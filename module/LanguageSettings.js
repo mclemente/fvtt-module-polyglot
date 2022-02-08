@@ -84,12 +84,15 @@ export class PolyglotLanguageSettings extends FormApplication {
 		super.activateListeners(html);
 		html.find(".polyglot-languageProvider").on("change", (event) => {
 			const list = html.find(".polyglot-languages-list")[0];
+			const title = html.find(".polyglot-languages-title-notes")[0];
 			const warning = html.find(".polyglot-languages-warn")[0];
 			if (this.languageProvider == event.target.value) {
 				list.style.display = "block";
+				title.style.display = "block";
 				warning.style.display = "none";
 			} else {
 				list.style.display = "none";
+				title.style.display = "none";
 				warning.style.display = "block";
 			}
 		});
@@ -103,8 +106,9 @@ export class PolyglotLanguageSettings extends FormApplication {
 		});
 		html.find("button").on("click", async (event) => {
 			if (event.currentTarget?.dataset?.action === "reset") {
-				game.settings.set("polyglot", "Alphabets", currentLanguageProvider.originalAlphabets);
-				game.settings.set("polyglot", "Languages", currentLanguageProvider.originalTongues);
+				currentLanguageProvider.loadAlphabet();
+				await game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
+				await game.settings.set("polyglot", "Languages", currentLanguageProvider.originalTongues);
 				this.close();
 			}
 		});
@@ -120,7 +124,8 @@ export class PolyglotLanguageSettings extends FormApplication {
 		if (languageProvider != formData.languageProvider) {
 			await game.settings.set("polyglot", "languageProvider", formData.languageProvider);
 			updateLanguageProvider();
-			await game.settings.set("polyglot", "Alphabets", currentLanguageProvider.originalAlphabets);
+			currentLanguageProvider.loadAlphabet();
+			await game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
 			await game.settings.set("polyglot", "Languages", currentLanguageProvider.originalTongues);
 		} else {
 			let langSettings = game.settings.get("polyglot", "Languages");

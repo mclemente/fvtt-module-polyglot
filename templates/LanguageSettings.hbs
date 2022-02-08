@@ -34,8 +34,10 @@
 				{{> settingPartial}}
 			{{/with}}
 
-			<label>{{localize "POLYGLOT.Languages.title"}}</label>
-			<p class="notes">{{localize "POLYGLOT.Languages.hint"}}</p>
+			<div class="polyglot-languages-title-notes">
+				<label>{{localize "POLYGLOT.Languages.title"}}</label>
+				<p class="notes">{{localize "POLYGLOT.Languages.hint"}}</p>
+			</div>
 			<ul class="polyglot-languages-list" style="list-style: none; padding: 0;">
 				<li style="display: flex;">
 					<div style="flex: 0 0 150px;">{{localize "POLYGLOT.LanguageLabel"}}</div>
@@ -57,8 +59,8 @@
 				</li>
 				{{/each}}
 			</ul>
-			<div class="polyglot-languages-warn" style="display: none">
-				⚠️ If you change the provider, you have to save and reopen these settings.
+			<div class="polyglot-languages-warn" style="font-weight: bold; color: red; text-align: center; margin-bottom: 0.5em; display: none;">
+				⚠️ If you change the provider, your language settings will be overwritten.
 			</div>
 		</div>
 	</section>
