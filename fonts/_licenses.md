@@ -5,6 +5,7 @@ The following fonts are owned by Pixel Sagas, check out their [website](http://w
 - Barazhad
 - Celestial
 - Daedra
+- Davek
 - Dethek
 - Espruar
 - HighDrowic
@@ -17,6 +18,7 @@ The following fonts are owned by Pixel Sagas, check out their [website](http://w
 - Ophidian
 - Qijomi
 - Reanaarian
+- Rellanic
 - Semphari
 - Thorass
 

@@ -29,6 +29,10 @@
 	src: url("../fonts/DarkEldar.ttf");
 }
 @font-face {
+	font-family: "Davek";
+	src: url("../fonts/Davek.otf");
+}
+@font-face {
 	font-family: "Dethek";
 	src: url("../fonts/Dethek.otf");
 }
@@ -139,6 +143,10 @@
 @font-face {
 	font-family: "Reanaarian";
 	src: url("../fonts/Reanaarian.otf");
+}
+@font-face {
+	font-family: "Rellanic";
+	src: url("../fonts/Rellanic.otf");
 }
 @font-face {
 	font-family: "Saurian";
