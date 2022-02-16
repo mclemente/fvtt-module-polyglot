@@ -1,7 +1,7 @@
 // prettier-ignore
 import {
 	LanguageProvider, a5eLanguageProvider, ariaLanguageProvider, coc7LanguageProvider, cyberpunkRedLanguageProvider, d35eLanguageProvider, darkHeresyLanguageProvider,
-	dccLanguageProvider, demonlordLanguageProvider, dnd5eLanguageProvider, dsa5LanguageProvider, gurpsLanguageProvider, kryxrpgLanguageProvider, oseLanguageProvider,
+	dccLanguageProvider, demonlordLanguageProvider, dnd5eLanguageProvider, dsa5LanguageProvider, fggLanguageProvider, gurpsLanguageProvider, kryxrpgLanguageProvider, oseLanguageProvider,
 	pf1LanguageProvider, pf2eLanguageProvider, sfrpgLanguageProvider, shadowrun5eLanguageProvider, splittermondLanguageProvider, swadeLanguageProvider, 
 	sw5eLanguageProvider, tormenta20LanguageProvider, uesrpgLanguageProvider, warhammerLanguageProvider,
 } from "./LanguageProvider.js";
@@ -74,6 +74,9 @@ export function initApi() {
 		case "dnd5e":
 			languageProviders.push(new dnd5eLanguageProvider("native.dnd5e"));
 			break;
+		case "fgg":
+			languageProviders.push(new fggLanguageProvider("native.fgg"));
+			break;
 		case "gurps":
 			languageProviders.push(new gurpsLanguageProvider("native.gurps"));
 			break;
@@ -136,12 +139,12 @@ export function registerModule(moduleId, languageProvider) {
 		return;
 	}
 	// Using Polyglot's id is not allowed
-	if (moduleId === "polyglot") {
-		console.warn(
-			`Polyglot | A module tried to register with the id "${moduleId}", which is not allowed. This api registration call was ignored. If you're the author of the module please use the id of your own module as it's specified in your manifest to register to this api. If this call was made form a game system instead of a module please use "registerSystem" instead.`
-		);
-		return;
-	}
+	// if (moduleId === "polyglot") {
+	// 	console.warn(
+	// 		`Polyglot | A module tried to register with the id "${moduleId}", which is not allowed. This api registration call was ignored. If you're the author of the module please use the id of your own module as it's specified in your manifest to register to this api. If this call was made form a game system instead of a module please use "registerSystem" instead.`
+	// 	);
+	// 	return;
+	// }
 
 	register(module, "module", languageProvider);
 }
