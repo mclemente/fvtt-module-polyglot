@@ -311,6 +311,11 @@ export class LanguageProvider {
 			if (actor.data.data.traits.languages.custom) {
 				for (let lang of actor.data.data.traits.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
 			}
+		} else if (actor.data.data?.languages?.value) {
+			for (let lang of actor.data.data.languages.value) known_languages.add(lang);
+			if (actor.data.data.languages.custom) {
+				for (let lang of actor.data.data.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
+			}
 		} else {
 			for (let item of actor.data.items) {
 				const name = item?.flags?.babele?.originalName || item.name;
