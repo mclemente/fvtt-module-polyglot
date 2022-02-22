@@ -311,11 +311,6 @@ export class LanguageProvider {
 			if (actor.data.data.traits.languages.custom) {
 				for (let lang of actor.data.data.traits.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
 			}
-		} else if (actor.data.data?.languages) {
-			for (let lang of actor.data.data.languages.value) known_languages.add(lang);
-			if (actor.data.data.languages.custom) {
-				for (let lang of actor.data.data.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
-			}
 		} else {
 			for (let item of actor.data.items) {
 				const name = item?.flags?.babele?.originalName || item.name;
@@ -898,6 +893,54 @@ export class demonlordLanguageProvider extends LanguageProvider {
 
 	conditions(polyglot, lang) {
 		return polyglot.literate_languages.has(lang);
+	}
+}
+
+export class dnd4eLanguageProvider extends LanguageProvider {
+	get originalAlphabets() {
+		return {
+			common: "130% Thorass",
+			barazhad: "150% Barazhad",
+			davek: "150% Davek",
+			iokharic: "170% Iokharic",
+			rellanic: "200% Rellanic",
+			celestial: "180% Celestial",
+			outwordly: "200% ArCiela",
+		};
+	}
+	get originalTongues() {
+		return {
+			_default: "common",
+			abyssal: "barazhad",
+			deep: "outwordly",
+			draconic: "iokharic",
+			dwarven: "davek",
+			elven: "rellanic",
+			giant: "davek",
+			goblin: "davek",
+			primordial: "davek",
+			supernal: "celestial",
+		};
+	}
+
+	addToConfig(key, lang) {
+		CONFIG.DND4EBETA.spoken[key] = lang;
+	}
+	removeFromConfig(key) {
+		delete CONFIG.DND4EBETA.spoken[key];
+	}
+
+	async getLanguages() {
+		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+		if (replaceLanguages) CONFIG.DND4EBETA.spoken = {};
+		this.languages = CONFIG.DND4EBETA.spoken;
+	}
+	getUserLanguages(actor) {
+		let known_languages = new Set();
+		let literate_languages = new Set();
+		for (let lang of actor.data.data.languages.spoken.value) known_languages.add(lang);
+		// for (let lang of actor.data.data.languages.script.value) literate_languages.add(lang);
+		return [known_languages, literate_languages];
 	}
 }
 
