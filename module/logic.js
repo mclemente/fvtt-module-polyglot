@@ -25,6 +25,7 @@ export class Polyglot {
 		Hooks.on("createChatMessage", this.createChatMessage.bind(this));
 		Hooks.on("renderChatMessage", this.renderChatMessage.bind(this));
 		Hooks.on("renderJournalSheet", this.renderJournalSheet.bind(this));
+		Hooks.on("renderStorySheet", this.renderJournalSheet.bind(this));
 		Hooks.on("chatBubble", this.chatBubble.bind(this)); //token, html, message, {emote}
 		Hooks.on("vinoPrepareChatDisplayData", this.vinoChatRender.bind(this));
 	}
