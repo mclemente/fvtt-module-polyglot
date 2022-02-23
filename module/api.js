@@ -6,6 +6,7 @@ import {
 	pf1LanguageProvider, pf2eLanguageProvider, sfrpgLanguageProvider, shadowrun5eLanguageProvider, splittermondLanguageProvider, swadeLanguageProvider, 
 	sw5eLanguageProvider, tormenta20LanguageProvider, uesrpgLanguageProvider, warhammerLanguageProvider,
 } from "./LanguageProvider.js";
+import { addSetting } from "./settings.js";
 
 export const availableLanguageProviders = {};
 export let currentLanguageProvider = undefined;
@@ -46,6 +47,13 @@ export function updateLanguageProvider() {
 }
 
 export function initApi() {
+	addSetting("languageProvider", {
+		//Has no name or hint
+		config: false,
+		type: String,
+		default: getDefaultLanguageProvider(),
+		onChange: updateLanguageProvider,
+	});
 	const languageProviders = [];
 	switch (game.system.id) {
 		case "a5e":

@@ -8,27 +8,13 @@ const debouncedReload = foundry.utils.debounce(() => {
 }, 100);
 
 /**
- * Returns if the system is one of the systems that were originally supported prior to 1.7.2.
- *
- * @returns {Boolean}
- */
-// prettier-ignore
-function legacyGenericSystem() {
-	const systems = [
-		"aria", "dark-heresy", "dcc", "D35E", "dnd5e", "demonlord", "dsa5", "kryx_rpg", "ose",
-		"pf1", "pf2e", "sfrpg", "shadowrun5e", "sw5e", "tormenta20", "uesrpg-d100", "wfrp4e"
-	];
-	return systems.includes(game.system.id);
-}
-
-/**
  * Shorthand for game.settings.register.
  * Default data: {scope: "world", config: true}
  * @function addSetting
  * @param {string} key
  * @param {object} data
  */
-function addSetting(key, data) {
+export function addSetting(key, data) {
 	const commonData = {
 		name: `POLYGLOT.${key}.title`,
 		hint: `POLYGLOT.${key}.hint`,
@@ -70,13 +56,6 @@ export function registerSettings() {
 		config: false,
 		default: {},
 		type: Object,
-	});
-	addSetting("languageProvider", {
-		//Has no name or hint
-		config: false,
-		type: String,
-		default: getDefaultLanguageProvider(),
-		onChange: updateLanguageProvider,
 	});
 
 	//Actual Settings
@@ -128,7 +107,7 @@ export function registerSettings() {
 		type: Boolean,
 	});
 	addSetting("enableAllFonts", {
-		config: legacyGenericSystem(),
+		config: !currentLanguageProvider.isGeneric,
 		default: false,
 		type: Boolean,
 		onChange: () => {

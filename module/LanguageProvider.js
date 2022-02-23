@@ -77,6 +77,10 @@ export class LanguageProvider {
 		return { _default: "thorass" };
 	}
 
+	get isGeneric() {
+		return !(this.constructor.prototype instanceof LanguageProvider);
+	}
+
 	/**
 	 * This is needed if the LanguageProvider gets languages from compendiums, since they require the game state to be ready.
 	 */

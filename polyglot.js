@@ -188,8 +188,8 @@ function formatName(name, shouldStripFileName = true) {
 }
 
 Hooks.once("init", () => {
-	registerSettings();
 	initApi();
+	registerSettings();
 	registerProviderSettings();
 	game.polyglot = new Polyglot();
 	game.polyglot.init();
