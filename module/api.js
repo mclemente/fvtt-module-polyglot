@@ -143,12 +143,12 @@ export function registerModule(moduleId, languageProvider) {
 		return;
 	}
 	// Using Polyglot's id is not allowed
-	// if (moduleId === "polyglot") {
-	// 	console.warn(
-	// 		`Polyglot | A module tried to register with the id "${moduleId}", which is not allowed. This api registration call was ignored. If you're the author of the module please use the id of your own module as it's specified in your manifest to register to this api. If this call was made form a game system instead of a module please use "registerSystem" instead.`
-	// 	);
-	// 	return;
-	// }
+	if (moduleId === "polyglot") {
+		console.warn(
+			`Polyglot | A module tried to register with the id "${moduleId}", which is not allowed. This api registration call was ignored. If you're the author of the module please use the id of your own module as it's specified in your manifest to register to this api. If this call was made form a game system instead of a module please use "registerSystem" instead.`
+		);
+		return;
+	}
 
 	register(module, "module", languageProvider);
 }
