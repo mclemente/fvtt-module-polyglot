@@ -20,6 +20,7 @@ export class Polyglot {
 		this.registerSystem = registerSystem;
 		Hooks.on("renderChatLog", this.renderChatLog.bind(this));
 		Hooks.on("updateUser", this.updateUser.bind(this));
+		Hooks.on("updateActiveEffect", this.controlToken.bind(this));
 		Hooks.on("controlToken", this.controlToken.bind(this));
 		Hooks.on("preCreateChatMessage", this.preCreateChatMessage.bind(this));
 		Hooks.on("createChatMessage", this.createChatMessage.bind(this));
