@@ -73,6 +73,10 @@
 				"system": "[Sistema] {name}"
 			}
 		},
+		"LanguageRegex": {
+			"title": "RegEx de idioma",
+			"hint": "Se puede usar para cambiar el modo en el que se buscan idiomas, usando \"Languages\" o cualquier otra cosa. Por ejemplo, \"Idioma\" para Español/Portugués, o \"Sprache\" para Alemán. Este ajuste es útil principalmente para idiomas distinto al inglés"
+		},
 
 		"Translation": "Traducción",
 		"TranslatedFrom": "Traducido del ",
