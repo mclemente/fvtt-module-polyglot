@@ -64,7 +64,7 @@ export function registerSettings() {
 		hint: "POLYGLOT.directory..hint",
 		default: "",
 		type: String,
-		filePicker: true,
+		filePicker: "folder",
 	});
 	addSetting("source", {
 		name: "POLYGLOT.source.name",
