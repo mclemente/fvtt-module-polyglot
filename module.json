@@ -9,7 +9,10 @@
 			"discord": "mclemente#5524"
 		},
 		{
-			"name": "MClemente,KaKaRoTo,elizeuangelo"
+			"name": "KaKaRoTo"
+		},
+		{
+			"name": "elizeuangelo"
 		}
 	],
 	"esmodules": ["polyglot.js"],
