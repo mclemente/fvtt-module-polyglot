@@ -410,7 +410,7 @@ export class Polyglot {
 	 */
 	renderJournalSheet(journalSheet, html) {
 		this._addPolyglotEditor(journalSheet);
-		if (journalSheet.document.isOwner || game.user.isGM) {
+		if (journalSheet.document?.isOwner || game.user.isGM) {
 			let runes = false;
 			const texts = [];
 			const styles = [];
