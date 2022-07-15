@@ -1,23 +1,10 @@
 import { currentLanguageProvider, registerModule, registerSystem } from "./api.js";
 import { LanguageProvider } from "./LanguageProvider.js";
-/**
- * Font sets that don't have Numeric characters.
- */
-const FONTS_26 = ["ArCiela", "FingerAlphabet", "KremlinPremier", "MageScript", "MeroiticDemotic", "OldeEnglish", "Pulsian", "Semphari", "Tuzluca"];
-
-/**
- * Font sets that use Logographic characters (e.g. Ancient Egyptian, Mandarin, Japanese)
- */
-// prettier-ignore
-const LOGOGRAPHICAL_FONTS = [
-	"Aztec", "DarkEldar", "Eltharin", "FingerAlphabet", "HighschoolRunes", "JungleSlang", "MageScript", "Oriental", "Saurian", "ScrapbookChinese", "Skaven", "Thassilonian"
-];
+import { FONTS, FONTS_26, LOGOGRAPHICAL_FONTS } from "./Fonts.js";
+import { libWrapper } from "./shim.js";
 
 export class Polyglot {
 	init() {
-		this.FONTS = Polyglot.FONTS;
-		this.registerModule = registerModule;
-		this.registerSystem = registerSystem;
 		Hooks.on("renderChatLog", this.renderChatLog.bind(this));
 		Hooks.on("updateUser", this.updateUser.bind(this));
 		Hooks.on("updateActiveEffect", this.controlToken.bind(this));
@@ -27,14 +14,119 @@ export class Polyglot {
 		Hooks.on("renderChatMessage", this.renderChatMessage.bind(this));
 		Hooks.on("renderJournalSheet", this.renderJournalSheet.bind(this));
 		Hooks.on("renderStorySheet", this.renderJournalSheet.bind(this));
+		Hooks.on("renderJournalTextPageSheet", this.renderJournalTextPageSheet.bind(this));
 		Hooks.on("chatBubble", this.chatBubble.bind(this)); //token, html, message, {emote}
 		Hooks.on("vinoPrepareChatDisplayData", this.vinoChatRender.bind(this));
+		libWrapper.register(
+			"polyglot",
+			"JournalTextPageSheet.prototype.activateEditor",
+			function (wrapped, target, editorOptions, initialContent) {
+				let langs = currentLanguageProvider.languages;
+				if (!game.user.isGM) {
+					langs = {};
+					for (let lang of this.known_languages) {
+						langs[lang] = currentLanguageProvider.languages[lang];
+					}
+					for (let lang of this.literate_languages) {
+						langs[lang] = currentLanguageProvider.languages[lang];
+					}
+				}
+				const languages = Object.entries(langs).map(([lang, name]) => {
+					return {
+						title: name || "",
+						inline: "span",
+						classes: "polyglot-journal",
+						attributes: {
+							title: name || "",
+							"data-language": lang || "",
+						},
+					};
+				});
+				if (this.truespeech) {
+					const truespeechIndex = languages.findIndex((element) => element.attributes["data-language"] == this.truespeech);
+					languages.splice(truespeechIndex, 1);
+				}
+				if (this.comprehendLanguages && !this._isTruespeech(this.comprehendLanguages)) {
+					const comprehendLanguagesIndex = languages.findIndex((element) => element.attributes["data-language"] == this.comprehendLanguages);
+					languages.splice(comprehendLanguagesIndex, 1);
+				}
+				if (!editorOptions) editorOptions = {};
+				editorOptions.style_formats = [
+					...CONFIG.TinyMCE.style_formats,
+					{
+						title: "Polyglot",
+						items: languages,
+					},
+				];
+				editorOptions.formats = {
+					removeformat: [
+						// Default remove format configuration from tinyMCE
+						{
+							selector: "b,strong,em,i,font,u,strike,sub,sup,dfn,code,samp,kbd,var,cite,mark,q,del,ins",
+							remove: "all",
+							split: true,
+							expand: false,
+							block_expand: true,
+							deep: true,
+						},
+						{
+							selector: "span",
+							attributes: ["style", "class"],
+							remove: "empty",
+							split: true,
+							expand: false,
+							deep: true,
+						},
+						{
+							selector: "*",
+							attributes: ["style", "class"],
+							split: false,
+							expand: false,
+							deep: true,
+						},
+						// Add custom config to remove spans from polyglot when needed
+						{
+							selector: "span",
+							classes: "polyglot-journal",
+							attributes: ["title", "class", "data-language"],
+							remove: "all",
+							split: true,
+							expand: false,
+							deep: true,
+						},
+					],
+				};
+				return wrapped(target, editorOptions, initialContent);
+			},
+			"WRAPPER"
+		);
+		libWrapper.register(
+			"polyglot",
+			"ChatBubbles.prototype._getMessageDimensions",
+			(message) => {
+				let div = $(`<div class="chat-bubble" style="visibility:hidden;font:${this?._bubble?.font}">${this?._bubble?.message || message}</div>`);
+				$("body").append(div);
+				let dims = {
+					width: div[0].clientWidth + 8,
+					height: div[0].clientHeight,
+				};
+				div.css({ maxHeight: "none" });
+				dims.unconstrained = div[0].clientHeight;
+				div.remove();
+				return dims;
+			},
+			"OVERRIDE"
+		);
 	}
-	constructor() {
-		this.known_languages = new Set();
-		this.literate_languages = new Set();
-		this.refresh_timeout = null;
-	}
+	constructor() {}
+	known_languages = new Set();
+	literate_languages = new Set();
+	refresh_timeout = null;
+	FONTS = FONTS;
+	CustomFonts = [];
+	CustomFontsSize = {};
+	registerModule = registerModule;
+	registerSystem = registerSystem;
 
 	get chatElement() {
 		return ui.sidebar.popouts.chat?.element || ui.chat.element;
@@ -142,7 +234,7 @@ export class Polyglot {
 			.map((m) => game.messages.get(m.dataset.messageId));
 		for (let i = messages.length - 1; i >= 0; i--) {
 			let message = messages[i];
-			if (message && (message.data.type == CONST.CHAT_MESSAGE_TYPES.IC || this._isMessageTypeOOC(message.data.type))) {
+			if (message && (message.type == CONST.CHAT_MESSAGE_TYPES.IC || this._isMessageTypeOOC(message.type))) {
 				let lang = message.getFlag("polyglot", "language") || "";
 				let unknown = !this._isTruespeech(lang) && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
 				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
@@ -295,10 +387,10 @@ export class Polyglot {
 				!known &&
 				(game.user.character ? !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages) : true);
 
-		let new_content = this.scrambleString(message.data.content, message.data.id, lang);
+		let new_content = this.scrambleString(message.content, message.id, lang);
 		if (displayTranslated && (lang != currentLanguageProvider.defaultLanguage || message.polyglot_unknown)) {
 			let content = html.find(".message-content");
-			let translation = message.data.content;
+			let translation = message.content;
 			let original = $("<div>")
 				.addClass("polyglot-original-text")
 				.css({ font: this._getFontStyle(lang) })
@@ -363,18 +455,6 @@ export class Polyglot {
 	 * and loads the current languages set for Comprehend Languages Spells and Tongues Spell settings.
 	 */
 	ready() {
-		ChatBubbles.prototype._getMessageDimensions = (message) => {
-			let div = $(`<div class="chat-bubble" style="visibility:hidden;font:${this._bubble.font}">${this._bubble.message || message}</div>`);
-			$("body").append(div);
-			let dims = {
-				width: div[0].clientWidth + 8,
-				height: div[0].clientHeight,
-			};
-			div.css({ maxHeight: "none" });
-			dims.unconstrained = div[0].clientHeight;
-			div.remove();
-			return dims;
-		};
 		this.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
 		this.truespeech = game.settings.get("polyglot", "truespeech");
 		this.updateConfigFonts();
@@ -395,9 +475,11 @@ export class Polyglot {
 	 * First, remove all our fonts, then add them again if needed.
 	 */
 	updateConfigFonts() {
-		CONFIG.fontFamilies = CONFIG.fontFamilies.filter((f) => !Polyglot.FONTS.includes(f));
+		//TODO: FIX
+		return;
+		CONFIG.fontFamilies = CONFIG.fontFamilies.filter((f) => !game.polyglot.FONTS.includes(f));
 		if (game.settings.get("polyglot", "exportFonts")) {
-			CONFIG.fontFamilies.push(...Polyglot.FONTS);
+			CONFIG.fontFamilies.push(...game.polyglot.FONTS);
 		}
 	}
 
@@ -409,7 +491,6 @@ export class Polyglot {
 	 * @returns
 	 */
 	renderJournalSheet(journalSheet, html) {
-		this._addPolyglotEditor(journalSheet);
 		if (journalSheet.document?.isOwner || game.user.isGM) {
 			let runes = false;
 			const texts = [];
@@ -447,17 +528,22 @@ export class Polyglot {
 			toggleButton.insertAfter(titleElement);
 			return;
 		}
-		const spans = journalSheet.element.find("span.polyglot-journal");
-		for (let span of spans.toArray()) {
-			const lang = span.dataset.language;
-			if (!lang) continue;
+	}
+
+	renderJournalTextPageSheet(journalSheet, [header, text, section], data) {
+		if (journalSheet.document?.isOwner || game.user.isGM) return;
+		const spans = section.querySelectorAll("span.polyglot-journal");
+		spans.forEach((e) => {
+			const lang = e.dataset.language;
+			delete e.dataset.language;
+			if (!lang) return;
 			let conditions = !this._isTruespeech(lang) && !this.known_languages.has(this.comprehendLanguages) && !currentLanguageProvider.conditions(this, lang);
 			if (conditions) {
-				span.title = "????";
-				span.textContent = this.scrambleString(span.textContent, journalSheet.id, lang);
-				span.style.font = this._getFontStyle(lang);
+				e.title = "????";
+				e.textContent = this.scrambleString(e.textContent, journalSheet.id, lang);
+				e.style.font = this._getFontStyle(lang);
 			}
-		}
+		});
 	}
 
 	/**
@@ -471,7 +557,7 @@ export class Polyglot {
 	 */
 	chatBubble(token, html, messageContent, { emote }) {
 		this._bubble = { font: "", message: "" };
-		if (emote.language) {
+		if (emote?.language) {
 			let lang = invertObject(currentLanguageProvider.languages)[emote.language] || emote.language || "";
 			const unknown = !this._isTruespeech(lang) && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
 			if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) return;
@@ -496,7 +582,7 @@ export class Polyglot {
 					if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) message.polyglot_unknown = false;
 					if (!message.polyglot_force && message.polyglot_unknown) {
 						const content = html.find(".bubble-content");
-						const new_content = this.scrambleString(message.data.content, message.id, lang);
+						const new_content = this.scrambleString(message.content, message.id, lang);
 						content.text(new_content);
 						this._bubble.font = this._getFontStyle(lang);
 						this._bubble.message = new_content;
@@ -533,97 +619,6 @@ export class Polyglot {
 	/* -------------------------------------------- */
 	/*  Internal Helpers	                        */
 	/* -------------------------------------------- */
-
-	/**
-	 * Adds the Polyglot menu to the Journal's editor.
-	 *
-	 * @param {Document} sheet
-	 * @returns
-	 */
-	_addPolyglotEditor(sheet) {
-		if (sheet._polyglotEditor) return;
-		const methodName = sheet.activateEditor ? "activateEditor" : "_createEditor";
-		sheet._polyglot_original_activateEditor = sheet[methodName];
-		let langs = currentLanguageProvider.languages;
-		if (!game.user.isGM) {
-			langs = {};
-			for (let lang of this.known_languages) {
-				langs[lang] = currentLanguageProvider.languages[lang];
-			}
-			for (let lang of this.literate_languages) {
-				langs[lang] = currentLanguageProvider.languages[lang];
-			}
-		}
-		const languages = Object.entries(langs).map(([lang, name]) => {
-			return {
-				title: name || "",
-				inline: "span",
-				classes: "polyglot-journal",
-				attributes: {
-					title: name || "",
-					"data-language": lang || "",
-				},
-			};
-		});
-		if (this.truespeech) {
-			const truespeechIndex = languages.findIndex((element) => element.attributes["data-language"] == this.truespeech);
-			languages.splice(truespeechIndex, 1);
-		}
-		if (this.comprehendLanguages && !this._isTruespeech(this.comprehendLanguages)) {
-			const comprehendLanguagesIndex = languages.findIndex((element) => element.attributes["data-language"] == this.comprehendLanguages);
-			languages.splice(comprehendLanguagesIndex, 1);
-		}
-		sheet[methodName] = function (target, editorOptions, initialContent) {
-			if (!editorOptions) editorOptions = {};
-			editorOptions.style_formats = [
-				...CONFIG.TinyMCE.style_formats,
-				{
-					title: "Polyglot",
-					items: languages,
-				},
-			];
-			editorOptions.formats = {
-				removeformat: [
-					// Default remove format configuration from tinyMCE
-					{
-						selector: "b,strong,em,i,font,u,strike,sub,sup,dfn,code,samp,kbd,var,cite,mark,q,del,ins",
-						remove: "all",
-						split: true,
-						expand: false,
-						block_expand: true,
-						deep: true,
-					},
-					{
-						selector: "span",
-						attributes: ["style", "class"],
-						remove: "empty",
-						split: true,
-						expand: false,
-						deep: true,
-					},
-					{
-						selector: "*",
-						attributes: ["style", "class"],
-						split: false,
-						expand: false,
-						deep: true,
-					},
-					// Add custom config to remove spans from polyglot when needed
-					{
-						selector: "span",
-						classes: "polyglot-journal",
-						attributes: ["title", "class", "data-language"],
-						remove: "all",
-						split: true,
-						expand: false,
-						deep: true,
-					},
-				],
-			};
-			return this._polyglot_original_activateEditor(target, editorOptions, initialContent);
-		};
-		sheet._polyglotEditor = true;
-	}
 
 	_allowOOC() {
 		switch (game.settings.get("polyglot", "allowOOC")) {

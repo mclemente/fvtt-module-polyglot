@@ -22,18 +22,18 @@ export class PolyglotFontSettings extends FormApplication {
 	}
 
 	getData(options) {
-		const fonts = Polyglot.CustomFonts;
-		const fontSizes = Polyglot.CustomFontsSize;
+		const fonts = game.polyglot.CustomFonts;
+		const fontSizes = game.polyglot.CustomFontsSize;
 		for (let key in fontSizes) {
-			if (!fonts.includes(key)) delete Polyglot.CustomFontsSize[key];
+			if (!fonts.includes(key)) delete game.polyglot.CustomFontsSize[key];
 		}
 		for (let key of fonts) {
-			Polyglot.CustomFontsSize[key] = Polyglot.CustomFontsSize[key] ?? "100";
+			game.polyglot.CustomFontsSize[key] = game.polyglot.CustomFontsSize[key] ?? "100";
 		}
 
 		return {
-			fontSize: Polyglot.CustomFontsSize,
-			customFonts: Polyglot.CustomFonts,
+			fontSize: game.polyglot.CustomFontsSize,
+			customFonts: game.polyglot.CustomFonts,
 		};
 	}
 

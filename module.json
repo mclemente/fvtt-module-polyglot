@@ -1,15 +1,12 @@
 {
-	"name": "polyglot",
 	"title": "Polyglot",
 	"description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
 	"version": "1.7",
-	"author": ["MClemente", "KaKaRoTo", "elizeuangelo"],
 	"authors": [
 		{
 			"name": "Matheus Clemente",
 			"discord": "mclemente#5524",
-			"ko-fi": "mclemente",
-			"patreon": "mclemente"
+			"ko-fi": "mclemente"
 		},
 		{
 			"name": "KaKaRoTo"
@@ -18,9 +15,8 @@
 			"name": "elizeuangelo"
 		}
 	],
-	"esmodules": ["./polyglot.js"],
-	"styles": ["./css/polyglot.css", "./css/fonts.css"],
-	"packs": [],
+	"esmodules": ["polyglot.js"],
+	"styles": ["css/polyglot.css", "css/fonts.css"],
 	"languages": [
 		{
 			"lang": "en",
@@ -66,8 +62,12 @@
 	"url": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot",
 	"manifest": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/releases/latest/download/module.json",
 	"download": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/releases/latest/download/module.zip",
-	"minimumCoreVersion": "0.8.5",
-	"compatibleCoreVersion": "9",
 	"bugs": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/issues",
-	"allowBugReporter": true
+	"id": "polyglot",
+	"compatibility": {
+		"minimum": "0.8.5",
+		"verified": "10.273"
+	},
+	"name": "polyglot",
+	"minimiumCoreVersion": "0.8.5"
 }

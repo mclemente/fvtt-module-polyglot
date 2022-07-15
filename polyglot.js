@@ -3,56 +3,6 @@ import { LanguageProvider } from "./module/LanguageProvider.js";
 import { Polyglot } from "./module/logic.js";
 import { registerSettings, registerProviderSettings } from "./module/settings.js";
 
-Polyglot.FONTS = [
-	"ArCiela",
-	"Aztec",
-	"Barazhad",
-	"Celestial",
-	"Daedra",
-	"DarkEldar",
-	"Davek",
-	"Dethek",
-	"DragonAlphabet",
-	"ElderFuthark",
-	"Eltharin",
-	"Espruar",
-	"Floki",
-	"FingerAlphabet",
-	"HighDrowic",
-	"HighschoolRunes",
-	"Infernal",
-	"Iokharic",
-	"JungleSlang",
-	"Kargi",
-	"KremlinPremier",
-	"MarasEye",
-	"MageScript",
-	"MeroiticDemotic",
-	"MiroslavNormal",
-	"NyStormning",
-	"OldeEspruar",
-	"OldeThorass",
-	"Ophidian",
-	"Pulsian",
-	"Oriental",
-	"OrkGlyphs",
-	"Qijomi",
-	"Reanaarian",
-	"Rellanic",
-	"NyStormning",
-	"Saurian",
-	"ScrapbookChinese",
-	"Semphari",
-	"Skaven",
-	"Tengwar",
-	"Thassilonian",
-	"Thorass",
-	"Tuzluca",
-	"Valmaric",
-];
-Polyglot.CustomFonts = [];
-Polyglot.CustomFontsSize = {};
-
 export async function getFonts() {
 	var source = game.settings.get("polyglot", "source");
 	var directory = game.settings.get("polyglot", "polyglotDirectory");
@@ -156,9 +106,9 @@ export async function getFonts() {
 				} else sheet.insertRule(`@font-face {font-family: "${font.name}"; src:url(../../../${font.identifyingPath});}`, sheet.cssRules.length);
 			}
 		}
-		Polyglot.FONTS = Polyglot.FONTS.concat(fontNames);
-		Polyglot.CustomFonts = Polyglot.CustomFonts.concat(fontNames);
-		Polyglot.CustomFontsSize = game.settings.get("polyglot", "CustomFontSizes");
+		game.polyglot.FONTS = game.polyglot.FONTS.concat(fontNames);
+		game.polyglot.CustomFonts = game.polyglot.CustomFonts.concat(fontNames);
+		game.polyglot.CustomFontsSize = game.settings.get("polyglot", "CustomFontSizes");
 		console.debug(`Polyglot | Loaded fonts.`, fontNames);
 	}
 }
