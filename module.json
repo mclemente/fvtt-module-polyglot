@@ -65,9 +65,7 @@
 	"bugs": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/issues",
 	"id": "polyglot",
 	"compatibility": {
-		"minimum": "0.8.5",
+		"minimum": "10",
 		"verified": "10.273"
-	},
-	"name": "polyglot",
-	"minimiumCoreVersion": "0.8.5"
+	}
 }
