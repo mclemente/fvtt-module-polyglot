@@ -223,16 +223,19 @@ export class LanguageProvider {
 	 */
 	loadAlphabet() {
 		this.alphabets = this.originalAlphabets;
-		if (game.settings.get("polyglot", "enableAllFonts")) {
+		const enableAllFonts = game.settings.get("polyglot", "enableAllFonts");
+		if ([1, 3].includes(enableAllFonts)) {
 			const defaultAlphabets = new LanguageProvider().originalAlphabets;
 			const invertedThis = invertObject(this.alphabets);
 			for (let alp in defaultAlphabets) {
 				if (!invertedThis[defaultAlphabets[alp]]) this.alphabets[alp] = defaultAlphabets[alp];
 			}
 		}
-		for (const font of game.polyglot.CustomFonts) {
-			let size = game.polyglot.CustomFontsSize[font] ?? 100;
-			this.alphabets[font] = `${size}% ${font}`;
+		if ([2, 3].includes(enableAllFonts)) {
+			for (let alp in game.settings.get("core", "fonts")) {
+				let size = game.polyglot.CustomFontsSize[alp] ?? 100;
+				this.alphabets[alp] = `${size}% ${alp}`;
+			}
 		}
 	}
 	/**

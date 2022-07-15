@@ -123,8 +123,7 @@ export class Polyglot {
 	literate_languages = new Set();
 	refresh_timeout = null;
 	FONTS = FONTS;
-	CustomFonts = [];
-	CustomFontsSize = {};
+	CustomFontsSize = game.settings.get("polyglot", "CustomFontSizes");
 	registerModule = registerModule;
 	registerSystem = registerSystem;
 
@@ -457,7 +456,7 @@ export class Polyglot {
 	ready() {
 		this.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
 		this.truespeech = game.settings.get("polyglot", "truespeech");
-		this.updateConfigFonts();
+		this.updateConfigFonts(game.settings.get("polyglot", "exportFonts"));
 		if (currentLanguageProvider.requiresReady) {
 			Hooks.on("polyglot.languageProvider.ready", () => {
 				this.updateUserLanguages(this.chatElement);
@@ -474,12 +473,18 @@ export class Polyglot {
 	 * Register fonts so they are available to other elements (such as Drawings)
 	 * First, remove all our fonts, then add them again if needed.
 	 */
-	updateConfigFonts() {
-		//TODO: FIX
-		return;
-		CONFIG.fontFamilies = CONFIG.fontFamilies.filter((f) => !game.polyglot.FONTS.includes(f));
-		if (game.settings.get("polyglot", "exportFonts")) {
-			CONFIG.fontFamilies.push(...game.polyglot.FONTS);
+	updateConfigFonts(value) {
+		if (value) {
+			for (let font in game.polyglot.FONTS) {
+				game.polyglot.FONTS[font].editor = true;
+			}
+			game.settings.set("core", "fonts", game.polyglot.FONTS);
+		} else {
+			const coreFonts = game.settings.get("core", "fonts");
+			for (let font in game.polyglot.FONTS) {
+				delete coreFonts[font];
+			}
+			game.settings.set("core", "fonts", coreFonts);
 		}
 	}
 

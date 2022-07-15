@@ -1,7 +1,6 @@
 import { currentLanguageProvider, getDefaultLanguageProvider, updateLanguageProvider } from "./api.js";
 import { PolyglotLanguageSettings } from "./LanguageSettings.js";
 import { PolyglotFontSettings } from "./FontSettings.js";
-import { getFonts } from "../polyglot.js";
 
 const debouncedReload = foundry.utils.debounce(() => {
 	window.location.reload();
@@ -59,27 +58,6 @@ export function registerSettings() {
 	});
 
 	//Actual Settings
-	addSetting("polyglotDirectory", {
-		name: "POLYGLOT.directory.name",
-		hint: "POLYGLOT.directory..hint",
-		default: "",
-		type: String,
-		filePicker: "folder",
-	});
-	addSetting("source", {
-		name: "POLYGLOT.source.name",
-		hint: "POLYGLOT.source..hint",
-		type: String,
-		choices: {
-			data: game.i18n.localize("POLYGLOT.source.data"),
-			forgevtt: game.i18n.localize("POLYGLOT.source.forgevtt"),
-			s3: game.i18n.localize("POLYGLOT.source.s3"),
-		},
-		default: "data",
-		onChange: (value) => {
-			getFonts();
-		},
-	});
 	addSetting("defaultLanguage", {
 		name: "POLYGLOT.DefaultLanguage.title",
 		hint: "POLYGLOT.DefaultLanguage.hint",
@@ -109,7 +87,13 @@ export function registerSettings() {
 	addSetting("enableAllFonts", {
 		config: !currentLanguageProvider.isGeneric,
 		default: false,
-		type: Boolean,
+		type: Number,
+		choices: {
+			0: game.i18n.localize("POLYGLOT.enableAllFonts.choices.0"),
+			1: game.i18n.localize("POLYGLOT.enableAllFonts.choices.1"),
+			2: game.i18n.localize("POLYGLOT.enableAllFonts.choices.2"),
+			3: game.i18n.localize("POLYGLOT.enableAllFonts.choices.3"),
+		},
 		onChange: () => {
 			currentLanguageProvider.loadAlphabet();
 			game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
@@ -120,7 +104,7 @@ export function registerSettings() {
 		hint: "POLYGLOT.ExportFonts.hint",
 		default: true,
 		type: Boolean,
-		onChange: () => game.polyglot.updateConfigFonts(),
+		onChange: (value) => game.polyglot.updateConfigFonts(value),
 	});
 	addSetting("JournalHighlight", {
 		name: "POLYGLOT.JournalHighlight.title",
