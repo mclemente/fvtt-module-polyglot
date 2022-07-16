@@ -52,8 +52,8 @@
 			"b": "Frases únicas",
 			"c": "Nenhum ⚠️"
 		},
-		"ExportFonts.title": "Tornar Fontes Disponíveis",
-		"ExportFonts.hint": "Torna as fontes do Polyglot disponíveis para uso no Foundry (por exemplo, na Ferramenta de Desenhos).",
+		"ExportFonts.title": "Adicionar Fontes do Polyglot à Base",
+		"ExportFonts.hint": "Adiciona as fontes do Polyglot ao menu de Fontes Adicionas do Foundry.",
 		"DisplayTranslated.title": "Mostrar traduções",
 		"DisplayTranslated.hint": "Para linguagens que são traduzidas no chat, mostrar o texto original e a tradução em seguida.",
 		"HideTranslation.title": "Esconder Globo e texto \"Traduzido do\" dos jogadores",
