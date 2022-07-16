@@ -54,8 +54,8 @@
 			"b": "Unique phrases",
 			"c": "None ⚠️"
 		},
-		"ExportFonts.title": "Make Fonts Available",
-		"ExportFonts.hint": "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
+		"ExportFonts.title": "Add Polyglot's fonts to Core",
+		"ExportFonts.hint": "Add Polyglot's fonts to Core's Additional Fonts menu.",
 		"DisplayTranslated.title": "Display Translations",
 		"DisplayTranslated.hint": "For languages that are translated in the chat window, display the original text and a translation below.",
 		"HideTranslation.title": "Hide Indicators from Players",
