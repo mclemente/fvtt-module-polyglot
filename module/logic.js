@@ -20,17 +20,16 @@ export class Polyglot {
 		libWrapper.register(
 			"polyglot",
 			"JournalTextPageSheet.prototype.activateEditor",
-			function (wrapped, target, editorOptions, initialContent) {
-				let langs = currentLanguageProvider.languages;
+			(wrapped, target, editorOptions, initialContent) => {
 				if (!game.user.isGM) {
-					langs = {};
+					var langs = {};
 					for (let lang of this.known_languages) {
 						langs[lang] = currentLanguageProvider.languages[lang];
 					}
 					for (let lang of this.literate_languages) {
 						langs[lang] = currentLanguageProvider.languages[lang];
 					}
-				}
+				} else langs = currentLanguageProvider.languages;
 				const languages = Object.entries(langs).map(([lang, name]) => {
 					return {
 						title: name || "",
@@ -44,11 +43,11 @@ export class Polyglot {
 				});
 				if (this.truespeech) {
 					const truespeechIndex = languages.findIndex((element) => element.attributes["data-language"] == this.truespeech);
-					languages.splice(truespeechIndex, 1);
+					if (truespeechIndex !== -1) languages.splice(truespeechIndex, 1);
 				}
 				if (this.comprehendLanguages && !this._isTruespeech(this.comprehendLanguages)) {
 					const comprehendLanguagesIndex = languages.findIndex((element) => element.attributes["data-language"] == this.comprehendLanguages);
-					languages.splice(comprehendLanguagesIndex, 1);
+					if (comprehendLanguagesIndex !== -1) languages.splice(comprehendLanguagesIndex, 1);
 				}
 				if (!editorOptions) editorOptions = {};
 				editorOptions.style_formats = [
@@ -345,10 +344,6 @@ export class Polyglot {
 		});
 	}
 
-	understands(lang) {
-		return this.known_languages.has(lang) || this.known_languages.has(this.comprehendLanguages) || this.known_languages.has(this.truespeech);
-	}
-
 	createChatMessage(chatEntity, _, userId) {
 		const chatData = chatEntity.data;
 		if (chatData.content.startsWith("<") || (chatData.type == CONST.CHAT_MESSAGE_TYPES.OOC && !this._allowOOC())) return;
@@ -359,7 +354,7 @@ export class Polyglot {
 	 *
 	 * @param {ChatMessage} message		The ChatMessage document being rendered
 	 * @param {JQuery} html 			The pending HTML as a jQuery object
-	 * @param {object} data 			The input data provided for template rendering
+	 * @param {*} data 					The input data provided for template rendering
 	 *
 	 * @var {Boolean} known				Determines if the actor actually knows the language, rather than being affected by Comprehend Languages or Tongues
 	 */
@@ -470,85 +465,55 @@ export class Polyglot {
 	}
 
 	/**
-	 * Register fonts so they are available to other elements (such as Drawings)
-	 * First, remove all our fonts, then add them again if needed.
+	 * Renders a journal entry, adding the scrambling button to its header in case user is the document's owner or a GM.
+	 *
+	 * @param {Document} journalSheet		A JournalSheet document.
+	 * @param {*} html
 	 */
-	updateConfigFonts(value) {
-		if (value) {
-			for (let font in game.polyglot.FONTS) {
-				game.polyglot.FONTS[font].editor = true;
-			}
-			game.settings.set("core", "fonts", game.polyglot.FONTS);
-		} else {
-			const coreFonts = game.settings.get("core", "fonts");
-			for (let font in game.polyglot.FONTS) {
-				delete coreFonts[font];
-			}
-			game.settings.set("core", "fonts", coreFonts);
+	renderJournalSheet(journalSheet, html) {
+		if (journalSheet.document?.isOwner || game.user.isGM) {
+			const toggleButton = this.createJournalButton(journalSheet);
+			html.closest(".app").find(".polyglot-button").remove();
+			const titleElement = html.closest(".app").find(".window-title");
+			toggleButton.insertAfter(titleElement);
 		}
 	}
 
 	/**
-	 * Renders a journal entry, scrambling the text of strings marked as under some language.
+	 * Renders a page entry, adds the scrambling button to the journal's header in case user is the page's owner, scrambles the text of strings marked as under some language.
 	 *
-	 * @param {Document} journalSheet
-	 * @param {*} html
+	 * @param {Document} journalTextPageSheet		A JournalTextPageSheet document.
+	 * @param {*} param1
+	 * @param {*} data
 	 * @returns
 	 */
-	renderJournalSheet(journalSheet, html) {
-		if (journalSheet.document?.isOwner || game.user.isGM) {
-			let runes = false;
-			const texts = [];
-			const styles = [];
-			const toggleString = "<a class='polyglot-button' title='Polyglot: " + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i></a>";
-			const toggleButton = $(toggleString);
-			toggleButton.click((ev) => {
-				ev.preventDefault();
-				let button = ev.currentTarget.firstChild;
-				runes = !runes;
-				button.className = runes ? "fas fa-link" : "fas fa-unlink";
-				const spans = journalSheet.element.find("span.polyglot-journal");
-				if (runes) {
-					for (let span of spans.toArray()) {
-						const lang = span.dataset.language;
-						if (!lang) continue;
-						texts.push(span.textContent);
-						styles.push(span.style.font);
-						span.textContent = this.scrambleString(span.textContent, journalSheet.id, lang);
-						span.style.font = this._getFontStyle(lang);
+	renderJournalTextPageSheet(journalTextPageSheet, [header, text, section], data) {
+		if (journalTextPageSheet.object.parent.isOwner || game.user.isGM) return;
+		else if (journalTextPageSheet.document.isOwner) {
+			const toggleButton = this.createJournalButton(journalTextPageSheet);
+			header
+				.closest(".app")
+				.querySelectorAll(".polyglot-button")
+				.forEach(function (container) {
+					if (!container.innerHTML) {
+						container.remove();
 					}
-				} else {
-					let i = 0;
-					for (let span of spans.toArray()) {
-						const lang = span.dataset.language;
-						if (!lang) continue;
-						span.textContent = texts[i];
-						span.style.font = styles[i];
-						i++;
-					}
+				});
+			const titleElement = header.closest(".app").querySelector(".window-title");
+			toggleButton.insertAfter(titleElement);
+		} else {
+			const spans = section.querySelectorAll("span.polyglot-journal");
+			spans.forEach((e) => {
+				const lang = e.dataset.language;
+				if (!lang) return;
+				let conditions = !this._isTruespeech(lang) && !this.known_languages.has(this.comprehendLanguages) && !currentLanguageProvider.conditions(this, lang);
+				if (conditions) {
+					e.title = "????";
+					e.textContent = this.scrambleString(e.textContent, journalTextPageSheet.id, lang);
+					e.style.font = this._getFontStyle(lang);
 				}
 			});
-			html.closest(".app").find(".polyglot-button").remove();
-			const titleElement = html.closest(".app").find(".window-title");
-			toggleButton.insertAfter(titleElement);
-			return;
 		}
-	}
-
-	renderJournalTextPageSheet(journalSheet, [header, text, section], data) {
-		if (journalSheet.document?.isOwner || game.user.isGM) return;
-		const spans = section.querySelectorAll("span.polyglot-journal");
-		spans.forEach((e) => {
-			const lang = e.dataset.language;
-			delete e.dataset.language;
-			if (!lang) return;
-			let conditions = !this._isTruespeech(lang) && !this.known_languages.has(this.comprehendLanguages) && !currentLanguageProvider.conditions(this, lang);
-			if (conditions) {
-				e.title = "????";
-				e.textContent = this.scrambleString(e.textContent, journalSheet.id, lang);
-				e.style.font = this._getFontStyle(lang);
-			}
-		});
 	}
 
 	/**
@@ -622,6 +587,77 @@ export class Polyglot {
 	}
 
 	/* -------------------------------------------- */
+	/*  Helpers				                        */
+	/* -------------------------------------------- */
+
+	/**
+	 * Creates the Header button for the Journal or Journal's Pages.
+	 * @param {Document} document 	A JournalSheet or JournalTextPageSheet
+	 * @returns {} toggleButton
+	 */
+	createJournalButton(document) {
+		let runes = false;
+		const texts = [];
+		const styles = [];
+		const toggleString = "<a class='polyglot-button' title='Polyglot: " + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i></a>";
+		const toggleButton = $(toggleString);
+		toggleButton.click((ev) => {
+			ev.preventDefault();
+			let button = ev.currentTarget.firstChild;
+			runes = !runes;
+			button.className = runes ? "fas fa-link" : "fas fa-unlink";
+			const spans = document.element.find("span.polyglot-journal");
+			if (runes) {
+				for (let span of spans.toArray()) {
+					const lang = span.dataset.language;
+					if (!lang) continue;
+					texts.push(span.textContent);
+					styles.push(span.style.font);
+					span.textContent = this.scrambleString(span.textContent, document.id, lang);
+					span.style.font = this._getFontStyle(lang);
+				}
+			} else {
+				let i = 0;
+				for (let span of spans.toArray()) {
+					const lang = span.dataset.language;
+					if (!lang) continue;
+					span.textContent = texts[i];
+					span.style.font = styles[i];
+					i++;
+				}
+			}
+		});
+		return toggleButton;
+	}
+
+	/**
+	 * Register fonts so they are available to other elements (such as Drawings).
+	 */
+	updateConfigFonts(value) {
+		if (value) {
+			for (let font in game.polyglot.FONTS) {
+				game.polyglot.FONTS[font].editor = true;
+			}
+			game.settings.set("core", "fonts", game.polyglot.FONTS);
+		} else {
+			const coreFonts = game.settings.get("core", "fonts");
+			for (let font in game.polyglot.FONTS) {
+				delete coreFonts[font];
+			}
+			game.settings.set("core", "fonts", coreFonts);
+		}
+	}
+
+	/**
+	 *
+	 * @param {String} lang
+	 * @returns {Boolean}
+	 */
+	understands(lang) {
+		return this.known_languages.has(lang) || this.known_languages.has(this.comprehendLanguages) || this.known_languages.has(this.truespeech) || this._isTruespeech(lang);
+	}
+
+	/* -------------------------------------------- */
 	/*  Internal Helpers	                        */
 	/* -------------------------------------------- */
 
@@ -657,6 +693,7 @@ export class Polyglot {
 
 	/**
 	 * Checks if a message is Out Of Character.
+	 * @returns {Boolean}
 	 */
 	_isMessageTypeOOC(type) {
 		return [CONST.CHAT_MESSAGE_TYPES.OOC, CONST.CHAT_MESSAGE_TYPES.WHISPER].includes(type);
