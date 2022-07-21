@@ -66,6 +66,6 @@
 	"id": "polyglot",
 	"compatibility": {
 		"minimum": "10",
-		"verified": "10.273"
+		"verified": "10"
 	}
 }
