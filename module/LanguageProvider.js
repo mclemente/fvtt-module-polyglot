@@ -154,7 +154,10 @@ export class LanguageProvider {
 	 * @param {String} lang
 	 */
 	addToConfig(key, lang) {
-		if (CONFIG[game.system.id.toUpperCase()]?.languages) CONFIG[game.system.id.toUpperCase()].languages[key] = lang;
+		if (CONFIG[game.system.id.toUpperCase()]?.languages) {
+			if (Array.isArray(CONFIG[game.system.id.toUpperCase()].languages)) CONFIG[game.system.id.toUpperCase()].languages.push(lang);
+			else CONFIG[game.system.id.toUpperCase()].languages[key] = lang;
+		}
 	}
 	/**
 	 * Removes a key from the languages object.
