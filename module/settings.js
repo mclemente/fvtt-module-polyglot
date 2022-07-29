@@ -2,10 +2,6 @@ import { currentLanguageProvider, getDefaultLanguageProvider, updateLanguageProv
 import { PolyglotLanguageSettings } from "./LanguageSettings.js";
 import { PolyglotFontSettings } from "./FontSettings.js";
 
-const debouncedReload = foundry.utils.debounce(() => {
-	window.location.reload();
-}, 100);
-
 /**
  * Shorthand for game.settings.register.
  * Default data: {scope: "world", config: true}
@@ -163,7 +159,7 @@ export function registerSettings() {
 		hint: "POLYGLOT.HideTranslation.hint",
 		default: false,
 		type: Boolean,
-		onChange: () => debouncedReload(),
+		requiresReload: true,
 	});
 	addSetting("allowOOC", {
 		name: "POLYGLOT.AllowOOC.title",
@@ -182,7 +178,7 @@ export function registerSettings() {
 		hint: "POLYGLOT.ScrambleGM.hint",
 		default: false,
 		type: Boolean,
-		onChange: () => debouncedReload(),
+		requiresReload: true,
 	});
 }
 
