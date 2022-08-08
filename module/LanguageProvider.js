@@ -895,7 +895,7 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		let literate_languages = new Set();
 		for (let item of actor.data.items) {
 			if (item.type === "language") {
-				const name = item.getFlag("babele", "originalName") || item.name;
+				const name = item?.flags?.babele?.originalName || item.name;
 				if (item.data.data.speak) known_languages.add(name);
 				if (item.data.data.read) literate_languages.add(name);
 			}
