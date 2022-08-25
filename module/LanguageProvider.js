@@ -339,8 +339,8 @@ export class LanguageProvider {
 	 * @param {} polyglot
 	 * @param {string} lang
 	 */
-	conditions(polyglot, lang) {
-		return polyglot.known_languages.has(lang);
+	conditions(lang) {
+		return game.polyglot.known_languages.has(lang);
 	}
 }
 
@@ -895,7 +895,7 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		let literate_languages = new Set();
 		for (let item of actor.data.items) {
 			if (item.type === "language") {
-				const name = item.getFlag("babele", "originalName") || item.name;
+				const name = item?.flags?.babele?.originalName || item.name;
 				if (item.system.speak) known_languages.add(name);
 				if (item.system.read) literate_languages.add(name);
 			}
@@ -903,8 +903,8 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		return [known_languages, literate_languages];
 	}
 
-	conditions(polyglot, lang) {
-		return polyglot.literate_languages.has(lang);
+	conditions(lang) {
+		return game.polyglot.literate_languages.has(lang);
 	}
 }
 
@@ -1252,8 +1252,8 @@ export class dsa5LanguageProvider extends LanguageProvider {
 		return [known_languages, literate_languages];
 	}
 
-	conditions(polyglot, lang) {
-		return polyglot.literate_languages.has(lang);
+	conditions(lang) {
+		return game.polyglot.literate_languages.has(lang);
 	}
 }
 
@@ -1820,8 +1820,8 @@ export class splittermondLanguageProvider extends LanguageProvider {
 		return [known_languages, literate_languages];
 	}
 
-	conditions(polyglot, lang) {
-		return polyglot.literate_languages.has(lang);
+	conditions(lang) {
+		return game.polyglot.literate_languages.has(lang);
 	}
 }
 
@@ -2087,8 +2087,8 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 		return [known_languages, literate_languages];
 	}
 
-	conditions(polyglot, lang) {
-		return polyglot.literate_languages.has(lang);
+	conditions(lang) {
+		return game.polyglot.literate_languages.has(lang);
 	}
 }
 

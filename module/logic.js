@@ -506,7 +506,7 @@ export class Polyglot {
 			spans.forEach((e) => {
 				const lang = e.dataset.language;
 				if (!lang) return;
-				let conditions = !this._isTruespeech(lang) && !this.known_languages.has(this.comprehendLanguages) && !currentLanguageProvider.conditions(this, lang);
+				let conditions = !this._isTruespeech(lang) && !this.known_languages.has(this.comprehendLanguages) && !currentLanguageProvider.conditions(lang);
 				if (conditions) {
 					e.title = "????";
 					e.textContent = this.scrambleString(e.textContent, journalTextPageSheet.id, lang);

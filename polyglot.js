@@ -4,6 +4,7 @@ import { Polyglot } from "./module/logic.js";
 import { registerSettings, registerProviderSettings } from "./module/settings.js";
 
 Hooks.once("init", () => {
+	CONFIG.TinyMCE.content_css.push("/modules/polyglot/css/polyglot.css");
 	initApi();
 	registerSettings();
 	registerProviderSettings();
