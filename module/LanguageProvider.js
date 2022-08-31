@@ -226,16 +226,19 @@ export class LanguageProvider {
 	 */
 	loadAlphabet() {
 		this.alphabets = this.originalAlphabets;
-		if (game.settings.get("polyglot", "enableAllFonts")) {
+		const enableAllFonts = game.settings.get("polyglot", "enableAllFonts");
+		if ([1, 3].includes(enableAllFonts)) {
 			const defaultAlphabets = new LanguageProvider().originalAlphabets;
 			const invertedThis = invertObject(this.alphabets);
 			for (let alp in defaultAlphabets) {
 				if (!invertedThis[defaultAlphabets[alp]]) this.alphabets[alp] = defaultAlphabets[alp];
 			}
 		}
-		for (const font of Polyglot.CustomFonts) {
-			let size = Polyglot.CustomFontsSize[font] ?? 100;
-			this.alphabets[font] = `${size}% ${font}`;
+		if ([2, 3].includes(enableAllFonts)) {
+			for (let alp in game.settings.get("core", "fonts")) {
+				let size = game.polyglot.CustomFontsSize[alp] ?? 100;
+				this.alphabets[alp] = `${size}% ${alp}`;
+			}
 		}
 	}
 	/**
@@ -313,15 +316,15 @@ export class LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		if (actor.data.data?.traits?.languages) {
-			for (let lang of actor.data.data.traits.languages.value) known_languages.add(lang);
-			if (actor.data.data.traits.languages.custom) {
-				for (let lang of actor.data.data.traits.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
+		if (actor.system?.traits?.languages) {
+			for (let lang of actor.system.traits.languages.value) known_languages.add(lang);
+			if (actor.system.traits.languages.custom) {
+				for (let lang of actor.system.traits.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
 			}
-		} else if (actor.data.data?.languages?.value) {
-			for (let lang of actor.data.data.languages.value) known_languages.add(lang);
-			if (actor.data.data.languages.custom) {
-				for (let lang of actor.data.data.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
+		} else if (actor.system?.languages?.value) {
+			for (let lang of actor.system.languages.value) known_languages.add(lang);
+			if (actor.system.languages.custom) {
+				for (let lang of actor.system.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
 			}
 		} else {
 			for (let item of actor.data.items) {
@@ -339,8 +342,8 @@ export class LanguageProvider {
 	 * @param {} polyglot
 	 * @param {string} lang
 	 */
-	conditions(polyglot, lang) {
-		return polyglot.known_languages.has(lang);
+	conditions(lang) {
+		return game.polyglot.known_languages.has(lang);
 	}
 }
 
@@ -417,7 +420,7 @@ export class a5eLanguageProvider extends LanguageProvider {
 		const known_languages = new Set();
 		const literate_languages = new Set();
 
-		const langs = actor.data.data.proficiencies?.languages;
+		const langs = actor.system.proficiencies?.languages;
 		if (!langs) return [known_languages, literate_languages];
 
 		langs.forEach((lang) => {
@@ -467,7 +470,7 @@ export class ariaLanguageProvider extends LanguageProvider {
 		let literate_languages = new Set();
 		known_languages.add(game.i18n.localize("ARIA.languages.Common"));
 		for (let lang of actor.data.items) {
-			if (lang.data.data.language) known_languages.add(lang.name.toLowerCase());
+			if (lang.system.language) known_languages.add(lang.name.toLowerCase());
 		}
 		return [known_languages, literate_languages];
 	}
@@ -777,8 +780,8 @@ export class darkHeresyLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		for (let lang in actor.data.data.skills.linguistics.specialities) {
-			if (actor.data.data.skills.linguistics.specialities[lang]["advance"] >= 0) known_languages.add(lang);
+		for (let lang in actor.system.skills.linguistics.specialities) {
+			if (actor.system.skills.linguistics.specialities[lang]["advance"] >= 0) known_languages.add(lang);
 		}
 		return [known_languages, literate_languages];
 	}
@@ -822,7 +825,7 @@ export class dccLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		for (let lang of actor.data.data.details.languages.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
+		for (let lang of actor.system.details.languages.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
 		return [known_languages, literate_languages];
 	}
 }
@@ -896,15 +899,15 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		for (let item of actor.data.items) {
 			if (item.type === "language") {
 				const name = item?.flags?.babele?.originalName || item.name;
-				if (item.data.data.speak) known_languages.add(name);
-				if (item.data.data.read) literate_languages.add(name);
+				if (item.system.speak) known_languages.add(name);
+				if (item.system.read) literate_languages.add(name);
 			}
 		}
 		return [known_languages, literate_languages];
 	}
 
-	conditions(polyglot, lang) {
-		return polyglot.literate_languages.has(lang);
+	conditions(lang) {
+		return game.polyglot.literate_languages.has(lang);
 	}
 }
 
@@ -950,8 +953,8 @@ export class dnd4eLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		for (let lang of actor.data.data.languages.spoken.value) known_languages.add(lang);
-		// for (let lang of actor.data.data.languages.script.value) literate_languages.add(lang);
+		for (let lang of actor.system.languages.spoken.value) known_languages.add(lang);
+		// for (let lang of actor.system.languages.script.value) literate_languages.add(lang);
 		return [known_languages, literate_languages];
 	}
 }
@@ -1022,11 +1025,11 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		if (actor.data.data?.traits?.languages) {
-			for (let lang of actor.data.data.traits.languages.value) known_languages.add(lang);
-			if (actor.data.data.traits.languages.custom) {
+		if (actor.system?.traits?.languages) {
+			for (let lang of actor.system.traits.languages.value) known_languages.add(lang);
+			if (actor.system.traits.languages.custom) {
 				const defaultSpecialLanguage = game.settings.get("polyglot", "DND5E.SpecialLanguages").trim().toLowerCase();
-				for (let lang of actor.data.data.traits.languages?.custom.split(/[;]/)) {
+				for (let lang of actor.system.traits.languages?.custom.split(/[;]/)) {
 					lang = lang.trim().toLowerCase();
 					if (lang.includes("usually common") || lang.includes("in life") || lang.includes("its creator")) {
 						known_languages.add(defaultSpecialLanguage);
@@ -1235,7 +1238,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 		let known_languages = new Set();
 		let literate_languages = new Set();
 		for (let item of actor.data.items) {
-			if (item.data.data.category?.value === "language") {
+			if (item.system.category?.value === "language") {
 				let myRegex = new RegExp(game.i18n.localize("LocalizedIDs.language") + "\\s*\\((.+)\\)", "i");
 				let match = item.name.match(myRegex);
 				if (match) {
@@ -1252,8 +1255,8 @@ export class dsa5LanguageProvider extends LanguageProvider {
 		return [known_languages, literate_languages];
 	}
 
-	conditions(polyglot, lang) {
-		return polyglot.literate_languages.has(lang);
+	conditions(lang) {
+		return game.polyglot.literate_languages.has(lang);
 	}
 }
 
@@ -1261,9 +1264,9 @@ export class fggLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		for (let lang of actor.data.data.languages.value) known_languages.add(lang.toLowerCase());
-		if (actor.data.data.languages.custom) {
-			for (let lang of actor.data.data.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
+		for (let lang of actor.system.languages.value) known_languages.add(lang.toLowerCase());
+		if (actor.system.languages.custom) {
+			for (let lang of actor.system.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
 		}
 		return [known_languages, literate_languages];
 	}
@@ -1282,7 +1285,7 @@ export class gurpsLanguageProvider extends LanguageProvider {
 			// window.GURPS set when the GURPS game system is loaded
 			let npat1 = ": +(?<name>[^\\(]+)";
 			let npat2 = " +\\((?<name>[^\\)]+)\\)";
-			GURPS.recurselist(actor.data.data.ads, (advantage) => {
+			GURPS.recurselist(actor.system.ads, (advantage) => {
 				if (!this.updateForPattern(advantage, new RegExp("Language" + npat1, "i"), known_languages, literate_languages))
 					if (!this.updateForPattern(advantage, new RegExp("Language" + npat2, "i"), known_languages, literate_languages))
 						if (!this.updateForPattern(advantage, new RegExp(game.i18n.localize("GURPS.language") + npat1, "i"), known_languages, literate_languages))
@@ -1432,7 +1435,7 @@ export class oseLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		for (let lang of actor.data.data.languages.value) known_languages.add(lang);
+		for (let lang of actor.system.languages.value) known_languages.add(lang);
 		return [known_languages, literate_languages];
 	}
 }
@@ -1800,7 +1803,7 @@ export class shadowrun5eLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		for (let lang in actor.data.data.skills.language.value) known_languages.add(actor.data.data.skills.language.value[lang].name.toLowerCase());
+		for (let lang in actor.system.skills.language.value) known_languages.add(actor.system.skills.language.value[lang].name.toLowerCase());
 		return [known_languages, literate_languages];
 	}
 }
@@ -1820,8 +1823,8 @@ export class splittermondLanguageProvider extends LanguageProvider {
 		return [known_languages, literate_languages];
 	}
 
-	conditions(polyglot, lang) {
-		return polyglot.literate_languages.has(lang);
+	conditions(lang) {
+		return game.polyglot.literate_languages.has(lang);
 	}
 }
 
@@ -2021,7 +2024,7 @@ export class tormenta20LanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		for (let lang of actor.data.data.tracos.idiomas.value) known_languages.add(lang);
+		for (let lang of actor.system.tracos.idiomas.value) known_languages.add(lang);
 		return [known_languages, literate_languages];
 	}
 }
@@ -2080,15 +2083,15 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 		let literate_languages = new Set();
 		for (let item of actor.data.items) {
 			if (item.type == "language") {
-				if (item.data.data.speak) known_languages.add(item.name.trim().toLowerCase());
-				if (item.data.data.readWrite) literate_languages.add(item.name.trim().toLowerCase());
+				if (item.system.speak) known_languages.add(item.name.trim().toLowerCase());
+				if (item.system.readWrite) literate_languages.add(item.name.trim().toLowerCase());
 			}
 		}
 		return [known_languages, literate_languages];
 	}
 
-	conditions(polyglot, lang) {
-		return polyglot.literate_languages.has(lang);
+	conditions(lang) {
+		return game.polyglot.literate_languages.has(lang);
 	}
 }
 

@@ -37,8 +37,16 @@
 		"ReplaceLanguages.hint": "Replaces the system's default languages with your Custom Languages. The first language on the list becomes the new default language.",
 		"ScrambleGM.title": "Scramble Messages for GM",
 		"ScrambleGM.hint": "Don't translate the text for the GM (refer to the globe's color for the token's understanding). Requires reload.",
-		"enableAllFonts.title": "Use All Fonts",
-		"enableAllFonts.hint": "Makes the Polyglot fonts available in the Language Settings.",
+		"enableAllFonts": {
+			"title": "Add Fonts to the Font and Language Settings",
+			"hint": "Add fonts to the Font and Language Settings.",
+			"choices": {
+				"0": "None",
+				"1": "Polyglot's Fonts",
+				"2": "Core's Additional Fonts",
+				"3": "Both"
+			}
+		},
 		"RandomizeRunes.title": "Randomize Runes",
 		"RandomizeRunes.hint": "This determines which type of RNG is used to generate a phrase. ⚠️ The \"None\" option only supports Alphanumeric characters (no accents).",
 		"RandomizeRunesOptions": {
@@ -46,8 +54,8 @@
 			"b": "Unique phrases",
 			"c": "None ⚠️"
 		},
-		"ExportFonts.title": "Make Fonts Available",
-		"ExportFonts.hint": "Make the Polyglot fonts available for use in Foundry (in Drawings for example).",
+		"ExportFonts.title": "Add Polyglot's fonts to Core",
+		"ExportFonts.hint": "Add Polyglot's fonts to Core's Additional Fonts menu.",
 		"DisplayTranslated.title": "Display Translations",
 		"DisplayTranslated.hint": "For languages that are translated in the chat window, display the original text and a translation below.",
 		"HideTranslation.title": "Hide Indicators from Players",

@@ -1,5 +1,4 @@
 import { currentLanguageProvider } from "./api.js";
-import { Polyglot } from "./logic.js";
 
 export class PolyglotFontSettings extends FormApplication {
 	constructor(object, options = {}) {
@@ -22,18 +21,17 @@ export class PolyglotFontSettings extends FormApplication {
 	}
 
 	getData(options) {
-		const fonts = Polyglot.CustomFonts;
-		const fontSizes = Polyglot.CustomFontsSize;
-		for (let key in fontSizes) {
-			if (!fonts.includes(key)) delete Polyglot.CustomFontsSize[key];
-		}
+		const fonts = Object.keys(game.settings.get("core", "fonts"));
+		const fontSizes = game.polyglot.CustomFontsSize;
 		for (let key of fonts) {
-			Polyglot.CustomFontsSize[key] = Polyglot.CustomFontsSize[key] ?? "100";
+			game.polyglot.CustomFontsSize[key] = game.polyglot.CustomFontsSize[key] ?? "100";
+		}
+		for (let key in fontSizes) {
+			if (!fonts.includes(key)) delete fontSizes[key];
 		}
 
 		return {
-			fontSize: Polyglot.CustomFontsSize,
-			customFonts: Polyglot.CustomFonts,
+			fontSize: fontSizes,
 		};
 	}
 
@@ -51,12 +49,12 @@ export class PolyglotFontSettings extends FormApplication {
 			event.target.parentElement.nextSibling.nextSibling.style.font = `${size}%${font}`;
 			font = font.trim();
 			font = font.replace(/['"]+/g, "");
-			Polyglot.CustomFontsSize[font] = size;
+			game.polyglot.CustomFontsSize[font] = size;
 		});
 		html.find("button").on("click", async (event) => {
 			if (event.currentTarget?.dataset?.action === "reset") {
-				for (let key in Polyglot.CustomFontsSize) {
-					Polyglot.CustomFontsSize[key] = 100;
+				for (let key in game.polyglot.CustomFontsSize) {
+					game.polyglot.CustomFontsSize[key] = 100;
 				}
 				this.close();
 			}
@@ -69,7 +67,7 @@ export class PolyglotFontSettings extends FormApplication {
 	 * @param {Object} formData - the form data
 	 */
 	async _updateObject(ev, formData) {
-		game.settings.set("polyglot", "CustomFontSizes", Polyglot.CustomFontsSize);
+		game.settings.set("polyglot", "CustomFontSizes", game.polyglot.CustomFontsSize);
 		currentLanguageProvider.loadAlphabet();
 	}
 }

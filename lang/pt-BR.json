@@ -35,8 +35,16 @@
 		"ReplaceLanguages.hint": "Substitui os idiomas do sistema com os seus Idiomas Customizados. O primeiro idioma da lista se tornará o novo idioma padrão.",
 		"ScrambleGM.title": "Embaralhar para o Mestre",
 		"ScrambleGM.hint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende). Recarregará o programa.",
-		"enableAllFonts.title": "Adicionar Fontes às Configurações de Idioma",
-		"enableAllFonts.hint": "Torna as fontes do Polyglot disponíveis nas Configurações de Idioma.",
+		"enableAllFonts": {
+			"title": "Adicionar Fontes às Configurações de Fonte e de Idioma",
+			"hint": "Adiciona fontes às Configurações de Fonte e de Idioma.",
+			"choices": {
+				"0": "Nenhuma",
+				"1": "Fontes do Polyglot",
+				"2": "Todas as Fontes Adicionais",
+				"3": "Ambas"
+			}
+		},
 		"RandomizeRunes.title": "Randomizar Runas",
 		"RandomizeRunes.hint": "Texto embaralhado sempre irá parecer diferente, mesmo se a mesma mensagem for repetida.  ⚠️ A opção \"Nenhum\" suporta apenas caracteres alfanuméricos (sem acentos).",
 		"RandomizeRunesOptions": {
@@ -44,8 +52,8 @@
 			"b": "Frases únicas",
 			"c": "Nenhum ⚠️"
 		},
-		"ExportFonts.title": "Tornar Fontes Disponíveis",
-		"ExportFonts.hint": "Torna as fontes do Polyglot disponíveis para uso no Foundry (por exemplo, na Ferramenta de Desenhos).",
+		"ExportFonts.title": "Adicionar Fontes do Polyglot à Base",
+		"ExportFonts.hint": "Adiciona as fontes do Polyglot ao menu de Fontes Adicionas do Foundry.",
 		"DisplayTranslated.title": "Mostrar traduções",
 		"DisplayTranslated.hint": "Para linguagens que são traduzidas no chat, mostrar o texto original e a tradução em seguida.",
 		"HideTranslation.title": "Esconder Globo e texto \"Traduzido do\" dos jogadores",

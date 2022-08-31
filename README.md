@@ -14,15 +14,10 @@ Talk to others using a language you can speak and scrambles text you can't under
 
 Check out the [wiki](https://clemente.gitbook.io/polyglot/).
 
-## Credit
+## Attribution
 
-The original idea for this module was proposed by `@Talwin Greenwood` on the FVTT discord.  
-The original PolyGlot module is written by KaKaRoTo. The 'fantasy languages' adaptation is written by elizeuangelo.  
-[@ironmonk88](https://github.com/ironmonk88) for the Translation Box.  
-[@manuelVo](https://github.com/manuelVo) for the API code.  
-This module uses code of [Soundboard](https://github.com/BlitzKraig/fvtt-SoundBoard), by Blitz, released under the MIT License.
-
-## License
-
-This module is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).  
-This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agreement for Module Development v 0.1.6](https://foundryvtt.com/article/license/).
+- `@Talwin Greenwood` on the FVTT discord, for the original idea for this module.
+- [@KaKaRoTo](https://github.com/kakaroto/) for the original PolyGlot module, which was licensed under [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
+- [@ElizeuAngelo](https://github.com/elizeuangelo) for the 'fantasy languages' adaptation.
+- [@ironmonk88](https://github.com/ironmonk88) for the Translation Box.  
+- [@manuelVo](https://github.com/manuelVo) for the API code. 
