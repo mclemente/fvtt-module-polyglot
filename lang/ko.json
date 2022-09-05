@@ -16,7 +16,6 @@
 			".hint": "폰트 파일을 포함하는 \"modules\" 폴더 외부 폴더로 설정한다."
 		},
 		"source": {
-			".hint": "폰트가 Forge 어셋에 저장되어 있다면 Forge를 선택한다. S3 버킷에 저장된 경우 S3을 선택한다.",
 			"data": "데이터",
 			"forgevtt": "Forge",
 			"s3": "S3"
