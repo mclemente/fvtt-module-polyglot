@@ -33,7 +33,6 @@
 	"POLYGLOT": {
 		"source": {
 			"forgevtt": "Forge",
-			"name": "Typ zdroje",
 			"data": "Data",
 			"s3": "Amazon S3"
 		},
