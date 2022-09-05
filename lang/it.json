@@ -1,1 +1,84 @@
-{}
+{
+	"POLYGLOT": {
+		"LanguageSettings": "Impostazioni lingua",
+		"ChatSettings": "Impostazioni chat",
+		"Languages.title": "Lingue",
+		"FontSize": "Dimensione dei caratteri (%)",
+		"CustomLanguages.title": "Lingue personalizzate",
+		"CustomLanguages.hint": "Definisci una lista di lingue personalizzate, separate da virgole, da aggiungere al sistema.",
+		"ComprehendLanguages.title": "Incantesimo Comprensione dei Linguaggi",
+		"source": {
+			"name": "Tipo di fonte",
+			"data": "Dati",
+			"s3": "S3",
+			"forgevtt": "Forge",
+			".hint": "Se i tuoi font sono caricati su Forge Assets, seleziona Forge. Se sono caricati in un bucket S3, seleziona S3."
+		},
+		"Truespeech.title": "Incantesimo Lingue",
+		"Truespeech.hint": "Determina una lingua che fa capire a chi la conosce tutte le lingue parlate (non fa leggere i Diari) e che può essere capita da tutte le creature.",
+		"JournalHighlight.title": "Opacità dell'evidenziatore nei Diari (%)",
+		"DefaultLanguage.title": "Lingua predefinita",
+		"DefaultLanguage.hint": "Nome del linguaggio predefinito da selezionare. Se vuoto, usa il predefinito di sistema.",
+		"ReplaceLanguages.title": "Sostituisci le lingue di sistema",
+		"ScrambleGM.title": "Rimescola i messaggi per il GM",
+		"ScrambleGM.hint": "Non tradurre i testi per il GM (fai riferimento al colore del mappamondo per capire se il token comprende). Richiede il ricaricamento.",
+		"enableAllFonts": {
+			"hint": "Aggiungi i font alle impostazioni di font e lingua.",
+			"choices": {
+				"0": "Nessuno",
+				"2": "Font aggiuntivi di base",
+				"3": "Entrambi",
+				"1": "Font di Polyglot"
+			},
+			"title": "Aggiungi font alle impostazioni di font e lingua"
+		},
+		"logographicalFontToggle.hint": "Dimezza la dimensione di frasi che usano font logografici (esempio: giapponese, cinese).",
+		"logographicalFontToggle.title": "Font logografici",
+		"directory": {
+			".hint": "Indica una cartella al di fuori della cartella \"modules\" che contiene i file dei font.",
+			"name": "Cartella dei font personalizzati"
+		},
+		"Fonts": "Font",
+		"Font": "Font",
+		"FontSettings": "Impostazioni font",
+		"RandomizeRunes.title": "Randomizza le rune",
+		"RandomizeRunesOptions": {
+			"a": "Default",
+			"b": "Frasi uniche",
+			"c": "Nessuno ⚠️"
+		},
+		"ExportFonts.title": "Aggiungi i font di Polyglot a quelli base",
+		"ExportFonts.hint": "Aggiungi i font di Polyglot al menù di Font Addizionali.",
+		"DisplayTranslated.title": "Mostra traduzioni",
+		"HideTranslation.title": "Nascondi indicatori ai Giocatori",
+		"HideTranslation.hint": "Nasconde il Mappamondo e il testo \"Tradotto da\" nei messaggi in chat ai giocatori. Perfetto per quando vuoi nascondere loro che lingua stai parlando.",
+		"AllowOOC.title": "Rimescola i messaggi OOC in chat",
+		"AllowOOC.hint": "Scegli che utenti hanno i messaggi rimescolati. OOC = Fuori personaggio (Out of Character).",
+		"AllowOOCOptions": {
+			"a": "Tutti",
+			"b": "Solo GM",
+			"c": "Solo Giocatori",
+			"d": "Nessuno"
+		},
+		"LanguageProvider": {
+			"name": "Fonte delle impostazioni delle lingue",
+			"choices": {
+				"module": "[Modulo] {name}",
+				"native": "Generico",
+				"system": "[Sistema] {name}"
+			},
+			"hint": "Seleziona la fonte delle informazioni per gli alfabeti e le lingue. Altre fonti possono essere rese disponibili tramite sistemi e moduli installati. Le opzioni sottostanti dipendono dalla fonte stabilita qui. ⚠️ Se cambi la fonte, devi salvare e riaprire queste impostazioni."
+		},
+		"LanguageRegex": {
+			"title": "RegEx lingua"
+		},
+		"Translation": "Traduzione",
+		"DefaultAlphabet": "Alfabeto predefinito",
+		"Languages.hint": "Cambia l'alfabeto usato per le lingue. Ripristinare le impostazioni predefinite ricaricherà la pagina.",
+		"ComprehendLanguages.hint": "Determina una lingua che fa comprendere a chi la conosce tutte le altre lingue, ma che non può essere parlata o scritta.",
+		"JournalHighlight.hint": "Definisci l'opacità dell'evidenziamento in un Dario.",
+		"ReplaceLanguages.hint": "Sostituisce le lingue predefinite del sistema con le tue lingue personalizzate. La prima della lista diventerà la nuova lingua predefinita.",
+		"RandomizeRunes.hint": "Questo determina che tipo di RNG viene usato per generare una frase. ⚠️ L'opzione \"Nessuno\" supporta solo caratteri alfanumerici (no accenti).",
+		"DisplayTranslated.hint": "Per le lingue che sono tradotte nella chat, mostra il testo originale con la traduzione sotto."
+	}
+}
