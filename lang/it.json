@@ -10,8 +10,7 @@
 		"source": {
 			"data": "Dati",
 			"s3": "S3",
-			"forgevtt": "Forge",
-			".hint": "Se i tuoi font sono caricati su Forge Assets, seleziona Forge. Se sono caricati in un bucket S3, seleziona S3."
+			"forgevtt": "Forge"
 		},
 		"Truespeech.title": "Incantesimo Lingue",
 		"Truespeech.hint": "Determina una lingua che fa capire a chi la conosce tutte le lingue parlate (non fa leggere i Diari) e che può essere capita da tutte le creature.",
