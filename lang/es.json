@@ -22,7 +22,6 @@
 			".hint": "Seleccione un directorio fuera de \"modules\" que contenta ficheros de fuentes"
 		},
 		"source": {
-			"name": "Tipo de fuente",
 			".hint": "Si las fuentes están almacenadas como recursos (Assets) de Forge, seleccione Forge. Si están en un S3 bucket, seleccione S3",
 			"data": "Datos",
 			"forgevtt": "Forge",
