@@ -8,7 +8,6 @@
 		"CustomLanguages.hint": "Definisci una lista di lingue personalizzate, separate da virgole, da aggiungere al sistema.",
 		"ComprehendLanguages.title": "Incantesimo Comprensione dei Linguaggi",
 		"source": {
-			"name": "Tipo di fonte",
 			"data": "Dati",
 			"s3": "S3",
 			"forgevtt": "Forge",
