@@ -9,7 +9,6 @@
 		"Font": "Font",
 		"Fonts": "Fonts",
 		"FontSize": "Font Size (%)",
-
 		"CustomLanguages.title": "Custom Languages",
 		"CustomLanguages.hint": "Define a list of custom, comma separated, languages to add to the system.",
 		"ComprehendLanguages.title": "Comprehend Languages Spell",
@@ -22,8 +21,8 @@
 			"name": "Source Type",
 			".hint": "If your fonts are stored in your Forge Assets, select Forge. If they are stored in an S3 bucket, select S3.",
 			"data": "Data",
-			"forgevtt": "Forge",
-			"s3": "S3"
+			"forgevtt": "Forge VTT",
+			"s3": "Amazon S3"
 		},
 		"Truespeech.title": "Tongues Spell",
 		"Truespeech.hint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures.",
@@ -79,9 +78,8 @@
 		},
 		"LanguageRegex": {
 			"title": "Language RegEx",
-			"hint": "You can use this to change the term searched on items from \"Languages\" to something else. For example, \"Idioma\" for Portuguese/Spanish, or \"Sprache\" for German. This setting is more useful for non-English speakers."
+			"hint": "You can use this to change the term searched on items from \"Language\" to something else, like \"Tongue\". This setting is more useful for non-English speakers."
 		},
-
 		"Translation": "Translation",
 		"TranslatedFrom": "Translated from ",
 		"LanguageLabel": "Language",
@@ -89,9 +87,7 @@
 		"LatinAlphabet": "Latin Alphabet",
 		"ToggleRunes": "Toggle Runes",
 		"Runes": "Runes",
-
 		"UESRPG.Language": "Language",
-
 		"Generic": {
 			"Language": "Language"
 		},
