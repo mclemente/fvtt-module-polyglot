@@ -45,9 +45,6 @@
 		"Languages.title": "Langues",
 		"Fonts": "Polices",
 		"FontSize": "Taille de Police (%)",
-		"source": {
-			"name": "Type de Source"
-		},
 		"logographicalFontToggle.title": "Polices Logographiques",
 		"ReplaceLanguages.title": "Remplacer les Langues du Système",
 		"DefaultAlphabet": "Alphabet Défault",
