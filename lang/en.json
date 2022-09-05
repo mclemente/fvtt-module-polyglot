@@ -14,17 +14,6 @@
 		"CustomLanguages.hint": "Define a list of custom, comma separated, languages to add to the system.",
 		"ComprehendLanguages.title": "Comprehend Languages Spell",
 		"ComprehendLanguages.hint": "Set a language whose speaker understands all other languages, but that can't be spoken or written.",
-		"directory": {
-			"name": "Custom Font Directory",
-			".hint": "Set to a folder outside the \"modules\" folder containing font files."
-		},
-		"source": {
-			"name": "Source Type",
-			".hint": "If your fonts are stored in your Forge Assets, select Forge. If they are stored in an S3 bucket, select S3.",
-			"data": "Data",
-			"forgevtt": "Forge",
-			"s3": "S3"
-		},
 		"Truespeech.title": "Tongues Spell",
 		"Truespeech.hint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures.",
 		"JournalHighlight.title": "Journal Highlight Opacity (%)",

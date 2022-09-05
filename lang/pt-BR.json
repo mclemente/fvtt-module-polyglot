@@ -7,18 +7,6 @@
 		"Languages.title": "Idiomas",
 		"Languages.hint": "Muda o alfabeto dos idiomas. Resetar irá recarregar.",
 		"Fonts": "Fontes",
-
-		"directory": {
-			"name": "Diretório de Fontes Customizadas",
-			".hint": "Defina uma pasta fora da pasta \"modules\" que contenha arquivos de fonte."
-		},
-		"source": {
-			"name": "Tipo de Armazenamento",
-			".hint": "Se as suas fontes estão armazenadas no Forge Assets, selecione Forge. Se estiverem no S3 bucket, selecione S3.",
-			"data": "Data",
-			"forgevtt": "Forge",
-			"s3": "S3"
-		},
 		"CustomLanguages.title": "Idiomas Customizados",
 		"CustomLanguages.hint": "Defina uma lista de idiomas customizados para adicionar ao sistema, separados por vírgula.",
 		"ComprehendLanguages.title": "Magia: Compreender Idiomas",

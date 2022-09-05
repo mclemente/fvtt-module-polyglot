@@ -18,17 +18,6 @@
 		"CustomLanguages.hint": "Define una lista de idiomas personalizados, separados mediante coma, para que sean añadidos al sistema",
 		"ComprehendLanguages.title": "Hechizo Comprender Idiomas",
 		"ComprehendLanguages.hint": "Tal y como funciona el hechizo de D&D Comprender Idiomas. No se podrá usar ni para hablar ni para leer, pero permitirá a quien lo posea entender todos los idiomas disponibles",
-		"directory": {
-			"name": "Directorio de fuentes personalizadas",
-			".hint": "Seleccione un directorio fuera de \"modules\" que contenta ficheros de fuentes"
-		},
-		"source": {
-			"name": "Tipo de fuente",
-			".hint": "Si las fuentes están almacenadas como recursos (Assets) de Forge, seleccione Forge. Si están en un S3 bucket, seleccione S3",
-			"data": "Datos",
-			"forgevtt": "Forge",
-			"s3": "S3"
-		},
 		"JournalHighlight.title": "Opacidad del resaltado en los diarios (%)",
 		"JournalHighlight.hint": "Define la opacidad del resaltado de las fuentes en el diario",
 		"logographicalFontToggle.title": "Fuentes logográficas",

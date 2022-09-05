@@ -12,17 +12,6 @@
 		"CustomLanguages.hint": "시스템에 추가할 사용자 정의 언어. 쉼표(,)로 구분하여 목록을 정의한다.",
 		"ComprehendLanguages.title": "언어 변환 주문",
 		"ComprehendLanguages.hint": "D&D의 언어 변환 주문과 같이, 설정한 사용자 지정 언어를 입력하면 말하거나 쓰진 못하지만 다른 언어를 이해할 수 있게 해준다.",
-		"directory": {
-			"name": "사용자 지정 폰트 디렉토리",
-			".hint": "폰트 파일을 포함하는 \"modules\" 폴더 외부 폴더로 설정한다."
-		},
-		"source": {
-			"name": "소스 유형",
-			".hint": "폰트가 Forge 어셋에 저장되어 있다면 Forge를 선택한다. S3 버킷에 저장된 경우 S3을 선택한다.",
-			"data": "데이터",
-			"forgevtt": "Forge",
-			"s3": "S3"
-		},
 		"Truespeech.title": "언어 구사 주문",
 		"Truespeech.hint": "D&D의 언어 구사 주문과 같이, 설정한 사용자 지정 언어를 입력하면 화자는 언어를 듣고 이해할 수 있으며(저널은 읽지 못함), 모든 생물의 언어를 이해할 수 있다.",
 		"JournalHighlight.title": "저널 하이라이트 불투명도(%)",
