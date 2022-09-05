@@ -10,7 +10,6 @@
 			".hint": "Valitse fonttitiedostoja sisältävä kansio, joka ei ole modules-kansiossa."
 		},
 		"source": {
-			".hint": "Jos fonttisi on tallennettu Forge Assetteihin, valitse Forge. Jos ne on tallennettu S3-säiliöön, valitse S3.",
 			"s3": "S3",
 			"forgevtt": "Forge"
 		},
