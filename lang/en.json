@@ -18,7 +18,6 @@
 			".hint": "Set to a folder outside the \"modules\" folder containing font files."
 		},
 		"source": {
-			".hint": "If your fonts are stored in your Forge Assets, select Forge. If they are stored in an S3 bucket, select S3.",
 			"data": "Data",
 			"forgevtt": "Forge VTT",
 			"s3": "Amazon S3"
