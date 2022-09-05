@@ -9,7 +9,6 @@
 		"Font": "Font",
 		"Fonts": "Fonts",
 		"FontSize": "Font Size (%)",
-
 		"CustomLanguages.title": "Custom Languages",
 		"CustomLanguages.hint": "Define a list of custom, comma separated, languages to add to the system.",
 		"ComprehendLanguages.title": "Comprehend Languages Spell",
@@ -68,9 +67,8 @@
 		},
 		"LanguageRegex": {
 			"title": "Language RegEx",
-			"hint": "You can use this to change the term searched on items from \"Languages\" to something else. For example, \"Idioma\" for Portuguese/Spanish, or \"Sprache\" for German. This setting is more useful for non-English speakers."
+			"hint": "You can use this to change the term searched on items from \"Language\" to something else, like \"Tongue\". This setting is more useful for non-English speakers."
 		},
-
 		"Translation": "Translation",
 		"TranslatedFrom": "Translated from ",
 		"LanguageLabel": "Language",
@@ -78,9 +76,7 @@
 		"LatinAlphabet": "Latin Alphabet",
 		"ToggleRunes": "Toggle Runes",
 		"Runes": "Runes",
-
 		"UESRPG.Language": "Language",
-
 		"Generic": {
 			"Language": "Language"
 		},

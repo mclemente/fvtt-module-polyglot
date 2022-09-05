@@ -7,7 +7,6 @@
 		"Languages.title": "언어",
 		"Languages.hint": "언어에 사용될 알파벳을 변경한다. 기본값으로 재설정하면 새로고침된다.",
 		"Fonts": "글꼴",
-
 		"CustomLanguages.title": "사용자 지정 언어",
 		"CustomLanguages.hint": "시스템에 추가할 사용자 정의 언어. 쉼표(,)로 구분하여 목록을 정의한다.",
 		"ComprehendLanguages.title": "언어 변환 주문",
@@ -56,7 +55,6 @@
 				"system": "[시스템] {name}"
 			}
 		},
-
 		"Translation": "번역",
 		"TranslatedFrom": "다음 언어로부터 번역됨: ",
 		"LanguageLabel": "언어",
@@ -64,12 +62,10 @@
 		"LatinAlphabet": "라틴 알파벳",
 		"ToggleRunes": "룬 토글",
 		"Runes": "룬",
-
 		"Generic": {
 			"Language": "언어"
 		},
 		"UESRPG.Language": "언어",
-
 		"COC7": {
 			"LanguageOwn": "언어",
 			"LanguageAny": "언어",

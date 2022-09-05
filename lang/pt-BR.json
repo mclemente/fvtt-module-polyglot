@@ -34,7 +34,7 @@
 			}
 		},
 		"RandomizeRunes.title": "Randomizar Runas",
-		"RandomizeRunes.hint": "Texto embaralhado sempre irá parecer diferente, mesmo se a mesma mensagem for repetida.  ⚠️ A opção \"Nenhum\" suporta apenas caracteres alfanuméricos (sem acentos).",
+		"RandomizeRunes.hint": "Texto embaralhado sempre irá parecer diferente, mesmo se a mesma mensagem for repetida. ⚠️ A opção \"Nenhum\" suporta apenas caracteres alfanuméricos (sem acentos).",
 		"RandomizeRunesOptions": {
 			"a": "Padrão",
 			"b": "Frases únicas",
@@ -63,7 +63,6 @@
 				"system": "[Sistema] {name}"
 			}
 		},
-
 		"Translation": "Tradução",
 		"TranslatedFrom": "Traduzido do ",
 		"LanguageLabel": "Idioma",
@@ -71,17 +70,28 @@
 		"LatinAlphabet": "Alfabeto Latino",
 		"ToggleRunes": "Alternar Runas",
 		"Runes": "Runas",
-
 		"Generic": {
 			"Language": "Idioma"
 		},
 		"UESRPG.Language": "Língua",
-
 		"COC7": {
 			"LanguageOwn": "Língua Nativa",
 			"LanguageAny": "Outra Língua",
 			"LanguageOther": "Outra Língua",
 			"LanguageSpec": "Línguas"
-		}
+		},
+		"FontSize": "Tamanho da Fonte (%)",
+		"LanguageRegex": {
+			"title": "RegEx da Linguagem",
+			"hint": "Você pode usar isto para mudar o termo pesquisado em itens de \"Idioma\" para algo diferente, como \"Língua\" ou \"Linguagem\"."
+		},
+		"DND5E": {
+			"SpecialLanguages.title": "Substituir Idiomas Especiais",
+			"SpecialLanguages.hint": "Nome do idioma que irá substituir \"idiomas\" como em \"todos os idiomas que ele conhecia em vida\"."
+		},
+		"SWADE": {
+			"LanguageSkills": "Idioma"
+		},
+		"Font": "Fonte"
 	}
 }

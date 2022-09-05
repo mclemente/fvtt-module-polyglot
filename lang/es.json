@@ -13,7 +13,6 @@
 		"Font": "Fuente",
 		"Fonts": "Fuentes",
 		"FontSize": "Tamaño de fuente (%)",
-
 		"CustomLanguages.title": "Idiomas personalizados",
 		"CustomLanguages.hint": "Define una lista de idiomas personalizados, separados mediante coma, para que sean añadidos al sistema",
 		"ComprehendLanguages.title": "Hechizo Comprender Idiomas",
@@ -66,7 +65,6 @@
 			"title": "RegEx de idioma",
 			"hint": "Se puede usar para cambiar el modo en el que se buscan idiomas, usando \"Languages\" o cualquier otra cosa. Por ejemplo, \"Idioma\" para Español/Portugués, o \"Sprache\" para Alemán. Este ajuste es útil principalmente para idiomas distinto al inglés"
 		},
-
 		"Translation": "Traducción",
 		"TranslatedFrom": "Traducido del ",
 		"LanguageLabel": "Idioma",
@@ -74,12 +72,10 @@
 		"LatinAlphabet": "Alfabeto latino",
 		"ToggleRunes": "Activar/desactivar runas",
 		"Runes": "Runas",
-
 		"Generic": {
 			"Language": "Idioma"
 		},
 		"UESRPG.Language": "Idioma",
-
 		"COC7": {
 			"LanguageOwn": "Lengua propia",
 			"LanguageAny": "Otras lenguas",

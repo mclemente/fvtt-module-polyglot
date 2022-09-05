@@ -15,8 +15,13 @@
 			"name": "elizeuangelo"
 		}
 	],
-	"esmodules": ["polyglot.js"],
-	"styles": ["css/polyglot.css", "css/fonts.css"],
+	"esmodules": [
+		"polyglot.js"
+	],
+	"styles": [
+		"css/polyglot.css",
+		"css/fonts.css"
+	],
 	"languages": [
 		{
 			"lang": "en",
@@ -57,6 +62,16 @@
 			"lang": "pl",
 			"name": "Polski",
 			"path": "lang/pl.json"
+		},
+		{
+			"lang": "it",
+			"name": "Italiano",
+			"path": "lang/it.json"
+		},
+		{
+			"lang": "fi",
+			"name": "Suomi",
+			"path": "lang/fi.json"
 		}
 	],
 	"url": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot",
