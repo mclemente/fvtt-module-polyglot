@@ -26,9 +26,36 @@
 	"POLYGLOT.LanguageLabel": "Jazyk",
 	"POLYGLOT.ToggleRunes": "Přepnout Runy",
 	"POLYGLOT.Runes": "Runy",
-
 	"POLYGLOT.Generic": {
 		"Language": "Jazyk"
 	},
-	"POLYGLOT.WFRP4E.LanguageSkills": "Jazyk"
+	"POLYGLOT.WFRP4E.LanguageSkills": "Jazyk",
+	"POLYGLOT": {
+		"source": {
+			"forgevtt": "Forge",
+			"name": "Typ zdroje",
+			"data": "Data",
+			"s3": "Amazon S3"
+		},
+		"enableAllFonts": {
+			"title": "Přidání písem do nastavení písma a jazyka"
+		},
+		"DND5E": {
+			"SpecialLanguages.title": "Nahradit speciální jazyky"
+		},
+		"LanguageSettings": "Nastavení jazyka",
+		"ChatSettings": "Nastavení chatu",
+		"Languages.title": "Jazyky",
+		"Font": "Písmo",
+		"Fonts": "Písma",
+		"FontSize": "Velikost písma (%)",
+		"directory": {
+			"name": "Adresář vlastních písem"
+		},
+		"logographicalFontToggle.title": "Logografická písma",
+		"ReplaceLanguages.title": "Nahrazení jazyků systému",
+		"LanguageRegex": {
+			"title": "Jazyk RegEx"
+		}
+	}
 }
