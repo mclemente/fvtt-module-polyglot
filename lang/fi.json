@@ -1,1 +1,58 @@
-{}
+{
+	"POLYGLOT": {
+		"LanguageSettings": "Kielten asetukset",
+		"ChatSettings": "Keskusteluasetukset",
+		"CustomLanguages.title": "Mukautetut kielet",
+		"ComprehendLanguages.title": "Kieltenymmärrys-loitsu",
+		"ComprehendLanguages.hint": "Aseta kieli, jonka puhuja ymmärtää kaikkia muita kieliä, mutta jota ei voi puhua eikä kirjoittaa.",
+		"directory": {
+			"name": "Mukautettu fonttikansio",
+			".hint": "Valitse fonttitiedostoja sisältävä kansio, joka ei ole modules-kansiossa."
+		},
+		"source": {
+			".hint": "Jos fonttisi on tallennettu Forge Assetteihin, valitse Forge. Jos ne on tallennettu S3-säiliöön, valitse S3.",
+			"s3": "S3",
+			"forgevtt": "Forge"
+		},
+		"Truespeech.title": "Kielten lahja -loitsu",
+		"JournalHighlight.title": "Muistiinpanon korostuksen peitto (%)",
+		"JournalHighlight.hint": "Määrittää muistiinpanon fonttien päälle tulevan korostuksen peiton.",
+		"logographicalFontToggle.title": "Logografiset fontit",
+		"logographicalFontToggle.hint": "Puolittaa logografisia fontteja (esim. japanilaiset, kiinalaiset merkit) käyttävien lauseiden pituuden.",
+		"DefaultLanguage.title": "Oletuskieli",
+		"DefaultLanguage.hint": "Valittavan oletuskielen nimi. Pidä tyhjänä, jos haluat käyttää järjestelmän oletusarvoa.",
+		"ReplaceLanguages.title": "Korvaa järjestelmän kielet",
+		"ScrambleGM.title": "PJ näkee sekoitetut viestit",
+		"ScrambleGM.hint": "Älä käännä tekstiä PJ:lle (katso maapallon väristä, mitä pelinappula ymmärtää). Vaatii uudelleenlataamisen.",
+		"Generic": {
+			"Language": "Kieli"
+		},
+		"enableAllFonts": {
+			"choices": {
+				"0": "Ei mitään",
+				"2": "Ytimen ylimääräiset fontit",
+				"3": "Molemmat",
+				"1": "Polyglot fontit"
+			}
+		},
+		"RandomizeRunesOptions": {
+			"a": "Oletus",
+			"b": "Uniikit fraasit",
+			"c": "Ei mitään ⚠️"
+		},
+		"ExportFonts.title": "Lisää Polyglotin fontit ytimeen",
+		"ExportFonts.hint": "Lisää Polyglotin fontit ytimen Ylimääräiset fontit -valikkoon.",
+		"DisplayTranslated.title": "Näytön käännökset",
+		"DefaultAlphabet": "Oletusaakkosto",
+		"FontSettings": "Fonttien asetukset",
+		"Languages.title": "Kielet",
+		"Font": "Fontti",
+		"Fonts": "Fontit",
+		"FontSize": "Fonttikoko (%)",
+		"CustomLanguages.hint": "Määritä pilkuilla erotettu luettelo mukautetuista kielistä, jotka lisätään järjestelmään.",
+		"Truespeech.hint": "Aseta kieli, jonka puhuja ymmärtää kaikkia puhuttuja kieliä (ei voi lukea muistiinpanoja) ja jota kaikki olennot ymmärtävät.",
+		"UESRPG.Language": "Kieli",
+		"ReplaceLanguages.hint": "Korvaa järjestelmän oletuskielet mukauttamallasi kielillä. Luettelon ensimmäisestä kielestä tulee uusi oletuskieli.",
+		"RandomizeRunes.hint": "Tämä määrittää, minkä tyyppistä satunnaislukugeneraattoria käytetään fraasin luomiseen. ⚠️ Vaihtoehto \"Ei mitään\" tukee vain aakkosnumeerisia merkkejä (ei aksentteja)."
+	}
+}
