@@ -8,7 +8,7 @@
 	"POLYGLOT.DefaultLanguage.title": "Langue par défaut",
 	"POLYGLOT.DefaultLanguage.hint": "Nom de la langue par défaut. Laisser vide pour choisir la langue du système.",
 	"POLYGLOT.ScrambleGM.title": "Crypter pour le MJ",
-	"POLYGLOT.ScrambleGM.hint": "Désactivez cette option pour toujours montrer le texte au MJ (se référer à la couleur du globle pour la compréhension normale de la langue)",
+	"POLYGLOT.ScrambleGM.hint": "Désactivez cette option pour toujours montrer le texte au MJ (se référer à la couleur du globle pour la compréhension normale de la langue). Nécessite un rechargement.",
 	"POLYGLOT.toggleRuneText.title": "Activer/Désactiver les runes pour les Journaux",
 	"POLYGLOT.toggleRuneText.hint": "Active/Désactive la visibilité des runes dans les Journaux.",
 	"POLYGLOT.RandomizeRunes.title": "Runes aléatoires",
@@ -20,13 +20,66 @@
 	"POLYGLOT.AllowOOC.title": "Crypter les messages non destinés à un personnage",
 	"POLYGLOT.AllowOOC.hint": "Permet au MJ de crypter tout les messages du tchat, y compris ceux non destinés aux personnages.",
 	"POLYGLOT.Translation": "Traduction",
-	"POLYGLOT.TranslatedFrom": "Traduit de  ",
+	"POLYGLOT.TranslatedFrom": "Traduit de ",
 	"POLYGLOT.LanguageLabel": "Langue",
 	"POLYGLOT.ToggleRunes": "Activer/Desactiver les Runes",
 	"POLYGLOT.Runes": "Runes",
-
 	"POLYGLOT.Generic": {
 		"Language": "Langue"
 	},
-	"POLYGLOT.WFRP4E.LanguageSkills": "Langue"
+	"POLYGLOT.WFRP4E.LanguageSkills": "Langue",
+	"POLYGLOT": {
+		"UESRPG.Language": "Langue",
+		"COC7": {
+			"LanguageOwn": "Langue",
+			"LanguageAny": "Langue",
+			"LanguageOther": "Langue",
+			"LanguageSpec": "Langue"
+		},
+		"DND5E": {
+			"SpecialLanguages.title": "Remplacer les Langues Spéciales"
+		},
+		"SWADE": {
+			"LanguageSkills": "Langues"
+		},
+		"Languages.title": "Langues",
+		"Fonts": "Polices",
+		"FontSize": "Taille de Police (%)",
+		"source": {
+			"name": "Type de Source"
+		},
+		"logographicalFontToggle.title": "Polices Logographiques",
+		"ReplaceLanguages.title": "Remplacer les Langues du Système",
+		"DefaultAlphabet": "Alphabet Défault",
+		"Font": "Police",
+		"enableAllFonts": {
+			"choices": {
+				"3": "Les Deux",
+				"0": "Rien",
+				"1": "Polices Polyglottes"
+			}
+		},
+		"RandomizeRunesOptions": {
+			"a": "Défault",
+			"b": "Phrases uniques",
+			"c": "Rien ⚠️"
+		},
+		"AllowOOCOptions": {
+			"a": "Tout",
+			"b": "MJ Seulement",
+			"c": "Joueurs Seulement",
+			"d": "Rien"
+		},
+		"LanguageProvider": {
+			"choices": {
+				"module": "[Module] {nom}",
+				"native": "Générique",
+				"system": "[Système] {nom}"
+			}
+		},
+		"LatinAlphabet": "Alphabet Latin",
+		"LanguageSettings": "Paramètres de Langue",
+		"FontSettings": "Paramètres de Police",
+		"AlphabetLabel": "Alphabet"
+	}
 }
