@@ -67,6 +67,11 @@
 			"lang": "it",
 			"name": "Italiano",
 			"path": "lang/it.json"
+		},
+		{
+			"lang": "fi",
+			"name": "Suomi",
+			"path": "lang/fi.json"
 		}
 	],
 	"url": "https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot",
