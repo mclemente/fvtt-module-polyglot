@@ -37,7 +37,8 @@
 			"LanguageSpec": "Langue"
 		},
 		"DND5E": {
-			"SpecialLanguages.title": "Remplacer les Langues Spéciales"
+			"SpecialLanguages.title": "Remplacer les Langues Spéciales",
+			"SpecialLanguages.hint": "Nom de la langue qui remplacera \"langues\" comme \"toutes les langues qu'il a connues dans la vie\"."
 		},
 		"SWADE": {
 			"LanguageSkills": "Langues"
@@ -53,8 +54,11 @@
 			"choices": {
 				"3": "Les Deux",
 				"0": "Rien",
-				"1": "Polices Polyglottes"
-			}
+				"1": "Polices Polyglottes",
+				"2": "Polices supplémentaires du Core"
+			},
+			"hint": "Ajouter les polices aux paramètres de police et de langue.",
+			"title": "Ajouter les polices aux paramètres de police et de langue"
 		},
 		"RandomizeRunesOptions": {
 			"a": "Défault",
@@ -72,11 +76,25 @@
 				"module": "[Module] {nom}",
 				"native": "Générique",
 				"system": "[Système] {nom}"
-			}
+			},
+			"name": "Fournisseur de paramètres de langue",
+			"hint": "Sélectionnez qui fournit des informations linguistiques pour les alphabets et les langues. D'autres fournisseurs de langues peuvent être mis à disposition via les systèmes de jeu et les modules installés. Les options ci-dessous dépendent du fournisseur de langue sélectionné ici. ⚠️ Si vous changez de fournisseur, vous devez enregistrer et rouvrir ces paramètres."
 		},
 		"LatinAlphabet": "Alphabet Latin",
 		"LanguageSettings": "Paramètres de Langue",
 		"FontSettings": "Paramètres de Police",
-		"AlphabetLabel": "Alphabet"
+		"AlphabetLabel": "Alphabet",
+		"ChatSettings": "Paramètres du chat",
+		"Languages.hint": "Modifie l'alphabet utilisé pour les langues. La réinitialisation aux valeurs par défaut déclenchera un rechargement.",
+		"HideTranslation.title": "Masquer les indicateurs aux joueurs",
+		"LanguageRegex": {
+			"title": "RegEx de langue",
+			"hint": "Vous pouvez l'utiliser pour changer le terme recherché sur les éléments de \"Langue\" à autre chose, comme \"Langage\"."
+		},
+		"ReplaceLanguages.hint": "Remplace les langues par défaut du système par vos langues personnalisées. La première langue de la liste devient la nouvelle langue par défaut.",
+		"JournalHighlight.hint": "Définit l'opacité du surlignage sur les polices du journal.",
+		"JournalHighlight.title": "Opacité du surlignage dans le journal (%)",
+		"logographicalFontToggle.hint": "Réduire de moitié la taille des phrases à l'aide de polices logographiques (par exemple, caractères japonais, chinois).",
+		"HideTranslation.hint": "Masque le globe et le texte \"Traduit de\" des messages de chat aux joueurs. Parfait lorsque vous ne voulez pas montrer aux joueurs quelle langue vous parlez. Déclenche un rechargement."
 	}
 }
