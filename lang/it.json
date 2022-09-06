@@ -68,7 +68,8 @@
 			"hint": "Seleziona la fonte delle informazioni per gli alfabeti e le lingue. Altre fonti possono essere rese disponibili tramite sistemi e moduli installati. Le opzioni sottostanti dipendono dalla fonte stabilita qui. ⚠️ Se cambi la fonte, devi salvare e riaprire queste impostazioni."
 		},
 		"LanguageRegex": {
-			"title": "RegEx lingua"
+			"title": "RegEx lingua",
+			"hint": "Puoi usare questa impostazione per cambiare il termine cercato tra gli oggetti da \"Lingua\" a qualcos'altro, come \"Linguaggio\"."
 		},
 		"Translation": "Traduzione",
 		"DefaultAlphabet": "Alfabeto predefinito",
@@ -77,6 +78,32 @@
 		"JournalHighlight.hint": "Definisci l'opacità dell'evidenziamento in un Dario.",
 		"ReplaceLanguages.hint": "Sostituisce le lingue predefinite del sistema con le tue lingue personalizzate. La prima della lista diventerà la nuova lingua predefinita.",
 		"RandomizeRunes.hint": "Questo determina che tipo di RNG viene usato per generare una frase. ⚠️ L'opzione \"Nessuno\" supporta solo caratteri alfanumerici (no accenti).",
-		"DisplayTranslated.hint": "Per le lingue che sono tradotte nella chat, mostra il testo originale con la traduzione sotto."
+		"DisplayTranslated.hint": "Per le lingue che sono tradotte nella chat, mostra il testo originale con la traduzione sotto.",
+		"Generic": {
+			"Language": "Lingua"
+		},
+		"UESRPG.Language": "Lingua",
+		"Runes": "Rune",
+		"ToggleRunes": "Attiva / disattiva rune",
+		"LatinAlphabet": "Alfabeto latino",
+		"AlphabetLabel": "Alfabeto",
+		"LanguageLabel": "Lingua",
+		"TranslatedFrom": "Tradotto dal ",
+		"SWADE": {
+			"LanguageSkills": "Lingua"
+		},
+		"DND5E": {
+			"SpecialLanguages.hint": "Nome della lingua che rimpiazzerà \"lingue\" come \"tutte le lingue conosciute in vita\".",
+			"SpecialLanguages.title": "Sostituisci lingue speciali"
+		},
+		"COC7": {
+			"LanguageSpec": "Lingua",
+			"LanguageOther": "Lingua",
+			"LanguageAny": "Lingua",
+			"LanguageOwn": "Lingua"
+		},
+		"WFRP4E": {
+			"LanguageSkills": "Lingua"
+		}
 	}
 }
