@@ -92,6 +92,9 @@
 		"SWADE": {
 			"LanguageSkills": "Idioma"
 		},
-		"Font": "Fonte"
+		"Font": "Fonte",
+		"WFRP4E": {
+			"LanguageSkills": "Idioma"
+		}
 	}
 }
