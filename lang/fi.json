@@ -89,6 +89,7 @@
 		"LanguageLabel": "Kieli",
 		"AlphabetLabel": "Aakkosto",
 		"LatinAlphabet": "Latinalaiset aakkoset",
-		"HideTranslation.hint": "Piilottaa maapallon ja Käännetty kielestä -tekstin pelaajille lähetetyistä keskusteluviesteistä. Täydellinen silloin, kun et halua näyttää pelaajille, mitä kieltä puhut. Vaatii uudelleenlatauksen."
+		"HideTranslation.hint": "Piilottaa maapallon ja Käännetty kielestä -tekstin pelaajille lähetetyistä keskusteluviesteistä. Täydellinen silloin, kun et halua näyttää pelaajille, mitä kieltä puhut. Vaatii uudelleenlatauksen.",
+		"Languages.hint": "Muuttaa kielissä käytettävää aakkostoa. Oletusasetusten palauttaminen lataa ne uudelleen."
 	}
 }
