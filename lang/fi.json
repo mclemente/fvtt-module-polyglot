@@ -32,7 +32,8 @@
 				"2": "Ytimen ylimääräiset fontit",
 				"3": "Molemmat",
 				"1": "Polyglot fontit"
-			}
+			},
+			"title": "Lisää fontit fontti- ja kieliasetuksiin"
 		},
 		"RandomizeRunesOptions": {
 			"a": "Oletus",
@@ -79,7 +80,8 @@
 		"LanguageProvider": {
 			"choices": {
 				"module": "[Moduuli] {name}",
-				"native": "Yleinen"
+				"native": "Yleinen",
+				"system": "[Järjestelmä] {name}"
 			},
 			"name": "Kieliasetusten tarjoaja"
 		},
@@ -90,6 +92,8 @@
 		"AlphabetLabel": "Aakkosto",
 		"LatinAlphabet": "Latinalaiset aakkoset",
 		"HideTranslation.hint": "Piilottaa maapallon ja Käännetty kielestä -tekstin pelaajille lähetetyistä keskusteluviesteistä. Täydellinen silloin, kun et halua näyttää pelaajille, mitä kieltä puhut. Vaatii uudelleenlatauksen.",
-		"Languages.hint": "Muuttaa kielissä käytettävää aakkostoa."
+		"Languages.hint": "Muuttaa kielissä käytettävää aakkostoa.",
+		"TranslatedFrom": "Käännetty kielestä ",
+		"Translation": "Käännös"
 	}
 }
