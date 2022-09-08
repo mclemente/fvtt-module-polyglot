@@ -5,7 +5,7 @@
 		"LanguageSettings": "Configurações de Idioma",
 		"ChatSettings": "Configurações de Chat",
 		"Languages.title": "Idiomas",
-		"Languages.hint": "Muda o alfabeto dos idiomas. Resetar irá recarregar.",
+		"Languages.hint": "Muda o alfabeto usado para os idiomas.",
 		"Fonts": "Fontes",
 		"CustomLanguages.title": "Idiomas Customizados",
 		"CustomLanguages.hint": "Defina uma lista de idiomas customizados para adicionar ao sistema, separados por vírgula.",
@@ -24,8 +24,8 @@
 		"ScrambleGM.title": "Embaralhar para o Mestre",
 		"ScrambleGM.hint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende). Recarregará o programa.",
 		"enableAllFonts": {
-			"title": "Adicionar Fontes às Configurações de Fonte e de Idioma",
-			"hint": "Adiciona fontes às Configurações de Fonte e de Idioma.",
+			"title": "Adicionar Fontes às Configurações do Módulo",
+			"hint": "Adiciona fontes das opções escolhidas às Configurações de Fonte e de Idioma.",
 			"choices": {
 				"0": "Nenhuma",
 				"1": "Fontes do Polyglot",
