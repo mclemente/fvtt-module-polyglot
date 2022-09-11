@@ -1,7 +1,6 @@
-import { currentLanguageProvider, registerModule, registerSystem } from "./api.js";
-import { LanguageProvider } from "./LanguageProvider.js";
-import { FONTS, FONTS_26, LOGOGRAPHICAL_FONTS } from "./Fonts.js";
-import { libWrapper } from "./shim.js";
+import {currentLanguageProvider, registerModule, registerSystem} from "./api.js";
+import {FONTS, FONTS_26, LOGOGRAPHICAL_FONTS} from "./Fonts.js";
+import {libWrapper} from "./shim.js";
 
 export class Polyglot {
 	init() {
@@ -345,8 +344,7 @@ export class Polyglot {
 	}
 
 	createChatMessage(chatEntity, _, userId) {
-		const chatData = chatEntity.data;
-		if (chatData.content.startsWith("<") || (chatData.type == CONST.CHAT_MESSAGE_TYPES.OOC && !this._allowOOC())) return;
+		if (chatEntity.content.startsWith("<") || (chatEntity.type === CONST.CHAT_MESSAGE_TYPES.OOC && !this._allowOOC())) return;
 	}
 	/**
 	 * Renders the messages, scrambling the text if it is not known by the user (or currently selected character)
@@ -440,7 +438,7 @@ export class Polyglot {
 				if (currentLanguageProvider.languages[data.lang]) var lang = data.lang;
 				else if (invertedLanguages[data.lang]) lang = invertedLanguages[data.lang];
 			} else if (!lang) lang = this.chatElement.find("select[name=polyglot-language]").val();
-			if (lang) document.data.update({ "flags.polyglot.language": lang });
+			if (lang) document.updateSource({ "flags.polyglot.language": lang });
 		}
 	}
 
@@ -543,8 +541,8 @@ export class Polyglot {
 			const message = game.messages.contents
 				.slice(-10)
 				.reverse()
-				.find((m) => m.data.content === messageContent);
-			if (message?.data.type == CONST.CHAT_MESSAGE_TYPES.IC) {
+				.find((m) => m.content === messageContent);
+			if (message?.type === CONST.CHAT_MESSAGE_TYPES.IC) {
 				let lang = message.getFlag("polyglot", "language") || "";
 				if (lang) {
 					const unknown = !this._isTruespeech(lang) && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
