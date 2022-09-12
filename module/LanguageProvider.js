@@ -90,7 +90,7 @@ export class LanguageProvider {
 		return {
 			LanguageRegex: {
 				type: String,
-				default: game.i18n.localize("POLYGLOT.Generic.Language"),
+				default: "",
 			},
 		};
 	}
@@ -329,8 +329,8 @@ export class LanguageProvider {
 			if (actor.system.languages.custom) {
 				for (let lang of actor.system.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
 			}
-		} else {
-			const languageRegex = game.settings.settings.get("polyglot", "LanguageRegex");
+		} else if (game.settings.settings.get("polyglot", "LanguageRegex")) {
+			const languageRegex = game.settings.get("polyglot", "LanguageRegex") || game.i18n.localize("POLYGLOT.Generic.Language");
 			let myRegex = new RegExp(languageRegex + "\\s*\\((.+)\\)", "i");
 			for (let item of actor.items) {
 				const name = item?.flags?.babele?.originalName || item.name;
@@ -1033,7 +1033,7 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 		return {
 			"DND5E.SpecialLanguages": {
 				type: String,
-				default: game.i18n.localize("DND5E.LanguagesCommon"),
+				default: "",
 			},
 		};
 	}
@@ -1050,7 +1050,8 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 		if (actor.system?.traits?.languages) {
 			for (let lang of actor.system.traits.languages.value) known_languages.add(lang);
 			if (actor.system.traits.languages.custom) {
-				const defaultSpecialLanguage = game.settings.get("polyglot", "DND5E.SpecialLanguages").trim().toLowerCase();
+				let defaultSpecialLanguage = game.settings.get("polyglot", "DND5E.SpecialLanguages") || game.i18n.localize("DND5E.LanguagesCommon");
+				defaultSpecialLanguage = defaultSpecialLanguage.trim().toLowerCase();
 				for (let lang of actor.system.traits.languages?.custom.split(/[;]/)) {
 					lang = lang.trim().toLowerCase();
 					if (lang.includes("usually common") || lang.includes("in life") || lang.includes("its creator")) {
@@ -1889,7 +1890,7 @@ export class swadeLanguageProvider extends LanguageProvider {
 		return {
 			LanguageRegex: {
 				type: String,
-				default: game.i18n.localize("POLYGLOT.SWADE.LanguageSkills"),
+				default: "",
 			},
 		};
 	}
@@ -2213,7 +2214,7 @@ export class warhammerLanguageProvider extends LanguageProvider {
 		return {
 			LanguageRegex: {
 				type: String,
-				default: game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills"),
+				default: "",
 			},
 		};
 	}
@@ -2227,7 +2228,8 @@ export class warhammerLanguageProvider extends LanguageProvider {
 		const langs = {};
 		const wfrp4ePack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
 		const wfrp4eItemList = await wfrp4ePack.getIndex();
-		let myRegex = new RegExp(game.settings.get("polyglot", "LanguageRegex") + "\\s*\\((.+)\\)", "i");
+		const languageRegex = game.settings.get("polyglot", "LanguageRegex") || game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills");
+		let myRegex = new RegExp(languageRegex + "\\s*\\((.+)\\)", "i");
 		for (let item of wfrp4eItemList) {
 			const match = item.name.match(myRegex);
 			if (match) {
@@ -2242,7 +2244,8 @@ export class warhammerLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		let myRegex = new RegExp(game.settings.get("polyglot", "LanguageRegex") + "\\s*\\((.+)\\)", "i");
+		const languageRegex = game.settings.get("polyglot", "LanguageRegex") || game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills");
+		let myRegex = new RegExp(languageRegex + "\\s*\\((.+)\\)", "i");
 		for (let item of actor.data.items) {
 			const match = item.name.match(myRegex);
 			// adding only the descriptive language name, not "Language (XYZ)"
