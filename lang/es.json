@@ -9,43 +9,43 @@
 		"LanguageSettings": "Ajustes de idiomas",
 		"ChatSettings": "Ajustes del chat",
 		"Languages.title": "Idiomas",
-		"Languages.hint": "Cambia el alfabeto de los idiomas. Volver a los valores por defecto recargará",
+		"Languages.hint": "Cambia el alfabeto de los idiomas.",
 		"Font": "Fuente",
 		"Fonts": "Fuentes",
 		"FontSize": "Tamaño de fuente (%)",
 		"CustomLanguages.title": "Idiomas personalizados",
-		"CustomLanguages.hint": "Define una lista de idiomas personalizados, separados mediante coma, para que sean añadidos al sistema",
+		"CustomLanguages.hint": "Define una lista de idiomas personalizados, separados mediante coma, para que sean añadidos al sistema.",
 		"ComprehendLanguages.title": "Hechizo Comprender Idiomas",
-		"ComprehendLanguages.hint": "Tal y como funciona el hechizo de D&D Comprender Idiomas. No se podrá usar ni para hablar ni para leer, pero permitirá a quien lo posea entender todos los idiomas disponibles",
+		"ComprehendLanguages.hint": "Define un idioma que permite al hablante entender todos los idiomas, pero que no puede ser escrito ni hablado.",
 		"JournalHighlight.title": "Opacidad del resaltado en los diarios (%)",
-		"JournalHighlight.hint": "Define la opacidad del resaltado de las fuentes en el diario",
+		"JournalHighlight.hint": "Define la opacidad del resaltado de las fuentes en el diario.",
 		"logographicalFontToggle.title": "Fuentes logográficas",
-		"logographicalFontToggle.hint": "Reduce a la mitad el tamaño de las frases usando fuentes logográficas (p.ej. caracteres japoneseso chinos)",
+		"logographicalFontToggle.hint": "Reduce a la mitad el tamaño de las frases que usen fuentes logográficas (p. ej. caracteres japoneses o chinos).",
 		"Truespeech.title": "Hechizo Idiomas",
-		"Truespeech.hint": "Tal y como funciona el hechizo de D&D Idiomas. El que lo posea podrá entender todos los idiomas hablados (pero no podrá leer diarios) y también le entenderán todas las criaturas",
+		"Truespeech.hint": "Define un idioma que permite al hablante entender todos los idiomas hablados (no puede leer Diarios), y que es entendido por todas las criaturas.",
 		"DefaultLanguage.title": "Idioma por defecto",
-		"DefaultLanguage.hint": "Nombre del idioma que se selecciona por defecto. Dejar en blanco para utilizar el valor por defecto del sistema",
+		"DefaultLanguage.hint": "Nombre del idioma que se selecciona por defecto. Dejar en blanco para utilizar el valor por defecto del sistema.",
 		"ReplaceLanguages.title": "Reemplazar idiomas del sistema",
-		"ReplaceLanguages.hint": "Reemplaza el idioma por defecto del sistema por sus idiomas personalizados. El primer idioma personalizado de la lista se convertirá en el nuevo idioma por defecto",
+		"ReplaceLanguages.hint": "Reemplaza el idioma por defecto del sistema por sus idiomas personalizados. El primer idioma personalizado de la lista se convertirá en el nuevo idioma por defecto.",
 		"ScrambleGM.title": "Codificar para el GM",
-		"ScrambleGM.hint": "Deshabilite esta opción para mostrar siempre el texto para el GM (remítase al color del globo para ver la perspectiva del icono)",
-		"enableAllFonts.title": "Añadir fuentes de los ajustes de idioma",
-		"enableAllFonts.hint": "Se usarán todas las fuentes",
+		"ScrambleGM.hint": "No traducir el texto para el DJ (remítase al color del globo para ver la perspectiva del icono). Requiere recargar la página.",
+		"enableAllFonts.title": "Añadir fuentes a los Ajustes de Módulos",
+		"enableAllFonts.hint": "Añade las fuentes de las opciones seleccionadas a los Ajustes de Fuente e Idioma.",
 		"RandomizeRunes.title": "Aleatorizar las runas",
-		"RandomizeRunes.hint": "Habilitar esta opción ocasiona que los textos codificados se vean siempre de forma distinta, aunque se repita el mismo mensaje",
+		"RandomizeRunes.hint": "Determina el tipo de aleatoriedad (RNG) utilizada para generar un frase. ⚠️ La opción \"Ninguno\" sólo admite carácteres alfanuméricos (sin acentos).",
 		"RandomizeRunesOptions": {
 			"a": "Por defecto",
 			"b": "Frases únicas",
 			"c": "Ninguna ⚠️"
 		},
-		"ExportFonts.title": "Habilitar la tipografía",
-		"ExportFonts.hint": "Permite que Foundry pueda usar la tipografía de Polyglot (por ejemplo, al crear dibujos)",
+		"ExportFonts.title": "Añade las fuentes de Polyglot al Núcleo",
+		"ExportFonts.hint": "Añade las fuentes de Polyglot al menú de Fuentes Adicionales del Núcleo.",
 		"DisplayTranslated.title": "Mostrar traducciones",
-		"DisplayTranslated.hint": "Para los idiomas que se traducen en el chat, muestra el texto original y a continuación la traducción",
+		"DisplayTranslated.hint": "Para los idiomas que se traducen en el chat, muestra el texto original y a continuación la traducción.",
 		"HideTranslation.title": "Ocultar a los jugadores los globos y el texto \"Traducido del\"",
-		"HideTranslation.hint": "Oculta el globo y el texto \"Traducido del\" del chat a los jugadores. Se usa para cuando no se quiere que los jugadores sepan en qué idioma se está hablando",
+		"HideTranslation.hint": "Oculta el globo y el texto \"Traducido del\" del chat a los jugadores. Se usa para cuando no se quiere que los jugadores sepan en qué idioma se está hablando. Requiere recargar la página.",
 		"AllowOOC.title": "Aleatorizar en mensajes Como Jugador (OOC)",
-		"AllowOOC.hint": "Permite que el GM pueda aleatorizar los mensajes cuando utiliza mensajes de chat Como Jugador (OOC)",
+		"AllowOOC.hint": "Determina qué usuarios tendrán sus mensajes codificados al utilizar el chat como jugador. OOC = Fuera de Personaje (Out of Character).",
 		"AllowOOCOptions": {
 			"a": "Todos",
 			"b": "Solo GM",
@@ -54,7 +54,7 @@
 		},
 		"LanguageProvider": {
 			"name": "Proveedor de ajustes de idioma",
-			"hint": "Seleccione quien provee información de alfabetos e idiomas. Se pueden habilitar más proveedores instalando módulos y sistemas. Las opciones que aparecen más abajo dependerán del proveedor seleccionado. ⚠️ Si cambia el proveedor, deberá guardar los cambios y volver a abrir la ventana de configuración",
+			"hint": "Seleccione quien provee información de alfabetos e idiomas. Se pueden habilitar más proveedores instalando módulos y sistemas. Las opciones que aparecen más abajo dependerán del proveedor seleccionado. ⚠️ Si cambia el proveedor, deberá guardar los cambios y volver a abrir la ventana de configuración.",
 			"choices": {
 				"module": "[Módulo] {name}",
 				"native": "Genérico",
@@ -63,7 +63,7 @@
 		},
 		"LanguageRegex": {
 			"title": "RegEx de idioma",
-			"hint": "Se puede usar para cambiar el modo en el que se buscan idiomas, usando \"Languages\" o cualquier otra cosa. Por ejemplo, \"Idioma\" para Español/Portugués, o \"Sprache\" para Alemán. Este ajuste es útil principalmente para idiomas distinto al inglés"
+			"hint": "Se puede usar para cambiar el término de búsqueda en los objetos de \"Idioma\" a otro diferente, como \"Lengua\"."
 		},
 		"Translation": "Traducción",
 		"TranslatedFrom": "Traducido del ",
@@ -91,6 +91,14 @@
 		},
 		"WFRP4E": {
 			"LanguageSkills": "Idioma"
+		},
+		"enableAllFonts": {
+			"choices": {
+				"0": "Ninguno",
+				"1": "Fuentes de Polyglot",
+				"2": "Fuentes adicionales del Núcleo",
+				"3": "Ambos"
+			}
 		}
 	}
 }

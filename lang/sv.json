@@ -1,0 +1,100 @@
+{
+	"POLYGLOT": {
+		"Languages.hint": "Ändrar alfabetet som används för språken. Återställning till standardinställningarna laddar om.",
+		"enableAllFonts": {
+			"choices": {
+				"0": "Ingen",
+				"1": "Polyglot's Teckensnitt",
+				"2": "Foundry's Extrafonter",
+				"3": "Bägge"
+			},
+			"title": "Lägg till teckensnitt i teckensnitts- och språkinställningarna",
+			"hint": "Lägg till teckensnitt i teckensnitts- och språkinställningarna."
+		},
+		"LanguageProvider": {
+			"choices": {
+				"module": "[Modul] {name}",
+				"native": "Generisk",
+				"system": "[System] {name}"
+			},
+			"name": "Provider av språkinställningar",
+			"hint": "Välj vem som tillhandahåller språkinformation för alfabet och språk. Fler språkleverantörer kan göras tillgängliga via spelsystem och installerade moduler. Alternativen nedan beror på vilken språkleverantör som väljs här. ⚠️ Om du byter leverantör har du för att spara och öppna dessa inställningar igen."
+		},
+		"UESRPG.Language": "Språk",
+		"COC7": {
+			"LanguageOwn": "Språk",
+			"LanguageAny": "Språk",
+			"LanguageOther": "Språk",
+			"LanguageSpec": "Språk"
+		},
+		"DND5E": {
+			"SpecialLanguages.title": "Ersätt specialspråk",
+			"SpecialLanguages.hint": "Namnet på språket som kommer att ersätta \"språk\" som \"alla språk det kunde i livet\"."
+		},
+		"SWADE": {
+			"LanguageSkills": "Språk"
+		},
+		"WFRP4E": {
+			"LanguageSkills": "Språk"
+		},
+		"Runes": "Runor",
+		"Generic": {
+			"Language": "Språk"
+		},
+		"DefaultAlphabet": "Standardalfabet",
+		"FontSettings": "Teckensnittsinställningar",
+		"LanguageSettings": "Språkinställningar",
+		"ChatSettings": "Chatinställningar",
+		"Languages.title": "Språk",
+		"Font": "Teckensnitt",
+		"Fonts": "Teckensnitt",
+		"FontSize": "Teckenstorlek (%)",
+		"CustomLanguages.title": "Anpassade språk",
+		"CustomLanguages.hint": "Definiera en lista över anpassade, kommaseparerade språk att lägga till i systemet.",
+		"ComprehendLanguages.title": "Magiformeln Förstå Språk",
+		"ComprehendLanguages.hint": "Sätt ett språk vars talare förstår alla andra språk, men som inte kan talas eller skrivas.",
+		"Truespeech.title": "Tala i tungor",
+		"Truespeech.hint": "Sätt ett språk vars talare förstår alla talade språk (kan inte läsa jJurnaler) och som förstås av alla varelser.",
+		"JournalHighlight.title": "Journalmarkering Opacitet (%)",
+		"JournalHighlight.hint": "Definierar opaciteten för markeringen över teckensnitt på journalen.",
+		"logographicalFontToggle.title": "Logografiska teckensnitt",
+		"logographicalFontToggle.hint": "Halverar storleken på fraser med hjälp av logografiska teckensnitt (t.ex. japanska, kinesiska tecken).",
+		"DefaultLanguage.title": "Standardspråk",
+		"DefaultLanguage.hint": "Namnet på standardspråket att välja. Lämna tomt för att använda systemets standard.",
+		"ReplaceLanguages.title": "Ersätt systemets språk",
+		"ReplaceLanguages.hint": "Ersätter systemets standardspråk med dina anpassade språk. Det första språket på listan blir det nya standardspråket.",
+		"ScrambleGM.title": "Förvräng meddelanden för SL",
+		"ScrambleGM.hint": "Översätt inte texten för SL (se globens färg för att se vad spelfigur förstår). Kräver omladdning.",
+		"RandomizeRunes.title": "Randomisera runor",
+		"RandomizeRunes.hint": "Detta avgör vilken typ av slumpgenerator som används för att generera en fras. ⚠️ Alternativet \"Ingen\" stöder endast alfanumeriska tecken (inga accenter).",
+		"RandomizeRunesOptions": {
+			"a": "Standard",
+			"b": "Unika fraser",
+			"c": "Inga ⚠️"
+		},
+		"ExportFonts.title": "Lägg till Polyglots teckensnitt till Foundry",
+		"ExportFonts.hint": "Lägg till Polyglots teckensnitt till Foundry meny för ytterligare teckensnitt.",
+		"DisplayTranslated.title": "Visa översättningar",
+		"DisplayTranslated.hint": "För språk som är översatta i chattfönstret, visa originaltexten och en översättning nedan.",
+		"HideTranslation.title": "Dölj indikatorer från spelare",
+		"AllowOOC.title": "Förvräng OOC Chat Messages",
+		"AllowOOC.hint": "Välj vems användare som ska få sina meddelanden förvrängda. OOC = Utan karaktär.",
+		"AllowOOCOptions": {
+			"a": "Alla",
+			"b": "Endast GM",
+			"c": "Endast spelare",
+			"d": "Ingen"
+		},
+		"LanguageRegex": {
+			"title": "Språkregex",
+			"hint": "Du kan använda detta för att ändra termen som söks på objekt från \"Språk\" till något annat, som \"Tungomål\". Den här inställningen är mer användbar för icke-engelsktalande."
+		},
+		"Translation": "Översättning",
+		"TranslatedFrom": "Översatt från ",
+		"LanguageLabel": "Språk",
+		"LatinAlphabet": "Latinska alfabetet",
+		"ToggleRunes": "Växla runor",
+		"HideTranslation.hint": "Döljer globen och texten \"Översatt från\" i chattmeddelanden till spelare. Perfekt för när du inte vill visa spelare vilket språk du talar. Kräver omladdning.",
+		"AlphabetLabel": "Alfabet"
+	}
+}
