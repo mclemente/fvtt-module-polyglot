@@ -32,7 +32,8 @@
 				"2": "Ytimen ylimääräiset fontit",
 				"3": "Molemmat",
 				"1": "Polyglot fontit"
-			}
+			},
+			"title": "Lisää fontit fontti- ja kieliasetuksiin"
 		},
 		"RandomizeRunesOptions": {
 			"a": "Oletus",
@@ -52,6 +53,47 @@
 		"Truespeech.hint": "Aseta kieli, jonka puhuja ymmärtää kaikkia puhuttuja kieliä (ei voi lukea muistiinpanoja) ja jota kaikki olennot ymmärtävät.",
 		"UESRPG.Language": "Kieli",
 		"ReplaceLanguages.hint": "Korvaa järjestelmän oletuskielet mukauttamallasi kielillä. Luettelon ensimmäisestä kielestä tulee uusi oletuskieli.",
-		"RandomizeRunes.hint": "Tämä määrittää, minkä tyyppistä satunnaislukugeneraattoria käytetään fraasin luomiseen. ⚠️ Vaihtoehto \"Ei mitään\" tukee vain aakkosnumeerisia merkkejä (ei aksentteja)."
+		"RandomizeRunes.hint": "Tämä määrittää, minkä tyyppistä satunnaislukugeneraattoria käytetään fraasin luomiseen. ⚠️ Vaihtoehto \"Ei mitään\" tukee vain aakkosnumeerisia merkkejä (ei aksentteja).",
+		"SWADE": {
+			"LanguageSkills": "Kieli"
+		},
+		"WFRP4E": {
+			"LanguageSkills": "Kieli"
+		},
+		"DND5E": {
+			"SpecialLanguages.title": "Korvaa erikoiset kielet",
+			"SpecialLanguages.hint": "Kielen nimi, joka korvaa \"kielet\" kuten \"kaikki kielet, jotka se osasi elämässään\"."
+		},
+		"COC7": {
+			"LanguageSpec": "Kieli",
+			"LanguageOwn": "Kieli",
+			"LanguageAny": "Kieli",
+			"LanguageOther": "Kieli"
+		},
+		"DisplayTranslated.hint": "Näytä alkuperäinen teksti ja käännös sen alapuolella keskusteluikkunassa käännetyille kielille.",
+		"HideTranslation.title": "Piilota ilmaisimet pelaajilta",
+		"AllowOOCOptions": {
+			"b": "Vain PJ",
+			"c": "Vain pelaajat",
+			"d": "Ei mitään"
+		},
+		"LanguageProvider": {
+			"choices": {
+				"module": "[Moduuli] {name}",
+				"native": "Yleinen",
+				"system": "[Järjestelmä] {name}"
+			},
+			"name": "Kieliasetusten tarjoaja"
+		},
+		"LanguageRegex": {
+			"title": "Kielen RegEx"
+		},
+		"LanguageLabel": "Kieli",
+		"AlphabetLabel": "Aakkosto",
+		"LatinAlphabet": "Latinalaiset aakkoset",
+		"HideTranslation.hint": "Piilottaa maapallon ja Käännetty kielestä -tekstin pelaajille lähetetyistä keskusteluviesteistä. Täydellinen silloin, kun et halua näyttää pelaajille, mitä kieltä puhut. Vaatii uudelleenlatauksen.",
+		"Languages.hint": "Muuttaa kielissä käytettävää aakkostoa.",
+		"TranslatedFrom": "Käännetty kielestä ",
+		"Translation": "Käännös"
 	}
 }
