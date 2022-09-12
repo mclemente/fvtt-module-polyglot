@@ -402,7 +402,9 @@ export class a5eLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get settings() {}
+	get settings() {
+		return {};
+	}
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
@@ -472,7 +474,9 @@ export class ariaLanguageProvider extends LanguageProvider {
 			altanegrais: "alta",
 		};
 	}
-	get settings() {}
+	get settings() {
+		return {};
+	}
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
@@ -664,7 +668,9 @@ export class cyberpunkRedLanguageProvider extends LanguageProvider {
 }
 
 export class d35eLanguageProvider extends LanguageProvider {
-	get settings() {}
+	get settings() {
+		return {};
+	}
 	get originalAlphabets() {
 		return {
 			common: "130% Thorass",
@@ -754,7 +760,9 @@ export class darkHeresyLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get settings() {}
+	get settings() {
+		return {};
+	}
 
 	getSystemDefaultLanguage() {
 		return "lowGothic";
@@ -816,7 +824,9 @@ export class dccLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get settings() {}
+	get settings() {
+		return {};
+	}
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
@@ -882,7 +892,9 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		return true;
 	}
 
-	get settings() {}
+	get settings() {
+		return {};
+	}
 
 	getSystemDefaultLanguage() {
 		return "Common Tongue";
@@ -944,7 +956,9 @@ export class dnd4eLanguageProvider extends LanguageProvider {
 			supernal: "celestial",
 		};
 	}
-	get settings() {}
+	get settings() {
+		return {};
+	}
 
 	addToConfig(key, lang) {
 		CONFIG.DND4EBETA.spoken[key] = lang;
@@ -1159,7 +1173,9 @@ export class dsa5LanguageProvider extends LanguageProvider {
 		return true;
 	}
 
-	get settings() {}
+	get settings() {
+		return {};
+	}
 
 	getSystemDefaultLanguage() {
 		return "garethi";
@@ -1271,7 +1287,9 @@ export class dsa5LanguageProvider extends LanguageProvider {
 }
 
 export class fggLanguageProvider extends LanguageProvider {
-	get settings() {}
+	get settings() {
+		return {};
+	}
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
@@ -1391,7 +1409,9 @@ export class kryxrpgLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get settings() {}
+	get settings() {
+		return {};
+	}
 }
 
 export class oseLanguageProvider extends LanguageProvider {
@@ -1441,7 +1461,9 @@ export class oseLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get settings() {}
+	get settings() {
+		return {};
+	}
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
@@ -1555,7 +1577,9 @@ export class pf1LanguageProvider extends LanguageProvider {
 			vudrani: "garundi",
 		};
 	}
-	get settings() {}
+	get settings() {
+		return {};
+	}
 }
 
 export class pf2eLanguageProvider extends LanguageProvider {
@@ -1657,7 +1681,9 @@ export class pf2eLanguageProvider extends LanguageProvider {
 			vudrani: "garundi",
 		};
 	}
-	get settings() {}
+	get settings() {
+		return {};
+	}
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const langs = {};
@@ -1757,7 +1783,9 @@ export class sfrpgLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get settings() {}
+	get settings() {
+		return {};
+	}
 }
 
 export class shadowrun5eLanguageProvider extends LanguageProvider {
@@ -1794,7 +1822,9 @@ export class shadowrun5eLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get settings() {}
+	get settings() {
+		return {};
+	}
 
 	getSystemDefaultLanguage() {
 		return "cityspeak";
@@ -1831,7 +1861,9 @@ export class shadowrun5eLanguageProvider extends LanguageProvider {
 }
 
 export class splittermondLanguageProvider extends LanguageProvider {
-	get settings() {}
+	get settings() {
+		return {};
+	}
 
 	getUserLanguages(actor) {
 		let known_languages = new Set();
@@ -1991,7 +2023,9 @@ export class sw5eLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get settings() {}
+	get settings() {
+		return {};
+	}
 
 	getSystemDefaultLanguage() {
 		return "basic";
@@ -2036,7 +2070,9 @@ export class tormenta20LanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get settings() {}
+	get settings() {
+		return {};
+	}
 
 	getSystemDefaultLanguage() {
 		return "comum";
@@ -2095,7 +2131,9 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	get settings() {}
+	get settings() {
+		return {};
+	}
 
 	getSystemDefaultLanguage() {
 		return "cyrodilic";

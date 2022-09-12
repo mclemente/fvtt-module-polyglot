@@ -185,7 +185,7 @@ export function registerSettings() {
 //Language Provider Settings
 export function registerProviderSettings() {
 	const systemSpecificSettings = currentLanguageProvider.settings;
-	if (systemSpecificSettings && Object.keys(systemSpecificSettings).length) {
+	if (Object.keys(systemSpecificSettings).length) {
 		for (let [key, data] of Object.entries(systemSpecificSettings)) {
 			addSetting(key, data);
 		}
