@@ -1,3 +1,9 @@
+# System Support
+
+If you want to add support for a system, be sure to check the [API page](/wiki/API).
+
+The guide assumes you're contributing the code to another module or system. If you want to contribute to this project, you will still need to create a subclass, but you should add it to [LanguageProvider.js](/module/LanguageProvider.js) and its name to the import list on [api.js](module/api.js).
+
 # Translations
 
 Polyglot is available in the follwing languages:
