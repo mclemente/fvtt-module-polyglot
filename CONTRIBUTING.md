@@ -1,29 +1,32 @@
+# System Support
+
+If you want to add support for a system, be sure to check the [API page](../../wiki/API).
+
+The guide assumes you're contributing the code to another module or system. If you want to contribute to this project, you will still need to create a subclass, but you should add it to [LanguageProvider.js](/module/LanguageProvider.js) and its name to the import list on [api.js](module/api.js).
+
 # Translations
 
-Polyglot is available in the follwing languages:
+<img src="https://weblate.foundryvtt-hub.com/widgets/polyglot/-/multi-auto.svg" alt="Translation status" />
 
--   Brazilian Portuguese
--   Czech, thanks to [@KarelZavicak](https://github.com/KarelZavicak)
+Polyglot is available in the following languages:
+
+-   Czech, thanks to [KarelZavicak](https://github.com/KarelZavicak)
 -   English
--   French, thanks to [@sladecraven](https://github.com/sladecraven)
--   German, thanks to [@Nyhles](https://github.com/Nyhles)
+-   Finnish, thanks to [Demian Wright](https://github.com/DemianWright)
+-   French, thanks to [sladecraven](https://github.com/sladecraven)
+-   German, thanks to [Nyhles](https://github.com/Nyhles)
+-   Italian, thanks to [EldritchTranslator](https://github.com/EldritchTranslator)
 -   Japanese, thanks to [BrotherSharper](https://github.com/BrotherSharper)
--   Korean, thanks to [@drdwing](https://github.com/drdwing)
+-   Korean, thanks to [drdwing](https://github.com/drdwing)
 -   Polish, thanks to [MichalGolaszewski](https://github.com/MichalGolaszewski)
--   Spanish, thanks to [@juanfrank](https://github.com/juanfrank) and [@lozalojo](https://github.com/lozalojo)
+-   Portuguese (Brazil)
+-   Spanish, thanks to [juanfrank](https://github.com/juanfrank) and [lozalojo](https://github.com/lozalojo)
+-   Swedish, thanks to [Jonas Karlsson](https://github.com/xdy)
 
 ## Contributing
 
-In case you try to make a translation, here are some hints:
-
-`Comprehend Languages` and `Tongues` should not be translated directly. They are named after the D&D spells and their names differs from language to language.
-
-`POLYGLOT.Translation` is meant to appear when the character understands the language but don't know what it is (i.e. under the effects of a spell that let's them understand it).
-
-`POLYGLOT.ToggleRunes` is meant to appear on the header of a Journal window.
+If you want to contribute with any translation, check out [Polyglot's Weblate page](https://weblate.foundryvtt-hub.com/engage/polyglot/).
 
 ### System Specific Translations
 
-`POLYGLOT.COC7.LanguageOwn`, `POLYGLOT.COC7.LanguageAny`, `POLYGLOT.COC7.LanguageOther` and `POLYGLOT.COC7.LanguageSpec` should use their equivalents on your language's Babele translation.
-
-`POLYGLOT.SWADE.LanguageSkills`, `POLYGLOT.WFRP4E.LanguageSkills` need to use the name used on their actual translations, otherwise it won't work. For example, COC7's Portuguese translation uses `Outros Línguas`, while WFRP4E's French translation uses `Langue`.
+Some translations are specific to a system (e.g. `COC7`, `SWADE`, and `WFRP4E`. When in doubt about its translation, check up with other translators of the system or the Babele module's translation.
