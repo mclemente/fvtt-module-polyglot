@@ -20,7 +20,7 @@ Polyglot is available in the following languages:
 -   Korean, thanks to [drdwing](https://github.com/drdwing)
 -   Polish, thanks to [MichalGolaszewski](https://github.com/MichalGolaszewski)
 -   Portuguese (Brazil)
--   Spanish, thanks to [juanfrank](https://github.com/juanfrank) and [lozalojo](https://github.com/lozalojo)
+-   Spanish, thanks to [juanfrank](https://github.com/juanfrank), [lozalojo](https://github.com/lozalojo), [GoR](github.com/Git-GoR)
 -   Swedish, thanks to [Jonas Karlsson](https://github.com/xdy)
 
 ## Contributing
