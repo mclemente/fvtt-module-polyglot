@@ -6,7 +6,9 @@ The guide assumes you're contributing the code to another module or system. If y
 
 # Translations
 
+<a href="https://weblate.foundryvtt-hub.com/engage/polyglot/">
 <img src="https://weblate.foundryvtt-hub.com/widgets/polyglot/-/multi-auto.svg" alt="Translation status" />
+</a>
 
 Polyglot is available in the following languages:
 
