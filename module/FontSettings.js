@@ -11,7 +11,7 @@ export class PolyglotFontSettings extends FormApplication {
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
 			id: "polyglot-font-form",
-			title: "Polyglot Language Settings",
+			title: "Polyglot Font Settings",
 			template: "./modules/polyglot/templates/FontSettings.hbs",
 			classes: ["sheet polyglot-font-settings"],
 			width: 600,
