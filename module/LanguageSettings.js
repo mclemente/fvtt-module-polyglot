@@ -32,14 +32,14 @@ export class PolyglotLanguageSettings extends FormApplication {
 			const type = provider.id.substring(0, dotPosition);
 			const id = provider.id.substring(dotPosition + 1);
 			if (type === "native") {
-				let title = id == game.system.id ? game.system.data.title : id;
+				let title = id == game.system.id ? game.system.title : id;
 				provider.selectTitle = (game.i18n.localize("POLYGLOT.LanguageProvider.choices.native") + " " + title).trim();
 			} else {
 				let name;
 				if (type === "module") {
-					name = game.modules.get(id).data.title;
+					name = game.modules.get(id).title;
 				} else {
-					name = game.system.data.title;
+					name = game.system.title;
 				}
 				provider.selectTitle = game.i18n.format(`POLYGLOT.LanguageProvider.choices.${type}`, { name });
 			}
