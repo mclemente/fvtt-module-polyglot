@@ -90,7 +90,7 @@ export function registerSettings() {
 	});
 	addSetting("enableAllFonts", {
 		config: !currentLanguageProvider.isGeneric,
-		default: false,
+		default: 0,
 		type: Number,
 		choices: {
 			0: game.i18n.localize("POLYGLOT.enableAllFonts.choices.0"),
@@ -106,7 +106,7 @@ export function registerSettings() {
 	addSetting("exportFonts", {
 		name: "POLYGLOT.ExportFonts.title",
 		hint: "POLYGLOT.ExportFonts.hint",
-		default: true,
+		default: false,
 		type: Boolean,
 		onChange: (value) => game.polyglot.updateConfigFonts(value),
 	});
