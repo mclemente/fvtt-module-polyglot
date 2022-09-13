@@ -74,6 +74,14 @@ export function registerSettings() {
 			c: game.i18n.localize("POLYGLOT.RandomizeRunesOptions.c"),
 		},
 	});
+	addSetting("RuneRegex", {
+		default: false,
+		type: Boolean,
+	});
+	addSetting("IgnoreJournalFontSize", {
+		default: false,
+		type: Boolean,
+	});
 	addSetting("logographicalFontToggle", {
 		name: "POLYGLOT.logographicalFontToggle.title",
 		hint: "POLYGLOT.logographicalFontToggle.hint",

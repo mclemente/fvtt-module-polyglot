@@ -5,70 +5,80 @@
 		"LanguageSettings": "Language Settings",
 		"ChatSettings": "Chat Settings",
 		"Languages.title": "Languages",
-		"Languages.hint": "Changes the alphabet used for the languages.",
+		"Languages.hint": "Changes the alphabet used for the languages. Reseting to defaults will reload.",
 		"Font": "Font",
 		"Fonts": "Fonts",
 		"FontSize": "Font Size (%)",
-		"CustomLanguages.title": "Custom Languages",
-		"CustomLanguages.hint": "Define a list of custom, comma separated, languages to add to the system.",
-		"ComprehendLanguages.title": "Comprehend Languages Spell",
-		"ComprehendLanguages.hint": "Set a language whose speaker understands all other languages, but that can't be spoken or written.",
-		"Truespeech.title": "Tongues Spell",
-		"Truespeech.hint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures.",
-		"JournalHighlight.title": "Journal Highlight Opacity (%)",
-		"JournalHighlight.hint": "Defines the opacity of the highlight over fonts on the journal.",
-		"logographicalFontToggle.title": "Logographical Fonts",
-		"logographicalFontToggle.hint": "Halves the size of phrases using Logographical fonts (e.g. Japanese, Chinese characters).",
-		"DefaultLanguage.title": "Default Language",
-		"DefaultLanguage.hint": "Name of the default language to select. Keep empty to use system default.",
-		"ReplaceLanguages.title": "Replace System's Languages",
-		"ReplaceLanguages.hint": "Replaces the system's default languages with your Custom Languages. The first language on the list becomes the new default language.",
-		"ScrambleGM.title": "Scramble Messages for GM",
-		"ScrambleGM.hint": "Don't translate the text for the GM (refer to the globe's color for the token's understanding). Requires reload.",
-		"enableAllFonts": {
-			"title": "Add Fonts to Module Settings",
-			"hint": "Adds fonts from the chosen sources to the Font Settings and Language Settings.",
-			"choices": {
-				"0": "None",
-				"1": "Polyglot's Fonts",
-				"2": "Core's Additional Fonts",
-				"3": "Both"
-			}
-		},
-		"RandomizeRunes.title": "Randomize Runes",
-		"RandomizeRunes.hint": "This determines which type of RNG is used to generate a phrase. ⚠️ The \"None\" option only supports Alphanumeric characters (no accents).",
-		"RandomizeRunesOptions": {
-			"a": "Default",
-			"b": "Unique phrases",
-			"c": "None ⚠️"
-		},
-		"ExportFonts.title": "Add Polyglot's fonts to Core",
-		"ExportFonts.hint": "Add Polyglot's fonts to Core's Additional Fonts menu.",
-		"DisplayTranslated.title": "Display Translations",
-		"DisplayTranslated.hint": "For languages that are translated in the chat window, display the original text and a translation below.",
-		"HideTranslation.title": "Hide Indicators from Players",
-		"HideTranslation.hint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Perfect for when you don't want to show players which language you are speaking. Requires reload.",
-		"AllowOOC.title": "Scramble OOC Chat Messages",
+
 		"AllowOOC.hint": "Choose whose users should have their messages scrambled. OOC = Out of Character.",
+		"AllowOOC.title": "Scramble OOC Chat Messages",
 		"AllowOOCOptions": {
 			"a": "All",
 			"b": "GM Only",
 			"c": "Players Only",
 			"d": "None"
 		},
+		"ComprehendLanguages.hint": "Set a language whose speaker understands all other languages, but that can't be spoken or written.",
+		"ComprehendLanguages.title": "Comprehend Languages Spell",
+		"CustomLanguages.hint": "Define a list of custom, comma separated, languages to add to the system.",
+		"CustomLanguages.title": "Custom Languages",
+		"DefaultLanguage.hint": "Name of the default language to select. Keep empty to use system default.",
+		"DefaultLanguage.title": "Default Language",
+		"DisplayTranslated.hint": "For languages that are translated in the chat window, display the original text and a translation below.",
+		"DisplayTranslated.title": "Display Translations",
+		"enableAllFonts": {
+			"choices": {
+				"0": "None",
+				"1": "Polyglot's Fonts",
+				"2": "Core's Additional Fonts",
+				"3": "Both"
+			},
+			"hint": "Add fonts to the Font and Language Settings.",
+			"title": "Add Fonts to the Font and Language Settings"
+		},
+		"ExportFonts.hint": "Add Polyglot's fonts to Core's Additional Fonts menu.",
+		"ExportFonts.title": "Add Polyglot's fonts to Core",
+		"HideTranslation.hint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Useful for when you don't want to show players which language you are speaking. Requires reload.",
+		"HideTranslation.title": "Hide Indicators from Players",
+		"IgnoreJournalFontSize": {
+			"hint": "Ignores the font size used for Polyglot's fonts, making languages runes on journals the same size as normal text. Useful for when the formatting of the journal matters.",
+			"title": "Journal: Use Normal Font Size"
+		},
+		"JournalHighlight.hint": "Defines the opacity of the highlight over fonts on the journal.",
+		"JournalHighlight.title": "Journal Highlight Opacity (%)",
 		"LanguageProvider": {
-			"name": "Language Settings Provider",
-			"hint": "Select who provides language information for alphabets and languages. More language providers can be made available via game systems and installed modules. The options below are dependent upon the language provider selected here. ⚠️ If you change the provider, you have to save and reopen these settings.",
 			"choices": {
 				"module": "[Module] {name}",
 				"native": "Generic",
 				"system": "[System] {name}"
-			}
+			},
+			"hint": "Select who provides language information for alphabets and languages. More language providers can be made available via game systems and installed modules. The options below are dependent upon the language provider selected here. ⚠️ If you change the provider, you have to save and reopen these settings.",
+			"name": "Language Settings Provider"
 		},
 		"LanguageRegex": {
-			"title": "Language RegEx",
-			"hint": "You can use this to change the term searched on items from \"Language\" to something else, like \"Tongue\". This setting is more useful for non-English speakers."
+			"hint": "You can use this to change the term searched on items from \"Languages\" to something else. For example, \"Idioma\" for Portuguese/Spanish, or \"Sprache\" for German. This setting is more useful for non-English speakers.",
+			"title": "Language RegEx"
 		},
+		"logographicalFontToggle.hint": "Halves the size of phrases using Logographical fonts (e.g. Japanese, Chinese characters).",
+		"logographicalFontToggle.title": "Logographical Fonts",
+		"RandomizeRunes.hint": "This determines which type of RNG is used to generate a phrase. ⚠️ The \"None\" option only supports Alphanumeric characters (no accents).",
+		"RandomizeRunes.title": "Randomize Runes",
+		"RandomizeRunesOptions": {
+			"a": "Default",
+			"b": "Unique phrases",
+			"c": "None ⚠️"
+		},
+		"ReplaceLanguages.hint": "Replaces the system's default languages with your Custom Languages. The first language on the list becomes the new default language.",
+		"ReplaceLanguages.title": "Replace System's Languages",
+		"RuneRegex": {
+			"hint": "Makes the randomization ignore non-alphanumerical characters (e.g. !,.;:?#$\"'). This might have the undesired effect of showing some of those characters as a square (□) on some fonts.",
+			"title": "Randomize Only Alphanumericals"
+		},
+		"ScrambleGM.hint": "Don't translate the text for the GM (refer to the globe's color for the token's understanding). Requires reload.",
+		"ScrambleGM.title": "Scramble Messages for GM",
+		"Truespeech.hint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures.",
+		"Truespeech.title": "Tongues Spell",
+
 		"Translation": "Translation",
 		"TranslatedFrom": "Translated from ",
 		"LanguageLabel": "Language",
@@ -76,7 +86,9 @@
 		"LatinAlphabet": "Latin Alphabet",
 		"ToggleRunes": "Toggle Runes",
 		"Runes": "Runes",
+
 		"UESRPG.Language": "Language",
+
 		"Generic": {
 			"Language": "Language"
 		},

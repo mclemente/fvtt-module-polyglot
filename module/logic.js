@@ -1,6 +1,6 @@
-import {currentLanguageProvider, registerModule, registerSystem} from "./api.js";
-import {FONTS, FONTS_26, LOGOGRAPHICAL_FONTS} from "./Fonts.js";
-import {libWrapper} from "./shim.js";
+import { currentLanguageProvider, registerModule, registerSystem } from "./api.js";
+import { FONTS, FONTS_26, LOGOGRAPHICAL_FONTS } from "./Fonts.js";
+import { libWrapper } from "./shim.js";
 
 export class Polyglot {
 	init() {
@@ -121,6 +121,8 @@ export class Polyglot {
 	literate_languages = new Set();
 	refresh_timeout = null;
 	FONTS = FONTS;
+	FONTS_26 = FONTS_26;
+	LOGOGRAPHICAL_FONTS = LOGOGRAPHICAL_FONTS;
 	CustomFontsSize = game.settings.get("polyglot", "CustomFontSizes");
 	registerModule = registerModule;
 	registerSystem = registerSystem;
@@ -326,7 +328,7 @@ export class Polyglot {
 	 */
 	scrambleString(string, salt, lang) {
 		const font = this._getFontStyle(lang).split(" ")[1];
-		if (game.settings.get("polyglot", "logographicalFontToggle") && LOGOGRAPHICAL_FONTS.includes(font)) {
+		if (game.settings.get("polyglot", "logographicalFontToggle") && this.LOGOGRAPHICAL_FONTS.includes(font)) {
 			string = string.substr(0, Math.round(string.length / 2));
 		}
 		const uniqueSalt = game.settings.get("polyglot", "useUniqueSalt");
@@ -335,8 +337,9 @@ export class Polyglot {
 		const salted_string = string + salt;
 		const rng = new MersenneTwister(this._hashCode(salted_string));
 		let characters = "abcdefghijklmnopqrstuvwxyz";
-		if (!FONTS_26.includes(font)) characters += "0123456789";
-		return string.replace(/\S/gu, () => {
+		if (!this.FONTS_26.includes(font)) characters += "0123456789";
+		const regex = game.settings.get("polyglot", "RuneRegex") ? /[a-zA-Z\d]/g : /\S/gu;
+		return string.replace(regex, () => {
 			const c = characters.charAt(Math.floor(rng.random() * characters.length)); //.toString(num)
 			const upper = Boolean(Math.round(rng.random()));
 			return upper ? c.toUpperCase() : c;
@@ -599,6 +602,7 @@ export class Polyglot {
 		const styles = [];
 		const toggleString = "<a class='polyglot-button' title='Polyglot: " + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i></a>";
 		const toggleButton = $(toggleString);
+		const IgnoreJournalFontSize = game.settings.get("polyglot", "IgnoreJournalFontSize");
 		toggleButton.click((ev) => {
 			ev.preventDefault();
 			let button = ev.currentTarget.firstChild;
@@ -612,7 +616,8 @@ export class Polyglot {
 					texts.push(span.textContent);
 					styles.push(span.style.font);
 					span.textContent = this.scrambleString(span.textContent, document.id, lang);
-					span.style.font = this._getFontStyle(lang);
+					if (IgnoreJournalFontSize) span.style.fontFamily = this._getFontStyle(lang).replace(/\d+%\s/g, "");
+					else span.style.font = this._getFontStyle(lang);
 				}
 			} else {
 				let i = 0;
