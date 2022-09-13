@@ -5,11 +5,10 @@
 		"LanguageSettings": "Language Settings",
 		"ChatSettings": "Chat Settings",
 		"Languages.title": "Languages",
-		"Languages.hint": "Changes the alphabet used for the languages. Reseting to defaults will reload.",
+		"Languages.hint": "Changes the alphabet used for the languages.",
 		"Font": "Font",
 		"Fonts": "Fonts",
 		"FontSize": "Font Size (%)",
-
 		"AllowOOC.hint": "Choose whose users should have their messages scrambled. OOC = Out of Character.",
 		"AllowOOC.title": "Scramble OOC Chat Messages",
 		"AllowOOCOptions": {
@@ -33,15 +32,15 @@
 				"2": "Core's Additional Fonts",
 				"3": "Both"
 			},
-			"hint": "Add fonts to the Font and Language Settings.",
-			"title": "Add Fonts to the Font and Language Settings"
+			"hint": "Adds fonts from the chosen sources to the Font Settings and Language Settings.",
+			"title": "Add Fonts to Module Settings"
 		},
-		"ExportFonts.hint": "Add Polyglot's fonts to Core's Additional Fonts menu.",
+		"ExportFonts.hint": "Add Polyglot's fonts to Core's Additional Fonts menu. Toggling this setting off will remove all of Polyglot's fonts from the menu.",
 		"ExportFonts.title": "Add Polyglot's fonts to Core",
 		"HideTranslation.hint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Useful for when you don't want to show players which language you are speaking. Requires reload.",
 		"HideTranslation.title": "Hide Indicators from Players",
 		"IgnoreJournalFontSize": {
-			"hint": "Ignores the font size used for Polyglot's fonts, making languages runes on journals the same size as normal text. Useful for when the formatting of the journal matters.",
+			"hint": "Ignores the size of Polyglot's fonts on journals, making them have the same size as normal text would have. Useful for when the formatting of the journal matters.",
 			"title": "Journal: Use Normal Font Size"
 		},
 		"JournalHighlight.hint": "Defines the opacity of the highlight over fonts on the journal.",
@@ -56,7 +55,7 @@
 			"name": "Language Settings Provider"
 		},
 		"LanguageRegex": {
-			"hint": "You can use this to change the term searched on items from \"Languages\" to something else. For example, \"Idioma\" for Portuguese/Spanish, or \"Sprache\" for German. This setting is more useful for non-English speakers.",
+			"hint": "You can use this to change the term searched on items from \"Language\" to something else, like \"Tongue\". This setting is more useful for non-English speakers.",
 			"title": "Language RegEx"
 		},
 		"logographicalFontToggle.hint": "Halves the size of phrases using Logographical fonts (e.g. Japanese, Chinese characters).",
@@ -78,7 +77,6 @@
 		"ScrambleGM.title": "Scramble Messages for GM",
 		"Truespeech.hint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures.",
 		"Truespeech.title": "Tongues Spell",
-
 		"Translation": "Translation",
 		"TranslatedFrom": "Translated from ",
 		"LanguageLabel": "Language",
@@ -86,9 +84,7 @@
 		"LatinAlphabet": "Latin Alphabet",
 		"ToggleRunes": "Toggle Runes",
 		"Runes": "Runes",
-
 		"UESRPG.Language": "Language",
-
 		"Generic": {
 			"Language": "Language"
 		},
