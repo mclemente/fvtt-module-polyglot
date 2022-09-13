@@ -327,7 +327,7 @@ export class Polyglot {
 	 * @return {string}			The message's text with its characters scrambled by the PRNG.
 	 */
 	scrambleString(string, salt, lang) {
-		const font = this._getFontStyle(lang).split(" ")[1];
+		const font = this._getFontStyle(lang).replace(/\d+%\s/g, "");
 		if (game.settings.get("polyglot", "logographicalFontToggle") && this.LOGOGRAPHICAL_FONTS.includes(font)) {
 			string = string.substr(0, Math.round(string.length / 2));
 		}
