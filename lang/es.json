@@ -38,8 +38,8 @@
 			"b": "Frases únicas",
 			"c": "Ninguna ⚠️"
 		},
-		"ExportFonts.title": "Añade las fuentes de Polyglot al Núcleo",
-		"ExportFonts.hint": "Añade las fuentes de Polyglot al menú de Fuentes Adicionales del Núcleo.",
+		"ExportFonts.title": "Añade las fuentes de Polyglot al programa Base",
+		"ExportFonts.hint": "Añade las fuentes de Polyglot al menú de Fuentes Adicionales del programa Base.",
 		"DisplayTranslated.title": "Mostrar traducciones",
 		"DisplayTranslated.hint": "Para los idiomas que se traducen en el chat, muestra el texto original y a continuación la traducción.",
 		"HideTranslation.title": "Ocultar a los jugadores los globos y el texto \"Traducido del\"",
@@ -96,7 +96,7 @@
 			"choices": {
 				"0": "Ninguno",
 				"1": "Fuentes de Polyglot",
-				"2": "Fuentes adicionales del Núcleo",
+				"2": "Fuentes adicionales del programa Base",
 				"3": "Ambos"
 			}
 		}
