@@ -39,11 +39,11 @@
 			"c": "Ninguna ⚠️"
 		},
 		"ExportFonts.title": "Añade las fuentes de Polyglot al programa Base",
-		"ExportFonts.hint": "Añade las fuentes de Polyglot al menú de Fuentes Adicionales del programa Base.",
+		"ExportFonts.hint": "Añade las fuentes de Polyglot al menú de Fuentes Adicionales del programa Base. Si se desactiva esta opción, se eliminarán todas las fuentes de Polyglot del menú.",
 		"DisplayTranslated.title": "Mostrar traducciones",
 		"DisplayTranslated.hint": "Para los idiomas que se traducen en el chat, muestra el texto original y a continuación la traducción.",
 		"HideTranslation.title": "Ocultar a los jugadores los globos y el texto \"Traducido del\"",
-		"HideTranslation.hint": "Oculta el globo y el texto \"Traducido del\" del chat a los jugadores. Se usa para cuando no se quiere que los jugadores sepan en qué idioma se está hablando. Requiere recargar la página.",
+		"HideTranslation.hint": "Oculta el globo y el texto \"Traducido del\" del chat a los jugadores. Útil para cuando no se quiere que los jugadores sepan en qué idioma se está hablando. Requiere recargar la página.",
 		"AllowOOC.title": "Aleatorizar en mensajes Como Jugador (OOC)",
 		"AllowOOC.hint": "Determina qué usuarios tendrán sus mensajes codificados al utilizar el chat como jugador. OOC = Fuera de Personaje (Out of Character).",
 		"AllowOOCOptions": {
@@ -99,6 +99,14 @@
 				"2": "Fuentes adicionales del programa Base",
 				"3": "Ambos"
 			}
+		},
+		"IgnoreJournalFontSize": {
+			"title": "Diario: Usar tamaño de fuente normal",
+			"hint": "Ignora el tamaño de las fuentes de Polyglot en los diarios, haciendo que tengan el mismo tamaño que tendría el texto normal. Útil para ocasiones el las que el formato del diario es importante."
+		},
+		"RuneRegex": {
+			"title": "Aleatorizar solo alfanuméricos",
+			"hint": "Hace que la aleatoriedad ignore los caracteres no alfanuméricos (p. ej. !,.;:?#$\"'). Esto puede causar que algunos de estos caracteres se muestren como un cuadrado (□) en algunas fuentes."
 		}
 	}
 }
