@@ -107,8 +107,6 @@ export function registerSettings() {
 		onChange: (value) => game.polyglot.updateConfigFonts(value),
 	});
 	addSetting("JournalHighlightColor", {
-		name: "POLYGLOT.JournalHighlight.title",
-		hint: "POLYGLOT.JournalHighlight.hint",
 		default: "#ffb400",
 		type: String,
 		onChange: (value) => {
@@ -118,8 +116,6 @@ export function registerSettings() {
 	const hex = hexToRgb(game.settings.get("polyglot", "JournalHighlightColor"));
 	document.documentElement.style.setProperty("--polyglot-journal-color", Object.values(hex).toString());
 	addSetting("JournalHighlight", {
-		name: "POLYGLOT.JournalHighlight.title",
-		hint: "POLYGLOT.JournalHighlight.hint",
 		default: 25,
 		range: {
 			min: 0,
@@ -221,7 +217,7 @@ export async function renderSettingsConfigHandler(settingsConfig, html) {
 	const JournalHighlight = game.settings.get("polyglot", "JournalHighlight");
 	const JournalHighlightInput = html.find('input[name="polyglot.JournalHighlight"]');
 	const JournalHighlightNotes = JournalHighlightInput.parent().parent().children()[2];
-	JournalHighlightNotes.classList.add("polyglot-journal");
+	if (JournalHighlightNotes) JournalHighlightNotes.classList.add("polyglot-journal");
 	const hex = hexToRgb(JournalHighlightColor);
 	document.documentElement.style.setProperty("--polyglot-journal-color-temp", Object.values(hex).toString());
 	document.documentElement.style.setProperty("--polyglot-journal-opacity-temp", JournalHighlight / 100);
@@ -243,7 +239,8 @@ export async function renderSettingsConfigHandler(settingsConfig, html) {
 		});
 	}
 
-	colorPicker("polyglot.JournalHighlightColor", html, JournalHighlightColor);
+	const JournalHighlightColorInput = html.find('input[name="polyglot.JournalHighlightColor"]');
+	if (JournalHighlightColorInput.length) colorPicker("polyglot.JournalHighlightColor", html, JournalHighlightColor);
 	const JournalHighlightColorPicker = html.find('input[data-edit="polyglot.JournalHighlightColor"]');
 	JournalHighlightColorPicker.on("change", (event) => {
 		const hex = hexToRgb(event.target.value);
