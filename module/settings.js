@@ -28,11 +28,6 @@ export function registerSettings() {
 		type: PolyglotFontSettings,
 		restricted: true,
 	});
-	addSetting("CustomFontSizes", {
-		config: false,
-		default: {},
-		type: Object,
-	});
 
 	//Language Settings Menu
 	game.settings.registerMenu("polyglot", "LanguageSettings", {

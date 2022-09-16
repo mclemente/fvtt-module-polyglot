@@ -1,19 +1,24 @@
 import { currentLanguageProvider, initApi } from "./module/api.js";
 import { LanguageProvider } from "./module/LanguageProvider.js";
 import { Polyglot } from "./module/logic.js";
-import { registerSettings, registerProviderSettings } from "./module/settings.js";
+import { addSetting, registerSettings, registerProviderSettings } from "./module/settings.js";
 
 Hooks.once("init", () => {
 	CONFIG.TinyMCE.content_css.push("/modules/polyglot/css/polyglot.css");
 	initApi();
-	registerSettings();
-	registerProviderSettings();
+	addSetting("CustomFontSizes", {
+		config: false,
+		default: {},
+		type: Object,
+	});
 	game.polyglot = new Polyglot();
 	game.polyglot.init();
 	Hooks.callAll("polyglot.init", LanguageProvider);
 });
 
 Hooks.on("setup", async () => {
+	registerSettings();
+	registerProviderSettings();
 	await currentLanguageProvider.setup();
 });
 Hooks.on("ready", () => {
