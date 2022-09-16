@@ -503,7 +503,7 @@ export class Polyglot {
 			const titleElement = header.closest(".app").querySelector(".window-title");
 			toggleButton.insertAfter(titleElement);
 		} else {
-			const spans = section.querySelectorAll("span.polyglot-journal");
+			const spans = section ? section.querySelectorAll("span.polyglot-journal") : header.querySelectorAll("span.polyglot-journal");
 			spans.forEach((e) => {
 				const lang = e.dataset.language;
 				if (!lang) return;
