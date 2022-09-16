@@ -1343,8 +1343,8 @@ export class gurpsLanguageProvider extends LanguageProvider {
 			GURPS.recurselist(actor.system.ads, (advantage) => {
 				if (!this.updateForPattern(advantage, new RegExp(languageRegex + npat1, "i"), known_languages, literate_languages))
 					if (!this.updateForPattern(advantage, new RegExp(languageRegex + npat2, "i"), known_languages, literate_languages))
-						if (!this.updateForPattern(advantage, new RegExp(game.i18n.localize("GURPS.language") + npat1, "i"), known_languages, literate_languages))
-							this.updateForPattern(advantage, new RegExp(game.i18n.localize("GURPS.language") + npat2, "i"), known_languages, literate_languages);
+						if (!this.updateForPattern(advantage, new RegExp(game.i18n.localize("GURPS.language") + npat1, "i"), known_languages, literate_languages, true))
+							this.updateForPattern(advantage, new RegExp(game.i18n.localize("GURPS.language") + npat2, "i"), known_languages, literate_languages, true);
 			});
 		}
 		return [known_languages, literate_languages];
@@ -1354,7 +1354,7 @@ export class gurpsLanguageProvider extends LanguageProvider {
     If we match on the Language name, search the name (or the notes) 
     for indicators of spoken or written levels of comprehension in English, or translated
   */
-	updateForPattern(advantage, regex, known_languages, literate_languages) {
+	updateForPattern(advantage, regex, known_languages, literate_languages, langDetected = false) {
 		let match = advantage.name.match(regex);
 		if (match) {
 			const lang = match.groups.name.trim().toLowerCase();
@@ -1367,16 +1367,21 @@ export class gurpsLanguageProvider extends LanguageProvider {
 			if (written && spoken) {
 				known_languages.add(lang);
 				literate_languages.add(lang);
+        return true
 			} else if (written) {
 				literate_languages.add(lang);
+        return true
 			} else if (spoken) {
 				known_languages.add(lang);
+        return true
 			} else {
-				// neither is specificaly identified, so assume both
-				known_languages.add(lang);
-				literate_languages.add(lang);
+				// neither is specificaly identified, assume both if "Language" detected
+        if (langDetected) {
+  				known_languages.add(lang);
+  				literate_languages.add(lang);
+          return true
+        }
 			}
-			return true;
 		}
 		return false;
 	}
