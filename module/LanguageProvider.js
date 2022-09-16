@@ -330,7 +330,7 @@ export class LanguageProvider {
 				for (let lang of actor.system.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
 			}
 		} else if (game.settings.settings.get("polyglot.LanguageRegex")) {
-			const languageRegex = game.settings.settings.get("polyglot", "LanguageRegex");
+			const languageRegex = game.settings.get("polyglot", "LanguageRegex");
 			let myRegex = new RegExp(languageRegex + "\\s*\\((.+)\\)", "i");
 			for (let item of actor.items) {
 				const name = item?.flags?.babele?.originalName || item.name;
