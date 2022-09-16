@@ -1,6 +1,8 @@
 :root {
 	--polyglot-journal-color: 255, 180, 0;
 	--polyglot-journal-opacity: 0.25;
+	--polyglot-journal-color-temp: 255, 180, 0;
+	--polyglot-journal-opacity-temp: 0.25;
 }
 
 .polyglot-lang-select {
@@ -18,6 +20,10 @@
 
 span.polyglot-journal {
 	background-color: rgba(var(--polyglot-journal-color), var(--polyglot-journal-opacity));
+}
+
+p.notes.polyglot-journal {
+	background-color: rgba(var(--polyglot-journal-color-temp), var(--polyglot-journal-opacity-temp));
 }
 
 .polyglot-translation-text {

@@ -43,8 +43,14 @@
 			"hint": "Ignores the size of Polyglot's fonts on journals, making them have the same size as normal text would have. Useful for when the formatting of the journal matters.",
 			"title": "Journal: Use Normal Font Size"
 		},
-		"JournalHighlight.hint": "Defines the opacity of the highlight over fonts on the journal.",
-		"JournalHighlight.title": "Journal Highlight Opacity (%)",
+		"JournalHighlight": {
+			"hint": "Defines the opacity of the highlight over fonts on the journal.",
+			"title": "Journal Highlight Opacity (%)"
+		},
+		"JournalHighlightColor": {
+			"hint": "Defines the color of the highlight over fonts on the journal.",
+			"title": "Journal Highlight Color"
+		},
 		"LanguageProvider": {
 			"choices": {
 				"module": "[Module] {name}",
@@ -53,6 +59,14 @@
 			},
 			"hint": "Select who provides language information for alphabets and languages. More language providers can be made available via game systems and installed modules. The options below are dependent upon the language provider selected here. ⚠️ If you change the provider, you have to save and reopen these settings.",
 			"name": "Language Settings Provider"
+		},
+		"languageDataPath": {
+			"title": "Language Data Path",
+			"hint": "If your system has languages set in actors' data and aren't being loaded properly, it might be using another data path. Input the data path to the correct attribute (e.g. actor.system.languages or actor.system.speak). This settings takes precedence over the Language Regex setting. Requires reload."
+		},
+		"literacyDataPath": {
+			"title": "Literacy Data Path",
+			"hint": "Same as the Language Data Path setting, but for reading journals. This settings requires the Language Data Path setting. Requires reload."
 		},
 		"LanguageRegex": {
 			"hint": "You can use this to change the term searched on items from \"Language\" to something else, like \"Tongue\". This setting is more useful for non-English speakers.",

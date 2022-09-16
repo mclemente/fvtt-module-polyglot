@@ -1,3 +1,5 @@
+import { addSetting, getNestedData } from "./settings.js";
+
 /**
  * Base class for all language providers.
  * If you want to offer a language provider in your system/module you must derive this class.
@@ -87,6 +89,22 @@ export class LanguageProvider {
 	}
 
 	get settings() {
+		if (this.isGeneric) {
+			addSetting("languageDataPath", {
+				default: "",
+				type: String,
+				requiresReload: true,
+			});
+			addSetting("literacyDataPath", {
+				default: "",
+				type: String,
+				requiresReload: true,
+			});
+			this.languageDataPath = game.settings.get("polyglot", "languageDataPath");
+			this.literacyDataPath = game.settings.get("polyglot", "literacyDataPath");
+			if (this.languageDataPath.startsWith("actor.")) this.languageDataPath = this.languageDataPath.slice(6);
+			if (this.literacyDataPath.startsWith("actor.")) this.literacyDataPath = this.literacyDataPath.slice(6);
+		}
 		return {
 			LanguageRegex: {
 				type: String,
@@ -329,7 +347,14 @@ export class LanguageProvider {
 			if (actor.system.languages.custom) {
 				for (let lang of actor.system.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
 			}
-		} else if (game.settings.settings.get("polyglot.LanguageRegex")) {
+		} else if (this.languageDataPath.length) {
+			let data = getNestedData(actor, this.languageDataPath);
+			for (let lang of data.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
+			if (this.literacyDataPath.length) {
+				let data = getNestedData(actor, this.literacyDataPath);
+				for (let lang of data.split(/[,;]/)) literate_languages.add(lang.trim().toLowerCase());
+			}
+		} else if (game.settings.settings.has("polyglot.LanguageRegex")) {
 			const languageRegex = game.settings.get("polyglot", "LanguageRegex");
 			let myRegex = new RegExp(languageRegex + "\\s*\\((.+)\\)", "i");
 			for (let item of actor.items) {

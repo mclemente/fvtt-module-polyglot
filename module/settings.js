@@ -1,4 +1,5 @@
-import { currentLanguageProvider, getDefaultLanguageProvider, updateLanguageProvider } from "./api.js";
+import { colorPicker } from "./colorPicker.js";
+import { currentLanguageProvider } from "./api.js";
 import { PolyglotLanguageSettings } from "./LanguageSettings.js";
 import { PolyglotFontSettings } from "./FontSettings.js";
 
@@ -105,13 +106,32 @@ export function registerSettings() {
 		type: Boolean,
 		onChange: (value) => game.polyglot.updateConfigFonts(value),
 	});
+	addSetting("JournalHighlightColor", {
+		name: "POLYGLOT.JournalHighlight.title",
+		hint: "POLYGLOT.JournalHighlight.hint",
+		default: "#ffb400",
+		type: String,
+		onChange: (value) => {
+			document.documentElement.style.setProperty("--polyglot-journal-color", value);
+		},
+	});
+	const hex = hexToRgb(game.settings.get("polyglot", "JournalHighlightColor"));
+	document.documentElement.style.setProperty("--polyglot-journal-color", Object.values(hex).toString());
 	addSetting("JournalHighlight", {
 		name: "POLYGLOT.JournalHighlight.title",
 		hint: "POLYGLOT.JournalHighlight.hint",
 		default: 25,
+		range: {
+			min: 0,
+			max: 100,
+			step: 1,
+		},
 		type: Number,
-		onChange: (value) => document.documentElement.style.setProperty("--polyglot-journal-opacity", value / 100),
+		onChange: (value) => {
+			document.documentElement.style.setProperty("--polyglot-journal-opacity", value / 100);
+		},
 	});
+	document.documentElement.style.setProperty("--polyglot-journal-opacity", game.settings.get("polyglot", "JournalHighlight") / 100);
 
 	//Language Settings
 	addSetting("replaceLanguages", {
@@ -193,4 +213,73 @@ export function registerProviderSettings() {
 			addSetting(key, data);
 		}
 	}
+}
+
+export async function renderSettingsConfigHandler(settingsConfig, html) {
+	const JournalHighlightColor = game.settings.get("polyglot", "JournalHighlightColor");
+
+	const JournalHighlight = game.settings.get("polyglot", "JournalHighlight");
+	const JournalHighlightInput = html.find('input[name="polyglot.JournalHighlight"]');
+	const JournalHighlightNotes = JournalHighlightInput.parent().parent().children()[2];
+	JournalHighlightNotes.classList.add("polyglot-journal");
+	const hex = hexToRgb(JournalHighlightColor);
+	document.documentElement.style.setProperty("--polyglot-journal-color-temp", Object.values(hex).toString());
+	document.documentElement.style.setProperty("--polyglot-journal-opacity-temp", JournalHighlight / 100);
+
+	JournalHighlightInput.on("change", (event) => {
+		document.documentElement.style.setProperty("--polyglot-journal-opacity-temp", event.target.value / 100);
+	});
+
+	if (game.settings.settings.has("polyglot.languageDataPath")) {
+		const languageDataPath = game.settings.get("polyglot", "languageDataPath");
+		const languageDataPathInput = html.find('input[name="polyglot.languageDataPath"]');
+		const LanguageRegexInput = html.find('input[name="polyglot.LanguageRegex"]');
+		const literacyDataPathInput = html.find('input[name="polyglot.literacyDataPath"]');
+		if (languageDataPath) disableCheckbox(LanguageRegexInput, true);
+		else disableCheckbox(literacyDataPathInput, true);
+		languageDataPathInput.on("change", (event) => {
+			disableCheckbox(LanguageRegexInput, event.target.value.length);
+			disableCheckbox(literacyDataPathInput, !event.target.value.length);
+		});
+	}
+
+	colorPicker("polyglot.JournalHighlightColor", html, JournalHighlightColor);
+	const JournalHighlightColorPicker = html.find('input[data-edit="polyglot.JournalHighlightColor"]');
+	JournalHighlightColorPicker.on("change", (event) => {
+		const hex = hexToRgb(event.target.value);
+		document.documentElement.style.setProperty("--polyglot-journal-color-temp", Object.values(hex).toString());
+	});
+}
+
+export function disableCheckbox(checkbox, boolean) {
+	checkbox.prop("disabled", boolean);
+}
+
+export function getNestedData(data, path) {
+	if (!RegExp(/^([\w_-]+\.)*([\w_-]+)$/).test(path)) {
+		return null;
+	}
+	const paths = path.split(".");
+	if (!paths.length) {
+		return null;
+	}
+	let res = data;
+	for (let i = 0; i < paths.length; i += 1) {
+		if (res === undefined) {
+			return null;
+		}
+		res = res?.[paths[i]];
+	}
+	return res;
+}
+
+function hexToRgb(hex) {
+	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	return result
+		? {
+				r: parseInt(result[1], 16),
+				g: parseInt(result[2], 16),
+				b: parseInt(result[3], 16),
+		  }
+		: null;
 }

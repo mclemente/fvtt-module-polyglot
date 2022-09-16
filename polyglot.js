@@ -1,7 +1,7 @@
 import { currentLanguageProvider, initApi } from "./module/api.js";
 import { LanguageProvider } from "./module/LanguageProvider.js";
 import { Polyglot } from "./module/logic.js";
-import { addSetting, registerSettings, registerProviderSettings } from "./module/settings.js";
+import { addSetting, registerSettings, registerProviderSettings, renderSettingsConfigHandler } from "./module/settings.js";
 
 Hooks.once("init", () => {
 	CONFIG.TinyMCE.content_css.push("/modules/polyglot/css/polyglot.css");
@@ -26,3 +26,4 @@ Hooks.on("ready", () => {
 	if (!Object.keys(game.settings.get("polyglot", "Languages")).length) game.settings.set("polyglot", "Languages", currentLanguageProvider.tongues);
 	Hooks.callAll("polyglot.ready", LanguageProvider);
 });
+Hooks.on("renderSettingsConfig", renderSettingsConfigHandler);
