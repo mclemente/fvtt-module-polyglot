@@ -149,7 +149,7 @@ export class Polyglot {
 					if (unknown) {
 						message = this.scrambleString(message, randomId, lang);
 						document.documentElement.style.setProperty("--polyglot-chat-bubble-font", this._getFontStyle(lang));
-						cssClasses = cssClasses ? cssClasses + "polyglot-chat-bubble" : "polyglot-chat-bubble";
+						cssClasses.push("polyglot-chat-bubble");
 					}
 				}
 				return wrapped(token, message, { cssClasses, requireVisible, pan });
