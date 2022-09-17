@@ -5,6 +5,10 @@
 	--polyglot-journal-opacity-temp: 0.25;
 }
 
+.polyglot-chat-bubble {
+	font: var(--polyglot-chat-bubble-font);
+}
+
 .polyglot-lang-select {
 	flex: 0 0 28px;
 	margin: 0 6px;

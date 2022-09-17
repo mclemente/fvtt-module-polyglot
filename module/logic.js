@@ -14,7 +14,6 @@ export class Polyglot {
 		Hooks.on("renderJournalSheet", this.renderJournalSheet.bind(this));
 		Hooks.on("renderStorySheet", this.renderJournalSheet.bind(this));
 		Hooks.on("renderJournalTextPageSheet", this.renderJournalTextPageSheet.bind(this));
-		Hooks.on("chatBubble", this.chatBubble.bind(this)); //token, html, message, {emote}
 		Hooks.on("vinoPrepareChatDisplayData", this.vinoChatRender.bind(this));
 		libWrapper.register(
 			"polyglot",
@@ -114,6 +113,48 @@ export class Polyglot {
 				return dims;
 			},
 			"OVERRIDE"
+		);
+		/**
+		 * Speak a message as a particular Token, displaying it as a chat bubble
+		 * WRAPPER:
+		 * 	Scrambles the message's text if a language is present.
+		 * @param {Token} token                   The speaking Token
+		 * @param {string} message                The spoken message text
+		 * @param {ChatBubbleOptions} [options]   Options which affect the bubble appearance
+		 * @returns {Promise<jQuery|null>}        A Promise which resolves to the created bubble HTML element, or null
+		 */
+		libWrapper.register(
+			"polyglot",
+			"ChatBubbles.prototype.say",
+			async (wrapped, token, message, { cssClasses, requireVisible = false, pan = true, language = "" } = {}) => {
+				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) return wrapped(token, message, { cssClasses, requireVisible, pan });
+				if (language) {
+					var lang = invertObject(currentLanguageProvider.languages)[language] || language;
+					var randomId = foundry.utils.randomID(16);
+				} else {
+					// Find the message out of the last 10 chat messages, last to first
+					const gameMessages = game.messages.contents
+						.slice(-10)
+						.reverse()
+						.find((m) => m.content === message);
+					// Message was sent in-character (no /ooc or /emote)
+					if (gameMessages?.type === CONST.CHAT_MESSAGE_TYPES.IC) {
+						lang = gameMessages.getFlag("polyglot", "language") || "";
+						randomId = gameMessages.id;
+					}
+				}
+				if (lang) {
+					//Language isn't truespeech, isn't known and user isn't under Comprehend Languages effect
+					const unknown = !this._isTruespeech(lang) && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
+					if (unknown) {
+						message = this.scrambleString(message, randomId, lang);
+						document.documentElement.style.setProperty("--polyglot-chat-bubble-font", this._getFontStyle(lang));
+						cssClasses = cssClasses ? cssClasses + "polyglot-chat-bubble" : "polyglot-chat-bubble";
+					}
+				}
+				return wrapped(token, message, { cssClasses, requireVisible, pan });
+			},
+			"WRAPPER"
 		);
 	}
 	constructor() {}
@@ -514,54 +555,6 @@ export class Polyglot {
 					e.style.font = this._getFontStyle(lang);
 				}
 			});
-		}
-	}
-
-	/**
-	 * Renders a chat bubble, scrambling its text.
-	 * It checks for emote.language in case a bubble is sent without a message (e.g. calling canvas.hud.bubbles.say()).
-	 *
-	 * @param {Token} token
-	 * @param {*} html
-	 * @param {*} messageContent
-	 * @param {*} emote
-	 */
-	chatBubble(token, html, messageContent, { emote }) {
-		this._bubble = { font: "", message: "" };
-		if (emote?.language) {
-			let lang = invertObject(currentLanguageProvider.languages)[emote.language] || emote.language || "";
-			const unknown = !this._isTruespeech(lang) && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
-			if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) return;
-			if (unknown) {
-				const content = html.find(".bubble-content");
-				const new_content = this.scrambleString(messageContent, foundry.utils.randomID(16), lang);
-				content.text(new_content);
-				this._bubble.font = this._getFontStyle(lang);
-				this._bubble.message = new_content;
-				content[0].style.font = this._bubble.font;
-			}
-		} else {
-			const message = game.messages.contents
-				.slice(-10)
-				.reverse()
-				.find((m) => m.content === messageContent);
-			if (message?.type === CONST.CHAT_MESSAGE_TYPES.IC) {
-				let lang = message.getFlag("polyglot", "language") || "";
-				if (lang) {
-					const unknown = !this._isTruespeech(lang) && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
-					message.polyglot_unknown = unknown;
-					if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) message.polyglot_unknown = false;
-					if (!message.polyglot_force && message.polyglot_unknown) {
-						const content = html.find(".bubble-content");
-						const new_content = this.scrambleString(message.content, message.id, lang);
-						content.text(new_content);
-						this._bubble.font = this._getFontStyle(lang);
-						this._bubble.message = new_content;
-						content[0].style.font = this._bubble.font;
-						message.polyglot_unknown = true;
-					}
-				}
-			}
 		}
 	}
 
