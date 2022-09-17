@@ -103,6 +103,18 @@
 		"RuneRegex": {
 			"title": "Randomizar apenas alfanuméricos",
 			"hint": "Faz com que a randomização ignore caracteres não alfanuméricos (por exemplo !,...;?#$\"''). Isto pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes."
+		},
+		"JournalHighlightColor": {
+			"title": "Cor do Marcador do Diário",
+			"hint": "Define a cor do marcador sobre as fontes no diário."
+		},
+		"languageDataPath": {
+			"title": "Caminho de Dados dos Idiomas",
+			"hint": "Se o seu sistema tem idiomas definidos nos dados dos atores e não estão sendo carregados devidamente, ele pode estar em outro caminho de dados. Defina o caminho de dados para o atributo correto (ex.: actor.system.languages ou actor.system.speak). Esta configuração tem precedência sobre a configuração de Language Regex. Recarregará o Foundry."
+		},
+		"literacyDataPath": {
+			"title": "Caminho de Dados de Alfabetização",
+			"hint": "Igual à configuração de Caminho de Dados de Idioma, mas para diários). Esta configuração requer a configuração de Caminho de Dados de Idioma. Recarregará o Foundry."
 		}
 	}
 }
