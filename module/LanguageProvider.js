@@ -347,7 +347,7 @@ export class LanguageProvider {
 			if (actor.system.languages.custom) {
 				for (let lang of actor.system.languages?.custom.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
 			}
-		} else if (this.languageDataPath.length) {
+		} else if (this.languageDataPath?.length) {
 			let data = getNestedData(actor, this.languageDataPath);
 			for (let lang of data.split(/[,;]/)) known_languages.add(lang.trim().toLowerCase());
 			if (this.literacyDataPath.length) {
