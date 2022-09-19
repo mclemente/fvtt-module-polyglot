@@ -1,10 +1,10 @@
 // prettier-ignore
 import {
-	LanguageProvider, a5eLanguageProvider, ariaLanguageProvider, coc7LanguageProvider, cyberpunkRedLanguageProvider, d35eLanguageProvider, darkHeresyLanguageProvider,
-	dccLanguageProvider, demonlordLanguageProvider, dnd4eLanguageProvider, dnd5eLanguageProvider, dsa5LanguageProvider, fggLanguageProvider, gurpsLanguageProvider,
-	kryxrpgLanguageProvider, oseLanguageProvider,
-	pf1LanguageProvider, pf2eLanguageProvider, sfrpgLanguageProvider, shadowrun5eLanguageProvider, splittermondLanguageProvider, swadeLanguageProvider, 
-	sw5eLanguageProvider, tormenta20LanguageProvider, uesrpgLanguageProvider, warhammerLanguageProvider,
+	LanguageProvider, a5eLanguageProvider, ariaLanguageProvider, coc7LanguageProvider, cyberpunkRedLanguageProvider, earthdawn4eLanguageProvider, d35eLanguageProvider, 
+	darkHeresyLanguageProvider, dccLanguageProvider, demonlordLanguageProvider, dnd4eLanguageProvider, dnd5eLanguageProvider, dsa5LanguageProvider, fggLanguageProvider, 
+	gurpsLanguageProvider, kryxrpgLanguageProvider, oseLanguageProvider, pf1LanguageProvider, pf2eLanguageProvider, sfrpgLanguageProvider,
+	shadowrun5eLanguageProvider, splittermondLanguageProvider, swadeLanguageProvider, sw5eLanguageProvider, tormenta20LanguageProvider,
+	uesrpgLanguageProvider, warhammerLanguageProvider,
 } from "./LanguageProvider.js";
 import { addSetting } from "./settings.js";
 
@@ -85,6 +85,9 @@ export function initApi() {
 			break;
 		case "dnd5e":
 			languageProviders.push(new dnd5eLanguageProvider("native.dnd5e"));
+			break;
+		case "earthdawn4e":
+			languageProviders.push(new earthdawn4eLanguageProvider("native.earthdawn4e"));
 			break;
 		case "fgg":
 			languageProviders.push(new fggLanguageProvider("native.fgg"));

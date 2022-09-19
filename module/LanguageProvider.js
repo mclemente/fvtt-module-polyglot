@@ -1311,6 +1311,41 @@ export class dsa5LanguageProvider extends LanguageProvider {
 	}
 }
 
+export class earthdawn4eLanguageProvider extends LanguageProvider {
+	get originalTongues() {
+		return {
+			human: "thorass",
+			dwarven: "dethek",
+			elven: "espruar",
+			windling: "oldethorass",
+			obsidiman: "dethek",
+			troll: "jungleslang",
+			ork: "dethek",
+			tskrang: "iokharic",
+		};
+	}
+	get settings() {
+		game.settings.register("polyglot", "replaceLanguages", { default: false, scope: "world", config: false });
+		return {};
+	}
+	async getLanguages() {
+		for (let lang in this.originalTongues) {
+			this.languages[lang] = game.i18n.localize(`earthdawn.l.language${lang.capitalize()}`);
+		}
+	}
+	getUserLanguages(actor) {
+		let known_languages = new Set();
+		let literate_languages = new Set();
+		for (let lang in actor.system.languages.speake) {
+			if (actor.system.languages.speake[lang]) known_languages.add(lang);
+		}
+		for (let lang in actor.system.languages.write) {
+			if (actor.system.languages.write[lang]) literate_languages.add(lang);
+		}
+		return [known_languages, literate_languages];
+	}
+}
+
 export class fggLanguageProvider extends LanguageProvider {
 	get settings() {
 		return {};

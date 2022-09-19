@@ -208,7 +208,7 @@ export class Polyglot {
 	set comprehendLanguages(lang) {
 		currentLanguageProvider.addLanguage(lang);
 		if (lang == this._comprehendLanguages) return;
-		currentLanguageProvider.removeLanguage(this._comprehendLanguages);
+		if (this._comprehendLanguages) currentLanguageProvider.removeLanguage(this._comprehendLanguages);
 		this._comprehendLanguages = lang.trim().toLowerCase().replace(/ \'/g, "_");
 	}
 
