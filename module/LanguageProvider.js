@@ -1325,8 +1325,18 @@ export class earthdawn4eLanguageProvider extends LanguageProvider {
 		};
 	}
 	get settings() {
-		game.settings.register("polyglot", "replaceLanguages", { default: false, scope: "world", config: false });
-		return {};
+		return {
+			LanguageRegex: {
+				type: String,
+				default: game.i18n.localize("POLYGLOT.Generic.Language"),
+			},
+			LiteracyRegex: {
+				name: "Literacy Regex",
+				hint: "Same as Language Regex, but for written languages.",
+				type: String,
+				default: "Speak",
+			},
+		};
 	}
 	async getLanguages() {
 		for (let lang in this.originalTongues) {
@@ -1336,13 +1346,32 @@ export class earthdawn4eLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		for (let lang in actor.system.languages.speake) {
-			if (actor.system.languages.speake[lang]) known_languages.add(lang);
+		for (let lang in actor.system.speak.languages) {
+			if (actor.system.speak.languages[lang]) known_languages.add(lang);
 		}
 		for (let lang in actor.system.languages.write) {
-			if (actor.system.languages.write[lang]) literate_languages.add(lang);
+			if (actor.system.write.languages[lang]) literate_languages.add(lang);
+		}
+		if (actor.system.languages.other) {
+			const languageRegex = game.settings.get("polyglot", "LanguageRegex");
+			const literacyRegex = game.settings.get("polyglot", "LiteracyRegex");
+			for (let lang of actor.system.languages.other.split(/[,;]/)) {
+				const languageMatch = lang.match(languageRegex + " \\((.+)\\)", "i");
+				const literacyMatch = lang.match(literacyRegex + " \\((.+)\\)", "i");
+				if (languageMatch || literacyMatch) {
+					if (languageMatch) known_languages.add(languageMatch[1].trim().toLowerCase());
+					else if (literacyMatch) literate_languages.add(literacyMatch[1].trim().toLowerCase());
+				} else {
+					known_languages.add(lang.trim().toLowerCase());
+					literate_languages.add(lang.trim().toLowerCase());
+				}
+			}
 		}
 		return [known_languages, literate_languages];
+	}
+
+	conditions(lang) {
+		return game.polyglot.literate_languages.has(lang);
 	}
 }
 
@@ -1962,8 +1991,7 @@ export class swadeLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		// languageRegex needs the redundancy because the setting previously defaulted to "", so old users would be affected negatively
-		const languageRegex = game.settings.get("polyglot", "LanguageRegex") || game.i18n.localize("POLYGLOT.SWADE.LanguageSkills");
+		const languageRegex = game.settings.get("polyglot", "LanguageRegex");
 		let myRegex = new RegExp(languageRegex + " \\((.+)\\)", "i");
 		for (let item of actor.items) {
 			const name = item?.flags?.babele?.originalName || item.name;
