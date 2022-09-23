@@ -1431,20 +1431,20 @@ export class gurpsLanguageProvider extends LanguageProvider {
 			if (written && spoken) {
 				known_languages.add(lang);
 				literate_languages.add(lang);
-        return true
+				return true;
 			} else if (written) {
 				literate_languages.add(lang);
-        return true
+				return true;
 			} else if (spoken) {
 				known_languages.add(lang);
-        return true
+				return true;
 			} else {
 				// neither is specificaly identified, assume both if "Language" detected
-        if (langDetected) {
-  				known_languages.add(lang);
-  				literate_languages.add(lang);
-          return true
-        }
+				if (langDetected) {
+					known_languages.add(lang);
+					literate_languages.add(lang);
+					return true;
+				}
 			}
 		}
 		return false;
