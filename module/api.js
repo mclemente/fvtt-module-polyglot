@@ -1,11 +1,4 @@
-// prettier-ignore
-import {
-	LanguageProvider, a5eLanguageProvider, ariaLanguageProvider, coc7LanguageProvider, cyberpunkRedLanguageProvider, earthdawn4eLanguageProvider, d35eLanguageProvider, 
-	darkHeresyLanguageProvider, dccLanguageProvider, demonlordLanguageProvider, dnd4eLanguageProvider, dnd5eLanguageProvider, dsa5LanguageProvider, fggLanguageProvider, 
-	gurpsLanguageProvider, kryxrpgLanguageProvider, oseLanguageProvider, pf1LanguageProvider, pf2eLanguageProvider, sfrpgLanguageProvider,
-	shadowrun5eLanguageProvider, splittermondLanguageProvider, swadeLanguageProvider, sw5eLanguageProvider, tormenta20LanguageProvider,
-	uesrpgLanguageProvider, warhammerLanguageProvider,
-} from "./LanguageProvider.js";
+import * as providers from "./LanguageProvider.js";
 import { addSetting } from "./settings.js";
 
 export const availableLanguageProviders = {};
@@ -43,7 +36,7 @@ export function getDefaultLanguageProvider() {
 export function updateLanguageProvider() {
 	// If the configured provider is registered use that one. If not use the default provider
 	const configuredProvider = game.settings.get("polyglot", "languageProvider");
-	currentLanguageProvider = availableLanguageProviders[configuredProvider] ?? availableLanguageProviders[game.settings.settings.get("polyglot.languageProvider").default];
+	currentLanguageProvider = availableLanguageProviders[configuredProvider || game.settings.settings.get("polyglot.languageProvider").default];
 }
 
 export function initApi() {
@@ -51,93 +44,19 @@ export function initApi() {
 		//Has no name or hint
 		config: false,
 		type: String,
-		default: getDefaultLanguageProvider(),
+		default: "", // Will be replaced by the end of this function
 		onChange: updateLanguageProvider,
 	});
+	const providerKeys = {
+		"cyberpunk-red-core": "cyberpunkRed",
+		"dark-heresy": "darkHeresy",
+		"uesrpg-d100": "uesrpg",
+		wfrp4e: "warhammer",
+	};
+	const supportedSystems = /a5e|aria|coc7|earthdawn4e|d35e|dcc|demonlord|dnd4e|dnd5e|dsa5|fgg|gurps|ose|pf1|pf2e|sfrpg|shadowrun5e|splittermond|swade|sw5e|tormenta20/;
 	const languageProviders = [];
-	switch (game.system.id) {
-		case "a5e":
-			languageProviders.push(new a5eLanguageProvider("native.a5e"));
-			break;
-		case "aria":
-			languageProviders.push(new ariaLanguageProvider("native.aria"));
-			break;
-		case "CoC7":
-			languageProviders.push(new coc7LanguageProvider("native.CoC7"));
-			break;
-		case "D35E":
-			languageProviders.push(new d35eLanguageProvider("native.D35E"));
-			break;
-		case "dark-heresy":
-			languageProviders.push(new darkHeresyLanguageProvider("native.dark-heresy"));
-			break;
-		case "dcc":
-			languageProviders.push(new dccLanguageProvider("native.dcc"));
-			break;
-		case "demonlord":
-			languageProviders.push(new demonlordLanguageProvider("native.demonlord"));
-			break;
-		case "dsa5":
-			languageProviders.push(new dsa5LanguageProvider("native.dsa5"));
-			break;
-		case "dnd4e":
-			languageProviders.push(new dnd4eLanguageProvider("native.dnd4e"));
-			break;
-		case "dnd5e":
-			languageProviders.push(new dnd5eLanguageProvider("native.dnd5e"));
-			break;
-		case "earthdawn4e":
-			languageProviders.push(new earthdawn4eLanguageProvider("native.earthdawn4e"));
-			break;
-		case "fgg":
-			languageProviders.push(new fggLanguageProvider("native.fgg"));
-			break;
-		case "gurps":
-			languageProviders.push(new gurpsLanguageProvider("native.gurps"));
-			break;
-		case "kryx_rpg":
-			languageProviders.push(new kryxrpgLanguageProvider("native.kryx_rpg"));
-			break;
-		case "ose":
-			languageProviders.push(new oseLanguageProvider("native.ose"));
-			break;
-		case "pf1":
-			languageProviders.push(new pf1LanguageProvider("native.pf1"));
-			break;
-		case "pf2e":
-			languageProviders.push(new pf2eLanguageProvider("native.pf2e"));
-			break;
-		case "sfrpg":
-			languageProviders.push(new sfrpgLanguageProvider("native.sfrpg"));
-			break;
-		case "shadowrun5e":
-			languageProviders.push(new shadowrun5eLanguageProvider("native.shadowrun5e"));
-			break;
-		case "splittermond":
-			languageProviders.push(new splittermondLanguageProvider("native.splittermond"));
-			break;
-		case "swade":
-			languageProviders.push(new swadeLanguageProvider("native.swade"));
-			break;
-		case "sw5e":
-			languageProviders.push(new sw5eLanguageProvider("native.sw5e"));
-			break;
-		case "tormenta20":
-			languageProviders.push(new tormenta20LanguageProvider("native.tormenta20"));
-			break;
-		case "uesrpg-d100":
-			languageProviders.push(new uesrpgLanguageProvider("native.uesrpg-d100"));
-			break;
-		case "wfrp4e":
-			languageProviders.push(new warhammerLanguageProvider("native.wfrp4e"));
-			break;
-		case "cyberpunk-red-core":
-			languageProviders.push(new cyberpunkRedLanguageProvider("native.cyberpunk-red-core"));
-			break;
-		default:
-			languageProviders.push(new LanguageProvider("native"));
-			break;
-	}
+	const providerString = providerKeys[game.system.id] ?? supportedSystems.exec(game.system.id) ? game.system.id : "";
+	languageProviders.push(eval(`new providers.${providerString}LanguageProvider("native${providerString.length ? "." + providerString : ""}")`));
 	for (let languageProvider of languageProviders) availableLanguageProviders[languageProvider.id] = languageProvider;
 	game.settings.settings.get("polyglot.languageProvider").default = getDefaultLanguageProvider();
 	updateLanguageProvider();
