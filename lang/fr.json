@@ -14,7 +14,7 @@
 	"POLYGLOT.RandomizeRunes.title": "Runes aléatoires",
 	"POLYGLOT.RandomizeRunes.hint": "Activer cette option fera apparaître un texte crypté différent chaque fois, même si le texte initial est le même.",
 	"POLYGLOT.ExportFonts.title": "Disponibilité ds Polices",
-	"POLYGLOT.ExportFonts.hint": "Rendre les polices de Polyglot disposnibles pour Foundry (dans les outils de dessin par exemple).",
+	"POLYGLOT.ExportFonts.hint": "Rendre les polices de Polyglot disponibles dans le menu des polices de Foundry. Désactiver ce réglage retirera toutes les polices de polyglotte du menu.",
 	"POLYGLOT.DisplayTranslated.title": "Affichicher la traduction",
 	"POLYGLOT.DisplayTranslated.hint": "Pour les langues traduites dans les messages de tchat, afficher le texte original et sa traduction.",
 	"POLYGLOT.AllowOOC.title": "Crypter les messages non destinés à un personnage",
@@ -69,7 +69,7 @@
 			"a": "Tout",
 			"b": "MJ Seulement",
 			"c": "Joueurs Seulement",
-			"d": "Rien"
+			"d": "Aucun"
 		},
 		"LanguageProvider": {
 			"choices": {
@@ -95,6 +95,26 @@
 		"JournalHighlight.hint": "Définit l'opacité du surlignage sur les polices du journal.",
 		"JournalHighlight.title": "Opacité du surlignage dans le journal (%)",
 		"logographicalFontToggle.hint": "Réduire de moitié la taille des phrases à l'aide de polices logographiques (par exemple, caractères japonais, chinois).",
-		"HideTranslation.hint": "Masque le globe et le texte \"Traduit de\" des messages de chat aux joueurs. Parfait lorsque vous ne voulez pas montrer aux joueurs quelle langue vous parlez. Déclenche un rechargement."
+		"HideTranslation.hint": "Masque le globe et le texte \"Traduit de\" des messages de chat aux joueurs. Utile lorsque vous ne voulez pas montrer aux joueurs quelle langue vous parlez. Déclenche un rechargement.",
+		"JournalHighlightColor": {
+			"hint": "Définit la couleur de surlignage sur les polices dans le journal.",
+			"title": "Couleur du surlignage dans le journal"
+		},
+		"languageDataPath": {
+			"title": "Chemin des données de langue",
+			"hint": "Si votre système possède des langues dans les données de l'acteur et qu'elles ne sont pas téléchargées proprement, il pourra utiliser un autre chemin de données. Renseignez le chemin des données vers l'attribut correct (ex : actor.system.language ou actor.system.speak). Ce réglage prend la préséance sur les réglages du regex de langue. Nécessite un rechargement."
+		},
+		"literacyDataPath": {
+			"title": "Chemin de données alphabétique",
+			"hint": "Identique au réglage du chemin des données mais pour lire les journaux. Ce réglage nécessite le réglage du chemin de données. Nécessite un rechargement."
+		},
+		"RuneRegex": {
+			"hint": "Faire en sorte que la génération aléatoire ignore les caractères qui ne sont pas alphanumériques (ex : !,.;:?#$\"'). Cela pourrait avoir un effet non désiré en montrant des caractères sous forme de carrés (□) sur certaines polices.",
+			"title": "Rendre aléatoire seulement les alphanumériques"
+		},
+		"IgnoreJournalFontSize": {
+			"title": "Journal : Utiliser la taille de police normale",
+			"hint": "Ignore la taille des police de Polyglot sur les journaux,les rendant de la même taille que celui d'un texte normal. Utile lorsque le format des journaux importe."
+		}
 	}
 }
