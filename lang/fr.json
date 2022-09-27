@@ -105,7 +105,7 @@
 			"hint": "Si votre système possède des langues dans les données de l'acteur et qu'elles ne sont pas téléchargées proprement, il pourra utiliser un autre chemin de données. Renseignez le chemin des données vers l'attribut correct (ex : actor.system.language ou actor.system.speak). Ce réglage prend la préséance sur les réglages du regex de langue. Nécessite un rechargement."
 		},
 		"literacyDataPath": {
-			"title": "Chemin de données alphabétique",
+			"title": "Parcours de données sur l'alphabétisation",
 			"hint": "Identique au réglage du chemin des données mais pour lire les journaux. Ce réglage nécessite le réglage du chemin de données. Nécessite un rechargement."
 		},
 		"RuneRegex": {
