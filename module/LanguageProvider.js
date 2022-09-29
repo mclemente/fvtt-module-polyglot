@@ -49,6 +49,7 @@ export class LanguageProvider {
 			maraseye: "200% MarasEye",
 			meroiticdemotic: "200% MeroiticDemotic",
 			miroslavnormal: "200% MiroslavNormal",
+			musiqwik: "200% MusiQwik",
 			nordic: "160% NyStormning",
 			oldeenglish: "150% OldeEnglish",
 			oldeespruar: "200% OldeEspruar",

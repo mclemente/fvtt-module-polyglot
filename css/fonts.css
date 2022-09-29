@@ -105,6 +105,10 @@
 	src: url("../fonts/MiroslavNormal.ttf");
 }
 @font-face {
+	font-family: "MusiQwik";
+	src: url("../fonts/MusiQwik.ttf");
+}
+@font-face {
 	font-family: "NyStormning";
 	src: url("../fonts/NyStormning.otf");
 }

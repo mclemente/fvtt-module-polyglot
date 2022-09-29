@@ -44,6 +44,7 @@ The following font is under [GNU GENERAL PUBLIC LICENSE v3](https://www.gnu.org/
 
 The following font is under [SIL OPEN FONT LICENSE Version 1.1](https://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web):
 
+- [MusiQwik](https://www.fontspace.com/musiqwik-font-f3722). Copyright (c) 2003, Robert Allgeyer.
 - [Ny Stormning](https://www.fontspace.com/ny-stormning-font-f23289). Copyright (c) 2016, Mew Too, Robert Jablonski (Cannot Into Space Fonts) (cannotintospacefonts@gmail.com).
 
 The following are under [CC BY-SA 3](https://creativecommons.org/licenses/by-sa/3.0/):

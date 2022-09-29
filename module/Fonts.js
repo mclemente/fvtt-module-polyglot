@@ -249,6 +249,16 @@ let FONTS = {
 			},
 		],
 	},
+	"MusiQwik": {
+		editor: false,
+		fonts: [
+			{
+				urls: ["modules/polyglot/fonts/MusiQwik.otf"],
+				weight: 400,
+				style: "normal",
+			},
+		],
+	},
 	"Ny Stormning": {
 		editor: false,
 		fonts: [
