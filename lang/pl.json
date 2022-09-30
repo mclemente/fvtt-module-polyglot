@@ -33,7 +33,7 @@
 			"c": "Brak ⚠️"
 		},
 		"ExportFonts.title": "Udostępnij Czcionki",
-		"ExportFonts.hint": "Udostępnij czcionki Polyglot do użytku w Foundry (na przykład w Rysunkach).",
+		"ExportFonts.hint": "Udostępnij czcionki Polyglot do użytku w Foundry (na przykład w Rysunkach). Wyłączenie tego ustawienia usunie wszystkie czcionki Polyglot z opcji wyboru.",
 		"DisplayTranslated.title": "Wyświetlaj Tłumaczenia",
 		"DisplayTranslated.hint": "Dla języków, które zostaną przetłumaczone na czacie, wyświetlaj tekst oryginalny oraz tłumaczenie pod spodem.",
 		"HideTranslation.title": "Usuń powiadomienia dla Graczy",
@@ -90,8 +90,15 @@
 		"FontSize": "Rozmiar Czcionki (%)",
 		"enableAllFonts": {
 			"choices": {
-				"1": "Czcionki pakietu Polyglot"
+				"1": "Czcionki pakietu Polyglot",
+				"0": "Żadne",
+				"2": "Dodatkowe czcionki Foundry",
+				"3": "Oba"
 			}
+		},
+		"languageDataPath": {
+			"title": "Ścieżka Języków",
+			"hint": "Jeżeli twój system mieści języki w aktorach i nie są one poprawnie wykryte przez Polyglot, możliwa jest potrzeba podania gdzie one są podane. Wpisz ścieżkę gdzie znajdują się języki (np. actor.system.languages czy actor.system.speak). Te ustawienie ma pierwszeństwo przed ustawieniem \"RegEx Języków\". Wymaga przeładowania."
 		}
 	}
 }
