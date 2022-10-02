@@ -33,11 +33,11 @@
 			"c": "Brak ⚠️"
 		},
 		"ExportFonts.title": "Udostępnij Czcionki",
-		"ExportFonts.hint": "Udostępnij czcionki Polyglot do użytku w Foundry (na przykład w Rysunkach).",
+		"ExportFonts.hint": "Udostępnij czcionki Polyglot do użytku w Foundry (na przykład w Rysunkach). Wyłączenie tego ustawienia usunie wszystkie czcionki Polyglot z opcji wyboru.",
 		"DisplayTranslated.title": "Wyświetlaj Tłumaczenia",
 		"DisplayTranslated.hint": "Dla języków, które zostaną przetłumaczone na czacie, wyświetlaj tekst oryginalny oraz tłumaczenie pod spodem.",
 		"HideTranslation.title": "Usuń powiadomienia dla Graczy",
-		"HideTranslation.hint": "Usuwa ikonę globu i tekst \"Przetłumaczono z:\" z wiadomości czatu. Idealne kiedy nie chcesz zdradzać graczom języka, którym się porozumiewasz. Wymaga przeładowania.",
+		"HideTranslation.hint": "Usuwa ikonę \"globu\" oraz tekst \"Przetłumaczono z:\" z wiadomości czatu. Idealne kiedy nie chcesz zdradzać graczom języka, którym się porozumiewasz. Wymaga przeładowania.",
 		"AllowOOC.title": "Szyfruj Wiadomości Czatu Poza Rolą",
 		"AllowOOC.hint": "Wybierz użytkowników, których wiadomości mają być szyfrowane przy mówieniu Poza Rolą.",
 		"AllowOOCOptions": {
@@ -77,6 +77,28 @@
 		},
 		"WFRP4E": {
 			"LanguageSkills": "Język"
+		},
+		"JournalHighlightColor": {
+			"hint": "Określa kolor podświetlenia czcionek w dzienniku.",
+			"title": "Kolor podświetleń w dzienniku"
+		},
+		"IgnoreJournalFontSize": {
+			"hint": "Ignoruje rozmiar czcionek Polyglot w dziennikach, dzięki czemu mają taki sam rozmiar jak normalny tekst. Przydatne, gdy liczy się dla Ciebie  formatowanie dziennika.",
+			"title": "Dziennik: Używaj normalnego rozmiaru czcionek"
+		},
+		"Font": "Czcionka",
+		"FontSize": "Rozmiar Czcionki (%)",
+		"enableAllFonts": {
+			"choices": {
+				"1": "Czcionki pakietu Polyglot",
+				"0": "Żadne",
+				"2": "Dodatkowe czcionki Foundry",
+				"3": "Oba"
+			}
+		},
+		"languageDataPath": {
+			"title": "Ścieżka Języków",
+			"hint": "Jeżeli twój system mieści języki w aktorach i nie są one poprawnie wykryte przez Polyglot, możliwa jest potrzeba podania gdzie one są podane. Wpisz ścieżkę gdzie znajdują się języki (np. actor.system.languages czy actor.system.speak). Te ustawienie ma pierwszeństwo przed ustawieniem \"RegEx Języków\". Wymaga przeładowania."
 		}
 	}
 }
