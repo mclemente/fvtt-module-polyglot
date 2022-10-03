@@ -407,6 +407,8 @@ export class Polyglot {
 			});
 			return;
 		}
+		// Skip for inline rolls
+		if (/\[\[(.*?)\]\]/g.test(message.content)) return;
 		if (!this.known_languages.size) this.updateUserLanguages(this.chatElement);
 		const lang = message.getFlag("polyglot", "language") || "";
 		if (!lang) return;
