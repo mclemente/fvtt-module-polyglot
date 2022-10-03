@@ -1210,82 +1210,92 @@ export class dsa5LanguageProvider extends LanguageProvider {
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		let langs = {};
-		if (game.modules.has("dsa5-core") && !game.modules.get("dsa5-core").active) {
-			ui.notifications.warn(`Polyglot | The ${game.modules.get("dsa5-core").title} module isn't active. Defaulting to built-in languages.`);
-		}
-		if (game.modules.has("dsa5-core") && game.modules.get("dsa5-core")?.active) {
-			const dsa5Pack = game.packs.get("dsa5-core.coreabilities");
-			const dsa5ItemList = await dsa5Pack.getIndex();
-			let languageRegex = new RegExp(game.i18n.localize("LocalizedIDs.language") + "\\s*\\((.+)\\)", "i");
-			let literacyRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy") + "\\s*\\((.+)\\)", "i");
-			for (let item of dsa5ItemList) {
-				let match = item.name.match(languageRegex);
-				if (match) {
-					let lang = match[1].trim();
-					let key = lang.toLowerCase();
-					langs[key] = lang;
-				} else {
-					match = item.name.match(literacyRegex);
-					if (match) {
-						let lang = match[1].trim();
-						let key = lang.toLowerCase();
-						langs[key] = lang;
+		if (game.modules.has("dsa5-core")) {
+			if (!game.modules.get("dsa5-core").active) {
+				ui.notifications.warn(`Polyglot | The ${game.modules.get("dsa5-core").title} module isn't active. Defaulting to built-in languages.`);
+			} else {
+				const dsa5Pack = game.packs.get("dsa5-core.coreabilities") ?? game.packs.get("dsa5-core.coreenabilities");
+				if (dsa5Pack) {
+					const dsa5ItemList = await dsa5Pack.getIndex();
+					let languageRegex = new RegExp(game.i18n.localize("LocalizedIDs.language") + "\\s*\\((.+)\\)", "i");
+					let literacyRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy") + "\\s*\\((.+)\\)", "i");
+					for (let item of dsa5ItemList) {
+						let match = item.name.match(languageRegex);
+						if (match) {
+							let lang = match[1].trim();
+							let key = lang.toLowerCase();
+							langs[key] = lang;
+						} else {
+							match = item.name.match(literacyRegex);
+							if (match) {
+								let lang = match[1].trim();
+								let key = lang.toLowerCase();
+								langs[key] = lang;
+							}
+						}
 					}
+					this.languages = replaceLanguages ? {} : langs;
+					return;
+				} else {
+					ui.notifications.error(`Polyglot | The ${game.modules.get("dsa5-core").title} pack wasn't retrieved correctly. Defaulting to built-in languages.`, {
+						console: false,
+					});
 				}
 			}
-		} else
-			langs = {
-				alaani: "Alaani",
-				"altes alaani": "Altes Alaani",
-				amulashtra: "Amulashtra",
-				angram: "Angram",
-				"angram-bilderschrift": "Angram-Bilderschrift",
-				arkanil: "Arkanil",
-				asdharia: "Asdharia",
-				atak: "Atak",
-				aureliani: "Aureliani",
-				bosparano: "Bosparano",
-				chrmk: "Chrmk",
-				chuchas: "Chuchas",
-				"drakhard-zinken": "Drakhard-Zinken",
-				fjarningsch: "Fjarningsch",
-				garethi: "Garethi",
-				"geheiligte glyphen von unau": "Geheiligte Glyphen von Unau",
-				"gimaril-glyphen": "Gimaril-Glyphen",
-				goblinisch: "Goblinisch",
-				"hjaldingsche runen": "Hjaldingsche Runen",
-				"imperiale zeichen": "Imperiale Zeichen",
-				isdira: "Isdira",
-				"isdira- und asdharia-zeichen": "Isdira- und Asdharia-Zeichen",
-				"kusliker zeichen": "Kusliker Zeichen",
-				mohisch: "Mohisch",
-				"nanduria-zeichen": "Nanduria-Zeichen",
-				nujuka: "Nujuka",
-				ogrisch: "Ogrisch",
-				oloarkh: "Oloarkh",
-				ologhaijan: "Ologhaijan",
-				protozelemja: "Protozelemja",
-				rabensprache: "Rabensprache",
-				rogolan: "Rogolan",
-				"rogolan-runen": "Rogolan-Runen",
-				rssahh: "Rssahh",
-				ruuz: "Ruuz",
-				"saga-thorwalsch": "Saga-Thorwalsch",
-				tahaya: "Tahaya",
-				thorwalsch: "Thorwalsch",
-				"thorwalsche runen": "Thorwalsche Runen",
-				trollisch: "Trollisch",
-				"trollische raumbildschrift": "Trollische Raumbildschrift",
-				tulamidya: "Tulamidya",
-				"tulamidya-zeichen": "Tulamidya-Zeichen",
-				"ur-tulamidya": "Ur-Tulamidya",
-				"ur-tulamidya-zeichen": "Ur-Tulamidya-Zeichen",
-				"yash-hualay-glyphen": "Yash-Hualay-Glyphen",
-				zelemja: "Zelemja",
-				zhayad: "Zhayad",
-				"zhayad-zeichen": "Zhayad-Zeichen",
-				zyklopäisch: "Zyklopäisch",
-			};
+		}
+
+		langs = {
+			alaani: "Alaani",
+			"altes alaani": "Altes Alaani",
+			amulashtra: "Amulashtra",
+			angram: "Angram",
+			"angram-bilderschrift": "Angram-Bilderschrift",
+			arkanil: "Arkanil",
+			asdharia: "Asdharia",
+			atak: "Atak",
+			aureliani: "Aureliani",
+			bosparano: "Bosparano",
+			chrmk: "Chrmk",
+			chuchas: "Chuchas",
+			"drakhard-zinken": "Drakhard-Zinken",
+			fjarningsch: "Fjarningsch",
+			garethi: "Garethi",
+			"geheiligte glyphen von unau": "Geheiligte Glyphen von Unau",
+			"gimaril-glyphen": "Gimaril-Glyphen",
+			goblinisch: "Goblinisch",
+			"hjaldingsche runen": "Hjaldingsche Runen",
+			"imperiale zeichen": "Imperiale Zeichen",
+			isdira: "Isdira",
+			"isdira- und asdharia-zeichen": "Isdira- und Asdharia-Zeichen",
+			"kusliker zeichen": "Kusliker Zeichen",
+			mohisch: "Mohisch",
+			"nanduria-zeichen": "Nanduria-Zeichen",
+			nujuka: "Nujuka",
+			ogrisch: "Ogrisch",
+			oloarkh: "Oloarkh",
+			ologhaijan: "Ologhaijan",
+			protozelemja: "Protozelemja",
+			rabensprache: "Rabensprache",
+			rogolan: "Rogolan",
+			"rogolan-runen": "Rogolan-Runen",
+			rssahh: "Rssahh",
+			ruuz: "Ruuz",
+			"saga-thorwalsch": "Saga-Thorwalsch",
+			tahaya: "Tahaya",
+			thorwalsch: "Thorwalsch",
+			"thorwalsche runen": "Thorwalsche Runen",
+			trollisch: "Trollisch",
+			"trollische raumbildschrift": "Trollische Raumbildschrift",
+			tulamidya: "Tulamidya",
+			"tulamidya-zeichen": "Tulamidya-Zeichen",
+			"ur-tulamidya": "Ur-Tulamidya",
+			"ur-tulamidya-zeichen": "Ur-Tulamidya-Zeichen",
+			"yash-hualay-glyphen": "Yash-Hualay-Glyphen",
+			zelemja: "Zelemja",
+			zhayad: "Zhayad",
+			"zhayad-zeichen": "Zhayad-Zeichen",
+			zyklopäisch: "Zyklopäisch",
+		};
 		this.languages = replaceLanguages ? {} : langs;
 	}
 
