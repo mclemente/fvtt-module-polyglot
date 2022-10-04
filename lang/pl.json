@@ -91,7 +91,7 @@
 		"enableAllFonts": {
 			"choices": {
 				"1": "Czcionki pakietu Polyglot",
-				"0": "Żadne",
+				"0": "Nic",
 				"2": "Dodatkowe czcionki Foundry",
 				"3": "Oba"
 			}
