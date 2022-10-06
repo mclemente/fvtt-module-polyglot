@@ -56,7 +56,7 @@
 			}
 		},
 		"Translation": "Tłumaczenie",
-		"TranslatedFrom": "Przetłumaczono z:",
+		"TranslatedFrom": "Przetłumaczono z ",
 		"LanguageLabel": "Język",
 		"AlphabetLabel": "Alfabet",
 		"LatinAlphabet": "Alfabet Łaciński",
@@ -83,7 +83,7 @@
 			"title": "Kolor podświetleń w dzienniku"
 		},
 		"IgnoreJournalFontSize": {
-			"hint": "Ignoruje rozmiar czcionek Polyglot w dziennikach, dzięki czemu mają taki sam rozmiar jak normalny tekst. Przydatne, gdy liczy się dla Ciebie  formatowanie dziennika.",
+			"hint": "Ignoruje rozmiar czcionek Polyglot w dziennikach, dzięki czemu mają taki sam rozmiar jak normalny tekst. Przydatne, gdy liczy się dla Ciebie formatowanie dziennika.",
 			"title": "Dziennik: Używaj normalnego rozmiaru czcionek"
 		},
 		"Font": "Czcionka",
@@ -91,7 +91,7 @@
 		"enableAllFonts": {
 			"choices": {
 				"1": "Czcionki pakietu Polyglot",
-				"0": "Żadne",
+				"0": "Nic",
 				"2": "Dodatkowe czcionki Foundry",
 				"3": "Oba"
 			}
@@ -99,6 +99,22 @@
 		"languageDataPath": {
 			"title": "Ścieżka Języków",
 			"hint": "Jeżeli twój system mieści języki w aktorach i nie są one poprawnie wykryte przez Polyglot, możliwa jest potrzeba podania gdzie one są podane. Wpisz ścieżkę gdzie znajdują się języki (np. actor.system.languages czy actor.system.speak). Te ustawienie ma pierwszeństwo przed ustawieniem \"RegEx Języków\". Wymaga przeładowania."
+		},
+		"literacyDataPath": {
+			"title": "Ścieżka danych dotyczących alfabetyzacji",
+			"hint": "Takie samo jak ustawienie Ścieżki Dostępu Języka, ale dla czytania dzienników. To ustawienie wymaga ustawienia Ścieżki Dostępu Język. Wymaga przeładowania."
+		},
+		"RuneRegex": {
+			"title": "Randomizuj tylko alfanumeryczne",
+			"hint": "Sprawia, że randomizacja ignoruje znaki niealfanumeryczne (np. !,.;:?#$\"'). Może to mieć niepożądany efekt wyświetlania niektórych z tych znaków jako kwadrat (□) na niektórych czcionkach."
+		},
+		"LanguageRegex": {
+			"hint": "Możesz użyć tego, aby zmienić termin wyszukiwany w elementach z \"Language\" na coś innego, na przykład \"Tongue\". To ustawienie jest bardziej przydatne dla osób nie mówiących po angielsku.",
+			"title": "RegEx języka"
+		},
+		"DND5E": {
+			"SpecialLanguages.title": "Zastąp języki specjalne",
+			"SpecialLanguages.hint": "Nazwa języka, który zastąpi \"języki\" np. \"wszystkie języki jakie znał w życiu\"."
 		}
 	}
 }
