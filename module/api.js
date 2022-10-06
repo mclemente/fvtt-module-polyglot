@@ -55,7 +55,9 @@ export function initApi() {
 	};
 	const supportedSystems = /a5e|aria|coc7|earthdawn4e|d35e|dcc|demonlord|dnd4e|dnd5e|dsa5|fgg|gurps|ose|pf1|pf2e|sfrpg|shadowrun5e|splittermond|swade|sw5e|tormenta20/;
 	const languageProviders = [];
-	const providerString = providerKeys[game.system.id] ?? supportedSystems.exec(game.system.id) ? game.system.id : "";
+	if (supportedSystems.exec(game.system.id)) var providerString = game.system.id;
+	else providerString = providerKeys[game.system.id] || "";
+
 	languageProviders.push(eval(`new providers.${providerString}LanguageProvider("native${providerString.length ? "." + providerString : ""}")`));
 	for (let languageProvider of languageProviders) availableLanguageProviders[languageProvider.id] = languageProvider;
 	game.settings.settings.get("polyglot.languageProvider").default = getDefaultLanguageProvider();
