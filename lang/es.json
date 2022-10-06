@@ -43,7 +43,7 @@
 		"DisplayTranslated.title": "Mostrar traducciones",
 		"DisplayTranslated.hint": "Para los idiomas que se traducen en el chat, muestra el texto original y a continuación la traducción.",
 		"HideTranslation.title": "Ocultar a los jugadores los globos y el texto \"Traducido del\"",
-		"HideTranslation.hint": "Oculta el globo y el texto \"Traducido del\" del chat a los jugadores. Útil para cuando no se quiere que los jugadores sepan en qué idioma se está hablando. Requiere recargar la página.",
+		"HideTranslation.hint": "Oculta el mensaje flotante \"Traducido del\" a los jugadores. Esto es útil cuando no se quiere que los jugadores sepan en qué idioma se está hablando. Se necesita recargar la página.",
 		"AllowOOC.title": "Aleatorizar en mensajes Como Jugador (OOC)",
 		"AllowOOC.hint": "Determina qué usuarios tendrán sus mensajes codificados al utilizar el chat como jugador. OOC = Fuera de Personaje (Out of Character).",
 		"AllowOOCOptions": {
@@ -107,6 +107,18 @@
 		"RuneRegex": {
 			"title": "Aleatorizar solo alfanuméricos",
 			"hint": "Hace que la aleatoriedad ignore los caracteres no alfanuméricos (p. ej. !,.;:?#$\"'). Esto puede causar que algunos de estos caracteres se muestren como un cuadrado (□) en algunas fuentes."
+		},
+		"JournalHighlightColor": {
+			"hint": "Define el color de resaltado sobre las fuentes del diario.",
+			"title": "Color de Resaltado del Diario"
+		},
+		"languageDataPath": {
+			"title": "Ruta de Datos del Idioma",
+			"hint": "Si tu sistema tiene idiomas configurados en los datos de los actores y no se cargan correctamente, es posible que esté usando otra ruta. Indica la ruta al atributo correcto (por ejemplo, actor.system.languages o actor.system.speak). Esta configuración tiene prioridad sobre la configuración Language Regex. Se necesita recargar la interfaz."
+		},
+		"literacyDataPath": {
+			"title": "Ruta de Datos para Alfabetización",
+			"hint": "Igual que la configuración de ruta de datos de idioma, pero para leer los diarios. Esta configuración requiere la configuración de la ruta de datos del idioma. Se necesita recargar."
 		}
 	}
 }
