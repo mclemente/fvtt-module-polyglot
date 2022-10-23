@@ -46,7 +46,6 @@
 				"system": "[システム] {name}"
 			}
 		},
-
 		"Translation": "翻訳",
 		"TranslatedFrom": "翻訳元：",
 		"LanguageLabel": "言語",
@@ -54,12 +53,10 @@
 		"LatinAlphabet": "ラテン文字",
 		"ToggleRunes": "ルーンの切替",
 		"Runes": "ルーン",
-
 		"Generic": {
 			"Language": "言語"
 		},
 		"UESRPG.Language": "言語",
-
 		"COC7": {
 			"LanguageOwn": "言語",
 			"LanguageAny": "言語",
@@ -71,6 +68,16 @@
 		},
 		"WFRP4E": {
 			"LanguageSkills": "言語"
-		}
+		},
+		"enableAllFonts": {
+			"choices": {
+				"1": "Polyglotのフォント",
+				"2": "コアの追加フォント",
+				"0": "なし",
+				"3": "両方"
+			}
+		},
+		"FontSize": "フォントサイズ(%)",
+		"Font": "フォント"
 	}
 }
