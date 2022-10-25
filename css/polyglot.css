@@ -6,7 +6,7 @@
 }
 
 .polyglot-chat-bubble {
-	font: var(--polyglot-chat-bubble-font);
+	font-family: var(--polyglot-chat-bubble-font);
 }
 
 .polyglot-lang-select {

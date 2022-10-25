@@ -97,23 +97,6 @@ export class Polyglot {
 			},
 			"WRAPPER"
 		);
-		libWrapper.register(
-			"polyglot",
-			"ChatBubbles.prototype._getMessageDimensions",
-			(message) => {
-				let div = $(`<div class="chat-bubble" style="visibility:hidden;font:${this?._bubble?.font}">${this?._bubble?.message || message}</div>`);
-				$("body").append(div);
-				let dims = {
-					width: div[0].clientWidth + 8,
-					height: div[0].clientHeight,
-				};
-				div.css({ maxHeight: "none" });
-				dims.unconstrained = div[0].clientHeight;
-				div.remove();
-				return dims;
-			},
-			"OVERRIDE"
-		);
 		/**
 		 * Speak a message as a particular Token, displaying it as a chat bubble
 		 * WRAPPER:
@@ -148,7 +131,8 @@ export class Polyglot {
 					const unknown = !this._isTruespeech(lang) && !this.known_languages.has(lang) && !this.known_languages.has(this.comprehendLanguages);
 					if (unknown) {
 						message = this.scrambleString(message, randomId, lang);
-						document.documentElement.style.setProperty("--polyglot-chat-bubble-font", this._getFontStyle(lang));
+						document.documentElement.style.setProperty("--polyglot-chat-bubble-font", this._getFontStyle(lang).replace(/\d+%\s/g, ""));
+						if (cssClasses == undefined) cssClasses = [];
 						cssClasses.push("polyglot-chat-bubble");
 					}
 				}
