@@ -19,11 +19,11 @@
 		"RandomizeRunes.title": "Zufalls-Runen",
 		"RandomizeRunes.hint": "Das Aktivieren dieser Option wird den verschlüsselten Text jedes mal unterschiedlich erscheinen lassen, selbst wenn die Nachricht die Gleiche ist.",
 		"ExportFonts.title": "Mache fonts verfügbar",
-		"ExportFonts.hint": "Macht die Polyglot Schriftarten für das Nutzen in Foundry verfügbar (in Zeichnungen zum Beispiel).",
+		"ExportFonts.hint": "Fügt die Polyglot-Schriften zum Menü Zusätzliche Schriften von Core hinzu. Wenn Sie diese Einstellung deaktivieren, werden alle Polyglot-Schriften aus dem Menü entfernt.",
 		"DisplayTranslated.title": "Übersetzungs Box anzeigen",
 		"DisplayTranslated.hint": "Für Sprachen die im Chat übersetzt werden, zeige den Original Text und die Übersetzung unterhalb an.",
 		"HideTranslation.title": "Verstecke Weltkugel und \"Übersetzt von\" Text vor Spielern",
-		"HideTranslation.hint": "Versteckt die Weltkugel und \"Übersetzt von\" Text von Chatnachrichten vor Spielern. Perfekt wenn du nicht möchtest, dass die Spieler sehen welche Sprache du sprichst.",
+		"HideTranslation.hint": "Blendet den Globus und den Text \"Übersetzt von\" aus Chat-Nachrichten an Spieler aus. Nützlich, wenn Sie den Spielern nicht zeigen wollen, welche Sprache Sie sprechen. Erfordert Neuladen.",
 		"AllowOOC.title": "Verschlüssele bei OOC Chatnachrichten",
 		"AllowOOC.hint": "Erlaubt dem GM den Text zu verschlüsseln wenn Out Of Charakter Nachrichten geschickt werden.",
 		"Translation": "Übersetzung",
@@ -31,7 +31,6 @@
 		"LanguageLabel": "Sprache",
 		"ToggleRunes": "Umschalten Runen",
 		"Runes": "Runen",
-
 		"Generic": {
 			"Language": "Sprache"
 		},
@@ -41,7 +40,76 @@
 			"LanguageOther": "Fremdsprache",
 			"LanguageSpec": "Fremdsprache"
 		},
-		"SWADE.LanguageSkills": "Language",
-		"WFRP4E.LanguageSkills": "Language"
+		"SWADE.LanguageSkills": "Sprache",
+		"WFRP4E.LanguageSkills": "Sprache",
+		"enableAllFonts": {
+			"title": "Schriftarten zu den Moduleinstellungen hinzufügen",
+			"choices": {
+				"0": "keine",
+				"1": "Polyglott Schriftarten",
+				"2": "Zusätzliche Schriftarten von Core",
+				"3": "beide"
+			},
+			"hint": "Fügt Schriftarten aus den gewählten Quellen zu den Schrifteinstellungen und Spracheinstellungen hinzu."
+		},
+		"JournalHighlightColor": {
+			"hint": "Bestimmt die Farbe der Hervorhebung von Schriftarten im Journal.",
+			"title": "Journal Hervorhebungsfarbe"
+		},
+		"languageDataPath": {
+			"title": "Datenpfad Sprache",
+			"hint": "Wenn Ihr System über Sprachen verfügt, die in den Akteursdaten festgelegt sind und nicht richtig geladen werden, verwendet es möglicherweise einen anderen Datenpfad. Geben Sie den Datenpfad in das richtige Attribut ein (z. B. actor.system.languages oder actor.system.speak). Diese Einstellung hat Vorrang vor der Einstellung Language Regex. Erfordert Neuladen."
+		},
+		"RandomizeRunesOptions": {
+			"a": "Voreinstellung",
+			"b": "Einzigartige Sätze",
+			"c": "Keine ⚠️"
+		},
+		"literacyDataPath": {
+			"hint": "Entspricht der Einstellung Sprachdatenpfad, jedoch für das Lesen von Zeitschriften. Diese Einstellung erfordert die Einstellung Sprachdatenpfad. Erfordert ein Neuladen.",
+			"title": "Datenpfad Alphabetisierung"
+		},
+		"AlphabetLabel": "Alphabet",
+		"DND5E": {
+			"SpecialLanguages.hint": "Name der Sprache die erstezt wird \"Sprachen\" ersetzten z.B. \"alle Sprachen, die es im Leben kannte\".",
+			"SpecialLanguages.title": "Ersetzen von speziellen Sprachen"
+		},
+		"LatinAlphabet": "Lateinisches Alphabet",
+		"UESRPG.Language": "Sprache",
+		"AllowOOCOptions": {
+			"d": "keine",
+			"a": "alle",
+			"b": "Nur für GM",
+			"c": "Nur für Spieler"
+		},
+		"IgnoreJournalFontSize": {
+			"title": "Zeitschrift: Normale Schriftgröße verwenden",
+			"hint": "Ignoriert die Größe von Polyglot-Schriften in Zeitschriften, so dass sie die gleiche Größe wie normaler Text haben. Nützlich, wenn die Formatierung der Zeitschrift wichtig ist."
+		},
+		"JournalHighlight": {
+			"hint": "Legt die Deckkraft der Hervorhebung von Schriftarten im Journal fest.",
+			"title": "Journal Hervorhebung Deckkraft (%)"
+		},
+		"LanguageProvider": {
+			"hint": "Wählen Sie aus, wer Sprachinformationen für Alphabete und Sprachen bereitstellt. Weitere Sprachanbieter können über Spielsysteme und installierte Module verfügbar gemacht werden. Die folgenden Optionen sind abhängig von dem hier ausgewählten Sprachanbieter. ⚠️ Wenn Sie den Anbieter wechseln, müssen Sie diese Einstellungen speichern und erneut öffnen.",
+			"name": "Anbieter für Spracheinstellungen"
+		},
+		"LanguageRegex": {
+			"title": "Sprache RegEx",
+			"hint": "Damit können Sie den Suchbegriff für Artikel von \"Sprache\" auf etwas anderes wie \"Sprache\" ändern. Diese Einstellung ist vor allem für Nicht-Englischsprachige nützlich."
+		},
+		"logographicalFontToggle.title": "Logografische Schriftarten",
+		"RuneRegex": {
+			"title": "Nur alphanumerische Zeichen zuordnen",
+			"hint": "Bewirkt, dass die Randomisierung nicht-alphanumerische Zeichen ignoriert (z. B. !,.;:?#$''). Dies kann den unerwünschten Effekt haben, dass einige dieser Zeichen in einigen Schriftarten als Quadrate (□) angezeigt werden."
+		},
+		"logographicalFontToggle.hint": "Halbiert die Größe von Sätzen mit logografischen Schriftarten (z. B. japanische oder chinesische Zeichen).",
+		"DefaultAlphabet": "Standardalphabet",
+		"Font": "Schriftart",
+		"FontSettings": "Schrifteinstellungen",
+		"FontSize": "Schriftgröße (%)",
+		"Fonts": "Schriftarten",
+		"Languages.hint": "Ändert das für die Sprachen verwendete Alphabet.",
+		"Languages.title": "Sprachen"
 	}
 }
