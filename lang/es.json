@@ -9,11 +9,11 @@
 		"LanguageSettings": "Ajustes de idiomas",
 		"ChatSettings": "Ajustes del chat",
 		"Languages.title": "Idiomas",
-		"Languages.hint": "Cambia el alfabeto de los idiomas",
+		"Languages.hint": "Cambia el alfabeto de los idiomas.",
 		"Font": "Fuente",
 		"Fonts": "Fuentes",
 		"FontSize": "Tamaño de fuente (%)",
-		"AllowOOC.hint": "Determina qué usuarios tendrán sus mensajes codificados al utilizar el chat como jugador. OOC = Out of character (como jugador, o fuera del personaje)",
+		"AllowOOC.hint": "Determina qué usuarios tendrán sus mensajes codificados al utilizar el chat como jugador. OOC = Out of character (como jugador, o fuera del personaje).",
 		"AllowOOC.title": "Codificar mensajes OOC del chat",
 		"AllowOOCOptions": {
 			"a": "Todos",
@@ -21,13 +21,13 @@
 			"c": "Solo jugadores",
 			"d": "Ninguno"
 		},
-		"ComprehendLanguages.hint": "Define un idioma que permite al hablante entender todos los idiomas, pero que no puede ser escrito ni hablado",
+		"ComprehendLanguages.hint": "Define un idioma que permite al hablante entender todos los idiomas, pero que no puede ser escrito ni hablado.",
 		"ComprehendLanguages.title": "Hechizo Comprender Idiomas",
-		"CustomLanguages.hint": "Define una lista de idiomas personalizados, separados mediante coma, para que sean añadidos al sistema",
+		"CustomLanguages.hint": "Define una lista de idiomas personalizados, separados mediante coma, para que sean añadidos al sistema.",
 		"CustomLanguages.title": "Idiomas personalizados",
-		"DefaultLanguage.hint": "Nombre del idioma que se selecciona por defecto. Dejar en blanco para utilizar el valor por defecto del sistema",
+		"DefaultLanguage.hint": "Nombre del idioma que se selecciona por defecto. Dejar en blanco para utilizar el valor por defecto del sistema.",
 		"DefaultLanguage.title": "Idioma por defecto",
-		"DisplayTranslated.hint": "Para los idiomas que se traducen en el chat, muestra el texto original y a continuación la traducción",
+		"DisplayTranslated.hint": "Para los idiomas que se traducen en el chat, muestra el texto original y a continuación la traducción.",
 		"DisplayTranslated.title": "Mostrar traducciones",
 		"enableAllFonts": {
 			"choices": {
@@ -36,28 +36,28 @@
 				"2": "Fuentes adicionales del programa Base",
 				"3": "Ambos"
 			},
-			"hint": "Añade las fuentes de las opciones seleccionadas a los Ajustes de Fuente e Idioma",
+			"hint": "Añade las fuentes de las opciones seleccionadas a los Ajustes de Fuente e Idioma.",
 			"title": "Añadir fuentes a los ajustes de los módulos"
 		},
-		"ExportFonts.hint": "Añade las fuentes de Polyglot al menú de Fuentes Adicionales del programa Base. Si se desactiva esta opción, se eliminarán todas las fuentes de Polyglot del menú",
+		"ExportFonts.hint": "Añade las fuentes de Polyglot al menú de Fuentes Adicionales del programa Base. Si se desactiva esta opción, se eliminarán todas las fuentes de Polyglot del menú.",
 		"ExportFonts.title": "Añade las fuentes de Polyglot al programa Base",
-		"HideTranslation.hint": "Oculta el globo y el texto \"Traducido del\" del chat a los jugadores. Útil para cuando no se quiere que los jugadores sepan en qué idioma se está hablando. Requiere recargar la página",
+		"HideTranslation.hint": "Oculta el globo y el texto \"Traducido del\" en el chat a los jugadores. Útil para cuando no se quiere que los jugadores sepan qué idioma se está hablando. Requiere recargar la página.",
 		"HideTranslation.title": "Ocultar a los jugadores los globos y el texto \"Traducido del\"",
 		"IgnoreJournalFontSize": {
 			"title": "Diario: Usar tamaño de fuente normal",
-			"hint": "Ignora el tamaño de las fuentes de Polyglot en los diarios, haciendo que tengan el mismo tamaño que tendría el texto normal. Útil para ocasiones el las que el formato del diario es importante"
+			"hint": "Ignora el tamaño de las fuentes de Polyglot en los diarios, haciendo que tengan el mismo tamaño que tendría el texto normal. Útil para ocasiones en las que el formato del diario es importante."
 		},
 		"JournalHighlight": {
-			"hint": "Define la opacidad del resaltado de las fuentes en el diario",
+			"hint": "Define la opacidad del resaltado de las fuentes en el diario.",
 			"title": "Opacidad del resaltado en los diarios (%)"
 		},
 		"JournalHighlightColor": {
-			"hint": "Define el color de resaltado de las fuentes en el diario",
+			"hint": "Define el color de resaltado de las fuentes en el diario.",
 			"title": "Color de resaltado de los disarios"
-		},		
+		},
 		"LanguageProvider": {
 			"name": "Proveedor de ajustes de idioma",
-			"hint": "Seleccione quien provee información de alfabetos e idiomas. Se pueden habilitar más proveedores instalando módulos y sistemas. Las opciones que aparecen más abajo dependerán del proveedor seleccionado. ⚠️ Si cambia el proveedor, deberá guardar los cambios y volver a abrir la ventana de configuración",
+			"hint": "Seleccione quien provee información de alfabetos e idiomas. Se pueden habilitar más proveedores instalando módulos y sistemas. Las opciones que aparecen más abajo dependerán del proveedor seleccionado. ⚠️ Si cambia el proveedor, deberá guardar los cambios y volver a abrir la ventana de configuración.",
 			"choices": {
 				"module": "[Módulo] {name}",
 				"native": "Genérico",
@@ -66,35 +66,35 @@
 		},
 		"languageDataPath": {
 			"title": "Ruta de idioma",
-			"hint": "Si el sistema tiene idiomas configurados en los datos de los actores que no se cargan bien, es posible que estén usando otra ruta. Introduzca la ruta en los datos al atributo correcto (p.e. actor.system.languages o actor.system.speak). Este ajuste tiene prioridad sobre los ajustes de RegEx de idioma. Requiere reinicio"
+			"hint": "Si el sistema tiene idiomas configurados en los datos de los actores que no se cargan bien, es posible que estén usando otra ruta. Introduzca la ruta en los datos al atributo correcto (p.e. actor.system.languages o actor.system.speak). Este ajuste tiene prioridad sobre los ajustes de RegEx de idioma. Requiere reinicio."
 		},
 		"literacyDataPath": {
 			"title": "Ruta de alfabetización",
-			"hint": "Lo mismo que el ajuste de la ruta de idioma, pero aplicado a la lectura de diarios. Se necesita rellenar el ajuste de ruta de idioma. Requiere reinicio"
+			"hint": "Lo mismo que el ajuste de la ruta de idioma, pero aplicado a la lectura de diarios. Se necesita rellenar el ajuste de ruta de idioma. Requiere reinicio."
 		},
 		"LanguageRegex": {
 			"title": "RegEx de idioma",
-			"hint": "Se puede usar para cambiar el término de búsqueda en los objetos de \"Idioma\" a otro diferente, como \"Lengua\""
+			"hint": "Se puede usar para cambiar el término de búsqueda en los objetos de \"Idioma\" a otro diferente, como \"Lengua\"."
 		},
-		"logographicalFontToggle.hint": "Reduce a la mitad el tamaño de las frases que usen fuentes logográficas (p. ej. caracteres japoneses o chinos)",
+		"logographicalFontToggle.hint": "Reduce a la mitad el tamaño de las frases que usen fuentes logográficas (p. ej. caracteres japoneses o chinos).",
 		"logographicalFontToggle.title": "Fuentes logográficas",
-		"RandomizeRunes.hint": "Determina el tipo de aleatoriedad (RNG) utilizada para generar un frase. ⚠️ La opción \"Ninguno\" sólo admite carácteres alfanuméricos (sin acentos)",
+		"RandomizeRunes.hint": "Determina el tipo de aleatoriedad (RNG) utilizada para generar una frase. ⚠️ La opción \"Ninguno\" solamente admite caracteres alfanuméricos (sin acentos).",
 		"RandomizeRunes.title": "Aleatorizar las runas",
 		"RandomizeRunesOptions": {
 			"a": "Por defecto",
 			"b": "Frases únicas",
 			"c": "Ninguna ⚠️"
 		},
-		"ReplaceLanguages.hint": "Reemplaza el idioma por defecto del sistema por sus idiomas personalizados. El primer idioma personalizado de la lista se convertirá en el nuevo idioma por defecto",
+		"ReplaceLanguages.hint": "Reemplaza el idioma por defecto del sistema por sus idiomas personalizados. El primer idioma personalizado de la lista se convertirá en el nuevo idioma por defecto.",
 		"ReplaceLanguages.title": "Reemplazar idiomas del sistema",
 		"RuneRegex": {
 			"title": "Aleatorizar solo alfanuméricos",
-			"hint": "Hace que la aleatoriedad ignore los caracteres no alfanuméricos (p. ej. !,.;:?#$\"'). Esto puede causar que algunos de estos caracteres se muestren como un cuadrado (□) en algunas fuentes"
+			"hint": "Hace que la aleatoriedad ignore los caracteres no alfanuméricos (p. ej. !,.;:?#$\"'). Esto puede causar que algunos de estos caracteres se muestren como un cuadrado (□) en algunas fuentes."
 		},
 		"ScrambleGM.title": "Codificar para el GM",
-		"ScrambleGM.hint": "No traducir el texto para el DJ (remítase al color del globo para ver la perspectiva del icono). Requiere recargar la página",
+		"ScrambleGM.hint": "No traducir el texto para el DJ (remítase al color del globo para ver la perspectiva del icono). Requiere recargar la página.",
 		"Truespeech.title": "Hechizo Idiomas",
-		"Truespeech.hint": "Define un idioma que permite al hablante entender todos los idiomas hablados (no puede leer Diarios), y que es entendido por todas las criaturas",
+		"Truespeech.hint": "Define un idioma que permite al hablante entender todos los idiomas hablados (no puede leer Diarios), y que es entendido por todas las criaturas.",
 		"Translation": "Traducción",
 		"TranslatedFrom": "Traducido del ",
 		"LanguageLabel": "Idioma",
@@ -114,7 +114,7 @@
 		},
 		"DND5E": {
 			"SpecialLanguages.title": "Reemplazar idiomas especiales",
-			"SpecialLanguages.hint": "Nombre del idioma que reemplazará \"languages\" tales como \"all the languages it knew in life\""
+			"SpecialLanguages.hint": "Nombre del idioma que reemplazará \"idiomas\" tales como \"todos los idiomas que supo en vida\"."
 		},
 		"SWADE": {
 			"LanguageSkills": "Idioma"
