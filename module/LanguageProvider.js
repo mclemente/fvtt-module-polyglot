@@ -360,7 +360,7 @@ export class LanguageProvider {
 			let myRegex = new RegExp(languageRegex + "\\s*\\((.+)\\)", "i");
 			for (let item of actor.items) {
 				const name = item?.flags?.babele?.originalName || item.name;
-				const match = name.match(myRegex + "\\s*\\((.+)\\)", "i");
+				const match = name.match(myRegex);
 				// adding only the descriptive language name, not "Language (XYZ)"
 				if (match) known_languages.add(match[1].trim().toLowerCase());
 			}
