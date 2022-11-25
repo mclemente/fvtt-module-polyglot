@@ -249,11 +249,11 @@ let FONTS = {
 			},
 		],
 	},
-	"MusiQwik": {
+	MusiQwik: {
 		editor: false,
 		fonts: [
 			{
-				urls: ["modules/polyglot/fonts/MusiQwik.otf"],
+				urls: ["modules/polyglot/fonts/MusiQwik.ttf"],
 				weight: 400,
 				style: "normal",
 			},
