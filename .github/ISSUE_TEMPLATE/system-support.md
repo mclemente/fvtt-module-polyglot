@@ -10,7 +10,7 @@ assignees: ''
 **System Name:**
 e.g. D&D 5e
 
-**System Repository or Foundry VTT address:**
+**System Repository or Foundry VTT link:**
 e.g. https://gitlab.com/foundrynet/dnd5e or https://foundryvtt.com/packages/dnd5e/
 
 **Does the system has the languages set up on Foundry?**
