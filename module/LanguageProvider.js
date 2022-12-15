@@ -2301,3 +2301,62 @@ export class warhammerLanguageProvider extends LanguageProvider {
 		return [known_languages, literate_languages];
 	}
 }
+
+export class wwnLanguageProvider extends LanguageProvider {
+	get settings() {
+		// TODO reimplement Replace/Custom Languages as a provider setting instead of a module setting
+		let replaceLanguages = game.settings.settings.get("polyglot.replaceLanguages");
+		replaceLanguages.config = false;
+		game.settings.settings.set("polyglot.replaceLanguages", replaceLanguages);
+		let customLanguages = game.settings.settings.get("polyglot.customLanguages");
+		customLanguages.config = false;
+		game.settings.settings.set("polyglot.customLanguages", customLanguages);
+		return {};
+	}
+
+	getSystemDefaultLanguage() {
+		return Object.keys(this.languages)[0];
+	}
+
+	addLanguage(lang) {
+		if (!lang) return;
+		let languages = game.settings.get("wwn", "languageList");
+		if (!languages.includes(lang)) {
+			if (languages.endsWith(",")) languages += lang;
+			else languages += "," + lang;
+			game.settings.set("wwn", "languageList", languages);
+		}
+		lang = lang.trim();
+		const key = lang.toLowerCase().replace(/ \'/g, "_");
+		this.languages[key] = lang;
+		if (!(key in this.tongues)) {
+			this.tongues[key] = this.tongues["_default"];
+		}
+	}
+	removeLanguage(lang) {
+		if (!lang) return;
+		let languages = game.settings.get("wwn", "languageList");
+		if (languages.includes(lang)) {
+			languages.replace(new RegExp(",\\s*" + lang), "");
+			game.settings.set("wwn", "languageList", languages);
+		}
+		const key = lang.trim().toLowerCase().replace(/ \'/g, "_");
+		delete this.languages[key];
+		if (key in this.tongues) {
+			delete this.tongues[key];
+		}
+	}
+
+	async getLanguages() {
+		for (let lang of game.settings.get("wwn", "languageList").split(",")) {
+			this.languages[lang.trim().toLowerCase()] = lang;
+		}
+	}
+
+	getUserLanguages(actor) {
+		let known_languages = new Set();
+		let literate_languages = new Set();
+		for (let lang of actor.system.languages.value) known_languages.add(lang);
+		return [known_languages, literate_languages];
+	}
+}
