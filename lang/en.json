@@ -18,7 +18,7 @@
 			"d": "None"
 		},
 		"ComprehendLanguages.hint": "Set a language whose speaker understands all other languages, but that can't be spoken or written.",
-		"ComprehendLanguages.title": "Comprehend Languages Spell",
+		"ComprehendLanguages.title": "Omniscient Language",
 		"CustomLanguages.hint": "Define a list of custom, comma separated, languages to add to the system.",
 		"CustomLanguages.title": "Custom Languages",
 		"DefaultLanguage.hint": "Name of the default language to select. Keep empty to use system default.",
@@ -90,7 +90,7 @@
 		"ScrambleGM.hint": "Don't translate the text for the GM (refer to the globe's color for the token's understanding). Requires reload.",
 		"ScrambleGM.title": "Scramble Messages for GM",
 		"Truespeech.hint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures.",
-		"Truespeech.title": "Tongues Spell",
+		"Truespeech.title": "Omnispeech Language",
 		"Translation": "Translation",
 		"TranslatedFrom": "Translated from ",
 		"LanguageLabel": "Language",
