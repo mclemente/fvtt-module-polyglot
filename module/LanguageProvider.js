@@ -1429,7 +1429,7 @@ export class gurpsLanguageProvider extends LanguageProvider {
 	}
 
 	/**
-    If we match on the Language name, search the name (or the notes) 
+    If we match on the Language name, search the name (or the notes)
     for indicators of spoken or written levels of comprehension in English, or translated
   */
 	updateForPattern(advantage, regex, known_languages, literate_languages, langDetected = false) {
