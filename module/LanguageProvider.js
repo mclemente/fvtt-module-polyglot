@@ -2356,7 +2356,7 @@ export class wwnLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let known_languages = new Set();
 		let literate_languages = new Set();
-		if (actor.system.languages) for (let lang of actor.system.languages.value) known_languages.add(lang);
+		if (actor.system.languages) for (let lang of actor.system.languages.value) known_languages.add(lang.toLowerCase());
 		return [known_languages, literate_languages];
 	}
 }
