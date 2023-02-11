@@ -1,7 +1,7 @@
-import { colorPicker } from "./colorPicker.js";
 import { currentLanguageProvider } from "./api.js";
-import { PolyglotLanguageSettings } from "./LanguageSettings.js";
+import { colorPicker } from "./colorPicker.js";
 import { PolyglotFontSettings } from "./FontSettings.js";
+import { PolyglotLanguageSettings } from "./LanguageSettings.js";
 
 /**
  * Shorthand for game.settings.register.
@@ -104,7 +104,7 @@ export function registerSettings() {
 		hint: "POLYGLOT.ExportFonts.hint",
 		default: false,
 		type: Boolean,
-		onChange: (value) => game.polyglot.updateConfigFonts(value),
+		requiresReload: true,
 	});
 	addSetting("JournalHighlightColor", {
 		default: "#ffb400",

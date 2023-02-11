@@ -616,13 +616,13 @@ export class Polyglot {
 	 * Register fonts so they are available to other elements (such as Drawings).
 	 */
 	updateConfigFonts(value) {
+		const coreFonts = game.settings.get("core", "fonts");
 		if (value) {
 			for (let font in game.polyglot.FONTS) {
 				game.polyglot.FONTS[font].editor = true;
 			}
-			game.settings.set("core", "fonts", game.polyglot.FONTS);
+			game.settings.set("core", "fonts", { ...coreFonts, ...game.polyglot.FONTS });
 		} else {
-			const coreFonts = game.settings.get("core", "fonts");
 			for (let font in game.polyglot.FONTS) {
 				delete coreFonts[font];
 			}
