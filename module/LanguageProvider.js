@@ -360,9 +360,8 @@ export class LanguageProvider {
 			let myRegex = new RegExp(languageRegex + "\\s*\\((.+)\\)", "i");
 			for (let item of actor.items) {
 				const name = item?.flags?.babele?.originalName || item.name;
-				const match = name.match(myRegex);
 				// adding only the descriptive language name, not "Language (XYZ)"
-				if (match) known_languages.add(match[1].trim().toLowerCase());
+				if (myRegex.test(name)) known_languages.add(name.match(myRegex)[1].trim().toLowerCase());
 			}
 		}
 		return [known_languages, literate_languages];
@@ -683,9 +682,8 @@ export class cyberpunkRedLanguageProvider extends LanguageProvider {
 		let myRegex = new RegExp(languageRegex + "\\s*\\((.+)\\)", "i");
 		for (let item of actor.items) {
 			if (item.type == "skill") {
-				const match = item.name.match(myRegex);
-				if (match) {
-					known_languages.add(match[1].trim().toLowerCase());
+				if (myRegex.test(item.name)) {
+					known_languages.add(item.name.match(myRegex)[1].trim().toLowerCase());
 				}
 			}
 		}
@@ -1079,21 +1077,22 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 				const defaultSpecialLanguage = game.settings.get("polyglot", "DND5E.SpecialLanguages").trim().toLowerCase();
 				for (let lang of actor.system.traits.languages?.custom.split(/[;]/)) {
 					lang = lang.trim().toLowerCase();
-					if (lang.includes("usually common") || lang.includes("in life") || lang.includes("its creator")) {
-						known_languages.add(defaultSpecialLanguage);
-					} else if (lang.includes("usually")) {
-						lang = lang.match(/(?<=usually)(.*)(?=\))/g)[0].trim();
-						known_languages.add(lang);
-					} else if (lang.match(/(?<=any)(.*)(?=language)/g)) {
-						lang = lang.match(/(?<=any)(.*)(?=language)/g)[0].trim();
-						known_languages.add(defaultSpecialLanguage);
-					} else if (lang.match(/(?<=understands)(.*)(?=but can't speak it)/g)) {
-						lang = lang.match(/(?<=understands)(.*)(?=but can't speak it)/g)[0].trim();
-						known_languages.add(lang);
-					} else if (lang.match(/(.*)(?=plus)/)) {
-						lang = lang.match(/(.*)(?=plus)/)[0].trim();
-						known_languages.add(lang);
-					} else known_languages.add(lang);
+					try {
+						if (/(usually common)|(in life)|(its creator)|(?<=any)(.*)(?=language)/i.test(lang)) {
+							known_languages.add(defaultSpecialLanguage);
+						} else if (/(?<=usually)(.*)(?=\))/g.test(lang)) {
+							lang = lang.match(/(?<=usually)(.*)(?=\))/g)[0].trim();
+							known_languages.add(lang);
+						} else if (/(?<=understands)(.*)(?=but can't speak it)/g.test(lang)) {
+							lang = lang.match(/(?<=understands)(.*)(?=but can't speak it)/g)[0].trim();
+							known_languages.add(lang);
+						} else if (/(.*)(?=plus)/.test(lang)) {
+							lang = lang.match(/(.*)(?=plus)/)[0].trim();
+							known_languages.add(lang);
+						} else known_languages.add(lang);
+					} catch (err) {
+						console.error(`Polyglot | Failed to get custom language "${lang}" from actor "${actor.name}".`, err);
+					}
 				}
 			}
 		}
@@ -1220,18 +1219,14 @@ export class dsa5LanguageProvider extends LanguageProvider {
 					let languageRegex = new RegExp(game.i18n.localize("LocalizedIDs.language") + "\\s*\\((.+)\\)", "i");
 					let literacyRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy") + "\\s*\\((.+)\\)", "i");
 					for (let item of dsa5ItemList) {
-						let match = item.name.match(languageRegex);
-						if (match) {
-							let lang = match[1].trim();
+						if (languageRegex.test(item.name)) {
+							let lang = item.name.match(languageRegex)[1].trim();
 							let key = lang.toLowerCase();
 							langs[key] = lang;
-						} else {
-							match = item.name.match(literacyRegex);
-							if (match) {
-								let lang = match[1].trim();
-								let key = lang.toLowerCase();
-								langs[key] = lang;
-							}
+						} else if (literacyRegex.test(item.name)) {
+							let lang = item.name.match(literacyRegex)[1].trim();
+							let key = lang.toLowerCase();
+							langs[key] = lang;
 						}
 					}
 					this.languages = replaceLanguages ? {} : langs;
@@ -1306,14 +1301,10 @@ export class dsa5LanguageProvider extends LanguageProvider {
 		let literacyRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy") + "\\s*\\((.+)\\)", "i");
 		for (let item of actor.items) {
 			if (item.system.category?.value === "language") {
-				let match = item.name.match(languageRegex);
-				if (match) {
-					known_languages.add(match[1].trim().toLowerCase());
-				} else {
-					match = item.name.match(literacyRegex);
-					if (match) {
-						literate_languages.add(match[1].trim().toLowerCase());
-					}
+				if (languageRegex.test(item.name)) {
+					known_languages.add(item.name.match(languageRegex)[1].trim().toLowerCase());
+				} else if (literacyRegex.test(item.name)) {
+					literate_languages.add(item.name.match(literacyRegex)[1].trim().toLowerCase());
 				}
 			}
 		}
@@ -1952,9 +1943,8 @@ export class swadeLanguageProvider extends LanguageProvider {
 		let myRegex = new RegExp(languageRegex + " \\((.+)\\)", "i");
 		for (let item of actor.items) {
 			const name = item?.flags?.babele?.originalName || item.name;
-			const match = name.match(myRegex);
 			// adding only the descriptive language name, not "Language (XYZ)"
-			if (match) known_languages.add(match[1].trim().toLowerCase());
+			if (myRegex.test(name)) known_languages.add(name.match(myRegex)[1].trim().toLowerCase());
 		}
 		return [known_languages, literate_languages];
 	}
@@ -2279,9 +2269,8 @@ export class warhammerLanguageProvider extends LanguageProvider {
 		const wfrp4eItemList = await wfrp4ePack.getIndex();
 		let myRegex = new RegExp(game.settings.get("polyglot", "LanguageRegex") + "\\s*\\((.+)\\)", "i");
 		for (let item of wfrp4eItemList) {
-			const match = item.name.match(myRegex);
-			if (match) {
-				let lang = match[1].trim();
+			if (myRegex.test(item.name)) {
+				let lang = item.name.match(myRegex)[1].trim();
 				let key = lang.toLowerCase();
 				langs[key] = lang;
 			}
@@ -2294,9 +2283,8 @@ export class warhammerLanguageProvider extends LanguageProvider {
 		let literate_languages = new Set();
 		let myRegex = new RegExp(game.settings.get("polyglot", "LanguageRegex") + "\\s*\\((.+)\\)", "i");
 		for (let item of actor.items) {
-			const match = item.name.match(myRegex);
 			// adding only the descriptive language name, not "Language (XYZ)"
-			if (match) known_languages.add(match[1].trim().toLowerCase());
+			if (myRegex.test(item.name)) known_languages.add(item.name.match(myRegex)[1].trim().toLowerCase());
 		}
 		return [known_languages, literate_languages];
 	}
