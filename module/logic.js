@@ -372,7 +372,11 @@ export class Polyglot {
 	}
 
 	createChatMessage(chatEntity, _, userId) {
-		if (chatEntity.content.startsWith("<") || (chatEntity.type === CONST.CHAT_MESSAGE_TYPES.OOC && !this._allowOOC())) return;
+		if (
+			/(^(@UUID|<|(http+?)(s\b|\b)|www\.))|(\.(com|jpg|gif|png|bmp|webp)$)/gi.test(chatEntity.content) ||
+			(chatEntity.type === CONST.CHAT_MESSAGE_TYPES.OOC && !this._allowOOC())
+		)
+			return;
 	}
 	/**
 	 * Renders the messages, scrambling the text if it is not known by the user (or currently selected character)
