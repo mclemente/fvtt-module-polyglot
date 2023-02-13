@@ -373,7 +373,7 @@ export class Polyglot {
 
 	createChatMessage(chatEntity, _, userId) {
 		if (
-			/(^(@UUID|<|(http+?)(s\b|\b)|www\.))|(\.(com|jpg|gif|png|bmp|webp)$)/gi.test(chatEntity.content) ||
+			/(^(@|<|(http+?)(s\b|\b)|www\.))|(\.(com|jpg|gif|png|bmp|webp)$)/gi.test(chatEntity.content) ||
 			(chatEntity.type === CONST.CHAT_MESSAGE_TYPES.OOC && !this._allowOOC())
 		)
 			return;
