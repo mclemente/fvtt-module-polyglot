@@ -372,10 +372,7 @@ export class Polyglot {
 	}
 
 	createChatMessage(chatEntity, _, userId) {
-		if (
-			/(^(@|<|(http+?)(s\b|\b)|www\.))|(\.(com|jpg|gif|png|bmp|webp)$)/gi.test(chatEntity.content) ||
-			(chatEntity.type === CONST.CHAT_MESSAGE_TYPES.OOC && !this._allowOOC())
-		)
+		if (/(^(@|<|(http+?)(s\b|\b)|www\.))|(\.(com|jpg|gif|png|bmp|webp)$)/gi.test(chatEntity.content) || (chatEntity.type === CONST.CHAT_MESSAGE_TYPES.OOC && !this._allowOOC()))
 			return;
 	}
 	/**
@@ -466,7 +463,8 @@ export class Polyglot {
 	 * @param {*} userId
 	 */
 	preCreateChatMessage(document, data, options, userId) {
-		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this._allowOOC() && this._isMessageTypeOOC(data.type))) {
+		if (/(^(@|<|(http+?)(s\b|\b)|www\.))|(\.(com|jpg|gif|png|bmp|webp)$)/gi.test(data.content)) return true;
+		else if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this._allowOOC() && this._isMessageTypeOOC(data.type))) {
 			if (data.lang) {
 				const invertedLanguages = invertObject(currentLanguageProvider.languages);
 				if (currentLanguageProvider.languages[data.lang]) var lang = data.lang;
