@@ -37,18 +37,15 @@ export class PolyglotFontSettings extends FormApplication {
 
 	async activateListeners(html) {
 		super.activateListeners(html);
-		html.find(".polyglot-alphabet").each(function () {
-			const font = this.previousSibling.previousSibling.previousSibling.previousSibling.innerText; //selectatr's value
-			this.style.font = currentLanguageProvider.alphabets[font];
-		});
+		// html.find(".polyglot-alphabet").each(function () {
+		// 	const font = this.previousSibling.previousSibling.previousSibling.previousSibling.innerText; //fontName's value
+		// 	this.style.fontSize = `${this.previousSibling.previousSibling.children[0].value}%`; //input's value
+		// 	this.style.fontFamily = font;
+		// });
 		html.find(".selectatr").on("change", async (event) => {
 			const size = event.target.value;
-			let split = event.target.parentElement.nextSibling.nextSibling.style.font.split("%");
-			split.shift();
-			let font = split.join();
-			event.target.parentElement.nextSibling.nextSibling.style.font = `${size}%${font}`;
-			font = font.trim();
-			font = font.replace(/['"]+/g, "");
+			const font = event.target.parentElement.nextSibling.nextSibling.style.fontFamily;
+			event.target.parentElement.nextSibling.nextSibling.style.fontSize = `${size}%`;
 			game.polyglot.CustomFontsSize[font] = size;
 		});
 		html.find("button").on("click", async (event) => {
