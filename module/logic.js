@@ -595,7 +595,7 @@ export class Polyglot {
 					const lang = span.dataset.language;
 					if (!lang) continue;
 					texts.push(span.textContent);
-					styles.push(span.style.font);
+					styles.push(span.children[0].style.fontFamily);
 					span.textContent = this.scrambleString(span.textContent, document.id, lang);
 					if (IgnoreJournalFontSize) span.style.fontFamily = this._getFontStyle(lang).replace(/\d+%\s/g, "");
 					else span.style.font = this._getFontStyle(lang);
@@ -606,7 +606,7 @@ export class Polyglot {
 					const lang = span.dataset.language;
 					if (!lang) continue;
 					span.textContent = texts[i];
-					span.style.font = styles[i];
+					span.style.fontFamily = styles[i];
 					i++;
 				}
 			}
