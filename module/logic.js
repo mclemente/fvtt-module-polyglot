@@ -579,8 +579,8 @@ export class Polyglot {
 	 */
 	createJournalButton(document) {
 		let runes = false;
-		const texts = [];
-		const styles = [];
+		let texts = [];
+		let styles = [];
 		const toggleString = "<a class='polyglot-button' title='Polyglot: " + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i></a>";
 		const toggleButton = $(toggleString);
 		const IgnoreJournalFontSize = game.settings.get("polyglot", "IgnoreJournalFontSize");
@@ -595,7 +595,20 @@ export class Polyglot {
 					const lang = span.dataset.language;
 					if (!lang) continue;
 					texts.push(span.textContent);
-					styles.push(span.children[0].style.fontFamily);
+					if (span.children.length && span.children[0].nodeName == "SPAN") {
+						var spanStyle = {
+							fontFamily: span.children[0].style.fontFamily,
+							fontSize: span.children[0].style.fontSize,
+							font: span.children[0].style.font,
+						};
+					} else {
+						spanStyle = {
+							fontFamily: span.style.fontFamily,
+							fontSize: span.style.fontSize,
+							font: span.style.font,
+						};
+					}
+					styles.push(spanStyle);
 					span.textContent = this.scrambleString(span.textContent, document.id, lang);
 					if (IgnoreJournalFontSize) span.style.fontFamily = this._getFontStyle(lang).replace(/\d+%\s/g, "");
 					else span.style.font = this._getFontStyle(lang);
@@ -606,9 +619,16 @@ export class Polyglot {
 					const lang = span.dataset.language;
 					if (!lang) continue;
 					span.textContent = texts[i];
-					span.style.fontFamily = styles[i];
+					if (styles[i].font) {
+						span.style.font = styles[i].font;
+					} else {
+						span.style.fontFamily = styles[i].fontFamily;
+						span.style.fontSize = styles[i].fontSize;
+					}
 					i++;
 				}
+				texts = [];
+				styles = [];
 			}
 		});
 		return toggleButton;
