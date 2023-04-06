@@ -85,6 +85,10 @@ export function registerSettings() {
 		type: Boolean,
 	});
 	addSetting("enableAllFonts", {
+		hint: game.i18n.format("POLYGLOT.enableAllFonts.hint", {
+			setting1: game.i18n.localize("POLYGLOT.FontSettings"),
+			setting2: game.i18n.localize("POLYGLOT.LanguageSettings"),
+		}),
 		config: !currentLanguageProvider.isGeneric,
 		default: 0,
 		type: Number,
@@ -217,7 +221,7 @@ export async function renderSettingsConfigHandler(settingsConfig, html) {
 	const JournalHighlight = game.settings.get("polyglot", "JournalHighlight");
 	const JournalHighlightInput = html.find('input[name="polyglot.JournalHighlight"]');
 	const JournalHighlightNotes = JournalHighlightInput.parent().parent().children()[2];
-	if (JournalHighlightNotes) JournalHighlightNotes.classList.add("polyglot-journal");
+	if (JournalHighlightNotes) JournalHighlightNotes.classList.add("polyglot-journal-temp");
 	const hex = hexToRgb(JournalHighlightColor);
 	document.documentElement.style.setProperty("--polyglot-journal-color-temp", Object.values(hex).toString());
 	document.documentElement.style.setProperty("--polyglot-journal-opacity-temp", JournalHighlight / 100);

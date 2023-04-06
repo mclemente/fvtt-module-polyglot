@@ -92,11 +92,13 @@ export class LanguageProvider {
 	get settings() {
 		if (this.isGeneric) {
 			addSetting("languageDataPath", {
+				hint: game.i18n.format("POLYGLOT.languageDataPath.hint", { setting: game.i18n.localize("POLYGLOT.LanguageRegex.title") }),
 				default: "",
 				type: String,
 				requiresReload: true,
 			});
 			addSetting("literacyDataPath", {
+				hint: game.i18n.format("POLYGLOT.literacyDataPath.hint", { setting: game.i18n.localize("POLYGLOT.languageDataPath.title") }),
 				default: "",
 				type: String,
 				requiresReload: true,

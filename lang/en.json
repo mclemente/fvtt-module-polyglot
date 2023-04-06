@@ -32,7 +32,7 @@
 				"2": "Core's Additional Fonts",
 				"3": "Both"
 			},
-			"hint": "Adds fonts from the chosen sources to the Font Settings and Language Settings.",
+			"hint": "Adds fonts from the chosen sources to the {setting1} and {setting2}.",
 			"title": "Add Fonts to Module Settings"
 		},
 		"ExportFonts.hint": "Add Polyglot's fonts to Core's Additional Fonts menu. Toggling this setting off will remove all of Polyglot's fonts from the menu.",
@@ -62,11 +62,11 @@
 		},
 		"languageDataPath": {
 			"title": "Language Data Path",
-			"hint": "If your system has languages set in actors' data and aren't being loaded properly, it might be using another data path. Input the data path to the correct attribute (e.g. actor.system.languages or actor.system.speak). This settings takes precedence over the Language Regex setting. Requires reload."
+			"hint": "If your system has languages set in actors' data and aren't being loaded properly, it might be using another data path. Input the data path to the correct attribute (e.g. actor.system.languages or actor.system.speak). This settings takes precedence over the {setting} setting. Requires reload."
 		},
 		"literacyDataPath": {
 			"title": "Literacy Data Path",
-			"hint": "Same as the Language Data Path setting, but for reading journals. This settings requires the Language Data Path setting. Requires reload."
+			"hint": "Same as the {setting} setting, but for reading journals. This settings requires the {setting} setting. Requires reload."
 		},
 		"LanguageRegex": {
 			"hint": "You can use this to change the term searched on items from \"Language\" to something else, like \"Tongue\". This setting is more useful for non-English speakers.",
