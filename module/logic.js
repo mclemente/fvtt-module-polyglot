@@ -148,7 +148,7 @@ export class Polyglot {
 	FONTS = FONTS;
 	FONTS_26 = FONTS_26;
 	LOGOGRAPHICAL_FONTS = LOGOGRAPHICAL_FONTS;
-	CustomFontsSize = game.settings.get("polyglot", "CustomFontSizes");
+	CustomFontSizes = game.settings.get("polyglot", "CustomFontSizes");
 	registerModule = registerModule;
 	registerSystem = registerSystem;
 

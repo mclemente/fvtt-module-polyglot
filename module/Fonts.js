@@ -1,4 +1,4 @@
-let FONTS = {
+export let FONTS = {
 	"Ar Ciela": {
 		editor: false,
 		fonts: [
@@ -464,12 +464,12 @@ let FONTS = {
 /**
  * Font sets that don't have Numeric characters.
  */
-let FONTS_26 = ["ArCiela", "FingerAlphabet", "KremlinPremier", "MageScript", "MeroiticDemotic", "OldeEnglish", "Pulsian", "Semphari", "Tuzluca"];
+export let FONTS_26 = ["ArCiela", "FingerAlphabet", "KremlinPremier", "MageScript", "MeroiticDemotic", "OldeEnglish", "Pulsian", "Semphari", "Tuzluca"];
 
 /**
  * Font sets that use Logographic characters (e.g. Ancient Egyptian, Mandarin, Japanese)
  */
-let LOGOGRAPHICAL_FONTS = [
+export let LOGOGRAPHICAL_FONTS = [
 	"Aztec",
 	"DarkEldar",
 	"Eltharin",
@@ -484,4 +484,51 @@ let LOGOGRAPHICAL_FONTS = [
 	"Thassilonian",
 ];
 
-export { FONTS, FONTS_26, LOGOGRAPHICAL_FONTS };
+export let CUSTOM_FONT_SIZES = {
+	"Ar Ciela": "200",
+	Aztec: "200",
+	Barazhad: "200",
+	Celestial: "200",
+	Daedra: "200",
+	"Dark Eldar": "200",
+	Davek: "150",
+	Dethek: "200",
+	"Dragon Alphabet": "100",
+	"Elder Futhark": "350",
+	Eltharin: "200",
+	Espruar: "150",
+	Floki: "200",
+	"Finger Alphabet": "150",
+	"High Drowic": "150",
+	"Highschool Runes": "200",
+	Infernal: "230",
+	Iokharic: "170",
+	"Jungle Slang": "180",
+	Kargi: "150",
+	"Kremlin Premier": "130",
+	"Mage Script": "200",
+	"Maras Eye": "200",
+	"Meroitic Demotic": "200",
+	"Miroslav Normal": "200",
+	MusiQwik: "200",
+	"Ny Stormning": "160",
+	"Olde English": "150",
+	"Olde Espruar": "200",
+	"Olde Thorass": "200",
+	Ophidian: "250",
+	Pulsian: "270",
+	Oriental: "130",
+	"Ork Glyphs": "200",
+	Qijomi: "200",
+	Reanaarian: "200",
+	Rellanic: "200",
+	Saurian: "200",
+	"Scrapbook Chinese": "100",
+	Semphari: "200",
+	Skaven: "200",
+	Tengwar: "200",
+	Thassilonian: "200",
+	Thorass: "200",
+	Tuzluca: "200",
+	Valmaric: "200",
+};

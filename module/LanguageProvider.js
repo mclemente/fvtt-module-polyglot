@@ -260,7 +260,7 @@ export class LanguageProvider {
 		}
 		if ([2, 3].includes(enableAllFonts)) {
 			for (let alp in game.settings.get("core", "fonts")) {
-				let size = game.polyglot.CustomFontsSize[alp] ?? 100;
+				let size = game.polyglot.CustomFontSizes[alp] ?? 100;
 				this.alphabets[alp] = `${size}% ${alp}`;
 			}
 		}

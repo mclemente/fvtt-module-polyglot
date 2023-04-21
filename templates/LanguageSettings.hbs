@@ -1,76 +1,55 @@
-{{#*inline "settingPartial"}}
-	<div class="form-group">
-		<label>{{this.name}}</label>
-		<div class="form-fields">
-			{{#if this.isCheckbox}}
-				<input type="checkbox" name="{{this.id}}" data-dtype="Boolean" {{checked this.value}} />
-			{{else if this.isSelect}}
-				<select class="polyglot-{{this.id}}" name="{{this.id}}">
-					{{#select this.value}}
-						{{#each this.choices as |name k|}}
-							<option value="{{k}}">{{localize name}}</option>
-						{{/each}}
-					{{/select}}
-				</select>
-			{{else if this.isRange}}
-				<input type="range" name="{{this.id}}" data-dtype="Number" value="{{ this.value }}"
-					min="{{ this.range.min }}" max="{{ this.range.max }}" step="{{ this.range.step }}" />
-				<span class="range-value">{{this.value}}</span>
-			{{else if this.isColor}}
-				<input type="color" name="{{this.id}}" value="{{this.value}}" data-dtype="{{this.type}}" />
-			{{else}}
-				<input type="text" name="{{this.id}}" value="{{this.value}}" data-dtype="{{this.type}}" />
-			{{/if}}
-		</div>
-		<p class="notes">{{this.hint}}</p>
-	</div>
-{{/inline}}
-
 <form class="flexcol" autocomplete="off" onsubmit="event.preventDefault()">
 	<section class="content">
 		<div class="settings-list">
-			{{!-- <h2 class="module-header">{{localize "POLYGLOT.Languages.title"}}</h2> --}}
 			{{#with data.providerSelection}}
-				{{> settingPartial}}
+				<div class="form-group">
+					<label>{{name}}</label>
+					<select class="form-fields polyglot-{{this.id}}" name="{{this.id}}">
+						{{#select this.value}}
+							{{#each this.choices as |name k|}}
+								<option value="{{k}}">{{localize name}}</option>
+							{{/each}}
+						{{/select}}
+					</select>
+				</div>
+				<p class="notes">{{this.hint}}</p>
 			{{/with}}
 
-			<div class="polyglot-languages-title-notes">
-				<label>{{localize "POLYGLOT.Languages.title"}}</label>
-				<p class="notes">{{localize "POLYGLOT.Languages.hint"}}</p>
-			</div>
-			<ul class="polyglot-languages-list" style="list-style: none; padding: 0;">
-				<li style="display: flex;">
-					<div style="flex: 0 0 150px;">{{localize "POLYGLOT.LanguageLabel"}}</div>
-					<div style="flex: 1;">{{localize "POLYGLOT.AlphabetLabel"}}</div>
-					<div style="flex: 2;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+			<ul class="polyglot-languages-list">
+				<li class="flexrow">
+					<div class="font-name">{{localize "POLYGLOT.LanguageLabel"}}</div>
+					<div class="polyglot-alphabet-list">{{localize "POLYGLOT.AlphabetLabel"}}</div>
+					<div class="polyglot-alphabet-title">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
 				</li>
-				<hr>
+				<hr />
 				{{#each languages.value as |key val|}}
-				<li style="display: flex;">
-					<div style="flex: 0 0 150px; text-transform: capitalize;">{{#if (eq val "_default")}}{{localize "POLYGLOT.DefaultAlphabet"}}{{else}}{{val}}{{/if}}</div>
-					<select class="selectatr" name="language.alphabet" value={{key}} data-dtype="String" style="flex: 1; text-transform: capitalize;">
-					{{#select key}}
-						{{#each ../alphabets.value as |font alphabet|}}
-							<option class="alphabet-option" value="{{alphabet}}" style="text-transform: capitalize;">{{alphabet}}</option>
-						{{/each}}
-					{{/select}}
-					</select>
-					<div class="polyglot-alphabet" style="flex: 2;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
-				</li>
+					<li class="flexrow">
+						<div class="font-name">{{#if (eq val "_default")}}{{localize "POLYGLOT.DefaultAlphabet"}}{{else}}{{val}}{{/if}}</div>
+						<div class="polyglot-alphabet-list">
+							<select class="selectatr" name="language.alphabet" value={{key}} data-dtype="String">
+								{{#select key}}
+									{{#each ../alphabets.value as |font alphabet|}}
+										<option value="{{alphabet}}">{{PolyglotBeautifyFont font}}</option>
+									{{/each}}
+								{{/select}}
+							</select>
+						</div>
+						<div class="polyglot-alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+					</li>
 				{{/each}}
 			</ul>
-			<div class="polyglot-languages-warn" style="font-weight: bold; color: red; text-align: center; margin-bottom: 0.5em; display: none;">
-				⚠️ If you change the provider, your language settings will be overwritten.
-			</div>
+			<div class="polyglot-languages-warn">⚠️ If you change the provider, your language settings will be overwritten.</div>
 		</div>
 	</section>
 
-	<footer class="sheet-footer flexrow" style="margin-top: auto">
+	<footer class="sheet-footer flexrow">
 		<button type="submit" name="submit">
-			<i class="far fa-save"></i> {{localize 'SETTINGS.Save'}}
+			<i class="far fa-save"></i>
+			{{localize "SETTINGS.Save"}}
 		</button>
 		<button type="button" data-action="reset">
-			<i class="fas fa-undo"></i> {{localize 'SETTINGS.Reset'}}
+			<i class="fas fa-undo"></i>
+			{{localize "SETTINGS.Reset"}}
 		</button>
 	</footer>
 </form>

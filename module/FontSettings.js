@@ -1,10 +1,6 @@
 import { currentLanguageProvider } from "./api.js";
 
 export class PolyglotFontSettings extends FormApplication {
-	constructor(object, options = {}) {
-		super(object, options);
-	}
-
 	/**
 	 * Default Options for this FormApplication
 	 */
@@ -15,43 +11,44 @@ export class PolyglotFontSettings extends FormApplication {
 			template: "./modules/polyglot/templates/FontSettings.hbs",
 			classes: ["sheet polyglot-font-settings"],
 			width: 600,
-			height: "fit-content",
+			height: 680,
 			closeOnSubmit: true,
+			resizable: true,
 		});
 	}
 
 	getData(options) {
 		const fonts = Object.keys(game.settings.get("core", "fonts"));
-		const fontSizes = game.polyglot.CustomFontsSize;
+		this.fontSizes = {};
+
 		for (let key of fonts) {
-			game.polyglot.CustomFontsSize[key] = game.polyglot.CustomFontsSize[key] ?? "100";
-		}
-		for (let key in fontSizes) {
-			if (!fonts.includes(key)) delete fontSizes[key];
+			this.fontSizes[key] = game.polyglot.CustomFontSizes[key] || "100";
 		}
 
 		return {
-			fontSize: fontSizes,
+			fontSize: this.fontSizes,
 		};
 	}
 
 	async activateListeners(html) {
 		super.activateListeners(html);
-		// html.find(".polyglot-alphabet").each(function () {
-		// 	const font = this.previousSibling.previousSibling.previousSibling.previousSibling.innerText; //fontName's value
-		// 	this.style.fontSize = `${this.previousSibling.previousSibling.children[0].value}%`; //input's value
-		// 	this.style.fontFamily = font;
-		// });
-		html.find(".selectatr").on("change", async (event) => {
-			const size = event.target.value;
+
+		const fontChange = async (event) => {
+			const size = event.type == "change" ? event.target.value : event.target.value - event.originalEvent.deltaY / 10;
+			if (size < 100) return;
 			const font = event.target.parentElement.nextSibling.nextSibling.style.fontFamily;
 			event.target.parentElement.nextSibling.nextSibling.style.fontSize = `${size}%`;
-			game.polyglot.CustomFontsSize[font] = size;
-		});
+			this.fontSizes[font] = size;
+		};
+
+		html.find(".selectatr").on("change", fontChange);
+		html.find(".selectatr").on("wheel", fontChange);
 		html.find("button").on("click", async (event) => {
 			if (event.currentTarget?.dataset?.action === "reset") {
-				for (let key in game.polyglot.CustomFontsSize) {
-					game.polyglot.CustomFontsSize[key] = 100;
+				const defaults = game.settings.settings.get("polyglot.CustomFontSizes").default;
+				for (let key in this.fontSizes) {
+					const normalizedKey = key.replace(" ", "").toLowerCase();
+					this.fontSizes[key] = defaults[normalizedKey] ?? 100;
 				}
 				this.close();
 			}
@@ -64,7 +61,8 @@ export class PolyglotFontSettings extends FormApplication {
 	 * @param {Object} formData - the form data
 	 */
 	async _updateObject(ev, formData) {
-		game.settings.set("polyglot", "CustomFontSizes", game.polyglot.CustomFontsSize);
+		game.polyglot.CustomFontSizes = deepClone(this.fontSizes);
+		game.settings.set("polyglot", "CustomFontSizes", game.polyglot.CustomFontSizes);
 		currentLanguageProvider.loadAlphabet();
 	}
 }
