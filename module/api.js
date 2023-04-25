@@ -2,7 +2,6 @@ import * as providers from "./LanguageProvider.js";
 import { addSetting } from "./settings.js";
 
 export const availableLanguageProviders = {};
-export let currentLanguageProvider = undefined;
 
 function register(module, type, languageProvider) {
 	const id = `${type}.${module.id}`;
@@ -36,7 +35,7 @@ export function getDefaultLanguageProvider() {
 export function updateLanguageProvider() {
 	// If the configured provider is registered use that one. If not use the default provider
 	const configuredProvider = game.settings.get("polyglot", "languageProvider");
-	currentLanguageProvider = availableLanguageProviders[configuredProvider || game.settings.settings.get("polyglot.languageProvider").default];
+	game.polyglot.languageProvider = availableLanguageProviders[configuredProvider || game.settings.settings.get("polyglot.languageProvider").default];
 }
 
 export function initApi() {
@@ -61,7 +60,6 @@ export function initApi() {
 	languageProviders.push(eval(`new providers.${providerString}LanguageProvider("native${providerString.length ? "." + providerString : ""}")`));
 	for (let languageProvider of languageProviders) availableLanguageProviders[languageProvider.id] = languageProvider;
 	game.settings.settings.get("polyglot.languageProvider").default = getDefaultLanguageProvider();
-	updateLanguageProvider();
 }
 
 export function registerModule(moduleId, languageProvider) {

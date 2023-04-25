@@ -1,4 +1,4 @@
-import { availableLanguageProviders, currentLanguageProvider, updateLanguageProvider } from "./api.js";
+import { availableLanguageProviders, updateLanguageProvider } from "./api.js";
 
 export class PolyglotLanguageSettings extends FormApplication {
 	/**
@@ -19,7 +19,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 
 	getData(options) {
 		const data = {};
-		const selectedProvider = currentLanguageProvider.id;
+		const selectedProvider = game.polyglot.languageProvider.id;
 		// Insert all speed providers into the template data
 		data.providers = Object.values(availableLanguageProviders).map((languageProvider) => {
 			const provider = {};
@@ -90,7 +90,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 		});
 		html.find(".polyglot-alphabet").each(function () {
 			const font = this.previousSibling.previousSibling.children[0].value; //selectatr's value
-			this.style.font = currentLanguageProvider.alphabets[font];
+			this.style.font = game.polyglot.languageProvider.alphabets[font];
 		});
 		html.find(".selectatr").on("change", (event) => {
 			const font = event.target.value;
@@ -98,15 +98,15 @@ export class PolyglotLanguageSettings extends FormApplication {
 			const nextSibling = parentElement.nextSibling;
 			if (nextSibling && nextSibling.nextSibling) {
 				const elementToChange = nextSibling.nextSibling;
-				const alphabet = currentLanguageProvider.alphabets[font];
+				const alphabet = game.polyglot.languageProvider.alphabets[font];
 				elementToChange.style.font = alphabet;
 			}
 		});
 		html.find("button").on("click", async (event) => {
 			if (event.currentTarget?.dataset?.action === "reset") {
-				currentLanguageProvider.loadAlphabet();
-				await game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
-				await game.settings.set("polyglot", "Languages", currentLanguageProvider.originalTongues);
+				game.polyglot.languageProvider.loadAlphabet();
+				await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.alphabets);
+				await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.originalTongues);
 				this.close();
 			}
 		});
@@ -121,9 +121,10 @@ export class PolyglotLanguageSettings extends FormApplication {
 		const languageProvider = game.settings.get("polyglot", "languageProvider");
 		if (languageProvider != formData.languageProvider) {
 			await game.settings.set("polyglot", "languageProvider", formData.languageProvider);
-			currentLanguageProvider.loadAlphabet();
-			await game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
-			await game.settings.set("polyglot", "Languages", currentLanguageProvider.originalTongues);
+			updateLanguageProvider();
+			game.polyglot.languageProvider.loadAlphabet();
+			await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.alphabets);
+			await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.originalTongues);
 		} else {
 			let langSettings = game.settings.get("polyglot", "Languages");
 			const iterableSettings = formData["language.alphabet"];
@@ -132,7 +133,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 				langSettings[lang] = iterableSettings[i];
 				i++;
 			}
-			currentLanguageProvider.tongues = langSettings;
+			game.polyglot.languageProvider.tongues = langSettings;
 			await game.settings.set("polyglot", "Languages", langSettings);
 		}
 	}

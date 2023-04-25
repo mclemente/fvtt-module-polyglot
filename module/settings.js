@@ -1,4 +1,3 @@
-import { currentLanguageProvider } from "./api.js";
 import { colorPicker } from "./colorPicker.js";
 import { PolyglotFontSettings } from "./FontSettings.js";
 import { PolyglotLanguageSettings } from "./LanguageSettings.js";
@@ -89,7 +88,7 @@ export function registerSettings() {
 			setting1: game.i18n.localize("POLYGLOT.FontSettings"),
 			setting2: game.i18n.localize("POLYGLOT.LanguageSettings"),
 		}),
-		config: !currentLanguageProvider.isGeneric,
+		config: !game.polyglot.languageProvider.isGeneric,
 		default: 0,
 		type: Number,
 		choices: {
@@ -99,8 +98,8 @@ export function registerSettings() {
 			3: game.i18n.localize("POLYGLOT.enableAllFonts.choices.3"),
 		},
 		onChange: () => {
-			currentLanguageProvider.loadAlphabet();
-			game.settings.set("polyglot", "Alphabets", currentLanguageProvider.alphabets);
+			game.polyglot.languageProvider.loadAlphabet();
+			game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.alphabets);
 		},
 	});
 	addSetting("exportFonts", {
@@ -140,9 +139,9 @@ export function registerSettings() {
 		default: false,
 		type: Boolean,
 		onChange: async () => {
-			await currentLanguageProvider.getLanguages();
-			currentLanguageProvider.loadTongues();
-			currentLanguageProvider.reloadLanguages();
+			await game.polyglot.languageProvider.getLanguages();
+			game.polyglot.languageProvider.loadTongues();
+			game.polyglot.languageProvider.reloadLanguages();
 		},
 	});
 	addSetting("customLanguages", {
@@ -151,8 +150,8 @@ export function registerSettings() {
 		default: "",
 		type: String,
 		onChange: () => {
-			currentLanguageProvider.loadTongues();
-			currentLanguageProvider.reloadLanguages();
+			game.polyglot.languageProvider.loadTongues();
+			game.polyglot.languageProvider.reloadLanguages();
 		},
 	});
 	addSetting("comprehendLanguages", {
@@ -207,7 +206,7 @@ export function registerSettings() {
 
 //Language Provider Settings
 export function registerProviderSettings() {
-	const systemSpecificSettings = currentLanguageProvider.settings;
+	const systemSpecificSettings = game.polyglot.languageProvider.settings;
 	if (Object.keys(systemSpecificSettings).length) {
 		for (let [key, data] of Object.entries(systemSpecificSettings)) {
 			addSetting(key, data);

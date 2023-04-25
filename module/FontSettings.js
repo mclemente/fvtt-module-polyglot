@@ -1,5 +1,3 @@
-import { currentLanguageProvider } from "./api.js";
-
 export class PolyglotFontSettings extends FormApplication {
 	/**
 	 * Default Options for this FormApplication
@@ -63,6 +61,6 @@ export class PolyglotFontSettings extends FormApplication {
 	async _updateObject(ev, formData) {
 		game.polyglot.CustomFontSizes = deepClone(this.fontSizes);
 		game.settings.set("polyglot", "CustomFontSizes", game.polyglot.CustomFontSizes);
-		currentLanguageProvider.loadAlphabet();
+		game.polyglot.languageProvider.loadAlphabet();
 	}
 }
