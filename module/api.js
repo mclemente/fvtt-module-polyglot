@@ -50,7 +50,6 @@ export function initApi() {
 		"cyberpunk-red-core": "cyberpunkRed",
 		"dark-heresy": "darkHeresy",
 		"uesrpg-d100": "uesrpg",
-		wfrp4e: "warhammer",
 	};
 	const supportedSystems = /a5e|aria|coc7|earthdawn4e|d35e|dcc|demonlord|dnd4e|dnd5e|dsa5|fgg|gurps|ose|pf1|pf2e|sfrpg|shadowrun5e|splittermond|swade|sw5e|tormenta20|wwn/;
 	const languageProviders = [];

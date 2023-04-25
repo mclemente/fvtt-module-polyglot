@@ -527,19 +527,22 @@ export class coc7LanguageProvider extends LanguageProvider {
 				item.name.match(game.i18n.localize("POLYGLOT.COC7.LanguageOther") + "\\s*\\((.+)\\)", "i");
 			// adding only the descriptive language name, not "Language (XYZ)"
 			if (match) known_languages.add(match[1].trim().toLowerCase());
-			else if (
-				[
-					game.i18n.localize("POLYGLOT.COC7.LanguageSpec"),
-					game.i18n.localize("POLYGLOT.COC7.LanguageOwn"),
-					game.i18n.localize("POLYGLOT.COC7.LanguageAny"),
-					game.i18n.localize("POLYGLOT.COC7.LanguageOther"),
-					game.i18n.localize("CoC7.language"),
-					"Language",
-					"Language (Own)",
-					"Language (Other)",
-				].includes(item.system.specialization)
-			)
-				known_languages.add(item.name.trim().toLowerCase());
+			else {
+				switch (item.system.specialization) {
+					case "LanguageSpec":
+					case "Language":
+					case "Language (Own)":
+					case "Language (Other)":
+					case game.i18n.localize("POLYGLOT.COC7.LanguageOwn"):
+					case game.i18n.localize("POLYGLOT.COC7.LanguageAny"):
+					case game.i18n.localize("POLYGLOT.COC7.LanguageOther"):
+					case game.i18n.localize("CoC7.language"):
+						known_languages.add(item.name.trim().toLowerCase());
+						break;
+					default:
+						break;
+				}
+			}
 		}
 		return [known_languages, literate_languages];
 	}
@@ -2206,7 +2209,7 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 	}
 }
 
-export class warhammerLanguageProvider extends LanguageProvider {
+export class wfrp4eLanguageProvider extends LanguageProvider {
 	get originalAlphabets() {
 		return {
 			common: "130% Thorass",
