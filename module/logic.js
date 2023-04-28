@@ -1,4 +1,3 @@
-import { registerModule, registerSystem } from "./api.js";
 import { FONTS, FONTS_26, LOGOGRAPHICAL_FONTS } from "./Fonts.js";
 import { libWrapper } from "./shim.js";
 
@@ -149,8 +148,8 @@ export class Polyglot {
 	FONTS_26 = FONTS_26;
 	LOGOGRAPHICAL_FONTS = LOGOGRAPHICAL_FONTS;
 	CustomFontSizes = game.settings.get("polyglot", "CustomFontSizes");
-	registerModule = registerModule;
-	registerSystem = registerSystem;
+	registerModule = null;
+	registerSystem = null;
 
 	get chatElement() {
 		return ui.sidebar.popouts.chat?.element || ui.chat.element;

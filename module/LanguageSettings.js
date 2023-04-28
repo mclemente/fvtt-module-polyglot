@@ -1,5 +1,3 @@
-import { availableLanguageProviders, updateLanguageProvider } from "./api.js";
-
 export class PolyglotLanguageSettings extends FormApplication {
 	/**
 	 * Default Options for this FormApplication
@@ -21,7 +19,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 		const data = {};
 		const selectedProvider = game.polyglot.languageProvider.id;
 		// Insert all speed providers into the template data
-		data.providers = Object.values(availableLanguageProviders).map((languageProvider) => {
+		data.providers = Object.values(game.polyglot.api.providers).map((languageProvider) => {
 			const provider = {};
 			provider.id = languageProvider.id;
 			let dotPosition = provider.id.indexOf(".");
@@ -121,7 +119,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 		const languageProvider = game.settings.get("polyglot", "languageProvider");
 		if (languageProvider != formData.languageProvider) {
 			await game.settings.set("polyglot", "languageProvider", formData.languageProvider);
-			updateLanguageProvider();
+			game.polyglot.api.updateProvider();
 			game.polyglot.languageProvider.loadAlphabet();
 			await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.alphabets);
 			await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.originalTongues);

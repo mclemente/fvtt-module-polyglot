@@ -1,20 +1,21 @@
 import { CUSTOM_FONT_SIZES } from "./module/Fonts.js";
 import { LanguageProvider } from "./module/LanguageProvider.js";
-import { initApi, updateLanguageProvider } from "./module/api.js";
+import { PolyglotAPI } from "./module/api.js";
 import { Polyglot } from "./module/logic.js";
 import { addSetting, registerProviderSettings, registerSettings, renderSettingsConfigHandler } from "./module/settings.js";
 
 Hooks.once("init", () => {
 	CONFIG.TinyMCE.content_css.push("/modules/polyglot/css/polyglot.css");
-	initApi();
 	addSetting("CustomFontSizes", {
 		config: false,
 		default: CUSTOM_FONT_SIZES,
 		type: Object,
 	});
+	const api = new PolyglotAPI();
+	api.init();
 	game.polyglot = new Polyglot();
-	updateLanguageProvider();
 	game.polyglot.init();
+	api.attach();
 	Handlebars.registerHelper({
 		PolyglotBeautifyFont: (font) => {
 			return font
