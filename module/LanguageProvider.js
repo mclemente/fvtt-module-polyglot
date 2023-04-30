@@ -272,6 +272,7 @@ export class LanguageProvider {
 	loadTongues() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const customLanguages = game.settings.get("polyglot", "customLanguages");
+		const omniglot = game.settings.get("polyglot", "omniglot");
 		const comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
 		const truespeech = game.settings.get("polyglot", "truespeech");
 		if (!replaceLanguages) {
@@ -291,6 +292,9 @@ export class LanguageProvider {
 				lang = lang.trim();
 				this.addLanguage(lang);
 			}
+		}
+		if (omniglot && !customLanguages.includes(omniglot)) {
+			this.addLanguage(omniglot);
 		}
 		if (comprehendLanguages && !customLanguages.includes(comprehendLanguages)) {
 			this.addLanguage(comprehendLanguages);

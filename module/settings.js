@@ -154,6 +154,13 @@ export function registerSettings() {
 			game.polyglot.languageProvider.reloadLanguages();
 		},
 	});
+	addSetting("omniglot", {
+		name: "POLYGLOT.Omniglot.title",
+		hint: "POLYGLOT.Omniglot.hint",
+		default: "",
+		type: String,
+		onChange: (value) => (game.polyglot.omniglot = value.trim().replace(/ \'/g, "_")),
+	});
 	addSetting("comprehendLanguages", {
 		name: "POLYGLOT.ComprehendLanguages.title",
 		hint: "POLYGLOT.ComprehendLanguages.hint",
