@@ -410,68 +410,54 @@ export class Polyglot {
 	 * @var {Boolean} known				Determines if the actor actually knows the language, rather than being affected by Comprehend Languages or Tongues
 	 */
 	async renderChatMessage(message, html, data) {
+		const lang = message.getFlag("polyglot", "language");
+		if (!lang || /\[\[(.*?)\]\]/g.test(message.content)) return;
+
 		if (this.languageProvider.requiresReady && !game.ready) {
-			Hooks.on("polyglot.languageProvider.ready", async () => {
+			Hooks.once("polyglot.languageProvider.ready", async () => {
 				await this.renderChatMessage(message, html, data);
 			});
 			return;
 		}
 		// Skip for inline rolls
-		if (/\[\[(.*?)\]\]/g.test(message.content)) return;
 		if (!this.known_languages.size) this.updateUserLanguages(this.chatElement);
-		const lang = message.getFlag("polyglot", "language") || "";
-		if (!lang) return;
-		let metadata = html.find(".message-metadata");
-		let language = this.languageProvider.languages[lang] || lang;
-		const known = this.known_languages.has(lang);
+		const metadata = html.find(".message-metadata");
+		const language = this.languageProvider.languages?.[lang] || lang;
+		const known = this.knows(lang);
+		const isGM = game.user.isGM;
 		const runifyGM = game.settings.get("polyglot", "runifyGM");
 		const displayTranslated = game.settings.get("polyglot", "display-translated");
 		const hideTranslation = game.settings.get("polyglot", "hideTranslation");
-		if (game.user.isGM && !runifyGM) message.polyglot_unknown = false;
-		else
-			message.polyglot_unknown =
-				!this._isTruespeech(lang) &&
-				!known &&
-				(game.user.character ? !this.known_languages.has(this.truespeech) && !this.known_languages.has(this.comprehendLanguages) : true);
+		const forceTranslation = message.polyglot_force || !message.polyglot_unknown;
 
-		let new_content = this.scrambleString(message.content, message.id, lang);
-		if (displayTranslated && (lang != this.languageProvider.defaultLanguage || message.polyglot_unknown)) {
-			let content = html.find(".message-content");
-			let translation = message.content;
-			let original = $("<div>")
-				.addClass("polyglot-original-text")
-				.css({ font: this._getFontStyle(lang) })
-				.html(new_content);
-			$(content).empty().append(original);
+		const content = $("<div>")
+			.addClass("polyglot-original-text")
+			.css({ font: this._getFontStyle(lang) })
+			.html(this.scrambleString(message.content, message.id, lang));
+		const translation = $("<div>")
+			.addClass("polyglot-translation-text")
+			.attr("title", game.i18n.localize("POLYGLOT.TranslatedFrom") + language)
+			.html(message.content);
 
-			if (message.polyglot_force || !message.polyglot_unknown) {
-				if (message.polyglot_force || (!this._isTruespeech(lang) && !message.polyglot_unknown && (game.user.isGM || !hideTranslation))) {
-					$(content).append(
-						$("<div>")
-							.addClass("polyglot-translation-text")
-							.attr("title", game.i18n.localize("POLYGLOT.TranslatedFrom") + language)
-							.html(translation)
-					);
-				} else {
-					$(content).append($("<div>").addClass("polyglot-translation-text").attr("title", game.i18n.localize("POLYGLOT.Translation")).html(translation));
-				}
+		if (displayTranslated && (lang !== this.languageProvider.defaultLanguage || message.polyglot_unknown)) {
+			html.find(".message-content").empty().append(content);
+			if (forceTranslation || (!this._isTruespeech(lang) && !message.polyglot_unknown && (isGM || !hideTranslation))) {
+				html.find(".message-content").append(translation);
 			}
-		} else if (!message.polyglot_force && message.polyglot_unknown) {
-			let content = html.find(".message-content");
-			content.text(new_content);
-			content[0].style.font = this._getFontStyle(lang);
+		} else if (!forceTranslation && message.polyglot_unknown) {
+			html.find(".message-content").empty().append(content);
 			message.polyglot_unknown = true;
 		}
 
-		if (game.user.isGM || (known && !hideTranslation)) {
-			const color = (game.user.isGM && !runifyGM) || known ? "green" : "red";
-			metadata.find(".polyglot-message-language").remove();
-			const title = game.user.isGM || known ? `title="${language}"` : "";
-			let button = $(`<a class="button polyglot-message-language" ${title}>
+		if (isGM || (known && !hideTranslation)) {
+			const color = (isGM && !runifyGM) || known ? "green" : "red";
+			const title = isGM || known ? `title="${language}"` : "";
+			const button = $(`<a class="button polyglot-message-language" ${title}>
 				<i class="fas fa-globe" style="color:${color}"></i>
 			</a>`);
+			metadata.find(".polyglot-message-language").remove();
 			metadata.append(button);
-			if (game.user.isGM && (runifyGM || !displayTranslated)) {
+			if (isGM && (runifyGM || !displayTranslated)) {
 				button.click(this._onGlobeClick.bind(this));
 			}
 		}
