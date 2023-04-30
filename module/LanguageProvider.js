@@ -1840,7 +1840,7 @@ export class shadowrun5eLanguageProvider extends LanguageProvider {
 		return {
 			aztec: "200% Aztec",
 			chinese: "130% ScrapbookChinese",
-			common: "130% Thorass",
+			common: "150% OldeEnglish",
 			cyrillic: "130% KremlinPremier",
 			elvish: "150% Espruar",
 			orcish: "150% OrkGlyphs",
