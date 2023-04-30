@@ -9,7 +9,7 @@
 		"Font": "Font",
 		"Fonts": "Fonts",
 		"FontSize": "Font Size (%)",
-		"AllowOOC.hint": "Choose whose users should have their messages scrambled. OOC = Out of Character.",
+		"AllowOOC.hint": "Choose which users should have their messages scrambled when speaking Out of Character.",
 		"AllowOOC.title": "Scramble OOC Chat Messages",
 		"AllowOOCOptions": {
 			"a": "All",
