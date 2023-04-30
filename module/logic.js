@@ -204,6 +204,7 @@ export class Polyglot {
 		this.languageProvider.removeLanguage(this._truespeech);
 		this._truespeech = lang;
 	}
+
 	/* -------------------------------------------- */
 	/*  Hooks	                                    */
 	/* -------------------------------------------- */
@@ -375,17 +376,25 @@ export class Polyglot {
 		});
 	}
 
-	createChatMessage(chatEntity, _, userId) {
-		if (/(^(@|<|(http+?)(s\b|\b)|www\.))|(\.(com|jpg|gif|png|bmp|webp)$)/gi.test(chatEntity.content) || (chatEntity.type === CONST.CHAT_MESSAGE_TYPES.OOC && !this._allowOOC()))
-			return;
+	/**
+	 * This is required for when Polyglot tries to update messages that have no language set.
+	 * This is essential for compatibility with modules that create messages (see https://github.com/mclemente/fvtt-module-polyglot/pull/285).
+	 * @param {ChatMessage} message
+	 * @param {Object} options
+	 * @param {String} userId
+	 * @returns {Boolean}
+	 */
+	createChatMessage(message, options, userId) {
+		if (this._isMessageLink(message.content) || (message.type === CONST.CHAT_MESSAGE_TYPES.OOC && !this._allowOOC())) return false;
 	}
+
 	/**
 	 * Renders the messages, scrambling the text if it is not known by the user (or currently selected character)
 	 * and adding the indicators ("Translated From" text and the globe icon).
 	 *
 	 * @param {ChatMessage} message		The ChatMessage document being rendered
 	 * @param {JQuery} html 			The pending HTML as a jQuery object
-	 * @param {*} data 					The input data provided for template rendering
+	 * @param {Object} data 					The input data provided for template rendering
 	 *
 	 * @var {Boolean} known				Determines if the actor actually knows the language, rather than being affected by Comprehend Languages or Tongues
 	 */
@@ -459,22 +468,21 @@ export class Polyglot {
 
 	/**
 	 * Adds the selected language to the message's flag.
-	 * Since FVTT 0.8, it has to use Document#Update instead of Document#SetFlag because Document#SetFlag can't be called during the preCreate stage.
-	 *
-	 * @param {*} document
-	 * @param {*} data
-	 * @param {*} options
-	 * @param {*} userId
+	 * @param {ChatMessage} message
+	 * @param {Object} data
+	 * @param {Object} options
+	 * @param {String} userId
+	 * @returns {Boolean}
 	 */
-	preCreateChatMessage(document, data, options, userId) {
-		if (/(^(@|<|(http+?)(s\b|\b)|www\.))|(\.(com|jpg|gif|png|bmp|webp)$)/gi.test(data.content)) return true;
-		else if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this._allowOOC() && this._isMessageTypeOOC(data.type))) {
+	preCreateChatMessage(message, data, options, userId) {
+		if (this._isMessageLink(data.content)) return true;
+		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this._allowOOC() && this._isMessageTypeOOC(data.type))) {
 			if (data.lang) {
 				const invertedLanguages = invertObject(this.languageProvider.languages);
 				if (this.languageProvider.languages[data.lang]) var lang = data.lang;
 				else if (invertedLanguages[data.lang]) lang = invertedLanguages[data.lang];
 			} else if (!lang) lang = this.chatElement.find("select[name=polyglot-language]").val();
-			if (lang) document.updateSource({ "flags.polyglot.language": lang });
+			if (lang) message.updateSource({ "flags.polyglot.language": lang });
 		}
 	}
 
@@ -677,8 +685,9 @@ export class Polyglot {
 				return game.user.isGM;
 			case "c":
 				return [CONST.USER_ROLES.TRUSTED, CONST.USER_ROLES.PLAYER].includes(game.user.role);
+			default:
+				return false;
 		}
-		return false;
 	}
 
 	/**
@@ -700,7 +709,17 @@ export class Polyglot {
 	}
 
 	/**
+	 * Determines if the message content is a link.
+	 * @param {String} messageContent
+	 * @returns {Boolean} - Whether the message content is a link to an image file or not.
+	 */
+	_isMessageLink(messageContent) {
+		return /(^(@|<|(http+?)(s\b|\b)|www\.))|(\.(com|jpg|gif|png|bmp|webp)$)/gi.test(messageContent);
+	}
+
+	/**
 	 * Checks if a message is Out Of Character.
+	 * @param {Number} type
 	 * @returns {Boolean}
 	 */
 	_isMessageTypeOOC(type) {
