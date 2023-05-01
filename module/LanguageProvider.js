@@ -1081,7 +1081,9 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 		let known_languages = new Set();
 		let literate_languages = new Set();
 		if (actor.system?.traits?.languages) {
-			for (let lang of actor.system.traits.languages.value) known_languages.add(lang);
+			for (let lang of actor.system.traits.languages.value) {
+				knownLanguages.add(lang.trim().replace(/[\s\']/g, "_"));
+			}
 			if (actor.system.traits.languages.custom) {
 				const defaultSpecialLanguage = game.settings.get("polyglot", "DND5E.SpecialLanguages").trim().toLowerCase();
 				for (let lang of actor.system.traits.languages?.custom.split(/[;]/)) {
