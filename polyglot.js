@@ -2,7 +2,7 @@ import { CUSTOM_FONT_SIZES } from "./module/Fonts.js";
 import { LanguageProvider } from "./module/LanguageProvider.js";
 import { PolyglotAPI } from "./module/api.js";
 import { Polyglot } from "./module/logic.js";
-import { addSetting, registerProviderSettings, registerSettings, renderSettingsConfigHandler } from "./module/settings.js";
+import { addSetting, registerProviderSettings, registerSettings, renderPolyglotGeneralSettingsHandler, renderSettingsConfigHandler } from "./module/settings.js";
 
 Hooks.once("init", () => {
 	CONFIG.TinyMCE.content_css.push("/modules/polyglot/css/polyglot.css");
@@ -39,3 +39,4 @@ Hooks.on("ready", () => {
 	Hooks.callAll("polyglot.ready", LanguageProvider);
 });
 Hooks.on("renderSettingsConfig", renderSettingsConfigHandler);
+Hooks.on("renderPolyglotGeneralSettings", renderPolyglotGeneralSettingsHandler);

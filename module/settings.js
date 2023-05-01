@@ -1,5 +1,5 @@
-import { colorPicker } from "./colorPicker.js";
 import { PolyglotFontSettings } from "./FontSettings.js";
+import { PolyglotGeneralSettings } from "./GeneralSettings.js";
 import { PolyglotLanguageSettings } from "./LanguageSettings.js";
 
 /**
@@ -19,30 +19,23 @@ export function addSetting(key, data) {
 	game.settings.register("polyglot", key, Object.assign(commonData, data));
 }
 
-export function registerSettings() {
-	//Font Settings Menu
-	game.settings.registerMenu("polyglot", "FontSettings", {
-		name: "POLYGLOT.FontSettings",
-		label: game.i18n.localize("POLYGLOT.FontSettings"),
-		icon: "fas fa-font",
-		type: PolyglotFontSettings,
-		restricted: true,
-	});
+export function addMenuSetting(key, data) {
+	const commonData = {
+		name: `POLYGLOT.${key}.title`,
+		hint: `POLYGLOT.${key}.hint`,
+		scope: "world",
+		config: false,
+	};
+	game.settings.register("polyglot", key, Object.assign(commonData, data));
+}
 
-	//Language Settings Menu
-	game.settings.registerMenu("polyglot", "LanguageSettings", {
-		name: "POLYGLOT.LanguageSettings",
-		label: game.i18n.localize("POLYGLOT.LanguageSettings"),
-		icon: "fas fa-globe",
-		type: PolyglotLanguageSettings,
-		restricted: true,
-	});
-	addSetting("Alphabets", {
+export function registerSettings() {
+	addMenuSetting("Alphabets", {
 		config: false,
 		default: {},
 		type: Object,
 	});
-	addSetting("Languages", {
+	addMenuSetting("Languages", {
 		config: false,
 		default: {},
 		type: Object,
@@ -58,7 +51,7 @@ export function registerSettings() {
 	});
 
 	//Font Settings
-	addSetting("useUniqueSalt", {
+	addMenuSetting("useUniqueSalt", {
 		name: "POLYGLOT.RandomizeRunes.title",
 		hint: "POLYGLOT.RandomizeRunes.hint",
 		default: "a",
@@ -69,28 +62,29 @@ export function registerSettings() {
 			c: game.i18n.localize("POLYGLOT.RandomizeRunesOptions.c"),
 		},
 	});
-	addSetting("RuneRegex", {
+	addMenuSetting("RuneRegex", {
 		default: false,
 		type: Boolean,
 	});
-	addSetting("IgnoreJournalFontSize", {
+	addMenuSetting("IgnoreJournalFontSize", {
 		default: false,
 		type: Boolean,
 	});
-	addSetting("logographicalFontToggle", {
+	addMenuSetting("logographicalFontToggle", {
 		name: "POLYGLOT.logographicalFontToggle.title",
 		hint: "POLYGLOT.logographicalFontToggle.hint",
 		default: true,
 		type: Boolean,
 	});
-	addSetting("enableAllFonts", {
+	addMenuSetting("enableAllFonts", {
 		hint: game.i18n.format("POLYGLOT.enableAllFonts.hint", {
 			setting1: game.i18n.localize("POLYGLOT.FontSettings"),
 			setting2: game.i18n.localize("POLYGLOT.LanguageSettings"),
 		}),
-		config: !game.polyglot.languageProvider.isGeneric,
+		// config: !game.polyglot.languageProvider.isGeneric,
 		default: 0,
 		type: Number,
+		requiresReload: true,
 		choices: {
 			0: game.i18n.localize("POLYGLOT.enableAllFonts.choices.0"),
 			1: game.i18n.localize("POLYGLOT.enableAllFonts.choices.1"),
@@ -102,14 +96,43 @@ export function registerSettings() {
 			game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.alphabets);
 		},
 	});
-	addSetting("exportFonts", {
+
+	//General Settings Menu
+	game.settings.registerMenu("polyglot", "GeneralSettings", {
+		name: "POLYGLOT.GeneralSettings",
+		label: game.i18n.localize("POLYGLOT.GeneralSettings"),
+		icon: "fas fa-cogs",
+		type: PolyglotGeneralSettings,
+		restricted: true,
+	});
+	const allFontsEnabled = game.settings.get("polyglot", "enableAllFonts") > 0;
+	//Font Settings Menu
+	if (allFontsEnabled) {
+		game.settings.registerMenu("polyglot", "FontSettings", {
+			name: "POLYGLOT.FontSettings",
+			label: game.i18n.localize("POLYGLOT.FontSettings"),
+			icon: "fas fa-font",
+			type: PolyglotFontSettings,
+			restricted: true,
+		});
+	}
+	//Language Settings Menu
+	game.settings.registerMenu("polyglot", "LanguageSettings", {
+		name: "POLYGLOT.LanguageSettings",
+		label: game.i18n.localize("POLYGLOT.LanguageSettings"),
+		icon: "fas fa-globe",
+		type: PolyglotLanguageSettings,
+		restricted: true,
+	});
+
+	addMenuSetting("exportFonts", {
 		name: "POLYGLOT.ExportFonts.title",
 		hint: "POLYGLOT.ExportFonts.hint",
 		default: false,
 		type: Boolean,
 		requiresReload: true,
 	});
-	addSetting("JournalHighlightColor", {
+	addMenuSetting("JournalHighlightColor", {
 		default: "#ffb400",
 		type: String,
 		onChange: (value) => {
@@ -118,7 +141,7 @@ export function registerSettings() {
 	});
 	const hex = hexToRgb(game.settings.get("polyglot", "JournalHighlightColor"));
 	document.documentElement.style.setProperty("--polyglot-journal-color", Object.values(hex).toString());
-	addSetting("JournalHighlight", {
+	addMenuSetting("JournalHighlight", {
 		default: 25,
 		range: {
 			min: 0,
@@ -133,7 +156,7 @@ export function registerSettings() {
 	document.documentElement.style.setProperty("--polyglot-journal-opacity", game.settings.get("polyglot", "JournalHighlight") / 100);
 
 	//Language Settings
-	addSetting("replaceLanguages", {
+	addMenuSetting("replaceLanguages", {
 		name: "POLYGLOT.ReplaceLanguages.title",
 		hint: "POLYGLOT.ReplaceLanguages.hint",
 		default: false,
@@ -144,7 +167,7 @@ export function registerSettings() {
 			game.polyglot.languageProvider.reloadLanguages();
 		},
 	});
-	addSetting("customLanguages", {
+	addMenuSetting("customLanguages", {
 		name: "POLYGLOT.CustomLanguages.title",
 		hint: "POLYGLOT.CustomLanguages.hint",
 		default: "",
@@ -154,21 +177,21 @@ export function registerSettings() {
 			game.polyglot.languageProvider.reloadLanguages();
 		},
 	});
-	addSetting("omniglot", {
+	addMenuSetting("omniglot", {
 		name: "POLYGLOT.Omniglot.title",
 		hint: "POLYGLOT.Omniglot.hint",
 		default: "",
 		type: String,
 		onChange: (value) => (game.polyglot.omniglot = value.trim().replace(/ \'/g, "_")),
 	});
-	addSetting("comprehendLanguages", {
+	addMenuSetting("comprehendLanguages", {
 		name: "POLYGLOT.ComprehendLanguages.title",
 		hint: "POLYGLOT.ComprehendLanguages.hint",
 		default: "",
 		type: String,
 		onChange: (value) => (game.polyglot.comprehendLanguages = value.trim().replace(/ \'/g, "_")),
 	});
-	addSetting("truespeech", {
+	addMenuSetting("truespeech", {
 		name: "POLYGLOT.Truespeech.title",
 		hint: "POLYGLOT.Truespeech.hint",
 		default: "",
@@ -177,20 +200,20 @@ export function registerSettings() {
 	});
 
 	//Chat Settings
-	addSetting("display-translated", {
+	addMenuSetting("display-translated", {
 		name: "POLYGLOT.DisplayTranslated.title",
 		hint: "POLYGLOT.DisplayTranslated.hint",
 		default: true,
 		type: Boolean,
 	});
-	addSetting("hideTranslation", {
+	addMenuSetting("hideTranslation", {
 		name: "POLYGLOT.HideTranslation.title",
 		hint: "POLYGLOT.HideTranslation.hint",
 		default: false,
 		type: Boolean,
 		requiresReload: true,
 	});
-	addSetting("allowOOC", {
+	addMenuSetting("allowOOC", {
 		name: "POLYGLOT.AllowOOC.title",
 		hint: "POLYGLOT.AllowOOC.hint",
 		choices: {
@@ -202,7 +225,7 @@ export function registerSettings() {
 		default: "b",
 		type: String,
 	});
-	addSetting("runifyGM", {
+	addMenuSetting("runifyGM", {
 		name: "POLYGLOT.ScrambleGM.title",
 		hint: "POLYGLOT.ScrambleGM.hint",
 		default: false,
@@ -221,12 +244,12 @@ export function registerProviderSettings() {
 	}
 }
 
-export async function renderSettingsConfigHandler(settingsConfig, html) {
+export async function renderPolyglotGeneralSettingsHandler(settingsConfig, html) {
 	const JournalHighlightColor = game.settings.get("polyglot", "JournalHighlightColor");
 
 	const JournalHighlight = game.settings.get("polyglot", "JournalHighlight");
-	const JournalHighlightInput = html.find('input[name="polyglot.JournalHighlight"]');
-	const JournalHighlightNotes = JournalHighlightInput.parent().parent().children()[2];
+	const JournalHighlightInput = html.find('input[name="JournalHighlight"]');
+	const JournalHighlightNotes = JournalHighlightInput.parent().children()[3];
 	if (JournalHighlightNotes) JournalHighlightNotes.classList.add("polyglot-journal-temp");
 	const hex = hexToRgb(JournalHighlightColor);
 	document.documentElement.style.setProperty("--polyglot-journal-color-temp", Object.values(hex).toString());
@@ -236,6 +259,14 @@ export async function renderSettingsConfigHandler(settingsConfig, html) {
 		document.documentElement.style.setProperty("--polyglot-journal-opacity-temp", event.target.value / 100);
 	});
 
+	const JournalHighlightColorPicker = html.find('input[data-edit="JournalHighlightColor"]');
+	JournalHighlightColorPicker.on("change", (event) => {
+		const hex = hexToRgb(event.target.value);
+		document.documentElement.style.setProperty("--polyglot-journal-color-temp", Object.values(hex).toString());
+	});
+}
+
+export async function renderSettingsConfigHandler(settingsConfig, html) {
 	if (game.settings.settings.has("polyglot.languageDataPath")) {
 		const languageDataPath = game.settings.get("polyglot", "languageDataPath");
 		const languageDataPathInput = html.find('input[name="polyglot.languageDataPath"]');
@@ -248,14 +279,6 @@ export async function renderSettingsConfigHandler(settingsConfig, html) {
 			disableCheckbox(literacyDataPathInput, !event.target.value.length);
 		});
 	}
-
-	const JournalHighlightColorInput = html.find('input[name="polyglot.JournalHighlightColor"]');
-	if (JournalHighlightColorInput.length) colorPicker("polyglot.JournalHighlightColor", html, JournalHighlightColor);
-	const JournalHighlightColorPicker = html.find('input[data-edit="polyglot.JournalHighlightColor"]');
-	JournalHighlightColorPicker.on("change", (event) => {
-		const hex = hexToRgb(event.target.value);
-		document.documentElement.style.setProperty("--polyglot-journal-color-temp", Object.values(hex).toString());
-	});
 }
 
 export function disableCheckbox(checkbox, boolean) {

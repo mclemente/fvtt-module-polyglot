@@ -2,8 +2,10 @@
 	"POLYGLOT": {
 		"DefaultAlphabet": "Default Alphabet",
 		"FontSettings": "Font Settings",
+		"GeneralSettings": "General Settings",
 		"LanguageSettings": "Language Settings",
 		"ChatSettings": "Chat Settings",
+		"General": "General",
 		"Languages.title": "Languages",
 		"Languages.hint": "Changes the alphabet used for the languages.",
 		"Font": "Font",
@@ -25,7 +27,7 @@
 		"ComprehendLanguages.title": "Omniscient Language",
 		"CustomLanguages.hint": "Define a list of custom languages to add to the system. They must be separated by commas or semicolons.",
 		"CustomLanguages.title": "Custom Languages",
-		"DefaultLanguage.hint": "Name of the default language to select. Keep empty to use system default ({default}).",
+		"DefaultLanguage.hint": "Name of the default language to select. Keep empty to use system default.",
 		"DefaultLanguage.title": "Default Language",
 		"DisplayTranslated.hint": "For languages that are translated in the chat window, display the original text and a translation below.",
 		"DisplayTranslated.title": "Display Translations",
@@ -45,15 +47,15 @@
 		"HideTranslation.title": "Hide Indicators from Players",
 		"IgnoreJournalFontSize": {
 			"hint": "Ignores the size of Polyglot's fonts on journals, making them have the same size as normal text would have. Useful for when the formatting of the journal matters.",
-			"title": "Journal: Use Normal Font Size"
+			"title": "Use Normal Font Size"
 		},
 		"JournalHighlight": {
 			"hint": "Defines the opacity of the highlight over fonts on the journal.",
-			"title": "Journal Highlight Opacity (%)"
+			"title": "Highlight Opacity (%)"
 		},
 		"JournalHighlightColor": {
 			"hint": "Defines the color of the highlight over fonts on the journal.",
-			"title": "Journal Highlight Color"
+			"title": "Highlight Color"
 		},
 		"LanguageProvider": {
 			"choices": {
