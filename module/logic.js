@@ -324,47 +324,47 @@ export class Polyglot {
 	 *
 	 * @param {*} html
 	 *
-	 * @var {Set} this.known_languages
+	 * @var {Set} this.knownLanguages
 	 */
 	updateUserLanguages(html) {
-		[this.known_languages, this.literate_languages] = this.getUserLanguages();
-		if (this.known_languages.size == 0) {
-			if (game.user.isGM) this.known_languages = new Set(Object.keys(this.languageProvider.languages));
-			else this.known_languages.add(this.languageProvider.defaultLanguage);
-		}
+		[this.knownLanguages, this.literateLanguages] = this.getUserLanguages();
+		const defaultLanguage = this.languageProvider.defaultLanguage;
+		if (this.knownLanguages.size == 0) {
+			if (game.user.isGM) this.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
+			else this.knownLanguages.add(defaultLanguage);
+		} else if (this.knownLanguages.has(this.omniglot)) this.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
+
 		let options = "";
 		let playerCharacters = [];
 		if (game.user.isGM) {
-			playerCharacters = game.actors.filter((a) => a.hasPlayerOwner);
+			playerCharacters = game.actors.filter((actor) => actor.hasPlayerOwner);
 			for (let i = 0; i < playerCharacters.length; i++) {
-				let known_languages = this.getUserLanguages([playerCharacters[i]])[0];
-				playerCharacters[i].known_languages = known_languages;
+				const knownLanguages = this.getUserLanguages([playerCharacters[i]])[0];
+				playerCharacters[i].knownLanguages = knownLanguages;
 			}
 		}
-		for (let lang of this.known_languages) {
-			if (!this._isTruespeech(lang) && lang === this.comprehendLanguages) continue;
-			let label = this.languageProvider.languages[lang] || lang;
+		for (let lang of this.knownLanguages) {
+			if (!this._isTruespeech(lang) && (lang === this.omniglot || lang === this.comprehendLanguages)) continue;
+			const label = this.languageProvider.languages[lang] || lang;
 			if (game.user.isGM && playerCharacters.length) {
-				let title = `title="PCs that know ${label}:\n`;
-				for (let actor of playerCharacters) {
-					if (actor.known_languages.has(lang)) {
-						title += `${actor.name}\n`;
-					}
+				const actorsThatKnowLang = playerCharacters.filter((actor) => actor.knownLanguages.has(lang));
+				if (actorsThatKnowLang.length) {
+					const names = actorsThatKnowLang.map((actor) => actor.name).join("\n");
+					options += `<option title="${`PCs that know ${label}:\n${names}`}" value="${lang}">${label}</option>`;
+					continue;
 				}
-				title += `"`;
-				if (title == `title="PCs that know ${label}:\n"`) title = ``;
-				options += `<option ${title.trim()} value="${lang}">${label}</option>`;
-			} else options += `<option value="${lang}">${label}</option>`;
+			}
+			options += `<option value="${lang}">${label}</option>`;
 		}
+
 		const select = html.find(".polyglot-lang-select select");
 		const prevOption = select.val();
 		select.html($(options));
 
-		let defaultLanguage = this.languageProvider.defaultLanguage;
 		let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
-		if (!this.knows(selectedLanguage)) {
-			if (this.knows(defaultLanguage)) selectedLanguage = defaultLanguage;
-			else selectedLanguage = [...this.known_languages][0];
+		if (!this.isLanguageKnown(selectedLanguage)) {
+			if (this.isLanguageKnown(defaultLanguage)) selectedLanguage = defaultLanguage;
+			else selectedLanguage = [...this.knownLanguages][0];
 		}
 
 		select.val(selectedLanguage);
