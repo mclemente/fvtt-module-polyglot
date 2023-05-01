@@ -30,6 +30,7 @@ Hooks.once("init", () => {
 Hooks.on("setup", async () => {
 	registerSettings();
 	registerProviderSettings();
+	game.polyglot.setup();
 	await game.polyglot.languageProvider.setup();
 });
 Hooks.on("ready", () => {

@@ -4,6 +4,7 @@ import { libWrapper } from "./shim.js";
 export class Polyglot {
 	init() {
 		Hooks.on("renderChatLog", this.renderChatLog.bind(this));
+		Hooks.on("updateActor", this.updateActor.bind(this));
 		Hooks.on("updateUser", this.updateUser.bind(this));
 		Hooks.on("updateActiveEffect", this.controlToken.bind(this));
 		Hooks.on("controlToken", this.controlToken.bind(this));
@@ -235,11 +236,21 @@ export class Polyglot {
 		this.updateUserLanguages(html);
 	}
 
+	updateActor(actor, data, options, userId) {
+		if (actor.hasPlayerOwner) {
+			const owner = game.users.find((user) => user.character?.id === actor.id);
+			if (game.user.isGM || owner.id == userId) {
+				this.updateUserLanguages(this.chatElement);
+				this.updateChatMessages();
+			}
+		}
+	}
+
 	/**
 	 * Updates the languages in the Languages selector and the messages that are readable by the character.
 	 */
-	updateUser(user, data) {
-		if (user.id == game.user.id && data.character !== undefined) {
+	updateUser(user, data, options, userId) {
+		if (user.id == userId && data.character !== undefined) {
 			this.updateUserLanguages(this.chatElement);
 			this.updateChatMessages();
 		}
@@ -483,14 +494,17 @@ export class Polyglot {
 		}
 	}
 
+	setup() {
+		this.omniglot = game.settings.get("polyglot", "omniglot");
+		this.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
+		this.truespeech = game.settings.get("polyglot", "truespeech");
+	}
+
 	/**
 	 * Registers settings, adjusts the bubble dimensions so the message is displayed correctly,
 	 * and loads the current languages set for Comprehend Languages Spells and Tongues Spell settings.
 	 */
 	ready() {
-		this.omniglot = game.settings.get("polyglot", "omniglot");
-		this.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
-		this.truespeech = game.settings.get("polyglot", "truespeech");
 		this.updateConfigFonts(game.settings.get("polyglot", "exportFonts"));
 		if (this.languageProvider.requiresReady) {
 			Hooks.on("polyglot.languageProvider.ready", () => {
