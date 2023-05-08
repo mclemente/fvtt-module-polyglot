@@ -508,12 +508,6 @@ export class Polyglot {
 		}
 	}
 
-	setup() {
-		this.omniglot = game.settings.get("polyglot", "omniglot");
-		this.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
-		this.truespeech = game.settings.get("polyglot", "truespeech");
-	}
-
 	/**
 	 * Registers settings, adjusts the bubble dimensions so the message is displayed correctly,
 	 * and loads the current languages set for Comprehend Languages Spells and Tongues Spell settings.
