@@ -4,7 +4,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 			id: "polyglot-general-form",
 			title: "Polyglot General Settings",
 			template: "./modules/polyglot/templates/GeneralSettings.hbs",
-			classes: ["sheet polyglot-general-settings"],
+			classes: ["sheet", "polyglot-general-settings"],
 			tabs: [{ navSelector: ".tabs", contentSelector: ".content", initial: "general" }],
 			width: 600,
 			height: "auto",
@@ -28,8 +28,8 @@ export class PolyglotGeneralSettings extends FormApplication {
 	}
 
 	prepSetting(key) {
-		const { name, hint } = game.settings.settings.get(`polyglot.${key}`);
-		return { id: key, value: game.settings.get("polyglot", key), name, hint };
+		const { name, hint, config } = game.settings.settings.get(`polyglot.${key}`);
+		return { id: key, value: game.settings.get("polyglot", key), name, hint, config };
 	}
 
 	async resetToDefault(key) {
@@ -40,9 +40,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 	getData(options) {
 		return {
 			// General Settings
-			// useUniqueSalt: this.prepSelection("useUniqueSalt"),
 			RuneRegex: this.prepSetting("RuneRegex"),
-			logographicalFontToggle: this.prepSetting("logographicalFontToggle"),
 			enableAllFonts: this.prepSetting("enableAllFonts"),
 			exportFonts: this.prepSetting("exportFonts"),
 			// Journal

@@ -7,7 +7,7 @@ export class PolyglotFontSettings extends FormApplication {
 			id: "polyglot-font-form",
 			title: "Polyglot Font Settings",
 			template: "./modules/polyglot/templates/FontSettings.hbs",
-			classes: ["sheet polyglot-font-settings"],
+			classes: ["sheet", "polyglot-font-settings"],
 			width: 780,
 			height: 680,
 			closeOnSubmit: true,

@@ -7,7 +7,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 			id: "polyglot-language-form",
 			title: "Polyglot Language Settings",
 			template: "./modules/polyglot/templates/LanguageSettings.hbs",
-			classes: ["sheet polyglot-language-settings"],
+			classes: ["sheet", "polyglot-language-settings"],
 			width: 600,
 			height: 680,
 			closeOnSubmit: true,

@@ -75,30 +75,12 @@ export function registerSettings() {
 	});
 
 	//Font Settings
-	// addMenuSetting("useUniqueSalt", {
-	// 	//TODO replace this for an implementation on the LanguageProvider
-	// 	name: "POLYGLOT.RandomizeRunes.title",
-	// 	hint: "POLYGLOT.RandomizeRunes.hint",
-	// 	default: "a",
-	// 	type: String,
-	// 	choices: {
-	// 		a: game.i18n.localize("POLYGLOT.RandomizeRunesOptions.a"),
-	// 		b: game.i18n.localize("POLYGLOT.RandomizeRunesOptions.b"),
-	// 		c: game.i18n.localize("POLYGLOT.RandomizeRunesOptions.c"),
-	// 	},
-	// });
 	addMenuSetting("RuneRegex", {
 		default: false,
 		type: Boolean,
 	});
 	addMenuSetting("IgnoreJournalFontSize", {
 		default: false,
-		type: Boolean,
-	});
-	addMenuSetting("logographicalFontToggle", {
-		name: "POLYGLOT.logographicalFontToggle.title",
-		hint: "POLYGLOT.logographicalFontToggle.hint",
-		default: true,
 		type: Boolean,
 	});
 	addMenuSetting("enableAllFonts", {
