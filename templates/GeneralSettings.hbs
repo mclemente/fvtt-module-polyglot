@@ -20,7 +20,7 @@
 
 	<section class="content">
 		<div class="tab" data-tab="general">
-			{{#with useUniqueSalt}}
+			{{!-- {{#with useUniqueSalt}}
 				<div class="form-group">
 					<label>{{localize name}}</label>
 					<select name="{{id}}" class="form-fields" id="{{id}}">
@@ -28,7 +28,7 @@
 					</select>
 					<p class="notes">{{localize hint}}</p>
 				</div>
-			{{/with}}
+			{{/with}} --}}
 			{{#with RuneRegex}}
 				<div class="form-group">
 					<label>{{localize name}}</label>
@@ -43,17 +43,13 @@
 					<p class="notes">{{localize hint}}</p>
 				</div>
 			{{/with}}
-			{{#unless isGeneric}}
-				{{#with enableAllFonts}}
-					<div class="form-group">
-						<label>{{localize name}}</label>
-						<select name="{{id}}" class="form-fields" id="{{id}}">
-							{{selectOptions select selected=selected nameAttr="key" labelAttr="value"}}
-						</select>
-						<p class="notes">{{localize hint}}</p>
-					</div>
-				{{/with}}
-			{{/unless}}
+			{{#with enableAllFonts}}
+				<div class="form-group">
+					<label>{{localize name}}</label>
+					<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
+					<p class="notes">{{localize hint}}</p>
+				</div>
+			{{/with}}
 			{{#with exportFonts}}
 				<div class="form-group">
 					<label>{{localize name}}</label>

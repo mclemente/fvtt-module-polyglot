@@ -1,4 +1,4 @@
-import { addSetting, getNestedData } from "./settings.js";
+import { getNestedData } from "./settings.js";
 
 /**
  * Base class for all language providers.
@@ -7,153 +7,456 @@ import { addSetting, getNestedData } from "./settings.js";
 export class LanguageProvider {
 	/**
 	 * @param {String} id
-	 * @var this.alphabets	The fonts' size and family.
-	 * @var this.languages	The language's names.
-	 * @var this.tongues	The language : font pair.
 	 */
 	constructor(id) {
 		this.id = id;
-		this.alphabets = this.originalAlphabets;
-		this.languages = {};
-		this.tongues = this.originalTongues;
 	}
+
+	/** The provider's default font key. */
+	defaultFont = "Thorass";
+
+	//TODO change Font Settings to allow changing alphabeticOnly and logographical
+	/**
+	 * Polyglot's fonts.
+	 * @var {String} fontSize - the font's size in %
+	 * @var {String} fontFamily - the font's name as they are set in the CSS (generally space-less)
+	 * @var {Boolean} alphabeticOnly - Optional. If a font type is meant to only replace alphabetic characters. This meant for font types that don't have all characters set.
+	 * @var {Boolean} logographical - Optional. If a font is meant to use the logographical logic (e.g. Aztec, Chinese and Oriental fonts).
+	 * @var {Object} replace - NOT IMPLEMENTED. Optional. A {string : replacement} pair.
+	 */
+	fonts = {
+		"Ar Ciela": {
+			fontSize: "200",
+			fontFamily: "ArCiela",
+			alphabeticOnly: true,
+		},
+		Aztec: {
+			fontSize: "200",
+			fontFamily: "Aztec",
+			logographical: true,
+		},
+		Barazhad: {
+			fontSize: "200",
+			fontFamily: "Barazhad",
+		},
+		Celestial: {
+			fontSize: "200",
+			fontFamily: "Celestial",
+		},
+		Daedra: {
+			fontSize: "200",
+			fontFamily: "Daedra",
+		},
+		"Dark Eldar": {
+			fontSize: "200",
+			fontFamily: "DarkEldar",
+			logographical: true,
+		},
+		Davek: {
+			fontSize: "150",
+			fontFamily: "Davek",
+		},
+		Dethek: {
+			fontSize: "200",
+			fontFamily: "Dethek",
+		},
+		"Dragon Alphabet": {
+			fontSize: "170",
+			fontFamily: "DragonAlphabet",
+		},
+		"Elder Futhark": {
+			fontSize: "350",
+			fontFamily: "ElderFuthark",
+		},
+		Eltharin: {
+			fontSize: "200",
+			fontFamily: "Eltharin",
+			logographical: true,
+		},
+		Espruar: {
+			fontSize: "150",
+			fontFamily: "Espruar",
+		},
+		"Finger Alphabet": {
+			fontSize: "150",
+			fontFamily: "FingerAlphabet",
+			alphabeticOnly: true,
+			logographical: true,
+		},
+		Floki: {
+			fontSize: "200",
+			fontFamily: "Floki",
+		},
+		"High Drowic": {
+			fontSize: "150",
+			fontFamily: "HighDrowic",
+		},
+		"Highschool Runes": {
+			fontSize: "200",
+			fontFamily: "HighschoolRunes",
+		},
+		Infernal: {
+			fontSize: "230",
+			fontFamily: "Infernal",
+		},
+		Iokharic: {
+			fontSize: "170",
+			fontFamily: "Iokharic",
+		},
+		"Jungle Slang": {
+			fontSize: "180",
+			fontFamily: "JungleSlang",
+			logographical: true,
+		},
+		Kargi: {
+			fontSize: "150",
+			fontFamily: "Kargi",
+		},
+		"Kremlin Premier": {
+			fontSize: "130",
+			fontFamily: "KremlinPremier",
+			alphabeticOnly: true,
+		},
+		"Mage Script": {
+			fontSize: "200",
+			fontFamily: "MageScript",
+			alphabeticOnly: true,
+			logographical: true,
+		},
+		"Maras Eye": {
+			fontSize: "200",
+			fontFamily: "MarasEye",
+		},
+		"Meroitic Demotic": {
+			fontSize: "200",
+			fontFamily: "MeroiticDemotic",
+			alphabeticOnly: true,
+		},
+		"Miroslav Normal": {
+			fontSize: "200",
+			fontFamily: "MiroslavNormal",
+		},
+		MusiQwik: {
+			fontSize: "200",
+			fontFamily: "MusiQwik",
+		},
+		"Ny Stormning": {
+			fontSize: "160",
+			fontFamily: "NyStormning",
+		},
+		"Olde English": {
+			fontSize: "150",
+			fontFamily: "OldeEnglish",
+			alphabeticOnly: true,
+		},
+		"Olde Espruar": {
+			fontSize: "200",
+			fontFamily: "OldeEspruar",
+		},
+		"Olde Thorass": {
+			fontSize: "200",
+			fontFamily: "OldeThorass",
+		},
+		Ophidian: {
+			fontSize: "250",
+			fontFamily: "Ophidian",
+		},
+		Oriental: {
+			fontSize: "130",
+			fontFamily: "Oriental",
+			logographical: true,
+		},
+		"Ork Glyphs": {
+			fontSize: "200",
+			fontFamily: "OrkGlyphs",
+		},
+		Pulsian: {
+			fontSize: "270",
+			fontFamily: "Pulsian",
+			alphabeticOnly: true,
+		},
+		Qijomi: {
+			fontSize: "200",
+			fontFamily: "Qijomi",
+		},
+		Reanaarian: {
+			fontSize: "200",
+			fontFamily: "Reanaarian",
+		},
+		Rellanic: {
+			fontSize: "200",
+			fontFamily: "Rellanic",
+		},
+		Saurian: {
+			fontSize: "200",
+			fontFamily: "Saurian",
+			logographical: true,
+		},
+		"Scrapbook Chinese": {
+			fontSize: "130",
+			fontFamily: "ScrapbookChinese",
+			logographical: true,
+		},
+		Semphari: {
+			fontSize: "200",
+			fontFamily: "Semphari",
+			alphabeticOnly: true,
+		},
+		Skaven: {
+			fontSize: "200",
+			fontFamily: "Skaven",
+			logographical: true,
+		},
+		Tengwar: {
+			fontSize: "200",
+			fontFamily: "Tengwar",
+		},
+		Thassilonian: {
+			fontSize: "200",
+			fontFamily: "Thassilonian",
+			logographical: true,
+		},
+		Thorass: {
+			fontSize: "200",
+			fontFamily: "Thorass",
+		},
+		Tuzluca: {
+			fontSize: "200",
+			fontFamily: "Tuzluca",
+			alphabeticOnly: true,
+		},
+		Valmaric: {
+			fontSize: "200",
+			fontFamily: "Valmaric",
+		},
+	};
 
 	/**
-	 * The system's original fonts.
+	 * The system's original languages.
+	 * @var {String} label - The language's displayed name.
+	 * @var {String} font - The key of a font set in this.fonts.
+	 * @var {String} rng - Determines which type of RNG is used to generate a phrase. Base Polyglot supports these; "Default", "Unique" and "None".
 	 */
-	get originalAlphabets() {
-		return {
-			arciela: "200% ArCiela",
-			aztec: "200% Aztec",
-			barazhad: "200% Barazhad",
-			celestial: "200% Celestial",
-			chinese: "130% ScrapbookChinese",
-			cyrillic: "130% KremlinPremier",
-			daedra: "200% Daedra",
-			darkeldar: "200% DarkEldar",
-			davek: "150% Davek",
-			dethek: "200% Dethek",
-			dovah: "170% DragonAlphabet",
-			elderfuthark: "350% ElderFuthark",
-			eltharin: "200% Eltharin",
-			espruar: "150% Espruar",
-			fingeralphabet: "150% FingerAlphabet",
-			floki: "200% Floki",
-			highdrowic: "150% HighDrowic",
-			highschoolrunes: "200% HighschoolRunes",
-			infernal: "230% Infernal",
-			iokharic: "170% Iokharic",
-			jungleslang: "180% JungleSlang",
-			kargi: "150% Kargi",
-			magescript: "200% MageScript",
-			maraseye: "200% MarasEye",
-			meroiticdemotic: "200% MeroiticDemotic",
-			miroslavnormal: "200% MiroslavNormal",
-			musiqwik: "200% MusiQwik",
-			nordic: "160% NyStormning",
-			oldeenglish: "150% OldeEnglish",
-			oldeespruar: "200% OldeEspruar",
-			oldethorass: "200% OldeThorass",
-			ophidian: "250% Ophidian",
-			oriental: "130% Oriental",
-			orkglyphs: "200% OrkGlyphs",
-			pulsian: "270% Pulsian",
-			qijomi: "200% Qijomi",
-			reanaarian: "200% Reanaarian",
-			rellanic: "200% Rellanic",
-			saurian: "200% Saurian",
-			semphari: "200% Semphari",
-			skaven: "200% Skaven",
-			tengwar: "200% Tengwar",
-			thassilonian: "200% Thassilonian",
-			thorass: "200% Thorass",
-			tuzluca: "200% Tuzluca",
-			valmaric: "200% Valmaric",
-		};
-	}
-	/**
-	 * The system's original language : font pairing.
-	 */
-	get originalTongues() {
-		return { _default: "thorass" };
-	}
+	languages = {
+		/*
+		languageKey: {
+			label: languageName, // Optional if set on this.getLanguages
+			font: fontName,
+			rng: "default", // Optional. Added automatically during this.getLanguages
+			//See https://github.com/mclemente/fvtt-module-polyglot/issues/283
+		},
+		*/
+	};
 
-	get isGeneric() {
-		return !(this.constructor.prototype instanceof LanguageProvider);
-	}
+	/** This is needed if the LanguageProvider gets languages from compendiums, since they require the game state to be ready. */
+	requiresReady = false;
 
-	/**
-	 * This is needed if the LanguageProvider gets languages from compendiums, since they require the game state to be ready.
-	 */
-	get requiresReady() {
-		return false;
-	}
-
+	/** Provider settings to be added by the module. */
 	get settings() {
-		if (this.isGeneric) {
-			addSetting("languageDataPath", {
-				hint: game.i18n.format("POLYGLOT.languageDataPath.hint", { setting: game.i18n.localize("POLYGLOT.LanguageRegex.title") }),
-				default: "",
-				type: String,
-				requiresReload: true,
-			});
-			addSetting("literacyDataPath", {
-				hint: game.i18n.format("POLYGLOT.literacyDataPath.hint", { setting: game.i18n.localize("POLYGLOT.languageDataPath.title") }),
-				default: "",
-				type: String,
-				requiresReload: true,
-			});
-			this.languageDataPath = game.settings.get("polyglot", "languageDataPath");
-			this.literacyDataPath = game.settings.get("polyglot", "literacyDataPath");
-			if (this.languageDataPath.startsWith("actor.")) this.languageDataPath = this.languageDataPath.slice(6);
-			if (this.literacyDataPath.startsWith("actor.")) this.literacyDataPath = this.literacyDataPath.slice(6);
-		}
-		return {
-			LanguageRegex: {
-				type: String,
-				default: game.i18n.localize("POLYGLOT.Generic.Language"),
-			},
+		return {};
+	}
+
+	///////////
+	// Hooks //
+	///////////
+
+	/**
+	 * Loads everything that can't be loaded on the constructor due to async/await.
+	 * It Hooks on ready if the system depends on reading compendiums.
+	 */
+	async setup() {
+		const setupSteps = async () => {
+			await this.getLanguages();
+			const enableAllFonts = game.settings.get("polyglot", "enableAllFonts");
+			if (enableAllFonts) {
+				for (let font in game.settings.get("core", "fonts")) {
+					const size = game.polyglot.CustomFontSizes[font] ?? "100";
+					this.addFont(font, size);
+				}
+			}
+			this.loadFonts();
+			this.loadLanguages();
+			this.loadCustomFonts();
+			this.reloadLanguages();
+			this.getDefaultLanguage();
 		};
+		if (this.requiresReady) {
+			if (game.modules.get("babele")?.active) {
+				Hooks.on("babele.ready", async () => {
+					await setupSteps();
+					Hooks.callAll("polyglot.languageProvider.ready");
+				});
+			} else {
+				Hooks.on("ready", async () => {
+					await setupSteps();
+					Hooks.callAll("polyglot.languageProvider.ready");
+				});
+			}
+		} else await setupSteps();
 	}
 
 	/**
-	 * Returns the system's default language if it exists.
-	 * @returns {String}
+	 * Even though the base method doesn't have an await, some providers might need it to look into compendiums.
 	 */
-	getSystemDefaultLanguage() {
-		const keys = Object.keys(this.languages);
-		if (keys.includes("common")) return "common";
-		else return this.languages[0] || Object.keys(this.languages)[0] || "";
-	}
-	/**
-	 * Returns defaultLang if it exists and is either a key or value on this.languages.
-	 * Otherwise, returns the system's default language.
-	 */
-	getDefaultLanguage() {
-		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
-		if (defaultLang) {
-			if (this.languages[defaultLang]) this.defaultLanguage = defaultLang;
-			const inverted = invertObject(this.languages);
-			if (inverted[defaultLang]) this.defaultLanguage = inverted[defaultLang];
-		} else {
-			this.defaultLanguage = this.getSystemDefaultLanguage();
+	async getLanguages() {
+		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+		if (CONFIG[game.system.id.toUpperCase()]?.languages) {
+			if (CONFIG[game.system.id.toUpperCase()].languages.constructor === Object) {
+				if (replaceLanguages) CONFIG[game.system.id.toUpperCase()].languages = {};
+				const systemLanguages = CONFIG[game.system.id.toUpperCase()].languages;
+				Object.keys(systemLanguages).forEach((key) => {
+					this.languages[key] = {
+						label: systemLanguages[key],
+						font: this.languages[key]?.font || this.defaultFont,
+						rng: "default",
+					};
+				});
+			}
+			if (CONFIG[game.system.id.toUpperCase()].languages.constructor === Array) {
+				if (replaceLanguages) CONFIG[game.system.id.toUpperCase()].languages = [];
+				for (let lang of CONFIG[game.system.id.toUpperCase()].languages) {
+					this.languages[lang.toLowerCase()] = {
+						label: lang,
+						font: this.languages[key]?.font || this.defaultFont,
+						rng: "default",
+					};
+				}
+			}
 		}
 	}
+
+	/**
+	 * Sets the fonts that will be available to choose on the settings.
+	 */
+	loadFonts() {
+		this.fonts = new LanguageProvider().fonts;
+		const enableAllFonts = game.settings.get("polyglot", "enableAllFonts");
+		for (let font in this.fonts) {
+			if (game.polyglot.CustomFontSizes[font]) {
+				this.fonts[font].size = game.polyglot.CustomFontSizes[font];
+			}
+		}
+		if (enableAllFonts) {
+			for (let font in game.settings.get("core", "fonts")) {
+				const size = game.polyglot.CustomFontSizes[font] ?? 100;
+				this.addFont(font, size);
+			}
+		}
+	}
+	/**
+	 * Add languages from the settings to this.languages.
+	 */
+	loadLanguages() {
+		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+		const customLanguages = game.settings.get("polyglot", "customLanguages");
+		const omniglot = game.settings.get("polyglot", "omniglot");
+		const comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
+		const truespeech = game.settings.get("polyglot", "truespeech");
+		if (replaceLanguages) this.languages = {};
+		if (customLanguages) {
+			for (let lang of customLanguages.split(/[,;]/)) {
+				lang = lang.trim();
+				this.addLanguage(lang);
+			}
+		}
+		if (omniglot && !customLanguages.includes(omniglot)) this.addLanguage(omniglot);
+		if (comprehendLanguages && !customLanguages.includes(comprehendLanguages)) this.addLanguage(comprehendLanguages);
+		if (truespeech && !customLanguages.includes(truespeech)) this.addLanguage(truespeech);
+	}
+	/**
+	 * Replace languages's fonts with the Languages setting's fonts.
+	 */
+	loadCustomFonts() {
+		const langSettings = game.settings.get("polyglot", "Languages");
+		if (JSON.stringify(langSettings) !== JSON.stringify(this.languages)) return;
+		for (let lang in langSettings) {
+			if (lang in this.languages && JSON.stringify(this.languages[lang]) !== JSON.stringify(langSettings[lang])) {
+				this.languages[lang] = langSettings[lang];
+			}
+		}
+	}
+	/**
+	 * Called when Custom Languages setting is changed.
+	 */
+	reloadLanguages() {
+		const langSettings = deepClone(game.settings.get("polyglot", "Languages"));
+		if (JSON.stringify(langSettings) !== JSON.stringify(this.languages) || !Object.keys(langSettings).length) return;
+		for (const key of Object.keys(langSettings)) {
+			if (!(key in this.languages)) {
+				delete this.languages[key];
+				this.removeFromConfig(lang);
+			}
+		}
+		for (const key of Object.keys(this.languages)) {
+			if (!(key in langSettings)) {
+				langSettings[key] = this.languages[key];
+			}
+		}
+		this.languages = langSettings;
+	}
+
+	///////////////////
+	// Font Handling //
+	///////////////////
+
+	/**
+	 * Adds a font to the Provider.
+	 * @param {String} lang
+	 * @param {Object} options
+	 * @see loadFonts
+	 */
+	addFont(fontFamily, size = 100, options = {}) {
+		const key = fontFamily.toLowerCase();
+		const defaultOptions = {
+			alphabeticOnly: false,
+			logographical: false,
+			// replace: {},
+		};
+
+		const font = Object.assign({}, defaultOptions, options, {
+			fontSize: size,
+			fontFamily: fontFamily,
+		});
+
+		this.fonts[key] = font;
+	}
+
+	/**
+	 * Removes a font from the Provider.
+	 * @param {String} lang
+	 */
+	removeFont(font) {
+		const key = font.toLowerCase();
+		delete this.fonts[key];
+	}
+
+	///////////////////////
+	// Language Handling //
+	///////////////////////
 
 	/**
 	 * Adds a language to the Provider.
 	 * @param {String} lang
+	 * @param {Object} options
+	 * @see loadLanguages
 	 */
-	addLanguage(lang) {
+	addLanguage(lang, options = {}) {
 		if (!lang) return;
-		lang = lang.trim();
+
 		const key = lang.toLowerCase().replace(/[\s\']/g, "_");
-		this.languages[key] = lang;
+		const defaultOptions = {
+			font: this.defaultFont,
+			rng: "default",
+		};
+
+		const language = Object.assign({}, defaultOptions, options, {
+			label: lang,
+		});
+
+		this.languages[key] = language;
 		this.addToConfig(key, lang);
-		if (!(key in this.tongues)) {
-			this.tongues[key] = this.tongues["_default"];
-		}
 	}
+
 	/**
 	 * Removes a language from the Provider if it isn't set a Custom Language.
 	 * Generally called when Comprehend Languages or Tongues setting are changed.
@@ -169,10 +472,40 @@ export class LanguageProvider {
 			.replace(/[\s\']/g, "_");
 		delete this.languages[key];
 		this.removeFromConfig(key);
-		if (key in this.tongues) {
-			delete this.tongues[key];
-		}
 	}
+
+	/**
+	 * Returns the system's default language if it exists.
+	 * @returns {String}
+	 */
+	getSystemDefaultLanguage() {
+		const keys = Object.keys(this.languages);
+		if (keys.includes("common")) return "common";
+		return this.languages[0] || keys[0] || "";
+	}
+
+	/**
+	 * Returns defaultLang if it exists and is either a key or value on this.languages.
+	 * Otherwise, returns the system's default language.
+	 */
+	getDefaultLanguage() {
+		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
+		if (defaultLang) {
+			if (this.languages[defaultLang]) this.defaultLanguage = defaultLang;
+			else {
+				const inverted = invertObject(this.languages);
+				if (inverted[defaultLang]) this.defaultLanguage = inverted[defaultLang];
+			}
+		} else this.defaultLanguage = this.getSystemDefaultLanguage();
+	}
+
+	getLanguageFont(lang) {
+		return this.languages[lang].font;
+	}
+
+	/////////////////////
+	// Config Handling //
+	/////////////////////
 
 	/**
 	 * Adds a key to the languages object.
@@ -186,6 +519,7 @@ export class LanguageProvider {
 			else CONFIG[game.system.id.toUpperCase()].languages[key] = lang;
 		}
 	}
+
 	/**
 	 * Removes a key from the languages object.
 	 * @param {String} key
@@ -193,150 +527,10 @@ export class LanguageProvider {
 	removeFromConfig(key) {
 		if (CONFIG[game.system.id.toUpperCase()]?.languages) delete CONFIG[game.system.id.toUpperCase()].languages[key];
 	}
-	/**
-	 * Loads everything that can't be loaded on the constructor due to async/await.
-	 * It Hooks on ready if the system depends on reading compendiums.
-	 */
-	async setup() {
-		if (this.requiresReady) {
-			if (game.modules.get("babele")?.active) {
-				Hooks.on("babele.ready", async () => {
-					await this.getLanguages();
-					this.loadAlphabet();
-					this.loadTongues();
-					this.loadCustomFonts();
-					this.reloadLanguages();
-					this.getDefaultLanguage();
-					Hooks.callAll("polyglot.languageProvider.ready");
-				});
-			} else {
-				Hooks.on("ready", async () => {
-					await this.getLanguages();
-					this.loadAlphabet();
-					this.loadTongues();
-					this.loadCustomFonts();
-					this.reloadLanguages();
-					this.getDefaultLanguage();
-					Hooks.callAll("polyglot.languageProvider.ready");
-				});
-			}
-		} else {
-			await this.getLanguages();
-			this.loadAlphabet();
-			this.loadTongues();
-			this.loadCustomFonts();
-			this.reloadLanguages();
-			this.getDefaultLanguage();
-		}
-	}
 
-	/**
-	 * Even though the base method doesn't have an await, some providers might need it to look into compendiums.
-	 */
-	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		if (CONFIG[game.system.id.toUpperCase()]?.languages) {
-			if (CONFIG[game.system.id.toUpperCase()].languages.constructor === Object) {
-				if (replaceLanguages) CONFIG[game.system.id.toUpperCase()].languages = {};
-				this.languages = CONFIG[game.system.id.toUpperCase()].languages;
-			}
-			if (CONFIG[game.system.id.toUpperCase()].languages.constructor === Array) {
-				if (replaceLanguages) CONFIG[game.system.id.toUpperCase()].languages = [];
-				for (let lang of CONFIG[game.system.id.toUpperCase()].languages) {
-					this.languages[lang.toLowerCase()] = lang;
-				}
-			}
-		}
-	}
-	/**
-	 * Sets the fonts that will be available to choose on the settings.
-	 */
-	loadAlphabet() {
-		this.alphabets = this.originalAlphabets;
-		const enableAllFonts = game.settings.get("polyglot", "enableAllFonts");
-		if ([1, 3].includes(enableAllFonts)) {
-			const defaultAlphabets = new LanguageProvider().originalAlphabets;
-			const invertedThis = invertObject(this.alphabets);
-			for (let alp in defaultAlphabets) {
-				if (!invertedThis[defaultAlphabets[alp]]) this.alphabets[alp] = defaultAlphabets[alp];
-			}
-		}
-		if ([2, 3].includes(enableAllFonts)) {
-			for (let alp in game.settings.get("core", "fonts")) {
-				let size = game.polyglot.CustomFontSizes[alp] ?? 100;
-				this.alphabets[alp] = `${size}% ${alp}`;
-			}
-		}
-	}
-	/**
-	 * Adds languages from the settings to this.languages.
-	 * Add tongues to this.tongues.
-	 */
-	loadTongues() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const customLanguages = game.settings.get("polyglot", "customLanguages");
-		const omniglot = game.settings.get("polyglot", "omniglot");
-		const comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
-		const truespeech = game.settings.get("polyglot", "truespeech");
-		if (!replaceLanguages) {
-			this.tongues = this.originalTongues;
-			if (this.languages.constructor === Array) {
-				for (let lang of this.languages) {
-					this.tongues[lang.toLowerCase()] = this.originalTongues["_default"];
-				}
-			} else if (this.languages.constructor === Object) {
-				for (let key of Object.keys(this.languages)) {
-					this.tongues[key] = this.originalTongues["_default"];
-				}
-			}
-		} else this.tongues = { _default: this.originalTongues["_default"] };
-		if (customLanguages) {
-			for (let lang of customLanguages.split(/[,;]/)) {
-				lang = lang.trim();
-				this.addLanguage(lang);
-			}
-		}
-		if (omniglot && !customLanguages.includes(omniglot)) {
-			this.addLanguage(omniglot);
-		}
-		if (comprehendLanguages && !customLanguages.includes(comprehendLanguages)) {
-			this.addLanguage(comprehendLanguages);
-		}
-		if (truespeech && !customLanguages.includes(truespeech)) {
-			this.addLanguage(truespeech);
-		}
-	}
-	/**
-	 * Replaces this.tongues's fonts with the Languages setting's fonts.
-	 */
-	loadCustomFonts() {
-		let langSettings = game.settings.get("polyglot", "Languages");
-		if (this.tongues == langSettings) return;
-		for (let lang in langSettings) {
-			if (lang in this.tongues && this.tongues[lang] != langSettings[lang]) {
-				this.tongues[lang] = langSettings[lang];
-			}
-		}
-	}
-	/**
-	 * Called when Custom Languages setting is changed.
-	 */
-	reloadLanguages() {
-		let langSettings = game.settings.get("polyglot", "Languages");
-		if (this.tongues == langSettings || !Object.keys(langSettings).length) return;
-		for (let lang in langSettings) {
-			if (!(lang in this.tongues)) {
-				delete langSettings[lang];
-				this.removeFromConfig(lang);
-			}
-		}
-		for (let lang in this.tongues) {
-			if (!(lang in langSettings)) {
-				langSettings[lang] = this.tongues["_default"];
-			}
-		}
-		this.tongues = langSettings;
-	}
+	////////////////////
+	// User Languages //
+	////////////////////
 
 	/**
 	 * Gets an actor's languages.
@@ -378,67 +572,126 @@ export class LanguageProvider {
 
 	/**
 	 * Returns the set with the languages to be shown on the journal.
-	 * @param {} polyglot
+	 * Useful for systems where speaking and reading are separate skills.
 	 * @param {string} lang
+	 * @returns {Boolean}
+	 * @see demonlordLanguageProvider.conditions
+	 * @see dsa5LanguageProvider.conditions
 	 */
 	conditions(lang) {
 		return game.polyglot.knownLanguages.has(lang);
 	}
 }
 
-export class a5eLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			abyssal: "150% Barazhad",
-			auran: "200% OldeThorass",
-			celestial: "180% Celestial",
-			elvish: "150% Espruar",
-			outwordly: "200% ArCiela",
-			draconic: "170% Iokharic",
-			drowic: "150% HighDrowic",
-			druidic: "120% JungleSlang",
-			dwarvish: "120% Dethek",
-			giant: "200% ElderFuthark",
-			gnoll: "150% Kargi",
-			infernal: "230% Infernal",
-			sylvan: "200% OldeEspruar",
-			serpent: "120% Ophidian",
-			tirsu: "250% Pulsian",
-		};
-	}
-
-	get originalTongues() {
-		return {
-			_default: "common",
-			abyssal: "infernal",
-			aquan: "dwarvish",
-			auran: "dwarvish",
-			cant: "common",
-			celestial: "celestial",
-			deep: "outwordly",
-			draconic: "draconic",
-			druidic: "druidic",
-			dwarvish: "dwarvish",
-			elvish: "elvish",
-			giant: "dwarvish",
-			gnoll: "gnoll",
-			gnomish: "dwarvish",
-			goblin: "dwarvish",
-			halfling: "common",
-			ignan: "dwarvish",
-			infernal: "infernal",
-			orc: "dwarvish",
-			primordial: "dwarvish",
-			sylvan: "elvish",
-			terran: "dwarvish",
-			undercommon: "elvish",
-		};
-	}
-
+export class GenericLanguageProvider extends LanguageProvider {
 	get settings() {
-		return {};
+		return {
+			languageDataPath: {
+				hint: game.i18n.format("POLYGLOT.languageDataPath.hint", { setting: game.i18n.localize("POLYGLOT.LanguageRegex.title") }),
+				default: "",
+				type: String,
+				requiresReload: true,
+			},
+			literacyDataPath: {
+				hint: game.i18n.format("POLYGLOT.literacyDataPath.hint", { setting: game.i18n.localize("POLYGLOT.languageDataPath.title") }),
+				default: "",
+				type: String,
+				requiresReload: true,
+			},
+			LanguageRegex: {
+				type: String,
+				default: game.i18n.localize("POLYGLOT.Generic.Language"),
+			},
+		};
 	}
+
+	async setup() {
+		this.languageDataPath = game.settings.get("polyglot", "languageDataPath");
+		this.literacyDataPath = game.settings.get("polyglot", "literacyDataPath");
+		if (this.languageDataPath.startsWith("actor.")) this.languageDataPath = this.languageDataPath.slice(6);
+		if (this.literacyDataPath.startsWith("actor.")) this.literacyDataPath = this.literacyDataPath.slice(6);
+		super.setup();
+	}
+}
+
+export class a5eLanguageProvider extends LanguageProvider {
+	languages = {
+		aarakocra: {
+			font: "Olde Thorass",
+		},
+		abyssal: {
+			font: "Infernal",
+		},
+		aquan: {
+			font: "Dethek",
+		},
+		auran: {
+			font: "Dethek",
+		},
+		celestial: {
+			font: "Celestial",
+		},
+		common: {
+			font: "Thorass",
+		},
+		deep: {
+			font: "Ar Ciela",
+		},
+		draconic: {
+			font: "Iokharic",
+		},
+		druidic: {
+			font: "Jungle Slang",
+		},
+		dwarvish: {
+			font: "Dethek",
+		},
+		elvish: {
+			font: "Espruar",
+		},
+		giant: {
+			font: "Dethek",
+		},
+		gith: {
+			font: "Pulsian",
+		},
+		gnoll: {
+			font: "Kargi",
+		},
+		gnomish: {
+			font: "Dethek",
+		},
+		goblin: {
+			font: "Dethek",
+		},
+		halfling: {
+			font: "Thorass",
+		},
+		ignan: {
+			font: "Dethek",
+		},
+		infernal: {
+			font: "Infernal",
+		},
+		orc: {
+			font: "Dethek",
+		},
+		primordial: {
+			font: "Dethek",
+		},
+		sylvan: {
+			font: "Olde Espruar",
+		},
+		terran: {
+			font: "Dethek",
+		},
+		cant: {
+			font: "Thorass",
+		},
+		undercommon: {
+			font: "High Drowic",
+		},
+	};
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
@@ -475,42 +728,48 @@ export class a5eLanguageProvider extends LanguageProvider {
 }
 
 export class ariaLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			kohestien: "130% Tuzluca",
-			aqab: "130% ArCiela",
-			staum: "130% Floki",
-			osmanlien: "130% Eltharin",
-			mon: "130% Valmaric",
-			nok: "130% DarkEldar",
-			carredass: "130% Celestial",
-			blanc: "130% OrkGlyphs",
-			knigien: "130% Tengwar",
-			esperan: "130% Thassilonian",
-			alta: "130% Espruar",
-		};
-	}
-	get originalTongues() {
-		return {
-			_default: "common",
-			kohestien: "kohestien",
-			aqab: "aqab",
-			staum: "staum",
-			osmanlien: "osmanlien",
-			mon: "mon",
-			nok: "nok",
-			carredass: "carredass",
-			blanc: "blanc",
-			knigien: "knigien",
-			esperan: "esperan",
-			altabiancais: "alta",
-			altanegrais: "alta",
-		};
-	}
-	get settings() {
-		return {};
-	}
+	languages = {
+		common: {
+			font: "Thorass",
+		},
+		kohestien: {
+			font: "Tuzluca",
+		},
+		aqab: {
+			font: "Ar Ciela",
+		},
+		staum: {
+			font: "Floki",
+		},
+		osmanlien: {
+			font: "Eltharin",
+		},
+		mon: {
+			font: "Valmaric",
+		},
+		nok: {
+			font: "Dark Eldar",
+		},
+		carredass: {
+			font: "Celestial",
+		},
+		blanc: {
+			font: "Ork Glyphs",
+		},
+		knigien: {
+			font: "Tengwar",
+		},
+		esperan: {
+			font: "Thassilonian",
+		},
+		altabiancais: {
+			font: "Espruar",
+		},
+		altanegrais: {
+			font: "Espruar",
+		},
+	};
+
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
@@ -523,6 +782,15 @@ export class ariaLanguageProvider extends LanguageProvider {
 }
 
 export class coc7LanguageProvider extends LanguageProvider {
+	get settings() {
+		return {
+			LanguageRegex: {
+				type: String,
+				default: game.i18n.localize("POLYGLOT.Generic.Language"),
+			},
+		};
+	}
+
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
@@ -556,73 +824,179 @@ export class coc7LanguageProvider extends LanguageProvider {
 }
 
 export class cyberpunkRedLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			cyrillic: "130% KremlinPremier",
-			miroslavnormal: "200% MiroslavNormal",
-			arciela: "200% ArCiela",
-			oriental: "130% Oriental",
-		};
-	}
+	defaultFont = "Olde English";
 
-	get originalTongues() {
+	languages = {
+		streetslang: {
+			font: "Olde English",
+		},
+		arabic: {
+			font: "Ar Ciela",
+		},
+		bengali: {
+			font: "Olde English",
+		},
+		berber: {
+			font: "Olde English",
+		},
+		burmese: {
+			font: "Ar Ciela",
+		},
+		cantonese: {
+			font: "Oriental",
+		},
+		chinese: {
+			font: "Oriental",
+		},
+		cree: {
+			font: "Olde English",
+		},
+		creole: {
+			font: "Olde English",
+		},
+		dari: {
+			font: "Olde English",
+		},
+		dutch: {
+			font: "Olde English",
+		},
+		english: {
+			font: "Olde English",
+		},
+		farsi: {
+			font: "Ar Ciela",
+		},
+		filipino: {
+			font: "Ar Ciela",
+		},
+		finnish: {
+			font: "Kremlin Premier",
+		},
+		french: {
+			font: "Olde English",
+		},
+		german: {
+			font: "Miroslav Normal",
+		},
+		guarani: {
+			font: "Olde English",
+		},
+		hausa: {
+			font: "Olde English",
+		},
+		hawaiian: {
+			font: "Olde English",
+		},
+		hebrew: {
+			font: "Olde English",
+		},
+		hindi: {
+			font: "Ar Ciela",
+		},
+		indonesian: {
+			font: "Ar Ciela",
+		},
+		italian: {
+			font: "Olde English",
+		},
+		japanese: {
+			font: "Oriental",
+		},
+		khmer: {
+			font: "Ar Ciela",
+		},
+		korean: {
+			font: "Oriental",
+		},
+		lingala: {
+			font: "Olde English",
+		},
+		malayan: {
+			font: "Ar Ciela",
+		},
+		mandarin: {
+			font: "Oriental",
+		},
+		maori: {
+			font: "Olde English",
+		},
+		mayan: {
+			font: "Olde English",
+		},
+		mongolian: {
+			font: "Ar Ciela",
+		},
+		navajo: {
+			font: "Olde English",
+		},
+		nepali: {
+			font: "Ar Ciela",
+		},
+		norwegian: {
+			font: "Miroslav Normal",
+		},
+		oromo: {
+			font: "Olde English",
+		},
+		pamanyungan: {
+			font: "Olde English",
+		},
+		polish: {
+			font: "Kremlin Premier",
+		},
+		portuguese: {
+			font: "Olde English",
+		},
+		quechua: {
+			font: "Olde English",
+		},
+		romanian: {
+			font: "Kremlin Premier",
+		},
+		russian: {
+			font: "Kremlin Premier",
+		},
+		sinhalese: {
+			font: "Olde English",
+		},
+		spanish: {
+			font: "Olde English",
+		},
+		swahili: {
+			font: "Olde English",
+		},
+		tahitian: {
+			font: "Olde English",
+		},
+		tamil: {
+			font: "Olde English",
+		},
+		turkish: {
+			font: "Ar Ciela",
+		},
+		twi: {
+			font: "Olde English",
+		},
+		ukrainian: {
+			font: "Kremlin Premier",
+		},
+		urdu: {
+			font: "Ar Ciela",
+		},
+		vietnamese: {
+			font: "Ar Ciela",
+		},
+		yoruba: {
+			font: "Olde English",
+		},
+	};
+
+	get settings() {
 		return {
-			_default: "common",
-			streetslang: "common",
-			arabic: "arciela",
-			bengali: "common",
-			berber: "common",
-			burmese: "arciela",
-			cantonese: "oriental",
-			chinese: "oriental",
-			cree: "common",
-			creole: "common",
-			dari: "common",
-			dutch: "common",
-			english: "common",
-			farsi: "arciela",
-			filipino: "arciela",
-			finnish: "cyrillic",
-			french: "common",
-			german: "miroslavnormal",
-			guarani: "common",
-			hausa: "common",
-			hawaiian: "common",
-			hebrew: "common",
-			hindi: "arciela",
-			indonesian: "arciela",
-			italian: "common",
-			japanese: "oriental",
-			khmer: "arciela",
-			korean: "oriental",
-			lingala: "common",
-			malayan: "arciela",
-			mandarin: "oriental",
-			maori: "common",
-			mayan: "common",
-			mongolian: "arciela",
-			navajo: "common",
-			nepali: "arciela",
-			norwegian: "miroslavnormal",
-			oromo: "common",
-			pamanyungan: "common",
-			polish: "cyrillic",
-			portuguese: "common",
-			quechua: "common",
-			romanian: "cyrillic",
-			russian: "cyrillic",
-			sinhalese: "common",
-			spanish: "common",
-			swahili: "common",
-			tahitian: "common",
-			tamil: "common",
-			turkish: "arciela",
-			twi: "common",
-			ukrainian: "cyrillic",
-			urdu: "arciela",
-			vietnamese: "arciela",
-			yoruba: "common",
+			LanguageRegex: {
+				type: String,
+				default: game.i18n.localize("POLYGLOT.Generic.Language"),
+			},
 		};
 	}
 
@@ -635,7 +1009,7 @@ export class cyberpunkRedLanguageProvider extends LanguageProvider {
 			berber: "Berber",
 			burmese: "Burmese",
 			cantonese: "Cantonese",
-			chinese: "Chinese",
+			chinese: "Scrapbook Chinese",
 			cree: "Cree",
 			creole: "Creole",
 			dari: "Dari",
@@ -704,101 +1078,130 @@ export class cyberpunkRedLanguageProvider extends LanguageProvider {
 }
 
 export class d35eLanguageProvider extends LanguageProvider {
-	get settings() {
-		return {};
-	}
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			auran: "200% OldeThorass",
-			celestial: "180% Celestial",
-			outwordly: "200% ArCiela",
-			draconic: "170% Iokharic",
-			dwarvish: "120% Dethek",
-			druidic: "120% JungleSlang",
-			gnoll: "150% Kargi",
-			elvish: "150% Espruar",
-			infernal: "230% Infernal",
-			sylvan: "200% OldeEspruar",
-			tirsu: "250% Pulsian",
-			drowic: "150% HighDrowic",
-
-			serpent: "120% Ophidian",
-		};
-	}
-
-	get originalTongues() {
-		return {
-			_default: "common",
-			aarakocra: "auran",
-			abyssal: "infernal",
-			aquan: "dwarvish",
-			auran: "dwarvish",
-			celestial: "celestial",
-			deep: "outwordly",
-			draconic: "draconic",
-			druidic: "druidic",
-			dwarven: "dwarvish",
-			elven: "elvish",
-			giant: "dwarvish",
-			gith: "tirsu",
-			gnoll: "gnoll",
-			gnome: "dwarvish",
-			goblin: "dwarvish",
-			halfling: "common",
-			ignan: "dwarvish",
-			infernal: "infernal",
-			orc: "dwarvish",
-			primordial: "dwarvish",
-			sylvan: "sylvan",
-			terran: "dwarvish",
-			cant: "common",
-			treant: "sylvan",
-			undercommon: "drowic",
-		};
-	}
+	languages = {
+		common: {
+			font: "Thorass",
+		},
+		aarakocra: {
+			font: "Olde Thorass",
+		},
+		abyssal: {
+			font: "Infernal",
+		},
+		aquan: {
+			font: "Dethek",
+		},
+		auran: {
+			font: "Dethek",
+		},
+		celestial: {
+			font: "Celestial",
+		},
+		deep: {
+			font: "Ar Ciela",
+		},
+		draconic: {
+			font: "Iokharic",
+		},
+		druidic: {
+			font: "Jungle Slang",
+		},
+		dwarven: {
+			font: "Dethek",
+		},
+		elven: {
+			font: "Espruar",
+		},
+		giant: {
+			font: "Dethek",
+		},
+		gith: {
+			font: "tirsu",
+		},
+		gnoll: {
+			font: "Kargi",
+		},
+		gnome: {
+			font: "Dethek",
+		},
+		goblin: {
+			font: "Dethek",
+		},
+		halfling: {
+			font: "Thorass",
+		},
+		ignan: {
+			font: "Dethek",
+		},
+		infernal: {
+			font: "Infernal",
+		},
+		orc: {
+			font: "Dethek",
+		},
+		primordial: {
+			font: "Dethek",
+		},
+		sylvan: {
+			font: "Olde Espruar",
+		},
+		terran: {
+			font: "Dethek",
+		},
+		cant: {
+			font: "Thorass",
+		},
+		treant: {
+			font: "Olde Espruar",
+		},
+		undercommon: {
+			font: "High Drowic",
+		},
+	};
 }
 
 export class darkHeresyLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			reikspiel: "230% Infernal",
-			druhir: "150% DarkEldar",
-			eltharin: "130% Eltharin",
-			kislevien: "110% MiroslavNormal",
-			norse: "350% ElderFuthark",
-			orcish: "150% OrkGlyphs",
-			queekish: "130% Skaven",
-			slaan: "170% Saurian",
-			klinkarhun: "110% Floki",
-			romance: "130% Tengwar",
-			cathan: "130% Oriental",
-		};
-	}
-
-	get originalTongues() {
-		return {
-			_default: "common",
-			chapterRunes: "",
-			chaosMarks: "",
-			eldar: "",
-			highGothic: "reikspiel",
-			imperialCodes: "",
-			lowGothic: "reikspiel",
-			mercenary: "",
-			necrontyr: "",
-			ork: "orcish",
-			technaLingua: "",
-			tau: "",
-			underworld: "",
-			xenosMarkings: "",
-		};
-	}
-
-	get settings() {
-		return {};
-	}
+	languages = {
+		lowGothic: {
+			font: "Infernal",
+		},
+		chapterRunes: {
+			font: "",
+		},
+		chaosMarks: {
+			font: "",
+		},
+		eldar: {
+			font: "",
+		},
+		highGothic: {
+			font: "Infernal",
+		},
+		imperialCodes: {
+			font: "",
+		},
+		mercenary: {
+			font: "",
+		},
+		necrontyr: {
+			font: "",
+		},
+		ork: {
+			font: "Ork Glyphs",
+		},
+		technaLingua: {
+			font: "",
+		},
+		tau: {
+			font: "",
+		},
+		underworld: {
+			font: "",
+		},
+		xenosMarkings: {
+			font: "",
+		},
+	};
 
 	getSystemDefaultLanguage() {
 		return "lowGothic";
@@ -835,34 +1238,38 @@ export class darkHeresyLanguageProvider extends LanguageProvider {
 }
 
 export class dccLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			draconic: "170% Iokharic",
-			dwarvish: "120% Dethek",
-			elvish: "150% Espruar",
-			gnoll: "150% Kargi",
-		};
-	}
-
-	get originalTongues() {
-		return {
-			_default: "common",
-			draconic: "draconic",
-			dwarvish: "dwarvish",
-			elvish: "elvish",
-			giant: "dwarvish",
-			gnoll: "gnoll",
-			goblin: "dwarvish",
-			halfling: "common",
-			orc: "dwarvish",
-			cant: "common",
-		};
-	}
-
-	get settings() {
-		return {};
-	}
+	languages = {
+		common: {
+			font: "Thorass",
+		},
+		draconic: {
+			font: "Iokharic",
+		},
+		dwarvish: {
+			font: "Dethek",
+		},
+		elvish: {
+			font: "Espruar",
+		},
+		giant: {
+			font: "Dethek",
+		},
+		gnoll: {
+			font: "Kargi",
+		},
+		goblin: {
+			font: "Dethek",
+		},
+		halfling: {
+			font: "Thorass",
+		},
+		orc: {
+			font: "Dethek",
+		},
+		cant: {
+			font: "Thorass",
+		},
+	};
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
@@ -882,54 +1289,77 @@ export class dccLanguageProvider extends LanguageProvider {
 }
 
 export class demonlordLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			elemental: "150% HighDrowic",
-			trollish: "200% ArCiela",
-			dwarvish: "120% Dethek",
-			woad: "120% JungleSlang",
-			elvish: "150% Espruar",
-			infernal: "250% Infernal",
-			secret: "200% Thassilonian",
-			balgrennish: "150% Tengwar",
-			exotic: "200% Barazhad",
-		};
-	}
-
-	get originalTongues() {
-		return {
-			_default: "exotic",
-			"Common Tongue": "common",
-			"Dark Speech": "infernal",
-			"High Archaic": "common",
-			Elvish: "elvish",
-			Dwarvish: "dwarvish",
-			"Secret Language": "secret",
-			Trollish: "trollish",
-			Centauri: "elemental",
-			Gnomish: "elemental",
-			Amrin: "common",
-			Balgrennish: "balgrennish",
-			Bhali: "balgrennish",
-			Edene: "common",
-			Erath: "common",
-			Grennish: "balgrennish",
-			Kalasan: "common",
-			Woad: "woad",
-			Sylphen: "elemental",
-			Molekin: "exotic",
-			Naga: "exotic",
-			Yerath: "exotic",
-		};
-	}
+	languages = {
+		"Common Tongue": {
+			font: "Thorass",
+		},
+		"Dark Speech": {
+			font: "Infernal",
+		},
+		"High Archaic": {
+			font: "Mage Script",
+		},
+		Elvish: {
+			font: "Espruar",
+		},
+		Dwarfish: {
+			font: "Dethek",
+		},
+		"Dead Languages": {
+			font: "Olde Thorass",
+		},
+		"Secret Language": {
+			font: "Thassilonian",
+		},
+		Trollish: {
+			font: "Ar Ciela",
+		},
+		Centauri: {
+			font: "High Drowic",
+		},
+		Gnomish: {
+			font: "High Drowic",
+		},
+		Amrin: {
+			font: "Thorass",
+		},
+		Balgrennish: {
+			font: "Tengwar",
+		},
+		Bhali: {
+			font: "Tengwar",
+		},
+		Edene: {
+			font: "Thorass",
+		},
+		Erath: {
+			font: "Thorass",
+		},
+		Grennish: {
+			font: "Tengwar",
+		},
+		Kalasan: {
+			font: "Thorass",
+		},
+		Woad: {
+			font: "Jungle Slang",
+		},
+		Sylphen: {
+			font: "High Drowic",
+		},
+		Molekin: {
+			font: "Barazhad",
+		},
+		Naga: {
+			font: "Barazhad",
+		},
+		Yerath: {
+			font: "Barazhad",
+		},
+	};
 
 	get requiresReady() {
 		return true;
-	}
-
-	get settings() {
-		return {};
 	}
 
 	getSystemDefaultLanguage() {
@@ -938,14 +1368,20 @@ export class demonlordLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const langs = {};
+		if (replaceLanguages) {
+			this.languages = {};
+			return;
+		}
 		const demonlordPack = game.packs.get("demonlord.languages");
 		const demonlordItemList = await demonlordPack.getIndex();
 		for (let item of demonlordItemList) {
 			const originalName = item?.flags?.babele?.originalName || item.name;
-			langs[originalName] = item.name;
+			this.languages[originalName] = {
+				label: item.name,
+				font: this.languages[originalName]?.font || this.defaultFont,
+				rng: "default",
+			};
 		}
-		this.languages = replaceLanguages ? {} : langs;
 	}
 
 	getUserLanguages(actor) {
@@ -967,34 +1403,38 @@ export class demonlordLanguageProvider extends LanguageProvider {
 }
 
 export class dnd4eLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			barazhad: "150% Barazhad",
-			davek: "150% Davek",
-			iokharic: "170% Iokharic",
-			rellanic: "200% Rellanic",
-			celestial: "180% Celestial",
-			outwordly: "200% ArCiela",
-		};
-	}
-	get originalTongues() {
-		return {
-			_default: "common",
-			abyssal: "barazhad",
-			deep: "outwordly",
-			draconic: "iokharic",
-			dwarven: "davek",
-			elven: "rellanic",
-			giant: "davek",
-			goblin: "davek",
-			primordial: "davek",
-			supernal: "celestial",
-		};
-	}
-	get settings() {
-		return {};
-	}
+	languages = {
+		common: {
+			font: "Thorass",
+		},
+		abyssal: {
+			font: "Barazhad",
+		},
+		deep: {
+			font: "Ar Ciela",
+		},
+		draconic: {
+			font: "Iokharic",
+		},
+		dwarven: {
+			font: "Davek",
+		},
+		elven: {
+			font: "Rellanic",
+		},
+		giant: {
+			font: "Davek",
+		},
+		goblin: {
+			font: "Davek",
+		},
+		primordial: {
+			font: "Davek",
+		},
+		supernal: {
+			font: "Celestial",
+		},
+	};
 
 	addToConfig(key, lang) {
 		CONFIG.DND4EBETA.spoken[key] = lang;
@@ -1018,53 +1458,84 @@ export class dnd4eLanguageProvider extends LanguageProvider {
 }
 
 export class dnd5eLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			auran: "200% OldeThorass",
-			celestial: "180% Celestial",
-			outwordly: "200% ArCiela",
-			draconic: "170% Iokharic",
-			dwarvish: "120% Dethek",
-			druidic: "120% JungleSlang",
-			gnoll: "150% Kargi",
-			elvish: "150% Espruar",
-			infernal: "230% Infernal",
-			sylvan: "200% OldeEspruar",
-			tirsu: "250% Pulsian",
-			drowic: "150% HighDrowic",
-			serpent: "120% Ophidian",
-		};
-	}
-	get originalTongues() {
-		return {
-			_default: "common",
-			aarakocra: "auran",
-			abyssal: "infernal",
-			aquan: "dwarvish",
-			auran: "dwarvish",
-			celestial: "celestial",
-			deep: "outwordly",
-			draconic: "draconic",
-			druidic: "druidic",
-			dwarvish: "dwarvish",
-			elvish: "elvish",
-			giant: "dwarvish",
-			gith: "tirsu",
-			gnoll: "gnoll",
-			gnomish: "dwarvish",
-			goblin: "dwarvish",
-			halfling: "common",
-			ignan: "dwarvish",
-			infernal: "infernal",
-			orc: "dwarvish",
-			primordial: "dwarvish",
-			sylvan: "sylvan",
-			terran: "dwarvish",
-			cant: "common",
-			undercommon: "drowic",
-		};
-	}
+	languages = {
+		aarakocra: {
+			font: "Olde Thorass",
+		},
+		abyssal: {
+			font: "Infernal",
+		},
+		aquan: {
+			font: "Dethek",
+		},
+		auran: {
+			font: "Dethek",
+		},
+		celestial: {
+			font: "Celestial",
+		},
+		common: {
+			font: "Thorass",
+		},
+		deep: {
+			font: "Ar Ciela",
+		},
+		draconic: {
+			font: "Iokharic",
+		},
+		druidic: {
+			font: "Jungle Slang",
+		},
+		dwarvish: {
+			font: "Dethek",
+		},
+		elvish: {
+			font: "Espruar",
+		},
+		giant: {
+			font: "Dethek",
+		},
+		gith: {
+			font: "Pulsian",
+		},
+		gnoll: {
+			font: "Kargi",
+		},
+		gnomish: {
+			font: "Dethek",
+		},
+		goblin: {
+			font: "Dethek",
+		},
+		halfling: {
+			font: "Thorass",
+		},
+		ignan: {
+			font: "Dethek",
+		},
+		infernal: {
+			font: "Infernal",
+		},
+		orc: {
+			font: "Dethek",
+		},
+		primordial: {
+			font: "Dethek",
+		},
+		sylvan: {
+			font: "Olde Espruar",
+		},
+		terran: {
+			font: "Dethek",
+		},
+		cant: {
+			font: "Thorass",
+		},
+		undercommon: {
+			font: "High Drowic",
+		},
+	};
+
 	get settings() {
 		return {
 			"DND5E.SpecialLanguages": {
@@ -1115,105 +1586,164 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 }
 
 export class dsa5LanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			"Altes Alaani": "150% HighschoolRunes",
-			Amulashtra: "150% Qijomi",
-			"Angram-Bilderschrift": "150% Skaven",
-			Arkanil: "170% ArCiela",
-			Atak: "150% FingerAlphabet",
-			Chrmk: "150% Iokharic",
-			Chuchas: "150% Kargi",
-			"Drakhard-Zinken": "150% Celestial",
-			Fjarningsch: "150% Dethek",
-			"Geheiligte Glyphen von Unau": "150% HighDrowic",
-			"Gimaril-Glyphen": "150% Semphari",
-			Goblinisch: "150% OrkGlyphs",
-			"Hjaldingsche Runen": "140% OldeThorass",
-			"Imperiale Zeichen": "160% Infernal",
-			"Isdira- und Asdharia-Zeichen": "150% Tengwar",
-			"Kusliker Zeichen": "150% MiroslavNormal",
-			Mohisch: "150% JungleSlang",
-			"Nanduria-Zeichen": "150% Espruar",
-			Nujuka: "150% Reanaarian",
-			// "Ogrisch": "150% OrkGlyphs",
-			// "Oloarkh": "150% OrkGlyphs",
-			// "Ologhaijan": "150% OrkGlyphs",
-			// "Protozelemja": "150% Kargi",
-			// "Rabensprache": "150% Valmaric"
-			"Rogolan-Runen": "350% ElderFuthark",
-			"Thorwalsche Runen": "150% Floki",
-			"Trollische Raumbildschrift": "150% Eltharin",
-			"Tulamidya-Zeichen": "150% Valmaric",
-			"Ur-Tulamidya-Zeichen": "150% OldeEspruar",
-			"Zhayad-Zeichen": "200% Pulsian",
-			unbekannt: "150% Ophidian",
-			// "Yash-Hualay-Glyphen": "150% Kargi",
-		};
-	}
-
-	get originalTongues() {
-		return {
-			_default: "unbekannt",
-			alaani: "Kusliker Zeichen",
-			"altes alaani": "Altes Alaani",
-			amulashtra: "Amulashtra",
-			angram: "Angram-Bilderschrift",
-			"angram-bilderschrift": "Angram-Bilderschrift",
-			arkanil: "Arkanil",
-			asdharia: "Isdira- und Asdharia-Zeichen",
-			atak: "Atak",
-			aureliani: "Imperiale Zeichen",
-			bosparano: "Kusliker Zeichen",
-			chrmk: "Chrmk",
-			chuchas: "Chuchas",
-			"drakhard-zinken": "Drakhard-Zinken",
-			fjarningsch: "Fjarningsch",
-			garethi: "Kusliker Zeichen",
-			"geheiligte glyphen von unau": "Geheiligte Glyphen von Unau",
-			"gimaril-glyphen": "Gimaril-Glyphen",
-			goblinisch: "Goblinisch",
-			"hjaldingsche hunen": "Hjaldingsche Runen",
-			"imperiale zeichen": "Imperiale Zeichen",
-			isdira: "Isdira- und Asdharia-Zeichen",
-			"isdira- und asdharia-zeichen": "Isdira- und Asdharia-Zeichen",
-			"kusliker zeichen": "Kusliker Zeichen",
-			mohisch: "Mohisch",
-			"nanduria-zeichen": "Nanduria-Zeichen",
-			nujuka: "Nujuka",
-			ogrisch: "Goblinisch",
-			oloarkh: "Goblinisch",
-			ologhaijan: "Goblinisch",
-			protozelemja: "Chuchas",
-			rabensprache: "Tulamidya-Zeichen",
-			rogolan: "Rogolan-Runen",
-			"rogolan-runen": "Rogolan-Runen",
-			rssahh: "Chrmk",
-			ruuz: "Tulamidya-Zeichen",
-			"saga-thorwalsch": "Hjaldingsche Runen",
-			tahaya: "Mohisch",
-			thorwalsch: "Thorwalsche Runen",
-			"thorwalsche runen": "Thorwalsche Runen",
-			trollisch: "Trollische Raumbildschrift",
-			"trollische raumbildschrift": "Trollische Raumbildschrift",
-			tulamidya: "Tulamidya-Zeichen",
-			"tulamidya-zeichen": "Tulamidya-Zeichen",
-			"ur-tulamidya": "Ur-Tulamidya-Zeichen",
-			"ur-tulamidya-zeichen": "Ur-Tulamidya-Zeichen",
-			"yash-hualay-glyphen": "Chuchas",
-			zelemja: "Chrmk",
-			zhayad: "Zhayad-Zeichen",
-			"zhayad-zeichen": "Zhayad-Zeichen",
-			zyklopäisch: "Kusliker Zeichen",
-		};
-	}
+	languages = {
+		unbekannt: {
+			font: "Ophidian",
+		},
+		alaani: {
+			font: "Miroslav Normal",
+		},
+		"altes alaani": {
+			font: "Highschool Runes",
+		},
+		amulashtra: {
+			font: "Qijomi",
+		},
+		angram: {
+			font: "Skaven",
+		},
+		"angram-bilderschrift": {
+			font: "Skaven",
+		},
+		arkanil: {
+			font: "Ar Ciela",
+		},
+		asdharia: {
+			font: "Tengwar",
+		},
+		atak: {
+			font: "FingerAlphabet",
+		},
+		aureliani: {
+			font: "Infernal",
+		},
+		bosparano: {
+			font: "Miroslav Normal",
+		},
+		chrmk: {
+			font: "Iokharic",
+		},
+		chuchas: {
+			font: "Kargi",
+		},
+		"drakhard-zinken": {
+			font: "Celestial",
+		},
+		fjarningsch: {
+			font: "Dethek",
+		},
+		garethi: {
+			font: "Miroslav Normal",
+		},
+		"geheiligte glyphen von unau": {
+			font: "High Drowic",
+		},
+		"gimaril-glyphen": {
+			font: "Semphari",
+		},
+		goblinisch: {
+			font: "Ork Glyphs",
+		},
+		"hjaldingsche hunen": {
+			font: "Olde Thorass",
+		},
+		"imperiale zeichen": {
+			font: "Infernal",
+		},
+		isdira: {
+			font: "Tengwar",
+		},
+		"isdira- und asdharia-zeichen": {
+			font: "Tengwar",
+		},
+		"kusliker zeichen": {
+			font: "Miroslav Normal",
+		},
+		mohisch: {
+			font: "Jungle Slang",
+		},
+		"nanduria-zeichen": {
+			font: "Espruar",
+		},
+		nujuka: {
+			font: "Reanaarian",
+		},
+		ogrisch: {
+			font: "Ork Glyphs",
+		},
+		oloarkh: {
+			font: "Ork Glyphs",
+		},
+		ologhaijan: {
+			font: "Ork Glyphs",
+		},
+		protozelemja: {
+			font: "Kargi",
+		},
+		rabensprache: {
+			font: "Valmaric",
+		},
+		rogolan: {
+			font: "Elder Futhark",
+		},
+		"rogolan-runen": {
+			font: "Elder Futhark",
+		},
+		rssahh: {
+			font: "Iokharic",
+		},
+		ruuz: {
+			font: "Valmaric",
+		},
+		"saga-thorwalsch": {
+			font: "Olde Thorass",
+		},
+		tahaya: {
+			font: "Jungle Slang",
+		},
+		thorwalsch: {
+			font: "Floki",
+		},
+		"thorwalsche runen": {
+			font: "Floki",
+		},
+		trollisch: {
+			font: "Eltharin",
+		},
+		"trollische raumbildschrift": {
+			font: "Eltharin",
+		},
+		tulamidya: {
+			font: "Valmaric",
+		},
+		"tulamidya-zeichen": {
+			font: "Valmaric",
+		},
+		"ur-tulamidya": {
+			font: "Olde Espruar",
+		},
+		"ur-tulamidya-zeichen": {
+			font: "Olde Espruar",
+		},
+		"yash-hualay-glyphen": {
+			font: "Kargi",
+		},
+		zelemja: {
+			font: "Iokharic",
+		},
+		zhayad: {
+			font: "Pulsian",
+		},
+		"zhayad-zeichen": {
+			font: "Pulsian",
+		},
+		zyklopäisch: {
+			font: "Miroslav Normal",
+		},
+	};
 
 	get requiresReady() {
 		return true;
-	}
-
-	get settings() {
-		return {};
 	}
 
 	getSystemDefaultLanguage() {
@@ -1236,11 +1766,19 @@ export class dsa5LanguageProvider extends LanguageProvider {
 						if (languageRegex.test(item.name)) {
 							let lang = item.name.match(languageRegex)[1].trim();
 							let key = lang.toLowerCase();
-							langs[key] = lang;
+							langs[key] = {
+								label: lang,
+								font: this.languages[key]?.font || this.defaultFont,
+								rng: "default",
+							};
 						} else if (literacyRegex.test(item.name)) {
 							let lang = item.name.match(literacyRegex)[1].trim();
 							let key = lang.toLowerCase();
-							langs[key] = lang;
+							langs[key] = {
+								label: lang,
+								font: this.languages[key]?.font || this.defaultFont,
+								rng: "default",
+							};
 						}
 					}
 					this.languages = replaceLanguages ? {} : langs;
@@ -1253,6 +1791,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 			}
 		}
 
+		// TODO replace this with standard this.languages structure
 		langs = {
 			alaani: "Alaani",
 			"altes alaani": "Altes Alaani",
@@ -1331,18 +1870,33 @@ export class dsa5LanguageProvider extends LanguageProvider {
 }
 
 export class earthdawn4eLanguageProvider extends LanguageProvider {
-	get originalTongues() {
-		return {
-			human: "thorass",
-			dwarven: "dethek",
-			elven: "espruar",
-			windling: "oldethorass",
-			obsidiman: "dethek",
-			troll: "jungleslang",
-			ork: "dethek",
-			tskrang: "iokharic",
-		};
-	}
+	languages = {
+		human: {
+			font: "Thorass",
+		},
+		dwarven: {
+			font: "Dethek",
+		},
+		elven: {
+			font: "Espruar",
+		},
+		windling: {
+			font: "Olde Thorass",
+		},
+		obsidiman: {
+			font: "Dethek",
+		},
+		troll: {
+			font: "Jungle Slang",
+		},
+		ork: {
+			font: "Dethek",
+		},
+		tskrang: {
+			font: "Iokharic",
+		},
+	};
+
 	get settings() {
 		return {
 			LanguageRegex: {
@@ -1357,11 +1911,13 @@ export class earthdawn4eLanguageProvider extends LanguageProvider {
 			},
 		};
 	}
+
 	async getLanguages() {
 		for (let lang in this.originalTongues) {
 			this.languages[lang] = game.i18n.localize(`earthdawn.l.language${lang.capitalize()}`);
 		}
 	}
+
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
@@ -1395,9 +1951,6 @@ export class earthdawn4eLanguageProvider extends LanguageProvider {
 }
 
 export class fggLanguageProvider extends LanguageProvider {
-	get settings() {
-		return {};
-	}
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
@@ -1410,6 +1963,15 @@ export class fggLanguageProvider extends LanguageProvider {
 }
 
 export class gurpsLanguageProvider extends LanguageProvider {
+	get settings() {
+		return {
+			LanguageRegex: {
+				type: String,
+				default: game.i18n.localize("POLYGLOT.Generic.Language"),
+			},
+		};
+	}
+
 	/**
 	 * Search through all of the advantages (including recursing into containers) looking for "Language" or translation.
 	 * Depending on the source, it can be two different patterns, Language: NAME (optionals) or Language (NAME) (optionals)
@@ -1471,59 +2033,35 @@ export class gurpsLanguageProvider extends LanguageProvider {
 }
 
 export class oseLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			lawful: "180% Celestial",
-			chaotic: "150% Barazhad",
-			neutral: "230% Infernal",
-			doppelganger: "250% Pulsian",
-			dwarvish: "120% Dethek",
-			draconic: "170% Iokharic",
-			gargoyle: "150% HighDrowic",
-			gnoll: "150% Kargi",
-			gnomish: "120% Tengwar",
-			harpy: "200% OldeThorass",
-			elvish: "150% Espruar",
-			ogre: "120% MeroiticDemotic",
-			sylvan: "200% OldeEspruar",
-		};
-	}
-
-	get originalTongues() {
-		return {
-			_default: "common",
-			1: "lawful",
-			2: "chaotic",
-			3: "neutral",
-			4: "dwarvish",
-			5: "doppelganger",
-			6: "draconic",
-			7: "dwarvish",
-			8: "elvish",
-			9: "gargoyle",
-			10: "gnoll",
-			11: "gnomish",
-			12: "dwarvish",
-			14: "harpy",
-			15: "dwarvish",
-			16: "draconic",
-			17: "draconic",
-			18: "gargoyle",
-			19: "sylvan",
-			20: "ogre",
-			21: "dwarvish",
-			22: "sylvan",
-		};
-	}
-
-	get settings() {
-		return {};
-	}
+	languages = {
+		0: "Thorass",
+		1: "Celestial",
+		2: "Barazhad",
+		3: "Infernal",
+		4: "Dethek",
+		5: "Pulsian",
+		6: "Iokharic",
+		7: "Dethek",
+		8: "Espruar",
+		9: "High Drowic",
+		10: "Kargi",
+		11: "Tengwar",
+		12: "Dethek",
+		14: "Olde Thorass",
+		15: "Dethek",
+		16: "Iokharic",
+		17: "Iokharic",
+		18: "High Drowic",
+		19: "Olde Espruar",
+		20: "Meroitic Demotic",
+		21: "Dethek",
+		22: "Olde Espruar",
+	};
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		this.languages = replaceLanguages ? [] : Object.fromEntries(CONFIG.OSE.languages.map((l) => [l, l]));
+		//TODO check if this is valid, otherwise change languages
+		this.languages = replaceLanguages ? [] : Object.fromEntries(CONFIG.OSE.languages.map((lang) => [lang, lang]));
 	}
 
 	getUserLanguages(actor) {
@@ -1535,211 +2073,392 @@ export class oseLanguageProvider extends LanguageProvider {
 }
 
 export class pf1LanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			abyssal: "150% Barazhad",
-			auran: "200% OldeThorass",
-			azlanti: "120% Tengwar",
-			boggard: "120% Semphari",
-			celestial: "180% Celestial",
-			outwordly: "200% ArCiela",
-			draconic: "170% Iokharic",
-			dwarvish: "120% Dethek",
-			drowic: "150% HighDrowic",
-			dziriak: "250% Pulsian",
-			giant: "120% MeroiticDemotic",
-			gnoll: "150% Kargi",
-			elvish: "150% Espruar",
-			erutaki: "120% Tuzluca",
-			garundi: "120% Qijomi",
-			infernal: "230% Infernal",
-			jistka: "120% Valmaric",
-			jungle: "120% JungleSlang",
-			kelish: "170% HighschoolRunes",
-			oriental: "130% Oriental",
-			requian: "150% Reanaarian",
-			serpent: "120% Ophidian",
-			signs: "170% FingerAlphabet",
-			sylvan: "200% OldeEspruar",
-			thassilonian: "150% Thassilonian",
-			utopian: "140% MarasEye",
-		};
-	}
-	get originalTongues() {
-		return {
-			_default: "common",
-			aboleth: "outwordly",
-			abyssal: "abyssal",
-			aklo: "serpent",
-			algollthu: "outwordly",
-			anadi: "jungle",
-			aquan: "auran",
-			arboreal: "sylvan",
-			auran: "auran",
-			azlanti: "azlanti",
-			boggard: "boggard",
-			caligni: "drowic",
-			celestial: "celestial",
-			cyclops: "giant",
-			daemonic: "infernal",
-			dark: "drowic",
-			destrachan: "outwordly",
-			draconic: "draconic",
-			drowsign: "signs",
-			druidic: "jungle",
-			dwarven: "dwarvish",
-			dziriak: "dziriak",
-			elven: "elvish",
-			erutaki: "erutaki",
-			garundi: "garundi",
-			giant: "giant",
-			gnoll: "gnoll",
-			gnome: "dwarvish",
-			gnomish: "dwarvish",
-			goblin: "gnoll",
-			grippli: "boggard",
-			hallit: "azlanti",
-			ignan: "dwarvish",
-			iruxi: "boggard",
-			jistkan: "jistka",
-			jotun: "giant",
-			jyoti: "celestial",
-			infernal: "infernal",
-			kelish: "kelish",
-			mwangi: "azlanti",
-			necril: "drowic",
-			orc: "dwarvish",
-			orcish: "dwarvish",
-			polyglot: "azlanti",
-			protean: "abyssal",
-			requian: "requian",
-			shoanti: "azlanti",
-			skald: "jitska",
-			sphinx: "requian",
-			strix: "infernal",
-			sylvan: "sylvan",
-			shoony: "dwarvish",
-			taldane: "azlanti",
-			tengu: "oriental",
-			terran: "dwarvish",
-			thassilonian: "thassilonian",
-			tien: "oriental",
-			treant: "sylvan",
-			undercommon: "drowic",
-			utopian: "utopian",
-			varisian: "azlanti",
-			vegepygmy: "gnoll",
-			vudrani: "garundi",
-		};
-	}
-	get settings() {
-		return {};
-	}
+	languages = {
+		common: {
+			font: "Thorass",
+		},
+		aboleth: {
+			font: "Ar Ciela",
+		},
+		abyssal: {
+			font: "Barazhad",
+		},
+		aklo: {
+			font: "Ophidian",
+		},
+		algollthu: {
+			font: "Ar Ciela",
+		},
+		anadi: {
+			font: "Jungle Slang",
+		},
+		aquan: {
+			font: "Olde Thorass",
+		},
+		arboreal: {
+			font: "Olde Espruar",
+		},
+		auran: {
+			font: "Olde Thorass",
+		},
+		azlanti: {
+			font: "Tengwar",
+		},
+		boggard: {
+			font: "Semphari",
+		},
+		caligni: {
+			font: "High Drowic",
+		},
+		celestial: {
+			font: "Celestial",
+		},
+		cyclops: {
+			font: "Meroitic Demotic",
+		},
+		daemonic: {
+			font: "Infernal",
+		},
+		dark: {
+			font: "High Drowic",
+		},
+		destrachan: {
+			font: "Ar Ciela",
+		},
+		draconic: {
+			font: "Iokharic",
+		},
+		drowsign: {
+			font: "Finger Alphabet",
+		},
+		druidic: {
+			font: "Jungle Slang",
+		},
+		dwarven: {
+			font: "Dethek",
+		},
+		dziriak: {
+			font: "Pulsian",
+		},
+		elven: {
+			font: "Espruar",
+		},
+		erutaki: {
+			font: "Tuzluca",
+		},
+		garundi: {
+			font: "Qijomi",
+		},
+		giant: {
+			font: "Meroitic Demotic",
+		},
+		gnoll: {
+			font: "Kargi",
+		},
+		gnome: {
+			font: "Dethek",
+		},
+		gnomish: {
+			font: "Dethek",
+		},
+		goblin: {
+			font: "Kargi",
+		},
+		grippli: {
+			font: "Semphari",
+		},
+		hallit: {
+			font: "Tengwar",
+		},
+		ignan: {
+			font: "Dethek",
+		},
+		iruxi: {
+			font: "Semphari",
+		},
+		jistkan: {
+			font: "Valmaric",
+		},
+		jotun: {
+			font: "Meroitic Demotic",
+		},
+		jyoti: {
+			font: "Celestial",
+		},
+		infernal: {
+			font: "Infernal",
+		},
+		kelish: {
+			font: "Highschool Runes",
+		},
+		mwangi: {
+			font: "Tengwar",
+		},
+		necril: {
+			font: "High Drowic",
+		},
+		orc: {
+			font: "Dethek",
+		},
+		orcish: {
+			font: "Dethek",
+		},
+		polyglot: {
+			font: "Tengwar",
+		},
+		protean: {
+			font: "Barazhad",
+		},
+		requian: {
+			font: "Reanaarian",
+		},
+		shoanti: {
+			font: "Tengwar",
+		},
+		skald: {
+			font: "Valmaric",
+		},
+		sphinx: {
+			font: "Reanaarian",
+		},
+		strix: {
+			font: "Infernal",
+		},
+		sylvan: {
+			font: "Olde Espruar",
+		},
+		shoony: {
+			font: "Dethek",
+		},
+		taldane: {
+			font: "Tengwar",
+		},
+		tengu: {
+			font: "Oriental",
+		},
+		terran: {
+			font: "Dethek",
+		},
+		thassilonian: {
+			font: "Thassilonian",
+		},
+		tien: {
+			font: "Oriental",
+		},
+		treant: {
+			font: "Olde Espruar",
+		},
+		undercommon: {
+			font: "High Drowic",
+		},
+		utopian: {
+			font: "Maras Eye",
+		},
+		varisian: {
+			font: "Tengwar",
+		},
+		vegepygmy: {
+			font: "Kargi",
+		},
+		vudrani: {
+			font: "Qijomi",
+		},
+	};
 }
 
 export class pf2eLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			abyssal: "150% Barazhad",
-			auran: "200% OldeThorass",
-			azlanti: "120% Tengwar",
-			boggard: "120% Semphari",
-			celestial: "180% Celestial",
-			outwordly: "200% ArCiela",
-			draconic: "170% Iokharic",
-			dwarvish: "120% Dethek",
-			drowic: "150% HighDrowic",
-			dziriak: "250% Pulsian",
-			giant: "120% MeroiticDemotic",
-			gnoll: "150% Kargi",
-			elvish: "150% Espruar",
-			erutaki: "120% Tuzluca",
-			garundi: "120% Qijomi",
-			infernal: "230% Infernal",
-			jistka: "120% Valmaric",
-			jungle: "120% JungleSlang",
-			kelish: "170% HighschoolRunes",
-			oriental: "130% Oriental",
-			requian: "150% Reanaarian",
-			serpent: "120% Ophidian",
-			signs: "170% FingerAlphabet",
-			sylvan: "200% OldeEspruar",
-			thassilonian: "150% Thassilonian",
-			utopian: "140% MarasEye",
-		};
-	}
-	get originalTongues() {
-		return {
-			_default: "common",
-			aboleth: "outwordly",
-			abyssal: "abyssal",
-			aklo: "serpent",
-			algollthu: "outwordly",
-			anadi: "jungle",
-			aquan: "auran",
-			arboreal: "sylvan",
-			auran: "auran",
-			azlanti: "azlanti",
-			boggard: "boggard",
-			caligni: "drowic",
-			celestial: "celestial",
-			cyclops: "giant",
-			daemonic: "infernal",
-			dark: "drowic",
-			destrachan: "outwordly",
-			draconic: "draconic",
-			drowsign: "signs",
-			druidic: "jungle",
-			dwarven: "dwarvish",
-			dziriak: "dziriak",
-			elven: "elvish",
-			erutaki: "erutaki",
-			garundi: "garundi",
-			giant: "giant",
-			gnoll: "gnoll",
-			gnome: "dwarvish",
-			gnomish: "dwarvish",
-			goblin: "gnoll",
-			grippli: "boggard",
-			hallit: "azlanti",
-			ignan: "dwarvish",
-			iruxi: "boggard",
-			jistkan: "jistka",
-			jotun: "giant",
-			jyoti: "celestial",
-			infernal: "infernal",
-			kelish: "kelish",
-			mwangi: "azlanti",
-			necril: "drowic",
-			orc: "dwarvish",
-			orcish: "dwarvish",
-			polyglot: "azlanti",
-			protean: "abyssal",
-			requian: "requian",
-			shoanti: "azlanti",
-			skald: "jitska",
-			sphinx: "requian",
-			strix: "infernal",
-			sylvan: "sylvan",
-			shoony: "dwarvish",
-			taldane: "azlanti",
-			tengu: "oriental",
-			terran: "dwarvish",
-			thassilonian: "thassilonian",
-			tien: "oriental",
-			treant: "sylvan",
-			undercommon: "drowic",
-			utopian: "utopian",
-			varisian: "azlanti",
-			vegepygmy: "gnoll",
-			vudrani: "garundi",
-		};
-	}
-	get settings() {
-		return {};
-	}
+	languages = {
+		common: {
+			font: "Thorass",
+		},
+		aboleth: {
+			font: "Ar Ciela",
+		},
+		abyssal: {
+			font: "Barazhad",
+		},
+		aklo: {
+			font: "Ophidian",
+		},
+		algollthu: {
+			font: "Ar Ciela",
+		},
+		anadi: {
+			font: "Jungle Slang",
+		},
+		aquan: {
+			font: "Olde Thorass",
+		},
+		arboreal: {
+			font: "Olde Espruar",
+		},
+		auran: {
+			font: "Olde Thorass",
+		},
+		azlanti: {
+			font: "Tengwar",
+		},
+		boggard: {
+			font: "Semphari",
+		},
+		caligni: {
+			font: "High Drowic",
+		},
+		celestial: {
+			font: "Celestial",
+		},
+		cyclops: {
+			font: "Meroitic Demotic",
+		},
+		daemonic: {
+			font: "Infernal",
+		},
+		dark: {
+			font: "High Drowic",
+		},
+		destrachan: {
+			font: "Ar Ciela",
+		},
+		draconic: {
+			font: "Iokharic",
+		},
+		drowsign: {
+			font: "Finger Alphabet",
+		},
+		druidic: {
+			font: "Jungle Slang",
+		},
+		dwarven: {
+			font: "Dethek",
+		},
+		dziriak: {
+			font: "Pulsian",
+		},
+		elven: {
+			font: "Espruar",
+		},
+		erutaki: {
+			font: "Tuzluca",
+		},
+		garundi: {
+			font: "Qijomi",
+		},
+		giant: {
+			font: "Meroitic Demotic",
+		},
+		gnoll: {
+			font: "Kargi",
+		},
+		gnome: {
+			font: "Dethek",
+		},
+		gnomish: {
+			font: "Dethek",
+		},
+		goblin: {
+			font: "Kargi",
+		},
+		grippli: {
+			font: "Semphari",
+		},
+		hallit: {
+			font: "Tengwar",
+		},
+		ignan: {
+			font: "Dethek",
+		},
+		iruxi: {
+			font: "Semphari",
+		},
+		jistkan: {
+			font: "Valmaric",
+		},
+		jotun: {
+			font: "Meroitic Demotic",
+		},
+		jyoti: {
+			font: "Celestial",
+		},
+		infernal: {
+			font: "Infernal",
+		},
+		kelish: {
+			font: "Highschool Runes",
+		},
+		mwangi: {
+			font: "Tengwar",
+		},
+		necril: {
+			font: "High Drowic",
+		},
+		orc: {
+			font: "Dethek",
+		},
+		orcish: {
+			font: "Dethek",
+		},
+		polyglot: {
+			font: "Tengwar",
+		},
+		protean: {
+			font: "Barazhad",
+		},
+		requian: {
+			font: "Reanaarian",
+		},
+		shoanti: {
+			font: "Tengwar",
+		},
+		skald: {
+			font: "Valmaric",
+		},
+		sphinx: {
+			font: "Reanaarian",
+		},
+		strix: {
+			font: "Infernal",
+		},
+		sylvan: {
+			font: "Olde Espruar",
+		},
+		shoony: {
+			font: "Dethek",
+		},
+		taldane: {
+			font: "Tengwar",
+		},
+		tengu: {
+			font: "Oriental",
+		},
+		terran: {
+			font: "Dethek",
+		},
+		thassilonian: {
+			font: "Thassilonian",
+		},
+		tien: {
+			font: "Oriental",
+		},
+		treant: {
+			font: "Olde Espruar",
+		},
+		undercommon: {
+			font: "High Drowic",
+		},
+		utopian: {
+			font: "Maras Eye",
+		},
+		varisian: {
+			font: "Tengwar",
+		},
+		vegepygmy: {
+			font: "Kargi",
+		},
+		vudrani: {
+			font: "Qijomi",
+		},
+	};
+
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const langs = {};
@@ -1763,124 +2482,175 @@ export class pf2eLanguageProvider extends LanguageProvider {
 			const index = homebrewLanguagesValues.indexOf(lang);
 			key = homebrewLanguagesKeys[index];
 		}
-		this.languages[key] = lang;
+		this.languages[key] = {
+			label: lang,
+			font: this.languages[key]?.font || this.defaultFont,
+			rng: "default",
+		};
 		this.addToConfig(key, lang);
-		if (!(key in this.tongues)) {
-			this.tongues[key] = this.tongues["_default"];
-		}
 	}
 }
 
 export class sfrpgLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			abyssal: "150% Barazhad",
-			auran: "200% OldeThorass",
-			azlanti: "120% Tengwar",
-			boggard: "120% Semphari",
-			celestial: "180% Celestial",
-			outwordly: "200% ArCiela",
-			draconic: "170% Iokharic",
-			dwarvish: "120% Dethek",
-			drowic: "150% HighDrowic",
-			dziriak: "250% Pulsian",
-			giant: "120% MeroiticDemotic",
-			gnoll: "150% Kargi",
-			elvish: "150% Espruar",
-			erutaki: "120% Tuzluca",
-			garundi: "120% Qijomi",
-			infernal: "230% Infernal",
-			jistka: "120% Valmaric",
-			jungle: "120% JungleSlang",
-			kelish: "170% HighschoolRunes",
-			oriental: "130% Oriental",
-			requian: "150% Reanaarian",
-			serpent: "120% Ophidian",
-			signs: "170% FingerAlphabet",
-			sylvan: "150% OldeEspruar",
-			thassilonian: "150% Thassilonian",
-			utopian: "140% MarasEye",
-		};
-	}
-
-	get originalTongues() {
-		return {
-			_default: "common",
-			abyssal: "abyssal",
-			akito: "common",
-			aklo: "serpent",
-			arkanen: "common",
-			aquan: "auran",
-			auran: "auran",
-			azlanti: "azlanti",
-			celestial: "celestial",
-			draconic: "draconic",
-			drow: "drowic",
-			dwarven: "dwarvish",
-			elven: "elvish",
-			gnome: "dwarvish",
-			goblin: "gnoll",
-			halfling: "common",
-			ignan: "dwarvish",
-			infernal: "infernal",
-			kalo: "common",
-			kasatha: "common",
-			Nchaki: "common",
-			orc: "dwarvish",
-			sarcesian: "common",
-			shirren: "common",
-			shobhad: "common",
-			terran: "auran",
-			triaxian: "common",
-			vercite: "common",
-			vesk: "common",
-			ysoki: "common",
-		};
-	}
-
-	get settings() {
-		return {};
-	}
+	languages = {
+		common: {
+			font: "Thorass",
+		},
+		abyssal: {
+			font: "Barazhad",
+		},
+		akito: {
+			font: "Thorass",
+		},
+		aklo: {
+			font: "Ophidian",
+		},
+		arkanen: {
+			font: "Thorass",
+		},
+		aquan: {
+			font: "Olde Thorass",
+		},
+		auran: {
+			font: "Olde Thorass",
+		},
+		azlanti: {
+			font: "Tengwar",
+		},
+		celestial: {
+			font: "Celestial",
+		},
+		draconic: {
+			font: "Iokharic",
+		},
+		drow: {
+			font: "High Drowic",
+		},
+		dwarven: {
+			font: "Dethek",
+		},
+		elven: {
+			font: "Espruar",
+		},
+		gnome: {
+			font: "Dethek",
+		},
+		goblin: {
+			font: "Kargi",
+		},
+		halfling: {
+			font: "Thorass",
+		},
+		ignan: {
+			font: "Dethek",
+		},
+		infernal: {
+			font: "Infernal",
+		},
+		kalo: {
+			font: "Thorass",
+		},
+		kasatha: {
+			font: "Thorass",
+		},
+		Nchaki: {
+			font: "Thorass",
+		},
+		orc: {
+			font: "Dethek",
+		},
+		sarcesian: {
+			font: "Thorass",
+		},
+		shirren: {
+			font: "Thorass",
+		},
+		shobhad: {
+			font: "Thorass",
+		},
+		terran: {
+			font: "Olde Thorass",
+		},
+		triaxian: {
+			font: "Thorass",
+		},
+		vercite: {
+			font: "Thorass",
+		},
+		vesk: {
+			font: "Thorass",
+		},
+		ysoki: {
+			font: "Thorass",
+		},
+	};
 }
 
 export class shadowrun5eLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			aztec: "200% Aztec",
-			chinese: "130% ScrapbookChinese",
-			common: "150% OldeEnglish",
-			cyrillic: "130% KremlinPremier",
-			elvish: "150% Espruar",
-			orcish: "150% OrkGlyphs",
-			oriental: "130% Oriental",
-		};
-	}
+	defaultFont = "Olde English";
 
-	get originalTongues() {
-		return {
-			_default: "common",
-			cityspeak: "common",
-			spanish: "common",
-			lakota: "common",
-			dakota: "common",
-			navajo: "common",
-			russian: "cyrillic",
-			french: "common",
-			italian: "common",
-			german: "common",
-			aztlaner: "aztec",
-			sperethiel: "elvish",
-			orzet: "orcish",
-			english: "common",
-			japanese: "oriental",
-			mandarin: "chinese",
-		};
-	}
-
-	get settings() {
-		return {};
-	}
+	languages = {
+		cityspeak: {
+			label: "Cityspeak",
+			font: "Olde English",
+		},
+		spanish: {
+			label: "Spanish",
+			font: "Olde English",
+		},
+		lakota: {
+			label: "Lakota",
+			font: "Olde English",
+		},
+		dakota: {
+			label: "Dakota",
+			font: "Olde English",
+		},
+		navajo: {
+			label: "Navajo",
+			font: "Olde English",
+		},
+		russian: {
+			label: "Russian",
+			font: "Kremlin Premier",
+		},
+		french: {
+			label: "French",
+			font: "Olde English",
+		},
+		italian: {
+			label: "Italian",
+			font: "Olde English",
+		},
+		german: {
+			label: "German",
+			font: "Olde English",
+		},
+		aztlaner: {
+			label: "Aztlaner Spanish",
+			font: "Aztec",
+		},
+		sperethiel: {
+			label: "Sperethiel",
+			font: "Espruar",
+		},
+		orzet: {
+			label: "Or'zet",
+			font: "Ork Glyphs",
+		},
+		english: {
+			label: "English",
+			font: "Olde English",
+		},
+		japanese: {
+			label: "Japanese",
+			font: "Oriental",
+		},
+		mandarin: {
+			label: "Mandarin",
+			font: "Scrapbook Chinese",
+		},
+	};
 
 	getSystemDefaultLanguage() {
 		return "cityspeak";
@@ -1888,24 +2658,7 @@ export class shadowrun5eLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const langs = {
-			cityspeak: "Cityspeak",
-			spanish: "Spanish",
-			lakota: "Lakota",
-			dakota: "Dakota",
-			navajo: "Navajo",
-			russian: "Russian",
-			french: "French",
-			italian: "Italian",
-			german: "German",
-			aztlaner: "Aztlaner Spanish",
-			sperethiel: "Sperethiel",
-			"or'zet": "Or'zet",
-			english: "English",
-			japanese: "Japanese",
-			mandarin: "Mandarin",
-		};
-		this.languages = replaceLanguages ? {} : langs;
+		if (replaceLanguages) this.languages = {};
 	}
 
 	getUserLanguages(actor) {
@@ -1917,10 +2670,6 @@ export class shadowrun5eLanguageProvider extends LanguageProvider {
 }
 
 export class splittermondLanguageProvider extends LanguageProvider {
-	get settings() {
-		return {};
-	}
-
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
@@ -1965,121 +2714,326 @@ export class swadeLanguageProvider extends LanguageProvider {
 }
 
 export class sw5eLanguageProvider extends LanguageProvider {
-	get originalTongues() {
-		return {
-			_default: "celestial",
-			abyssin: "barazhad",
-			aleena: "jungleslang",
-			antarian: "arciela",
-			anzellan: "valmaric",
-			aqualish: "floki",
-			arconese: "orkglyphs",
-			ardennian: "thorass",
-			arkanian: "celestial",
-			balosur: "arciela",
-			barabel: "darkeldar",
-			basic: "celestial",
-			besalisk: "barazhad",
-			binary: "celestial",
-			bith: "skaven",
-			bocce: "tuzluca",
-			bothese: "infernal",
-			catharese: "espruar",
-			cerean: "oldeespruar",
-			"chadra-fan": "infernal",
-			chagri: "ophidian",
-			cheunh: "arciela",
-			chevin: "eltharin",
-			chironan: "saurian",
-			clawdite: "reanaarian",
-			codruese: "meroiticdemotic",
-			colicoid: "thassilonian",
-			dashadi: "iokharic",
-			defel: "darkeldar",
-			devaronese: "iokharic",
-			dosh: "iokharic",
-			draethos: "pulsian",
-			durese: "reanaarian",
-			dug: "qijomi",
-			ewokese: "skaven",
-			falleen: "tengwar",
-			felucianese: "skaven",
-			gamorrese: "highschoolrunes",
-			gand: "reanaarian",
-			geonosian: "maraseye",
-			givin: "highdrowic",
-			gran: "qijomi",
-			gungan: "highschoolrunes",
-			hapan: "valmaric",
-			harchese: "thassilonian",
-			herglese: "ophidian",
-			honoghran: "tuzluca",
-			huttese: "thassilonian",
-			iktotchese: "iokharic",
-			ithorese: "dethek",
-			jawaese: "valmaric",
-			kaleesh: "infernal",
-			kaminoan: "arciela",
-			karkaran: "ophidian",
-			keldor: "meroiticdemotic",
-			kharan: "arciela",
-			killik: "thassilonian",
-			klatooinian: "thassilonian",
-			kubazian: "oldethorass",
-			kushiban: "thorass",
-			kyuzo: "barazhad",
-			lannik: "semphari",
-			lasat: "floki",
-			lowickese: "qijomi",
-			lurmese: "jungleslang",
-			mandoa: "kargi",
-			miralukese: "miroslavnormal",
-			mirialan: "miroslavnormal",
-			moncal: "darkeldar",
-			mustafarian: "orkglyphs",
-			muun: "tengwar",
-			nautila: "ophidian",
-			ortolan: "thorass",
-			pakpak: "oldethorass",
-			pyke: "meroiticdemotic",
-			quarrenese: "ophidian",
-			rakata: "iokharic",
-			rattataki: "infernal",
-			rishii: "maraseye",
-			rodese: "meroiticdemotic",
-			ryn: "espruar",
-			selkatha: "ophidian",
-			semblan: "fingeralphabet",
-			shistavanen: "pulsian",
-			shyriiwook: "oldeespruar",
-			sith: "highdrowic",
-			squibbian: "valmaric",
-			sriluurian: "jungleslang",
-			"ssi-ruuvi": "maraseye",
-			sullustese: "highschoolrunes",
-			talzzi: "oldethorass",
-			tarasinese: "oldeespruar",
-			thisspiasian: "arciela",
-			togorese: "floki",
-			togruti: "pulsian",
-			toydarian: "espruar",
-			tusken: "semphari",
-			"twi'leki": "tuzluca",
-			ugnaught: "floki",
-			umbaran: "jungleslang",
-			utapese: "eltharin",
-			verpine: "thassilonian",
-			vong: "valmaric",
-			voss: "iokharic",
-			yevethan: "highdrowic",
-			zabraki: "maraseye",
-			zygerrian: "floki",
-		};
-	}
-
-	get settings() {
-		return {};
-	}
+	languages = {
+		basic: {
+			font: "Celestial",
+		},
+		abyssin: {
+			font: "Barazhad",
+		},
+		aleena: {
+			font: "Jungle Slang",
+		},
+		antarian: {
+			font: "Ar Ciela",
+		},
+		anzellan: {
+			font: "Valmaric",
+		},
+		aqualish: {
+			font: "Floki",
+		},
+		arconese: {
+			font: "Ork Glyphs",
+		},
+		ardennian: {
+			font: "Thorass",
+		},
+		arkanian: {
+			font: "Celestial",
+		},
+		balosur: {
+			font: "Ar Ciela",
+		},
+		barabel: {
+			font: "Dark Eldar",
+		},
+		besalisk: {
+			font: "Barazhad",
+		},
+		binary: {
+			font: "Celestial",
+		},
+		bith: {
+			font: "Skaven",
+		},
+		bocce: {
+			font: "Tuzluca",
+		},
+		bothese: {
+			font: "Infernal",
+		},
+		catharese: {
+			font: "Espruar",
+		},
+		cerean: {
+			font: "Olde Espruar",
+		},
+		"chadra-fan": {
+			font: "Infernal",
+		},
+		chagri: {
+			font: "Ophidian",
+		},
+		cheunh: {
+			font: "Ar Ciela",
+		},
+		chevin: {
+			font: "Eltharin",
+		},
+		chironan: {
+			font: "Saurian",
+		},
+		clawdite: {
+			font: "Reanaarian",
+		},
+		codruese: {
+			font: "Meroitic Demotic",
+		},
+		colicoid: {
+			font: "Thassilonian",
+		},
+		dashadi: {
+			font: "Iokharic",
+		},
+		defel: {
+			font: "Dark Eldar",
+		},
+		devaronese: {
+			font: "Iokharic",
+		},
+		dosh: {
+			font: "Iokharic",
+		},
+		draethos: {
+			font: "Pulsian",
+		},
+		durese: {
+			font: "Reanaarian",
+		},
+		dug: {
+			font: "Qijomi",
+		},
+		ewokese: {
+			font: "Skaven",
+		},
+		falleen: {
+			font: "Tengwar",
+		},
+		felucianese: {
+			font: "Skaven",
+		},
+		gamorrese: {
+			font: "Highschool Runes",
+		},
+		gand: {
+			font: "Reanaarian",
+		},
+		geonosian: {
+			font: "Maras Eye",
+		},
+		givin: {
+			font: "High Drowic",
+		},
+		gran: {
+			font: "Qijomi",
+		},
+		gungan: {
+			font: "Highschool Runes",
+		},
+		hapan: {
+			font: "Valmaric",
+		},
+		harchese: {
+			font: "Thassilonian",
+		},
+		herglese: {
+			font: "Ophidian",
+		},
+		honoghran: {
+			font: "Tuzluca",
+		},
+		huttese: {
+			font: "Thassilonian",
+		},
+		iktotchese: {
+			font: "Iokharic",
+		},
+		ithorese: {
+			font: "Dethek",
+		},
+		jawaese: {
+			font: "Valmaric",
+		},
+		kaleesh: {
+			font: "Infernal",
+		},
+		kaminoan: {
+			font: "Ar Ciela",
+		},
+		karkaran: {
+			font: "Ophidian",
+		},
+		keldor: {
+			font: "Meroitic Demotic",
+		},
+		kharan: {
+			font: "Ar Ciela",
+		},
+		killik: {
+			font: "Thassilonian",
+		},
+		klatooinian: {
+			font: "Thassilonian",
+		},
+		kubazian: {
+			font: "Olde Thorass",
+		},
+		kushiban: {
+			font: "Thorass",
+		},
+		kyuzo: {
+			font: "Barazhad",
+		},
+		lannik: {
+			font: "Semphari",
+		},
+		lasat: {
+			font: "Floki",
+		},
+		lowickese: {
+			font: "Qijomi",
+		},
+		lurmese: {
+			font: "Jungle Slang",
+		},
+		mandoa: {
+			font: "Kargi",
+		},
+		miralukese: {
+			font: "Miroslav Normal",
+		},
+		mirialan: {
+			font: "Miroslav Normal",
+		},
+		moncal: {
+			font: "Dark Eldar",
+		},
+		mustafarian: {
+			font: "Ork Glyphs",
+		},
+		muun: {
+			font: "Tengwar",
+		},
+		nautila: {
+			font: "Ophidian",
+		},
+		ortolan: {
+			font: "Thorass",
+		},
+		pakpak: {
+			font: "Olde Thorass",
+		},
+		pyke: {
+			font: "Meroitic Demotic",
+		},
+		quarrenese: {
+			font: "Ophidian",
+		},
+		rakata: {
+			font: "Iokharic",
+		},
+		rattataki: {
+			font: "Infernal",
+		},
+		rishii: {
+			font: "Maras Eye",
+		},
+		rodese: {
+			font: "Meroitic Demotic",
+		},
+		ryn: {
+			font: "Espruar",
+		},
+		selkatha: {
+			font: "Ophidian",
+		},
+		semblan: {
+			font: "Finger Alphabet",
+		},
+		shistavanen: {
+			font: "Pulsian",
+		},
+		shyriiwook: {
+			font: "Olde Espruar",
+		},
+		sith: {
+			font: "High Drowic",
+		},
+		squibbian: {
+			font: "Valmaric",
+		},
+		sriluurian: {
+			font: "Jungle Slang",
+		},
+		"ssi-ruuvi": {
+			font: "Maras Eye",
+		},
+		sullustese: {
+			font: "Highschool Runes",
+		},
+		talzzi: {
+			font: "Olde Thorass",
+		},
+		tarasinese: {
+			font: "Olde Espruar",
+		},
+		thisspiasian: {
+			font: "Ar Ciela",
+		},
+		togorese: {
+			font: "Floki",
+		},
+		togruti: {
+			font: "Pulsian",
+		},
+		toydarian: {
+			font: "Espruar",
+		},
+		tusken: {
+			font: "Semphari",
+		},
+		"twi'leki": {
+			font: "Tuzluca",
+		},
+		ugnaught: {
+			font: "Floki",
+		},
+		umbaran: {
+			font: "Jungle Slang",
+		},
+		utapese: {
+			font: "Eltharin",
+		},
+		verpine: {
+			font: "Thassilonian",
+		},
+		vong: {
+			font: "Valmaric",
+		},
+		voss: {
+			font: "Iokharic",
+		},
+		yevethan: {
+			font: "High Drowic",
+		},
+		zabraki: {
+			font: "Maras Eye",
+		},
+		zygerrian: {
+			font: "Floki",
+		},
+	};
 
 	getSystemDefaultLanguage() {
 		return "basic";
@@ -2087,46 +3041,56 @@ export class sw5eLanguageProvider extends LanguageProvider {
 }
 
 export class tormenta20LanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			abyssal: "150% Barazhad",
-			auran: "200% OldeThorass",
-			common: "130% Thorass",
-			celestial: "180% Celestial",
-			draconic: "170% Iokharic",
-			dwarvish: "120% Dethek",
-			giant: "120% MeroiticDemotic",
-			gnoll: "150% Kargi",
-			elvish: "150% Espruar",
-			infernal: "230% Infernal",
-			sylvan: "200% OldeEspruar",
-		};
-	}
-
-	get originalTongues() {
-		return {
-			_default: "common",
-			abissal: "abyssal",
-			anao: "dwarvish",
-			aquan: "auran",
-			auran: "auran",
-			celestial: "celestial",
-			draconico: "draconic",
-			elfico: "elvish",
-			gigante: "giant",
-			gnoll: "gnoll",
-			goblin: "gnoll",
-			ignan: "auran",
-			infernal: "infernal",
-			orc: "dwarvish",
-			silvestre: "sylvan",
-			terran: "auran",
-		};
-	}
-
-	get settings() {
-		return {};
-	}
+	languages = {
+		comum: {
+			font: "Thorass",
+		},
+		abissal: {
+			font: "Barazhad",
+		},
+		anao: {
+			font: "Dethek",
+		},
+		aquan: {
+			font: "Olde Thorass",
+		},
+		auran: {
+			font: "Olde Thorass",
+		},
+		celestial: {
+			font: "Celestial",
+		},
+		draconico: {
+			font: "Iokharic",
+		},
+		elfico: {
+			font: "Espruar",
+		},
+		gigante: {
+			font: "Meroitic Demotic",
+		},
+		gnoll: {
+			font: "Kargi",
+		},
+		goblin: {
+			font: "Kargi",
+		},
+		ignan: {
+			font: "Olde Thorass",
+		},
+		infernal: {
+			font: "Infernal",
+		},
+		orc: {
+			font: "Dethek",
+		},
+		silvestre: {
+			font: "Olde Espruar",
+		},
+		terran: {
+			font: "Olde Thorass",
+		},
+	};
 
 	getSystemDefaultLanguage() {
 		return "comum";
@@ -2134,9 +3098,7 @@ export class tormenta20LanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		if (replaceLanguages) {
-			CONFIG.T20.idiomas = {};
-		}
+		if (replaceLanguages) CONFIG.T20.idiomas = {};
 		this.languages = CONFIG.T20.idiomas;
 	}
 
@@ -2149,45 +3111,47 @@ export class tormenta20LanguageProvider extends LanguageProvider {
 }
 
 export class uesrpgLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			cyrodilic: "130% Thorass",
-			aldmeri: "150% Espruar",
-			ayleidoon: "230% OldeEspruar",
-			bosmeri: "200% MageScript",
-			daedric: "200% Daedra",
-			dovah: "170% DragonAlphabet",
-			dunmeri: "150% HighDrowic",
-			dwemeris: "120% Dethek",
-			falmer: "200% ArCiela",
-			jel: "120% Ophidian",
-			nordic: "160% NyStormning",
-			taagra: "120% JungleSlang",
-			yoku: "130% Oriental",
-		};
-	}
-
-	get originalTongues() {
-		return {
-			_default: "cyrodilic",
-			aldmeri: "aldmeri",
-			ayleidoon: "aldmeri",
-			bosmeri: "bosmeri",
-			daedric: "daedric",
-			dovah: "dovah",
-			dunmeri: "dunmeri",
-			dwemeris: "dwemeris",
-			falmer: "falmer",
-			jel: "jel",
-			nordic: "nordic",
-			taagra: "taagra",
-			yoku: "yoku",
-		};
-	}
-
-	get settings() {
-		return {};
-	}
+	languages = {
+		cyrodilic: {
+			font: "Thorass",
+		},
+		aldmeri: {
+			font: "Espruar",
+		},
+		ayleidoon: {
+			font: "Espruar",
+		},
+		bosmeri: {
+			font: "Mage Script",
+		},
+		daedric: {
+			font: "Daedra",
+		},
+		dovah: {
+			font: "Dragon Alphabet",
+		},
+		dunmeri: {
+			font: "High Drowic",
+		},
+		dwemeris: {
+			font: "Dethek",
+		},
+		falmer: {
+			font: "Ar Ciela",
+		},
+		jel: {
+			font: "Ophidian",
+		},
+		nordic: {
+			font: "Ny Stormning",
+		},
+		taagra: {
+			font: "Jungle Slang",
+		},
+		yoku: {
+			font: "Oriental",
+		},
+	};
 
 	getSystemDefaultLanguage() {
 		return "cyrodilic";
@@ -2219,45 +3183,59 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 }
 
 export class wfrp4eLanguageProvider extends LanguageProvider {
-	get originalAlphabets() {
-		return {
-			common: "130% Thorass",
-			reikspiel: "230% Infernal",
-			druhir: "150% DarkEldar",
-			eltharin: "130% Eltharin",
-			kislevien: "110% MiroslavNormal",
-			norse: "350% ElderFuthark",
-			orcish: "150% OrkGlyphs",
-			queekish: "130% Skaven",
-			slaan: "170% Saurian",
-			klinkarhun: "110% Floki",
-			romance: "130% Tengwar",
-			cathan: "130% Oriental",
-		};
-	}
-
-	get originalTongues() {
-		return {
-			_default: "common",
-			reikspiel: "reikspiel",
-			wastelander: "reikspiel",
-			classical: "reikspiel",
-			cathan: "cathan",
-			tilean: "common",
-			estalian: "romance",
-			gospodarinyi: "kislevien",
-			albion: "norse",
-			norse: "norse",
-			bretonnian: "romance",
-			druhir: "druhir",
-			elthárin: "eltharin",
-			orcish: "orcish",
-			queekish: "queekish",
-			slaan: "slaan",
-			khazalid: "klinkarhun",
-			magick: "eltharin",
-		};
-	}
+	languages = {
+		reikspiel: {
+			font: "Infernal",
+		},
+		wastelander: {
+			font: "Infernal",
+		},
+		classical: {
+			font: "Infernal",
+		},
+		cathan: {
+			font: "Oriental",
+		},
+		tilean: {
+			font: "Thorass",
+		},
+		estalian: {
+			font: "Tengwar",
+		},
+		gospodarinyi: {
+			font: "Miroslav Normal",
+		},
+		albion: {
+			font: "Elder Futhark",
+		},
+		norse: {
+			font: "Elder Futhark",
+		},
+		bretonnian: {
+			font: "romance",
+		},
+		druhir: {
+			font: "Dark Eldar",
+		},
+		elthárin: {
+			font: "Eltharin",
+		},
+		orcish: {
+			font: "Ork Glyphs",
+		},
+		queekish: {
+			font: "queekish",
+		},
+		slaan: {
+			font: "Saurian",
+		},
+		khazalid: {
+			font: "Floki",
+		},
+		magick: {
+			font: "Eltharin",
+		},
+	};
 
 	get requiresReady() {
 		return true;
@@ -2278,7 +3256,10 @@ export class wfrp4eLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const langs = {};
+		if (replaceLanguages) {
+			this.languages = {};
+			return;
+		}
 		const wfrp4ePack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
 		const wfrp4eItemList = await wfrp4ePack.getIndex();
 		let myRegex = new RegExp(game.settings.get("polyglot", "LanguageRegex") + "\\s*\\((.+)\\)", "i");
@@ -2286,10 +3267,13 @@ export class wfrp4eLanguageProvider extends LanguageProvider {
 			if (myRegex.test(item.name)) {
 				let lang = item.name.match(myRegex)[1].trim();
 				let key = lang.toLowerCase();
-				langs[key] = lang;
+				this.languages[key] = {
+					label: lang,
+					font: this.languages[key]?.font || this.defaultFont,
+					rng: "default",
+				};
 			}
 		}
-		this.languages = replaceLanguages ? {} : langs;
 	}
 
 	getUserLanguages(actor) {
@@ -2330,10 +3314,11 @@ export class wwnLanguageProvider extends LanguageProvider {
 		}
 		lang = lang.trim();
 		const key = lang.toLowerCase().replace(/[\s\']/g, "_");
-		this.languages[key] = lang;
-		if (!(key in this.tongues)) {
-			this.tongues[key] = this.tongues["_default"];
-		}
+		this.languages[key] = {
+			label: lang,
+			font: this.languages[key]?.font || this.defaultFont,
+			rng: "default",
+		};
 	}
 	removeLanguage(lang) {
 		if (!lang) return;
@@ -2347,9 +3332,6 @@ export class wwnLanguageProvider extends LanguageProvider {
 			.toLowerCase()
 			.replace(/[\s\']/g, "_");
 		delete this.languages[key];
-		if (key in this.tongues) {
-			delete this.tongues[key];
-		}
 	}
 
 	async getLanguages() {

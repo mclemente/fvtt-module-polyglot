@@ -461,29 +461,6 @@ export let FONTS = {
 	},
 };
 
-/**
- * Font sets that don't have Numeric characters.
- */
-export let FONTS_26 = ["ArCiela", "FingerAlphabet", "KremlinPremier", "MageScript", "MeroiticDemotic", "OldeEnglish", "Pulsian", "Semphari", "Tuzluca"];
-
-/**
- * Font sets that use Logographic characters (e.g. Ancient Egyptian, Mandarin, Japanese)
- */
-export let LOGOGRAPHICAL_FONTS = [
-	"Aztec",
-	"DarkEldar",
-	"Eltharin",
-	"FingerAlphabet",
-	"HighschoolRunes",
-	"JungleSlang",
-	"MageScript",
-	"Oriental",
-	"Saurian",
-	"ScrapbookChinese",
-	"Skaven",
-	"Thassilonian",
-];
-
 export let CUSTOM_FONT_SIZES = {
 	"Ar Ciela": "200",
 	Aztec: "200",

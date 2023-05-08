@@ -21,10 +21,11 @@ export class PolyglotAPI {
 			.join("|");
 		const systemsRegex = new RegExp(supportedSystems);
 		if (systemsRegex.test(game.system.id)) var providerString = game.system.id;
-		else providerString = providerKeys[game.system.id] || "";
+		// Replace "" for "Generic"
+		else providerString = providerKeys[game.system.id] || "Generic";
 
 		const languageProviders = [];
-		languageProviders.push(eval(`new providers.${providerString}LanguageProvider("native${providerString.length ? "." + providerString : ""}")`));
+		languageProviders.push(eval(`new providers.${providerString}LanguageProvider("native${providerString !== "Generic" ? "." + providerString : ""}")`));
 		for (let languageProvider of languageProviders) this.providers[languageProvider.id] = languageProvider;
 		addSetting("languageProvider", {
 			//Has no name or hint
@@ -41,8 +42,11 @@ export class PolyglotAPI {
 		return this.polyglot.languageProvider;
 	}
 
-	set languageProvider(string) {
-		this.polyglot.languageProvider = string;
+	/**
+	 * @param {String} provider
+	 */
+	set languageProvider(provider) {
+		this.polyglot.languageProvider = this.providers[provider];
 	}
 
 	attach() {

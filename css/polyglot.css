@@ -54,9 +54,13 @@ input.selectatr[type="number"] {
 .polyglot-languages-list li .fontSize {
 	flex: 0 0 90px;
 	text-align: center;
+	margin: auto;
 }
 .polyglot-alphabet-list {
 	flex: 0 0 160px;
+}
+.polyglot-alphabet {
+	margin: auto;
 }
 .polyglot-language-settings .font-name,
 .polyglot-language-settings .selectatr {
@@ -65,6 +69,7 @@ input.selectatr[type="number"] {
 .polyglot-languages-list .font-name,
 .font-name {
 	flex: 0 0 150px;
+	margin: auto;
 }
 .polyglot-languages-list {
 	list-style: none;
@@ -79,4 +84,8 @@ input.selectatr[type="number"] {
 	text-align: center;
 	margin-bottom: 0.5em;
 	display: none;
+}
+
+a.polyglot-message-language.unclickable {
+	cursor: default;
 }

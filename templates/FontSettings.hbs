@@ -5,16 +5,24 @@
 				<li class="flexrow">
 					<div class="font-name">{{localize "POLYGLOT.Font"}}</div>
 					<div class="fontSize">{{localize "POLYGLOT.FontSize"}}</div>
+					<div class="fontSize">{{localize "POLYGLOT.AlphabeticOnly"}}</div>
+					<div class="fontSize">{{localize "POLYGLOT.Logographical"}}</div>
 					<div class="polyglot-alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
 				</li>
 				<hr />
-				{{#each fontSize as |font alphabet|}}
+				{{#each fonts}}
 					<li class="flexrow">
-						<div class="font-name">{{alphabet}}</div>
+						<div class="font-name">{{this.label}}</div>
 						<div class="fontSize">
-							<input class="selectatr" type="number" value="{{font}}" min="100" max="350" step="10" />
+							<input class="selectatr" type="number" value="{{this.size}}" min="100" max="350" step="10" />
 						</div>
-						<div class="polyglot-alphabet" style="font-size: {{font}}%; font-family: {{alphabet}}">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+						<div class="fontSize">
+							<input class="alphabeticOnly" type="checkbox" {{checked this.alphabeticOnly}} />
+						</div>
+						<div class="fontSize">
+							<input class="logographical" type="checkbox" {{checked this.logographical}} />
+						</div>
+						<div class="polyglot-alphabet" style="font-size: {{this.size}}%; font-family: {{this.family}}">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
 					</li>
 				{{/each}}
 			</ul>

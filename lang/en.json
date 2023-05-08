@@ -11,6 +11,8 @@
 		"Font": "Font",
 		"Fonts": "Fonts",
 		"FontSize": "Font Size (%)",
+		"AlphabeticOnly": "Only Alphabetic",
+		"Logographical": "Logographical",
 		"AllowOOC.hint": "Choose which users should have their messages scrambled. OOC = Out of Character.",
 		"AllowOOC.title": "Scramble OOC Chat Messages",
 		"AllowOOCOptions": {

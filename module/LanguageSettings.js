@@ -30,12 +30,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 				let title = id == game.system.id ? game.system.title : id;
 				provider.selectTitle = (game.i18n.localize("POLYGLOT.LanguageProvider.choices.native") + " " + title).trim();
 			} else {
-				let name;
-				if (type === "module") {
-					name = game.modules.get(id).title;
-				} else {
-					name = game.system.title;
-				}
+				const name = type === "module" ? game.modules.get(id).title : game.system.title;
 				provider.selectTitle = game.i18n.format(`POLYGLOT.LanguageProvider.choices.${type}`, { name });
 			}
 			provider.isSelected = provider.id === selectedProvider;
@@ -60,17 +55,28 @@ export class PolyglotLanguageSettings extends FormApplication {
 		this.languageProvider = data.providerSelection.value;
 
 		function prepSetting(key) {
-			let settingData = game.settings.settings.get(`polyglot.${key}`);
-			return {
-				value: game.settings.get("polyglot", `${key}`),
-				name: settingData.name,
-				hint: settingData.hint,
-			};
+			const { name, hint } = game.settings.settings.get(`polyglot.${key}`);
+			const value = game.settings.get("polyglot", `${key}`);
+			return { value, name, hint };
 		}
+
+		const asArray = Object.entries(game.settings.get("polyglot", "Languages"));
+
+		const { name, hint } = game.settings.settings.get("polyglot.Languages");
+		const filtered = asArray.filter(([key, value]) => {
+			return key !== game.polyglot.omniglot && key !== game.polyglot.comprehendLanguages && key !== game.polyglot.truespeech;
+		});
+		const value = Object.fromEntries(filtered);
+
+		const languages = {
+			name,
+			hint,
+			value,
+		};
 
 		return {
 			data: data,
-			languages: prepSetting("Languages"),
+			languages,
 			alphabets: prepSetting("Alphabets"),
 		};
 	}
@@ -88,7 +94,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 		});
 		html.find(".polyglot-alphabet").each(function () {
 			const font = this.previousSibling.previousSibling.children[0].value; //selectatr's value
-			this.style.font = game.polyglot.languageProvider.alphabets[font];
+			this.style.font = game.polyglot.languageProvider.fonts[font];
 		});
 		html.find(".selectatr").on("change", (event) => {
 			const font = event.target.value;
@@ -96,15 +102,15 @@ export class PolyglotLanguageSettings extends FormApplication {
 			const nextSibling = parentElement.nextSibling;
 			if (nextSibling && nextSibling.nextSibling) {
 				const elementToChange = nextSibling.nextSibling;
-				const alphabet = game.polyglot.languageProvider.alphabets[font];
+				const alphabet = game.polyglot.languageProvider.fonts[font];
 				elementToChange.style.font = alphabet;
 			}
 		});
 		html.find("button").on("click", async (event) => {
 			if (event.currentTarget?.dataset?.action === "reset") {
-				game.polyglot.languageProvider.loadAlphabet();
-				await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.alphabets);
-				await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.originalTongues);
+				game.polyglot.languageProvider.loadFonts();
+				await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
+				await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
 				this.close();
 			}
 		});
@@ -120,18 +126,20 @@ export class PolyglotLanguageSettings extends FormApplication {
 		if (languageProvider != formData.languageProvider) {
 			await game.settings.set("polyglot", "languageProvider", formData.languageProvider);
 			game.polyglot.api.updateProvider();
-			game.polyglot.languageProvider.loadAlphabet();
-			await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.alphabets);
-			await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.originalTongues);
+			game.polyglot.languageProvider.loadFonts();
+			await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
+			await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
 		} else {
-			let langSettings = game.settings.get("polyglot", "Languages");
-			const iterableSettings = formData["language.alphabet"];
+			const langSettings = game.settings.get("polyglot", "Languages");
+			const fonts = formData["language.alphabet"];
+			const rng = formData["language.rng"];
 			let i = 0;
 			for (let lang in langSettings) {
-				langSettings[lang] = iterableSettings[i];
+				langSettings[lang].font = fonts[i];
+				langSettings[lang].rng = rng[i];
 				i++;
 			}
-			game.polyglot.languageProvider.tongues = langSettings;
+			game.polyglot.languageProvider.languages = langSettings;
 			await game.settings.set("polyglot", "Languages", langSettings);
 		}
 	}
