@@ -76,5 +76,17 @@
 	"compatibility": {
 		"minimum": "10",
 		"verified": "11"
+	},
+	"relationships": {
+		"requires": [
+			{
+				"id": "lib-wrapper",
+				"type": "module",
+				"manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json",
+				"compatibility": {
+					"verified": "1.12.11.0"
+				}
+			}
+		]
 	}
 }

@@ -1,5 +1,4 @@
 import { FONTS, FONTS_26, LOGOGRAPHICAL_FONTS } from "./Fonts.js";
-import { libWrapper } from "./shim.js";
 
 export class Polyglot {
 	init() {
