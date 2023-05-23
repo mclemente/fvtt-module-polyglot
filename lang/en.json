@@ -2,20 +2,26 @@
 	"POLYGLOT": {
 		"DefaultAlphabet": "Default Alphabet",
 		"FontSettings": "Font Settings",
+		"GeneralSettings": "General Settings",
 		"LanguageSettings": "Language Settings",
 		"ChatSettings": "Chat Settings",
+		"General": "General",
 		"Languages.title": "Languages",
 		"Languages.hint": "Changes the alphabet used for the languages.",
 		"Font": "Font",
 		"Fonts": "Fonts",
 		"FontSize": "Font Size (%)",
-		"AllowOOC.hint": "Choose whose users should have their messages scrambled. OOC = Out of Character.",
+		"AllowOOC.hint": "Choose which users should have their messages scrambled. OOC = Out of Character.",
 		"AllowOOC.title": "Scramble OOC Chat Messages",
 		"AllowOOCOptions": {
 			"a": "All",
 			"b": "GM Only",
 			"c": "Players Only",
 			"d": "None"
+		},
+		"Omniglot": {
+			"title": "Omniglot Language",
+			"hint": "Set a language whose speaker understands and speaks all other languages."
 		},
 		"ComprehendLanguages.hint": "Set a language whose speaker understands all other languages, but that can't be spoken or written.",
 		"ComprehendLanguages.title": "Omniscient Language",
@@ -41,15 +47,15 @@
 		"HideTranslation.title": "Hide Indicators from Players",
 		"IgnoreJournalFontSize": {
 			"hint": "Ignores the size of Polyglot's fonts on journals, making them have the same size as normal text would have. Useful for when the formatting of the journal matters.",
-			"title": "Journal: Use Normal Font Size"
+			"title": "Use Normal Font Size"
 		},
 		"JournalHighlight": {
 			"hint": "Defines the opacity of the highlight over fonts on the journal.",
-			"title": "Journal Highlight Opacity (%)"
+			"title": "Highlight Opacity (%)"
 		},
 		"JournalHighlightColor": {
 			"hint": "Defines the color of the highlight over fonts on the journal.",
-			"title": "Journal Highlight Color"
+			"title": "Highlight Color"
 		},
 		"LanguageProvider": {
 			"choices": {

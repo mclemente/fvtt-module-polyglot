@@ -4,11 +4,9 @@
 	--polyglot-journal-color-temp: 255, 180, 0;
 	--polyglot-journal-opacity-temp: 0.25;
 }
-
 .polyglot-chat-bubble {
 	font-family: var(--polyglot-chat-bubble-font);
 }
-
 .polyglot-lang-select {
 	flex: 0 0 28px;
 	margin: 0 6px;
@@ -17,54 +15,68 @@
 	height: 24px;
 	background: rgba(255, 255, 245, 0.8);
 }
-
-.polyglot-language-settings {
-	max-width: 800px;
-}
-
 span.polyglot-journal {
 	background-color: rgba(var(--polyglot-journal-color), var(--polyglot-journal-opacity));
 }
-
-p.notes.polyglot-journal {
+.polyglot-journal-temp {
 	background-color: rgba(var(--polyglot-journal-color-temp), var(--polyglot-journal-opacity-temp));
 }
-
 .polyglot-translation-text {
 	position: relative;
 	padding-top: 16px;
-	/* line-height: 24px; */
-	/* background: rgba(0, 0, 0, 0.1); */
-	/* border: 1px solid #999; */
-	/* border-radius: 3px; */
-	/* box-shadow: 0 0 2px #FFF inset; */
 	border-top: 1px solid #999;
 	-webkit-user-select: text;
 	-moz-user-select: text;
 	-ms-user-select: text;
 	user-select: text;
 }
-
 .polyglot-translation-text:before {
 	position: absolute;
 	content: attr(title);
 	font-size: 14px;
 	top: 0px;
-	/* left: 4px; */
 	font-weight: bold;
 	font-style: italic;
 }
-
 .polyglot-group-header {
 	font-weight: bold;
 	padding: 8px 20px;
 	background-color: rgba(255, 255, 255, 0.4);
 }
-
 input.selectatr[type="number"] {
 	width: 30px;
+	height: 100%;
+	background: none;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid var(--color-border-light-tertiary);
 }
-
-div.fontName {
-	flex: 0 0 210px;
+.polyglot-languages-list li .fontSize {
+	flex: 0 0 90px;
+	text-align: center;
+}
+.polyglot-alphabet-list {
+	flex: 0 0 160px;
+}
+.polyglot-language-settings .font-name,
+.polyglot-language-settings .selectatr {
+	text-transform: capitalize;
+}
+.polyglot-languages-list .font-name,
+.font-name {
+	flex: 0 0 150px;
+}
+.polyglot-languages-list {
+	list-style: none;
+	padding: 0;
+}
+.polyglot-languages-list .flexrow {
+	flex-wrap: nowrap;
+}
+.polyglot-languages-warn {
+	font-weight: bold;
+	color: red;
+	text-align: center;
+	margin-bottom: 0.5em;
+	display: none;
 }

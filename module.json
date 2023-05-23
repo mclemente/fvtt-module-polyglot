@@ -1,27 +1,16 @@
 {
 	"title": "Polyglot",
 	"description": "Talk to others using a language you can speak and scrambles text you can't understand, in several fantasy scripts.",
-	"version": "1.7",
+	"version": "1.9",
 	"authors": [
 		{
 			"name": "Matheus Clemente",
 			"discord": "mclemente#5524",
 			"ko-fi": "mclemente"
-		},
-		{
-			"name": "KaKaRoTo"
-		},
-		{
-			"name": "elizeuangelo"
 		}
 	],
-	"esmodules": [
-		"polyglot.js"
-	],
-	"styles": [
-		"css/polyglot.css",
-		"css/fonts.css"
-	],
+	"esmodules": ["polyglot.js"],
+	"styles": ["css/polyglot.css", "css/fonts.css"],
 	"languages": [
 		{
 			"lang": "en",
@@ -86,6 +75,18 @@
 	"id": "polyglot",
 	"compatibility": {
 		"minimum": "10",
-		"verified": "10"
+		"verified": "11"
+	},
+	"relationships": {
+		"requires": [
+			{
+				"id": "lib-wrapper",
+				"type": "module",
+				"manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json",
+				"compatibility": {
+					"verified": "1.12.11.0"
+				}
+			}
+		]
 	}
 }
