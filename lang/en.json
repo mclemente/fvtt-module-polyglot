@@ -115,7 +115,15 @@
 			"SpecialLanguages.hint": "Name of the language that will replace \"languages\" such as \"all the languages it knew in life\"."
 		},
 		"SWADE": {
-			"LanguageSkills": "Language"
+			"LanguageSkills": "Language",
+			"AdditionalLanguageStat": {
+				"title": "Language Stat Key",
+				"hint": "It is possible to target an Additional Stat (which is set on the SWADE Settings Configurator). You need to input the Stat Key (case sensitive). Beware that setting this overrides the {setting} setting."
+			},
+			"AdditionalLiterateStat": {
+				"title": "Literacy Stat Key",
+				"hint": "It is possible to limit reading journals by adding an Additional Stat. You need to input the Stat Key (case sensitive). This setting is independent from the {setting} setting."
+			}
 		},
 		"WFRP4E": {
 			"LanguageSkills": "Language"
