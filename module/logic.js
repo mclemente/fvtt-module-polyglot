@@ -438,6 +438,11 @@ export class Polyglot {
 		const runifyGM = game.settings.get("polyglot", "runifyGM");
 		const displayTranslated = game.settings.get("polyglot", "display-translated");
 		const hideTranslation = game.settings.get("polyglot", "hideTranslation");
+		if (isGM && !runifyGM) message.polyglot_unknown = false;
+		else {
+			message.polyglot_unknown =
+				!this._isTruespeech(lang) && !known && (game.user.character ? !this.isLanguageKnown(this.truespeech) && !this.isLanguageKnown(this.comprehendLanguages) : true);
+		}
 		const forceTranslation = message.polyglot_force || !message.polyglot_unknown;
 
 		const content = $("<div>")
