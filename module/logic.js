@@ -458,10 +458,7 @@ export class Polyglot {
 			.addClass("polyglot-original-text")
 			.css({ font: this._getFontStyle(lang) })
 			.html(this.scrambleString(message.content, message.id, lang));
-		const translation = $("<div>")
-			.addClass("polyglot-translation-text")
-			.attr("title", game.i18n.localize("POLYGLOT.TranslatedFrom") + language)
-			.html(message.content);
+		const translation = $("<div>").addClass("polyglot-translation-text").attr("data-tooltip", language).attr("data-tooltip-direction", "UP").html(message.content);
 
 		if (displayTranslated && (lang !== this.languageProvider.defaultLanguage || message.polyglot_unknown)) {
 			html.find(".message-content").empty().append(content);
@@ -475,7 +472,7 @@ export class Polyglot {
 
 		if (isGM || (known && !hideTranslation)) {
 			const color = (isGM && !runifyGM) || known ? "green" : "red";
-			const title = isGM || known ? `title="${language}"` : "";
+			const title = isGM || known ? `data-tooltip="${language}" data-tooltip-direction="LEFT"` : "";
 			const clickable = isGM && (runifyGM || !displayTranslated);
 			const button = $(`<a class="button polyglot-message-language ${clickable ? "" : "unclickable"}" ${title}>
 				<i class="fas fa-globe" style="color:${color}"></i>
@@ -612,7 +609,10 @@ export class Polyglot {
 		let runes = false;
 		let texts = [];
 		let styles = [];
-		const toggleString = "<a class='polyglot-button' title='Polyglot: " + game.i18n.localize("POLYGLOT.ToggleRunes") + "'><i class='fas fa-unlink'></i></a>";
+		const toggleString = `<a class='polyglot-button'
+			data-tooltip='Polyglot: ${game.i18n.localize("POLYGLOT.ToggleRunes")}'>
+			<i class='fas fa-unlink' data-tooltip-direction="UP"></i>
+		</a>`;
 		const toggleButton = $(toggleString);
 		const IgnoreJournalFontSize = game.settings.get("polyglot", "IgnoreJournalFontSize");
 		toggleButton.click((ev) => {
