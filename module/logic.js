@@ -27,14 +27,14 @@ export class Polyglot {
 						langs[lang] = this.languageProvider.languages[lang];
 					}
 				} else langs = this.languageProvider.languages;
-				const languages = Object.entries(langs).map(([lang, name]) => {
+				const languages = Object.entries(langs).map(([key, lang]) => {
 					return {
-						title: name || "",
+						title: lang.label || "",
 						inline: "span",
 						classes: "polyglot-journal",
 						attributes: {
-							title: name || "",
-							"data-language": lang || "",
+							title: lang.label || "",
+							"data-language": key || "",
 						},
 					};
 				});
