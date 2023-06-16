@@ -12,7 +12,7 @@ Talk to others using a language you can speak and scrambles text you can't under
 
 ## How to Use
 
-Check out the [wiki](../wiki).
+Check out the [wiki](https://github.com/mclemente/fvtt-module-polyglot/wiki).
 
 ## Attribution
 
