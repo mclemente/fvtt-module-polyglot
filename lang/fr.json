@@ -1,7 +1,7 @@
 {
 	"POLYGLOT.CustomLanguages.title": "Langues Spéciales",
-	"POLYGLOT.CustomLanguages.hint": "Défini une liste de langues supplémentaires, en complément de celles du système. Chaque langue doit être séparée par une virtule.",
-	"POLYGLOT.ComprehendLanguages.title": "Compréhension des langues",
+	"POLYGLOT.CustomLanguages.hint": "Définissez une liste de langues personnalisées à ajouter au système. Elles doivent être séparées par des virgules ou des points-virgules.",
+	"POLYGLOT.ComprehendLanguages.title": "Langue omnisciente",
 	"POLYGLOT.ComprehendLanguages.hint": "Pour gérer les sorts ou effets de type 'Compréhension des Langues'. Saisissez une langue spéciale déja déclarée. Le fait de posséder cette langue permettra au personnage de comprendre tout les autres languages.",
 	"POLYGLOT.Truespeech.title": "Parler les langues",
 	"POLYGLOT.Truespeech.hint": "Pour gérer les sorts ou les effets du type 'Parler les Langues'. Saisissez une langue spéciale déja déclarée. Le fait de posséder cette langue permettra au personnage de parler tout les autres languages et de se faire comprendre dans toutes les langues.",
@@ -18,7 +18,7 @@
 	"POLYGLOT.DisplayTranslated.title": "Affichicher la traduction",
 	"POLYGLOT.DisplayTranslated.hint": "Pour les langues traduites dans les messages de tchat, afficher le texte original et sa traduction.",
 	"POLYGLOT.AllowOOC.title": "Crypter les messages non destinés à un personnage",
-	"POLYGLOT.AllowOOC.hint": "Permet au MJ de crypter tout les messages du tchat, y compris ceux non destinés aux personnages.",
+	"POLYGLOT.AllowOOC.hint": "Choisissez les utilisateurs dont les messages doivent être crypté. OOC = Out of Character.",
 	"POLYGLOT.Translation": "Traduction",
 	"POLYGLOT.TranslatedFrom": "Traduit de ",
 	"POLYGLOT.LanguageLabel": "Langue",
@@ -41,7 +41,15 @@
 			"SpecialLanguages.hint": "Nom de la langue qui remplacera \"langues\" comme \"toutes les langues qu'il a connues dans la vie\"."
 		},
 		"SWADE": {
-			"LanguageSkills": "Langues"
+			"LanguageSkills": "Langues",
+			"AdditionalLiterateStat": {
+				"title": "Clé Stat de l'alphabétisation",
+				"hint": "Il est possible de limiter les journaux de lecture en ajoutant un statut supplémentaire. Vous devez saisir la clé Stat (sensible à la casse). Ce paramètre est indépendant du paramètre {setting}."
+			},
+			"AdditionalLanguageStat": {
+				"title": "Clé Stat de la langue",
+				"hint": "Il est possible de cibler un statut supplémentaire (qui est défini dans le configurateur de paramètres de SWADE). Vous devez saisir la clé de l'état (sensible à la casse). Attention, ce paramètre remplace le paramètre {setting}."
+			}
 		},
 		"Languages.title": "Langues",
 		"Fonts": "Polices",
@@ -57,7 +65,7 @@
 				"1": "Polices Polyglottes",
 				"2": "Polices supplémentaires du Core"
 			},
-			"hint": "Ajouter les polices aux paramètres de police et de langue.",
+			"hint": "Ajoute les polices des sources choisies aux {setting1} et {setting2}.",
 			"title": "Ajouter les polices aux paramètres de police et de langue"
 		},
 		"RandomizeRunesOptions": {
@@ -93,28 +101,34 @@
 		},
 		"ReplaceLanguages.hint": "Remplace les langues par défaut du système par vos langues personnalisées. La première langue de la liste devient la nouvelle langue par défaut.",
 		"JournalHighlight.hint": "Définit l'opacité du surlignage sur les polices du journal.",
-		"JournalHighlight.title": "Opacité du surlignage dans le journal (%)",
+		"JournalHighlight.title": "Opacité du surlignage (%)",
 		"logographicalFontToggle.hint": "Réduire de moitié la taille des phrases à l'aide de polices logographiques (par exemple, caractères japonais, chinois).",
 		"HideTranslation.hint": "Masque le globe et le texte \"Traduit de\" des messages de chat aux joueurs. Utile lorsque vous ne voulez pas montrer aux joueurs quelle langue vous parlez. Déclenche un rechargement.",
 		"JournalHighlightColor": {
 			"hint": "Définit la couleur de surlignage sur les polices dans le journal.",
-			"title": "Couleur du surlignage dans le journal"
+			"title": "Couleur du surlignage"
 		},
 		"languageDataPath": {
 			"title": "Chemin des données de langue",
-			"hint": "Si votre système possède des langues dans les données de l'acteur et qu'elles ne sont pas téléchargées proprement, il pourra utiliser un autre chemin de données. Renseignez le chemin des données vers l'attribut correct (ex : actor.system.language ou actor.system.speak). Ce réglage prend la préséance sur les réglages du regex de langue. Nécessite un rechargement."
+			"hint": "Si les langues de votre système sont définies dans les données des acteurs et ne sont pas chargées correctement, il se peut qu'un autre chemin de données soit utilisé. Saisissez le chemin de données vers l'attribut correct (par exemple actor.system.languages ou actor.system.speak). Ce paramètre est prioritaire sur le paramètre {setting}. Nécessite un rechargement."
 		},
 		"literacyDataPath": {
 			"title": "Parcours de données sur l'alphabétisation",
-			"hint": "Identique au réglage du chemin des données mais pour lire les journaux. Ce réglage nécessite le réglage du chemin de données. Nécessite un rechargement."
+			"hint": "Identique au paramètre {setting}, mais pour la lecture des journaux. Ce paramètre nécessite le paramètre {setting}. Nécessite un rechargement."
 		},
 		"RuneRegex": {
 			"hint": "Faire en sorte que la génération aléatoire ignore les caractères qui ne sont pas alphanumériques (ex : !,.;:?#$\"'). Cela pourrait avoir un effet non désiré en montrant des caractères sous forme de carrés (□) sur certaines polices.",
 			"title": "Rendre aléatoire seulement les alphanumériques"
 		},
 		"IgnoreJournalFontSize": {
-			"title": "Journal : Utiliser la taille de police normale",
+			"title": "Utiliser une taille de police normale",
 			"hint": "Ignore la taille des police de Polyglot sur les journaux,les rendant de la même taille que celui d'un texte normal. Utile lorsque le format des journaux importe."
-		}
+		},
+		"GeneralSettings": "Paramètres généraux",
+		"Omniglot": {
+			"hint": "Définir une langue dont le locuteur comprend et parle toutes les autres langues.",
+			"title": "Langue Omniglot"
+		},
+		"General": "Général"
 	}
 }
