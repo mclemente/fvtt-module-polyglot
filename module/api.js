@@ -1,8 +1,6 @@
 import * as providers from "./LanguageProvider.js";
 import { addSetting } from "./settings.js";
 
-export const availableLanguageProviders = {};
-
 export class PolyglotAPI {
 	providers = {};
 	polyglot = null;
@@ -98,7 +96,7 @@ export class PolyglotAPI {
 
 	#register(id, languageProvider) {
 		const providerInstance = new languageProvider(id);
-		availableLanguageProviders[languageProvider.id] = providerInstance;
+		this.providers[providerInstance.id] = providerInstance;
 		this.updateProvider();
 	}
 }
