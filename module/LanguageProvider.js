@@ -1227,7 +1227,11 @@ export class dsa5LanguageProvider extends LanguageProvider {
 			if (!game.modules.get("dsa5-core").active) {
 				ui.notifications.warn(`Polyglot | The ${game.modules.get("dsa5-core").title} module isn't active. Defaulting to built-in languages.`);
 			} else {
-				const dsa5Pack = game.packs.get("dsa5-core.coreabilities") ?? game.packs.get("dsa5-core.coreenabilities");
+				
+				//use old compendium for versions < 11, remove this if module's version doesn't support those foundry versions anymore
+				let packName = Number(game.version.split(".")[0]) < 11 ? "abilities" : "equipment"
+				const dsa5Pack = game.packs.get(`dsa5-core.core${packName}`) ?? game.packs.get(`dsa5-core.coreen${packName}`);
+								
 				if (dsa5Pack) {
 					const dsa5ItemList = await dsa5Pack.getIndex();
 					let languageRegex = new RegExp(game.i18n.localize("LocalizedIDs.language") + "\\s*\\((.+)\\)", "i");
