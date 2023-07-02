@@ -1227,7 +1227,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 			if (!game.modules.get("dsa5-core").active) {
 				ui.notifications.warn(`Polyglot | The ${game.modules.get("dsa5-core").title} module isn't active. Defaulting to built-in languages.`);
 			} else {
-				const dsa5Pack = game.packs.get("dsa5-core.coreabilities") ?? game.packs.get("dsa5-core.coreenabilities");
+				const dsa5Pack = game.packs.get("dsa5-core.coreequipment") ?? game.packs.get("dsa5-core.coreenequipment");
 				if (dsa5Pack) {
 					const dsa5ItemList = await dsa5Pack.getIndex();
 					let languageRegex = new RegExp(game.i18n.localize("LocalizedIDs.language") + "\\s*\\((.+)\\)", "i");
