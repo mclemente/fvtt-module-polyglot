@@ -8,12 +8,12 @@
 		"Languages.hint": "Zmienia alfabety wykorzystywane dla poszczególnych języków. Zresetowanie ustawień będzie wymagało przeładowania.",
 		"Fonts": "Czcionki",
 		"CustomLanguages.title": "Własne Języki",
-		"CustomLanguages.hint": "Zdefiniuj listę oddzielonych przecinkami niestandardowych języków, które dodane zostaną do systemu.",
-		"ComprehendLanguages.title": "Zaklęcie Rozumienie Języków",
+		"CustomLanguages.hint": "Zdefiniuj listę niestandardowych języków, które chcesz dodać do systemu. Muszą one być oddzielone przecinkami lub średnikami.",
+		"ComprehendLanguages.title": "Rozumienie Języków",
 		"ComprehendLanguages.hint": "Ustaw język, którego użytkownik rozumie wszystkie inne języki, ale w którym nie można mówić czy pisać.",
-		"Truespeech.title": "Zaklęcie Języki",
+		"Truespeech.title": "Rozumienie Języków",
 		"Truespeech.hint": "Ustal język, którego użytkownik rozumie wszystkie mówione języki (nie może czytać dzienników), i który rozumiany jest przez wszystkie istoty.",
-		"JournalHighlight.title": "Nieprzezroczystość Podświetleń Dziennika (%)",
+		"JournalHighlight.title": "Krycie podświetlenia (%)",
 		"JournalHighlight.hint": "Określa stopień nieprzezroczystości podświetleń nad czcionkami w dzienniku.",
 		"logographicalFontToggle.title": "Pismo Logograficzne",
 		"logographicalFontToggle.hint": "Zmniejsza rozmiar fraz używających pisma Logograficznego (np. Japoński, Chiński).",
@@ -24,7 +24,7 @@
 		"ScrambleGM.title": "Szyfruj Wiadomości dla MG",
 		"ScrambleGM.hint": "Nie tłumacz języków dla MG (aby określić zrozumienie języka przez żeton, odnieś się koloru ikonki globu). Wymaga przeładowania.",
 		"enableAllFonts.title": "Używaj Wszystkich Czcionek",
-		"enableAllFonts.hint": "Udostępnia czcionki zapewniane przez Polyglot w Ustawieniach Języka.",
+		"enableAllFonts.hint": "Dodaje czcionki z wybranych źródeł do {setting1} i {setting2}.",
 		"RandomizeRunes.title": "Randomizacja Run",
 		"RandomizeRunes.hint": "Określa jaki rodzaj randomizacji używany jest do tworzenia fraz. ⚠️ Opcja \"Brak\" wspiera tylko znaki alfanumeryczne (bez akcentów).",
 		"RandomizeRunesOptions": {
@@ -39,7 +39,7 @@
 		"HideTranslation.title": "Usuń powiadomienia dla Graczy",
 		"HideTranslation.hint": "Usuwa ikonę \"globu\" oraz tekst \"Przetłumaczono z:\" z wiadomości czatu. Idealne kiedy nie chcesz zdradzać graczom języka, którym się porozumiewasz. Wymaga przeładowania.",
 		"AllowOOC.title": "Szyfruj Wiadomości Czatu Poza Rolą",
-		"AllowOOC.hint": "Wybierz użytkowników, których wiadomości mają być szyfrowane przy mówieniu Poza Rolą.",
+		"AllowOOC.hint": "Wybierz, którzy użytkownicy powinni mieć zakodowane wiadomości. OOC = poza charakterem.",
 		"AllowOOCOptions": {
 			"a": "Wszyscy",
 			"b": "Tylko MG",
@@ -73,18 +73,26 @@
 			"LanguageSpec": "Język"
 		},
 		"SWADE": {
-			"LanguageSkills": "Język"
+			"LanguageSkills": "Język",
+			"AdditionalLanguageStat": {
+				"title": "Klucz statystyk języka",
+				"hint": "Możliwe jest kierowanie na dodatkowy stat (który jest ustawiony w konfiguratorze ustawień SWADE). Należy wprowadzić klucz stat (wielkość liter ma znaczenie). Należy pamiętać, że ustawienie to zastępuje ustawienie {setting}."
+			},
+			"AdditionalLiterateStat": {
+				"title": "Klucz do statystyk umiejętności czytania i pisania",
+				"hint": "Możliwe jest ograniczenie liczby czytanych dzienników poprzez dodanie dodatkowej statystyki. Należy wprowadzić klucz Stat (wielkość liter ma znaczenie). To ustawienie jest niezależne od ustawienia {setting}."
+			}
 		},
 		"WFRP4E": {
 			"LanguageSkills": "Język"
 		},
 		"JournalHighlightColor": {
 			"hint": "Określa kolor podświetlenia czcionek w dzienniku.",
-			"title": "Kolor podświetleń w dzienniku"
+			"title": "Kolor podświetlenia"
 		},
 		"IgnoreJournalFontSize": {
 			"hint": "Ignoruje rozmiar czcionek Polyglot w dziennikach, dzięki czemu mają taki sam rozmiar jak normalny tekst. Przydatne, gdy liczy się dla Ciebie formatowanie dziennika.",
-			"title": "Dziennik: Używaj normalnego rozmiaru czcionek"
+			"title": "Użyj normalnego rozmiaru czcionki"
 		},
 		"Font": "Czcionka",
 		"FontSize": "Rozmiar Czcionki (%)",
@@ -98,11 +106,11 @@
 		},
 		"languageDataPath": {
 			"title": "Ścieżka Języków",
-			"hint": "Jeżeli twój system mieści języki w aktorach i nie są one poprawnie wykryte przez Polyglot, możliwa jest potrzeba podania gdzie one są podane. Wpisz ścieżkę gdzie znajdują się języki (np. actor.system.languages czy actor.system.speak). Te ustawienie ma pierwszeństwo przed ustawieniem \"RegEx Języków\". Wymaga przeładowania."
+			"hint": "Jeśli twój system ma języki ustawione w danych aktorów i nie są one poprawnie ładowane, być może używa innej ścieżki danych. Wprowadź ścieżkę danych do właściwego atrybutu (np. actor.system.languages lub actor.system.speak). To ustawienie ma pierwszeństwo przed ustawieniem {setting}. Wymaga przeładowania."
 		},
 		"literacyDataPath": {
 			"title": "Ścieżka danych dotyczących alfabetyzacji",
-			"hint": "Takie samo jak ustawienie Ścieżki Dostępu Języka, ale dla czytania dzienników. To ustawienie wymaga ustawienia Ścieżki Dostępu Język. Wymaga przeładowania."
+			"hint": "To samo, co ustawienie {setting}, ale dla odczytu dzienników. To ustawienie wymaga ustawienia {setting}. Wymaga przeładowania."
 		},
 		"RuneRegex": {
 			"title": "Randomizuj tylko alfanumeryczne",
@@ -115,6 +123,12 @@
 		"DND5E": {
 			"SpecialLanguages.title": "Zastąp języki specjalne",
 			"SpecialLanguages.hint": "Nazwa języka, który zastąpi \"języki\" np. \"wszystkie języki jakie znał w życiu\"."
-		}
+		},
+		"GeneralSettings": "Ustawienia Ogólne",
+		"Omniglot": {
+			"hint": "Ustaw język, którego użytkownicy rozumieją i znają wszystkie inne języki.",
+			"title": "Język Omniglot"
+		},
+		"General": "Ogólne"
 	}
 }

@@ -8,12 +8,12 @@
 		"Languages.hint": "Muda o alfabeto usado para os idiomas.",
 		"Fonts": "Fontes",
 		"CustomLanguages.title": "Idiomas Customizados",
-		"CustomLanguages.hint": "Defina uma lista de idiomas customizados para adicionar ao sistema, separados por vírgula.",
-		"ComprehendLanguages.title": "Magia: Compreender Idiomas",
+		"CustomLanguages.hint": "Defina uma lista de idiomas customizados para adicionar ao sistema, separados por vírgula ou por ponto e vírgula.",
+		"ComprehendLanguages.title": "Idioma Omnisciente",
 		"ComprehendLanguages.hint": "Define um idioma cujo falante entende todos os idiomas, mas não pode ser escrito ou falado.",
-		"Truespeech.title": "Magia: Línguas",
+		"Truespeech.title": "Idioma de Omnifala",
 		"Truespeech.hint": "Define um idioma cujo falante entende todas as línguas faladas (mas não escritas em Diários) e que é entendido por todas as criaturas.",
-		"JournalHighlight.title": "Opacidade do Marcador do Diário (%)",
+		"JournalHighlight.title": "Opacidade do Marcador (%)",
 		"JournalHighlight.hint": "Define a opacidade do marcador sobre as fontes no diário.",
 		"logographicalFontToggle.title": "Fontes Logográficas",
 		"logographicalFontToggle.hint": "Reduz pela metade o tamanho de frases usando fontes logográficas (ex.: caracteres japoneses ou chineses).",
@@ -25,7 +25,7 @@
 		"ScrambleGM.hint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende). Recarregará o programa.",
 		"enableAllFonts": {
 			"title": "Adicionar Fontes às Configurações do Módulo",
-			"hint": "Adiciona fontes das opções escolhidas às Configurações de Fonte e de Idioma.",
+			"hint": "Adiciona fontes das opções escolhidas às {setting1} e {setting2}.",
 			"choices": {
 				"0": "Nenhuma",
 				"1": "Fontes do Polyglot",
@@ -90,14 +90,22 @@
 			"SpecialLanguages.hint": "Nome do idioma que irá substituir \"idiomas\" como em \"todos os idiomas que ele conhecia em vida\"."
 		},
 		"SWADE": {
-			"LanguageSkills": "Idioma"
+			"LanguageSkills": "Idioma",
+			"AdditionalLanguageStat": {
+				"title": "Chave de Atributo de Idioma",
+				"hint": "É possível escolher uma Característica Adicional (que é defina nas Configurações Gerais do SWADE). Você precisa colocar a Chave do Atributo (diferencia maiúsculas e minúsculas). Note que esta configuração sobrepõe a configuração de {setting}."
+			},
+			"AdditionalLiterateStat": {
+				"title": "Chave de Atributo de Alfabetização",
+				"hint": "É possível escolher uma Característica Adicional. Você precisa colocar a Chave do Atributo (diferencia maiúsculas e minúsculas). Esta configuração é independente da configuração de {setting}."
+			}
 		},
 		"Font": "Fonte",
 		"WFRP4E": {
 			"LanguageSkills": "Idioma"
 		},
 		"IgnoreJournalFontSize": {
-			"title": "Diário: Usar tamanho de fonte normal",
+			"title": "Usar tamanho de fonte normal",
 			"hint": "Ignora o tamanho das fontes do Polyglot nos diários, fazendo com que elas tenham o mesmo tamanho que o texto normal teria. Útil para quando a formatação do diário importa."
 		},
 		"RuneRegex": {
@@ -105,16 +113,22 @@
 			"hint": "Faz com que a randomização ignore caracteres não alfanuméricos (por exemplo !,...;?#$\"''). Isto pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes."
 		},
 		"JournalHighlightColor": {
-			"title": "Cor do Marcador do Diário",
+			"title": "Cor do Marcador",
 			"hint": "Define a cor do marcador sobre as fontes no diário."
 		},
 		"languageDataPath": {
 			"title": "Caminho de Dados dos Idiomas",
-			"hint": "Se o seu sistema tem idiomas definidos nos dados dos atores e não estão sendo carregados devidamente, ele pode estar em outro caminho de dados. Defina o caminho de dados para o atributo correto (ex.: actor.system.languages ou actor.system.speak). Esta configuração tem precedência sobre a configuração de Language Regex. Recarregará o Foundry."
+			"hint": "Se o seu sistema tem idiomas definidos nos dados dos atores e não estão sendo carregados devidamente, ele pode estar em outro caminho de dados. Defina o caminho de dados para o atributo correto (ex.: actor.system.languages ou actor.system.speak). Esta configuração tem precedência sobre a configuração de {setting}. Recarregará o Foundry."
 		},
 		"literacyDataPath": {
 			"title": "Caminho de Dados de Alfabetização",
-			"hint": "Igual à configuração de Caminho de Dados de Idioma, mas para diários). Esta configuração requer a configuração de Caminho de Dados de Idioma. Recarregará o Foundry."
+			"hint": "Igual à configuração de {setting}, mas para diários. Esta configuração requer a configuração de {setting}. Recarregará o Foundry."
+		},
+		"GeneralSettings": "Configurações Gerais",
+		"General": "Geral",
+		"Omniglot": {
+			"title": "Idioma Omniglota",
+			"hint": "Define um idioma cujo falante entende e fala todos os outros idiomas."
 		}
 	}
 }

@@ -1,8 +1,6 @@
 import * as providers from "./LanguageProvider.js";
 import { addSetting } from "./settings.js";
 
-export const availableLanguageProviders = {};
-
 export class PolyglotAPI {
 	providers = {};
 	polyglot = null;
@@ -90,20 +88,19 @@ export class PolyglotAPI {
 			return;
 		}
 
-		this.#register(module, languageProvider);
+		this.#register(`module.${module.id}`, languageProvider);
 	}
 
 	/**
 	 * @param {providers.LanguageProvider} languageProvider
 	 */
 	registerSystem(languageProvider) {
-		this.#register(game.system, languageProvider);
+		this.#register(`system.${game.system.id}`, languageProvider);
 	}
 
-	#register(source, type, languageProvider) {
-		const id = `${type}.${source.id}`;
+	#register(id, languageProvider) {
 		const providerInstance = new languageProvider(id);
-		availableLanguageProviders[languageProvider.id] = providerInstance;
+		this.providers[providerInstance.id] = providerInstance;
 		this.updateProvider();
 	}
 }

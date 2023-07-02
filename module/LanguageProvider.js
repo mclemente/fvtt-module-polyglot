@@ -1858,7 +1858,9 @@ export class dsa5LanguageProvider extends LanguageProvider {
 			return;
 		}
 		if (game.modules.has("dsa5-core") && game.modules.get("dsa5-core").active) {
-			const dsa5Pack = game.packs.get("dsa5-core.coreabilities") ?? game.packs.get("dsa5-core.coreenabilities");
+			//use old compendium for versions < 11, remove this if module's version doesn't support those foundry versions anymore
+			const packName = Number(game.version.split(".")[0]) < 11 ? "abilities" : "equipment";
+			const dsa5Pack = game.packs.get(`dsa5-core.core${packName}`) ?? game.packs.get(`dsa5-core.coreen${packName}`);
 			const languages = {};
 			if (dsa5Pack) {
 				const dsa5ItemList = await dsa5Pack.getIndex();

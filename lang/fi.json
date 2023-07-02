@@ -3,7 +3,7 @@
 		"LanguageSettings": "Kielten asetukset",
 		"ChatSettings": "Keskusteluasetukset",
 		"CustomLanguages.title": "Mukautetut kielet",
-		"ComprehendLanguages.title": "Kieltenymmärrys-loitsu",
+		"ComprehendLanguages.title": "Kaikkitietävä kieli",
 		"ComprehendLanguages.hint": "Aseta kieli, jonka puhuja ymmärtää kaikkia muita kieliä, mutta jota ei voi puhua eikä kirjoittaa.",
 		"directory": {
 			"name": "Mukautettu fonttikansio",
@@ -13,8 +13,8 @@
 			"s3": "S3",
 			"forgevtt": "Forge"
 		},
-		"Truespeech.title": "Kielten lahja -loitsu",
-		"JournalHighlight.title": "Muistiinpanon korostuksen peitto (%)",
+		"Truespeech.title": "Kaikkikieli",
+		"JournalHighlight.title": "Korostuksen peitto (%)",
 		"JournalHighlight.hint": "Määrittää muistiinpanon fonttien päälle tulevan korostuksen peiton.",
 		"logographicalFontToggle.title": "Logografiset fontit",
 		"logographicalFontToggle.hint": "Puolittaa logografisia fontteja (esim. japanilaiset, kiinalaiset merkit) käyttävien lauseiden pituuden.",
@@ -33,7 +33,8 @@
 				"3": "Molemmat",
 				"1": "Polyglot fontit"
 			},
-			"title": "Lisää fontit fontti- ja kieliasetuksiin"
+			"title": "Lisää fontteja moduulin asetuksiin",
+			"hint": "Lisää fontteja valituista lähteistä kohtiin {setting1} ja {setting2}."
 		},
 		"RandomizeRunesOptions": {
 			"a": "Oletus",
@@ -41,7 +42,7 @@
 			"c": "Ei mitään ⚠️"
 		},
 		"ExportFonts.title": "Lisää Polyglotin fontit ytimeen",
-		"ExportFonts.hint": "Lisää Polyglotin fontit ytimen Ylimääräiset fontit -valikkoon.",
+		"ExportFonts.hint": "Lisää Polyglotin fontit ytimen Ylimääräiset fontit -valikkoon. Tämän asetuksen kytkeminen pois päältä poistaa kaikki Polyglotin fontit valikosta.",
 		"DisplayTranslated.title": "Näytön käännökset",
 		"DefaultAlphabet": "Oletusaakkosto",
 		"FontSettings": "Fonttien asetukset",
@@ -49,13 +50,21 @@
 		"Font": "Fontti",
 		"Fonts": "Fontit",
 		"FontSize": "Fonttikoko (%)",
-		"CustomLanguages.hint": "Määritä pilkuilla erotettu luettelo mukautetuista kielistä, jotka lisätään järjestelmään.",
+		"CustomLanguages.hint": "Kirjoita luettelo järjestelmään lisättävistä mukautetuista kielistä. Ne on erotettava toisistaan pilkuilla tai puolipisteillä.",
 		"Truespeech.hint": "Aseta kieli, jonka puhuja ymmärtää kaikkia puhuttuja kieliä (ei voi lukea muistiinpanoja) ja jota kaikki olennot ymmärtävät.",
 		"UESRPG.Language": "Kieli",
 		"ReplaceLanguages.hint": "Korvaa järjestelmän oletuskielet mukauttamallasi kielillä. Luettelon ensimmäisestä kielestä tulee uusi oletuskieli.",
 		"RandomizeRunes.hint": "Tämä määrittää, minkä tyyppistä satunnaislukugeneraattoria käytetään fraasin luomiseen. ⚠️ Vaihtoehto \"Ei mitään\" tukee vain aakkosnumeerisia merkkejä (ei aksentteja).",
 		"SWADE": {
-			"LanguageSkills": "Kieli"
+			"LanguageSkills": "Kieli",
+			"AdditionalLanguageStat": {
+				"hint": "On mahdollista kohdistaa lisäominaisuuteen (joka asetetaan SWADE Settings Configuratorissa). Sinun on syötettävä Stat-avain (merkkikokoriippuvainen). Huomaa, että tämä asetus ohittaa asetuksen {setting}.",
+				"title": "Kielen Stat-avain"
+			},
+			"AdditionalLiterateStat": {
+				"title": "Lukutaidon Stat-avain",
+				"hint": "Muistiinpanoja on mahdollista rajoittaa lisäämällä lisäominaisuus. Sinun on kirjoitettava Stat-avain (merkkikokoriippuvainen). Tämä asetus on ei riipu asetuksesta {setting}."
+			}
 		},
 		"WFRP4E": {
 			"LanguageSkills": "Kieli"
@@ -75,7 +84,8 @@
 		"AllowOOCOptions": {
 			"b": "Vain PJ",
 			"c": "Vain pelaajat",
-			"d": "Ei mitään"
+			"d": "Ei mitään",
+			"a": "Kaikki"
 		},
 		"LanguageProvider": {
 			"choices": {
@@ -83,17 +93,50 @@
 				"native": "Yleinen",
 				"system": "[Järjestelmä] {name}"
 			},
-			"name": "Kieliasetusten tarjoaja"
+			"name": "Kieliasetusten tarjoaja",
+			"hint": "Valitse, kuka tarjoaa kielitietoja aakkosista ja kielistä. Pelijärjestelmät ja asennetut moduulit voivat tarjota lisää kielipalvelujen tarjoajia. Alla olevat vaihtoehdot riippuvat tässä valitusta kielipalveluntarjoajasta. ⚠️ Jos vaihdat palveluntarjoajaa, sinun on tallennettava ja avattava nämä asetukset uudelleen."
 		},
 		"LanguageRegex": {
-			"title": "Kielen RegEx"
+			"title": "Kielen RegEx",
+			"hint": "Tällä voit vaihtaa esineissä käytetyn termin \"Kieli\" joksikin muuksi, kuten \"Puhe\"."
 		},
 		"LanguageLabel": "Kieli",
 		"AlphabetLabel": "Aakkosto",
 		"LatinAlphabet": "Latinalaiset aakkoset",
-		"HideTranslation.hint": "Piilottaa maapallon ja Käännetty kielestä -tekstin pelaajille lähetetyistä keskusteluviesteistä. Täydellinen silloin, kun et halua näyttää pelaajille, mitä kieltä puhut. Vaatii uudelleenlatauksen.",
+		"HideTranslation.hint": "Piilottaa maapallon ja Käännetty kielestä -tekstin pelaajille lähetetyistä keskusteluviesteistä. Hyödyllinen silloin, kun et halua näyttää pelaajille, mitä kieltä puhut. Vaatii uudelleenlatauksen.",
 		"Languages.hint": "Muuttaa kielissä käytettävää aakkostoa.",
 		"TranslatedFrom": "Käännetty kielestä ",
-		"Translation": "Käännös"
+		"Translation": "Käännös",
+		"AllowOOC.hint": "Valitse, minkä käyttäjien viestit salataan. PUP = pelin ulkopuolinen puhe.",
+		"AllowOOC.title": "Salaa PUP-viestit",
+		"GeneralSettings": "Yleiset asetukset",
+		"languageDataPath": {
+			"hint": "Jos järjestelmässäsi on asetettuja kieliä hahmojen tietoihin ja niitä ei ladata oikein, se saattaa käyttää toista resurssipolkua. Syötä resurssipolku oikeaan attribuuttiin (esim. actor.system.languages tai actor.system.speak). Tämä asetus on ensisijainen {setting}-asetukseen nähden. Vaatii uudelleenlatauksen.",
+			"title": "Kielen resurssipolku"
+		},
+		"RuneRegex": {
+			"hint": "Jättää muut kuin aakkosnumeeriset merkit (esim. !,.;:?#$\"') huomioimatta satunnaistamisessa. Tämä saattaa aiheuttaa sen, että jotkin näistä merkeistä näkyvät neliönä (□) joissakin fonteissa.",
+			"title": "Satunnaista vain aakkosnumeeriset merkit"
+		},
+		"General": "Yleinen",
+		"Omniglot": {
+			"title": "Kaikkikieli",
+			"hint": "Aseta kieli, jonka puhuja ymmärtää ja puhuu kaikkia muita kieliä."
+		},
+		"IgnoreJournalFontSize": {
+			"hint": "Jättää huomiotta Polyglotin fonttien koon muistiinpanoissa, jolloin niiden koko on sama kuin normaalin tekstin. Hyödyllinen silloin, kun muistiinpanon muotoilulla on merkitystä.",
+			"title": "Käytä tavallista fonttikokoa"
+		},
+		"JournalHighlightColor": {
+			"hint": "Määrittää muistiinpanon fonttien päälle tulevan korostuksen peiton.",
+			"title": "Korostusväri"
+		},
+		"literacyDataPath": {
+			"title": "Lukutaidon resurssipolku",
+			"hint": "Sama kuin asetus {setting}, mutta muistiinpanojen lukemista varten. Tämä asetus edellyttää asetusta {setting}. Vaatii uudelleenlatauksen."
+		},
+		"RandomizeRunes.title": "Satunnaista riimut",
+		"ToggleRunes": "Vaihda riimut päälle/pois",
+		"Runes": "Riimut"
 	}
 }
