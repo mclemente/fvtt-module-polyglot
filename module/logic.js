@@ -14,88 +14,7 @@ export class Polyglot {
 		Hooks.on("renderStorySheet", this.renderJournalSheet.bind(this));
 		Hooks.on("renderJournalTextPageSheet", this.renderJournalTextPageSheet.bind(this));
 		Hooks.on("vinoPrepareChatDisplayData", this.vinoChatRender.bind(this));
-		libWrapper.register(
-			"polyglot",
-			"JournalTextPageSheet.prototype.activateEditor",
-			(wrapped, target, editorOptions, initialContent) => {
-				if (!game.user.isGM) {
-					var langs = {};
-					for (let lang of this.knownLanguages) {
-						langs[lang] = this.languageProvider.languages[lang];
-					}
-					for (let lang of this.literateLanguages) {
-						langs[lang] = this.languageProvider.languages[lang];
-					}
-				} else langs = this.languageProvider.languages;
-				const languages = Object.entries(langs).map(([key, lang]) => {
-					return {
-						title: lang.label || "",
-						inline: "span",
-						classes: "polyglot-journal",
-						attributes: {
-							title: lang.label || "",
-							"data-language": key || "",
-						},
-					};
-				});
-				if (this.truespeech) {
-					const truespeechIndex = languages.findIndex((element) => element.attributes["data-language"] == this.truespeech);
-					if (truespeechIndex !== -1) languages.splice(truespeechIndex, 1);
-				}
-				if (this.comprehendLanguages && !this._isTruespeech(this.comprehendLanguages)) {
-					const comprehendLanguagesIndex = languages.findIndex((element) => element.attributes["data-language"] == this.comprehendLanguages);
-					if (comprehendLanguagesIndex !== -1) languages.splice(comprehendLanguagesIndex, 1);
-				}
-				if (!editorOptions) editorOptions = {};
-				editorOptions.style_formats = [
-					...CONFIG.TinyMCE.style_formats,
-					{
-						title: "Polyglot",
-						items: languages,
-					},
-				];
-				editorOptions.formats = {
-					removeformat: [
-						// Default remove format configuration from tinyMCE
-						{
-							selector: "b,strong,em,i,font,u,strike,sub,sup,dfn,code,samp,kbd,var,cite,mark,q,del,ins",
-							remove: "all",
-							split: true,
-							expand: false,
-							block_expand: true,
-							deep: true,
-						},
-						{
-							selector: "span",
-							attributes: ["style", "class"],
-							remove: "empty",
-							split: true,
-							expand: false,
-							deep: true,
-						},
-						{
-							selector: "*",
-							attributes: ["style", "class"],
-							split: false,
-							expand: false,
-							deep: true,
-						},
-						// Add custom config to remove spans from polyglot when needed
-						{
-							selector: "span",
-							classes: "polyglot-journal",
-							attributes: ["title", "class", "data-language"],
-							remove: "all",
-							split: true,
-							expand: false,
-							deep: true,
-						},
-					],
-				};
-				return wrapped(target, editorOptions, initialContent);
-			},
-			"WRAPPER"
-		);
+		libWrapper.register("polyglot", "JournalTextPageSheet.prototype.activateEditor", this.activateEditorWrapper.bind(this), "WRAPPER");
 		/**
 		 * Speak a message as a particular Token, displaying it as a chat bubble
 		 * WRAPPER:
@@ -799,8 +718,95 @@ export class Polyglot {
 	}
 
 	/* -------------------------------------------- */
+	/*  Wrappers			                        */
+	/* -------------------------------------------- */
+
+	activateEditorWrapper(wrapped, target, editorOptions, initialContent) {
+		// let { target, editorOptions, initialContent } = activeEditorLogic(target, editorOptions, initialContent);
+		this.activeEditorLogic(editorOptions);
+		return wrapped(target, editorOptions, initialContent);
+	}
+
+	activeEditorLogic(editorOptions = {}) {
+		if (!game.user.isGM) {
+			var langs = {};
+			for (let lang of this.knownLanguages) {
+				langs[lang] = this.languageProvider.languages[lang];
+			}
+			for (let lang of this.literateLanguages) {
+				langs[lang] = this.languageProvider.languages[lang];
+			}
+		} else langs = this.languageProvider.languages;
+		const languages = Object.entries(langs).map(([key, lang]) => {
+			return {
+				title: lang.label || "",
+				inline: "span",
+				classes: "polyglot-journal",
+				attributes: {
+					title: lang.label || "",
+					"data-language": key || "",
+				},
+			};
+		});
+		if (this.truespeech) {
+			const truespeechIndex = languages.findIndex((element) => element.attributes["data-language"] == this.truespeech);
+			if (truespeechIndex !== -1) languages.splice(truespeechIndex, 1);
+		}
+		if (this.comprehendLanguages && !this._isTruespeech(this.comprehendLanguages)) {
+			const comprehendLanguagesIndex = languages.findIndex((element) => element.attributes["data-language"] == this.comprehendLanguages);
+			if (comprehendLanguagesIndex !== -1) languages.splice(comprehendLanguagesIndex, 1);
+		}
+		editorOptions.style_formats = [
+			...CONFIG.TinyMCE.style_formats,
+			{
+				title: "Polyglot",
+				items: languages,
+			},
+		];
+		editorOptions.formats = {
+			removeformat: [
+				// Default remove format configuration from tinyMCE
+				{
+					selector: "b,strong,em,i,font,u,strike,sub,sup,dfn,code,samp,kbd,var,cite,mark,q,del,ins",
+					remove: "all",
+					split: true,
+					expand: false,
+					block_expand: true,
+					deep: true,
+				},
+				{
+					selector: "span",
+					attributes: ["style", "class"],
+					remove: "empty",
+					split: true,
+					expand: false,
+					deep: true,
+				},
+				{
+					selector: "*",
+					attributes: ["style", "class"],
+					split: false,
+					expand: false,
+					deep: true,
+				},
+				// Add custom config to remove spans from polyglot when needed
+				{
+					selector: "span",
+					classes: "polyglot-journal",
+					attributes: ["title", "class", "data-language"],
+					remove: "all",
+					split: true,
+					expand: false,
+					deep: true,
+				},
+			],
+		};
+	}
+
+	/* -------------------------------------------- */
 	/*  Legacy Support	                            */
 	/* -------------------------------------------- */
+
 	get known_languages() {
 		return this.knownLanguages;
 	}
