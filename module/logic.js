@@ -787,4 +787,19 @@ export class Polyglot {
 		const defaultLang = this.languageProvider.tongues._default;
 		return this.languageProvider.alphabets[tongue] || this.languageProvider.alphabets[defaultLang];
 	}
+
+	/* -------------------------------------------- */
+	/*  Legacy Support	                            */
+	/* -------------------------------------------- */
+	get known_languages() {
+		return this.knownLanguages;
+	}
+
+	get literate_languages() {
+		return this.literateLanguages;
+	}
+
+	get LanguageProvider() {
+		return this.languageProvider;
+	}
 }
