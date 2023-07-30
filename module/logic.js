@@ -797,4 +797,19 @@ export class Polyglot {
 		const font = this.languageProvider.fonts[langFont] || this.languageProvider.fonts[defaultFont];
 		return `${font.fontSize}% ${font.fontFamily}`;
 	}
+
+	/* -------------------------------------------- */
+	/*  Legacy Support	                            */
+	/* -------------------------------------------- */
+	get known_languages() {
+		return this.knownLanguages;
+	}
+
+	get literate_languages() {
+		return this.literateLanguages;
+	}
+
+	get LanguageProvider() {
+		return this.languageProvider;
+	}
 }
