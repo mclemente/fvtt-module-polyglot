@@ -298,6 +298,10 @@ export class Polyglot {
 	 */
 	scrambleString(string, salt, lang) {
 		const language = this.languageProvider.languages[lang];
+		if (!language) {
+			console.warn(`Polyglot | Language "${lang}" doesn't exist on the Language Provider, scrambling has been skipped for this string.`);
+			return string;
+		}
 		const rng = language.rng;
 		if (rng == "none") return string;
 		if (rng == "default") salt = lang;
