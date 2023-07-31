@@ -475,17 +475,13 @@ export class Polyglot {
 	 * @returns
 	 */
 	renderJournalTextPageSheet(journalTextPageSheet, [header, text, section], data) {
-		if (journalTextPageSheet.object.parent.isOwner || game.user.isGM) return;
+		if (journalTextPageSheet.object.parent.isOwner || game.user.isGM || data.editable) return;
 		else if (journalTextPageSheet.document.isOwner) {
 			const toggleButton = this.createJournalButton(journalTextPageSheet);
 			header
 				.closest(".app")
 				.querySelectorAll(".polyglot-button")
-				.forEach(function (container) {
-					if (!container.innerHTML) {
-						container.remove();
-					}
-				});
+				.forEach((container) => container.remove());
 			const titleElement = header.closest(".app").querySelector(".window-title");
 			toggleButton.insertAfter(titleElement);
 		} else {
