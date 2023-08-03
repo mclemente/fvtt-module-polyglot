@@ -671,7 +671,7 @@ export class Polyglot {
 	 * @returns {Boolean} - Whether the message content is a link to an image file or not.
 	 */
 	_isMessageLink(messageContent) {
-		return /(^(@|<|(http+?)(s\b|\b)|www\.))|(\.(com|jpg|gif|png|bmp|webp)$)/gi.test(messageContent);
+		return /@|<|https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/gi.test(messageContent);
 	}
 
 	/**
