@@ -74,6 +74,13 @@ export class Polyglot {
 	}
 
 	/**
+	 * @returns {object}
+	 */
+	get alphabets() {
+		return this.languageProvider.alphabets;
+	}
+
+	/**
 	 * Returns an object or array, based on the game system's own data structure.
 	 *
 	 * @returns {object|array}

@@ -250,6 +250,16 @@ export class LanguageProvider {
 	/** This is needed if the LanguageProvider gets languages from compendiums, since they require the game state to be ready. */
 	requiresReady = false;
 
+	/** Legacy Support for old alphabets */
+	get alphabets() {
+		const alphabets = {};
+		for (const language of Object.keys(this.languages)) {
+			const font = this.fonts[this.languages[language].font];
+			alphabets[language] = `${font.fontSize}% ${font.fontFamily}`;
+		}
+		return alphabets;
+	}
+
 	/** Provider settings to be added by the module. */
 	get settings() {
 		return {};
