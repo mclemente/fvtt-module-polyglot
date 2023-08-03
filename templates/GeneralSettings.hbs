@@ -2,7 +2,7 @@
 	<nav class="sheet-tabs tabs">
 		<a class="item" data-tab="general">
 			<i class="fas fa-cogs"></i>
-			{{localize "POLYGLOT.General"}}
+			{{localize "POLYGLOT.Fonts"}}
 		</a>
 		<a class="item" data-tab="journal">
 			<i class="fas fa-book-open"></i>
@@ -20,15 +20,6 @@
 
 	<section class="content">
 		<div class="tab" data-tab="general">
-			{{#with useUniqueSalt}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<select name="{{id}}" class="form-fields" id="{{id}}">
-						{{selectOptions select selected=selected nameAttr="key" labelAttr="value"}}
-					</select>
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
 			{{#with RuneRegex}}
 				<div class="form-group">
 					<label>{{localize name}}</label>
@@ -36,24 +27,13 @@
 					<p class="notes">{{localize hint}}</p>
 				</div>
 			{{/with}}
-			{{#with logographicalFontToggle}}
+			{{#with enableAllFonts}}
 				<div class="form-group">
 					<label>{{localize name}}</label>
 					<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
 					<p class="notes">{{localize hint}}</p>
 				</div>
 			{{/with}}
-			{{#unless isGeneric}}
-				{{#with enableAllFonts}}
-					<div class="form-group">
-						<label>{{localize name}}</label>
-						<select name="{{id}}" class="form-fields" id="{{id}}">
-							{{selectOptions select selected=selected nameAttr="key" labelAttr="value"}}
-						</select>
-						<p class="notes">{{localize hint}}</p>
-					</div>
-				{{/with}}
-			{{/unless}}
 			{{#with exportFonts}}
 				<div class="form-group">
 					<label>{{localize name}}</label>
@@ -88,18 +68,22 @@
 		</div>
 		<div class="tab" data-tab="languages">
 			{{#with replaceLanguages}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
-					<p class="notes">{{localize hint}}</p>
-				</div>
+				{{#if config}}
+					<div class="form-group">
+						<label>{{localize name}}</label>
+						<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
+						<p class="notes">{{localize hint}}</p>
+					</div>
+				{{/if}}
 			{{/with}}
 			{{#with customLanguages}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="text" value="{{value}}" />
-					<p class="notes">{{localize hint}}</p>
-				</div>
+				{{#if config}}
+					<div class="form-group">
+						<label>{{localize name}}</label>
+						<input name="{{id}}" id="{{id}}" type="text" value="{{value}}" />
+						<p class="notes">{{localize hint}}</p>
+					</div>
+				{{/if}}
 			{{/with}}
 			{{#with omniglot}}
 				<div class="form-group">

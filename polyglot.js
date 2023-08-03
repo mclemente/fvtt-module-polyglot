@@ -16,26 +16,17 @@ Hooks.once("init", () => {
 	game.polyglot = new Polyglot();
 	game.polyglot.init();
 	api.attach();
-	Handlebars.registerHelper({
-		PolyglotBeautifyFont: (font) => {
-			return font
-				.split("% ")[1]
-				.split(/(?=[A-Z])/)
-				.join(" ");
-		},
-	});
 	Hooks.callAll("polyglot.init", LanguageProvider);
 });
 
 Hooks.on("setup", async () => {
 	registerSettings();
 	registerProviderSettings();
-	game.polyglot.setup();
 	await game.polyglot.languageProvider.setup();
 });
 Hooks.on("ready", () => {
 	game.polyglot.ready();
-	if (!Object.keys(game.settings.get("polyglot", "Languages")).length) game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.tongues);
+	if (!Object.keys(game.settings.get("polyglot", "Languages")).length) game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
 	Hooks.callAll("polyglot.ready", LanguageProvider);
 });
 Hooks.on("renderSettingsConfig", renderSettingsConfigHandler);

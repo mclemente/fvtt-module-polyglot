@@ -22,21 +22,11 @@ span.polyglot-journal {
 	background-color: rgba(var(--polyglot-journal-color-temp), var(--polyglot-journal-opacity-temp));
 }
 .polyglot-translation-text {
-	position: relative;
-	padding-top: 16px;
-	border-top: 1px solid #999;
+	border-top: 1px solid var(--color-border-light-2);
 	-webkit-user-select: text;
 	-moz-user-select: text;
 	-ms-user-select: text;
 	user-select: text;
-}
-.polyglot-translation-text:before {
-	position: absolute;
-	content: attr(title);
-	font-size: 14px;
-	top: 0px;
-	font-weight: bold;
-	font-style: italic;
 }
 .polyglot-group-header {
 	font-weight: bold;
@@ -54,9 +44,13 @@ input.selectatr[type="number"] {
 .polyglot-languages-list li .fontSize {
 	flex: 0 0 90px;
 	text-align: center;
+	margin: auto;
 }
 .polyglot-alphabet-list {
 	flex: 0 0 160px;
+}
+.polyglot-alphabet {
+	margin: auto;
 }
 .polyglot-language-settings .font-name,
 .polyglot-language-settings .selectatr {
@@ -65,6 +59,7 @@ input.selectatr[type="number"] {
 .polyglot-languages-list .font-name,
 .font-name {
 	flex: 0 0 150px;
+	margin: auto;
 }
 .polyglot-languages-list {
 	list-style: none;
@@ -79,4 +74,8 @@ input.selectatr[type="number"] {
 	text-align: center;
 	margin-bottom: 0.5em;
 	display: none;
+}
+
+a.polyglot-message-language.unclickable {
+	cursor: default;
 }

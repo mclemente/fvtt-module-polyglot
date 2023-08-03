@@ -11,6 +11,8 @@
 		"Font": "Font",
 		"Fonts": "Fonts",
 		"FontSize": "Font Size (%)",
+		"AlphabeticOnly": "Only Alphabetic",
+		"Logographical": "Logographical",
 		"AllowOOC.hint": "Choose which users should have their messages scrambled. OOC = Out of Character.",
 		"AllowOOC.title": "Scramble OOC Chat Messages",
 		"AllowOOCOptions": {
@@ -32,16 +34,10 @@
 		"DisplayTranslated.hint": "For languages that are translated in the chat window, display the original text and a translation below.",
 		"DisplayTranslated.title": "Display Translations",
 		"enableAllFonts": {
-			"choices": {
-				"0": "None",
-				"1": "Polyglot's Fonts",
-				"2": "Core's Additional Fonts",
-				"3": "Both"
-			},
-			"hint": "Adds fonts from the chosen sources to the {setting1} and {setting2}.",
-			"title": "Add Fonts to Module Settings"
+			"hint": "Add Foundry's fonts to the {setting1} and {setting2}.",
+			"title": "Add Foundry's fonts to {settingMenuLabel}"
 		},
-		"ExportFonts.hint": "Add Polyglot's fonts to Core's Additional Fonts menu. Toggling this setting off will remove all of Polyglot's fonts from the menu.",
+		"ExportFonts.hint": "Add Polyglot's fonts to Core's {settingMenuLabel} menu. Toggle this setting off to remove all of Polyglot's fonts from the menu.",
 		"ExportFonts.title": "Add Polyglot's fonts to Core",
 		"HideTranslation.hint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Useful for when you don't want to show players which language you are speaking. Requires reload.",
 		"HideTranslation.title": "Hide Indicators from Players",

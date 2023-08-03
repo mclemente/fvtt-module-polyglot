@@ -17,24 +17,34 @@
 
 			<ul class="polyglot-languages-list">
 				<li class="flexrow">
-					<div class="font-name">{{localize "POLYGLOT.LanguageLabel"}}</div>
-					<div class="polyglot-alphabet-list">{{localize "POLYGLOT.AlphabetLabel"}}</div>
-					<div class="polyglot-alphabet-title">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+					<div>{{localize "POLYGLOT.LanguageLabel"}}</div>
+					<div>{{localize "POLYGLOT.Fonts"}}</div>
+					{{!-- <div class="polyglot-alphabet-title">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div> --}}
+					<div>Randomize Letters</div>
 				</li>
 				<hr />
-				{{#each languages.value as |key val|}}
+				{{#each languages.value as |value key|}}
 					<li class="flexrow">
-						<div class="font-name">{{#if (eq val "_default")}}{{localize "POLYGLOT.DefaultAlphabet"}}{{else}}{{val}}{{/if}}</div>
-						<div class="polyglot-alphabet-list">
-							<select class="selectatr" name="language.alphabet" value={{key}} data-dtype="String">
-								{{#select key}}
-									{{#each ../alphabets.value as |font alphabet|}}
-										<option value="{{alphabet}}">{{PolyglotBeautifyFont font}}</option>
+						<div data-id="{{key}}">{{value.label}}</div>
+						<div>
+							<select class="selectatr" name="language.alphabet" data-dtype="String">
+								{{#select value.font}}
+									{{#each ../alphabets.value as |font label|}}
+										<option value="{{label}}">{{label}}</option>
 									{{/each}}
 								{{/select}}
 							</select>
 						</div>
-						<div class="polyglot-alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+						{{!-- <div class="polyglot-alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div> --}}
+						<div>
+							<select class="selectatr" name="language.rng" data-dtype="String">
+								{{#select value.rng}}
+									<option value="default">Default</option>
+									<option value="unique">Unique</option>
+									<option value="none">None</option>
+								{{/select}}
+							</select>
+						</div>
 					</li>
 				{{/each}}
 			</ul>

@@ -30,6 +30,30 @@ export function addMenuSetting(key, data) {
 }
 
 export function registerSettings() {
+	//General Settings Menu
+	game.settings.registerMenu("polyglot", "GeneralSettings", {
+		name: "POLYGLOT.GeneralSettings",
+		label: game.i18n.localize("POLYGLOT.GeneralSettings"),
+		icon: "fas fa-cogs",
+		type: PolyglotGeneralSettings,
+		restricted: true,
+	});
+	//Font Settings Menu
+	game.settings.registerMenu("polyglot", "FontSettings", {
+		name: "POLYGLOT.FontSettings",
+		label: game.i18n.localize("POLYGLOT.FontSettings"),
+		icon: "fas fa-font",
+		type: PolyglotFontSettings,
+		restricted: true,
+	});
+	//Language Settings Menu
+	game.settings.registerMenu("polyglot", "LanguageSettings", {
+		name: "POLYGLOT.LanguageSettings",
+		label: game.i18n.localize("POLYGLOT.LanguageSettings"),
+		icon: "fas fa-globe",
+		type: PolyglotLanguageSettings,
+		restricted: true,
+	});
 	addMenuSetting("Alphabets", {
 		config: false,
 		default: {},
@@ -51,17 +75,6 @@ export function registerSettings() {
 	});
 
 	//Font Settings
-	addMenuSetting("useUniqueSalt", {
-		name: "POLYGLOT.RandomizeRunes.title",
-		hint: "POLYGLOT.RandomizeRunes.hint",
-		default: "a",
-		type: String,
-		choices: {
-			a: game.i18n.localize("POLYGLOT.RandomizeRunesOptions.a"),
-			b: game.i18n.localize("POLYGLOT.RandomizeRunesOptions.b"),
-			c: game.i18n.localize("POLYGLOT.RandomizeRunesOptions.c"),
-		},
-	});
 	addMenuSetting("RuneRegex", {
 		default: false,
 		type: Boolean,
@@ -70,64 +83,25 @@ export function registerSettings() {
 		default: false,
 		type: Boolean,
 	});
-	addMenuSetting("logographicalFontToggle", {
-		name: "POLYGLOT.logographicalFontToggle.title",
-		hint: "POLYGLOT.logographicalFontToggle.hint",
-		default: true,
-		type: Boolean,
-	});
 	addMenuSetting("enableAllFonts", {
+		name: game.i18n.format("POLYGLOT.enableAllFonts.title", { settingMenuLabel: game.i18n.localize("POLYGLOT.FontSettings") }),
 		hint: game.i18n.format("POLYGLOT.enableAllFonts.hint", {
 			setting1: game.i18n.localize("POLYGLOT.FontSettings"),
 			setting2: game.i18n.localize("POLYGLOT.LanguageSettings"),
 		}),
-		// config: !game.polyglot.languageProvider.isGeneric,
-		default: 0,
-		type: Number,
+		default: false,
+		type: Boolean,
 		requiresReload: true,
-		choices: {
-			0: game.i18n.localize("POLYGLOT.enableAllFonts.choices.0"),
-			1: game.i18n.localize("POLYGLOT.enableAllFonts.choices.1"),
-			2: game.i18n.localize("POLYGLOT.enableAllFonts.choices.2"),
-			3: game.i18n.localize("POLYGLOT.enableAllFonts.choices.3"),
-		},
 		onChange: () => {
-			game.polyglot.languageProvider.loadAlphabet();
-			game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.alphabets);
+			//TODO check if this is still needed
+			game.polyglot.languageProvider.loadFonts();
+			game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
 		},
-	});
-
-	//General Settings Menu
-	game.settings.registerMenu("polyglot", "GeneralSettings", {
-		name: "POLYGLOT.GeneralSettings",
-		label: game.i18n.localize("POLYGLOT.GeneralSettings"),
-		icon: "fas fa-cogs",
-		type: PolyglotGeneralSettings,
-		restricted: true,
-	});
-	const allFontsEnabled = game.settings.get("polyglot", "enableAllFonts") > 0;
-	//Font Settings Menu
-	if (allFontsEnabled) {
-		game.settings.registerMenu("polyglot", "FontSettings", {
-			name: "POLYGLOT.FontSettings",
-			label: game.i18n.localize("POLYGLOT.FontSettings"),
-			icon: "fas fa-font",
-			type: PolyglotFontSettings,
-			restricted: true,
-		});
-	}
-	//Language Settings Menu
-	game.settings.registerMenu("polyglot", "LanguageSettings", {
-		name: "POLYGLOT.LanguageSettings",
-		label: game.i18n.localize("POLYGLOT.LanguageSettings"),
-		icon: "fas fa-globe",
-		type: PolyglotLanguageSettings,
-		restricted: true,
 	});
 
 	addMenuSetting("exportFonts", {
 		name: "POLYGLOT.ExportFonts.title",
-		hint: "POLYGLOT.ExportFonts.hint",
+		hint: game.i18n.format("POLYGLOT.ExportFonts.hint", { settingMenuLabel: game.i18n.localize("SETTINGS.FontConfigN") }),
 		default: false,
 		type: Boolean,
 		requiresReload: true,
@@ -163,7 +137,7 @@ export function registerSettings() {
 		type: Boolean,
 		onChange: async () => {
 			await game.polyglot.languageProvider.getLanguages();
-			game.polyglot.languageProvider.loadTongues();
+			game.polyglot.languageProvider.loadLanguages();
 			game.polyglot.languageProvider.reloadLanguages();
 		},
 	});
@@ -173,7 +147,7 @@ export function registerSettings() {
 		default: "",
 		type: String,
 		onChange: () => {
-			game.polyglot.languageProvider.loadTongues();
+			game.polyglot.languageProvider.loadLanguages();
 			game.polyglot.languageProvider.reloadLanguages();
 		},
 	});
