@@ -273,8 +273,8 @@ export class LanguageProvider {
 			const enableAllFonts = game.settings.get("polyglot", "enableAllFonts");
 			if (enableAllFonts) {
 				for (let font in game.settings.get("core", "fonts")) {
-					const size = game.polyglot.CustomFontSizes[font] ?? "100";
-					this.addFont(font, size);
+					const fontSize = game.polyglot.CustomFontSizes[font] ?? "100";
+					this.addFont(font, fontSize);
 				}
 			}
 			this.loadFonts();
@@ -336,13 +336,13 @@ export class LanguageProvider {
 		const enableAllFonts = game.settings.get("polyglot", "enableAllFonts");
 		for (let font in this.fonts) {
 			if (game.polyglot.CustomFontSizes[font]) {
-				this.fonts[font].size = game.polyglot.CustomFontSizes[font];
+				this.fonts[font].fontSize = game.polyglot.CustomFontSizes[font];
 			}
 		}
 		if (enableAllFonts) {
 			for (let font in game.settings.get("core", "fonts")) {
-				const size = game.polyglot.CustomFontSizes[font] ?? 100;
-				this.addFont(font, size);
+				const fontSize = game.polyglot.CustomFontSizes[font] ?? 100;
+				this.addFont(font, fontSize);
 			}
 		}
 	}
@@ -408,7 +408,7 @@ export class LanguageProvider {
 	 * @param {Object} options
 	 * @see loadFonts
 	 */
-	addFont(fontFamily, size = 100, options = {}) {
+	addFont(fontFamily, fontSize = 100, options = {}) {
 		const key = fontFamily.toLowerCase();
 		const defaultOptions = {
 			alphabeticOnly: false,
@@ -417,8 +417,8 @@ export class LanguageProvider {
 		};
 
 		const font = Object.assign({}, defaultOptions, options, {
-			fontSize: size,
-			fontFamily: fontFamily,
+			fontSize,
+			fontFamily,
 		});
 
 		this.fonts[key] = font;
