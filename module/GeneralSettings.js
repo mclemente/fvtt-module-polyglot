@@ -39,8 +39,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 
 	getData(options) {
 		return {
-			journalTabName: game.version < 11 ? game.i18n.localize("DOCUMENT.JournalEntries") : game.i18n.localize("SIDEBAR.TabJournal"),
-			isGeneric: game.polyglot.languageProvider.isGeneric,
+			journalTabName: game.i18n.localize("SIDEBAR.TabJournal"),
 
 			// General Settings
 			RuneRegex: this.prepSetting("RuneRegex"),
