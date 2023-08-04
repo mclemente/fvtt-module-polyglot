@@ -305,7 +305,9 @@ export class LanguageProvider {
 					Hooks.callAll("polyglot.languageProvider.ready");
 				});
 			}
-		} else await setupSteps();
+		} else {
+			await setupSteps();
+		}
 	}
 
 	/**
@@ -314,6 +316,7 @@ export class LanguageProvider {
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		if (CONFIG[game.system.id.toUpperCase()]?.languages) {
+			const languagesSetting = game.settings.get("polyglot", "Languages");
 			if (CONFIG[game.system.id.toUpperCase()].languages.constructor === Object) {
 				if (replaceLanguages) CONFIG[game.system.id.toUpperCase()].languages = {};
 				const systemLanguages = CONFIG[game.system.id.toUpperCase()].languages;
@@ -321,7 +324,7 @@ export class LanguageProvider {
 					this.languages[key] = {
 						label: systemLanguages[key],
 						font: this.languages[key]?.font || this.defaultFont,
-						rng: "default",
+						rng: languagesSetting[lang].rng ?? "default",
 					};
 				});
 			}
@@ -331,7 +334,7 @@ export class LanguageProvider {
 					this.languages[lang.toLowerCase()] = {
 						label: lang,
 						font: this.languages[key]?.font || this.defaultFont,
-						rng: "default",
+						rng: languagesSetting[lang].rng ?? "default",
 					};
 				}
 			}
@@ -457,9 +460,10 @@ export class LanguageProvider {
 		if (!lang) return;
 
 		const key = lang.toLowerCase().replace(/[\s\']/g, "_");
+		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const defaultOptions = {
 			font: this.defaultFont,
-			rng: "default",
+			rng: languagesSetting[lang].rng ?? "default",
 		};
 
 		const language = Object.assign({}, defaultOptions, options, {
@@ -600,13 +604,17 @@ export class GenericLanguageProvider extends LanguageProvider {
 	get settings() {
 		return {
 			languageDataPath: {
-				hint: game.i18n.format("POLYGLOT.languageDataPath.hint", { setting: game.i18n.localize("POLYGLOT.LanguageRegex.title") }),
+				hint: game.i18n.format("POLYGLOT.languageDataPath.hint", {
+					setting: game.i18n.localize("POLYGLOT.LanguageRegex.title"),
+				}),
 				default: "",
 				type: String,
 				requiresReload: true,
 			},
 			literacyDataPath: {
-				hint: game.i18n.format("POLYGLOT.literacyDataPath.hint", { setting: game.i18n.localize("POLYGLOT.languageDataPath.title") }),
+				hint: game.i18n.format("POLYGLOT.literacyDataPath.hint", {
+					setting: game.i18n.localize("POLYGLOT.languageDataPath.title"),
+				}),
 				default: "",
 				type: String,
 				requiresReload: true,
@@ -708,15 +716,19 @@ export class a5eLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
+		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const langs = {};
 		if (replaceLanguages) {
 			CONFIG.A5E.languages = {};
 		} else {
 			for (let lang in CONFIG.A5E.languages) {
-				langs[lang] = game.i18n.localize(CONFIG.A5E.languages[lang]);
+				langs[lang] = {
+					label: game.i18n.localize(CONFIG.A5E.languages[lang]),
+					font: this.languages[lang]?.font ?? this.defaultFont,
+					rng: languagesSetting[lang].rng ?? "default",
+				};
 			}
 		}
-
 		this.languages = langs;
 	}
 
@@ -1015,7 +1027,7 @@ export class cyberpunkRedLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const langs = {
+		const originalLanguages = {
 			streetslang: "Streetslang",
 			arabic: "Arabic",
 			bengali: "Bengali",
@@ -1071,6 +1083,15 @@ export class cyberpunkRedLanguageProvider extends LanguageProvider {
 			vietnamese: "Vietnamese",
 			yoruba: "Yoruba",
 		};
+		const langs = {};
+		const languagesSetting = game.settings.get("polyglot", "Languages");
+		for (let lang in originalLanguages) {
+			langs[lang] = {
+				label: originalLanguages[lang],
+				font: this.languages[lang]?.font ?? this.defaultFont,
+				rng: languagesSetting[lang].rng ?? "default",
+			};
+		}
 		this.languages = replaceLanguages ? {} : langs;
 	}
 
@@ -1222,22 +1243,35 @@ export class darkHeresyLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const langs = {
-			chapterRunes: "Chapter Runes",
-			chaosMarks: "Chaos Marks",
-			eldar: "Eldar",
-			highGothic: "High Gothic",
-			imperialCodes: "Imperial Codes",
-			lowGothic: "Low Gothic",
-			mercenary: "Mercenary",
-			necrontyr: "Necrontyr",
-			ork: "Ork",
-			tau: "Tau",
-			technaLingua: "Techna-Lingua",
-			underworld: "Underworld",
-			xenosMarkings: "Xenos Markings",
-		};
-		this.languages = replaceLanguages ? {} : langs;
+		if (replaceLanguages) {
+			this.languages = {};
+		} else {
+			const originalLanguages = {
+				chapterRunes: "Chapter Runes",
+				chaosMarks: "Chaos Marks",
+				eldar: "Eldar",
+				highGothic: "High Gothic",
+				imperialCodes: "Imperial Codes",
+				lowGothic: "Low Gothic",
+				mercenary: "Mercenary",
+				necrontyr: "Necrontyr",
+				ork: "Ork",
+				tau: "Tau",
+				technaLingua: "Techna-Lingua",
+				underworld: "Underworld",
+				xenosMarkings: "Xenos Markings",
+			};
+			const langs = {};
+			const languagesSetting = game.settings.get("polyglot", "Languages");
+			for (let lang in originalLanguages) {
+				langs[lang] = {
+					label: originalLanguages[lang],
+					font: this.languages[lang]?.font ?? this.defaultFont,
+					rng: languagesSetting[lang].rng ?? "default",
+				};
+			}
+			this.languages = langs;
+		}
 	}
 
 	getUserLanguages(actor) {
@@ -1287,8 +1321,13 @@ export class dccLanguageProvider extends LanguageProvider {
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const langs = {};
+		const languagesSetting = game.settings.get("polyglot", "Languages");
 		for (let item in CONFIG.DCC.languages) {
-			langs[item] = game.i18n.localize(CONFIG.DCC.languages[item]);
+			langs[item] = {
+				label: game.i18n.localize(CONFIG.DCC.languages[item]),
+				font: this.languages[item]?.font ?? this.defaultFont,
+				rng: languagesSetting[lang].rng ?? "default",
+			};
 		}
 		this.languages = replaceLanguages ? {} : langs;
 	}
@@ -1387,12 +1426,13 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		}
 		const demonlordPack = game.packs.get("demonlord.languages");
 		const demonlordItemList = await demonlordPack.getIndex();
+		const languagesSetting = game.settings.get("polyglot", "Languages");
 		for (let item of demonlordItemList) {
 			const originalName = item?.flags?.babele?.originalName || item.name;
 			this.languages[originalName] = {
 				label: item.name,
 				font: this.languages[originalName]?.font || this.defaultFont,
-				rng: "default",
+				rng: languagesSetting[lang].rng ?? "default",
 			};
 		}
 	}
@@ -1458,14 +1498,30 @@ export class dnd4eLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		if (replaceLanguages) CONFIG.DND4EBETA.spoken = {};
-		this.languages = CONFIG.DND4EBETA.spoken;
+		const langs = {};
+		if (replaceLanguages) {
+			CONFIG.DND4EBETA.spoken = {};
+		}
+		const languagesSetting = game.settings.get("polyglot", "Languages");
+		for (let lang in CONFIG.DND4EBETA.spoken) {
+			langs[lang] = {
+				label: CONFIG.DND4EBETA.spoken[lang],
+				font: this.languages[lang]?.font ?? this.defaultFont,
+				rng: languagesSetting[lang].rng ?? "default",
+			};
+		}
+		this.languages = langs;
 	}
+
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
-		for (let lang of actor.system.languages.spoken.value) knownLanguages.add(lang);
-		// for (let lang of actor.system.languages.script.value) literateLanguages.add(lang);
+		for (let lang of actor.system.languages.spoken.value) {
+			knownLanguages.add(lang);
+		}
+		// for (let lang of actor.system.languages.script.value) {
+		// 	literateLanguages.add(lang);
+		// }
 		return [knownLanguages, literateLanguages];
 	}
 }
@@ -1876,6 +1932,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 				const dsa5ItemList = await dsa5Pack.getIndex();
 				const languageRegex = new RegExp(game.i18n.localize("LocalizedIDs.language") + "\\s*\\((.+)\\)", "i");
 				const literacyRegex = new RegExp(game.i18n.localize("LocalizedIDs.literacy") + "\\s*\\((.+)\\)", "i");
+				const languagesSetting = game.settings.get("polyglot", "Languages");
 				for (const item of dsa5ItemList) {
 					if (languageRegex.test(item.name)) {
 						const lang = item.name.match(languageRegex)[1].trim();
@@ -1883,7 +1940,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 						languages[key] = {
 							label: lang,
 							font: this.languages[key]?.font || this.defaultFont,
-							rng: "default",
+							rng: languagesSetting[lang].rng ?? "default",
 						};
 					} else if (literacyRegex.test(item.name)) {
 						const lang = item.name.match(literacyRegex)[1].trim();
@@ -1891,7 +1948,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 						languages[key] = {
 							label: lang,
 							font: this.languages[key]?.font || this.defaultFont,
-							rng: "default",
+							rng: languagesSetting[lang].rng ?? "default",
 						};
 					}
 				}
@@ -1970,8 +2027,9 @@ export class earthdawn4eLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		for (let lang in this.originalTongues) {
-			this.languages[lang] = game.i18n.localize(`earthdawn.l.language${lang.capitalize()}`);
+		for (let lang in this.languages) {
+			this.languages[lang].label = game.i18n.localize(`earthdawn.l.language${lang.capitalize()}`);
+			this.languages[lang].rng = "default";
 		}
 	}
 
@@ -2213,11 +2271,12 @@ export class oseLanguageProvider extends LanguageProvider {
 			this.languages = {};
 			return;
 		}
+		const languagesSetting = game.settings.get("polyglot", "Languages");
 		CONFIG.OSE.languages.forEach((key) => {
 			this.languages[key] = {
 				label: key,
 				font: this.languages[key]?.font ?? this.defaultFont,
-				rng: "default",
+				rng: languagesSetting[lang].rng ?? "default",
 			};
 		});
 	}
@@ -2619,10 +2678,11 @@ export class pf2eLanguageProvider extends LanguageProvider {
 			const index = homebrewLanguagesValues.indexOf(lang);
 			key = homebrewLanguagesKeys[index];
 		}
+		const languagesSetting = game.settings.get("polyglot", "Languages");
 		this.languages[key] = {
 			label: lang,
 			font: this.languages[key]?.font || this.defaultFont,
-			rng: "default",
+			rng: languagesSetting[lang].rng ?? "default",
 		};
 		this.addToConfig(key, lang);
 	}
@@ -2834,12 +2894,16 @@ export class swadeLanguageProvider extends LanguageProvider {
 				default: game.i18n.localize("POLYGLOT.SWADE.LanguageSkills"),
 			},
 			"SWADE.AdditionalLanguageStat": {
-				hint: game.i18n.format("POLYGLOT.SWADE.AdditionalLanguageStat.hint", { setting: game.i18n.localize("POLYGLOT.LanguageRegex.title") }),
+				hint: game.i18n.format("POLYGLOT.SWADE.AdditionalLanguageStat.hint", {
+					setting: game.i18n.localize("POLYGLOT.LanguageRegex.title"),
+				}),
 				type: String,
 				default: "",
 			},
 			"SWADE.AdditionalLiterateStat": {
-				hint: game.i18n.format("POLYGLOT.SWADE.AdditionalLiterateStat.hint", { setting: game.i18n.localize("POLYGLOT.SWADE.AdditionalLanguageStat.title") }),
+				hint: game.i18n.format("POLYGLOT.SWADE.AdditionalLiterateStat.hint", {
+					setting: game.i18n.localize("POLYGLOT.SWADE.AdditionalLanguageStat.title"),
+				}),
 				type: String,
 				default: "",
 			},
@@ -3432,6 +3496,7 @@ export class wfrp4eLanguageProvider extends LanguageProvider {
 		}
 		const wfrp4ePack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
 		const wfrp4eItemList = await wfrp4ePack.getIndex();
+		const languagesSetting = game.settings.get("polyglot", "Languages");
 		let myRegex = new RegExp(game.settings.get("polyglot", "LanguageRegex") + "\\s*\\((.+)\\)", "i");
 		for (let item of wfrp4eItemList) {
 			if (myRegex.test(item.name)) {
@@ -3440,7 +3505,7 @@ export class wfrp4eLanguageProvider extends LanguageProvider {
 				this.languages[key] = {
 					label: lang,
 					font: this.languages[key]?.font || this.defaultFont,
-					rng: "default",
+					rng: languagesSetting[lang].rng ?? "default",
 				};
 			}
 		}
@@ -3487,10 +3552,11 @@ export class wwnLanguageProvider extends LanguageProvider {
 		}
 		lang = lang.trim();
 		const key = lang.toLowerCase().replace(/[\s\']/g, "_");
+		const languagesSetting = game.settings.get("polyglot", "Languages");
 		this.languages[key] = {
 			label: lang,
 			font: this.defaultFont,
-			rng: "default",
+			rng: languagesSetting[lang].rng ?? "default",
 		};
 	}
 	removeLanguage(lang) {
@@ -3508,12 +3574,13 @@ export class wwnLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
+		const languagesSetting = game.settings.get("polyglot", "Languages");
 		for (let lang of game.settings.get("wwn", "languageList").split(",")) {
 			const key = lang.toLowerCase().replace(/[\s\']/g, "_");
 			this.languages[key] = {
 				label: lang,
 				font: this.defaultFont,
-				rng: "default",
+				rng: languagesSetting[lang].rng ?? "default",
 			};
 		}
 	}
