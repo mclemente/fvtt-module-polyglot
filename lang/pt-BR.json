@@ -24,8 +24,8 @@
 		"ScrambleGM.title": "Embaralhar para o Mestre",
 		"ScrambleGM.hint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende). Recarregará o programa.",
 		"enableAllFonts": {
-			"title": "Adicionar Fontes às Configurações do Módulo",
-			"hint": "Adiciona fontes das opções escolhidas às {setting1} e {setting2}.",
+			"title": "Adicionar Fontes do Foundry às {settingMenuLabel}",
+			"hint": "Adiciona fontes do Foundry às {setting1} e {setting2}.",
 			"choices": {
 				"0": "Nenhuma",
 				"1": "Fontes do Polyglot",
@@ -41,7 +41,7 @@
 			"c": "Nenhum ⚠️"
 		},
 		"ExportFonts.title": "Adicionar Fontes do Polyglot à Base",
-		"ExportFonts.hint": "Adiciona as fontes do Polyglot ao menu de Fontes Adicionas do Foundry. Desativar esta configuração irá remover todas as fontes do Polyglot do menu.",
+		"ExportFonts.hint": "Adiciona as fontes do Polyglot ao {settingMenuLabel} do Foundry. Desative esta configuração para remover todas as fontes do Polyglot do menu.",
 		"DisplayTranslated.title": "Mostrar traduções",
 		"DisplayTranslated.hint": "Para linguagens que são traduzidas no chat, mostrar o texto original e a tradução em seguida.",
 		"HideTranslation.title": "Esconder Globo e texto \"Traduzido do\" dos jogadores",
@@ -129,6 +129,8 @@
 		"Omniglot": {
 			"title": "Idioma Omniglota",
 			"hint": "Define um idioma cujo falante entende e fala todos os outros idiomas."
-		}
+		},
+		"AlphabeticOnly": "Apenas Alfabética",
+		"Logographical": "Logográfica"
 	}
 }
