@@ -2429,16 +2429,13 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		common: {
 			font: "Thorass",
 		},
-		aboleth: {
-			font: "Ar Ciela",
-		},
 		abyssal: {
 			font: "Barazhad",
 		},
 		aklo: {
 			font: "Ophidian",
 		},
-		algollthu: {
+		alghollthu: {
 			font: "Ar Ciela",
 		},
 		anadi: {
@@ -2471,17 +2468,11 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		daemonic: {
 			font: "Infernal",
 		},
-		dark: {
-			font: "High Drowic",
-		},
 		destrachan: {
 			font: "Ar Ciela",
 		},
 		draconic: {
 			font: "Iokharic",
-		},
-		drowsign: {
-			font: "Finger Alphabet",
 		},
 		druidic: {
 			font: "Jungle Slang",
@@ -2501,14 +2492,8 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		garundi: {
 			font: "Qijomi",
 		},
-		giant: {
-			font: "Meroitic Demotic",
-		},
 		gnoll: {
 			font: "Kargi",
-		},
-		gnome: {
-			font: "Dethek",
 		},
 		gnomish: {
 			font: "Dethek",
@@ -2549,14 +2534,8 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		necril: {
 			font: "High Drowic",
 		},
-		orc: {
-			font: "Dethek",
-		},
 		orcish: {
 			font: "Dethek",
-		},
-		polyglot: {
-			font: "Tengwar",
 		},
 		protean: {
 			font: "Barazhad",
@@ -2597,9 +2576,6 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		tien: {
 			font: "Oriental",
 		},
-		treant: {
-			font: "Olde Espruar",
-		},
 		undercommon: {
 			font: "High Drowic",
 		},
@@ -2609,9 +2585,6 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		varisian: {
 			font: "Tengwar",
 		},
-		vegepygmy: {
-			font: "Kargi",
-		},
 		vudrani: {
 			font: "Qijomi",
 		},
@@ -2619,16 +2592,22 @@ export class pf2eLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		const langs = {};
 		if (replaceLanguages) {
 			CONFIG.PF2E.languages = {};
 		} else {
+			const langs = {};
+			const languagesSetting = game.settings.get("polyglot", "Languages");
 			for (let lang in CONFIG.PF2E.languages) {
-				langs[lang] = game.i18n.localize(CONFIG.PF2E.languages[lang]);
+				langs[lang] = {
+					label: game.i18n.localize(CONFIG.PF2E.languages[lang]),
+					font: this.languages[lang]?.font ?? this.defaultFont,
+					rng: languagesSetting[lang].rng ?? "default",
+				};
 			}
+			this.languages = langs;
 		}
-		this.languages = langs;
 	}
+
 	addLanguage(lang) {
 		if (!lang) return;
 		lang = lang.trim();
