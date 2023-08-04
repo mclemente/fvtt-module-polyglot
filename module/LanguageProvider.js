@@ -323,7 +323,7 @@ export class LanguageProvider {
 				Object.keys(systemLanguages).forEach((key) => {
 					this.languages[key] = {
 						label: systemLanguages[key],
-						font: this.languages[key]?.font || this.defaultFont,
+						font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
 						rng: languagesSetting[lang].rng ?? "default",
 					};
 				});
@@ -333,7 +333,7 @@ export class LanguageProvider {
 				for (let lang of CONFIG[game.system.id.toUpperCase()].languages) {
 					this.languages[lang.toLowerCase()] = {
 						label: lang,
-						font: this.languages[key]?.font || this.defaultFont,
+						font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
 						rng: languagesSetting[lang].rng ?? "default",
 					};
 				}
@@ -724,7 +724,7 @@ export class a5eLanguageProvider extends LanguageProvider {
 			for (let lang in CONFIG.A5E.languages) {
 				langs[lang] = {
 					label: game.i18n.localize(CONFIG.A5E.languages[lang]),
-					font: this.languages[lang]?.font ?? this.defaultFont,
+					font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
 					rng: languagesSetting[lang].rng ?? "default",
 				};
 			}
@@ -1088,7 +1088,7 @@ export class cyberpunkRedLanguageProvider extends LanguageProvider {
 		for (let lang in originalLanguages) {
 			langs[lang] = {
 				label: originalLanguages[lang],
-				font: this.languages[lang]?.font ?? this.defaultFont,
+				font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
 				rng: languagesSetting[lang].rng ?? "default",
 			};
 		}
@@ -1266,7 +1266,7 @@ export class darkHeresyLanguageProvider extends LanguageProvider {
 			for (let lang in originalLanguages) {
 				langs[lang] = {
 					label: originalLanguages[lang],
-					font: this.languages[lang]?.font ?? this.defaultFont,
+					font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
 					rng: languagesSetting[lang].rng ?? "default",
 				};
 			}
@@ -1325,7 +1325,7 @@ export class dccLanguageProvider extends LanguageProvider {
 		for (let item in CONFIG.DCC.languages) {
 			langs[item] = {
 				label: game.i18n.localize(CONFIG.DCC.languages[item]),
-				font: this.languages[item]?.font ?? this.defaultFont,
+				font: languagesSetting[lang]?.font || this.languages[item]?.font || this.defaultFont,
 				rng: languagesSetting[lang].rng ?? "default",
 			};
 		}
@@ -1431,7 +1431,7 @@ export class demonlordLanguageProvider extends LanguageProvider {
 			const originalName = item?.flags?.babele?.originalName || item.name;
 			this.languages[originalName] = {
 				label: item.name,
-				font: this.languages[originalName]?.font || this.defaultFont,
+				font: languagesSetting[lang]?.font || this.languages[originalName]?.font || this.defaultFont,
 				rng: languagesSetting[lang].rng ?? "default",
 			};
 		}
@@ -1506,7 +1506,7 @@ export class dnd4eLanguageProvider extends LanguageProvider {
 		for (let lang in CONFIG.DND4EBETA.spoken) {
 			langs[lang] = {
 				label: CONFIG.DND4EBETA.spoken[lang],
-				font: this.languages[lang]?.font ?? this.defaultFont,
+				font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
 				rng: languagesSetting[lang].rng ?? "default",
 			};
 		}
@@ -1939,7 +1939,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 						const key = lang.toLowerCase();
 						languages[key] = {
 							label: lang,
-							font: this.languages[key]?.font || this.defaultFont,
+							font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
 							rng: languagesSetting[lang].rng ?? "default",
 						};
 					} else if (literacyRegex.test(item.name)) {
@@ -1947,7 +1947,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 						const key = lang.toLowerCase();
 						languages[key] = {
 							label: lang,
-							font: this.languages[key]?.font || this.defaultFont,
+							font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
 							rng: languagesSetting[lang].rng ?? "default",
 						};
 					}
@@ -2275,7 +2275,7 @@ export class oseLanguageProvider extends LanguageProvider {
 		CONFIG.OSE.languages.forEach((key) => {
 			this.languages[key] = {
 				label: key,
-				font: this.languages[key]?.font ?? this.defaultFont,
+				font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
 				rng: languagesSetting[lang].rng ?? "default",
 			};
 		});
@@ -2659,7 +2659,7 @@ export class pf2eLanguageProvider extends LanguageProvider {
 			for (let lang in CONFIG.PF2E.languages) {
 				langs[lang] = {
 					label: game.i18n.localize(CONFIG.PF2E.languages[lang]),
-					font: this.languages[lang]?.font ?? this.defaultFont,
+					font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
 					rng: languagesSetting[lang].rng ?? "default",
 				};
 			}
@@ -2681,7 +2681,7 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		this.languages[key] = {
 			label: lang,
-			font: this.languages[key]?.font || this.defaultFont,
+			font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
 			rng: languagesSetting[lang].rng ?? "default",
 		};
 		this.addToConfig(key, lang);
@@ -3504,7 +3504,7 @@ export class wfrp4eLanguageProvider extends LanguageProvider {
 				let key = lang.toLowerCase();
 				this.languages[key] = {
 					label: lang,
-					font: this.languages[key]?.font || this.defaultFont,
+					font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
 					rng: languagesSetting[lang].rng ?? "default",
 				};
 			}
@@ -3552,11 +3552,10 @@ export class wwnLanguageProvider extends LanguageProvider {
 		}
 		lang = lang.trim();
 		const key = lang.toLowerCase().replace(/[\s\']/g, "_");
-		const languagesSetting = game.settings.get("polyglot", "Languages");
 		this.languages[key] = {
 			label: lang,
 			font: this.defaultFont,
-			rng: languagesSetting[lang].rng ?? "default",
+			rng: "default",
 		};
 	}
 	removeLanguage(lang) {
@@ -3579,7 +3578,7 @@ export class wwnLanguageProvider extends LanguageProvider {
 			const key = lang.toLowerCase().replace(/[\s\']/g, "_");
 			this.languages[key] = {
 				label: lang,
-				font: this.defaultFont,
+				font: languagesSetting[lang]?.font || this.defaultFont,
 				rng: languagesSetting[lang].rng ?? "default",
 			};
 		}
