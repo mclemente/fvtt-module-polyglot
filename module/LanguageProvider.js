@@ -324,7 +324,7 @@ export class LanguageProvider {
 					this.languages[key] = {
 						label: systemLanguages[key],
 						font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
-						rng: languagesSetting[lang].rng ?? "default",
+						rng: languagesSetting[lang]?.rng ?? "default",
 					};
 				});
 			}
@@ -334,7 +334,7 @@ export class LanguageProvider {
 					this.languages[lang.toLowerCase()] = {
 						label: lang,
 						font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
-						rng: languagesSetting[lang].rng ?? "default",
+						rng: languagesSetting[lang]?.rng ?? "default",
 					};
 				}
 			}
@@ -463,7 +463,7 @@ export class LanguageProvider {
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const defaultOptions = {
 			font: this.defaultFont,
-			rng: languagesSetting[lang].rng ?? "default",
+			rng: languagesSetting[lang]?.rng ?? "default",
 		};
 
 		const language = Object.assign({}, defaultOptions, options, {
@@ -725,7 +725,7 @@ export class a5eLanguageProvider extends LanguageProvider {
 				langs[lang] = {
 					label: game.i18n.localize(CONFIG.A5E.languages[lang]),
 					font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
-					rng: languagesSetting[lang].rng ?? "default",
+					rng: languagesSetting[lang]?.rng ?? "default",
 				};
 			}
 		}
@@ -1089,7 +1089,7 @@ export class cyberpunkRedLanguageProvider extends LanguageProvider {
 			langs[lang] = {
 				label: originalLanguages[lang],
 				font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
-				rng: languagesSetting[lang].rng ?? "default",
+				rng: languagesSetting[lang]?.rng ?? "default",
 			};
 		}
 		this.languages = replaceLanguages ? {} : langs;
@@ -1267,7 +1267,7 @@ export class darkHeresyLanguageProvider extends LanguageProvider {
 				langs[lang] = {
 					label: originalLanguages[lang],
 					font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
-					rng: languagesSetting[lang].rng ?? "default",
+					rng: languagesSetting[lang]?.rng ?? "default",
 				};
 			}
 			this.languages = langs;
@@ -1326,7 +1326,7 @@ export class dccLanguageProvider extends LanguageProvider {
 			langs[item] = {
 				label: game.i18n.localize(CONFIG.DCC.languages[item]),
 				font: languagesSetting[lang]?.font || this.languages[item]?.font || this.defaultFont,
-				rng: languagesSetting[lang].rng ?? "default",
+				rng: languagesSetting[lang]?.rng ?? "default",
 			};
 		}
 		this.languages = replaceLanguages ? {} : langs;
@@ -1432,7 +1432,7 @@ export class demonlordLanguageProvider extends LanguageProvider {
 			this.languages[originalName] = {
 				label: item.name,
 				font: languagesSetting[lang]?.font || this.languages[originalName]?.font || this.defaultFont,
-				rng: languagesSetting[lang].rng ?? "default",
+				rng: languagesSetting[lang]?.rng ?? "default",
 			};
 		}
 	}
@@ -1507,7 +1507,7 @@ export class dnd4eLanguageProvider extends LanguageProvider {
 			langs[lang] = {
 				label: CONFIG.DND4EBETA.spoken[lang],
 				font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
-				rng: languagesSetting[lang].rng ?? "default",
+				rng: languagesSetting[lang]?.rng ?? "default",
 			};
 		}
 		this.languages = langs;
@@ -1940,7 +1940,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 						languages[key] = {
 							label: lang,
 							font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
-							rng: languagesSetting[lang].rng ?? "default",
+							rng: languagesSetting[lang]?.rng ?? "default",
 						};
 					} else if (literacyRegex.test(item.name)) {
 						const lang = item.name.match(literacyRegex)[1].trim();
@@ -1948,7 +1948,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 						languages[key] = {
 							label: lang,
 							font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
-							rng: languagesSetting[lang].rng ?? "default",
+							rng: languagesSetting[lang]?.rng ?? "default",
 						};
 					}
 				}
@@ -2276,7 +2276,7 @@ export class oseLanguageProvider extends LanguageProvider {
 			this.languages[key] = {
 				label: key,
 				font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
-				rng: languagesSetting[lang].rng ?? "default",
+				rng: languagesSetting[lang]?.rng ?? "default",
 			};
 		});
 	}
@@ -2660,7 +2660,7 @@ export class pf2eLanguageProvider extends LanguageProvider {
 				langs[lang] = {
 					label: game.i18n.localize(CONFIG.PF2E.languages[lang]),
 					font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
-					rng: languagesSetting[lang].rng ?? "default",
+					rng: languagesSetting[lang]?.rng ?? "default",
 				};
 			}
 			this.languages = langs;
@@ -2682,7 +2682,7 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		this.languages[key] = {
 			label: lang,
 			font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
-			rng: languagesSetting[lang].rng ?? "default",
+			rng: languagesSetting[lang]?.rng ?? "default",
 		};
 		this.addToConfig(key, lang);
 	}
@@ -3505,7 +3505,7 @@ export class wfrp4eLanguageProvider extends LanguageProvider {
 				this.languages[key] = {
 					label: lang,
 					font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
-					rng: languagesSetting[lang].rng ?? "default",
+					rng: languagesSetting[lang]?.rng ?? "default",
 				};
 			}
 		}
@@ -3579,7 +3579,7 @@ export class wwnLanguageProvider extends LanguageProvider {
 			this.languages[key] = {
 				label: lang,
 				font: languagesSetting[lang]?.font || this.defaultFont,
-				rng: languagesSetting[lang].rng ?? "default",
+				rng: languagesSetting[lang]?.rng ?? "default",
 			};
 		}
 	}
