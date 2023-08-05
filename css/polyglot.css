@@ -4,6 +4,11 @@
 	--polyglot-journal-color-temp: 255, 180, 0;
 	--polyglot-journal-opacity-temp: 0.25;
 }
+
+.polyglot.wfrp4e select {
+	color: #e2e2e2;
+}
+
 .polyglot-chat-bubble {
 	font-family: var(--polyglot-chat-bubble-font);
 }

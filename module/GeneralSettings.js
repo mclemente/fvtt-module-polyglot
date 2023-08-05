@@ -4,7 +4,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 			id: "polyglot-general-form",
 			title: "Polyglot General Settings",
 			template: "./modules/polyglot/templates/GeneralSettings.hbs",
-			classes: ["sheet", "polyglot-general-settings"],
+			classes: ["sheet", "polyglot", "polyglot-general-settings", game.system.id],
 			tabs: [{ navSelector: ".tabs", contentSelector: ".content", initial: "general" }],
 			width: 600,
 			height: "auto",
