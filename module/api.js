@@ -17,7 +17,7 @@ export class PolyglotAPI {
 			.filter((provider) => provider !== "LanguageProvider")
 			.map((provider) => provider.replace("LanguageProvider", ""))
 			.join("|");
-		const systemsRegex = new RegExp(supportedSystems);
+		const systemsRegex = new RegExp(`^(${supportedSystems})$`);
 		let providerString = game.system.id;
 		if (!systemsRegex.test(game.system.id)) {
 			providerString = providerKeys[game.system.id] || "Generic";
