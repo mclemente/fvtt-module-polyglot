@@ -13,7 +13,7 @@
 			"s3": "S3",
 			"forgevtt": "Forge"
 		},
-		"Truespeech.title": "Kaikkikieli",
+		"Truespeech.title": "Kaikkipuheen kieli",
 		"JournalHighlight.title": "Korostuksen peitto (%)",
 		"JournalHighlight.hint": "Määrittää muistiinpanon fonttien päälle tulevan korostuksen peiton.",
 		"logographicalFontToggle.title": "Logografiset fontit",
@@ -33,8 +33,8 @@
 				"3": "Molemmat",
 				"1": "Polyglot fontit"
 			},
-			"title": "Lisää fontteja moduulin asetuksiin",
-			"hint": "Lisää fontteja valituista lähteistä kohtiin {setting1} ja {setting2}."
+			"title": "Lisää Foundryn fontteja {settingMenuLabel} asetuksiin",
+			"hint": "Lisää Foundryn fontteja kohtiin {setting1} ja {setting2}."
 		},
 		"RandomizeRunesOptions": {
 			"a": "Oletus",
@@ -42,7 +42,7 @@
 			"c": "Ei mitään ⚠️"
 		},
 		"ExportFonts.title": "Lisää Polyglotin fontit ytimeen",
-		"ExportFonts.hint": "Lisää Polyglotin fontit ytimen Ylimääräiset fontit -valikkoon. Tämän asetuksen kytkeminen pois päältä poistaa kaikki Polyglotin fontit valikosta.",
+		"ExportFonts.hint": "Lisää Polyglotin fontit ytimen {settingMenuLabel} -valikkoon. Kytke asetus pois päältä poistaaksesi kaikki Polyglotin fontit valikosta.",
 		"DisplayTranslated.title": "Näytön käännökset",
 		"DefaultAlphabet": "Oletusaakkosto",
 		"FontSettings": "Fonttien asetukset",
@@ -120,7 +120,7 @@
 		},
 		"General": "Yleinen",
 		"Omniglot": {
-			"title": "Kaikkikieli",
+			"title": "Kaikkikielen kieli",
 			"hint": "Aseta kieli, jonka puhuja ymmärtää ja puhuu kaikkia muita kieliä."
 		},
 		"IgnoreJournalFontSize": {
@@ -137,6 +137,8 @@
 		},
 		"RandomizeRunes.title": "Satunnaista riimut",
 		"ToggleRunes": "Vaihda riimut päälle/pois",
-		"Runes": "Riimut"
+		"Runes": "Riimut",
+		"AlphabeticOnly": "Vain aakkoselliset",
+		"Logographical": "Logografinen"
 	}
 }
