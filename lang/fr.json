@@ -1,5 +1,5 @@
 {
-	"POLYGLOT.CustomLanguages.title": "Langues Spéciales",
+	"POLYGLOT.CustomLanguages.title": "Langues personnalisées",
 	"POLYGLOT.CustomLanguages.hint": "Définissez une liste de langues personnalisées à ajouter au système. Elles doivent être séparées par des virgules ou des points-virgules.",
 	"POLYGLOT.ComprehendLanguages.title": "Langue omnisciente",
 	"POLYGLOT.ComprehendLanguages.hint": "Pour gérer les sorts ou effets de type 'Compréhension des Langues'. Saisissez une langue spéciale déja déclarée. Le fait de posséder cette langue permettra au personnage de comprendre tout les autres languages.",
@@ -13,12 +13,12 @@
 	"POLYGLOT.toggleRuneText.hint": "Active/Désactive la visibilité des runes dans les Journaux.",
 	"POLYGLOT.RandomizeRunes.title": "Runes aléatoires",
 	"POLYGLOT.RandomizeRunes.hint": "Activer cette option fera apparaître un texte crypté différent chaque fois, même si le texte initial est le même.",
-	"POLYGLOT.ExportFonts.title": "Disponibilité ds Polices",
-	"POLYGLOT.ExportFonts.hint": "Rendre les polices de Polyglot disponibles dans le menu des polices de Foundry. Désactiver ce réglage retirera toutes les polices de polyglotte du menu.",
-	"POLYGLOT.DisplayTranslated.title": "Affichicher la traduction",
+	"POLYGLOT.ExportFonts.title": "Ajouter les Polices de Polyglot au logiciel",
+	"POLYGLOT.ExportFonts.hint": "Rendre les polices de Polyglot disponibles dans le menu {settingMenuLabel} de Foundry. Désactiver ce réglage retire toutes les polices de Polyglot du menu.",
+	"POLYGLOT.DisplayTranslated.title": "Afficher les traductions",
 	"POLYGLOT.DisplayTranslated.hint": "Pour les langues traduites dans les messages de tchat, afficher le texte original et sa traduction.",
-	"POLYGLOT.AllowOOC.title": "Crypter les messages non destinés à un personnage",
-	"POLYGLOT.AllowOOC.hint": "Choisissez les utilisateurs dont les messages doivent être crypté. OOC = Out of Character.",
+	"POLYGLOT.AllowOOC.title": "Crypter les messages du chat HRP",
+	"POLYGLOT.AllowOOC.hint": "Choisissez les utilisateurs dont les messages doivent être cryptés. OOC = hors role play.",
 	"POLYGLOT.Translation": "Traduction",
 	"POLYGLOT.TranslatedFrom": "Traduit de ",
 	"POLYGLOT.LanguageLabel": "Langue",
@@ -65,8 +65,8 @@
 				"1": "Polices Polyglottes",
 				"2": "Polices supplémentaires du Core"
 			},
-			"hint": "Ajoute les polices des sources choisies aux {setting1} et {setting2}.",
-			"title": "Ajouter les polices aux paramètres de police et de langue"
+			"hint": "Ajoute les polices de Foundry aux {setting1} et {setting2}.",
+			"title": "Ajouter les polices aux {settingMenuLabel}"
 		},
 		"RandomizeRunesOptions": {
 			"a": "Défault",
@@ -74,7 +74,7 @@
 			"c": "Rien ⚠️"
 		},
 		"AllowOOCOptions": {
-			"a": "Tout",
+			"a": "Tous",
 			"b": "MJ Seulement",
 			"c": "Joueurs Seulement",
 			"d": "Aucun"
@@ -93,7 +93,7 @@
 		"FontSettings": "Paramètres de Police",
 		"AlphabetLabel": "Alphabet",
 		"ChatSettings": "Paramètres du chat",
-		"Languages.hint": "Modifie l'alphabet utilisé pour les langues. La réinitialisation aux valeurs par défaut déclenchera un rechargement.",
+		"Languages.hint": "Modifie l'alphabet utilisé pour les langues.",
 		"HideTranslation.title": "Masquer les indicateurs aux joueurs",
 		"LanguageRegex": {
 			"title": "RegEx de langue",
@@ -127,8 +127,10 @@
 		"GeneralSettings": "Paramètres généraux",
 		"Omniglot": {
 			"hint": "Définir une langue dont le locuteur comprend et parle toutes les autres langues.",
-			"title": "Langue Omniglot"
+			"title": "Langue omniglotte"
 		},
-		"General": "Général"
+		"General": "Général",
+		"AlphabeticOnly": "Alphabétique seulement",
+		"Logographical": "Logographique"
 	}
 }
