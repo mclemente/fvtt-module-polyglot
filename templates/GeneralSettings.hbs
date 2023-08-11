@@ -68,22 +68,22 @@
 		</div>
 		<div class="tab" data-tab="languages">
 			{{#with replaceLanguages}}
-				{{#if config}}
+				{{#unless polyglotHide}}
 					<div class="form-group">
 						<label>{{localize name}}</label>
 						<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
 						<p class="notes">{{localize hint}}</p>
 					</div>
-				{{/if}}
+				{{/unless}}
 			{{/with}}
 			{{#with customLanguages}}
-				{{#if config}}
+				{{#unless polyglotHide}}
 					<div class="form-group">
 						<label>{{localize name}}</label>
 						<input name="{{id}}" id="{{id}}" type="text" value="{{value}}" />
 						<p class="notes">{{localize hint}}</p>
 					</div>
-				{{/if}}
+				{{/unless}}
 			{{/with}}
 			{{#with omniglot}}
 				<div class="form-group">

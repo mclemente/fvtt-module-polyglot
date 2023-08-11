@@ -32,8 +32,8 @@ export class PolyglotGeneralSettings extends FormApplication {
 	}
 
 	prepSetting(key) {
-		const { name, hint, config } = game.settings.settings.get(`polyglot.${key}`);
-		return { id: key, value: game.settings.get("polyglot", key), name, hint, config };
+		const { name, hint, config, polyglotHide } = game.settings.settings.get(`polyglot.${key}`);
+		return { id: key, value: game.settings.get("polyglot", key), name, hint, config, polyglotHide };
 	}
 
 	async resetToDefault(key) {

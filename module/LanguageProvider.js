@@ -3529,11 +3529,11 @@ export class wwnLanguageProvider extends LanguageProvider {
 		return {
 			// System has a built-in setting to handle languages.
 			replaceLanguages: {
-				config: false,
+				polyglotHide: true,
 				...game.settings.settings.get("polyglot.replaceLanguages"),
 			},
 			customLanguages: {
-				config: false,
+				polyglotHide: true,
 				...game.settings.settings.get("polyglot.customLanguages"),
 			},
 		};
