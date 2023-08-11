@@ -3,11 +3,15 @@ export class PolyglotFontSettings extends FormApplication {
 	 * Default Options for this FormApplication
 	 */
 	static get defaultOptions() {
+		const classes = ["sheet", "polyglot", "polyglot-font-settings"];
+		if (game.system.id === "wfrp4e") {
+			classes.push(game.system.id);
+		}
 		return mergeObject(super.defaultOptions, {
 			id: "polyglot-font-form",
 			title: "Polyglot Font Settings",
 			template: "./modules/polyglot/templates/FontSettings.hbs",
-			classes: ["sheet", "polyglot", "polyglot-font-settings", game.system.id],
+			classes,
 			width: 780,
 			height: 680,
 			closeOnSubmit: true,

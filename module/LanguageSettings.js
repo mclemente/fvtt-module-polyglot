@@ -3,11 +3,15 @@ export class PolyglotLanguageSettings extends FormApplication {
 	 * Default Options for this FormApplication
 	 */
 	static get defaultOptions() {
+		const classes = ["sheet", "polyglot", "polyglot-language-settings"];
+		if (game.system.id === "wfrp4e") {
+			classes.push(game.system.id);
+		}
 		return mergeObject(super.defaultOptions, {
 			id: "polyglot-language-form",
 			title: "Polyglot Language Settings",
 			template: "./modules/polyglot/templates/LanguageSettings.hbs",
-			classes: ["sheet", "polyglot", "polyglot-language-settings", game.system.id],
+			classes,
 			width: 600,
 			height: 680,
 			closeOnSubmit: true,

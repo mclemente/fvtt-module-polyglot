@@ -1,10 +1,14 @@
 export class PolyglotGeneralSettings extends FormApplication {
 	static get defaultOptions() {
+		const classes = ["sheet", "polyglot", "polyglot-general-settings"];
+		if (game.system.id === "wfrp4e") {
+			classes.push(game.system.id);
+		}
 		return mergeObject(super.defaultOptions, {
 			id: "polyglot-general-form",
 			title: "Polyglot General Settings",
 			template: "./modules/polyglot/templates/GeneralSettings.hbs",
-			classes: ["sheet", "polyglot", "polyglot-general-settings", game.system.id],
+			classes,
 			tabs: [{ navSelector: ".tabs", contentSelector: ".content", initial: "general" }],
 			width: 600,
 			height: "auto",
