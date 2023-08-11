@@ -2503,13 +2503,13 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		anadi: {
 			font: "Jungle Slang",
 		},
-		aquan: {
+		thalassic: {
 			font: "Olde Thorass",
 		},
 		arboreal: {
 			font: "Olde Espruar",
 		},
-		auran: {
+		sussuran: {
 			font: "Olde Thorass",
 		},
 		azlanti: {
@@ -2569,7 +2569,7 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		hallit: {
 			font: "Tengwar",
 		},
-		ignan: {
+		pyric: {
 			font: "Dethek",
 		},
 		iruxi: {
@@ -2617,7 +2617,7 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		strix: {
 			font: "Infernal",
 		},
-		sylvan: {
+		fey: {
 			font: "Olde Espruar",
 		},
 		shoony: {
@@ -2629,7 +2629,7 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		tengu: {
 			font: "Oriental",
 		},
-		terran: {
+		petran: {
 			font: "Dethek",
 		},
 		thassilonian: {
