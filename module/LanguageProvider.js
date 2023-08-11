@@ -265,6 +265,10 @@ export class LanguageProvider {
 		return {};
 	}
 
+	get replaceLanguages() {
+		return game.settings.get("polyglot", "replaceLanguages");
+	}
+
 	///////////
 	// Hooks //
 	///////////
@@ -314,12 +318,11 @@ export class LanguageProvider {
 	 * Even though the base method doesn't have an await, some providers might need it to look into compendiums.
 	 */
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const langs = {};
 		if (CONFIG[game.system.id.toUpperCase()]?.languages) {
 			if (CONFIG[game.system.id.toUpperCase()].languages.constructor === Object) {
-				if (replaceLanguages) {
+				if (this.replaceLanguages) {
 					CONFIG[game.system.id.toUpperCase()].languages = {};
 				}
 				const systemLanguages = CONFIG[game.system.id.toUpperCase()].languages;
@@ -336,7 +339,7 @@ export class LanguageProvider {
 				this.languages = langs;
 			}
 			if (CONFIG[game.system.id.toUpperCase()].languages.constructor === Array) {
-				if (replaceLanguages) {
+				if (this.replaceLanguages) {
 					CONFIG[game.system.id.toUpperCase()].languages = [];
 				}
 				for (let key of CONFIG[game.system.id.toUpperCase()].languages) {
@@ -351,8 +354,7 @@ export class LanguageProvider {
 				this.languages = langs;
 			}
 		} else if (Object.keys(this.languages).length) {
-			const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-			if (replaceLanguages) {
+			if (this.replaceLanguages) {
 				this.languages = {};
 			} else {
 				Object.keys(this.languages).forEach((key) => {
@@ -392,12 +394,11 @@ export class LanguageProvider {
 	 * Add languages from the settings to this.languages.
 	 */
 	loadLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const customLanguages = game.settings.get("polyglot", "customLanguages");
 		const omniglot = game.settings.get("polyglot", "omniglot");
 		const comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
 		const truespeech = game.settings.get("polyglot", "truespeech");
-		if (replaceLanguages) this.languages = {};
+		if (this.replaceLanguages) this.languages = {};
 		if (customLanguages) {
 			for (let lang of customLanguages.split(/[,;]/)) {
 				lang = lang.trim();
@@ -1037,7 +1038,6 @@ export class cyberpunkRedLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const originalLanguages = {
 			streetslang: "Streetslang",
 			arabic: "Arabic",
@@ -1255,8 +1255,7 @@ export class darkHeresyLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		if (replaceLanguages) {
+		if (this.replaceLanguages) {
 			this.languages = {};
 		} else {
 			const originalLanguages = {
@@ -1418,8 +1417,7 @@ export class demonlordLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		if (replaceLanguages) {
+		if (this.replaceLanguages) {
 			this.languages = {};
 			return;
 		}
@@ -1496,9 +1494,8 @@ export class dnd4eLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const langs = {};
-		if (replaceLanguages) {
+		if (this.replaceLanguages) {
 			CONFIG.DND4EBETA.spoken = {};
 		}
 		const languagesSetting = game.settings.get("polyglot", "Languages");
@@ -1917,8 +1914,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		if (replaceLanguages) {
+		if (this.replaceLanguages) {
 			this.languages = {};
 			return;
 		}
@@ -2269,8 +2265,7 @@ export class oseLanguageProvider extends LanguageProvider {
 	};
 
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		if (replaceLanguages) {
+		if (this.replaceLanguages) {
 			this.languages = {};
 			return;
 		}
@@ -3311,10 +3306,9 @@ export class tormenta20LanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const langs = {};
-		if (replaceLanguages) {
+		if (this.replaceLanguages) {
 			CONFIG.T20.idiomas = {};
 		}
 		Object.keys(CONFIG.T20.idiomas).forEach((key) => {
@@ -3386,10 +3380,9 @@ export class uesrpgLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const langs = {};
-		if (replaceLanguages) {
+		if (this.replaceLanguages) {
 			CONFIG.UESRPG.languages = {};
 		}
 		Object.keys(CONFIG.UESRPG.languages).forEach((key) => {
@@ -3495,8 +3488,7 @@ export class wfrp4eLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const replaceLanguages = game.settings.get("polyglot", "replaceLanguages");
-		if (replaceLanguages) {
+		if (this.replaceLanguages) {
 			this.languages = {};
 			return;
 		}
