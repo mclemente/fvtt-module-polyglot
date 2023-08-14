@@ -269,8 +269,10 @@ export class Polyglot {
 			}
 		}
 		for (let lang of this.knownLanguages) {
-			if (!this._isTruespeech(lang) && (lang === this.omniglot || lang === this.comprehendLanguages)) continue;
-			const label = this.languageProvider.languages[lang].label || lang;
+			if (!this._isTruespeech(lang) && (lang === this.omniglot || lang === this.comprehendLanguages)) {
+				continue;
+			}
+			const label = this.languageProvider.languages[lang]?.label || lang.capitalize();
 			if (game.user.isGM && playerCharacters.length) {
 				const actorsThatKnowLang = playerCharacters.filter((actor) => actor.knownLanguages.has(lang));
 				if (actorsThatKnowLang.length) {
