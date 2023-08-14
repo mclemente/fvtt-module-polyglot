@@ -1,5 +1,6 @@
 {
 	"POLYGLOT": {
+		"GameMasterHasAssignedCharacter": "You are a {GM} and have a character assigned to you. Polyglot will behave weirdly because of that. Consider unassigning that character from your User.",
 		"DefaultAlphabet": "Default Alphabet",
 		"FontSettings": "Font Settings",
 		"GeneralSettings": "General Settings",

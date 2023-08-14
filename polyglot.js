@@ -20,6 +20,13 @@ Hooks.once("init", () => {
 });
 
 Hooks.on("setup", async () => {
+	if (game.user.isGM && game.user.character) {
+		console.warn(
+			`Polyglot | ${game.i18n.format("POLYGLOT.GameMasterHasAssignedCharacter", {
+				GM: game.i18n.localize("USER.RoleGamemaster"),
+			})}`
+		);
+	}
 	registerSettings();
 	registerProviderSettings();
 	await game.polyglot.languageProvider.setup();
