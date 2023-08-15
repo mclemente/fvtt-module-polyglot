@@ -11,7 +11,7 @@
 		"CustomLanguages.hint": "Zdefiniuj listę niestandardowych języków, które chcesz dodać do systemu. Muszą one być oddzielone przecinkami lub średnikami.",
 		"ComprehendLanguages.title": "Rozumienie Języków",
 		"ComprehendLanguages.hint": "Ustaw język, którego użytkownik rozumie wszystkie inne języki, ale w którym nie można mówić czy pisać.",
-		"Truespeech.title": "Rozumienie Języków",
+		"Truespeech.title": "Rozumienie Mowy",
 		"Truespeech.hint": "Ustal język, którego użytkownik rozumie wszystkie mówione języki (nie może czytać dzienników), i który rozumiany jest przez wszystkie istoty.",
 		"JournalHighlight.title": "Krycie podświetlenia (%)",
 		"JournalHighlight.hint": "Określa stopień nieprzezroczystości podświetleń nad czcionkami w dzienniku.",
@@ -23,8 +23,8 @@
 		"ReplaceLanguages.hint": "Zastępuje wszystkie domyślne języki systemowe podaną listą Własnych Języków. Pierwszy język na liście staje się nowym językiem domyślnym.",
 		"ScrambleGM.title": "Szyfruj Wiadomości dla MG",
 		"ScrambleGM.hint": "Nie tłumacz języków dla MG (aby określić zrozumienie języka przez żeton, odnieś się koloru ikonki globu). Wymaga przeładowania.",
-		"enableAllFonts.title": "Używaj Wszystkich Czcionek",
-		"enableAllFonts.hint": "Dodaje czcionki z wybranych źródeł do {setting1} i {setting2}.",
+		"enableAllFonts.title": "Dodaj czcionki Foundry do {settingMenuLabel}",
+		"enableAllFonts.hint": "Dodaj czcionki Foundry do {setting1} i {setting2}.",
 		"RandomizeRunes.title": "Randomizacja Run",
 		"RandomizeRunes.hint": "Określa jaki rodzaj randomizacji używany jest do tworzenia fraz. ⚠️ Opcja \"Brak\" wspiera tylko znaki alfanumeryczne (bez akcentów).",
 		"RandomizeRunesOptions": {
@@ -33,7 +33,7 @@
 			"c": "Brak ⚠️"
 		},
 		"ExportFonts.title": "Udostępnij Czcionki",
-		"ExportFonts.hint": "Udostępnij czcionki Polyglot do użytku w Foundry (na przykład w Rysunkach). Wyłączenie tego ustawienia usunie wszystkie czcionki Polyglot z opcji wyboru.",
+		"ExportFonts.hint": "Dodaje czcionki Polyglot do menu Głownego{settingMenuLabel}. Wyłącz to ustawienie, aby usunąć wszystkie czcionki Polyglot z menu.",
 		"DisplayTranslated.title": "Wyświetlaj Tłumaczenia",
 		"DisplayTranslated.hint": "Dla języków, które zostaną przetłumaczone na czacie, wyświetlaj tekst oryginalny oraz tłumaczenie pod spodem.",
 		"HideTranslation.title": "Usuń powiadomienia dla Graczy",
@@ -129,6 +129,8 @@
 			"hint": "Ustaw język, którego użytkownicy rozumieją i znają wszystkie inne języki.",
 			"title": "Język Omniglot"
 		},
-		"General": "Ogólne"
+		"General": "Ogólne",
+		"AlphabeticOnly": "Tylko alfabetyczne",
+		"Logographical": "Logograficzny"
 	}
 }
