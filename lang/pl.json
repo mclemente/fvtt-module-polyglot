@@ -131,6 +131,7 @@
 		},
 		"General": "Ogólne",
 		"AlphabeticOnly": "Tylko alfabetyczne",
-		"Logographical": "Logograficzny"
+		"Logographical": "Logograficzny",
+		"GameMasterHasAssignedCharacter": "Jesteś {GM} i masz przypisaną postać. Z tego powodu Polyglot będzie się dziwnie zachowywać. Rozważ usunięcie tej postaci ze swojego użytkownika."
 	}
 }
