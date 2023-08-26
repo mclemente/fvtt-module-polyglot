@@ -538,12 +538,20 @@ export class LanguageProvider {
 	getDefaultLanguage() {
 		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
 		if (defaultLang) {
-			if (this.languages[defaultLang]) this.defaultLanguage = defaultLang;
-			else {
-				const inverted = invertObject(this.languages);
-				if (inverted[defaultLang]) this.defaultLanguage = inverted[defaultLang];
+			if (this.languages[defaultLang]) {
+				this.defaultLanguage = defaultLang;
+			} else {
+				Object.values(this.languages).every((l) => {
+					if (defaultLang === l.label) {
+						this.defaultLanguage = defaultLang;
+						return false;
+					}
+					return true;
+				});
 			}
-		} else this.defaultLanguage = this.getSystemDefaultLanguage();
+		} else {
+			this.defaultLanguage = this.getSystemDefaultLanguage();
+		}
 	}
 
 	getLanguageFont(lang) {
