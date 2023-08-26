@@ -41,7 +41,7 @@
 			"SpecialLanguages.hint": "Nom de la langue qui remplacera \"langues\" comme \"toutes les langues qu'il a connues dans la vie\"."
 		},
 		"SWADE": {
-			"LanguageSkills": "Langues",
+			"LanguageSkills": "Langue",
 			"AdditionalLiterateStat": {
 				"title": "Clé Stat de l'alphabétisation",
 				"hint": "Il est possible de limiter les journaux de lecture en ajoutant un statut supplémentaire. Vous devez saisir la clé Stat (sensible à la casse). Ce paramètre est indépendant du paramètre {setting}."
@@ -131,6 +131,7 @@
 		},
 		"General": "Général",
 		"AlphabeticOnly": "Alphabétique seulement",
-		"Logographical": "Logographique"
+		"Logographical": "Logographique",
+		"GameMasterHasAssignedCharacter": "Vous êtes un {GM} et un personnage vous a été assigné. Polyglot se comportera bizarrement à cause de cela. Envisagez de ne plus être l'Utilisateur de ce personnage."
 	}
 }
