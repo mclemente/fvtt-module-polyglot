@@ -31,9 +31,21 @@ export class Polyglot {
 				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
 					return wrapped(token, message, { cssClasses, requireVisible, pan });
 				}
+				let lang = "";
+				let randomId = "";
 				if (language) {
-					var lang = invertObject(this.languageProvider.languages)[language] || language;
-					var randomId = foundry.utils.randomID(16);
+					randomId = foundry.utils.randomID(16);
+					if (this.languageProvider.languages[language]) {
+						lang = language;
+					} else {
+						Object.values(this.languageProvider.languages).every((l) => {
+							if (language === l.label) {
+								lang = language;
+								return false;
+							}
+							return true;
+						});
+					}
 				} else {
 					// Find the message out of the last 10 chat messages, last to first
 					const gameMessages = game.messages.contents
@@ -435,12 +447,24 @@ export class Polyglot {
 	preCreateChatMessage(message, data, options, userId) {
 		if (this._isMessageLink(data.content)) return true;
 		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (this._allowOOC() && this._isMessageTypeOOC(data.type))) {
-			if (data.lang) {
-				const invertedLanguages = invertObject(this.languageProvider.languages);
-				if (this.languageProvider.languages[data.lang]) var lang = data.lang;
-				else if (invertedLanguages[data.lang]) lang = invertedLanguages[data.lang];
-			} else if (!lang) lang = this.chatElement.find("select[name=polyglot-language]").val();
-			if (lang) message.updateSource({ "flags.polyglot.language": lang });
+			let lang = this.chatElement.find("select[name=polyglot-language]").val();
+			const language = data.lang || data.language;
+			if (language) {
+				if (this.languageProvider.languages[language]) {
+					lang = language;
+				} else {
+					Object.values(this.languageProvider.languages).every((l) => {
+						if (language === l.label) {
+							lang = language;
+							return false;
+						}
+						return true;
+					});
+				}
+			}
+			if (lang) {
+				message.updateSource({ "flags.polyglot.language": lang });
+			}
 		}
 	}
 
