@@ -28,7 +28,9 @@ export class Polyglot {
 			"polyglot",
 			"ChatBubbles.prototype.say",
 			async (wrapped, token, message, { cssClasses, requireVisible = false, pan = true, language = "" } = {}) => {
-				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) return wrapped(token, message, { cssClasses, requireVisible, pan });
+				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
+					return wrapped(token, message, { cssClasses, requireVisible, pan });
+				}
 				if (language) {
 					var lang = invertObject(this.languageProvider.languages)[language] || language;
 					var randomId = foundry.utils.randomID(16);
