@@ -112,9 +112,13 @@ export class PolyglotLanguageSettings extends FormApplication {
 		});
 		html.find("button").on("click", async (event) => {
 			if (event.currentTarget?.dataset?.action === "reset") {
-				game.polyglot.languageProvider.loadFonts();
-				await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
-				await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
+				await game.settings.set("polyglot", "Languages", {});
+				const defaultProvider = new game.polyglot.languageProvider.constructor();
+				defaultProvider.getLanguages();
+
+				// game.polyglot.languageProvider.loadFonts();
+				// await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
+				await game.settings.set("polyglot", "Languages", defaultProvider.languages);
 				this.close();
 			}
 		});
