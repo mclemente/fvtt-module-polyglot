@@ -477,12 +477,20 @@ export class Polyglot {
 		if (this.languageProvider.requiresReady) {
 			Hooks.on("polyglot.languageProvider.ready", () => {
 				this.updateUserLanguages(this.chatElement);
-				game.settings.set("polyglot", "Alphabets", this.languageProvider.fonts);
-				game.settings.set("polyglot", "Languages", this.languageProvider.languages);
+				if (!Object.keys(game.settings.get("polyglot", "Alphabets")).length) {
+					game.settings.set("polyglot", "Alphabets", this.languageProvider.fonts);
+				}
+				if (!Object.keys(game.settings.get("polyglot", "Languages")).length) {
+					game.settings.set("polyglot", "Languages", this.languageProvider.languages);
+				}
 			});
 		} else {
-			game.settings.set("polyglot", "Alphabets", this.languageProvider.fonts);
-			game.settings.set("polyglot", "Languages", this.languageProvider.languages);
+			if (!Object.keys(game.settings.get("polyglot", "Alphabets")).length) {
+				game.settings.set("polyglot", "Alphabets", this.languageProvider.fonts);
+			}
+			if (!Object.keys(game.settings.get("polyglot", "Languages")).length) {
+				game.settings.set("polyglot", "Languages", this.languageProvider.languages);
+			}
 		}
 	}
 

@@ -20,16 +20,16 @@ export class PolyglotFontSettings extends FormApplication {
 	}
 
 	getData(options) {
-		const fonts = Object.keys(game.polyglot.languageProvider.fonts);
+		const fonts = game.settings.get("polyglot", "Alphabets");
 		this.fonts = {};
 
-		for (let key of fonts) {
+		for (let key of Object.keys(fonts)) {
 			this.fonts[key] = {
 				label: key,
-				family: game.polyglot.languageProvider.fonts[key].fontFamily,
+				family: fonts[key].fontFamily,
 				size: game.polyglot.CustomFontSizes[key] || "100",
-				alphabeticOnly: game.polyglot.languageProvider.fonts[key]?.alphabeticOnly || false,
-				logographical: game.polyglot.languageProvider.fonts[key]?.logographical || false,
+				alphabeticOnly: fonts[key]?.alphabeticOnly || false,
+				logographical: fonts[key]?.logographical || false,
 			};
 		}
 
@@ -64,10 +64,11 @@ export class PolyglotFontSettings extends FormApplication {
 		html.find(".selectatr").on("wheel", changeFontSize);
 		html.find("button").on("click", async (event) => {
 			if (event.currentTarget?.dataset?.action === "reset") {
-				const defaults = game.settings.settings.get("polyglot.CustomFontSizes").default;
-				for (const key in this.fonts) {
-					this.fonts[key].fontSize = defaults[key] ?? "100";
-				}
+				const defaultAlphabets = new game.polyglot.languageProvider.constructor().fonts;
+				game.polyglot.languageProvider.fonts = defaultAlphabets;
+				await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
+				const defaultCustomFontSizes = game.settings.settings.get("polyglot.CustomFontSizes").default;
+				await game.settings.set("polyglot", "CustomFontSizes", defaultCustomFontSizes);
 				this.close();
 			}
 		});
@@ -85,8 +86,9 @@ export class PolyglotFontSettings extends FormApplication {
 			game.polyglot.languageProvider.fonts[key].alphabeticOnly = font.alphabeticOnly;
 			game.polyglot.languageProvider.fonts[key].logographical = font.logographical;
 		}
+		await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
 		game.polyglot.CustomFontSizes = customFontSizes;
-		game.settings.set("polyglot", "CustomFontSizes", game.polyglot.CustomFontSizes);
+		await game.settings.set("polyglot", "CustomFontSizes", game.polyglot.CustomFontSizes);
 		game.polyglot.languageProvider.loadFonts();
 	}
 }
