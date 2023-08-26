@@ -103,9 +103,28 @@ export class PolyglotGeneralSettings extends FormApplication {
 		});
 		html.find("button").on("click", async (event) => {
 			if (event.currentTarget?.dataset?.action === "reset") {
-				game.polyglot.languageProvider.loadFonts();
-				await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
-				await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
+				const keys = [
+					"RuneRegex",
+					"enableAllFonts",
+					"exportFonts",
+					"IgnoreJournalFontSize",
+					"JournalHighlightColor",
+					"JournalHighlight",
+					"replaceLanguages",
+					"customLanguages",
+					"omniglot",
+					"comprehendLanguages",
+					"truespeech",
+					"display-translated",
+					"hideTranslation",
+					"allowOOC",
+					"runifyGM",
+				];
+				await Promise.all(
+					keys.map(async (key) => {
+						await this.resetToDefault(key);
+					})
+				);
 				this.close();
 			}
 		});
