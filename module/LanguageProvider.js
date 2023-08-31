@@ -1416,9 +1416,7 @@ export class demonlordLanguageProvider extends LanguageProvider {
 		},
 	};
 
-	get requiresReady() {
-		return true;
-	}
+	requiresReady = true;
 
 	getSystemDefaultLanguage() {
 		return "Common Tongue";
@@ -1913,9 +1911,7 @@ export class dsa5LanguageProvider extends LanguageProvider {
 		},
 	};
 
-	get requiresReady() {
-		return true;
-	}
+	requiresReady = true;
 
 	getSystemDefaultLanguage() {
 		return "garethi";
@@ -3478,9 +3474,7 @@ export class wfrp4eLanguageProvider extends LanguageProvider {
 		},
 	};
 
-	get requiresReady() {
-		return true;
-	}
+	requiresReady = true;
 
 	get settings() {
 		return {
