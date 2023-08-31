@@ -771,26 +771,35 @@ export class Polyglot {
 	}
 
 	activeEditorLogic(editorOptions = {}) {
+		let langs = this.languageProvider.languages;
 		if (!game.user.isGM) {
-			var langs = {};
+			langs = {};
 			for (let lang of this.knownLanguages) {
-				langs[lang] = this.languageProvider.languages[lang];
+				const data = this.languageProvider.languages[lang];
+				if (data) {
+					langs[lang] = this.languageProvider.languages[lang];
+				}
 			}
 			for (let lang of this.literateLanguages) {
-				langs[lang] = this.languageProvider.languages[lang];
+				const data = this.languageProvider.languages[lang];
+				if (data) {
+					langs[lang] = this.languageProvider.languages[lang];
+				}
 			}
-		} else langs = this.languageProvider.languages;
-		const languages = Object.entries(langs).map(([key, lang]) => {
-			return {
-				title: lang.label || "",
-				inline: "span",
-				classes: "polyglot-journal",
-				attributes: {
+		}
+		const languages = Object.entries(langs)
+			.filter(([key, lang]) => typeof lang !== "undefined")
+			.map(([key, lang]) => {
+				return {
 					title: lang.label || "",
-					"data-language": key || "",
-				},
-			};
-		});
+					inline: "span",
+					classes: "polyglot-journal",
+					attributes: {
+						title: lang.label || "",
+						"data-language": key || "",
+					},
+				};
+			});
 		if (this.truespeech) {
 			const truespeechIndex = languages.findIndex((element) => element.attributes["data-language"] == this.truespeech);
 			if (truespeechIndex !== -1) languages.splice(truespeechIndex, 1);
