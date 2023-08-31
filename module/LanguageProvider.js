@@ -3494,7 +3494,12 @@ export class wfrp4eLanguageProvider extends LanguageProvider {
 			this.languages = {};
 			return;
 		}
-		const wfrp4ePack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
+		let wfrp4ePack;
+		if (isNewerVersion(game.system.version, "6.6.1")) {
+			wfrp4ePack = game.packs.get("wfrp4e-core.items") || game.packs.get("wfrp4e.basic");
+		} else {
+			wfrp4ePack = game.packs.get("wfrp4e-core.skills") || game.packs.get("wfrp4e.basic");
+		}
 		const wfrp4eItemList = await wfrp4ePack.getIndex();
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		let myRegex = new RegExp(game.settings.get("polyglot", "LanguageRegex") + "\\s*\\((.+)\\)", "i");
