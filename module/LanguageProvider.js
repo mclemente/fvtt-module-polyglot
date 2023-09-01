@@ -378,9 +378,14 @@ export class LanguageProvider {
 	loadFonts() {
 		this.fonts = new LanguageProvider().fonts;
 		const enableAllFonts = game.settings.get("polyglot", "enableAllFonts");
+		const fonts = game.settings.get("polyglot", "Alphabets");
 		for (let font in this.fonts) {
 			if (game.polyglot.CustomFontSizes[font]) {
 				this.fonts[font].fontSize = game.polyglot.CustomFontSizes[font];
+			}
+			if (fonts[font]) {
+				this.fonts[font].alphabeticOnly = fonts[font].alphabeticOnly;
+				this.fonts[font].logographical = fonts[font].logographical;
 			}
 		}
 		if (enableAllFonts) {
