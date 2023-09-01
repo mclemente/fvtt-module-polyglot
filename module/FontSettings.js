@@ -42,11 +42,11 @@ export class PolyglotFontSettings extends FormApplication {
 		super.activateListeners(html);
 
 		const changeFontSize = async (event) => {
-			const fontSize = event.type == "change" ? event.target.value : event.target.value - event.originalEvent.deltaY / 10;
-			if (fontSize < 100) return;
+			const size = event.type == "change" ? event.target.value : event.target.value - event.originalEvent.deltaY / 10;
+			if (size < 100) return;
 			const font = event.target.parentElement.previousElementSibling.textContent;
-			event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.style.fontSize = `${fontSize}%`;
-			this.fonts[font].fontSize = fontSize;
+			event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.style.fontSize = `${size}%`;
+			this.fonts[font].size = size;
 		};
 		const changeFontAlphabetic = async (event) => {
 			const font = event.target.parentElement.previousElementSibling.previousElementSibling.textContent;
@@ -82,7 +82,7 @@ export class PolyglotFontSettings extends FormApplication {
 	async _updateObject(ev, formData) {
 		const customFontSizes = {};
 		for (const [key, font] of Object.entries(this.fonts)) {
-			customFontSizes[key] = font.fontSize;
+			customFontSizes[key] = font.size;
 			game.polyglot.languageProvider.fonts[key].alphabeticOnly = font.alphabeticOnly;
 			game.polyglot.languageProvider.fonts[key].logographical = font.logographical;
 		}
