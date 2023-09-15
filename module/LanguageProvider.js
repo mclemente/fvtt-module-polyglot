@@ -602,21 +602,33 @@ export class LanguageProvider {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
 		if (actor.system?.traits?.languages) {
-			for (let lang of actor.system.traits.languages.value) knownLanguages.add(lang);
+			for (let lang of actor.system.traits.languages.value) {
+				knownLanguages.add(lang);
+			}
 			if (actor.system.traits.languages.custom) {
-				for (let lang of actor.system.traits.languages?.custom.split(/[,;]/)) knownLanguages.add(lang.trim().toLowerCase());
+				for (let lang of actor.system.traits.languages?.custom.split(/[,;]/)) {
+					const key = lang.trim().toLowerCase();
+					knownLanguages.add(key);
+				}
 			}
 		} else if (actor.system?.languages?.value) {
 			for (let lang of actor.system.languages.value) knownLanguages.add(lang);
 			if (actor.system.languages.custom) {
-				for (let lang of actor.system.languages?.custom.split(/[,;]/)) knownLanguages.add(lang.trim().toLowerCase());
+				for (let lang of actor.system.languages?.custom.split(/[,;]/)) {
+					const key = lang.trim().toLowerCase();
+					knownLanguages.add(key);
+				}
 			}
 		} else if (this.languageDataPath?.length) {
 			let data = getNestedData(actor, this.languageDataPath);
-			for (let lang of data.split(/[,;]/)) knownLanguages.add(lang.trim().toLowerCase());
+			for (let lang of data.split(/[,;]/)) {
+				knownLanguages.add(lang.trim().toLowerCase());
+			}
 			if (this.literacyDataPath.length) {
 				let data = getNestedData(actor, this.literacyDataPath);
-				for (let lang of data.split(/[,;]/)) literateLanguages.add(lang.trim().toLowerCase());
+				for (let lang of data.split(/[,;]/)) {
+					literateLanguages.add(lang.trim().toLowerCase());
+				}
 			}
 		} else if (game.settings.settings.has("polyglot.LanguageRegex")) {
 			const languageRegex = game.settings.get("polyglot", "LanguageRegex");
@@ -1637,22 +1649,24 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 			if (actor.system.traits.languages.custom) {
 				const defaultSpecialLanguage = game.settings.get("polyglot", "DND5E.SpecialLanguages").trim().toLowerCase();
 				for (let lang of actor.system.traits.languages?.custom.split(/[;]/)) {
-					lang = lang.trim().toLowerCase();
+					const key = lang.trim().toLowerCase();
 					try {
-						if (/(usually common)|(in life)|(its creator)|(?<=any)(.*)(?=language)/i.test(lang)) {
+						if (/(usually common)|(in life)|(its creator)|(?<=any)(.*)(?=language)/i.test(key)) {
 							knownLanguages.add(defaultSpecialLanguage);
-						} else if (/(?<=usually)(.*)(?=\))/g.test(lang)) {
-							lang = lang.match(/(?<=usually)(.*)(?=\))/g)[0].trim();
-							knownLanguages.add(lang);
-						} else if (/(?<=understands)(.*)(?=but can't speak it)/g.test(lang)) {
-							lang = lang.match(/(?<=understands)(.*)(?=but can't speak it)/g)[0].trim();
-							knownLanguages.add(lang);
-						} else if (/(.*)(?=plus)/.test(lang)) {
-							lang = lang.match(/(.*)(?=plus)/)[0].trim();
-							knownLanguages.add(lang);
-						} else knownLanguages.add(lang);
+						} else if (/(?<=usually)(.*)(?=\))/g.test(key)) {
+							key = key.match(/(?<=usually)(.*)(?=\))/g)[0].trim();
+							knownLanguages.add(key);
+						} else if (/(?<=understands)(.*)(?=but can't speak it)/g.test(key)) {
+							key = key.match(/(?<=understands)(.*)(?=but can't speak it)/g)[0].trim();
+							knownLanguages.add(key);
+						} else if (/(.*)(?=plus)/.test(key)) {
+							key = key.match(/(.*)(?=plus)/)[0].trim();
+							knownLanguages.add(key);
+						} else {
+							knownLanguages.add(key);
+						}
 					} catch (err) {
-						console.error(`Polyglot | Failed to get custom language "${lang}" from actor "${actor.name}".`, err);
+						console.error(`Polyglot | Failed to get custom language "${key}" from actor "${actor.name}".`, err);
 					}
 				}
 			}
