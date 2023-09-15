@@ -457,7 +457,7 @@ export class LanguageProvider {
 	 * @see loadFonts
 	 */
 	addFont(fontFamily, fontSize = 100, options = {}) {
-		const key = fontFamily.toLowerCase();
+		const key = fontFamily;
 		const defaultOptions = {
 			alphabeticOnly: false,
 			logographical: false,
@@ -477,7 +477,7 @@ export class LanguageProvider {
 	 * @param {String} lang
 	 */
 	removeFont(font) {
-		const key = font.toLowerCase();
+		const key = font;
 		delete this.fonts[key];
 	}
 
@@ -497,7 +497,7 @@ export class LanguageProvider {
 		const key = lang.toLowerCase().replace(/[\s\']/g, "_");
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const defaultOptions = {
-			font: this.defaultFont,
+			font: languagesSetting[key]?.font ?? this.defaultFont,
 			rng: languagesSetting[key]?.rng ?? "default",
 		};
 
@@ -636,7 +636,9 @@ export class LanguageProvider {
 			for (let item of actor.items) {
 				const name = item?.flags?.babele?.originalName || item.name;
 				// adding only the descriptive language name, not "Language (XYZ)"
-				if (myRegex.test(name)) knownLanguages.add(name.match(myRegex)[1].trim().toLowerCase());
+				if (myRegex.test(name)) {
+					knownLanguages.add(name.match(myRegex)[1].trim().toLowerCase());
+				}
 			}
 		}
 		return [knownLanguages, literateLanguages];
@@ -3572,6 +3574,7 @@ export class wwnLanguageProvider extends LanguageProvider {
 	addLanguage(lang) {
 		if (!lang) return;
 		let languages = game.settings.get("wwn", "languageList");
+		const languagesSetting = game.settings.get("polyglot", "Languages");
 		if (!languages.includes(lang)) {
 			if (languages.endsWith(",")) languages += lang;
 			else languages += "," + lang;
@@ -3581,8 +3584,8 @@ export class wwnLanguageProvider extends LanguageProvider {
 		const key = lang.toLowerCase().replace(/[\s\']/g, "_");
 		this.languages[key] = {
 			label: lang,
-			font: this.defaultFont,
-			rng: "default",
+			font: languagesSetting[key]?.font ?? this.defaultFont,
+			rng: languagesSetting[key]?.rng ?? "default",
 		};
 	}
 	removeLanguage(lang) {
