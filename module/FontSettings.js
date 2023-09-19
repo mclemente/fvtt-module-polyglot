@@ -42,8 +42,9 @@ export class PolyglotFontSettings extends FormApplication {
 		super.activateListeners(html);
 
 		const changeFontSize = async (event) => {
+			if (!event.target.hasFocus) return;
 			const size = event.type == "change" ? event.target.value : event.target.value - event.originalEvent.deltaY / 10;
-			if (size < 100) return;
+			if (size < 50) return;
 			const font = event.target.parentElement.previousElementSibling.textContent;
 			event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.style.fontSize = `${size}%`;
 			this.fonts[font].size = size;
@@ -60,6 +61,12 @@ export class PolyglotFontSettings extends FormApplication {
 		html.find(".alphabeticOnly").on("change", changeFontAlphabetic);
 		html.find(".logographical").on("change", changeFontLogographical);
 
+		html.find(".selectatr").on("focus", (event) => {
+			event.target.hasFocus = true;
+		});
+		html.find(".selectatr").on("blur", (event) => {
+			event.target.hasFocus = false;
+		});
 		html.find(".selectatr").on("change", changeFontSize);
 		html.find(".selectatr").on("wheel", changeFontSize);
 		html.find("button").on("click", async (event) => {
