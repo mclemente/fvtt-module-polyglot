@@ -84,7 +84,9 @@ export function registerSettings() {
 		type: Boolean,
 	});
 	addMenuSetting("enableAllFonts", {
-		name: game.i18n.format("POLYGLOT.enableAllFonts.title", { settingMenuLabel: game.i18n.localize("POLYGLOT.FontSettings") }),
+		name: game.i18n.format("POLYGLOT.enableAllFonts.title", {
+			settingMenuLabel: game.i18n.localize("POLYGLOT.FontSettings"),
+		}),
 		hint: game.i18n.format("POLYGLOT.enableAllFonts.hint", {
 			setting1: game.i18n.localize("POLYGLOT.FontSettings"),
 			setting2: game.i18n.localize("POLYGLOT.LanguageSettings"),
@@ -101,7 +103,9 @@ export function registerSettings() {
 
 	addMenuSetting("exportFonts", {
 		name: "POLYGLOT.ExportFonts.title",
-		hint: game.i18n.format("POLYGLOT.ExportFonts.hint", { settingMenuLabel: game.i18n.localize("SETTINGS.FontConfigN") }),
+		hint: game.i18n.format("POLYGLOT.ExportFonts.hint", {
+			settingMenuLabel: game.i18n.localize("SETTINGS.FontConfigN"),
+		}),
 		default: false,
 		type: Boolean,
 		requiresReload: true,
