@@ -94,11 +94,6 @@ export function registerSettings() {
 		default: false,
 		type: Boolean,
 		requiresReload: true,
-		onChange: () => {
-			//TODO check if this is still needed
-			game.polyglot.languageProvider.loadFonts();
-			game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
-		},
 	});
 
 	addMenuSetting("exportFonts", {

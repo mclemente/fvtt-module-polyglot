@@ -115,9 +115,6 @@ export class PolyglotLanguageSettings extends FormApplication {
 				await game.settings.set("polyglot", "Languages", {});
 				const defaultProvider = new game.polyglot.languageProvider.constructor();
 				defaultProvider.getLanguages();
-
-				// game.polyglot.languageProvider.loadFonts();
-				// await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
 				await game.settings.set("polyglot", "Languages", defaultProvider.languages);
 				this.close();
 			}
@@ -134,7 +131,6 @@ export class PolyglotLanguageSettings extends FormApplication {
 		if (languageProvider != formData.languageProvider) {
 			await game.settings.set("polyglot", "languageProvider", formData.languageProvider);
 			game.polyglot.api.updateProvider();
-			// game.polyglot.languageProvider.loadFonts();
 			await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
 			await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
 			SettingsConfig.reloadConfirm({ world: true });

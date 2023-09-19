@@ -474,24 +474,23 @@ export class Polyglot {
 	 */
 	ready() {
 		this.updateConfigFonts(game.settings.get("polyglot", "exportFonts"));
-		if (this.languageProvider.requiresReady) {
-			Hooks.on("polyglot.languageProvider.ready", () => {
-				this.updateUserLanguages(this.chatElement);
-				if (!Object.keys(game.settings.get("polyglot", "Alphabets")).length) {
-					game.settings.set("polyglot", "Alphabets", this.languageProvider.fonts);
-				}
-				if (!Object.keys(game.settings.get("polyglot", "Languages")).length) {
-					game.settings.set("polyglot", "Languages", this.languageProvider.languages);
-				}
-			});
-		} else {
-			if (!Object.keys(game.settings.get("polyglot", "Alphabets")).length) {
-				game.settings.set("polyglot", "Alphabets", this.languageProvider.fonts);
+		function checkChanges() {
+			const alphabetsSetting = game.settings.get("polyglot", "Alphabets");
+			const languagesSetting = game.settings.get("polyglot", "Languages");
+			const { fonts, languages } = game.polyglot.languageProvider;
+			if (!isEmpty(diffObject(alphabetsSetting, fonts)) || !isEmpty(diffObject(fonts, alphabetsSetting))) {
+				game.settings.set("polyglot", "Alphabets", fonts);
 			}
-			if (!Object.keys(game.settings.get("polyglot", "Languages")).length) {
-				game.settings.set("polyglot", "Languages", this.languageProvider.languages);
+			if (!isEmpty(diffObject(languagesSetting, languages)) || !isEmpty(diffObject(languages, languagesSetting))) {
+				game.settings.set("polyglot", "Languages", languages);
 			}
 		}
+		if (this.languageProvider.requiresReady) {
+			Hooks.once("polyglot.languageProvider.ready", () => {
+				this.updateUserLanguages(this.chatElement);
+				checkChanges();
+			});
+		} else checkChanges();
 	}
 
 	/**
