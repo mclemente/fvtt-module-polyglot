@@ -577,8 +577,8 @@ export class Polyglot {
 		let texts = [];
 		let styles = [];
 		const toggleString = `<a class='polyglot-button'
-			data-tooltip='Polyglot: ${game.i18n.localize("POLYGLOT.ToggleRunes")}'>
-			<i class='fas fa-unlink' data-tooltip-direction="UP"></i>
+			data-tooltip='Polyglot: ${game.i18n.localize("POLYGLOT.ToggleRunes")}' data-tooltip-direction="UP">
+			<i class='fas fa-unlink'></i>
 		</a>`;
 		const toggleButton = $(toggleString);
 		const IgnoreJournalFontSize = game.settings.get("polyglot", "IgnoreJournalFontSize");
