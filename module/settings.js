@@ -146,6 +146,7 @@ export function registerSettings() {
 		hint: "POLYGLOT.CustomLanguages.hint",
 		default: "",
 		type: String,
+		requiresReload: true,
 		onChange: () => {
 			game.polyglot.languageProvider.loadLanguages();
 			game.polyglot.languageProvider.reloadLanguages();

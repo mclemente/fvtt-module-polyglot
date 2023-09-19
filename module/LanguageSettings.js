@@ -134,9 +134,10 @@ export class PolyglotLanguageSettings extends FormApplication {
 		if (languageProvider != formData.languageProvider) {
 			await game.settings.set("polyglot", "languageProvider", formData.languageProvider);
 			game.polyglot.api.updateProvider();
-			game.polyglot.languageProvider.loadFonts();
+			// game.polyglot.languageProvider.loadFonts();
 			await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
 			await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
+			SettingsConfig.reloadConfirm({ world: true });
 		} else {
 			const langSettings = game.settings.get("polyglot", "Languages");
 			const fonts = formData["language.alphabet"];
@@ -147,8 +148,11 @@ export class PolyglotLanguageSettings extends FormApplication {
 				langSettings[lang].rng = rng[i];
 				i++;
 			}
+			let current = game.settings.get("polyglot", "Languages");
+			if (langSettings === current) return;
 			game.polyglot.languageProvider.languages = langSettings;
 			await game.settings.set("polyglot", "Languages", langSettings);
+			SettingsConfig.reloadConfirm({ world: true });
 		}
 	}
 }

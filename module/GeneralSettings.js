@@ -131,10 +131,16 @@ export class PolyglotGeneralSettings extends FormApplication {
 	}
 
 	async _updateObject(event, formData) {
-		await Promise.all(
-			Object.entries(formData).map(async ([key, value]) => {
-				await game.settings.set("polyglot", key, value);
-			})
-		);
+		let requiresClientReload = false;
+		let requiresWorldReload = false;
+		for (let [k, v] of Object.entries(foundry.utils.flattenObject(formData))) {
+			let s = game.settings.settings.get(`polyglot.${k}`);
+			let current = game.settings.get(s.namespace, s.key);
+			if (v === current) continue;
+			requiresClientReload ||= s.scope === "client" && s.requiresReload;
+			requiresWorldReload ||= s.scope === "world" && s.requiresReload;
+			await game.settings.set(s.namespace, s.key, v);
+		}
+		if (requiresClientReload || requiresWorldReload) SettingsConfig.reloadConfirm({ world: requiresWorldReload });
 	}
 }

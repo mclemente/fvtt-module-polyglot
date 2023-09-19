@@ -81,14 +81,25 @@ export class PolyglotFontSettings extends FormApplication {
 	 */
 	async _updateObject(ev, formData) {
 		const customFontSizes = {};
+		let changes = false;
 		for (const [key, font] of Object.entries(this.fonts)) {
 			customFontSizes[key] = font.size;
 			game.polyglot.languageProvider.fonts[key].alphabeticOnly = font.alphabeticOnly;
 			game.polyglot.languageProvider.fonts[key].logographical = font.logographical;
 		}
-		await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
-		game.polyglot.CustomFontSizes = customFontSizes;
-		await game.settings.set("polyglot", "CustomFontSizes", game.polyglot.CustomFontSizes);
-		game.polyglot.languageProvider.loadFonts();
+		let current = game.settings.get("polyglot", "Alphabets");
+		if (Object.keys(diffObject(current, game.polyglot.languageProvider.fonts)).length) {
+			await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
+			changes = true;
+		}
+		current = game.settings.get("polyglot", "CustomFontSizes");
+		if (Object.keys(diffObject(current, customFontSizes)).length) {
+			game.polyglot.CustomFontSizes = customFontSizes;
+			await game.settings.set("polyglot", "CustomFontSizes", game.polyglot.CustomFontSizes);
+			changes = true;
+		}
+		if (changes) {
+			SettingsConfig.reloadConfirm({ world: true });
+		}
 	}
 }
