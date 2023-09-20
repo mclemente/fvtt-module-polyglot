@@ -18,6 +18,7 @@ Check out the [wiki](https://github.com/mclemente/fvtt-module-polyglot/wiki).
 -   [@ElizeuAngelo](https://github.com/elizeuangelo) for the 'fantasy languages' adaptation.
 -   [@ironmonk88](https://github.com/ironmonk88) for the Translation Box.
 -   [@manuelVo](https://github.com/manuelVo) for the API code.
+-   [@Ghost](https://github.com/ghost-fvtt) for the Foundry Factory.
 
 ## Community Contribution
 

@@ -435,7 +435,7 @@ export class LanguageProvider {
 		for (const key of Object.keys(langSettings)) {
 			if (!(key in this.languages)) {
 				delete this.languages[key];
-				this.removeFromConfig(lang);
+				this.removeFromConfig(key);
 			}
 		}
 		for (const key of Object.keys(this.languages)) {
@@ -494,7 +494,7 @@ export class LanguageProvider {
 	addLanguage(lang, options = {}) {
 		if (!lang) return;
 
-		const key = lang.toLowerCase().replace(/[\s\']/g, "_");
+		const key = lang.toLowerCase().replace(/[\s']/g, "_");
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const defaultOptions = {
 			font: languagesSetting[key]?.font ?? this.defaultFont,
@@ -518,10 +518,7 @@ export class LanguageProvider {
 		if (!lang) return;
 		const customLanguages = game.settings.get("polyglot", "customLanguages");
 		if (customLanguages.includes(lang)) return;
-		const key = lang
-			.trim()
-			.toLowerCase()
-			.replace(/[\s\']/g, "_");
+		const key = lang.trim().toLowerCase().replace(/[\s']/g, "_");
 		delete this.languages[key];
 		this.removeFromConfig(key);
 	}
@@ -606,7 +603,7 @@ export class LanguageProvider {
 				knownLanguages.add(lang);
 			}
 			if (actor.system.traits.languages.custom) {
-				for (let lang of actor.system.traits.languages?.custom.split(/[,;]/)) {
+				for (let lang of actor.system.traits.languages.custom.split(/[,;]/)) {
 					const key = lang.trim().toLowerCase();
 					knownLanguages.add(key);
 				}
@@ -614,7 +611,7 @@ export class LanguageProvider {
 		} else if (actor.system?.languages?.value) {
 			for (let lang of actor.system.languages.value) knownLanguages.add(lang);
 			if (actor.system.languages.custom) {
-				for (let lang of actor.system.languages?.custom.split(/[,;]/)) {
+				for (let lang of actor.system.languages.custom.split(/[,;]/)) {
 					const key = lang.trim().toLowerCase();
 					knownLanguages.add(key);
 				}
@@ -1132,7 +1129,7 @@ export class cyberpunkRedLanguageProvider extends LanguageProvider {
 				rng: languagesSetting[lang]?.rng ?? "default",
 			};
 		}
-		this.languages = replaceLanguages ? {} : langs;
+		this.languages = this.replaceLanguages ? {} : langs;
 	}
 
 	getUserLanguages(actor) {
@@ -1646,12 +1643,13 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 		let literateLanguages = new Set();
 		if (actor.system?.traits?.languages) {
 			for (let lang of actor.system.traits.languages.value) {
-				knownLanguages.add(lang.trim().replace(/[\s\']/g, "_"));
+				knownLanguages.add(lang.trim().replace(/[\s']/g, "_"));
 			}
 			if (actor.system.traits.languages.custom) {
 				const defaultSpecialLanguage = game.settings.get("polyglot", "DND5E.SpecialLanguages").trim().toLowerCase();
+				// eslint-disable-next-line no-unsafe-optional-chaining
 				for (let lang of actor.system.traits.languages?.custom.split(/[;]/)) {
-					const key = lang.trim().toLowerCase();
+					let key = lang.trim().toLowerCase();
 					try {
 						if (/(usually common)|(in life)|(its creator)|(?<=any)(.*)(?=language)/i.test(key)) {
 							knownLanguages.add(defaultSpecialLanguage);
@@ -2051,7 +2049,7 @@ export class earthdawn4eLanguageProvider extends LanguageProvider {
 		for (let lang in this.languages) {
 			this.languages[lang] = {
 				label: game.i18n.localize(`earthdawn.l.language${lang.capitalize()}`),
-				font: languagesSetting[lang]?.font || this.languages[key]?.font || this.defaultFont,
+				font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
 				rng: languagesSetting[lang]?.rng ?? "default",
 			};
 		}
@@ -2095,7 +2093,7 @@ export class fggLanguageProvider extends LanguageProvider {
 		let literateLanguages = new Set();
 		for (let lang of actor.system.languages.value) knownLanguages.add(lang.toLowerCase());
 		if (actor.system.languages.custom) {
-			for (let lang of actor.system.languages?.custom.split(/[,;]/)) knownLanguages.add(lang.trim().toLowerCase());
+			for (let lang of actor.system.languages.custom.split(/[,;]/)) knownLanguages.add(lang.trim().toLowerCase());
 		}
 		return [knownLanguages, literateLanguages];
 	}
@@ -2119,11 +2117,13 @@ export class gurpsLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
+		// eslint-disable-next-line no-undef
 		if (GURPS) {
 			const languageRegex = game.settings.get("polyglot", "LanguageRegex");
 			// window.GURPS set when the GURPS game system is loaded
 			let npat1 = ": +(?<name>[^\\(]+)";
 			let npat2 = " +\\((?<name>[^\\)]+)\\)";
+			// eslint-disable-next-line no-undef
 			GURPS.recurselist(actor.system.ads, (advantage) => {
 				if (!this.updateForPattern(advantage, new RegExp(languageRegex + npat1, "i"), knownLanguages, literateLanguages))
 					if (!this.updateForPattern(advantage, new RegExp(languageRegex + npat2, "i"), knownLanguages, literateLanguages))
@@ -2675,7 +2675,7 @@ export class pf2eLanguageProvider extends LanguageProvider {
 	addLanguage(lang) {
 		if (!lang) return;
 		lang = lang.trim();
-		let key = lang.toLowerCase().replace(/[\s\']/g, "_");
+		let key = lang.toLowerCase().replace(/[\s']/g, "_");
 		const homebrewLanguagesObj = game.settings.get("pf2e", "homebrew.languages");
 		const homebrewLanguagesKeys = homebrewLanguagesObj.map((a) => a.id);
 		const homebrewLanguagesValues = homebrewLanguagesObj.map((a) => a.value);
@@ -3581,7 +3581,7 @@ export class wwnLanguageProvider extends LanguageProvider {
 			game.settings.set("wwn", "languageList", languages);
 		}
 		lang = lang.trim();
-		const key = lang.toLowerCase().replace(/[\s\']/g, "_");
+		const key = lang.toLowerCase().replace(/[\s']/g, "_");
 		this.languages[key] = {
 			label: lang,
 			font: languagesSetting[key]?.font ?? this.defaultFont,
@@ -3595,17 +3595,14 @@ export class wwnLanguageProvider extends LanguageProvider {
 			languages.replace(new RegExp(",\\s*" + lang), "");
 			game.settings.set("wwn", "languageList", languages);
 		}
-		const key = lang
-			.trim()
-			.toLowerCase()
-			.replace(/[\s\']/g, "_");
+		const key = lang.trim().toLowerCase().replace(/[\s']/g, "_");
 		delete this.languages[key];
 	}
 
 	async getLanguages() {
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		for (let lang of game.settings.get("wwn", "languageList").split(",")) {
-			const key = lang.toLowerCase().replace(/[\s\']/g, "_");
+			const key = lang.toLowerCase().replace(/[\s']/g, "_");
 			this.languages[key] = {
 				label: lang,
 				font: languagesSetting[key]?.font || this.defaultFont,

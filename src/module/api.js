@@ -2,8 +2,10 @@ import * as providers from "./LanguageProvider.js";
 import { addSetting } from "./settings.js";
 
 export class PolyglotAPI {
-	providers = {};
-	polyglot = null;
+	constructor() {
+		this.providers = {};
+		this.polyglot = null;
+	}
 
 	init() {
 		/** Providers whose systems use "-"" in their names */
@@ -80,13 +82,13 @@ export class PolyglotAPI {
 		const module = game.modules.get(moduleId);
 		if (!module) {
 			console.warn(
-				`Polyglot | A module tried to register with the id "${moduleId}". However no active module with this id was found. This api registration call was ignored. If you are the author of that module please check that the id passed to "registerModule" matches the id in your manifest exactly.`
+				`Polyglot | A module tried to register with the id "${moduleId}". However no active module with this id was found. This api registration call was ignored. If you are the author of that module please check that the id passed to "registerModule" matches the id in your manifest exactly.`,
 			);
 			return;
 		}
 		if (moduleId === "polyglot") {
 			console.warn(
-				`Polyglot | A module tried to register with the id "${moduleId}", which is not allowed. This api registration call was ignored. If you're the author of the module please use the id of your own module as it's specified in your manifest to register to this api.`
+				`Polyglot | A module tried to register with the id "${moduleId}", which is not allowed. This api registration call was ignored. If you're the author of the module please use the id of your own module as it's specified in your manifest to register to this api.`,
 			);
 			return;
 		}

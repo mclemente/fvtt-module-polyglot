@@ -3,9 +3,3 @@
 # SPDX-License-Identifier: MIT
 
 dist
-package-lock.json
-.pnp.cjs
-.pnp.js
-src/styles/fonts.css
-.github/
-src/fonts/

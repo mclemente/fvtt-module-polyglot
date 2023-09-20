@@ -41,7 +41,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 		await game.settings.set("polyglot", key, defaultValue);
 	}
 
-	getData(options) {
+	getData() {
 		return {
 			journalTabName: game.i18n.localize("SIDEBAR.TabJournal"),
 
@@ -123,7 +123,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 				await Promise.all(
 					keys.map(async (key) => {
 						await this.resetToDefault(key);
-					})
+					}),
 				);
 				this.close();
 			}

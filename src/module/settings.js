@@ -156,21 +156,21 @@ export function registerSettings() {
 		hint: "POLYGLOT.Omniglot.hint",
 		default: "",
 		type: String,
-		onChange: (value) => (game.polyglot.omniglot = value.trim().replace(/ \'/g, "_")),
+		onChange: (value) => (game.polyglot.omniglot = value.trim().replace(/'/g, "_")),
 	});
 	addMenuSetting("comprehendLanguages", {
 		name: "POLYGLOT.ComprehendLanguages.title",
 		hint: "POLYGLOT.ComprehendLanguages.hint",
 		default: "",
 		type: String,
-		onChange: (value) => (game.polyglot.comprehendLanguages = value.trim().replace(/ \'/g, "_")),
+		onChange: (value) => (game.polyglot.comprehendLanguages = value.trim().replace(/'/g, "_")),
 	});
 	addMenuSetting("truespeech", {
 		name: "POLYGLOT.Truespeech.title",
 		hint: "POLYGLOT.Truespeech.hint",
 		default: "",
 		type: String,
-		onChange: (value) => (game.polyglot.truespeech = value.trim().replace(/ \'/g, "_")),
+		onChange: (value) => (game.polyglot.truespeech = value.trim().replace(/'/g, "_")),
 	});
 
 	//Chat Settings

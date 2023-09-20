@@ -1,8 +1,9 @@
-import { CUSTOM_FONT_SIZES } from "./module/Fonts.js";
-import { LanguageProvider } from "./module/LanguageProvider.js";
-import { PolyglotAPI } from "./module/api.js";
-import { Polyglot } from "./module/logic.js";
-import { addSetting, registerProviderSettings, registerSettings, renderPolyglotGeneralSettingsHandler, renderSettingsConfigHandler } from "./module/settings.js";
+import { CUSTOM_FONT_SIZES } from "./Fonts.js";
+import { LanguageProvider } from "./LanguageProvider.js";
+import { PolyglotAPI } from "./api.js";
+import { Polyglot } from "./logic.js";
+import { preloadTemplates } from "./preloadTemplates.js";
+import { addSetting, registerProviderSettings, registerSettings, renderPolyglotGeneralSettingsHandler, renderSettingsConfigHandler } from "./settings.js";
 
 Hooks.once("init", () => {
 	CONFIG.TinyMCE.content_css.push("/modules/polyglot/css/polyglot.css");
@@ -17,6 +18,7 @@ Hooks.once("init", () => {
 	game.polyglot.init();
 	api.attach();
 	Hooks.callAll("polyglot.init", LanguageProvider);
+	return preloadTemplates();
 });
 
 Hooks.on("setup", async () => {
@@ -24,7 +26,7 @@ Hooks.on("setup", async () => {
 		console.warn(
 			`Polyglot | ${game.i18n.format("POLYGLOT.GameMasterHasAssignedCharacter", {
 				GM: game.i18n.localize("USER.RoleGamemaster"),
-			})}`
+			})}`,
 		);
 	}
 	registerSettings();

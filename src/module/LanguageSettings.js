@@ -19,7 +19,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 		});
 	}
 
-	getData(options) {
+	getData() {
 		const data = {};
 		const selectedProvider = game.polyglot.languageProvider.id;
 		// Insert all speed providers into the template data
@@ -67,7 +67,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 		const asArray = Object.entries(game.settings.get("polyglot", "Languages"));
 
 		const { name, hint } = game.settings.settings.get("polyglot.Languages");
-		const filtered = asArray.filter(([key, value]) => {
+		const filtered = asArray.filter(([key]) => {
 			return key !== game.polyglot.omniglot && key !== game.polyglot.comprehendLanguages && key !== game.polyglot.truespeech;
 		});
 		const value = Object.fromEntries(filtered);
