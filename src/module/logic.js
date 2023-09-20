@@ -329,27 +329,6 @@ export class Polyglot {
 		} else checkChanges();
 	}
 
-	/**
-	 * Scrambles the text of vino messages.
-	 * @param {*} chatDisplayData
-	 */
-	vinoChatRender(chatDisplayData) {
-		const message = chatDisplayData.message;
-		const lang = message.getFlag("polyglot", "language");
-
-		if (lang) {
-			const isLanguageUnknown = !this.isLanguageknownOrUnderstood(lang);
-			message.polyglot_unknown = isLanguageUnknown;
-			if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) message.polyglot_unknown = false;
-			if (!message.polyglot_force && message.polyglot_unknown) {
-				const newContent = this.scrambleString(chatDisplayData.text, message.id, lang);
-				chatDisplayData.text = newContent;
-				chatDisplayData.font = this._getFontStyle(lang);
-				chatDisplayData.skipAutoQuote = true;
-			}
-		}
-	}
-
 	/* -------------------------------------------- */
 	/*  Helpers				                        */
 	/* -------------------------------------------- */
