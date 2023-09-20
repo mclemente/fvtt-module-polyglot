@@ -25,11 +25,9 @@ export class PolyglotAPI {
 			providerString = providerKeys[game.system.id] || "Generic";
 		}
 
-		const languageProviders = [];
-		languageProviders.push(eval(`new providers.${providerString}LanguageProvider("native${providerString !== "Generic" ? "." + providerString : ""}")`));
-		for (let languageProvider of languageProviders) {
-			this.providers[languageProvider.id] = languageProvider;
-		}
+		const providerId = "native" + (providerString !== "Generic" ? "." + providerString : "");
+		this.providers[providerId] = new providers[`${providerString}LanguageProvider`](providerId);
+
 		addSetting("languageProvider", {
 			//Has no name or hint
 			config: false,
@@ -78,6 +76,10 @@ export class PolyglotAPI {
 		this.polyglot.languageProvider = this.providers[configuredProvider] || this.providers[fallbackProvider];
 	}
 
+	/**
+	 * @param {String} moduleId
+	 * @param {providers.LanguageProvider} languageProvider
+	 */
 	registerModule(moduleId, languageProvider) {
 		const module = game.modules.get(moduleId);
 		if (!module) {
@@ -103,6 +105,10 @@ export class PolyglotAPI {
 		this.#register(`system.${game.system.id}`, languageProvider);
 	}
 
+	/**
+	 * @param {String} id
+	 * @param {providers.LanguageProvider} languageProvider
+	 */
 	#register(id, languageProvider) {
 		const providerInstance = new languageProvider(id);
 		this.providers[providerInstance.id] = providerInstance;
