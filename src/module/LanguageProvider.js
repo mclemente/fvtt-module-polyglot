@@ -543,9 +543,9 @@ export class LanguageProvider {
 			if (this.languages[defaultLang]) {
 				this.defaultLanguage = defaultLang;
 			} else {
-				Object.values(this.languages).every((l) => {
-					if (defaultLang === l.label) {
-						this.defaultLanguage = defaultLang;
+				Object.entries(this.languages).every(([key, lang]) => {
+					if (defaultLang === lang.label) {
+						this.defaultLanguage = key;
 						return false;
 					}
 					return true;
