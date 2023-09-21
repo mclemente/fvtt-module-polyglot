@@ -5,9 +5,11 @@ export default class PolyglotHooks {
 	 */
 	static renderChatLog(chatlog, html, data) {
 		html.find("#chat-controls").after(
-			`<div id='polyglot' class='polyglot-lang-select flexrow'><label>${game.i18n.localize(
-				"POLYGLOT.LanguageLabel",
-			)}:</label><select name='polyglot-language'></select></div>`,
+			`<div id='polyglot' class='polyglot-lang-select flexrow'>
+				<input name="polyglot-checkbox" type="checkbox" checked></input>
+				<label>${game.i18n.localize("POLYGLOT.LanguageLabel")}</label>
+				<select name='polyglot-language'></select>
+			</div>`,
 		);
 		const select = html.find(".polyglot-lang-select select");
 		select.change((e) => {
@@ -53,7 +55,7 @@ export default class PolyglotHooks {
 	 * @returns {Boolean}
 	 */
 	static preCreateChatMessage(message, data, options, userId) {
-		if (game.polyglot._isMessageLink(data.content)) return true;
+		if (!game.polyglot.chatElement.find("input[name=polyglot-checkbox]")[0].checked || game.polyglot._isMessageLink(data.content)) return true;
 		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (game.polyglot._allowOOC() && game.polyglot._isMessageTypeOOC(data.type))) {
 			let lang = game.polyglot.chatElement.find("select[name=polyglot-language]").val();
 			const language = data.lang || data.language;

@@ -15,9 +15,20 @@
 .polyglot-lang-select {
 	flex: 0 0 28px;
 	margin: 0 6px;
+	align-items: center;
+}
+.polyglot-lang-select input {
+	margin-left: 0;
+}
+.polyglot-lang-select input:checked {
+	accent-color: rgb(255, 255, 245);
+}
+.polyglot-lang-select label {
+	flex: 0;
 }
 .polyglot-lang-select select {
 	height: 24px;
+	margin-left: 6px;
 	background: rgba(255, 255, 245, 0.8);
 }
 span.polyglot-journal {
