@@ -113,4 +113,5 @@ jobs:
           name: ${{ github.event.release.name }}
           token: ${{ secrets.GITHUB_TOKEN }}
           artifacts: './dist/${{ env.package_type }}.json, ./${{ env.package_type }}.zip'
+          tag: ${{ github.event.release.tag_name }}
           body: ${{ github.event.release.body }}
