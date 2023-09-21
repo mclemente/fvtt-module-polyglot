@@ -31,6 +31,17 @@
 	margin-left: 6px;
 	background: rgba(255, 255, 245, 0.8);
 }
+.polyglot-user-list {
+	display: inline-flex;
+	max-width: max-content;
+	margin: auto 3px;
+}
+.polyglot-user-list div {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	margin: auto 2px auto 2px;
+}
 span.polyglot-journal {
 	background-color: rgba(var(--polyglot-journal-color), var(--polyglot-journal-opacity));
 }

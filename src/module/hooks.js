@@ -9,11 +9,15 @@ export default class PolyglotHooks {
 				<input name="polyglot-checkbox" type="checkbox" checked></input>
 				<label>${game.i18n.localize("POLYGLOT.LanguageLabel")}</label>
 				<select name='polyglot-language'></select>
+				<div class="polyglot-user-list"></div>
 			</div>`,
 		);
 		const select = html.find(".polyglot-lang-select select");
-		select.change((e) => {
-			game.polyglot.lastSelection = select.val();
+
+		select.change((ev) => {
+			const lang = ev.target.value;
+			game.polyglot.lastSelection = lang;
+			if (game.user.isGM) game.polyglot.constructor.setLanguageSpeakers(html, lang);
 		});
 		game.polyglot.updateUserLanguages(html);
 	}

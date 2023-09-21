@@ -221,27 +221,11 @@ export class Polyglot {
 		} else if (this.knownLanguages.has(this.omniglot)) this.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
 
 		let options = "";
-		let playerCharacters = [];
-		if (game.user.isGM) {
-			playerCharacters = game.actors.filter((actor) => actor.hasPlayerOwner);
-			for (let i = 0; i < playerCharacters.length; i++) {
-				const knownLanguages = this.getUserLanguages([playerCharacters[i]])[0];
-				playerCharacters[i].knownLanguages = knownLanguages;
-			}
-		}
 		for (let lang of this.knownLanguages) {
 			if (!this._isTruespeech(lang) && (lang === this.omniglot || lang === this.comprehendLanguages)) {
 				continue;
 			}
 			const label = this.languageProvider.languages[lang]?.label || lang.capitalize();
-			if (game.user.isGM && playerCharacters.length) {
-				const actorsThatKnowLang = playerCharacters.filter((actor) => actor.knownLanguages.has(lang));
-				if (actorsThatKnowLang.length) {
-					const names = actorsThatKnowLang.map((actor) => actor.name).join("\n");
-					options += `<option title="${`PCs that know ${label}:\n${names}`}" value="${lang}">${label}</option>`;
-					continue;
-				}
-			}
 			options += `<option value="${lang}">${label}</option>`;
 		}
 
@@ -255,6 +239,7 @@ export class Polyglot {
 			else selectedLanguage = [...this.knownLanguages][0];
 		}
 
+		if (game.user.isGM) Polyglot.setLanguageSpeakers(html, selectedLanguage);
 		select.val(selectedLanguage);
 	}
 
@@ -619,6 +604,32 @@ export class Polyglot {
 				},
 			],
 		};
+	}
+
+	static setLanguageSpeakers(html, lang) {
+		const speakers = html.find(".polyglot-user-list");
+		speakers.empty();
+
+		let playerCharacters = game.actors.filter((actor) => actor.hasPlayerOwner);
+		for (let i = 0; i < playerCharacters.length; i++) {
+			const knownLanguages = game.polyglot.getUserLanguages([playerCharacters[i]])[0];
+			playerCharacters[i].knownLanguages = knownLanguages;
+		}
+		const usersThatKnowLang = game.users.filter((u) => !u.isGM && playerCharacters.some((a) => a.knownLanguages.has(lang) && a.testUserPermission(u, "OWNER")));
+
+		if (usersThatKnowLang.length) {
+			let users = [];
+			for (let user of usersThatKnowLang) {
+				const { id, name, color } = user;
+				let userDiv = $("<div></div>");
+				userDiv.attr("data-user-id", id);
+				userDiv.attr("data-tooltip", name);
+				userDiv.attr("data-tooltip-direction", "UP");
+				userDiv.css({ "background-color": color });
+				users.push(userDiv);
+			}
+			speakers.append(...users);
+		}
 	}
 
 	/* -------------------------------------------- */
