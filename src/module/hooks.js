@@ -11,7 +11,7 @@ export default class PolyglotHooks {
 		);
 		const select = html.find(".polyglot-lang-select select");
 		select.change((e) => {
-			this.lastSelection = select.val();
+			game.polyglot.lastSelection = select.val();
 		});
 		game.polyglot.updateUserLanguages(html);
 	}
@@ -36,12 +36,12 @@ export default class PolyglotHooks {
 	 */
 	static updateUser(user, data, options, userId) {
 		if (user.id == userId && data.character !== undefined) {
-			this.controlToken();
+			PolyglotHooks.controlToken();
 		}
 	}
 
 	static updateActiveEffect() {
-		this.controlToken();
+		PolyglotHooks.controlToken();
 	}
 
 	/**
@@ -140,7 +140,7 @@ export default class PolyglotHooks {
 			metadata.find(".polyglot-message-language").remove();
 			metadata.append(button);
 			if (clickable) {
-				button.click(this._onGlobeClick.bind(this));
+				button.click(game.polyglot._onGlobeClick.bind(this));
 			}
 		}
 	}
@@ -173,7 +173,7 @@ export default class PolyglotHooks {
 	}
 
 	static renderStorySheet(journalSheet, html) {
-		this.renderJournalSheet(journalSheet, html);
+		PolyglotHooks.renderJournalSheet(journalSheet, html);
 	}
 
 	/**
