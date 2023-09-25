@@ -1,10 +1,10 @@
 <form autocomplete="off" onsubmit="event.preventDefault()">
 	<nav class="sheet-tabs tabs">
 		{{#each tabs}}
-		<a class="item" data-tab="{{@key}}">
-			<i class="fas fa-cogs"></i>
-			{{localize "POLYGLOT.Fonts"}}
-		</a>
+			<a class="item" data-tab="{{@key}}">
+				<i class="{{icon}}"></i>
+				{{localize name}}
+			</a>
 		{{/each}}
 	</nav>
 
