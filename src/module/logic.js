@@ -249,12 +249,12 @@ export class Polyglot {
 	 * @return {string}			The message's text with its characters scrambled by the PRNG.
 	 */
 	scrambleString(string, salt, lang) {
-		const language = this.languageProvider.languages[lang];
+		let language = this.languageProvider.languages[lang];
 		if (!language) {
-			console.warn(`Polyglot | Language "${lang}" doesn't exist on the Language Provider, scrambling has been skipped for this string.`);
-			return string;
+			language = { rng: "default" };
+			console.warn(`Polyglot | Language "${lang}" doesn't exist on the Language Provider, RNG and Font were set to default.`);
 		}
-		const rng = language.rng;
+		const rng = language.rng ?? "default";
 		if (rng == "none") return string;
 		if (rng == "default") salt = lang;
 		// const font = this._getFontStyle(lang).replace(/\d+%\s/g, "");

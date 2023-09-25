@@ -196,7 +196,7 @@ export default class PolyglotHooks {
 	static renderJournalTextPageSheet(journalTextPageSheet, [header, text, section], data) {
 		if (journalTextPageSheet.object.parent.isOwner || game.user.isGM || data.editable) return;
 		else if (journalTextPageSheet.document.isOwner) {
-			const toggleButton = game.polyglot.createJournalButton(journalTextPageSheet);
+			const toggleButton = game.polyglot.createJournalButton(journalTextPageSheet.object.parent.sheet);
 			header
 				.closest(".app")
 				.querySelectorAll(".polyglot-button")

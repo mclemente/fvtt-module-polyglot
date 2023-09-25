@@ -6,7 +6,7 @@ import { preloadTemplates } from "./preloadTemplates.js";
 import { addSetting, registerProviderSettings, registerSettings, renderPolyglotGeneralSettingsHandler, renderSettingsConfigHandler } from "./settings.js";
 
 Hooks.once("init", () => {
-	CONFIG.TinyMCE.content_css.push("/modules/polyglot/css/polyglot.css");
+	CONFIG.TinyMCE.content_css.push("/modules/polyglot/styles/polyglot.css");
 	addSetting("CustomFontSizes", {
 		config: false,
 		default: CUSTOM_FONT_SIZES,

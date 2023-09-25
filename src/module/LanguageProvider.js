@@ -557,7 +557,7 @@ export class LanguageProvider {
 	}
 
 	getLanguageFont(lang) {
-		return this.languages[lang]?.font;
+		return this.languages[lang]?.font ?? this.defaultFont;
 	}
 
 	/////////////////////
