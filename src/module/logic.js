@@ -108,39 +108,36 @@ export class Polyglot {
 	}
 
 	get omniglot() {
-		return this._omniglot;
+		return this._omniglot.trim().toLowerCase().replace(/[\s']/g, "_");
 	}
 
 	set omniglot(lang) {
-		this.languageProvider.addLanguage(lang);
-		lang = lang.trim().toLowerCase().replace(/[\s']/g, "_");
 		if (lang === this._omniglot) return;
-		if (this._omniglot) this.languageProvider.removeLanguage(this._omniglot);
+		this.languageProvider.removeLanguage(this._omniglot);
+		this.languageProvider.addLanguage(lang);
 		this._omniglot = lang;
 	}
 
 	get comprehendLanguages() {
-		return this._comprehendLanguages;
+		return this._comprehendLanguages.trim().toLowerCase().replace(/[\s']/g, "_");
 	}
 
 	set comprehendLanguages(lang) {
-		this.languageProvider.addLanguage(lang);
-		lang = lang.trim().toLowerCase().replace(/[\s']/g, "_");
 		if (lang === this._comprehendLanguages) return;
-		if (this._comprehendLanguages) this.languageProvider.removeLanguage(this._comprehendLanguages);
+		this.languageProvider.removeLanguage(this._comprehendLanguages);
+		this.languageProvider.addLanguage(lang);
 		this._comprehendLanguages = lang;
 	}
 
 	get truespeech() {
-		return this._truespeech;
+		return this._truespeech.trim().toLowerCase().replace(/[\s']/g, "_");
 	}
 
 	set truespeech(lang) {
-		const key = lang.trim().toLowerCase().replace(/[\s']/g, "_");
-		if (key === this._truespeech) return;
-		this.languageProvider.addLanguage(lang);
+		if (lang === this._truespeech) return;
 		this.languageProvider.removeLanguage(this._truespeech);
-		this._truespeech = key;
+		this.languageProvider.addLanguage(lang);
+		this._truespeech = lang;
 	}
 
 	/* -------------------------------------------- */
