@@ -538,7 +538,7 @@ export class LanguageProvider {
 	 * Otherwise, returns the system's default language.
 	 */
 	getDefaultLanguage() {
-		const defaultLang = game.settings.get("polyglot", "defaultLanguage");
+		const defaultLang = game.user.flags?.polyglot?.defaultLanguage ?? game.settings.get("polyglot", "defaultLanguage");
 		if (defaultLang) {
 			if (this.languages[defaultLang]) {
 				this.defaultLanguage = defaultLang;

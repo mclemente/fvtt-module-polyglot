@@ -1,0 +1,22 @@
+<div class="form-group">
+	<label>{{localize name}}</label>
+	{{#if (eq type "Boolean")}}
+		<input name="{{id}}" type="checkbox" {{checked value}} />
+	{{/if}}
+	{{#if (eq type "String")}}
+		<input name="{{id}}" type="text" value="{{value}}" data-dtype="String" />
+	{{/if}}
+	{{#if (eq type "Color")}}
+		{{colorPicker name="JournalHighlightColor" value=value}}
+	{{/if}}
+	{{#if (eq type "Select")}}
+		<select name="{{id}}" class="form-fields">
+			{{selectOptions value selected=selected nameAttr="key" labelAttr="value"}}
+		</select>
+	{{/if}}
+	{{#if (eq type "Range")}}
+		<input name="{{id}}" type="range" max="{{range.max}}" min="{{range.min}}" step="{{range.step}}" value="{{value}}" />
+		<span class="range-value">{{value}}</span>
+	{{/if}}
+	<p class="notes">{{localize hint}}</p>
+</div>

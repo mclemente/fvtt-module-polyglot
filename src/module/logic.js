@@ -136,11 +136,11 @@ export class Polyglot {
 	}
 
 	set truespeech(lang) {
+		const key = lang.trim().toLowerCase().replace(/[\s']/g, "_");
+		if (key === this._truespeech) return;
 		this.languageProvider.addLanguage(lang);
-		lang = lang.trim().toLowerCase().replace(/[\s']/g, "_");
-		if (lang === this._truespeech) return;
 		this.languageProvider.removeLanguage(this._truespeech);
-		this._truespeech = lang;
+		this._truespeech = key;
 	}
 
 	/* -------------------------------------------- */

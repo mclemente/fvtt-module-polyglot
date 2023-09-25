@@ -3,7 +3,12 @@
 // SPDX-License-Identifier: MIT
 
 export async function preloadTemplates() {
-	const templatePaths = ["modules/polyglot/templates/FontSettings.hbs", "modules/polyglot/templates/GeneralSettings.hbs", "modules/polyglot/templates/LanguageSettings.hbs"];
+	const templatePaths = [
+		"modules/polyglot/templates/partials/settings.hbs",
+		"modules/polyglot/templates/FontSettings.hbs",
+		"modules/polyglot/templates/GeneralSettings.hbs",
+		"modules/polyglot/templates/LanguageSettings.hbs",
+	];
 
 	return loadTemplates(templatePaths);
 }

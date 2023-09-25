@@ -35,7 +35,6 @@ Hooks.on("setup", async () => {
 });
 Hooks.on("ready", () => {
 	game.polyglot.ready();
-	if (!Object.keys(game.settings.get("polyglot", "Languages")).length) game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
 	Hooks.callAll("polyglot.ready", LanguageProvider);
 });
 Hooks.on("renderSettingsConfig", renderSettingsConfigHandler);

@@ -36,7 +36,6 @@ export function registerSettings() {
 		label: game.i18n.localize("POLYGLOT.GeneralSettings"),
 		icon: "fas fa-cogs",
 		type: PolyglotGeneralSettings,
-		restricted: true,
 	});
 	//Font Settings Menu
 	game.settings.registerMenu("polyglot", "FontSettings", {
@@ -69,7 +68,6 @@ export function registerSettings() {
 	addSetting("defaultLanguage", {
 		name: "POLYGLOT.DefaultLanguage.title",
 		hint: "POLYGLOT.DefaultLanguage.hint",
-		scope: "client",
 		default: "",
 		type: String,
 	});

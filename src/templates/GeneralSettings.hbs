@@ -1,144 +1,21 @@
 <form autocomplete="off" onsubmit="event.preventDefault()">
 	<nav class="sheet-tabs tabs">
-		<a class="item" data-tab="general">
+		{{#each tabs}}
+		<a class="item" data-tab="{{@key}}">
 			<i class="fas fa-cogs"></i>
 			{{localize "POLYGLOT.Fonts"}}
 		</a>
-		<a class="item" data-tab="journal">
-			<i class="fas fa-book-open"></i>
-			{{journalTabName}}
-		</a>
-		<a class="item" data-tab="languages">
-			<i class="fas fa-globe"></i>
-			{{localize "POLYGLOT.Languages.title"}}
-		</a>
-		<a class="item" data-tab="chat">
-			<i class="fas fa-comments"></i>
-			{{localize "CHAT.Chat"}}
-		</a>
+		{{/each}}
 	</nav>
 
 	<section class="content">
-		<div class="tab" data-tab="general">
-			{{#with RuneRegex}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-			{{#with enableAllFonts}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-			{{#with exportFonts}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-		</div>
-		<div class="tab" data-tab="journal">
-			{{#with IgnoreJournalFontSize}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-			{{#with JournalHighlightColor}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					{{colorPicker name="JournalHighlightColor" value=value}}
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-			{{#with JournalHighlight}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="range" max="{{range.max}}" min="{{range.min}}" step="{{range.step}}" value="{{value}}" />
-					<span class="range-value">{{value}}</span>
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-		</div>
-		<div class="tab" data-tab="languages">
-			{{#with replaceLanguages}}
-				{{#unless polyglotHide}}
-					<div class="form-group">
-						<label>{{localize name}}</label>
-						<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
-						<p class="notes">{{localize hint}}</p>
-					</div>
-				{{/unless}}
-			{{/with}}
-			{{#with customLanguages}}
-				{{#unless polyglotHide}}
-					<div class="form-group">
-						<label>{{localize name}}</label>
-						<input name="{{id}}" id="{{id}}" type="text" value="{{value}}" />
-						<p class="notes">{{localize hint}}</p>
-					</div>
-				{{/unless}}
-			{{/with}}
-			{{#with omniglot}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="text" value="{{value}}" />
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-			{{#with comprehendLanguages}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="text" value="{{value}}" />
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-			{{#with truespeech}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="text" value="{{value}}" />
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-		</div>
-		<div class="tab" data-tab="chat">
-			{{#with display-translated}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-			{{#with hideTranslation}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-			{{#with allowOOC}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<select name="{{id}}" class="form-fields" id="{{id}}">
-						{{selectOptions select selected=selected nameAttr="key" labelAttr="value"}}
-					</select>
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-			{{#with runifyGM}}
-				<div class="form-group">
-					<label>{{localize name}}</label>
-					<input name="{{id}}" id="{{id}}" type="checkbox" {{checked value}} />
-					<p class="notes">{{localize hint}}</p>
-				</div>
-			{{/with}}
-		</div>
+		{{#each settings}}
+			<div class="tab" data-tab="{{@key}}">
+				{{#each this as |setting|}}
+					{{> "modules/polyglot/templates/partials/settings.hbs" setting}}
+				{{/each}}
+			</div>
+		{{/each}}
 	</section>
 
 	<footer class="sheet-footer flexrow">

@@ -44,6 +44,9 @@ export default class PolyglotHooks {
 		if (user.id == userId && data.character !== undefined) {
 			PolyglotHooks.controlToken();
 		}
+		if (data.flags?.polyglot) {
+			game.polyglot.languageProvider.getDefaultLanguage();
+		}
 	}
 
 	static updateActiveEffect() {
