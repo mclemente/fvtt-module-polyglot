@@ -120,29 +120,6 @@ export class PolyglotGeneralSettings extends FormApplication {
 
 	async activateListeners(html) {
 		super.activateListeners(html);
-		html.find(".polyglot-languageProvider").on("change", (event) => {
-			const languagesList = html.find(".polyglot-languages-list")[0];
-			const languagesTitle = html.find(".polyglot-languages-title-notes")[0];
-			const languagesWarning = html.find(".polyglot-languages-warn")[0];
-			const shouldDisplayLanguages = this.languageProvider === event.target.value;
-			languagesList.style.display = shouldDisplayLanguages ? "block" : "none";
-			languagesTitle.style.display = shouldDisplayLanguages ? "block" : "none";
-			languagesWarning.style.display = shouldDisplayLanguages ? "none" : "block";
-		});
-		html.find(".polyglot-alphabet").each(function () {
-			const font = this.previousSibling.previousSibling.children[0].value; //selectatr's value
-			this.style.font = game.polyglot.languageProvider.fonts[font];
-		});
-		html.find(".selectatr").on("change", (event) => {
-			const font = event.target.value;
-			const parentElement = event.target.parentElement;
-			const nextSibling = parentElement.nextSibling;
-			if (nextSibling && nextSibling.nextSibling) {
-				const elementToChange = nextSibling.nextSibling;
-				const alphabet = game.polyglot.languageProvider.fonts[font];
-				elementToChange.style.font = alphabet;
-			}
-		});
 		html.find("button").on("click", async (event) => {
 			if (event.currentTarget?.dataset?.action === "reset") {
 				const keys = [

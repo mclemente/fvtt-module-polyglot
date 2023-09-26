@@ -27,16 +27,6 @@ export class PolyglotAPI {
 
 		const providerId = "native" + (providerString !== "Generic" ? "." + providerString : "");
 		this.providers[providerId] = new providers[`${providerString}LanguageProvider`](providerId);
-
-		addSetting("languageProvider", {
-			//Has no name or hint
-			config: false,
-			type: String,
-			default: this.defaultProvider(),
-			onChange: (str) => {
-				this.languageProvider = this.providers[str];
-			},
-		});
 	}
 
 	get languageProvider() {
@@ -55,18 +45,28 @@ export class PolyglotAPI {
 		this.polyglot = game.polyglot;
 		this.polyglot.registerModule = this.registerModule;
 		this.polyglot.registerSystem = this.registerSystem;
-		this.updateProvider();
 	}
 
 	defaultProvider() {
 		/** providerIds should always be sorted the same way so this should achieve a stable default. */
 		const providerIds = Object.keys(this.providers);
-		if (!providerIds.length) return;
-		const gameSystem = providerIds.find((key) => key.startsWith("system.") || key.includes(game.system.id));
-		if (gameSystem) return gameSystem;
+		let defaultValue = providerIds[0];
+
 		const module = providerIds.find((key) => key.startsWith("module."));
-		if (module) return module;
-		return providerIds[0];
+		if (module) defaultValue = module;
+
+		const gameSystem = providerIds.find((key) => key.startsWith("system.") || key.includes(game.system.id));
+		if (gameSystem) defaultValue = gameSystem;
+
+		addSetting("languageProvider", {
+			//Has no name or hint
+			config: false,
+			type: String,
+			default: defaultValue,
+			onChange: (s) => {
+				this.languageProvider = this.providers[s];
+			},
+		});
 	}
 
 	updateProvider() {
@@ -102,6 +102,7 @@ export class PolyglotAPI {
 	 * @param {providers.LanguageProvider} languageProvider
 	 */
 	registerSystem(languageProvider) {
+		this.providers;
 		this.#register(`system.${game.system.id}`, languageProvider);
 	}
 
@@ -112,6 +113,5 @@ export class PolyglotAPI {
 	#register(id, languageProvider) {
 		const providerInstance = new languageProvider(id);
 		this.providers[providerInstance.id] = providerInstance;
-		this.updateProvider();
 	}
 }

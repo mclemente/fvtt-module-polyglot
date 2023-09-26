@@ -18,6 +18,8 @@ Hooks.once("init", () => {
 	game.polyglot.init();
 	api.attach();
 	Hooks.callAll("polyglot.init", LanguageProvider);
+	api.defaultProvider();
+	api.updateProvider();
 	return preloadTemplates();
 });
 

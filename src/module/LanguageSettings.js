@@ -91,11 +91,9 @@ export class PolyglotLanguageSettings extends FormApplication {
 		super.activateListeners(html);
 		html.find(".polyglot-languageProvider").on("change", (event) => {
 			const languagesList = html.find(".polyglot-languages-list")[0];
-			const languagesTitle = html.find(".polyglot-languages-title-notes")[0];
 			const languagesWarning = html.find(".polyglot-languages-warn")[0];
 			const shouldDisplayLanguages = this.languageProvider === event.target.value;
 			languagesList.style.display = shouldDisplayLanguages ? "block" : "none";
-			languagesTitle.style.display = shouldDisplayLanguages ? "block" : "none";
 			languagesWarning.style.display = shouldDisplayLanguages ? "none" : "block";
 		});
 		html.find(".polyglot-alphabet").each(function () {
