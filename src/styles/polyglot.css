@@ -43,14 +43,17 @@
 }
 .polyglot-lang-select .select2-container--default .select2-selection--single .select2-selection__rendered {
 	line-height: 24px;
+	color: fieldtext;
 }
 .polyglot-lang-select .select2-container--default .select2-selection--single .select2-selection__arrow {
 	height: 22px;
 }
+.polyglot-lang-select .select2-container--default .select2-selection--single .select2-selection__arrow b {
+	border-color: fieldtext transparent transparent transparent;
+}
 .select2-dropdown.polyglot-language {
 	background: rgb(255, 255, 245);
 }
-
 .polyglot-user-list {
 	display: inline-flex;
 	max-width: max-content;
