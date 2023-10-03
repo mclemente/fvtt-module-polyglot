@@ -211,7 +211,7 @@ export class Polyglot {
 	 */
 	updateUserLanguages(html) {
 		[this.knownLanguages, this.literateLanguages] = this.getUserLanguages();
-		const defaultLanguage = this.languageProvider.defaultLanguage;
+		const defaultLanguage = this.defaultLanguage;
 		if (this.knownLanguages.size == 0) {
 			if (game.user.isGM) this.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
 			else this.knownLanguages.add(defaultLanguage);

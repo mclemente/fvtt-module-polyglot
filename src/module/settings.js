@@ -124,6 +124,7 @@ export function registerSettings() {
 		hint: "POLYGLOT.ReplaceLanguages.hint",
 		default: false,
 		type: Boolean,
+		requiresReload: true,
 		onChange: async () => {
 			await game.polyglot.languageProvider.getLanguages();
 			game.polyglot.languageProvider.loadLanguages();
