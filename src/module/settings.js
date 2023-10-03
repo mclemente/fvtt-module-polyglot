@@ -64,14 +64,6 @@ export function registerSettings() {
 		type: Object,
 	});
 
-	//Actual Settings
-	addSetting("defaultLanguage", {
-		name: "POLYGLOT.DefaultLanguage.title",
-		hint: "POLYGLOT.DefaultLanguage.hint",
-		default: "",
-		type: String,
-	});
-
 	//Font Settings
 	addMenuSetting("RuneRegex", {
 		default: false,
@@ -136,6 +128,15 @@ export function registerSettings() {
 			await game.polyglot.languageProvider.getLanguages();
 			game.polyglot.languageProvider.loadLanguages();
 			game.polyglot.languageProvider.reloadLanguages();
+		},
+	});
+	addMenuSetting("defaultLanguage", {
+		name: "POLYGLOT.DefaultLanguage.title",
+		hint: "POLYGLOT.DefaultLanguage.hint",
+		default: "",
+		type: String,
+		onChange: () => {
+			game.polyglot.languageProvider.getDefaultLanguage();
 		},
 	});
 	addMenuSetting("customLanguages", {
