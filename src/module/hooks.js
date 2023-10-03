@@ -4,12 +4,12 @@ export default class PolyglotHooks {
 	 * Adds the Languages selector to the chatlog.
 	 */
 	static renderChatLog(chatlog, html, data) {
+		game.polyglot.renderChatLog = true;
 		html.find("#chat-controls").after(
 			`<div id='polyglot' class='polyglot-lang-select flexrow'>
 				<input name="polyglot-checkbox" type="checkbox" checked></input>
 				<label>${game.i18n.localize("POLYGLOT.LanguageLabel")}</label>
 				<select name='polyglot-language'></select>
-				<div class="polyglot-user-list"></div>
 			</div>`,
 		);
 		const select = html.find(".polyglot-lang-select select");
@@ -17,7 +17,6 @@ export default class PolyglotHooks {
 		select.change((ev) => {
 			const lang = ev.target.value;
 			game.polyglot.lastSelection = lang;
-			if (game.user.isGM) game.polyglot.constructor.setLanguageSpeakers(html, lang);
 		});
 		game.polyglot.updateUserLanguages(html);
 	}

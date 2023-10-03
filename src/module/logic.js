@@ -217,26 +217,81 @@ export class Polyglot {
 			else this.knownLanguages.add(defaultLanguage);
 		} else if (this.knownLanguages.has(this.omniglot)) this.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
 
-		let options = "";
+		if (!game.polyglot.renderChatLog) return;
+		let options = [];
+		let ownedActors = [];
+		if (game.user.isGM) {
+			ownedActors = game.actors.filter((actor) => actor.hasPlayerOwner);
+			for (let i = 0; i < ownedActors.length; i++) {
+				ownedActors[i].knownLanguages = this.getUserLanguages([ownedActors[i]])[0];
+			}
+		}
 		for (let lang of this.knownLanguages) {
 			if (!this._isTruespeech(lang) && (lang === this.omniglot || lang === this.comprehendLanguages)) {
 				continue;
 			}
 			const label = this.languageProvider.languages[lang]?.label || lang.capitalize();
-			options += `<option value="${lang}">${label}</option>`;
+			if (game.user.isGM && ownedActors.length) {
+				const usersThatKnowLang = game.users.filter((u) => !u.isGM && ownedActors.some((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER")));
+				if (usersThatKnowLang.length) {
+					let users = [];
+					for (let user of usersThatKnowLang) {
+						const { id, name, color } = user;
+						users.push({ userId: id, bgColor: color, userName: name });
+					}
+					options.push({
+						id: lang,
+						text: label,
+						users,
+					});
+					continue;
+				}
+			}
+			options.push({
+				id: lang,
+				text: label,
+			});
 		}
 
 		const select = html.find(".polyglot-lang-select select");
 		const prevOption = select.val();
-		select.html($(options));
+
+		select.empty();
+
+		const formatState = (state) => {
+			const { id, text, users } = state;
+			if (!id || !users) return text;
+			else {
+				let userList = [];
+				for (let user of users) {
+					const { userId, bgColor, userName } = user;
+					userList.push(`<div style="background-color: ${bgColor}" data-user-id=${userId} data-tooltip=${userName} data-tooltip-direction="UP"></div>`);
+				}
+				var $state = $(
+					`<span>
+						${text}
+						<div class="polyglot-user-list">${userList.join("")}</div>
+					</span>`.trim(),
+				);
+			}
+			return $state;
+		};
+
+		select.select2({
+			data: options,
+			dropdownCssClass: "polyglot-language",
+			templateResult: formatState,
+			templateSelection: formatState,
+		});
+		$(".select2-selection__rendered").hover(function () {
+			$(this).removeAttr("title");
+		});
 
 		let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
 		if (!this.isLanguageKnown(selectedLanguage)) {
 			if (this.isLanguageKnown(defaultLanguage)) selectedLanguage = defaultLanguage;
 			else selectedLanguage = [...this.knownLanguages][0];
 		}
-
-		if (game.user.isGM) Polyglot.setLanguageSpeakers(html, selectedLanguage);
 		select.val(selectedLanguage);
 	}
 
@@ -601,32 +656,6 @@ export class Polyglot {
 				},
 			],
 		};
-	}
-
-	static setLanguageSpeakers(html, lang) {
-		const speakers = html.find(".polyglot-user-list");
-		speakers.empty();
-
-		let playerCharacters = game.actors.filter((actor) => actor.hasPlayerOwner);
-		for (let i = 0; i < playerCharacters.length; i++) {
-			const knownLanguages = game.polyglot.getUserLanguages([playerCharacters[i]])[0];
-			playerCharacters[i].knownLanguages = knownLanguages;
-		}
-		const usersThatKnowLang = game.users.filter((u) => !u.isGM && playerCharacters.some((a) => a.knownLanguages.has(lang) && a.testUserPermission(u, "OWNER")));
-
-		if (usersThatKnowLang.length) {
-			let users = [];
-			for (let user of usersThatKnowLang) {
-				const { id, name, color } = user;
-				let userDiv = $("<div></div>");
-				userDiv.attr("data-user-id", id);
-				userDiv.attr("data-tooltip", name);
-				userDiv.attr("data-tooltip-direction", "UP");
-				userDiv.css({ "background-color": color });
-				users.push(userDiv);
-			}
-			speakers.append(...users);
-		}
 	}
 
 	/* -------------------------------------------- */

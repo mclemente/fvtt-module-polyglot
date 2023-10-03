@@ -27,7 +27,7 @@ const distDirectory = "./dist";
 const stylesDirectory = `${sourceDirectory}/styles`;
 const stylesExtension = "css";
 const sourceFileExtension = "js";
-const staticFiles = ["assets", "fonts", "lang", "packs", "templates", "module.json"];
+const staticFiles = ["assets", "fonts", "lang", "lib", "packs", "templates", "module.json"];
 
 /********************/
 /*      BUILD       */
@@ -70,10 +70,15 @@ async function copyFiles() {
 	}
 }
 
+function select2() {
+	return gulp.src(["node_modules/select2/dist/js/select2.min.js", "node_modules/select2/dist/css/select2.min.css"]).pipe(gulp.dest("dist/lib/select2"));
+}
+
 /**
  * Watch for changes for each build step
  */
 export function watch() {
+	select2();
 	gulp.watch(`${sourceDirectory}/**/*.${sourceFileExtension}`, { ignoreInitial: false }, buildCode);
 	gulp.watch(`${stylesDirectory}/**/*.${stylesExtension}`, { ignoreInitial: false }, buildStyles);
 	gulp.watch(
@@ -83,7 +88,7 @@ export function watch() {
 	);
 }
 
-export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, copyFiles));
+export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, select2, copyFiles));
 
 /********************/
 /*      CLEAN       */

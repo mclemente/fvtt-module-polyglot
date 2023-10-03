@@ -14,7 +14,8 @@
 		"verified": "11"
 	},
 	"esmodules": ["module/polyglot.js"],
-	"styles": ["styles/polyglot.css", "styles/fonts.css"],
+	"scripts": ["lib/select2/select2.min.js"],
+	"styles": ["lib/select2/select2.min.css", "styles/polyglot.css", "styles/fonts.css"],
 	"languages": [
 		{
 			"lang": "en",
