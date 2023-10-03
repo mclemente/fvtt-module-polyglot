@@ -61,7 +61,11 @@ export default class PolyglotHooks {
 	 * @returns {Boolean}
 	 */
 	static preCreateChatMessage(message, data, options, userId) {
-		if (!game.polyglot.chatElement.find("input[name=polyglot-checkbox]")[0].checked || game.polyglot._isMessageLink(data.content)) return true;
+		const isCheckboxEnabled = game.polyglot.chatElement.find("input[name=polyglot-checkbox]")[0].checked;
+		const isMessageLink = game.polyglot._isMessageLink(data.content);
+		// Message preprended by /desc from either Cautious GM Tools or Narrator Tools modules
+		const isDescMessage = message.flags?.cgmp?.subType === 1 || ["description", "narration", "notification"].includes(message.flags?.["narrator-tools"]?.type);
+		if (!isCheckboxEnabled || isMessageLink || isDescMessage) return true;
 		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (game.polyglot._allowOOC() && game.polyglot._isMessageTypeOOC(data.type))) {
 			let lang = game.polyglot.chatElement.find("select[name=polyglot-language]").val();
 			const language = data.lang || data.language;
