@@ -102,7 +102,6 @@ export class PolyglotAPI {
 	 * @param {providers.LanguageProvider} languageProvider
 	 */
 	registerSystem(languageProvider) {
-		this.providers;
 		this.#register(`system.${game.system.id}`, languageProvider);
 	}
 
