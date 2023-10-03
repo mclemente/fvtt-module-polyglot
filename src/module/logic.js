@@ -226,13 +226,14 @@ export class Polyglot {
 				ownedActors[i].knownLanguages = this.getUserLanguages([ownedActors[i]])[0];
 			}
 		}
+		const filteredUsers = this.languageProvider.filterUsers(ownedActors);
 		for (let lang of this.knownLanguages) {
 			if (!this._isTruespeech(lang) && (lang === this.omniglot || lang === this.comprehendLanguages)) {
 				continue;
 			}
 			const label = this.languageProvider.languages[lang]?.label || lang.capitalize();
 			if (game.user.isGM && ownedActors.length) {
-				const usersThatKnowLang = game.users.filter((u) => !u.isGM && ownedActors.some((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER")));
+				const usersThatKnowLang = filteredUsers.filter((u) => ownedActors.some((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER")));
 				if (usersThatKnowLang.length) {
 					let users = [];
 					for (let user of usersThatKnowLang) {

@@ -642,6 +642,16 @@ export class LanguageProvider {
 	}
 
 	/**
+	 * Filters users for Polyglot.updateUserLanguages()
+	 * @param {Array} ownedActors
+	 * @returns
+	 */
+	// eslint-disable-next-line no-unused-vars
+	filterUsers(ownedActors) {
+		return game.users.filter((u) => !u.isGM && u.hasRole(CONST.USER_ROLES.PLAYER));
+	}
+
+	/**
 	 * Returns the set with the languages to be shown on the journal.
 	 * Useful for systems where speaking and reading are separate skills.
 	 * @param {string} lang
@@ -1624,10 +1634,22 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 	};
 
 	get settings() {
+		const parties = Object.fromEntries(game.actors.filter((a) => a.type === "group").map((a) => [a.id, a.name]));
 		return {
 			"DND5E.SpecialLanguages": {
 				type: String,
 				default: game.i18n.localize("DND5E.LanguagesCommon"),
+			},
+			"DND5E.TargetedParty": {
+				type: String,
+				default: Object.keys(parties).length ? Object.keys(parties)[0] : "none",
+				choices: {
+					none: "",
+					...parties,
+				},
+				onChange: () => {
+					game.polyglot.updateUserLanguages(game.polyglot.chatElement);
+				},
 			},
 		};
 	}
@@ -1672,6 +1694,17 @@ export class dnd5eLanguageProvider extends LanguageProvider {
 			}
 		}
 		return [knownLanguages, literateLanguages];
+	}
+
+	filterUsers(ownedActors) {
+		const filtered = super.filterUsers(ownedActors);
+		const party = game.actors.find((a) => a.id === game.settings.get("polyglot", "DND5E.TargetedParty"));
+		if (filtered.length > 10 && party?.system?.members.size) {
+			const members = Array.from(party.system.members.map((a) => a.id));
+			const users = filtered.filter((u) => ownedActors.some((actor) => members.includes(actor.id) && actor.testUserPermission(u, "OWNER")));
+			return users;
+		}
+		return filtered;
 	}
 }
 
@@ -2672,6 +2705,23 @@ export class pf2eLanguageProvider extends LanguageProvider {
 		},
 	};
 
+	get settings() {
+		const parties = Object.fromEntries(game.actors.filter((a) => a.type === "party").map((a) => [a.id, a.name]));
+		return {
+			"PF2E.TargetedParty": {
+				type: String,
+				default: Object.keys(parties).length ? Object.keys(parties)[0] : "none",
+				choices: {
+					none: "",
+					...parties,
+				},
+				onChange: () => {
+					game.polyglot.updateUserLanguages(game.polyglot.chatElement);
+				},
+			},
+		};
+	}
+
 	addLanguage(lang) {
 		if (!lang) return;
 		lang = lang.trim();
@@ -2690,6 +2740,17 @@ export class pf2eLanguageProvider extends LanguageProvider {
 			rng: languagesSetting[key]?.rng ?? "default",
 		};
 		this.addToConfig(key, lang);
+	}
+
+	filterUsers(ownedActors) {
+		const filtered = super.filterUsers(ownedActors);
+		const party = game.actors.find((a) => a.id === game.settings.get("polyglot", "PF2E.TargetedParty"));
+		if (filtered.length > 10 && party?.members.length) {
+			const members = party.members.map((a) => a.id);
+			const users = filtered.filter((u) => ownedActors.some((actor) => members.includes(actor.id) && actor.testUserPermission(u, "OWNER")));
+			return users;
+		}
+		return filtered;
 	}
 }
 
