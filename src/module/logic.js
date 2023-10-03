@@ -292,7 +292,7 @@ export class Polyglot {
 			if (this.isLanguageKnown(defaultLanguage)) selectedLanguage = defaultLanguage;
 			else selectedLanguage = [...this.knownLanguages][0];
 		}
-		select.val(selectedLanguage);
+		select.val(selectedLanguage).trigger("change.select2");
 	}
 
 	/**
