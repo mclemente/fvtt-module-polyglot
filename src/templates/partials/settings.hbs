@@ -11,7 +11,7 @@
 	{{/if}}
 	{{#if (eq type "Select")}}
 		<select name="{{id}}" class="form-fields">
-			{{selectOptions value selected=selected nameAttr="key" labelAttr="value"}}
+			{{selectOptions select selected=value nameAttr="key" labelAttr="value"}}
 		</select>
 	{{/if}}
 	{{#if (eq type "Range")}}
