@@ -116,13 +116,13 @@
 			"SpecialLanguages.hint": "Name of the language that will replace \"languages\" such as \"all the languages it knew in life\".",
 			"TargetedParty": {
 				"title": "Target Group",
-				"desc": "If your game has a lot of users, the speaker indicator might become too crowded. You can filter the list by limiting it to users that own characters that are members of the target Group actor."
+				"hint": "If your game has a lot of users, the speaker indicator might become too crowded. You can filter the list by limiting it to users that own characters that are members of the target Group actor."
 			}
 		},
 		"PF2E": {
 			"TargetedParty": {
 				"title": "Target Party",
-				"desc": "If your game has a lot of users, the speaker indicator might become too crowded. You can filter the list by limiting it to users that own characters that are members of the target Party actor."
+				"hint": "If your game has a lot of users, the speaker indicator might become too crowded. You can filter the list by limiting it to users that own characters that are members of the target Party actor."
 			}
 		},
 		"SWADE": {
