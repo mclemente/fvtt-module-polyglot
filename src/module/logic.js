@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { FONTS } from "./Fonts.js";
 import PolyglotHooks from "./hooks.js";
 
@@ -20,16 +19,9 @@ export class Polyglot {
 				Hooks.on(hook, PolyglotHooks[hook]);
 			}
 		}
-		libWrapper.register("polyglot", "JournalTextPageSheet.prototype.activateEditor", this.activateEditorWrapper.bind(this), "WRAPPER");
-		/**
-		 * Speak a message as a particular Token, displaying it as a chat bubble
-		 * WRAPPER:
-		 * 	Scrambles the message's text if a language is present.
-		 * @param {Token} token                   The speaking Token
-		 * @param {string} message                The spoken message text
-		 * @param {ChatBubbleOptions} [options]   Options which affect the bubble appearance
-		 * @returns {Promise<jQuery|null>}        A Promise which resolves to the created bubble HTML element, or null
-		 */
+		Polyglot.handleTinyMCE();
+
+		// eslint-disable-next-line no-undef
 		libWrapper.register(
 			"polyglot",
 			"ChatBubbles.prototype.say",
@@ -565,16 +557,36 @@ export class Polyglot {
 	}
 
 	/* -------------------------------------------- */
-	/*  Wrappers			                        */
+	/*  Journal Editor		                        */
 	/* -------------------------------------------- */
 
-	activateEditorWrapper(wrapped, target, editorOptions, initialContent) {
-		// let { target, editorOptions, initialContent } = activeEditorLogic(target, editorOptions, initialContent);
-		this.activeEditorLogic(editorOptions);
-		return wrapped(target, editorOptions, initialContent);
+	static handleTinyMCE() {
+		// Add Polyglot to TinyMCE's menu
+		CONFIG.TinyMCE.style_formats.push({
+			title: "Polyglot",
+			items: {},
+		});
+		// Add custom config to remove spans from polyglot when needed
+		const removeFormat = [
+			{
+				selector: "span",
+				classes: "polyglot-journal",
+				attributes: ["title", "class", "data-language"],
+				remove: "all",
+				split: true,
+				expand: false,
+				deep: true,
+			},
+		];
+		if (!CONFIG.TinyMCE.formats) {
+			CONFIG.TinyMCE.formats = {
+				removeformat: removeFormat,
+			};
+		} else if (!CONFIG.TinyMCE.formats.removeformat) CONFIG.TinyMCE.formats.removeformat = [...removeFormat];
+		else CONFIG.TinyMCE.formats.removeformat.push(...removeFormat);
 	}
 
-	activeEditorLogic(editorOptions = {}) {
+	getLanguagesForEditor() {
 		let langs = this.languageProvider.languages;
 		if (!game.user.isGM) {
 			langs = {};
@@ -605,58 +617,14 @@ export class Polyglot {
 				};
 			});
 		if (this.truespeech) {
-			const truespeechIndex = languages.findIndex((element) => element.attributes["data-language"] == this.truespeech);
+			const truespeechIndex = languages.findIndex((element) => element.attributes["data-language"] === this.truespeech);
 			if (truespeechIndex !== -1) languages.splice(truespeechIndex, 1);
 		}
 		if (this.comprehendLanguages && !this._isTruespeech(this.comprehendLanguages)) {
-			const comprehendLanguagesIndex = languages.findIndex((element) => element.attributes["data-language"] == this.comprehendLanguages);
+			const comprehendLanguagesIndex = languages.findIndex((element) => element.attributes["data-language"] === this.comprehendLanguages);
 			if (comprehendLanguagesIndex !== -1) languages.splice(comprehendLanguagesIndex, 1);
 		}
-		editorOptions.style_formats = [
-			...CONFIG.TinyMCE.style_formats,
-			{
-				title: "Polyglot",
-				items: languages,
-			},
-		];
-		editorOptions.formats = {
-			removeformat: [
-				// Default remove format configuration from tinyMCE
-				{
-					selector: "b,strong,em,i,font,u,strike,sub,sup,dfn,code,samp,kbd,var,cite,mark,q,del,ins",
-					remove: "all",
-					split: true,
-					expand: false,
-					block_expand: true,
-					deep: true,
-				},
-				{
-					selector: "span",
-					attributes: ["style", "class"],
-					remove: "empty",
-					split: true,
-					expand: false,
-					deep: true,
-				},
-				{
-					selector: "*",
-					attributes: ["style", "class"],
-					split: false,
-					expand: false,
-					deep: true,
-				},
-				// Add custom config to remove spans from polyglot when needed
-				{
-					selector: "span",
-					classes: "polyglot-journal",
-					attributes: ["title", "class", "data-language"],
-					remove: "all",
-					split: true,
-					expand: false,
-					deep: true,
-				},
-			],
-		};
+		return languages;
 	}
 
 	/* -------------------------------------------- */

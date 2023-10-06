@@ -176,6 +176,7 @@ export default class PolyglotHooks {
 	 * @param {*} html
 	 */
 	static renderJournalSheet(journalSheet, html) {
+		CONFIG.TinyMCE.style_formats.find((f) => f.title === "Polyglot").items = game.polyglot.getLanguagesForEditor();
 		if (journalSheet.document?.isOwner || game.user.isGM) {
 			const toggleButton = game.polyglot.createJournalButton(journalSheet);
 			html.closest(".app").find(".polyglot-button").remove();
