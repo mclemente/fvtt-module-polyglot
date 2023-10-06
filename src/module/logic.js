@@ -633,6 +633,8 @@ export class Polyglot {
 	/*  Legacy Support	                            */
 	/* -------------------------------------------- */
 
+	activeEditorLogic() {}
+
 	get known_languages() {
 		return this.knownLanguages;
 	}
