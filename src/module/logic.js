@@ -156,9 +156,9 @@ export class Polyglot {
 			.toArray()
 			.map((m) => game.messages.get(m.dataset.messageId));
 		for (let i = messages.length - 1; i >= 0; i--) {
-			let message = messages[i];
+			const message = messages[i];
 			if (message && (message.type == CONST.CHAT_MESSAGE_TYPES.IC || this._isMessageTypeOOC(message.type))) {
-				let lang = message.getFlag("polyglot", "language");
+				const lang = message.getFlag("polyglot", "language");
 				if (lang) {
 					let unknown = !this.isLanguageknownOrUnderstood(lang);
 					if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
@@ -168,7 +168,9 @@ export class Polyglot {
 						globe.css({ color });
 						unknown = false;
 					}
-					if (unknown != message.polyglot_unknown) ui.chat.updateMessage(message);
+					if (unknown !== message.polyglot_unknown) {
+						ui.chat.updateMessage(message);
+					}
 				}
 			}
 		}

@@ -152,7 +152,7 @@ export default class PolyglotHooks {
 			metadata.find(".polyglot-message-language").remove();
 			metadata.append(button);
 			if (clickable) {
-				button.click(game.polyglot._onGlobeClick.bind(this));
+				button.on("click", game.polyglot._onGlobeClick.bind(this));
 			}
 		}
 	}
