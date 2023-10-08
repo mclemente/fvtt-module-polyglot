@@ -30,6 +30,11 @@ module.exports = {
 		],
 	},
 
+	globals: {
+		libWrapper: false,
+		GURPS: false,
+	},
+
 	overrides: [
 		{
 			files: ["./*.js", "./*.cjs", "./*.mjs"],

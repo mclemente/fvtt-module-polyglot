@@ -21,7 +21,6 @@ export class Polyglot {
 		}
 		Polyglot.handleTinyMCE();
 
-		// eslint-disable-next-line no-undef
 		libWrapper.register(
 			"polyglot",
 			"ChatBubbles.prototype.say",

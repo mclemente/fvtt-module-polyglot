@@ -2150,13 +2150,11 @@ export class gurpsLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
-		// eslint-disable-next-line no-undef
 		if (GURPS) {
 			const languageRegex = game.settings.get("polyglot", "LanguageRegex");
 			// window.GURPS set when the GURPS game system is loaded
 			let npat1 = ": +(?<name>[^\\(]+)";
 			let npat2 = " +\\((?<name>[^\\)]+)\\)";
-			// eslint-disable-next-line no-undef
 			GURPS.recurselist(actor.system.ads, (advantage) => {
 				if (!this.updateForPattern(advantage, new RegExp(languageRegex + npat1, "i"), knownLanguages, literateLanguages))
 					if (!this.updateForPattern(advantage, new RegExp(languageRegex + npat2, "i"), knownLanguages, literateLanguages))
