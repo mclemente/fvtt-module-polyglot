@@ -18,10 +18,30 @@ export class PolyglotGeneralSettings extends FormApplication {
 	}
 
 	_prepSetting(key) {
-		const { name, hint, polyglotHide, type, range, choices } = game.settings.settings.get(`polyglot.${key}`);
-		if (polyglotHide) return;
+		const settingData = game.settings.settings.get(`polyglot.${key}`);
+		if (settingData.polyglotHide) return;
+
+		const { name, hint, type, range, choices, isColor } = settingData;
 		const select = choices !== undefined ? Object.entries(choices).map(([key, value]) => ({ key, value })) : [];
-		return { id: key, value: game.settings.get("polyglot", key), name, hint, type: type.name, range, select };
+
+		let settingType = type.name;
+		if (range) {
+			settingType = "Range";
+		} else if (choices) {
+			settingType = "Select";
+		} else if (isColor) {
+			settingType = "Color";
+		}
+
+		return {
+			id: key,
+			value: game.settings.get("polyglot", key),
+			name,
+			hint,
+			type: settingType,
+			range,
+			select,
+		};
 	}
 
 	_prepFlag(key) {
@@ -73,8 +93,8 @@ export class PolyglotGeneralSettings extends FormApplication {
 					journal: {
 						// Journal
 						IgnoreJournalFontSize: this._prepSetting("IgnoreJournalFontSize"),
-						JournalHighlightColor: { ...this._prepSetting("JournalHighlightColor"), type: "Color" },
-						JournalHighlight: { ...this._prepSetting("JournalHighlight"), type: "Range" },
+						JournalHighlightColor: this._prepSetting("JournalHighlightColor"),
+						JournalHighlight: this._prepSetting("JournalHighlight"),
 					},
 					languages: {
 						// Languages
@@ -89,7 +109,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 						// Chat
 						"display-translated": this._prepSetting("display-translated"),
 						hideTranslation: this._prepSetting("hideTranslation"),
-						allowOOC: { ...this._prepSetting("allowOOC"), type: "Select" },
+						allowOOC: this._prepSetting("allowOOC"),
 						runifyGM: this._prepSetting("runifyGM"),
 					},
 				},
