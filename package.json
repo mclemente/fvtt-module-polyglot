@@ -1,23 +1,4 @@
 {
-	"private": true,
-	"name": "polyglot",
-	"description": "<description of the package>",
-	"license": "<please choose an appropriate license. https://choosealicense.com/ is a great place to get more information if you are unsure>",
-	"homepage": "<optionally the URL to your repository or another homepage>",
-	"repository": {
-		"type": "git",
-		"url": "<optionally the URL to your repository>"
-	},
-	"bugs": {
-		"url": "<optionally the URL to your issues list>"
-	},
-	"contributors": [
-		{
-			"name": "<your name>",
-			"email": "<optionally your e-mail address>"
-		}
-	],
-	"type": "module",
 	"scripts": {
 		"build": "gulp build",
 		"build:watch": "gulp watch",
