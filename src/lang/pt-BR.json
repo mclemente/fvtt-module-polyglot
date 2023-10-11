@@ -82,8 +82,8 @@
 		},
 		"FontSize": "Tamanho da Fonte (%)",
 		"LanguageRegex": {
-			"title": "RegEx da Linguagem",
-			"hint": "Você pode usar isto para mudar o termo pesquisado em itens de \"Idioma\" para algo diferente, como \"Língua\" ou \"Linguagem\"."
+			"title": "RegEx da Idioma",
+			"hint": "Define o termo pesquisado entre os itens de atores para determinar os seus idiomas falados."
 		},
 		"DND5E": {
 			"SpecialLanguages.title": "Substituir Idiomas Especiais",
@@ -110,7 +110,7 @@
 		},
 		"RuneRegex": {
 			"title": "Randomizar apenas alfanuméricos",
-			"hint": "Faz com que a randomização ignore caracteres não alfanuméricos (por exemplo !,...;?#$\"''). Isto pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes."
+			"hint": "Faz com que a randomização ignore caracteres não alfanuméricos (por exemplo !,...;?#$\"''). Isso pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes."
 		},
 		"JournalHighlightColor": {
 			"title": "Cor do Marcador",
