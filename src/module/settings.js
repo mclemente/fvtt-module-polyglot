@@ -98,6 +98,7 @@ export function registerSettings() {
 	addMenuSetting("JournalHighlightColor", {
 		default: "#ffb400",
 		type: String,
+		isColor: true,
 		onChange: (value) => {
 			document.documentElement.style.setProperty("--polyglot-journal-color", value);
 		},
