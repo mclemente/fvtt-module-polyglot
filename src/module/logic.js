@@ -227,11 +227,15 @@ export class Polyglot {
 			const label = this.languageProvider.languages[lang]?.label || lang.capitalize();
 			if (game.user.isGM && ownedActors.length) {
 				const usersThatKnowLang = filteredUsers.filter((u) => ownedActors.some((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER")));
-				if (usersThatKnowLang.length) {
+				const usersWithOwnedActors = usersThatKnowLang.map((u) => {
+					const actorsOwnedByUser = ownedActors.filter((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER")).map((a) => a.name);
+					return { ...u, actorsOwnedByUser };
+				});
+				if (usersWithOwnedActors.length) {
 					let users = [];
-					for (let user of usersThatKnowLang) {
-						const { id, name, color } = user;
-						users.push({ userId: id, bgColor: color, userName: name });
+					for (let user of usersWithOwnedActors) {
+						const { name, color, actorsOwnedByUser } = user;
+						users.push({ bgColor: color, userName: name, ownedActors: actorsOwnedByUser.join(", ") });
 					}
 					options.push({
 						id: lang,
@@ -258,14 +262,15 @@ export class Polyglot {
 			else {
 				let userList = [];
 				for (let user of users) {
-					const { userId, bgColor, userName } = user;
-					userList.push(`<div style="background-color: ${bgColor}" data-user-id=${userId} data-tooltip=${userName} data-tooltip-direction="UP"></div>`);
+					const { bgColor, userName, ownedActors } = user;
+					const tooltip = `${userName} (${ownedActors})`;
+					userList.push(`<div style="background-color: ${bgColor};" data-tooltip="${tooltip}" data-tooltip-direction="UP"></div>`);
 				}
 				var $state = $(
-					`<span>
-						${text}
+					`<div class="flexrow">
+						<div>${text}</div>
 						<div class="polyglot-user-list">${userList.join("")}</div>
-					</span>`.trim(),
+					</div>`.trim(),
 				);
 			}
 			return $state;
