@@ -21,7 +21,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 		const settingData = game.settings.settings.get(`polyglot.${key}`);
 		if (settingData.polyglotHide) return;
 
-		const { name, hint, type, range, choices, isColor } = settingData;
+		const { name, hint, type, range, choices, isColor, hasTextarea } = settingData;
 		const select = choices !== undefined ? Object.entries(choices).map(([key, value]) => ({ key, value })) : [];
 
 		let settingType = type.name;
@@ -31,6 +31,8 @@ export class PolyglotGeneralSettings extends FormApplication {
 			settingType = "Select";
 		} else if (isColor) {
 			settingType = "Color";
+		} else if (hasTextarea) {
+			settingType = "Textarea";
 		}
 
 		return {

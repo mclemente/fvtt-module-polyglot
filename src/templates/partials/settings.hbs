@@ -6,6 +6,9 @@
 	{{#if (eq type "String")}}
 		<input name="{{id}}" type="text" value="{{value}}" data-dtype="String" />
 	{{/if}}
+	{{#if (eq type "Textarea")}}
+		<textarea name="{{id}}" cols="4" data-dtype="String">{{value}}</textarea>
+	{{/if}}
 	{{#if (eq type "Color")}}
 		{{colorPicker name="JournalHighlightColor" value=value}}
 	{{/if}}

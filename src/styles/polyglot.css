@@ -8,6 +8,10 @@
 .polyglot.wfrp4e select {
 	color: #e2e2e2;
 }
+.polyglot.polyglot-general-settings .tab .form-group textarea {
+	resize: vertical;
+	min-height: 57px;
+}
 
 .polyglot-chat-bubble {
 	font-family: var(--polyglot-chat-bubble-font);
