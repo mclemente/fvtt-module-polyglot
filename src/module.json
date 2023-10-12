@@ -73,18 +73,6 @@
 			"path": "lang/sv.json"
 		}
 	],
-	"relationships": {
-		"requires": [
-			{
-				"id": "lib-wrapper",
-				"type": "module",
-				"manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json",
-				"compatibility": {
-					"verified": "1.12.11.0"
-				}
-			}
-		]
-	},
 	"url": "This is auto replaced",
 	"version": "This is auto replaced",
 	"manifest": "This is auto replaced",

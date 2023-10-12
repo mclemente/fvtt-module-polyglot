@@ -31,7 +31,7 @@ module.exports = {
 	},
 
 	globals: {
-		libWrapper: false,
+		globalThis: false,
 		GURPS: false,
 	},
 

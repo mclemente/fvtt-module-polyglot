@@ -1,3 +1,4 @@
+import { libWrapper } from "../lib/libWrapper.js";
 import { FONTS } from "./Fonts.js";
 import PolyglotHooks from "./hooks.js";
 
