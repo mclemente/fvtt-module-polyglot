@@ -10,9 +10,9 @@
 		"CustomLanguages.title": "Idiomas Customizados",
 		"CustomLanguages.hint": "Defina uma lista de idiomas customizados para adicionar ao sistema, separados por vírgula ou por ponto e vírgula.",
 		"ComprehendLanguages.title": "Idioma Omnisciente",
-		"ComprehendLanguages.hint": "Define um idioma cujo falante entende todos os idiomas, mas não pode ser escrito ou falado.",
+		"ComprehendLanguages.hint": "Define um idioma cujo falante entende todos os idiomas, mas não pode ser escrito ou falado. Um ator poderá ler todas as mensagens do chat e todos os textos de diários.",
 		"Truespeech.title": "Idioma de Omnifala",
-		"Truespeech.hint": "Define um idioma cujo falante entende todas as línguas faladas (mas não escritas em Diários) e que é entendido por todas as criaturas.",
+		"Truespeech.hint": "Define um idioma cujo falante entende todas as línguas faladas (mas não escritas em Diários) e que é entendido por todas as criaturas. Um ator poderá ler todas as mensagens de chat e escrever mensagens em um idioma que é entendido por todos.",
 		"JournalHighlight.title": "Opacidade do Marcador (%)",
 		"JournalHighlight.hint": "Define a opacidade do marcador sobre as fontes no diário.",
 		"logographicalFontToggle.title": "Fontes Logográficas",
@@ -132,7 +132,7 @@
 		"General": "Geral",
 		"Omniglot": {
 			"title": "Idioma Omniglota",
-			"hint": "Define um idioma cujo falante entende e fala todos os outros idiomas."
+			"hint": "Define um idioma cujo falante entende e fala todos os outros idiomas. Um ator poderá ler e escrever em todos os outros idiomas, tanto no chat quanto em diários."
 		},
 		"AlphabeticOnly": "Apenas Alfabética",
 		"Logographical": "Logográfica",
