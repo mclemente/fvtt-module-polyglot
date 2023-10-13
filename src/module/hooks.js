@@ -139,7 +139,6 @@ export default class PolyglotHooks {
 			}
 		} else if (!forceTranslation && message.polyglot_unknown) {
 			html.find(".message-content").empty().append(content);
-			message.polyglot_unknown = true;
 		}
 
 		if (isGM || (known && !hideTranslation)) {
