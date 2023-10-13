@@ -143,7 +143,7 @@ export default class PolyglotHooks {
 			let color = "red";
 			if ((isGM && !runifyGM) || known) color = "green";
 			else if (understood) color = "blue";
-			const title = isGM || known || understood ? `data-tooltip="${language}" data-tooltip-direction="LEFT"` : "";
+			const title = isGM || known || game.polyglot._isTruespeech(lang) ? `data-tooltip="${language}" data-tooltip-direction="LEFT"` : "";
 			const clickable = isGM && (runifyGM || !displayTranslated);
 			const button = $(`<a class="button polyglot-message-language ${clickable ? "" : "unclickable"}" ${title}>
 				<i class="fas fa-globe" style="color:${color}"></i>
