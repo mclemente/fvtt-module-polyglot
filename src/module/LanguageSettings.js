@@ -31,8 +31,12 @@ export class PolyglotLanguageSettings extends FormApplication {
 			const type = provider.id.substring(0, dotPosition);
 			const id = provider.id.substring(dotPosition + 1);
 			if (type === "native") {
-				let title = id == game.system.id ? game.system.title : id;
-				provider.selectTitle = (game.i18n.localize("POLYGLOT.LanguageProvider.choices.native") + " " + title).trim();
+				let title = id === game.system.id ? game.system.title : id;
+				provider.selectTitle = (
+					`${game.i18n.localize("POLYGLOT.LanguageProvider.choices.native")
+					} ${
+					title}`
+				).trim();
 			} else {
 				const name = type === "module" ? game.modules.get(id).title : game.system.title;
 				provider.selectTitle = game.i18n.format(`POLYGLOT.LanguageProvider.choices.${type}`, { name });
@@ -68,7 +72,11 @@ export class PolyglotLanguageSettings extends FormApplication {
 
 		const { name, hint } = game.settings.settings.get("polyglot.Languages");
 		const filtered = asArray.filter(([key]) => {
-			return key !== game.polyglot.omniglot && key !== game.polyglot.comprehendLanguages && key !== game.polyglot.truespeech;
+			return (
+				key !== game.polyglot.omniglot
+				&& key !== game.polyglot.comprehendLanguages
+				&& key !== game.polyglot.truespeech
+			);
 		});
 		const value = Object.fromEntries(filtered);
 
@@ -97,7 +105,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 			languagesWarning.style.display = shouldDisplayLanguages ? "none" : "block";
 		});
 		html.find(".polyglot-alphabet").each(function () {
-			const font = this.previousSibling.previousSibling.children[0].value; //selectatr's value
+			const font = this.previousSibling.previousSibling.children[0].value; // selectatr's value
 			this.style.font = game.polyglot.languageProvider.fonts[font];
 		});
 		html.find(".selectatr").on("change", (event) => {
@@ -128,7 +136,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 	 */
 	async _updateObject(ev, formData) {
 		const languageProvider = game.settings.get("polyglot", "languageProvider");
-		if (languageProvider != formData.languageProvider) {
+		if (languageProvider !== formData.languageProvider) {
 			await game.settings.set("polyglot", "languageProvider", formData.languageProvider);
 			game.polyglot.api.updateProvider();
 			await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);

@@ -3,7 +3,13 @@ import { LanguageProvider } from "./LanguageProvider.js";
 import { PolyglotAPI } from "./api.js";
 import { Polyglot } from "./logic.js";
 import { preloadTemplates } from "./preloadTemplates.js";
-import { addSetting, registerProviderSettings, registerSettings, renderPolyglotGeneralSettingsHandler, renderSettingsConfigHandler } from "./settings.js";
+import {
+	addSetting,
+	registerProviderSettings,
+	registerSettings,
+	renderPolyglotGeneralSettingsHandler,
+	renderSettingsConfigHandler,
+} from "./settings.js";
 
 Hooks.once("init", () => {
 	CONFIG.TinyMCE.content_css.push("/modules/polyglot/styles/polyglot.css");

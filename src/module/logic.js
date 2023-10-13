@@ -57,12 +57,15 @@ export class Polyglot {
 					}
 				}
 				if (lang) {
-					//Language isn't truespeech, isn't known and user isn't under Comprehend Languages effect
+					// Language isn't truespeech, isn't known and user isn't under Comprehend Languages effect
 					const unknown = !this.isLanguageknownOrUnderstood(lang);
 					if (unknown) {
 						message = this.scrambleString(message, randomId, lang);
-						document.documentElement.style.setProperty("--polyglot-chat-bubble-font", this._getFontStyle(lang).replace(/\d+%\s/g, ""));
-						if (cssClasses == undefined) cssClasses = [];
+						document.documentElement.style.setProperty(
+							"--polyglot-chat-bubble-font",
+							this._getFontStyle(lang).replace(/\d+%\s/g, ""),
+						);
+						if (cssClasses === undefined) cssClasses = [];
 						cssClasses.push("polyglot-chat-bubble");
 					}
 				}
@@ -156,7 +159,10 @@ export class Polyglot {
 			.toArray()
 			.map((m) => game.messages.get(m.dataset.messageId));
 		for (const message of messages) {
-			if (message.type == CONST.CHAT_MESSAGE_TYPES.IC || (this._isMessageTypeOOC(message.type) && message.getFlag("polyglot", "language"))) {
+			if (
+				message.type === CONST.CHAT_MESSAGE_TYPES.IC
+				|| (this._isMessageTypeOOC(message.type) && message.getFlag("polyglot", "language"))
+			) {
 				ui.chat.updateMessage(message);
 			}
 		}
@@ -165,18 +171,18 @@ export class Polyglot {
 	getUserLanguages(actors = []) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
-		if (actors.length == 0) {
+		if (actors.length === 0) {
 			if (canvas && canvas.tokens) {
 				for (let token of canvas.tokens.controlled) {
 					if (token.actor) actors.push(token.actor);
 				}
 			}
-			if (actors.length == 0 && game.user.character) actors.push(game.user.character);
+			if (actors.length === 0 && game.user.character) actors.push(game.user.character);
 		}
 		for (let actor of actors) {
 			try {
 				[knownLanguages, literateLanguages] = this.languageProvider.getUserLanguages(actor);
-			} catch (err) {
+			} catch(err) {
 				console.error(`Polyglot | Failed to get languages from actor "${actor.name}".`, err);
 			}
 		}
@@ -192,10 +198,12 @@ export class Polyglot {
 	updateUserLanguages(html) {
 		[this.knownLanguages, this.literateLanguages] = this.getUserLanguages();
 		const defaultLanguage = this.defaultLanguage;
-		if (this.knownLanguages.size == 0) {
+		if (this.knownLanguages.size === 0) {
 			if (game.user.isGM) this.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
 			else this.knownLanguages.add(defaultLanguage);
-		} else if (this.knownLanguages.has(this.omniglot)) this.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
+		} else if (this.knownLanguages.has(this.omniglot)) {
+			this.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
+		}
 
 		if (!game.polyglot.renderChatLog) return;
 		let options = [];
@@ -204,7 +212,11 @@ export class Polyglot {
 			ownedActors = game.actors.filter((actor) => actor.hasPlayerOwner);
 			for (const actor of ownedActors) {
 				actor.knownLanguages = this.getUserLanguages([actor])[0];
-				if (actor.knownLanguages.has(this.omniglot) || actor.knownLanguages.has(this.truespeech) || actor.knownLanguages.has(this.comprehendLanguages)) {
+				if (
+					actor.knownLanguages.has(this.omniglot)
+					|| actor.knownLanguages.has(this.truespeech)
+					|| actor.knownLanguages.has(this.comprehendLanguages)
+				) {
 					actor.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
 				} else if (this.truespeech) {
 					actor.knownLanguages.add(this.truespeech);
@@ -218,9 +230,13 @@ export class Polyglot {
 			}
 			const label = this.languageProvider.languages[lang]?.label || lang.capitalize();
 			if (game.user.isGM && ownedActors.length) {
-				const usersThatKnowLang = filteredUsers.filter((u) => ownedActors.some((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER")));
+				const usersThatKnowLang = filteredUsers.filter((u) =>
+					ownedActors.some((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER")),
+				);
 				const usersWithOwnedActors = usersThatKnowLang.map((u) => {
-					const actorsOwnedByUser = ownedActors.filter((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER")).map((a) => a.name);
+					const actorsOwnedByUser = ownedActors
+						.filter((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER"))
+						.map((a) => a.name);
 					return { ...u, actorsOwnedByUser };
 				});
 				if (usersWithOwnedActors.length) {
@@ -250,15 +266,17 @@ export class Polyglot {
 
 		const formatState = (state) => {
 			const { id, text, users } = state;
-			if (!id || !users) return text;
-			else {
+			let $state = text;
+			if (id && users) {
 				let userList = [];
 				for (let user of users) {
 					const { bgColor, userName, ownedActors } = user;
 					const tooltip = `${userName} (${ownedActors})`;
-					userList.push(`<div style="background-color: ${bgColor};" data-tooltip="${tooltip}" data-tooltip-direction="UP"></div>`);
+					userList.push(
+						`<div style="background-color: ${bgColor};" data-tooltip="${tooltip}" data-tooltip-direction="UP"></div>`,
+					);
 				}
-				var $state = $(
+				$state = $(
 					`<div class="flexrow">
 						<div>${text}</div>
 						<div class="polyglot-user-list">${userList.join("")}</div>
@@ -298,11 +316,13 @@ export class Polyglot {
 		let language = this.languageProvider.languages[lang];
 		if (!language) {
 			language = { rng: "default" };
-			console.warn(`Polyglot | Language "${lang}" doesn't exist on the Language Provider, RNG and Font were set to default.`);
+			console.warn(
+				`Polyglot | Language "${lang}" doesn't exist on the Language Provider, RNG and Font were set to default.`,
+			);
 		}
 		const rng = language.rng ?? "default";
-		if (rng == "none") return string;
-		if (rng == "default") salt = lang;
+		if (rng === "none") return string;
+		if (rng === "default") salt = lang;
 		// const font = this._getFontStyle(lang).replace(/\d+%\s/g, "");
 		const font = this.languageProvider.getLanguageFont(lang);
 		const selectedFont = this.languageProvider.fonts[font];
@@ -314,7 +334,9 @@ export class Polyglot {
 		const salted_string = string + salt;
 		const seed = new MersenneTwister(this._hashCode(salted_string));
 		const regex = game.settings.get("polyglot", "RuneRegex") ? /[a-zA-Z\d]/g : /\S/gu;
-		const characters = selectedFont.alphabeticOnly ? "abcdefghijklmnopqrstuvwxyz" : "abcdefghijklmnopqrstuvwxyz0123456789";
+		const characters = selectedFont.alphabeticOnly
+			? "abcdefghijklmnopqrstuvwxyz"
+			: "abcdefghijklmnopqrstuvwxyz0123456789";
 
 		// if (selectedFont.replace) {
 		// 	Object.keys(selectedFont.replace).forEach((key) => {
@@ -342,10 +364,16 @@ export class Polyglot {
 			const alphabetsSetting = game.settings.get("polyglot", "Alphabets");
 			const languagesSetting = game.settings.get("polyglot", "Languages");
 			const { fonts, languages } = game.polyglot.languageProvider;
-			if (!foundry.utils.isEmpty(diffObject(alphabetsSetting, fonts)) || !foundry.utils.isEmpty(diffObject(fonts, alphabetsSetting))) {
+			if (
+				!foundry.utils.isEmpty(diffObject(alphabetsSetting, fonts))
+				|| !foundry.utils.isEmpty(diffObject(fonts, alphabetsSetting))
+			) {
 				game.settings.set("polyglot", "Alphabets", fonts);
 			}
-			if (!foundry.utils.isEmpty(diffObject(languagesSetting, languages)) || !foundry.utils.isEmpty(diffObject(languages, languagesSetting))) {
+			if (
+				!foundry.utils.isEmpty(diffObject(languagesSetting, languages))
+				|| !foundry.utils.isEmpty(diffObject(languages, languagesSetting))
+			) {
 				game.settings.set("polyglot", "Languages", languages);
 			}
 		}
@@ -387,17 +415,16 @@ export class Polyglot {
 					const lang = span.dataset.language;
 					if (!lang) continue;
 					texts.push(span.textContent);
-					if (span.children.length && span.children[0].nodeName == "SPAN") {
-						var spanStyle = {
+					let spanStyle = {
+						fontFamily: span.style.fontFamily,
+						fontSize: span.style.fontSize,
+						font: span.style.font,
+					};
+					if (span.children.length && span.children[0].nodeName === "SPAN") {
+						spanStyle = {
 							fontFamily: span.children[0].style.fontFamily,
 							fontSize: span.children[0].style.fontSize,
 							font: span.children[0].style.font,
-						};
-					} else {
-						spanStyle = {
-							fontFamily: span.style.fontFamily,
-							fontSize: span.style.fontSize,
-							font: span.style.font,
 						};
 					}
 					styles.push(spanStyle);
@@ -450,11 +477,11 @@ export class Polyglot {
 
 	isLanguageUnderstood(lang) {
 		return (
-			this.knownLanguages.has(this.omniglot) ||
-			this.knownLanguages.has(this.comprehendLanguages) ||
-			this.knownLanguages.has(this.truespeech) ||
-			this._isOmniglot(lang) ||
-			this._isTruespeech(lang)
+			this.knownLanguages.has(this.omniglot)
+			|| this.knownLanguages.has(this.comprehendLanguages)
+			|| this.knownLanguages.has(this.truespeech)
+			|| this._isOmniglot(lang)
+			|| this._isTruespeech(lang)
 		);
 	}
 
@@ -508,7 +535,9 @@ export class Polyglot {
 	 * @returns {Boolean} - Whether the message content is a link to an image file or not.
 	 */
 	_isMessageLink(messageContent) {
-		return /@|<|https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/gi.test(messageContent);
+		return /@|<|https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/gi.test(
+			messageContent,
+		);
 	}
 
 	/**
@@ -521,7 +550,7 @@ export class Polyglot {
 	}
 
 	_isOmniglot(lang) {
-		return lang == this.omniglot;
+		return lang === this.omniglot;
 	}
 
 	/**
@@ -531,7 +560,7 @@ export class Polyglot {
 	 * @returns {Boolean}
 	 */
 	_isTruespeech(lang) {
-		return lang == this.truespeech;
+		return lang === this.truespeech;
 	}
 
 	_onGlobeClick(event) {
@@ -615,11 +644,15 @@ export class Polyglot {
 				};
 			});
 		if (this.truespeech) {
-			const truespeechIndex = languages.findIndex((element) => element.attributes["data-language"] === this.truespeech);
+			const truespeechIndex = languages.findIndex(
+				(element) => element.attributes["data-language"] === this.truespeech,
+			);
 			if (truespeechIndex !== -1) languages.splice(truespeechIndex, 1);
 		}
 		if (this.comprehendLanguages && !this._isTruespeech(this.comprehendLanguages)) {
-			const comprehendLanguagesIndex = languages.findIndex((element) => element.attributes["data-language"] === this.comprehendLanguages);
+			const comprehendLanguagesIndex = languages.findIndex(
+				(element) => element.attributes["data-language"] === this.comprehendLanguages,
+			);
 			if (comprehendLanguagesIndex !== -1) languages.splice(comprehendLanguagesIndex, 1);
 		}
 		return languages;

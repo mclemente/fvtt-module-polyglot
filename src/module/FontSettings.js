@@ -43,18 +43,24 @@ export class PolyglotFontSettings extends FormApplication {
 
 		const changeFontSize = async (event) => {
 			if (!event.target.hasFocus) return;
-			const size = event.type == "change" ? event.target.value : event.target.value - event.originalEvent.deltaY / 10;
+			let size = event.target.value;
+			if (event.type !== "change") {
+				size -= event.originalEvent.deltaY / 10;
+			}
 			if (size < 50) return;
-			const font = event.target.parentElement.previousElementSibling.textContent;
-			event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.style.fontSize = `${size}%`;
+			const parent = event.target.parentElement;
+			const font = parent.previousElementSibling.textContent;
+			parent.nextElementSibling.nextElementSibling.nextElementSibling.style.fontSize = `${size}%`;
 			this.fonts[font].size = size;
 		};
 		const changeFontAlphabetic = async (event) => {
-			const font = event.target.parentElement.previousElementSibling.previousElementSibling.textContent;
+			const parent = event.target.parentElement;
+			const font = parent.previousElementSibling.previousElementSibling.textContent;
 			this.fonts[font].alphabeticOnly = event.target.checked;
 		};
 		const changeFontLogographical = async (event) => {
-			const font = event.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+			const parent = event.target.parentElement;
+			const font = parent.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
 			this.fonts[font].logographical = event.target.checked;
 		};
 

@@ -24,7 +24,7 @@ export default class PolyglotHooks {
 	static updateActor(actor, data, options, userId) {
 		if (actor.hasPlayerOwner) {
 			const owner = game.users.find((user) => user.character?.id === actor.id);
-			if (game.user.isGM || owner.id == userId) {
+			if (game.user.isGM || owner.id === userId) {
 				game.polyglot.updateUserLanguages(game.polyglot.chatElement);
 				game.polyglot.updateChatMessages();
 			}
@@ -40,7 +40,7 @@ export default class PolyglotHooks {
 	 * Updates the languages in the Languages selector and the messages that are readable by the character.
 	 */
 	static updateUser(user, data, options, userId) {
-		if (user.id == userId && data.character !== undefined) {
+		if (user.id === userId && data.character !== undefined) {
 			PolyglotHooks.controlToken();
 		}
 		if (data.flags?.polyglot) {
@@ -64,9 +64,14 @@ export default class PolyglotHooks {
 		const isCheckboxEnabled = game.polyglot.chatElement.find("input[name=polyglot-checkbox]")[0].checked;
 		const isMessageLink = game.polyglot._isMessageLink(data.content);
 		// Message preprended by /desc from either Cautious GM Tools or Narrator Tools modules
-		const isDescMessage = message.flags?.cgmp?.subType === 1 || ["description", "narration", "notification"].includes(message.flags?.["narrator-tools"]?.type);
+		const isDescMessage =
+			message.flags?.cgmp?.subType === 1
+			|| ["description", "narration", "notification"].includes(message.flags?.["narrator-tools"]?.type);
 		if (!isCheckboxEnabled || isMessageLink || isDescMessage) return true;
-		if (data.type == CONST.CHAT_MESSAGE_TYPES.IC || (game.polyglot._allowOOC() && game.polyglot._isMessageTypeOOC(data.type))) {
+		if (
+			data.type === CONST.CHAT_MESSAGE_TYPES.IC
+			|| (game.polyglot._allowOOC() && game.polyglot._isMessageTypeOOC(data.type))
+		) {
 			let lang = game.polyglot.chatElement.find("select[name=polyglot-language]").val();
 			const language = data.lang || data.language;
 			if (language) {
@@ -120,7 +125,8 @@ export default class PolyglotHooks {
 		const hideTranslation = game.settings.get("polyglot", "hideTranslation");
 		if (isGM && !runifyGM) message.polyglot_unknown = false;
 		else {
-			message.polyglot_unknown = !game.polyglot._isTruespeech(lang) && !known && (game.user.character || isGM ? !understood : true);
+			message.polyglot_unknown =
+				!game.polyglot._isTruespeech(lang) && !known && (game.user.character || isGM ? !understood : true);
 		}
 		const forceTranslation = message.polyglot_force || !message.polyglot_unknown;
 
@@ -128,11 +134,21 @@ export default class PolyglotHooks {
 			.addClass("polyglot-original-text")
 			.css({ font: game.polyglot._getFontStyle(lang) })
 			.html(game.polyglot.scrambleString(message.content, message.id, lang));
-		const translation = $("<div>").addClass("polyglot-translation-text").attr("data-tooltip", language).attr("data-tooltip-direction", "UP").html(message.content);
+		const translation = $("<div>")
+			.addClass("polyglot-translation-text")
+			.attr("data-tooltip", language)
+			.attr("data-tooltip-direction", "UP")
+			.html(message.content);
 
-		if (displayTranslated && (lang !== game.polyglot.languageProvider.defaultLanguage || message.polyglot_unknown)) {
+		if (
+			displayTranslated
+			&& (lang !== game.polyglot.languageProvider.defaultLanguage || message.polyglot_unknown)
+		) {
 			html.find(".message-content").empty().append(content);
-			if (forceTranslation || (!game.polyglot._isTruespeech(lang) && !message.polyglot_unknown && (isGM || !hideTranslation))) {
+			if (
+				forceTranslation
+				|| (!game.polyglot._isTruespeech(lang) && !message.polyglot_unknown && (isGM || !hideTranslation))
+			) {
 				html.find(".message-content").append(translation);
 			}
 		} else if (!forceTranslation && message.polyglot_unknown) {
@@ -143,7 +159,10 @@ export default class PolyglotHooks {
 			let color = "red";
 			if ((isGM && !runifyGM) || known) color = "green";
 			else if (understood) color = "blue";
-			const title = isGM || known || game.polyglot._isTruespeech(lang) ? `data-tooltip="${language}" data-tooltip-direction="LEFT"` : "";
+			const title =
+				isGM || known || game.polyglot._isTruespeech(lang)
+					? `data-tooltip="${language}" data-tooltip-direction="LEFT"`
+					: "";
 			const clickable = isGM && (runifyGM || !displayTranslated);
 			const button = $(`<a class="button polyglot-message-language ${clickable ? "" : "unclickable"}" ${title}>
 				<i class="fas fa-globe" style="color:${color}"></i>
@@ -165,7 +184,10 @@ export default class PolyglotHooks {
 	 * @returns {Boolean}
 	 */
 	static createChatMessage(message, options, userId) {
-		if (game.polyglot._isMessageLink(message.content) || (message.type === CONST.CHAT_MESSAGE_TYPES.OOC && !game.polyglot._allowOOC())) return false;
+		if (
+			game.polyglot._isMessageLink(message.content)
+			|| (message.type === CONST.CHAT_MESSAGE_TYPES.OOC && !game.polyglot._allowOOC())
+		) return false;
 	}
 
 	/**
@@ -197,28 +219,33 @@ export default class PolyglotHooks {
 	 * @returns
 	 */
 	static renderJournalTextPageSheet(journalTextPageSheet, [header, text, section], data) {
-		if (journalTextPageSheet.object.parent.isOwner || game.user.isGM || data.editable) return;
-		else if (journalTextPageSheet.document.isOwner) {
-			const toggleButton = game.polyglot.createJournalButton(journalTextPageSheet.object.parent.sheet);
-			header
-				.closest(".app")
-				.querySelectorAll(".polyglot-button")
-				.forEach((container) => container.remove());
-			const titleElement = header.closest(".app").querySelector(".window-title");
-			toggleButton.insertAfter(titleElement);
-		} else {
-			const spans = section ? section.querySelectorAll("span.polyglot-journal") : header.querySelectorAll("span.polyglot-journal");
-			spans.forEach((e) => {
-				const lang = e.dataset.language;
-				if (!lang) return;
-				let conditions =
-					!game.polyglot._isTruespeech(lang) && !game.polyglot.isLanguageKnown(game.polyglot.comprehendLanguages) && !game.polyglot.languageProvider.conditions(lang);
-				if (conditions) {
-					e.title = "????";
-					e.textContent = game.polyglot.scrambleString(e.textContent, journalTextPageSheet.id, lang);
-					e.style.font = game.polyglot._getFontStyle(lang);
-				}
-			});
+		if (!(journalTextPageSheet.object.parent.isOwner || game.user.isGM || data.editable)) {
+			if (journalTextPageSheet.document.isOwner) {
+				const toggleButton = game.polyglot.createJournalButton(journalTextPageSheet.object.parent.sheet);
+				header
+					.closest(".app")
+					.querySelectorAll(".polyglot-button")
+					.forEach((container) => container.remove());
+				const titleElement = header.closest(".app").querySelector(".window-title");
+				toggleButton.insertAfter(titleElement);
+			} else {
+				const spans = section
+					? section.querySelectorAll("span.polyglot-journal")
+					: header.querySelectorAll("span.polyglot-journal");
+				spans.forEach((e) => {
+					const lang = e.dataset.language;
+					if (!lang) return;
+					let conditions =
+						!game.polyglot._isTruespeech(lang)
+						&& !game.polyglot.isLanguageKnown(game.polyglot.comprehendLanguages)
+						&& !game.polyglot.languageProvider.conditions(lang);
+					if (conditions) {
+						e.title = "????";
+						e.textContent = game.polyglot.scrambleString(e.textContent, journalTextPageSheet.id, lang);
+						e.style.font = game.polyglot._getFontStyle(lang);
+					}
+				});
+			}
 		}
 	}
 

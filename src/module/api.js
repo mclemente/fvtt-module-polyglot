@@ -25,7 +25,7 @@ export class PolyglotAPI {
 			providerString = providerKeys[game.system.id] || "Generic";
 		}
 
-		const providerId = "native" + (providerString !== "Generic" ? "." + providerString : "");
+		const providerId = `native${providerString !== "Generic" ? `.${providerString}` : ""}`;
 		this.providers[providerId] = new providers[`${providerString}LanguageProvider`](providerId);
 	}
 
@@ -59,7 +59,7 @@ export class PolyglotAPI {
 		if (gameSystem) defaultValue = gameSystem;
 
 		addSetting("languageProvider", {
-			//Has no name or hint
+			// Has no name or hint
 			config: false,
 			type: String,
 			default: defaultValue,

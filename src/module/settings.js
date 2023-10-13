@@ -30,14 +30,14 @@ export function addMenuSetting(key, data) {
 }
 
 export function registerSettings() {
-	//General Settings Menu
+	// General Settings Menu
 	game.settings.registerMenu("polyglot", "GeneralSettings", {
 		name: "POLYGLOT.GeneralSettings",
 		label: game.i18n.localize("POLYGLOT.GeneralSettings"),
 		icon: "fas fa-cogs",
 		type: PolyglotGeneralSettings,
 	});
-	//Font Settings Menu
+	// Font Settings Menu
 	game.settings.registerMenu("polyglot", "FontSettings", {
 		name: "POLYGLOT.FontSettings",
 		label: game.i18n.localize("POLYGLOT.FontSettings"),
@@ -45,7 +45,7 @@ export function registerSettings() {
 		type: PolyglotFontSettings,
 		restricted: true,
 	});
-	//Language Settings Menu
+	// Language Settings Menu
 	game.settings.registerMenu("polyglot", "LanguageSettings", {
 		name: "POLYGLOT.LanguageSettings",
 		label: game.i18n.localize("POLYGLOT.LanguageSettings"),
@@ -64,7 +64,7 @@ export function registerSettings() {
 		type: Object,
 	});
 
-	//Font Settings
+	// Font Settings
 	addMenuSetting("RuneRegex", {
 		default: false,
 		type: Boolean,
@@ -117,9 +117,12 @@ export function registerSettings() {
 			document.documentElement.style.setProperty("--polyglot-journal-opacity", value / 100);
 		},
 	});
-	document.documentElement.style.setProperty("--polyglot-journal-opacity", game.settings.get("polyglot", "JournalHighlight") / 100);
+	document.documentElement.style.setProperty(
+		"--polyglot-journal-opacity",
+		game.settings.get("polyglot", "JournalHighlight") / 100,
+	);
 
-	//Language Settings
+	// Language Settings
 	addMenuSetting("replaceLanguages", {
 		name: "POLYGLOT.ReplaceLanguages.title",
 		hint: "POLYGLOT.ReplaceLanguages.hint",
@@ -175,7 +178,7 @@ export function registerSettings() {
 		onChange: (value) => (game.polyglot.truespeech = value.trim().replace(/'/g, "_")),
 	});
 
-	//Chat Settings
+	// Chat Settings
 	addMenuSetting("display-translated", {
 		name: "POLYGLOT.DisplayTranslated.title",
 		hint: "POLYGLOT.DisplayTranslated.hint",
@@ -210,7 +213,7 @@ export function registerSettings() {
 	});
 }
 
-//Language Provider Settings
+// Language Provider Settings
 export function registerProviderSettings() {
 	const systemSpecificSettings = game.polyglot.languageProvider.settings;
 	if (Object.keys(systemSpecificSettings).length) {
@@ -280,12 +283,12 @@ export function getNestedData(data, path) {
 }
 
 function hexToRgb(hex) {
-	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 	return result
 		? {
-				r: parseInt(result[1], 16),
-				g: parseInt(result[2], 16),
-				b: parseInt(result[3], 16),
-		  }
+			r: parseInt(result[1], 16),
+			g: parseInt(result[2], 16),
+			b: parseInt(result[3], 16),
+		}
 		: null;
 }

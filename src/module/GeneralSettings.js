@@ -134,7 +134,9 @@ export class PolyglotGeneralSettings extends FormApplication {
 
 		for (const s in data.settings) {
 			// eslint-disable-next-line no-unused-vars
-			data.settings[s] = Object.fromEntries(Object.entries(data.settings[s]).filter(([key, value]) => value !== undefined));
+			data.settings[s] = Object.fromEntries(
+				Object.entries(data.settings[s]).filter(([key, value]) => value !== undefined),
+			);
 		}
 
 		return data;
@@ -183,7 +185,9 @@ export class PolyglotGeneralSettings extends FormApplication {
 				requiresWorldReload ||= s.scope === "world" && s.requiresReload;
 				await game.settings.set(s.namespace, s.key, v);
 			}
-			if (requiresClientReload || requiresWorldReload) SettingsConfig.reloadConfirm({ world: requiresWorldReload });
+			if (requiresClientReload || requiresWorldReload) {
+				SettingsConfig.reloadConfirm({ world: requiresWorldReload });
+			}
 		} else {
 			for (let [k, v] of Object.entries(foundry.utils.flattenObject(formData))) {
 				let current = game.user.getFlag("polyglot", k);
