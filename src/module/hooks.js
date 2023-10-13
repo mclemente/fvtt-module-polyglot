@@ -122,7 +122,9 @@ export default class PolyglotHooks {
 			message.polyglot_unknown =
 				!game.polyglot._isTruespeech(lang) &&
 				!known &&
-				(game.user.character ? !game.polyglot.isLanguageKnown(game.polyglot.truespeech) && !game.polyglot.isLanguageKnown(game.polyglot.comprehendLanguages) : true);
+				(game.user.character || isGM
+					? !game.polyglot.isLanguageKnown(game.polyglot.truespeech) && !game.polyglot.isLanguageKnown(game.polyglot.comprehendLanguages)
+					: true);
 		}
 		const forceTranslation = message.polyglot_force || !message.polyglot_unknown;
 
