@@ -202,8 +202,9 @@ export class Polyglot {
 		let ownedActors = [];
 		if (game.user.isGM) {
 			ownedActors = game.actors.filter((actor) => actor.hasPlayerOwner);
-			for (let i = 0; i < ownedActors.length; i++) {
-				ownedActors[i].knownLanguages = this.getUserLanguages([ownedActors[i]])[0];
+			for (const actor of ownedActors) {
+				actor.knownLanguages = this.getUserLanguages([actor])[0];
+				if (actor.knownLanguages.has(this.omniglot)) actor.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
 			}
 		}
 		const filteredUsers = this.languageProvider.filterUsers(ownedActors);
