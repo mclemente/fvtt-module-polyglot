@@ -113,18 +113,14 @@ export default class PolyglotHooks {
 		const metadata = html.find(".message-metadata");
 		const language = game.polyglot.languageProvider.languages?.[lang]?.label || lang;
 		const known = game.polyglot.isLanguageKnown(lang);
+		const understood = game.polyglot.isLanguageUnderstood(lang);
 		const isGM = game.user.isGM;
 		const runifyGM = game.settings.get("polyglot", "runifyGM");
 		const displayTranslated = game.settings.get("polyglot", "display-translated");
 		const hideTranslation = game.settings.get("polyglot", "hideTranslation");
 		if (isGM && !runifyGM) message.polyglot_unknown = false;
 		else {
-			message.polyglot_unknown =
-				!game.polyglot._isTruespeech(lang) &&
-				!known &&
-				(game.user.character || isGM
-					? !game.polyglot.isLanguageKnown(game.polyglot.truespeech) && !game.polyglot.isLanguageKnown(game.polyglot.comprehendLanguages)
-					: true);
+			message.polyglot_unknown = !game.polyglot._isTruespeech(lang) && !known && (game.user.character || isGM ? !understood : true);
 		}
 		const forceTranslation = message.polyglot_force || !message.polyglot_unknown;
 
@@ -143,8 +139,10 @@ export default class PolyglotHooks {
 			html.find(".message-content").empty().append(content);
 		}
 
-		if (isGM || (known && !hideTranslation)) {
-			const color = (isGM && !runifyGM) || known ? "green" : "red";
+		if (isGM || ((known || understood) && !hideTranslation)) {
+			let color = "red";
+			if ((isGM && !runifyGM) || known) color = "green";
+			else if (understood) color = "blue";
 			const title = isGM || known ? `data-tooltip="${language}" data-tooltip-direction="LEFT"` : "";
 			const clickable = isGM && (runifyGM || !displayTranslated);
 			const button = $(`<a class="button polyglot-message-language ${clickable ? "" : "unclickable"}" ${title}>

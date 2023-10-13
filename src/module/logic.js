@@ -155,25 +155,13 @@ export class Polyglot {
 			.slice(-100)
 			.toArray()
 			.map((m) => game.messages.get(m.dataset.messageId));
-		for (let i = messages.length - 1; i >= 0; i--) {
-			const message = messages[i];
-			if (message && (message.type == CONST.CHAT_MESSAGE_TYPES.IC || this._isMessageTypeOOC(message.type))) {
-				const lang = message.getFlag("polyglot", "language");
-				if (lang) {
-					let unknown = !this.isLanguageknownOrUnderstood(lang);
-					if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
-						// Update globe color
-						const globe = this.chatElement.find(`.message[data-message-id="${message.id}"] .message-metadata .polyglot-message-language i`);
-						const color = unknown ? "red" : "green";
-						globe.css({ color });
-						unknown = false;
-					}
-					if (unknown !== message.polyglot_unknown) {
-						ui.chat.updateMessage(message);
-					}
-				}
+		console.time("updateChatMessagesDelayed");
+		for (const message of messages) {
+			if (message.type == CONST.CHAT_MESSAGE_TYPES.IC || (this._isMessageTypeOOC(message.type) && message.getFlag("polyglot", "language"))) {
+				ui.chat.updateMessage(message);
 			}
 		}
+		console.timeEnd("updateChatMessagesDelayed");
 	}
 
 	getUserLanguages(actors = []) {
