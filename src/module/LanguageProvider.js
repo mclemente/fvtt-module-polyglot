@@ -648,7 +648,7 @@ export class LanguageProvider {
 	 */
 	// eslint-disable-next-line no-unused-vars
 	filterUsers(ownedActors) {
-		return game.users.filter((u) => !u.isGM && u.hasRole(CONST.USER_ROLES.PLAYER));
+		return game.users.players.filter((u) => u.hasRole(CONST.USER_ROLES.PLAYER));
 	}
 
 	/**
