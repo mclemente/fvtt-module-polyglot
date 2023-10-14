@@ -164,7 +164,7 @@ export default class PolyglotHooks {
 					? `data-tooltip="${language}" data-tooltip-direction="LEFT"`
 					: "";
 			const clickable = isGM && (runifyGM || !displayTranslated);
-			const button = $(`<a class="button polyglot-message-language ${clickable ? "" : "unclickable"}" ${title}>
+			const button = $(`<a class="polyglot-message-language ${clickable ? "" : "unclickable"}" ${title}>
 				<i class="fas fa-globe" style="color:${color}"></i>
 			</a>`);
 			metadata.find(".polyglot-message-language").remove();
