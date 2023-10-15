@@ -2,9 +2,9 @@
 	"POLYGLOT.CustomLanguages.title": "Langues personnalisées",
 	"POLYGLOT.CustomLanguages.hint": "Définissez une liste de langues personnalisées à ajouter au système. Elles doivent être séparées par des virgules ou des points-virgules.",
 	"POLYGLOT.ComprehendLanguages.title": "Langue omnisciente",
-	"POLYGLOT.ComprehendLanguages.hint": "Pour gérer les sorts ou effets de type 'Compréhension des Langues'. Saisissez une langue spéciale déja déclarée. Le fait de posséder cette langue permettra au personnage de comprendre tout les autres languages.",
+	"POLYGLOT.ComprehendLanguages.hint": "Saisissez une langue dont le locuteur comprend toutes les autres langues, mais qui ne peut être parlée ni écrite. Un acteur sera capable de lire tous les messages de conversation et le texte des journaux.",
 	"POLYGLOT.Truespeech.title": "Parler les langues",
-	"POLYGLOT.Truespeech.hint": "Pour gérer les sorts ou les effets du type 'Parler les Langues'. Saisissez une langue spéciale déja déclarée. Le fait de posséder cette langue permettra au personnage de parler tout les autres languages et de se faire comprendre dans toutes les langues.",
+	"POLYGLOT.Truespeech.hint": "Saisissez une langue dont le locuteur comprend toutes les langues parlées (ne peut lire les journaux) et qui est comprise par toutes les créatures. Un acteur sera capable de lire tous les messages de la conversation et d'écrire les messages dans une langue qui est comprise de tous.",
 	"POLYGLOT.DefaultLanguage.title": "Langue par défaut",
 	"POLYGLOT.DefaultLanguage.hint": "Nom de la langue par défaut. Laisser vide pour choisir la langue du système.",
 	"POLYGLOT.ScrambleGM.title": "Crypter pour le MJ",
@@ -38,7 +38,11 @@
 		},
 		"DND5E": {
 			"SpecialLanguages.title": "Remplacer les Langues Spéciales",
-			"SpecialLanguages.hint": "Nom de la langue qui remplacera \"langues\" comme \"toutes les langues qu'il a connues dans la vie\"."
+			"SpecialLanguages.hint": "Nom de la langue qui remplacera \"langues\" comme \"toutes les langues qu'il a connues dans la vie\".",
+			"TargetedParty": {
+				"title": "Groupe cible",
+				"hint": "Si votre partie possède de trop nombreux utilisateurs, l'indicateur pourrait devenir trop chargé. Vous pouvez filtrer la liste en la limitant aux utilisateurs qui possèdent des personnages qui sont membres des acteurs du groupe cible."
+			}
 		},
 		"SWADE": {
 			"LanguageSkills": "Langue",
@@ -126,12 +130,18 @@
 		},
 		"GeneralSettings": "Paramètres généraux",
 		"Omniglot": {
-			"hint": "Définir une langue dont le locuteur comprend et parle toutes les autres langues.",
+			"hint": "Définir une langue dont le locuteur comprend et parle toutes les autres langues. Un acteur sera capable de lire et écrire toutes les autres langues. À la fois dans la conversation et sur les journaux.",
 			"title": "Langue omniglotte"
 		},
 		"General": "Général",
 		"AlphabeticOnly": "Alphabétique seulement",
 		"Logographical": "Logographique",
-		"GameMasterHasAssignedCharacter": "Vous êtes un {GM} et un personnage vous a été assigné. Polyglot se comportera bizarrement à cause de cela. Envisagez de ne plus être l'Utilisateur de ce personnage."
+		"GameMasterHasAssignedCharacter": "Vous êtes un {GM} et un personnage vous a été assigné. Polyglot se comportera bizarrement à cause de cela. Envisagez de ne plus être l'Utilisateur de ce personnage.",
+		"PF2E": {
+			"TargetedParty": {
+				"title": "Groupe d'aventurier cible",
+				"hint": "Si votre partie présente de trop nombreux utilisateurs, l'indicateur pourrait devenir trop peuplé. Vous pouvez filtrer la liste en la limitant aux utilisateurs qui sont membres des acteurs du Groupe d'aventuriers."
+			}
+		}
 	}
 }

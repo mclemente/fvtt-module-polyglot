@@ -10,9 +10,9 @@
 		"CustomLanguages.title": "Własne Języki",
 		"CustomLanguages.hint": "Zdefiniuj listę niestandardowych języków, które chcesz dodać do systemu. Muszą one być oddzielone przecinkami lub średnikami.",
 		"ComprehendLanguages.title": "Rozumienie Języków",
-		"ComprehendLanguages.hint": "Ustaw język, którego użytkownik rozumie wszystkie inne języki, ale w którym nie można mówić czy pisać.",
+		"ComprehendLanguages.hint": "Ustaw język, którego mówca rozumie wszystkie inne języki, ale nie można nim mówić ani pisać. Aktor będzie mógł czytać wszystkie wiadomości na czacie i tekst w dzienniku.",
 		"Truespeech.title": "Rozumienie Mowy",
-		"Truespeech.hint": "Ustal język, którego użytkownik rozumie wszystkie mówione języki (nie może czytać dzienników), i który rozumiany jest przez wszystkie istoty.",
+		"Truespeech.hint": "Ustaw język, którego mówca rozumie wszystkie języki mówione (nie może czytać Dzienników) i który jest rozumiany przez wszystkie stworzenia. Aktor będzie mógł czytać wszystkie wiadomości na czacie i pisać wiadomości w języku zrozumiałym dla wszystkich.",
 		"JournalHighlight.title": "Krycie podświetlenia (%)",
 		"JournalHighlight.hint": "Określa stopień nieprzezroczystości podświetleń nad czcionkami w dzienniku.",
 		"logographicalFontToggle.title": "Pismo Logograficzne",
@@ -122,16 +122,26 @@
 		},
 		"DND5E": {
 			"SpecialLanguages.title": "Zastąp języki specjalne",
-			"SpecialLanguages.hint": "Nazwa języka, który zastąpi \"języki\" np. \"wszystkie języki jakie znał w życiu\"."
+			"SpecialLanguages.hint": "Nazwa języka, który zastąpi \"języki\" np. \"wszystkie języki jakie znał w życiu\".",
+			"TargetedParty": {
+				"title": "Grupa docelowa",
+				"hint": "Jeśli gra ma wielu użytkowników, wskaźnik głośnika może stać się zbyt zatłoczony. Listę można filtrować, ograniczając ją do użytkowników posiadających postacie należące do docelowego aktora grupy."
+			}
 		},
 		"GeneralSettings": "Ustawienia Ogólne",
 		"Omniglot": {
-			"hint": "Ustaw język, którego użytkownicy rozumieją i znają wszystkie inne języki.",
+			"hint": "Ustaw język, którego użytkownik rozumie i zna wszystkie inne języki. Aktor będzie mógł czytać i pisać we wszystkich innych językach, zarówno na czacie, jak i w dziennikach.",
 			"title": "Język Omniglot"
 		},
 		"General": "Ogólne",
 		"AlphabeticOnly": "Tylko alfabetyczne",
 		"Logographical": "Logograficzny",
-		"GameMasterHasAssignedCharacter": "Jesteś {GM} i masz przypisaną postać. Z tego powodu Polyglot będzie się dziwnie zachowywać. Rozważ usunięcie tej postaci ze swojego użytkownika."
+		"GameMasterHasAssignedCharacter": "Jesteś {GM} i masz przypisaną postać. Z tego powodu Polyglot będzie się dziwnie zachowywać. Rozważ usunięcie tej postaci ze swojego użytkownika.",
+		"PF2E": {
+			"TargetedParty": {
+				"title": "Drużyna docelowa",
+				"hint": "Jeśli gra ma wielu użytkowników, wskaźnik głośnika może stać się zbyt zatłoczony. Możesz filtrować listę, ograniczając ją do użytkowników, którzy posiadają postacie należące do docelowego aktora drużyny."
+			}
+		}
 	}
 }
