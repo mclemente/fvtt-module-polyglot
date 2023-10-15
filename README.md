@@ -1,4 +1,4 @@
-![GitHub release](https://img.shields.io/github/release-date/League-of-Foundry-Developers/fvtt-module-polyglot)
+![GitHub release](https://img.shields.io/github/release-date/mclemente/fvtt-module-polyglot)
 ![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/mclemente/fvtt-module-polyglot/latest/module.zip)
 
 [![ko-fi](https://img.shields.io/badge/ko--fi-Support%20Me-red?style=flat-square&logo=ko-fi)](https://ko-fi.com/mclemente)
