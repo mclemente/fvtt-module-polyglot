@@ -278,12 +278,12 @@ export class LanguageProvider {
 	 * It Hooks on ready if the system depends on reading compendiums.
 	 */
 	async setup() {
+		game.polyglot.omniglot = game.settings.get("polyglot", "omniglot");
+		game.polyglot.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
+		game.polyglot.truespeech = game.settings.get("polyglot", "truespeech");
+
 		const setupSteps = async () => {
 			await this.getLanguages();
-
-			game.polyglot.omniglot = game.settings.get("polyglot", "omniglot");
-			game.polyglot.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
-			game.polyglot.truespeech = game.settings.get("polyglot", "truespeech");
 			const enableAllFonts = game.settings.get("polyglot", "enableAllFonts");
 			if (enableAllFonts) {
 				for (let font in game.settings.get("core", "fonts")) {

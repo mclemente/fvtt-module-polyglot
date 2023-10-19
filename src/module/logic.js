@@ -12,9 +12,6 @@ export class Polyglot {
 		this.CustomFontSizes = game.settings.get("polyglot", "CustomFontSizes");
 		this.registerModule = null;
 		this.registerSystem = null;
-		this._omniglot = "";
-		this._comprehendLanguages = "";
-		this._truespeech = "";
 	}
 
 	init() {
