@@ -5,6 +5,7 @@
 
 import fs from "fs-extra";
 import gulp from "gulp";
+import rename from "gulp-rename";
 import sourcemaps from "gulp-sourcemaps";
 import merge from "merge-stream";
 import path from "node:path";
@@ -27,7 +28,7 @@ const distDirectory = "./dist";
 const stylesDirectory = `${sourceDirectory}/styles`;
 const stylesExtension = "css";
 const sourceFileExtension = "js";
-const staticFiles = ["assets", "fonts", "lang", "lib", "packs", "templates", "module.json"];
+const staticFiles = ["assets", "fonts", "lang", "packs", "templates", "module.json"];
 
 /********************/
 /*      BUILD       */
@@ -71,7 +72,9 @@ async function copyFiles() {
 }
 
 function select2() {
-	return gulp.src(["node_modules/select2/dist/js/select2.min.js", "node_modules/select2/dist/css/select2.min.css"]).pipe(gulp.dest("dist/lib/select2"));
+	const select2JS = gulp.src("node_modules/select2/dist/js/select2.min.js").pipe(rename("select2.410.min.js")).pipe(gulp.dest("dist/lib/select2"));
+	const select2CSS = gulp.src("node_modules/select2/dist/css/select2.min.css").pipe(gulp.dest("dist/lib/select2"));
+	return merge(select2JS, select2CSS)
 }
 
 /**
