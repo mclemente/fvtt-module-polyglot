@@ -1,6 +1,6 @@
-import { PolyglotFontSettings } from "./FontSettings.js";
-import { PolyglotGeneralSettings } from "./GeneralSettings.js";
-import { PolyglotLanguageSettings } from "./LanguageSettings.js";
+import { PolyglotFontSettings } from "./forms/FontSettings.js";
+import { PolyglotGeneralSettings } from "./forms/GeneralSettings.js";
+import { PolyglotLanguageSettings } from "./forms/LanguageSettings.js";
 
 /**
  * Shorthand for game.settings.register.

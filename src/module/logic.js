@@ -1,6 +1,6 @@
 import { FONTS } from "./Fonts.js";
 import PolyglotHooks from "./hooks.js";
-import { libWrapper } from "./libWrapper.js";
+import { libWrapper } from "./libs/libWrapper.js";
 
 export class Polyglot {
 	constructor() {
