@@ -1,6 +1,5 @@
 import LanguageProvider from "./templates/Base.js";
 
-
 export default class d35eLanguageProvider extends LanguageProvider {
 	languages = {
 		common: {

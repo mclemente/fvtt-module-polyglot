@@ -1,6 +1,5 @@
 import LanguageProvider from "./templates/Base.js";
 
-
 export default class pf1LanguageProvider extends LanguageProvider {
 	languages = {
 		common: {

@@ -1,6 +1,5 @@
 import LanguageProvider from "./Base.js";
 
-
 export default class GenericLanguageProvider extends LanguageProvider {
 	get settings() {
 		return {

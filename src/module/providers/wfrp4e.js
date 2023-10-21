@@ -1,6 +1,5 @@
 import LanguageProvider from "./templates/Base.js";
 
-
 export default class wfrp4eLanguageProvider extends LanguageProvider {
 	languages = {
 		reikspiel: {

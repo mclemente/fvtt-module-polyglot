@@ -1,6 +1,5 @@
 import LanguageProvider from "./templates/Base.js";
 
-
 export default class swadeLanguageProvider extends LanguageProvider {
 	get settings() {
 		return {

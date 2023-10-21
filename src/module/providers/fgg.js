@@ -1,6 +1,5 @@
 import LanguageProvider from "./templates/Base.js";
 
-
 export default class fggLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();

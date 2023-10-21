@@ -1,6 +1,5 @@
 import LanguageProvider from "./templates/Base.js";
 
-
 export default class dsa5LanguageProvider extends LanguageProvider {
 	defaultFont = "Ophidian";
 

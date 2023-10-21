@@ -1,6 +1,5 @@
 import LanguageProvider from "./templates/Base.js";
 
-
 export default class ariaLanguageProvider extends LanguageProvider {
 	languages = {
 		common: {

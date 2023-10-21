@@ -1,6 +1,5 @@
 import LanguageProvider from "./templates/Base.js";
 
-
 export default class dnd5eLanguageProvider extends LanguageProvider {
 	languages = {
 		aarakocra: {

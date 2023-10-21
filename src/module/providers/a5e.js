@@ -1,6 +1,5 @@
 import LanguageProvider from "./templates/Base.js";
 
-
 export default class a5eLanguageProvider extends LanguageProvider {
 	languages = {
 		aarakocra: {

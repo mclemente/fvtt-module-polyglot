@@ -1,6 +1,5 @@
 import LanguageProvider from "./templates/Base.js";
 
-
 export default class darkHeresyLanguageProvider extends LanguageProvider {
 	languages = {
 		lowGothic: {

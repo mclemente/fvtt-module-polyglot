@@ -1,6 +1,5 @@
 import LanguageProvider from "./templates/Base.js";
 
-
 export default class coc7LanguageProvider extends LanguageProvider {
 	get settings() {
 		return {

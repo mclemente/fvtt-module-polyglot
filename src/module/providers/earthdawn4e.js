@@ -1,6 +1,5 @@
 import LanguageProvider from "./templates/Base.js";
 
-
 export default class earthdawn4eLanguageProvider extends LanguageProvider {
 	languages = {
 		human: {
