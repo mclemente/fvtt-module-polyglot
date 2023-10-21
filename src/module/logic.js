@@ -286,22 +286,38 @@ export class Polyglot {
 			return $state;
 		};
 
-		select.select2({
-			data: options,
-			dropdownCssClass: "polyglot-language",
-			templateResult: formatState,
-			templateSelection: formatState,
-		});
-		$(".select2-selection__rendered").hover(function () {
-			$(this).removeAttr("title");
-		});
-
-		let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
-		if (!this.isLanguageKnown(selectedLanguage)) {
-			if (this.isLanguageKnown(defaultLanguage)) selectedLanguage = defaultLanguage;
-			else selectedLanguage = [...this.knownLanguages][0];
+		// This is needed in case a system or another module already defined select2 under version 4.1, which doesn't accept dropdownCssClass
+		try {
+			select.select2({
+				data: options,
+				dropdownCssClass: "polyglot-language",
+				templateResult: formatState,
+				templateSelection: formatState,
+			});
+		} catch(error) {
+			if (error.message.includes("No select2/compat/dropdownCss")) {
+				select.select2({
+					data: options,
+					templateResult: formatState,
+					templateSelection: formatState,
+				});
+			}
+			else {
+				console.error(error);
+			}
 		}
-		select.val(selectedLanguage).trigger("change.select2");
+		finally {
+			$(".select2-selection__rendered").hover(function () {
+				$(this).removeAttr("title");
+			});
+
+			let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
+			if (!this.isLanguageKnown(selectedLanguage)) {
+				if (this.isLanguageKnown(defaultLanguage)) selectedLanguage = defaultLanguage;
+				else selectedLanguage = [...this.knownLanguages][0];
+			}
+			select.val(selectedLanguage).trigger("change.select2");
+		}
 	}
 
 	/**
