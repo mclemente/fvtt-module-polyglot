@@ -1,8 +1,8 @@
 import { CUSTOM_FONT_SIZES } from "./Fonts.js";
-import { LanguageProvider } from "./LanguageProvider.js";
 import { PolyglotAPI } from "./api.js";
 import { Polyglot } from "./logic.js";
 import { preloadTemplates } from "./preloadTemplates.js";
+import { LanguageProvider } from "./providers/_module.js";
 import {
 	addSetting,
 	registerProviderSettings,

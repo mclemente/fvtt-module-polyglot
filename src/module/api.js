@@ -1,4 +1,5 @@
-import * as providers from "./LanguageProvider.js";
+import * as providers from "./providers/_module.js";
+import { providerKeys } from "./providers/_shared.js";
 import { addSetting } from "./settings.js";
 
 export class PolyglotAPI {
@@ -8,12 +9,6 @@ export class PolyglotAPI {
 	}
 
 	init() {
-		/** Providers whose systems use "-"" in their names */
-		const providerKeys = {
-			"cyberpunk-red-core": "cyberpunkRed",
-			"dark-heresy": "darkHeresy",
-			"uesrpg-d100": "uesrpg",
-		};
 		// Assumes the first class in the file is the actual LanguageProvider class. This is better than adding an if-clause in the loop
 		const supportedSystems = Object.keys(providers)
 			.filter((provider) => provider !== "LanguageProvider")
