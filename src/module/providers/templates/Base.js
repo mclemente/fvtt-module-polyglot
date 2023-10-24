@@ -541,21 +541,29 @@ export default class LanguageProvider {
 	 * Otherwise, returns the system's default language.
 	 */
 	getDefaultLanguage() {
-		const defaultLang =
-			game.user.getFlag("polyglot", "defaultLanguage") ?? game.settings.get("polyglot", "defaultLanguage");
-		if (defaultLang) {
-			if (this.languages[defaultLang]) {
-				this.defaultLanguage = defaultLang;
+		const getLanguage = (language) => {
+			if (this.languages[language]) {
+				this.defaultLanguage = language;
 			} else {
 				Object.entries(this.languages).every(([key, lang]) => {
-					if (defaultLang === lang.label) {
+					if (language === lang.label) {
 						this.defaultLanguage = key;
 						return false;
 					}
 					return true;
 				});
 			}
-		} else {
+		};
+		const worldDefault = game.settings.get("polyglot", "defaultLanguage");
+		const userDefault = game.user.getFlag("polyglot", "defaultLanguage");
+		// We have to check for World's setting first because users might input an invalid language
+		if (worldDefault) {
+			getLanguage(worldDefault);
+		}
+		if (userDefault) {
+			getLanguage(userDefault);
+		}
+		if (this.defaultLanguage === undefined) {
 			this.defaultLanguage = this.getSystemDefaultLanguage();
 		}
 	}
