@@ -106,7 +106,7 @@ export default class PolyglotHooks {
 	 */
 	static async renderChatMessage(message, html, data) {
 		const lang = message.getFlag("polyglot", "language");
-		if (!lang || /\[\[(.*?)\]\]/g.test(message.content)) return;
+		if (!lang) return;
 
 		if (game.polyglot.languageProvider.requiresReady && !game.ready) {
 			Hooks.once("polyglot.languageProvider.ready", async () => {
