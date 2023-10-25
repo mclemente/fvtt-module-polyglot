@@ -42,7 +42,7 @@ export default class wfrp4eLanguageProvider extends LanguageProvider {
 			font: "Ork Glyphs",
 		},
 		queekish: {
-			font: "queekish",
+			font: "Skaven",
 		},
 		slaan: {
 			font: "Saurian",
