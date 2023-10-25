@@ -332,9 +332,6 @@ export class Polyglot {
 		let language = this.languageProvider.languages[lang];
 		if (!language) {
 			language = { rng: "default" };
-			console.warn(
-				`Polyglot | Language "${lang}" doesn't exist on the Language Provider, RNG and Font were set to default.`,
-			);
 		}
 		const rng = language.rng ?? "default";
 		if (rng === "none") return string;
