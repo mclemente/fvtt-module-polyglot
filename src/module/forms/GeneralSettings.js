@@ -176,7 +176,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 				} else {
 					await Promise.all(
 						keys.map(async (key) => {
-							await game.user.unsetFlag(key);
+							await game.user.unsetFlag("polyglot", key);
 						}),
 					);
 				}
