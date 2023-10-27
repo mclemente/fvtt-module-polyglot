@@ -146,28 +146,40 @@ export class PolyglotGeneralSettings extends FormApplication {
 		super.activateListeners(html);
 		html.find("button").on("click", async (event) => {
 			if (event.currentTarget?.dataset?.action === "reset") {
-				const keys = [
-					"RuneRegex",
-					"enableAllFonts",
-					"exportFonts",
-					"IgnoreJournalFontSize",
-					"JournalHighlightColor",
-					"JournalHighlight",
-					"replaceLanguages",
-					"customLanguages",
-					"omniglot",
-					"comprehendLanguages",
-					"truespeech",
-					"display-translated",
-					"hideTranslation",
-					"allowOOC",
-					"runifyGM",
+				let keys = [
+					"defaultLanguage"
 				];
-				await Promise.all(
-					keys.map(async (key) => {
-						await this.resetToDefault(key);
-					}),
-				);
+				if (game.user.isGM) {
+					keys = [
+						"RuneRegex",
+						"enableAllFonts",
+						"exportFonts",
+						"IgnoreJournalFontSize",
+						"JournalHighlightColor",
+						"JournalHighlight",
+						"replaceLanguages",
+						"defaultLanguage",
+						"customLanguages",
+						"omniglot",
+						"comprehendLanguages",
+						"truespeech",
+						"display-translated",
+						"hideTranslation",
+						"allowOOC",
+						"runifyGM",
+					];
+					await Promise.all(
+						keys.map(async (key) => {
+							await this.resetToDefault(key);
+						}),
+					);
+				} else {
+					await Promise.all(
+						keys.map(async (key) => {
+							await game.user.unsetFlag(key);
+						}),
+					);
+				}
 				this.close();
 			}
 		});
