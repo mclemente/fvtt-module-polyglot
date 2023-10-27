@@ -174,26 +174,22 @@ export class PolyglotGeneralSettings extends FormApplication {
 	}
 
 	async _updateObject(event, formData) {
-		if (game.user.isGM) {
-			let requiresClientReload = false;
-			let requiresWorldReload = false;
-			for (let [k, v] of Object.entries(foundry.utils.flattenObject(formData))) {
-				let s = game.settings.settings.get(`polyglot.${k}`);
-				let current = game.settings.get(s.namespace, s.key);
-				if (v === current) continue;
-				requiresClientReload ||= s.scope === "client" && s.requiresReload;
-				requiresWorldReload ||= s.scope === "world" && s.requiresReload;
+		let requiresClientReload = false;
+		let requiresWorldReload = false;
+		for (let [k, v] of Object.entries(foundry.utils.flattenObject(formData))) {
+			let s = game.settings.settings.get(`polyglot.${k}`);
+			let current = game.user.isGM ? game.settings.get(s.namespace, s.key) : game.user.getFlag("polyglot", k);
+			if (v === current) continue;
+			requiresClientReload ||= s.scope === "client" && s.requiresReload;
+			requiresWorldReload ||= s.scope === "world" && s.requiresReload;
+			if (game.user.isGM) {
 				await game.settings.set(s.namespace, s.key, v);
-			}
-			if (requiresClientReload || requiresWorldReload) {
-				SettingsConfig.reloadConfirm({ world: requiresWorldReload });
-			}
-		} else {
-			for (let [k, v] of Object.entries(foundry.utils.flattenObject(formData))) {
-				let current = game.user.getFlag("polyglot", k);
-				if (v === current) continue;
+			} else {
 				await game.user.setFlag("polyglot", k, v);
 			}
+		}
+		if (requiresClientReload || requiresWorldReload) {
+			SettingsConfig.reloadConfirm({ world: requiresWorldReload });
 		}
 	}
 }
