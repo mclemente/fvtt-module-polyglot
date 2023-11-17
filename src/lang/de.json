@@ -9,7 +9,7 @@
 		"Truespeech.title": "Allwissende Sprache",
 		"Truespeech.hint": "Lege eine Sprache fest, deren Sprecher alle gesprochenen Sprachen versteht (kann keine Notizbücher lesen) und die von allen Lebewesen verstanden wird. Ein Akteur wird in der Lage sein, alle Chat-Nachrichten zu lesen und Nachrichten in einer Sprache zu schreiben, die von allen verstanden wird.",
 		"DefaultLanguage.title": "Standardsprache",
-		"DefaultLanguage.hint": "Name der Standard Sprache. Leer lassen, um den Systemvorgaben zu nutzen.",
+		"DefaultLanguage.hint": "Name der Standard Sprache. Leer lassen, um die Systemvorgaben zu nutzen.",
 		"ReplaceLanguages.title": "Systemsprachen ersetzen",
 		"ReplaceLanguages.hint": "Ersetzt die Standardsprachen des Systems durch deine benutzerdefinierten Sprachen. Die erste Sprache in der Liste wird die neue Standardsprache.",
 		"ScrambleGM.title": "Verschleiere Nachrichten für den SL",
