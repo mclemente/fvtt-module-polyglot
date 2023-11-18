@@ -22,12 +22,9 @@ export default class PolyglotHooks {
 	}
 
 	static updateActor(actor, data, options, userId) {
-		if (actor.hasPlayerOwner) {
-			const owner = game.users.find((user) => user.character?.id === actor.id);
-			if (game.user.isGM || owner.id === userId) {
-				game.polyglot.updateUserLanguages(game.polyglot.chatElement);
-				game.polyglot.updateChatMessages();
-			}
+		if (actor.hasPlayerOwner && actor.testUserPermission(game.user, "OWNER")) {
+			game.polyglot.updateUserLanguages(game.polyglot.chatElement);
+			game.polyglot.updateChatMessages();
 		}
 	}
 
