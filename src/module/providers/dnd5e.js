@@ -100,18 +100,80 @@ export default class dnd5eLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	/**
-	 * Gets an actor's languages.
-	 * @param {Document} actor
-	 * @var literateLanguages	For systems that support literacy (e.g. reading journals).
-	 * @returns [Set, Set]
-	 */
+	languageRarities = ["standard", "exotic"];
+
+	multiLanguages = {
+		primordial: {
+			parent: "exotic"
+		}
+	};
+
+	async getLanguages() {
+		const languagesSetting = game.settings.get("polyglot", "Languages");
+		const langs = {};
+		if (this.replaceLanguages) {
+			CONFIG.DND5E.languages = {};
+		}
+		const systemLanguages = CONFIG.DND5E.languages;
+		const getLang = (key, target) => {
+			const processLanguage = (label) => {
+				if (label) {
+					langs[key] = {
+						label,
+						font: languagesSetting[key]?.font || this.languages[key]?.font || this.defaultFont,
+						rng: languagesSetting[key]?.rng ?? "default",
+					};
+				}
+			};
+
+			if (key in this.multiLanguages) {
+				processLanguage(game.i18n.localize(target[key].label));
+			}
+			if (target[key].children) {
+				Object.keys(target[key].children).forEach((kkey) => {
+					getLang(kkey, target[key].children);
+				});
+			} else {
+				processLanguage(game.i18n.localize(target[key]));
+			}
+		};
+		Object.keys(systemLanguages).forEach((key) => {
+			if (this.languageRarities.includes(key)) {
+				Object.keys(systemLanguages[key].children).forEach((kkey) => {
+					getLang(kkey, systemLanguages[key].children);
+				});
+			} else {
+				getLang(key, systemLanguages);
+			}
+		});
+		this.languages = langs;
+	}
+
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
 		if (actor.system?.traits?.languages) {
 			for (let lang of actor.system.traits.languages.value) {
-				knownLanguages.add(lang.trim().replace(/[\s']/g, "_"));
+				if (this.languageRarities.includes(lang)) {
+					for (let l in CONFIG.DND5E.languages[lang].children) {
+						knownLanguages.add(l.trim().replace(/[\s']/g, "_"));
+					}
+				} else {
+					knownLanguages.add(lang.trim().replace(/[\s']/g, "_"));
+				}
+				if (lang in this.multiLanguages) {
+					const parent = this.multiLanguages[lang].parent;
+					let languages;
+					if (parent) {
+						const parentChildren = CONFIG.DND5E.languages[parent].children;
+						languages = parentChildren[lang].children;
+					} else {
+						languages = CONFIG.DND5E.languages[lang].children;
+					}
+					for (let l in languages) {
+						knownLanguages.add(l.trim().replace(/[\s']/g, "_"));
+					}
+				}
 			}
 			if (actor.system.traits.languages.custom) {
 				const defaultSpecialLanguage = game.settings
