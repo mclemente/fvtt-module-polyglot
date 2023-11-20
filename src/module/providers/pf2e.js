@@ -206,7 +206,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 	filterUsers(ownedActors) {
 		const filtered = super.filterUsers(ownedActors);
 		const party = game.actors.find((a) => a.id === game.settings.get("polyglot", "PF2E.TargetedParty"));
-		if (filtered.length > 10 && party?.members.length) {
+		if (party?.members.length) {
 			const members = party.members.map((a) => a.id);
 			const users = filtered.filter((u) => ownedActors.some((actor) => members.includes(actor.id) && actor.testUserPermission(u, "OWNER"))
 			);

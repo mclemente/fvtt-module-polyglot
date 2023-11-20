@@ -213,7 +213,7 @@ export default class dnd5eLanguageProvider extends LanguageProvider {
 	filterUsers(ownedActors) {
 		const filtered = super.filterUsers(ownedActors);
 		const party = game.actors.find((a) => a.id === game.settings.get("polyglot", "DND5E.TargetedParty"));
-		if (filtered.length > 10 && party?.system?.members.size) {
+		if (party?.system?.members.size) {
 			const members = Array.from(party.system.members.map((a) => a.id));
 			const users = filtered.filter((u) => ownedActors.some((actor) => members.includes(actor.id) && actor.testUserPermission(u, "OWNER"))
 			);
