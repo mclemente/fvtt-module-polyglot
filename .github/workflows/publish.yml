@@ -1,15 +1,15 @@
-# SPDX-FileCopyrightText: 2022 Johannes Loher
+# SPDX-FileCopyrightText: 2021 Johannes Loher
 #
 # SPDX-License-Identifier: MIT
 
-name: Release
+name: Publish
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - "*.*.*"
 
 env:
-  package_type: module
   node_version: 16
 
 jobs:
@@ -62,23 +62,10 @@ jobs:
       - name: Install dependencies
         run: npm ci --cache .npm --prefer-offline
 
-      - name: Extract tag version number
-        id: get_version
-        uses: battila7/get-version-action@v2
-
-      - name: Substitute Manifest and Download Links For Versioned Ones
-        id: sub_manifest_link_version
-        uses: microsoft/variable-substitution@v1
-        with:
-          files: "src/${{ env.package_type }}.json"
-        env:
-          version: ${{ steps.get_version.outputs.version-without-v }}
-          url: https://github.com/${{ github.repository }}
-          manifest: https://github.com/${{ github.repository }}/releases/latest/download/${{ env.package_type }}.json
-          download: https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/${{ env.package_type }}.zip
-
       - name: Build
         run: npm run build
+        env:
+          NODE_ENV: production
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
@@ -86,14 +73,29 @@ jobs:
           name: dist
           path: dist
 
-  publish:
-    needs:
-      - lint
-      - build
+  reuse:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: REUSE Compliance Check
+        uses: fsfe/reuse-action@v2
+
+  publish:
+    needs:
+      - lint
+      - build
+      - reuse
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install node
+        uses: actions/setup-node@v4.0.0
+        with:
+          node-version: ${{ env.node_version }}
 
       - name: Download production artifacts for publication
         uses: actions/download-artifact@v3
@@ -103,15 +105,27 @@ jobs:
 
       - name: Create zip file
         working-directory: ./dist
-        run: zip -r ../${{ env.package_type }}.zip .
+        run: zip -r ../module.zip .
+
+      - name: Extract version
+        run: |
+          echo "::set-output name=version::$(jq -r '.version' package.json)"
+        id: extract_version
 
       - name: Create release
         id: create_version_release
         uses: ncipollo/release-action@v1
         with:
-          allowUpdates: true
-          name: ${{ github.event.release.name }}
+          allowUpdates: false
+          name: ${{ steps.extract_version.outputs.version }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "./dist/${{ env.package_type }}.json, ./${{ env.package_type }}.zip"
-          tag: ${{ github.event.release.tag_name }}
-          body: ${{ github.event.release.body }}
+          artifacts: "./module.json, ./module.zip"
+
+      - name: Publish to Foundry Admin
+        uses: Varriount/fvtt-autopublish@v2.0.1
+        with:
+          username: ${{ secrets.FVTT_USERNAME }}
+          password: ${{ secrets.FVTT_PASSWORD }}
+          module-id: ${{ secrets.FVTT_PACKAGE_ID }}
+          manifest-url: https://github.com/${{ github.repository }}/releases/download/v${{ steps.extract_version.outputs.version }}/module.json
+          manifest-file: ./module.json
