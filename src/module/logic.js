@@ -378,14 +378,14 @@ export class Polyglot {
 			const languagesSetting = game.settings.get("polyglot", "Languages");
 			const { fonts, languages } = game.polyglot.languageProvider;
 			if (
-				!foundry.utils.isEmpty(diffObject(alphabetsSetting, fonts))
-				|| !foundry.utils.isEmpty(diffObject(fonts, alphabetsSetting))
+				!foundry.utils.isEmpty(foundry.utils.diffObject(alphabetsSetting, fonts))
+				|| !foundry.utils.isEmpty(foundry.utils.diffObject(fonts, alphabetsSetting))
 			) {
 				game.settings.set("polyglot", "Alphabets", fonts);
 			}
 			if (
-				!foundry.utils.isEmpty(diffObject(languagesSetting, languages))
-				|| !foundry.utils.isEmpty(diffObject(languages, languagesSetting))
+				!foundry.utils.isEmpty(foundry.utils.diffObject(languagesSetting, languages))
+				|| !foundry.utils.isEmpty(foundry.utils.diffObject(languages, languagesSetting))
 			) {
 				game.settings.set("polyglot", "Languages", languages);
 			}

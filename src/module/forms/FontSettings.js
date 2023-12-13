@@ -96,12 +96,12 @@ export class PolyglotFontSettings extends FormApplication {
 			game.polyglot.languageProvider.fonts[key].logographical = font.logographical;
 		}
 		let current = game.settings.get("polyglot", "Alphabets");
-		if (!foundry.utils.isEmpty(diffObject(current, game.polyglot.languageProvider.fonts))) {
+		if (!foundry.utils.isEmpty(foundry.utils.diffObject(current, game.polyglot.languageProvider.fonts))) {
 			await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
 			changes = true;
 		}
 		current = game.settings.get("polyglot", "CustomFontSizes");
-		if (!foundry.utils.isEmpty(diffObject(current, customFontSizes))) {
+		if (!foundry.utils.isEmpty(foundry.utils.diffObject(current, customFontSizes))) {
 			game.polyglot.CustomFontSizes = customFontSizes;
 			await game.settings.set("polyglot", "CustomFontSizes", game.polyglot.CustomFontSizes);
 			changes = true;
