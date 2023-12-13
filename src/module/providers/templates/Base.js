@@ -327,7 +327,7 @@ export default class LanguageProvider {
 				}
 				const systemLanguages = CONFIG[game.system.id.toUpperCase()].languages;
 				Object.keys(systemLanguages).forEach((key) => {
-					const label = game.i18n.localize(systemLanguages[key]);
+					const label = typeof systemLanguages[key] === "string" ? game.i18n.localize(systemLanguages[key]) : null;
 					if (label) {
 						langs[key] = {
 							label,
@@ -435,7 +435,7 @@ export default class LanguageProvider {
 	 * Called when Custom Languages setting is changed.
 	 */
 	reloadLanguages() {
-		const langSettings = deepClone(game.settings.get("polyglot", "Languages"));
+		const langSettings = foundry.utils.deepClone(game.settings.get("polyglot", "Languages"));
 		if (JSON.stringify(langSettings) !== JSON.stringify(this.languages) || !Object.keys(langSettings).length) {
 			return;
 		}
