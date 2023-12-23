@@ -73,20 +73,10 @@ jobs:
           name: dist
           path: dist
 
-  reuse:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: REUSE Compliance Check
-        uses: fsfe/reuse-action@v2
-
   publish:
     needs:
       - lint
       - build
-      - reuse
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
