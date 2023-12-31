@@ -148,6 +148,29 @@ input.selectatr[type="number"] {
   display: none;
 }
 
+.polyglot-language-settings .window-content,
+.polyglot-font-settings .window-content {
+  padding: 0;
+}
+
+.polyglot-language-settings form,
+.polyglot-font-settings form {
+  height: 100%;
+}
+.polyglot-language-settings form section,
+.polyglot-font-settings form section {
+  padding: 1rem;
+  overflow: hidden auto;
+}
+.polyglot-language-settings form footer,
+.polyglot-font-settings form footer {
+  margin: 1rem;
+  flex: 0;
+}
+.polyglot-font-settings .polyglot-languages-list {
+  margin: 0;
+}
+
 a.polyglot-message-language.unclickable {
   cursor: default;
 }
