@@ -83,6 +83,7 @@ export class PolyglotFontSettings extends FormApplication {
 				const defaultCustomFontSizes = game.settings.settings.get("polyglot.CustomFontSizes").default;
 				await game.settings.set("polyglot", "CustomFontSizes", defaultCustomFontSizes);
 				this.close();
+				SettingsConfig.reloadConfirm({ world: true });
 			}
 		});
 	}
