@@ -301,12 +301,10 @@ export class Polyglot {
 					templateResult: formatState,
 					templateSelection: formatState,
 				});
-			}
-			else {
+			} else {
 				console.error(error);
 			}
-		}
-		finally {
+		} finally {
 			$(".select2-selection__rendered").hover(function () {
 				$(this).removeAttr("title");
 			});

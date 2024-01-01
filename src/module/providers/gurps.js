@@ -76,10 +76,7 @@ export default class gurpsLanguageProvider extends LanguageProvider {
 			} else if (spoken) {
 				knownLanguages.add(lang);
 				return true;
-			}
-
-			// neither is specificaly identified, assume both if "Language" detected
-			else if (langDetected) {
+			} else if (langDetected) { // neither is specificaly identified, assume both if "Language" detected
 				knownLanguages.add(lang);
 				literateLanguages.add(lang);
 				return true;

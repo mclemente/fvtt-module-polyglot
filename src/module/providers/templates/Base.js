@@ -582,8 +582,7 @@ export default class LanguageProvider {
 		if (CONFIG[game.system.id.toUpperCase()]?.languages) {
 			if (Array.isArray(CONFIG[game.system.id.toUpperCase()].languages)) {
 				CONFIG[game.system.id.toUpperCase()].languages.push(lang);
-			}
-			else CONFIG[game.system.id.toUpperCase()].languages[key] = lang;
+			} else CONFIG[game.system.id.toUpperCase()].languages[key] = lang;
 		}
 	}
 
