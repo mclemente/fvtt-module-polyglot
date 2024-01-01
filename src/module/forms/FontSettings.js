@@ -23,7 +23,7 @@ export class PolyglotFontSettings extends FormApplication {
 		const fonts = game.settings.get("polyglot", "Alphabets");
 		this.fonts = {};
 
-		for (let key of Object.keys(fonts)) {
+		for (let key in fonts) {
 			this.fonts[key] = {
 				label: key,
 				family: fonts[key].fontFamily,
@@ -90,25 +90,18 @@ export class PolyglotFontSettings extends FormApplication {
 
 	async _updateObject() {
 		const customFontSizes = {};
-		let changes = false;
 		for (const [key, font] of Object.entries(this.fonts)) {
 			customFontSizes[key] = font.size;
 			game.polyglot.languageProvider.fonts[key].alphabeticOnly = font.alphabeticOnly;
 			game.polyglot.languageProvider.fonts[key].logographical = font.logographical;
 		}
 		let current = game.settings.get("polyglot", "Alphabets");
-		if (!foundry.utils.isEmpty(foundry.utils.diffObject(current, game.polyglot.languageProvider.fonts))) {
-			await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
-			changes = true;
-		}
+		await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
 		current = game.settings.get("polyglot", "CustomFontSizes");
-		if (!foundry.utils.isEmpty(foundry.utils.diffObject(current, customFontSizes))) {
-			game.polyglot.CustomFontSizes = customFontSizes;
-			await game.settings.set("polyglot", "CustomFontSizes", game.polyglot.CustomFontSizes);
-			changes = true;
-		}
-		if (changes) {
-			SettingsConfig.reloadConfirm({ world: true });
-		}
+		game.polyglot.CustomFontSizes = customFontSizes;
+		await game.settings.set("polyglot", "CustomFontSizes", game.polyglot.CustomFontSizes);
+		const changes = !foundry.utils.isEmpty(foundry.utils.diffObject(current, game.polyglot.languageProvider.fonts))
+			|| !foundry.utils.isEmpty(foundry.utils.diffObject(current, customFontSizes));
+		if (changes) SettingsConfig.reloadConfirm({ world: true });
 	}
 }

@@ -284,13 +284,6 @@ export default class LanguageProvider {
 
 		const setupSteps = async () => {
 			await this.getLanguages();
-			const enableAllFonts = game.settings.get("polyglot", "enableAllFonts");
-			if (enableAllFonts) {
-				for (let font in game.settings.get("core", "fonts")) {
-					const fontSize = game.polyglot.CustomFontSizes[font] ?? "100";
-					this.addFont(font, fontSize);
-				}
-			}
 			this.loadFonts();
 			this.loadLanguages();
 			this.loadCustomFonts();
@@ -379,6 +372,20 @@ export default class LanguageProvider {
 		this.fonts = new LanguageProvider().fonts;
 		const enableAllFonts = game.settings.get("polyglot", "enableAllFonts");
 		const fonts = game.settings.get("polyglot", "Alphabets");
+
+		if (enableAllFonts) {
+			for (let font in game.settings.get("core", "fonts")) {
+				if (fonts[font]) {
+					this.fonts[font] = fonts[font];
+				} else {
+					const fontSize = game.polyglot.CustomFontSizes[font] ?? "100";
+					this.addFont(font, fontSize);
+				}
+			}
+		}
+		for (let font in fonts) {
+			if (!this.fonts[font]) this.fonts[font] = fonts[font];
+		}
 		for (let font in this.fonts) {
 			if (game.polyglot.CustomFontSizes[font]) {
 				this.fonts[font].fontSize = game.polyglot.CustomFontSizes[font];
@@ -386,12 +393,6 @@ export default class LanguageProvider {
 			if (fonts[font]) {
 				this.fonts[font].alphabeticOnly = fonts[font].alphabeticOnly;
 				this.fonts[font].logographical = fonts[font].logographical;
-			}
-		}
-		if (enableAllFonts) {
-			for (let font in game.settings.get("core", "fonts")) {
-				const fontSize = game.polyglot.CustomFontSizes[font] ?? 100;
-				this.addFont(font, fontSize);
 			}
 		}
 	}
@@ -464,17 +465,12 @@ export default class LanguageProvider {
 	 * @see loadFonts
 	 */
 	addFont(fontFamily, fontSize = 100, options = {}) {
-		const key = fontFamily;
 		const defaultOptions = {
 			alphabeticOnly: false,
 			logographical: false,
 			// replace: {},
 		};
-
-		const font = { ...defaultOptions, ...options, fontSize,
-			fontFamily};
-
-		this.fonts[key] = font;
+		this.fonts[fontFamily] = { ...defaultOptions, ...options, fontSize, fontFamily };
 	}
 
 	/**
