@@ -13,7 +13,6 @@ export class PolyglotGeneralSettings extends FormApplication {
 			width: 600,
 			height: "auto",
 			closeOnSubmit: true,
-			resizable: true,
 		});
 	}
 
