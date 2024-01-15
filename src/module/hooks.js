@@ -127,11 +127,12 @@ export default class PolyglotHooks {
 				!game.polyglot._isTruespeech(lang) && !known && (game.user.character || isGM ? !understood : true);
 		}
 		const forceTranslation = message.polyglot_force || !message.polyglot_unknown;
+		const innerText = html.find(".message-content")[0].innerText;
 
 		const content = $("<div>")
 			.addClass("polyglot-original-text")
 			.css({ font: game.polyglot._getFontStyle(lang) })
-			.html(game.polyglot.scrambleString(message.content, message.id, lang));
+			.html(game.polyglot.scrambleString(innerText, message.id, lang));
 		const translation = $("<div>")
 			.addClass("polyglot-translation-text")
 			.attr("data-tooltip", language)
@@ -142,7 +143,7 @@ export default class PolyglotHooks {
 			displayTranslated
 			&& (lang !== game.polyglot.languageProvider.defaultLanguage || message.polyglot_unknown)
 		) {
-			html.find(".message-content").empty().append(content);
+			html.find(".message-content")[0].innerText = content;
 			if (
 				forceTranslation
 				|| (!game.polyglot._isTruespeech(lang) && !message.polyglot_unknown && (isGM || !hideTranslation))
@@ -150,7 +151,7 @@ export default class PolyglotHooks {
 				html.find(".message-content").append(translation);
 			}
 		} else if (!forceTranslation && message.polyglot_unknown) {
-			html.find(".message-content").empty().append(content);
+			html.find(".message-content")[0].innerText = content;
 		}
 
 		if (isGM || ((known || understood) && !hideTranslation)) {
