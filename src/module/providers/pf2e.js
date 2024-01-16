@@ -165,6 +165,18 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 
 	get settings() {
 		return {
+			replaceLanguages: {
+				polyglotHide: true,
+				...game.settings.settings.get("polyglot.replaceLanguages"),
+			},
+			customLanguages: {
+				polyglotHide: true,
+				...game.settings.settings.get("polyglot.customLanguages"),
+			},
+			defaultLanguage: {
+				polyglotHide: true,
+				...game.settings.settings.get("polyglot.defaultLanguage"),
+			},
 		};
 	}
 
