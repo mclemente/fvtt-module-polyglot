@@ -218,14 +218,14 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
-		if (actor.system?.traits?.languages) {
-			for (let lang of actor.system.traits.languages.value) {
+		if (actor.system?.details?.languages) {
+			for (let lang of actor.system.details.languages.value) {
 				if (lang in CONFIG.PF2E.languages) {
 					knownLanguages.add(lang);
 				}
 			}
-			if (actor.system.traits.languages.custom) {
-				for (let lang of actor.system.traits.languages.custom.split(/[,;]/)) {
+			if (actor.system.details.languages.custom) {
+				for (let lang of actor.system.details.languages.custom.split(/[,;]/)) {
 					const key = lang.trim().toLowerCase();
 					knownLanguages.add(key);
 				}
