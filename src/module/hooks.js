@@ -143,7 +143,8 @@ export default class PolyglotHooks {
 			displayTranslated
 			&& (lang !== game.polyglot.languageProvider.defaultLanguage || message.polyglot_unknown)
 		) {
-			html.find(".message-content")[0].innerText = content;
+			html.find(".message-content")[0].empty().append(content);
+
 			if (
 				forceTranslation
 				|| (!game.polyglot._isTruespeech(lang) && !message.polyglot_unknown && (isGM || !hideTranslation))
@@ -151,7 +152,7 @@ export default class PolyglotHooks {
 				html.find(".message-content").append(translation);
 			}
 		} else if (!forceTranslation && message.polyglot_unknown) {
-			html.find(".message-content")[0].innerText = content;
+			html.find(".message-content")[0].empty().append(content);
 		}
 
 		if (isGM || ((known || understood) && !hideTranslation)) {
