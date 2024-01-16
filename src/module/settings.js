@@ -36,6 +36,7 @@ export function registerSettings() {
 		label: game.i18n.localize("POLYGLOT.GeneralSettings"),
 		icon: "fas fa-cogs",
 		type: PolyglotGeneralSettings,
+		restricted: game.system.id === "pf2e"
 	});
 	// Font Settings Menu
 	game.settings.registerMenu("polyglot", "FontSettings", {
