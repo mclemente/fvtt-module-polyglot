@@ -215,7 +215,26 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 	}
 
 	getDefaultLanguage() {
-		this.defaultLanguage = this.getSystemDefaultLanguage();
+		const getLanguage = (language) => {
+			if (this.languages[language]) {
+				this.defaultLanguage = language;
+			} else {
+				Object.entries(this.languages).every(([key, lang]) => {
+					if (language === lang.label) {
+						this.defaultLanguage = key;
+						return false;
+					}
+					return true;
+				});
+			}
+		};
+		const userDefault = game.user.getFlag("polyglot", "defaultLanguage");
+		if (userDefault) {
+			getLanguage(userDefault);
+		}
+		if (this.defaultLanguage === undefined) {
+			this.defaultLanguage = this.getSystemDefaultLanguage();
+		}
 	}
 
 	filterUsers(ownedActors) {
