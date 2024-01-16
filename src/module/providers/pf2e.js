@@ -2,10 +2,7 @@ import LanguageProvider from "./templates/Base.js";
 
 export default class pf2eLanguageProvider extends LanguageProvider {
 	languages = {
-		common: {
-			font: "Thorass",
-		},
-		abyssal: {
+		chthonian: {
 			font: "Barazhad",
 		},
 		aklo: {
@@ -35,7 +32,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 		caligni: {
 			font: "High Drowic",
 		},
-		celestial: {
+		empyrean: {
 			font: "Celestial",
 		},
 		cyclops: {
@@ -50,7 +47,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 		draconic: {
 			font: "Iokharic",
 		},
-		druidic: {
+		wildsong: {
 			font: "Jungle Slang",
 		},
 		dwarven: {
@@ -68,7 +65,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 		garundi: {
 			font: "Qijomi",
 		},
-		gnoll: {
+		kholo: {
 			font: "Kargi",
 		},
 		gnomish: {
@@ -98,7 +95,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 		jyoti: {
 			font: "Celestial",
 		},
-		infernal: {
+		diabolic: {
 			font: "Infernal",
 		},
 		kelish: {
@@ -131,7 +128,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 		strix: {
 			font: "Infernal",
 		},
-		fey: {
+		sylvan: {
 			font: "Olde Espruar",
 		},
 		shoony: {
@@ -152,7 +149,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 		tien: {
 			font: "Oriental",
 		},
-		undercommon: {
+		sakvroth: {
 			font: "High Drowic",
 		},
 		utopian: {
