@@ -180,24 +180,42 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 		};
 	}
 
-	addLanguage(lang) {
-		if (!lang) return;
-		lang = lang.trim();
-		let key = lang.toLowerCase().replace(/[\s']/g, "_");
-		const homebrewLanguagesObj = game.settings.get("pf2e", "homebrew.languages");
-		const homebrewLanguagesKeys = homebrewLanguagesObj.map((a) => a.id);
-		const homebrewLanguagesValues = homebrewLanguagesObj.map((a) => a.value);
-		if (homebrewLanguagesValues.includes(lang)) {
-			const index = homebrewLanguagesValues.indexOf(lang);
-			key = homebrewLanguagesKeys[index];
-		}
+	async getLanguages() {
 		const languagesSetting = game.settings.get("polyglot", "Languages");
-		this.languages[key] = {
-			label: lang,
-			font: languagesSetting[key]?.font || this.languages[key]?.font || this.defaultFont,
-			rng: languagesSetting[key]?.rng ?? "default",
-		};
-		this.addToConfig(key, lang);
+		const langs = {};
+		const systemLanguages = foundry.utils.deepClone(CONFIG.PF2E.languages);
+		delete systemLanguages.common;
+		Object.keys(systemLanguages).forEach((key) => {
+			langs[key] = {
+				label: game.i18n.localize(`PF2E.Actor.Creature.Language.${key}`),
+				font: languagesSetting[key]?.font || this.languages[key]?.font || this.defaultFont,
+				rng: languagesSetting[key]?.rng ?? "default",
+			};
+		});
+		const customSystemLanguages = game.settings.get("pf2e", "homebrew.languages");
+		customSystemLanguages.forEach((l) => {
+			const key = l.id;
+			langs[key] = {
+				label: l.value,
+				font: languagesSetting[key]?.font || this.languages[key]?.font || this.defaultFont,
+				rng: languagesSetting[key]?.rng ?? "default",
+			};
+		});
+		this.languages = langs;
+	}
+
+	loadLanguages() {}
+
+	addLanguage() {}
+
+	removeLanguage() {}
+
+	getSystemDefaultLanguage() {
+		return game.settings.get("pf2e", "homebrew.languageRarities").commonLanguage;
+	}
+
+	getDefaultLanguage() {
+		this.defaultLanguage = this.getSystemDefaultLanguage();
 	}
 
 	filterUsers(ownedActors) {

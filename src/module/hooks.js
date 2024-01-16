@@ -250,6 +250,13 @@ export default class PolyglotHooks {
 		}
 	}
 
+	static async closeHomebrewElements(homebrewElements, html) {
+		if (game.system.id === "pf2e") {
+			await game.polyglot.languageProvider.getLanguages();
+			await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
+		}
+	}
+
 	// Re-checks the user languages for the GM when activating another party on the Actors sidebar.
 	static renderActorDirectoryPF2e(actors, html, data) {
 		game.polyglot.updateUserLanguages(game.polyglot.chatElement);
