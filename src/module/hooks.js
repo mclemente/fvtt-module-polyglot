@@ -58,7 +58,7 @@ export default class PolyglotHooks {
 	 * @returns {Boolean}
 	 */
 	static preCreateChatMessage(message, data, options, userId) {
-		const isCheckboxEnabled = game.polyglot.chatElement.find("input[name=polyglot-checkbox]")[0].checked;
+		const isCheckboxEnabled = game.polyglot.chatElement.find("input[name=polyglot-checkbox]").prop("checked");
 		const isMessageLink = game.polyglot._isMessageLink(data.content);
 		const isMessageInlineRoll = /\[\[(.*?)\]\]/g.test(data.content);
 		// Message preprended by /desc from either Cautious GM Tools or Narrator Tools modules
@@ -127,7 +127,8 @@ export default class PolyglotHooks {
 				!game.polyglot._isTruespeech(lang) && !known && (game.user.character || isGM ? !understood : true);
 		}
 		const forceTranslation = message.polyglot_force || !message.polyglot_unknown;
-		const innerText = html.find(".message-content")[0].innerText;
+		const messageContent = html.find(".message-content");
+		const innerText = messageContent.text();
 
 		const content = $("<div>")
 			.addClass("polyglot-original-text")
@@ -143,16 +144,16 @@ export default class PolyglotHooks {
 			displayTranslated
 			&& (lang !== game.polyglot.languageProvider.defaultLanguage || message.polyglot_unknown)
 		) {
-			html.find(".message-content")[0].empty().append(content);
+			messageContent.empty().append(content);
 
 			if (
 				forceTranslation
 				|| (!game.polyglot._isTruespeech(lang) && !message.polyglot_unknown && (isGM || !hideTranslation))
 			) {
-				html.find(".message-content").append(translation);
+				messageContent.append(translation);
 			}
 		} else if (!forceTranslation && message.polyglot_unknown) {
-			html.find(".message-content")[0].empty().append(content);
+			messageContent.empty().append(content);
 		}
 
 		if (isGM || ((known || understood) && !hideTranslation)) {
