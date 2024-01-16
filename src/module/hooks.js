@@ -250,6 +250,11 @@ export default class PolyglotHooks {
 		}
 	}
 
+	// Re-checks the user languages for the GM when activating another party on the Actors sidebar.
+	static renderActorDirectoryPF2e(actors, html, data) {
+		game.polyglot.updateUserLanguages(game.polyglot.chatElement);
+	}
+
 	/**
 	 * Scrambles the text of vino messages.
 	 * @param {*} chatDisplayData

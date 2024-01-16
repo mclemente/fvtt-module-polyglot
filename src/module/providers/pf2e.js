@@ -164,19 +164,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 	};
 
 	get settings() {
-		const parties = Object.fromEntries(game.actors.filter((a) => a.type === "party").map((a) => [a.id, a.name]));
 		return {
-			"PF2E.TargetedParty": {
-				type: String,
-				default: Object.keys(parties).length ? Object.keys(parties)[0] : "none",
-				choices: {
-					none: "",
-					...parties,
-				},
-				onChange: () => {
-					game.polyglot.updateUserLanguages(game.polyglot.chatElement);
-				},
-			},
 		};
 	}
 
@@ -202,7 +190,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 
 	filterUsers(ownedActors) {
 		const filtered = super.filterUsers(ownedActors);
-		const party = game.actors.find((a) => a.id === game.settings.get("polyglot", "PF2E.TargetedParty"));
+		const party = game.actors.find((a) => a.id === game.settings.get("pf2e", "activeParty"));
 		if (party?.members.length) {
 			const members = party.members.map((a) => a.id);
 			const users = filtered.filter((u) => ownedActors.some((actor) => members.includes(actor.id) && actor.testUserPermission(u, "OWNER"))
@@ -217,7 +205,10 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 		let literateLanguages = new Set();
 		if (actor.system?.details?.languages) {
 			for (let lang of actor.system.details.languages.value) {
-				if (lang in CONFIG.PF2E.languages) {
+				if (lang === "common") {
+					const common = game.settings.get("pf2e", "homebrew.languageRarities").commonLanguage;
+					knownLanguages.add(common);
+				} else if (lang in CONFIG.PF2E.languages) {
 					knownLanguages.add(lang);
 				}
 			}
