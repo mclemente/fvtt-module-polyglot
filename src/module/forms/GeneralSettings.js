@@ -20,11 +20,13 @@ export class PolyglotGeneralSettings extends FormApplication {
 		const settingData = game.settings.settings.get(`polyglot.${key}`);
 		if (settingData.polyglotHide) return;
 
-		const { name, hint, type, range, choices, isColor, hasTextarea } = settingData;
+		const { button, choices, hasTextarea, hint, isColor, name, range, type } = settingData;
 		const select = choices !== undefined ? Object.entries(choices).map(([key, value]) => ({ key, value })) : [];
 
 		let settingType = type.name;
-		if (range) {
+		if (button) {
+			settingType = "Button";
+		} else if (range) {
 			settingType = "Range";
 		} else if (choices) {
 			settingType = "Select";
@@ -144,7 +146,8 @@ export class PolyglotGeneralSettings extends FormApplication {
 	async activateListeners(html) {
 		super.activateListeners(html);
 		html.find("button").on("click", async (event) => {
-			if (event.currentTarget?.dataset?.action === "reset") {
+			const dataset = event.currentTarget?.dataset;
+			if (dataset?.action === "reset") {
 				let keys = [
 					"defaultLanguage"
 				];
@@ -180,6 +183,9 @@ export class PolyglotGeneralSettings extends FormApplication {
 					);
 				}
 				this.close();
+			} else if (dataset?.key) {
+				const key = dataset.key;
+				game.polyglot.languageProvider.settings?.[key].button?.(event);
 			}
 		});
 	}
