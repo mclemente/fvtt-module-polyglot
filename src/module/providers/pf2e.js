@@ -257,8 +257,6 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 				if (lang === "common") {
 					const common = game.settings.get("pf2e", "homebrew.languageRarities").commonLanguage;
 					knownLanguages.add(common);
-					// Legacy support for messages written in "common"
-					knownLanguages.add(lang);
 				} else if (lang in CONFIG.PF2E.languages) {
 					knownLanguages.add(lang);
 				}
