@@ -165,10 +165,6 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 
 	get settings() {
 		return {
-			replaceLanguages: {
-				polyglotHide: true,
-				...game.settings.settings.get("polyglot.replaceLanguages"),
-			},
 			customLanguages: {
 				polyglotHide: true,
 				...game.settings.settings.get("polyglot.customLanguages"),
@@ -181,6 +177,10 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
+		const customSystemLanguages = game.settings.get("pf2e", "homebrew.languages");
+		if (this.replaceLanguages) {
+			CONFIG.PF2E.languages = {};
+		}
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const langs = {};
 		const systemLanguages = foundry.utils.deepClone(CONFIG.PF2E.languages);
@@ -192,7 +192,6 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 				rng: languagesSetting[key]?.rng ?? "default",
 			};
 		});
-		const customSystemLanguages = game.settings.get("pf2e", "homebrew.languages");
 		customSystemLanguages.forEach((l) => {
 			const key = l.id;
 			langs[key] = {
@@ -200,6 +199,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 				font: languagesSetting[key]?.font || this.languages[key]?.font || this.defaultFont,
 				rng: languagesSetting[key]?.rng ?? "default",
 			};
+			if (this.replaceLanguages) CONFIG.PF2E.languages[key] = l.value;
 		});
 		this.languages = langs;
 	}
