@@ -199,10 +199,10 @@ export class Polyglot {
 		[this.knownLanguages, this.literateLanguages] = this.getUserLanguages();
 		const defaultLanguage = this.defaultLanguage;
 		if (this.knownLanguages.size === 0) {
-			if (game.user.isGM) this.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
+			if (game.user.isGM) this.knownLanguages = new Set(Object.keys(this.languageProvider.languages).sort());
 			else this.knownLanguages.add(defaultLanguage);
 		} else if (this.knownLanguages.has(this.omniglot)) {
-			this.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
+			this.knownLanguages = new Set(Object.keys(this.languageProvider.languages).sort());
 		}
 
 		if (!game.polyglot.renderChatLog) return;
@@ -217,7 +217,7 @@ export class Polyglot {
 					|| actor.knownLanguages.has(this.truespeech)
 					|| actor.knownLanguages.has(this.comprehendLanguages)
 				) {
-					actor.knownLanguages = new Set(Object.keys(this.languageProvider.languages));
+					actor.knownLanguages = new Set(Object.keys(this.languageProvider.languages).sort());
 				} else if (this.truespeech) {
 					actor.knownLanguages.add(this.truespeech);
 				}
