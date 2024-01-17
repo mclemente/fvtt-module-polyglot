@@ -64,7 +64,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 			return { value, name, hint };
 		}
 
-		const asArray = Object.entries(game.settings.get("polyglot", "Languages"));
+		const asArray = Object.entries(game.settings.get("polyglot", "Languages")).sort();
 
 		const { name, hint } = game.settings.settings.get("polyglot.Languages");
 		const filtered = asArray.filter(([key]) => {
