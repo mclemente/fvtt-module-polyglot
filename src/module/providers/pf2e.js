@@ -211,13 +211,6 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 
 	loadLanguages() {}
 
-	reloadLanguages(value) {
-		if (value) {
-			game.settings.get("pf2e", "homebrew.languageRarities").onReady();
-		}
-		super.reloadLanguages();
-	}
-
 	addLanguage() {}
 
 	removeLanguage() {}
