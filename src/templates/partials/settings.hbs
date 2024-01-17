@@ -1,7 +1,7 @@
 <div class="form-group">
 	<label>{{localize name}}</label>
 	{{#if (eq type "Button")}}
-		<button style="flex: 2;" type="button" data-key="{{id}}">{{localize name}}</button>
+		<button name="{{id}}" type="button" style="flex: 2;">{{localize name}}</button>
 	{{/if}}
 	{{#if (eq type "Boolean")}}
 		<input name="{{id}}" type="checkbox" {{checked value}} />
