@@ -295,6 +295,7 @@ export default class PolyglotHooks {
 		if (game.system.id === "pf2e") {
 			await game.polyglot.languageProvider.getLanguages();
 			await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
+			game.polyglot.updateUserLanguages(game.polyglot.chatElement);
 		}
 	}
 

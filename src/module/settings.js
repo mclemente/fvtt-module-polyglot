@@ -129,10 +129,10 @@ export function registerSettings() {
 		default: false,
 		type: Boolean,
 		requiresReload: true,
-		onChange: async () => {
+		onChange: async (value) => {
 			await game.polyglot.languageProvider.getLanguages();
 			game.polyglot.languageProvider.loadLanguages();
-			game.polyglot.languageProvider.reloadLanguages();
+			game.polyglot.languageProvider.reloadLanguages(value);
 		},
 	});
 	addMenuSetting("defaultLanguage", {

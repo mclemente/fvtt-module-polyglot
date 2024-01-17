@@ -165,6 +165,10 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 
 	get settings() {
 		return {
+			replaceLanguages: {
+				...game.settings.settings.get("polyglot.replaceLanguages"),
+				hint: "POLYGLOT.PF2E.replaceLanguages.hint"
+			},
 			customLanguages: {
 				polyglotHide: true,
 				...game.settings.settings.get("polyglot.customLanguages"),
@@ -177,8 +181,9 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
+		const replaceLanguages = this.replaceLanguages;
 		const customSystemLanguages = game.settings.get("pf2e", "homebrew.languages");
-		if (this.replaceLanguages) {
+		if (replaceLanguages) {
 			CONFIG.PF2E.languages = {};
 		}
 		const languagesSetting = game.settings.get("polyglot", "Languages");
@@ -199,12 +204,19 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 				font: languagesSetting[key]?.font || this.languages[key]?.font || this.defaultFont,
 				rng: languagesSetting[key]?.rng ?? "default",
 			};
-			if (this.replaceLanguages) CONFIG.PF2E.languages[key] = l.value;
+			if (replaceLanguages) CONFIG.PF2E.languages[key] = l.value;
 		});
 		this.languages = langs;
 	}
 
 	loadLanguages() {}
+
+	reloadLanguages(value) {
+		if (value) {
+			game.settings.get("pf2e", "homebrew.languageRarities").onReady();
+		}
+		super.reloadLanguages();
+	}
 
 	addLanguage() {}
 
