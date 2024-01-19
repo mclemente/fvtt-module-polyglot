@@ -10,8 +10,6 @@ export class Polyglot {
 		this.FONTS = FONTS;
 		// TODO consider removing this variable and let LanguageProvider handle it instead
 		this.CustomFontSizes = game.settings.get("polyglot", "CustomFontSizes");
-		this.registerModule = null;
-		this.registerSystem = null;
 	}
 
 	init() {

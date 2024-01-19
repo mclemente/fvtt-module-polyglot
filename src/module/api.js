@@ -38,8 +38,6 @@ export class PolyglotAPI {
 	attach() {
 		game.polyglot.api = this;
 		this.polyglot = game.polyglot;
-		this.polyglot.registerModule = this.registerModule;
-		this.polyglot.registerSystem = this.registerSystem;
 	}
 
 	defaultProvider() {
