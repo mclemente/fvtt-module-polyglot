@@ -1,144 +1,144 @@
 {
-  "POLYGLOT": {
-    "GameMasterHasAssignedCharacter": "You are a {GM} and have a character assigned to you. Polyglot will behave weirdly because of that. Consider unassigning that character from your User.",
-    "DefaultAlphabet": "Default Alphabet",
-    "FontSettings": "Font Settings",
-    "GeneralSettings": "General Settings",
-    "LanguageSettings": "Language Settings",
-    "ChatSettings": "Chat Settings",
-    "General": "General",
-    "Languages.title": "Languages",
-    "Languages.hint": "Changes the alphabet used for the languages.",
-    "Font": "Font",
-    "Fonts": "Fonts",
-    "FontSize": "Font Size (%)",
-    "AlphabeticOnly": "Only Alphabetic",
-    "Logographical": "Logographical",
-    "AllowOOC.hint": "Choose which users should have their messages scrambled. OOC = Out of Character.",
-    "AllowOOC.title": "Scramble OOC Chat Messages",
-    "AllowOOCOptions": {
-      "a": "All",
-      "b": "GM Only",
-      "c": "Players Only",
-      "d": "None"
-    },
-    "Omniglot": {
-      "title": "Omniglot Language",
-      "hint": "Set a language whose speaker understands and speaks all other languages. An actor will be able to read and write in all other languages, both on chat and on journals."
-    },
-    "ComprehendLanguages.hint": "Set a language whose speaker understands all other languages, but that can't be spoken or written. An actor will be able to read all chat messages and journal text.",
-    "ComprehendLanguages.title": "Omniscient Language",
-    "CustomLanguages.hint": "Define a list of custom languages to add to the system. They must be separated by commas or semicolons.",
-    "CustomLanguages.title": "Custom Languages",
-    "DefaultLanguage.hint": "Name of the default language to select. Keep empty to use system default.",
-    "DefaultLanguage.title": "Default Language",
-    "DisplayTranslated.hint": "For languages that are translated in the chat window, display the original text and a translation below.",
-    "DisplayTranslated.title": "Display Translations",
-    "enableAllFonts": {
-      "hint": "Add Foundry's fonts to the {setting1} and {setting2}.",
-      "title": "Add Foundry's fonts to {settingMenuLabel}"
-    },
-    "ExportFonts.hint": "Add Polyglot's fonts to Core's {settingMenuLabel} menu. Toggle this setting off to remove all of Polyglot's fonts from the menu.",
-    "ExportFonts.title": "Add Polyglot's fonts to Core",
-    "HideTranslation.hint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Useful for when you don't want to show players which language you are speaking. Requires reload.",
-    "HideTranslation.title": "Hide Indicators from Players",
-    "IgnoreJournalFontSize": {
-      "hint": "Ignores the size of Polyglot's fonts on journals, making them have the same size as normal text would have. Useful for when the formatting of the journal matters.",
-      "title": "Use Normal Font Size"
-    },
-    "JournalHighlight": {
-      "hint": "Defines the opacity of the highlight over fonts on the journal.",
-      "title": "Highlight Opacity (%)"
-    },
-    "JournalHighlightColor": {
-      "hint": "Defines the color of the highlight over fonts on the journal.",
-      "title": "Highlight Color"
-    },
-    "LanguageProvider": {
-      "choices": {
-        "module": "[Module] {name}",
-        "native": "Generic",
-        "system": "[System] {name}"
-      },
-      "hint": "Select who provides language information for alphabets and languages. More language providers can be made available via game systems and installed modules. The options below are dependent upon the language provider selected here. ⚠️ If you change the provider, you have to save and reopen these settings.",
-      "name": "Language Settings Provider"
-    },
-    "languageDataPath": {
-      "title": "Language Data Path",
-      "hint": "If your system has languages set in actors' data and aren't being loaded properly, it might be using another data path. Input the data path to the correct attribute (e.g. actor.system.languages or actor.system.speak). This settings takes precedence over the {setting} setting. Requires reload."
-    },
-    "literacyDataPath": {
-      "title": "Literacy Data Path",
-      "hint": "Same as the {setting} setting, but for reading journals. This settings requires the {setting} setting. Requires reload."
-    },
-    "LanguageRegex": {
-      "hint": "You can use this to change the term searched on items from \"Language\" to something else, like \"Tongue\". This setting is more useful for non-English speakers.",
-      "title": "Language RegEx"
-    },
-    "logographicalFontToggle.hint": "Halves the size of phrases using Logographical fonts (e.g. Japanese, Chinese characters).",
-    "logographicalFontToggle.title": "Logographical Fonts",
-    "RandomizeRunes.hint": "This determines which type of RNG is used to generate a phrase. ⚠️ The \"None\" option only supports Alphanumeric characters (no accents).",
-    "RandomizeRunes.title": "Randomize Runes",
-    "RandomizeRunesOptions": {
-      "a": "Default",
-      "b": "Unique phrases",
-      "c": "None ⚠️"
-    },
-    "ReplaceLanguages.hint": "Removes the system's default languages. The first language on the Custom Languages' list becomes the new default language.",
-    "ReplaceLanguages.title": "Remove System's Languages",
-    "RuneRegex": {
-      "hint": "Makes the randomization ignore non-alphanumerical characters (e.g. !,.;:?#$\"'). This might have the undesired effect of showing some of those characters as a square (□) on some fonts.",
-      "title": "Randomize Only Alphanumericals"
-    },
-    "ScrambleGM.hint": "Don't translate the text for the GM (refer to the globe's color for the token's understanding). Requires reload.",
-    "ScrambleGM.title": "Scramble Messages for GM",
-    "Truespeech.hint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures. An actor will be able to read all chat messages and to write messages in a language that is understood by all.",
-    "Truespeech.title": "Omnispeech Language",
-    "Translation": "Translation",
-    "TranslatedFrom": "Translated from ",
-    "LanguageLabel": "Language",
-    "AlphabetLabel": "Alphabet",
-    "LatinAlphabet": "Latin Alphabet",
-    "ToggleRunes": "Toggle Runes",
-    "Runes": "Runes",
-    "UESRPG.Language": "Language",
-    "Generic": {
-      "Language": "Language"
-    },
-    "COC7": {
-      "LanguageOwn": "Language",
-      "LanguageAny": "Language",
-      "LanguageOther": "Language",
-      "LanguageSpec": "Language"
-    },
-    "DND5E": {
-      "SpecialLanguages.title": "Replace Special Languages",
-      "SpecialLanguages.hint": "Name of the language that will replace \"languages\" such as \"all the languages it knew in life\".",
-      "TargetedParty": {
-        "title": "Target Group",
-        "hint": "If your game has a lot of users, the speaker indicator might become too crowded. You can filter the list by limiting it to users that own characters that are members of the target Group actor."
-      }
-    },
-    "PF2E": {
-      "replaceLanguages.hint": "Removes the system's default languages. You must have at least one custom language set on the Homebrew Elements menu, otherwise the non-Common languages won't be removed. If you disable this setting and want to reset the rarities back to defaults, check the module's wiki.",
-      "TargetedParty": {
-        "title": "Target Party",
-        "hint": "If your game has a lot of users, the speaker indicator might become too crowded. You can filter the list by limiting it to users that own characters that are members of the target Party actor."
-      }
-    },
-    "SWADE": {
-      "LanguageSkills": "Language",
-      "AdditionalLanguageStat": {
-        "title": "Language Stat Key",
-        "hint": "It is possible to target an Additional Stat (which is set on the SWADE Settings Configurator). You need to input the Stat Key (case sensitive). Beware that setting this overrides the {setting} setting."
-      },
-      "AdditionalLiterateStat": {
-        "title": "Literacy Stat Key",
-        "hint": "It is possible to limit reading journals by adding an Additional Stat. You need to input the Stat Key (case sensitive). This setting is independent from the {setting} setting."
-      }
-    },
-    "WFRP4E": {
-      "LanguageSkills": "Language"
-    }
-  }
+	"POLYGLOT": {
+		"GameMasterHasAssignedCharacter": "You are a {GM} and have a character assigned to you. Polyglot will behave weirdly because of that. Consider unassigning that character from your User.",
+		"DefaultAlphabet": "Default Alphabet",
+		"FontSettings": "Font Settings",
+		"GeneralSettings": "General Settings",
+		"LanguageSettings": "Language Settings",
+		"ChatSettings": "Chat Settings",
+		"General": "General",
+		"Languages.title": "Languages",
+		"Languages.hint": "Changes the alphabet used for the languages.",
+		"Font": "Font",
+		"Fonts": "Fonts",
+		"FontSize": "Font Size (%)",
+		"AlphabeticOnly": "Only Alphabetic",
+		"Logographical": "Logographical",
+		"AllowOOC.hint": "Choose which users should have their messages scrambled. OOC = Out of Character.",
+		"AllowOOC.title": "Scramble OOC Chat Messages",
+		"AllowOOCOptions": {
+			"a": "All",
+			"b": "GM Only",
+			"c": "Players Only",
+			"d": "None"
+		},
+		"Omniglot": {
+			"title": "Omniglot Language",
+			"hint": "Set a language whose speaker understands and speaks all other languages. An actor will be able to read and write in all other languages, both on chat and on journals."
+		},
+		"ComprehendLanguages.hint": "Set a language whose speaker understands all other languages, but that can't be spoken or written. An actor will be able to read all chat messages and journal text.",
+		"ComprehendLanguages.title": "Omniscient Language",
+		"CustomLanguages.hint": "Define a list of custom languages to add to the system. They must be separated by commas or semicolons.",
+		"CustomLanguages.title": "Custom Languages",
+		"DefaultLanguage.hint": "Name of the default language to select. Keep empty to use system default.",
+		"DefaultLanguage.title": "Default Language",
+		"DisplayTranslated.hint": "For languages that are translated in the chat window, display the original text and a translation below.",
+		"DisplayTranslated.title": "Display Translations",
+		"enableAllFonts": {
+			"hint": "Add Foundry's fonts to the {setting1} and {setting2}.",
+			"title": "Add Foundry's fonts to {settingMenuLabel}"
+		},
+		"ExportFonts.hint": "Add Polyglot's fonts to Core's {settingMenuLabel} menu. Toggle this setting off to remove all of Polyglot's fonts from the menu.",
+		"ExportFonts.title": "Add Polyglot's fonts to Core",
+		"HideTranslation.hint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Useful for when you don't want to show players which language you are speaking. Requires reload.",
+		"HideTranslation.title": "Hide Indicators from Players",
+		"IgnoreJournalFontSize": {
+			"hint": "Ignores the size of Polyglot's fonts on journals, making them have the same size as normal text would have. Useful for when the formatting of the journal matters.",
+			"title": "Use Normal Font Size"
+		},
+		"JournalHighlight": {
+			"hint": "Defines the opacity of the highlight over fonts on the journal.",
+			"title": "Highlight Opacity (%)"
+		},
+		"JournalHighlightColor": {
+			"hint": "Defines the color of the highlight over fonts on the journal.",
+			"title": "Highlight Color"
+		},
+		"LanguageProvider": {
+			"choices": {
+				"module": "[Module] {name}",
+				"native": "Generic",
+				"system": "[System] {name}"
+			},
+			"hint": "Select who provides language information for alphabets and languages. More language providers can be made available via game systems and installed modules. The options below are dependent upon the language provider selected here. ⚠️ If you change the provider, you have to save and reopen these settings.",
+			"name": "Language Settings Provider"
+		},
+		"languageDataPath": {
+			"title": "Language Data Path",
+			"hint": "If your system has languages set in actors' data and aren't being loaded properly, it might be using another data path. Input the data path to the correct attribute (e.g. actor.system.languages or actor.system.speak). This settings takes precedence over the {setting} setting. Requires reload."
+		},
+		"literacyDataPath": {
+			"title": "Literacy Data Path",
+			"hint": "Same as the {setting} setting, but for reading journals. This settings requires the {setting} setting. Requires reload."
+		},
+		"LanguageRegex": {
+			"hint": "You can use this to change the term searched on items from \"Language\" to something else, like \"Tongue\". This setting is more useful for non-English speakers.",
+			"title": "Language RegEx"
+		},
+		"logographicalFontToggle.hint": "Halves the size of phrases using Logographical fonts (e.g. Japanese, Chinese characters).",
+		"logographicalFontToggle.title": "Logographical Fonts",
+		"RandomizeRunes.hint": "This determines which type of RNG is used to generate a phrase. ⚠️ The \"None\" option only supports Alphanumeric characters (no accents).",
+		"RandomizeRunes.title": "Randomize Runes",
+		"RandomizeRunesOptions": {
+			"a": "Default",
+			"b": "Unique phrases",
+			"c": "None ⚠️"
+		},
+		"ReplaceLanguages.hint": "Removes the system's default languages. The first language on the Custom Languages' list becomes the new default language.",
+		"ReplaceLanguages.title": "Remove System's Languages",
+		"RuneRegex": {
+			"hint": "Makes the randomization ignore non-alphanumerical characters (e.g. !,.;:?#$\"'). This might have the undesired effect of showing some of those characters as a square (□) on some fonts.",
+			"title": "Randomize Only Alphanumericals"
+		},
+		"ScrambleGM.hint": "Don't translate the text for the GM (refer to the globe's color for the token's understanding). Requires reload.",
+		"ScrambleGM.title": "Scramble Messages for GM",
+		"Truespeech.hint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures. An actor will be able to read all chat messages and to write messages in a language that is understood by all.",
+		"Truespeech.title": "Omnispeech Language",
+		"Translation": "Translation",
+		"TranslatedFrom": "Translated from ",
+		"LanguageLabel": "Language",
+		"AlphabetLabel": "Alphabet",
+		"LatinAlphabet": "Latin Alphabet",
+		"ToggleRunes": "Toggle Runes",
+		"Runes": "Runes",
+		"UESRPG.Language": "Language",
+		"Generic": {
+			"Language": "Language"
+		},
+		"COC7": {
+			"LanguageOwn": "Language",
+			"LanguageAny": "Language",
+			"LanguageOther": "Language",
+			"LanguageSpec": "Language"
+		},
+		"DND5E": {
+			"SpecialLanguages.title": "Replace Special Languages",
+			"SpecialLanguages.hint": "Name of the language that will replace \"languages\" such as \"all the languages it knew in life\".",
+			"TargetedParty": {
+				"title": "Target Group",
+				"hint": "If your game has a lot of users, the speaker indicator might become too crowded. You can filter the list by limiting it to users that own characters that are members of the target Group actor."
+			}
+		},
+		"PF2E": {
+			"replaceLanguages.hint": "Removes the system's default languages. You must have at least one homebrew language set on the Homebrew Elements menu, otherwise the non-Common languages won't be removed. If you disable this setting and want to reset the rarities back to defaults, check the module's wiki.",
+			"TargetedParty": {
+				"title": "Target Party",
+				"hint": "If your game has a lot of users, the speaker indicator might become too crowded. You can filter the list by limiting it to users that own characters that are members of the target Party actor."
+			}
+		},
+		"SWADE": {
+			"LanguageSkills": "Language",
+			"AdditionalLanguageStat": {
+				"title": "Language Stat Key",
+				"hint": "It is possible to target an Additional Stat (which is set on the SWADE Settings Configurator). You need to input the Stat Key (case sensitive). Beware that setting this overrides the {setting} setting."
+			},
+			"AdditionalLiterateStat": {
+				"title": "Literacy Stat Key",
+				"hint": "It is possible to limit reading journals by adding an Additional Stat. You need to input the Stat Key (case sensitive). This setting is independent from the {setting} setting."
+			}
+		},
+		"WFRP4E": {
+			"LanguageSkills": "Language"
+		}
+	}
 }
