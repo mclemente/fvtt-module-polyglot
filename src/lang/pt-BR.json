@@ -7,8 +7,8 @@
 		"Languages.title": "Idiomas",
 		"Languages.hint": "Muda o alfabeto usado para os idiomas.",
 		"Fonts": "Fontes",
-		"CustomLanguages.title": "Idiomas Customizados",
-		"CustomLanguages.hint": "Defina uma lista de idiomas customizados para adicionar ao sistema, separados por vírgula ou por ponto e vírgula.",
+		"CustomLanguages.title": "Idiomas Personalizados",
+		"CustomLanguages.hint": "Defina uma lista de idiomas personalizados para adicionar ao sistema, separados por vírgula ou por ponto e vírgula.",
 		"ComprehendLanguages.title": "Idioma Omnisciente",
 		"ComprehendLanguages.hint": "Define um idioma cujo falante entende todos os idiomas, mas não pode ser escrito ou falado. Um ator poderá ler todas as mensagens do chat e todos os textos de diários.",
 		"Truespeech.title": "Idioma de Omnifala",
@@ -19,8 +19,8 @@
 		"logographicalFontToggle.hint": "Reduz pela metade o tamanho de frases usando fontes logográficas (ex.: caracteres japoneses ou chineses).",
 		"DefaultLanguage.title": "Idioma Padrão",
 		"DefaultLanguage.hint": "Nome do idioma padrão para ser escolhido. Deixe vazio para usar o padrão do sistema.",
-		"ReplaceLanguages.title": "Substituir Idiomas do Sistema",
-		"ReplaceLanguages.hint": "Substitui os idiomas do sistema com os seus Idiomas Customizados. O primeiro idioma da lista se tornará o novo idioma padrão.",
+		"ReplaceLanguages.title": "Remover Idiomas do Sistema",
+		"ReplaceLanguages.hint": "Remove os idiomas padrão do sistema. O primeiro idioma da lista de Idiomas Personalizados se tornará o novo idioma padrão.",
 		"ScrambleGM.title": "Embaralhar para o Mestre",
 		"ScrambleGM.hint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende). Recarregará o programa.",
 		"enableAllFonts": {
@@ -141,7 +141,8 @@
 			"TargetedParty": {
 				"title": "Grupo Alvo",
 				"hint": "Se o seu jogo tem muitos usuários, o indicador de falantes de uma língua pode ficar muito cheio. Você pode filtrar a lista limitando-a para usuários que são donos de personagens que fazem parte do ator de Grupo escolhido."
-			}
+			},
+			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma caseiro definido no menu Homebrew Elements, caso contrário, os idiomas não comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
 		}
 	}
 }

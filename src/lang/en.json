@@ -120,7 +120,7 @@
       }
     },
     "PF2E": {
-      "replaceLanguages.hint": "Removes the system's default languages. You must have at least one custom language set on the Homebrew Elements menu, otherwise the non-Common languages won't be removed. If you disable this setting and want to reset the rarities back to defaults, check the module's wiki.",
+      "replaceLanguages.hint": "Removes the system's default languages. You must have at least one homebrew language set on the Homebrew Elements menu, otherwise the non-Common languages won't be removed. If you disable this setting and want to reset the rarities back to defaults, check the module's wiki.",
       "TargetedParty": {
         "title": "Target Party",
         "hint": "If your game has a lot of users, the speaker indicator might become too crowded. You can filter the list by limiting it to users that own characters that are members of the target Party actor."
