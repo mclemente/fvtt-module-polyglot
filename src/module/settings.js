@@ -1,3 +1,4 @@
+import { CUSTOM_FONT_SIZES } from "./Fonts.js";
 import { PolyglotFontSettings } from "./forms/FontSettings.js";
 import { PolyglotGeneralSettings } from "./forms/GeneralSettings.js";
 import { PolyglotLanguageSettings } from "./forms/LanguageSettings.js";
@@ -33,14 +34,14 @@ export function registerSettings() {
 	// General Settings Menu
 	game.settings.registerMenu("polyglot", "GeneralSettings", {
 		name: "POLYGLOT.GeneralSettings",
-		label: game.i18n.localize("POLYGLOT.GeneralSettings"),
+		label: "POLYGLOT.GeneralSettings",
 		icon: "fas fa-cogs",
 		type: PolyglotGeneralSettings,
 	});
 	// Font Settings Menu
 	game.settings.registerMenu("polyglot", "FontSettings", {
 		name: "POLYGLOT.FontSettings",
-		label: game.i18n.localize("POLYGLOT.FontSettings"),
+		label: "POLYGLOT.FontSettings",
 		icon: "fas fa-font",
 		type: PolyglotFontSettings,
 		restricted: true,
@@ -48,7 +49,7 @@ export function registerSettings() {
 	// Language Settings Menu
 	game.settings.registerMenu("polyglot", "LanguageSettings", {
 		name: "POLYGLOT.LanguageSettings",
-		label: game.i18n.localize("POLYGLOT.LanguageSettings"),
+		label: "POLYGLOT.LanguageSettings",
 		icon: "fas fa-globe",
 		type: PolyglotLanguageSettings,
 		restricted: true,
@@ -74,13 +75,8 @@ export function registerSettings() {
 		type: Boolean,
 	});
 	addMenuSetting("enableAllFonts", {
-		name: game.i18n.format("POLYGLOT.enableAllFonts.title", {
-			settingMenuLabel: game.i18n.localize("POLYGLOT.FontSettings"),
-		}),
-		hint: game.i18n.format("POLYGLOT.enableAllFonts.hint", {
-			setting1: game.i18n.localize("POLYGLOT.FontSettings"),
-			setting2: game.i18n.localize("POLYGLOT.LanguageSettings"),
-		}),
+		name: "POLYGLOT.enableAllFonts.title",
+		hint: "POLYGLOT.enableAllFonts.hint",
 		default: false,
 		type: Boolean,
 		requiresReload: true,
@@ -88,9 +84,7 @@ export function registerSettings() {
 
 	addMenuSetting("exportFonts", {
 		name: "POLYGLOT.ExportFonts.title",
-		hint: game.i18n.format("POLYGLOT.ExportFonts.hint", {
-			settingMenuLabel: game.i18n.localize("SETTINGS.FontConfigN"),
-		}),
+		hint: "POLYGLOT.ExportFonts.hint",
 		default: false,
 		type: Boolean,
 		requiresReload: true,
@@ -192,24 +186,34 @@ export function registerSettings() {
 		type: Boolean,
 		requiresReload: true,
 	});
-	addMenuSetting("allowOOC", {
-		name: "POLYGLOT.AllowOOC.title",
-		hint: "POLYGLOT.AllowOOC.hint",
-		choices: {
-			a: game.i18n.localize("POLYGLOT.AllowOOCOptions.a"),
-			b: game.i18n.localize("POLYGLOT.AllowOOCOptions.b"),
-			c: game.i18n.localize("POLYGLOT.AllowOOCOptions.c"),
-			d: game.i18n.localize("POLYGLOT.AllowOOCOptions.d"),
-		},
-		default: "b",
-		type: String,
-	});
+	// allowOOC
 	addMenuSetting("runifyGM", {
 		name: "POLYGLOT.ScrambleGM.title",
 		hint: "POLYGLOT.ScrambleGM.hint",
 		default: false,
 		type: Boolean,
 		requiresReload: true,
+	});
+
+	// Used Internally
+	addMenuSetting("CustomFontSizes", {
+		default: CUSTOM_FONT_SIZES,
+		type: Object,
+	});
+
+	Hooks.on("i18nInit", () => {
+		addMenuSetting("allowOOC", {
+			name: "POLYGLOT.AllowOOC.title",
+			hint: "POLYGLOT.AllowOOC.hint",
+			choices: {
+				a: game.i18n.localize("POLYGLOT.AllowOOCOptions.a"),
+				b: game.i18n.localize("POLYGLOT.AllowOOCOptions.b"),
+				c: game.i18n.localize("POLYGLOT.AllowOOCOptions.c"),
+				d: game.i18n.localize("POLYGLOT.AllowOOCOptions.d"),
+			},
+			default: "b",
+			type: String,
+		});
 	});
 }
 
