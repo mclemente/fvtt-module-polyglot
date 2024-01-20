@@ -273,6 +273,10 @@ export default class LanguageProvider {
 	// Hooks //
 	// /////////
 
+	init() {}
+
+	i18nInit() {}
+
 	/**
 	 * Loads everything that can't be loaded on the constructor due to async/await.
 	 * It Hooks on ready if the system depends on reading compendiums.
@@ -306,6 +310,8 @@ export default class LanguageProvider {
 			await setupSteps();
 		}
 	}
+
+	ready() {}
 
 	/**
 	 * Even though the base method doesn't have an await, some providers might need it to look into compendiums.

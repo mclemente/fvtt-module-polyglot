@@ -26,7 +26,12 @@ Hooks.once("init", () => {
 	Hooks.callAll("polyglot.init", LanguageProvider);
 	api.defaultProvider();
 	api.updateProvider();
+	game.polyglot.languageProvider.init();
 	return preloadTemplates();
+});
+
+Hooks.once("i18nInit", () => {
+	game.polyglot.languageProvider.i18nInit();
 });
 
 Hooks.on("setup", async () => {
@@ -44,6 +49,7 @@ Hooks.on("setup", async () => {
 Hooks.on("ready", () => {
 	game.polyglot.ready();
 	Hooks.callAll("polyglot.ready", LanguageProvider);
+	game.polyglot.languageProvider.ready();
 });
 Hooks.on("renderSettingsConfig", renderSettingsConfigHandler);
 Hooks.on("renderPolyglotGeneralSettings", renderPolyglotGeneralSettingsHandler);
