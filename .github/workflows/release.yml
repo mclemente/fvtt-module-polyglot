@@ -115,3 +115,32 @@ jobs:
           artifacts: "./dist/${{ env.package_type }}.json, ./${{ env.package_type }}.zip"
           tag: ${{ github.event.release.tag_name }}
           body: ${{ github.event.release.body }}
+
+      - name: Get Module ID
+        id: moduleID
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          path: "./dist/${{ env.package_type }}.json"
+          prop_path: "id"
+
+      - name: Get mininum
+        id: minimum
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          path: "./dist/${{ env.package_type }}.json"
+          prop_path: "compatibility.minimum"
+
+      - name: Get verified
+        id: verified
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          path: "./dist/${{ env.package_type }}.json"
+          prop_path: "compatibility.verified"
+
+      - name: Foundry Release API
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: "https://api.foundryvtt.com/_api/packages/release_version"
+          method: "POST"
+          customHeaders: '{"Content-Type": "application/json", "Authorization" : "${{ secrets.FOUNDRY_KEY }}"}'
+          data: '{"id": "${{ steps.moduleID.outputs.prop }}", "release": {"version":  "${{ steps.get_version.outputs.version-without-v }}", "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/${{ env.package_type }}.json" "notes": "https://github.com/${{ github.repository }}/releases/tag/${{ github.event.release.tag_name }}/", "compatibility" : {"minimum": "${{ steps.minimum.outputs.prop }}", "verified": "${{ steps.verified.outputs.prop }}"}}}'
