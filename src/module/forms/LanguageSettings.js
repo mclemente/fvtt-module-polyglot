@@ -116,10 +116,13 @@ export class PolyglotLanguageSettings extends FormApplication {
 		});
 		html.find("button").on("click", async (event) => {
 			if (event.currentTarget?.dataset?.action === "reset") {
+				const current = game.settings.get("polyglot", "Languages");
 				await game.settings.set("polyglot", "Languages", {});
 				const defaultProvider = new game.polyglot.languageProvider.constructor();
 				defaultProvider.getLanguages();
+				const diff = foundry.utils.diffObject(defaultProvider.languages, current);
 				await game.settings.set("polyglot", "Languages", defaultProvider.languages);
+				if (Object.keys(diff).length) SettingsConfig.reloadConfirm({ world: true });
 				this.close();
 			}
 		});
