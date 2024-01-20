@@ -19,15 +19,15 @@
 				<li class="flexrow">
 					<div>{{localize "POLYGLOT.LanguageLabel"}}</div>
 					<div>{{localize "POLYGLOT.Fonts"}}</div>
-					{{!-- <div class="polyglot-alphabet-title">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div> --}}
 					<div>Randomize Letters</div>
 				</li>
 				<hr />
 				{{#each languages.value as |value key|}}
 					<li class="flexrow">
 						<div data-id="{{key}}">{{value.label}}</div>
+						<div style="display: none;"><input name="languages.{{key}}.label" value="{{value.label}}" /></div>
 						<div>
-							<select class="selectatr" name="language.alphabet" data-dtype="String">
+							<select class="selectatr" name="languages.{{key}}.font" data-dtype="String">
 								{{#select value.font}}
 									{{#each ../alphabets.value as |font label|}}
 										<option value="{{label}}">{{label}}</option>
@@ -35,9 +35,8 @@
 								{{/select}}
 							</select>
 						</div>
-						{{!-- <div class="polyglot-alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div> --}}
 						<div>
-							<select class="selectatr" name="language.rng" data-dtype="String">
+							<select class="selectatr" name="languages.{{key}}.rng" data-dtype="String">
 								{{#select value.rng}}
 									<option value="default">Default</option>
 									<option value="unique">Unique</option>

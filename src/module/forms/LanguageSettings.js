@@ -137,22 +137,14 @@ export class PolyglotLanguageSettings extends FormApplication {
 			game.polyglot.api.updateProvider();
 			await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
 			await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
-			SettingsConfig.reloadConfirm({ world: true });
 		} else {
-			const langSettings = foundry.utils.duplicate(game.settings.get("polyglot", "Languages"));
-			const fonts = formData["language.alphabet"];
-			const rng = formData["language.rng"];
-			let i = 0;
-			for (let lang in langSettings) {
-				langSettings[lang].font = fonts[i];
-				langSettings[lang].rng = rng[i];
-				i++;
-			}
-			let current = game.settings.get("polyglot", "Languages");
-			if (langSettings === current) return;
-			game.polyglot.languageProvider.languages = langSettings;
-			await game.settings.set("polyglot", "Languages", langSettings);
-			SettingsConfig.reloadConfirm({ world: true });
+			const languages = foundry.utils.expandObject(formData).languages;
+			const current = game.settings.get("polyglot", "Languages");
+			const diff = foundry.utils.diffObject(current, languages);
+			if (!Object.keys(diff).length) return;
+			game.polyglot.languageProvider.languages = languages;
+			await game.settings.set("polyglot", "Languages", languages);
 		}
+		SettingsConfig.reloadConfirm({ world: true });
 	}
 }
