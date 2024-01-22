@@ -16,12 +16,17 @@ export class PolyglotGeneralSettings extends FormApplication {
 		});
 	}
 
-	_prepSetting(key) {
+	_prepSetting(key, flag = false) {
 		const settingData = game.settings.settings.get(`polyglot.${key}`);
-		if (settingData.polyglotHide) return;
+		if (!flag && settingData.polyglotHide) return;
 
-		const { button, choices, hasTextarea, hint, isColor, name, range, type } = settingData;
-		const select = choices !== undefined ? Object.entries(choices).map(([key, value]) => ({ key, value })) : [];
+		const { button, choices, default: def, hasTextarea, hint, isColor, name, range, type } = settingData;
+		let select = [];
+		if (choices !== undefined) {
+			const type = foundry.utils.getType(choices);
+			if (type === "Object") select = Object.entries(choices).map(([key, value]) => ({ key, value }));
+			else if (type === "Array") select = choices;
+		}
 
 		let settingType = type.name;
 		if (button) {
@@ -38,7 +43,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 
 		return {
 			id: key,
-			value: game.settings.get("polyglot", key),
+			value: flag ? (game.user.flags?.polyglot?.[key] ?? def) : game.settings.get("polyglot", key),
 			name,
 			hint,
 			type: settingType,
@@ -48,14 +53,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 	}
 
 	_prepFlag(key) {
-		const { name, hint, default: def, type } = game.settings.settings.get(`polyglot.${key}`);
-		return {
-			id: key,
-			name,
-			hint,
-			value: game.user.flags?.polyglot?.[key] ?? def,
-			type: type.name,
-		};
+		return this._prepSetting(key, true);
 	}
 
 	async resetToDefault(key) {
