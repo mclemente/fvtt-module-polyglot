@@ -300,11 +300,9 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 
 	filterUsers(ownedActors) {
 		const filtered = super.filterUsers(ownedActors);
-		const party = game.actors.find((a) => a.id === game.settings.get("pf2e", "activeParty"));
-		if (party?.members.length) {
-			const members = party.members.map((a) => a.id);
-			const users = filtered.filter((u) => ownedActors.some((actor) => members.includes(actor.id) && actor.testUserPermission(u, "OWNER"))
-			);
+		if (game.actors.party?.members.length) {
+			const members = game.actors.party.members.map((a) => a.id);
+			const users = filtered.filter((user) => ownedActors.some((actor) => members.includes(actor.id) && actor.testUserPermission(user, "OWNER")));
 			return users;
 		}
 		return filtered;
