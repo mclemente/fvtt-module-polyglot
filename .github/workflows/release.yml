@@ -116,6 +116,11 @@ jobs:
           tag: ${{ github.event.release.tag_name }}
           body: ${{ github.event.release.body }}
 
+  foundry-release:
+    needs:
+      - publish
+    runs-on: ubuntu-latest
+    steps:
       - name: Get Module ID
         id: moduleID
         uses: notiz-dev/github-action-json-property@release
@@ -137,10 +142,14 @@ jobs:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "compatibility.verified"
 
+      - name: Extract tag version number
+        id: get_version
+        uses: battila7/get-version-action@v2
+
       - name: Foundry Release API
         uses: fjogeleit/http-request-action@v1
         with:
           url: "https://api.foundryvtt.com/_api/packages/release_version"
           method: "POST"
           customHeaders: '{"Content-Type": "application/json", "Authorization" : "${{ secrets.FOUNDRY_KEY }}"}'
-          data: '{"id": "${{ steps.moduleID.outputs.prop }}", "release": {"version": "${{ env.version }}", "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/${{ env.package_type }}.json", "notes": "https://github.com/${{ github.repository }}/releases/tag/${{ github.event.release.tag_name }}/", "compatibility" : {"minimum": "${{ steps.minimum.outputs.prop }}", "verified": "${{ steps.verified.outputs.prop }}"}}}'
+          data: '{"id": "${{ steps.moduleID.outputs.prop }}", "release": {"version": "${{ steps.get_version.outputs.version-without-v }}", "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/${{ env.package_type }}.json", "notes": "https://github.com/${{ github.repository }}/releases/tag/${{ github.event.release.tag_name }}/", "compatibility" : {"minimum": "${{ steps.minimum.outputs.prop }}", "verified": "${{ steps.verified.outputs.prop }}"}}}'
