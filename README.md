@@ -8,8 +8,15 @@
 Talk to others using a language you can speak and scrambles text you can't understand, into several fantasy scripts.
 
 ## How to Use
+### As a GM
+- Check the module settings to configure it according to your preferences.
+- Select tokens to speak as them.
+- Change the default editor of the Journal Sheet to TinyMCE if you intend to use the Journal feature.
+- Check the [wiki](https://github.com/mclemente/fvtt-module-polyglot/wiki) for more in-depth information.
 
-Check out the [wiki](https://github.com/mclemente/fvtt-module-polyglot/wiki).
+### As a Player
+- Assign a character on the User Configuration window.
+- Talk as your character. Select other owned tokens to read and speak as them.
 
 ## Attribution
 
