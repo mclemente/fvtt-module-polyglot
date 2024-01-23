@@ -181,7 +181,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 	}
 
 	init() {
-		if (game.settings.get("polyglot", "replaceLanguages")) {
+		if (this.replaceLanguages) {
 			CONFIG.PF2E.languages = {
 				common: "PF2E.Actor.Creature.Language.common"
 			};
@@ -235,30 +235,26 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const replaceLanguages = this.replaceLanguages;
 		const customSystemLanguages = game.settings.get("pf2e", "homebrew.languages");
-		if (replaceLanguages) {
-			CONFIG.PF2E.languages = {};
-		}
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const langs = {};
 		const systemLanguages = foundry.utils.deepClone(CONFIG.PF2E.languages);
 		delete systemLanguages.common;
-		Object.keys(systemLanguages).forEach((key) => {
+		Object.entries(systemLanguages).forEach(([key, value]) => {
 			langs[key] = {
-				label: game.i18n.localize(`PF2E.Actor.Creature.Language.${key}`),
+				label: game.i18n.has(value) ? game.i18n.localize(value) : value,
 				font: languagesSetting[key]?.font || this.languages[key]?.font || this.defaultFont,
 				rng: languagesSetting[key]?.rng ?? "default",
 			};
 		});
-		customSystemLanguages.forEach((l) => {
+		customSystemLanguages.filter((lang) => !(lang.id in systemLanguages)).forEach((l) => {
 			const key = l.id;
 			langs[key] = {
 				label: l.value,
 				font: languagesSetting[key]?.font || this.languages[key]?.font || this.defaultFont,
 				rng: languagesSetting[key]?.rng ?? "default",
 			};
-			if (replaceLanguages) CONFIG.PF2E.languages[key] = l.value;
+			if (this.replaceLanguages) CONFIG.PF2E.languages[key] = l.value;
 		});
 		this.languages = langs;
 	}
