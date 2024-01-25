@@ -236,6 +236,11 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 
 	async getLanguages() {
 		const customSystemLanguages = game.settings.get("pf2e", "homebrew.languages");
+		if (this.replaceLanguages) {
+			CONFIG.PF2E.languages = {
+				common: "PF2E.Actor.Creature.Language.common"
+			};
+		}
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const langs = {};
 		const systemLanguages = foundry.utils.deepClone(CONFIG.PF2E.languages);
