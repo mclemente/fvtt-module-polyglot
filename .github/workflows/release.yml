@@ -116,11 +116,6 @@ jobs:
           tag: ${{ github.event.release.tag_name }}
           body: ${{ github.event.release.body }}
 
-  foundry-release:
-    needs:
-      - publish
-    runs-on: ubuntu-latest
-    steps:
       - name: Get Module ID
         id: moduleID
         uses: notiz-dev/github-action-json-property@release
