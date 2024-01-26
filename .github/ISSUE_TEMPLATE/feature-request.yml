@@ -1,0 +1,26 @@
+name: Feature Request
+description: Request a Feature
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to request a new Feature or an update to an existing Feature on Polyglot
+  - type: textarea
+    id: user-experience
+    attributes:
+      label: User Experience
+      description: What problem does this solve? What should it function like?
+      placeholder: In order to help with bulk creation of documents, I would like a new button...
+    validations:
+      required: true
+  - type: checkboxes
+    id: checkboxes
+    attributes:
+      label: Have you read the Wiki?
+      description: Are you sure you're not suggesting something that breaks core Foundry behavior or is already implemented?
+      options:
+        - label: Yes
+        - required: true
+    validations:
+      required: true
