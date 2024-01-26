@@ -1,0 +1,38 @@
+name: Bug Report
+about: File a bug report
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to report an issue with Polyglot
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+  - type: textarea
+    id: repro-steps
+    attributes:
+      label: Reproduction Steps
+      description: Keep them simple, include screenshots as needed. Note what System(s) you tested in, if relevant.
+      placeholder: To encounter the bug, first open up...
+    validations:
+      required: true
+  - type: input
+    id: game-system
+    attributes:
+      label: Which game system, and which version, are you using?
+      placeholder: "e.g. dnd5e 2.4.1"
+    validations:
+      required: true
+  - type: input
+    id: polyglot-version
+    attributes:
+      label: Which Polyglot version are you using?
+      placeholder: "e.g. 2.3.28"
+    validations:
+      required: true
