@@ -21,6 +21,6 @@ body:
       description: Are you sure you're not suggesting something that breaks core Foundry behavior or is already implemented?
       options:
         - label: "Yes"
-        - required: true
+          required: true
     validations:
       required: true
