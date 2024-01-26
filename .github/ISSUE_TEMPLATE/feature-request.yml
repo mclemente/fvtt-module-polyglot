@@ -18,7 +18,7 @@ body:
     id: checkboxes
     attributes:
       label: Have you read the Wiki?
-      description: Are you sure you're not suggesting something that breaks core Foundry behavior or is already implemented?
+      description: "Are you sure you're not suggesting something that hasn't [already been implemented](https://github.com/mclemente/fvtt-module-polyglot/wiki#features) or that doesn't break [core Foundry behavior](https://github.com/mclemente/fvtt-module-polyglot/wiki#understanding-core-behavior)?"
       options:
         - label: "Yes"
           required: true
