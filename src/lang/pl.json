@@ -19,12 +19,12 @@
 		"logographicalFontToggle.hint": "Zmniejsza rozmiar fraz używających pisma Logograficznego (np. Japoński, Chiński).",
 		"DefaultLanguage.title": "Domyślny Język",
 		"DefaultLanguage.hint": "Nazwa języka wybranego jako domyślny. Pozostaw puste, aby wybrać domyślny język systemu.",
-		"ReplaceLanguages.title": "Nadpisz Języki Systemu",
-		"ReplaceLanguages.hint": "Zastępuje wszystkie domyślne języki systemowe podaną listą Własnych Języków. Pierwszy język na liście staje się nowym językiem domyślnym.",
+		"ReplaceLanguages.title": "Usuń Języki Systemowe",
+		"ReplaceLanguages.hint": "Usuwa domyślne języki systemu. Pierwszy język na liście języków niestandardowych staje się nowym językiem domyślnym.",
 		"ScrambleGM.title": "Szyfruj Wiadomości dla MG",
 		"ScrambleGM.hint": "Nie tłumacz języków dla MG (aby określić zrozumienie języka przez żeton, odnieś się koloru ikonki globu). Wymaga przeładowania.",
-		"enableAllFonts.title": "Dodaj czcionki Foundry do {settingMenuLabel}",
-		"enableAllFonts.hint": "Dodaj czcionki Foundry do {setting1} i {setting2}.",
+		"enableAllFonts.title": "Dodaj czcionki Foundry do Polyglot",
+		"enableAllFonts.hint": "Przełącz to ustawienie, aby usunąć wszystkie czcionki Foundry z Polyglot.",
 		"RandomizeRunes.title": "Randomizacja Run",
 		"RandomizeRunes.hint": "Określa jaki rodzaj randomizacji używany jest do tworzenia fraz. ⚠️ Opcja \"Brak\" wspiera tylko znaki alfanumeryczne (bez akcentów).",
 		"RandomizeRunesOptions": {
@@ -32,8 +32,8 @@
 			"b": "Unikalne frazy",
 			"c": "Brak ⚠️"
 		},
-		"ExportFonts.title": "Udostępnij Czcionki",
-		"ExportFonts.hint": "Dodaje czcionki Polyglot do menu Głownego{settingMenuLabel}. Wyłącz to ustawienie, aby usunąć wszystkie czcionki Polyglot z menu.",
+		"ExportFonts.title": "Dodaj czcionki Polyglot do Foundry",
+		"ExportFonts.hint": "Dodaje czcionki Polyglot do menu dodatkowych czcionek Foundry. Wyłącz to ustawienie, aby usunąć wszystkie czcionki Polyglot z menu.",
 		"DisplayTranslated.title": "Wyświetlaj Tłumaczenia",
 		"DisplayTranslated.hint": "Dla języków, które zostaną przetłumaczone na czacie, wyświetlaj tekst oryginalny oraz tłumaczenie pod spodem.",
 		"HideTranslation.title": "Usuń powiadomienia dla Graczy",
@@ -141,7 +141,8 @@
 			"TargetedParty": {
 				"title": "Drużyna docelowa",
 				"hint": "Jeśli gra ma wielu użytkowników, wskaźnik głośnika może stać się zbyt zatłoczony. Możesz filtrować listę, ograniczając ją do użytkowników, którzy posiadają postacie należące do docelowego aktora drużyny."
-			}
+			},
+			"replaceLanguages.hint": "Usuwa domyślne języki systemowe. Musisz mieć co najmniej jeden język homebrew ustawiony w menu Homebrew Elements, w przeciwnym razie języki inne niż Common nie zostaną usunięte. Jeśli wyłączyłeś to ustawienie i chcesz przywrócić domyślne ustawienia rzadkości, sprawdź wiki modułu."
 		}
 	}
 }
