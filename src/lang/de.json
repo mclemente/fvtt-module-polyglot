@@ -120,11 +120,6 @@
 		"Fonts": "Schriftarten",
 		"Languages.hint": "Ändert das für die Sprachen verwendete Alphabet.",
 		"Languages.title": "Sprachen",
-		"PF2E": {
-			"TargetedParty": {
-				"hint": "Wenn dein Spiel sehr viele Spieler hat, kann die Sprecheranzeige zu voll werden. Du kannst die Liste filtern, indem du sie auf Benutzer beschränken, die Charaktere besitzen, die Mitglieder der Zielgruppe sind."
-			}
-		},
 		"SWADE": {
 			"AdditionalLiterateStat": {
 				"title": "Alphabetisierung 'Stat Key'",
