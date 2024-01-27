@@ -139,7 +139,6 @@
 		"GameMasterHasAssignedCharacter": "Vous êtes un {GM} et un personnage vous a été assigné. Polyglot se comportera bizarrement à cause de cela. Envisagez de ne plus être l'Utilisateur de ce personnage.",
 		"PF2E": {
 			"TargetedParty": {
-				"title": "Groupe d'aventurier cible",
 				"hint": "Si votre partie présente de trop nombreux utilisateurs, l'indicateur pourrait devenir trop peuplé. Vous pouvez filtrer la liste en la limitant aux utilisateurs qui sont membres des acteurs du Groupe d'aventuriers."
 			}
 		}
