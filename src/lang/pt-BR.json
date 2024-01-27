@@ -24,8 +24,8 @@
 		"ScrambleGM.title": "Embaralhar para o Mestre",
 		"ScrambleGM.hint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende). Recarregará o programa.",
 		"enableAllFonts": {
-			"title": "Adicionar Fontes do Foundry às {settingMenuLabel}",
-			"hint": "Adiciona fontes do Foundry às {setting1} e {setting2}.",
+			"title": "Adicionar fontes do Foundry ao Polyglot",
+			"hint": "Desative essa configuração para remover do Polyglot todas as fontes do Foundry.",
 			"choices": {
 				"0": "Nenhuma",
 				"1": "Fontes do Polyglot",
@@ -40,8 +40,8 @@
 			"b": "Frases únicas",
 			"c": "Nenhum ⚠️"
 		},
-		"ExportFonts.title": "Adicionar Fontes do Polyglot à Base",
-		"ExportFonts.hint": "Adiciona as fontes do Polyglot ao {settingMenuLabel} do Foundry. Desative esta configuração para remover todas as fontes do Polyglot do menu.",
+		"ExportFonts.title": "Adicionar Fontes do Polyglot ao Foundry",
+		"ExportFonts.hint": "Adiciona as fontes do Polyglot ao menu de Fontes Adicionais do Foundry. Desativar esta configuração remover do menu todas as fontes do Polyglot.",
 		"DisplayTranslated.title": "Mostrar traduções",
 		"DisplayTranslated.hint": "Para linguagens que são traduzidas no chat, mostrar o texto original e a tradução em seguida.",
 		"HideTranslation.title": "Esconder Globo e texto \"Traduzido do\" dos jogadores",
@@ -143,6 +143,8 @@
 				"hint": "Se o seu jogo tem muitos usuários, o indicador de falantes de uma língua pode ficar muito cheio. Você pode filtrar a lista limitando-a para usuários que são donos de personagens que fazem parte do ator de Grupo escolhido."
 			},
 			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma caseiro definido no menu Homebrew Elements, caso contrário, os idiomas não comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
-		}
+		},
+		"UnknownLanguages": "Idiomas Desconhecidos",
+		"KnownLanguages": "Idiomas Conhecidos"
 	}
 }
