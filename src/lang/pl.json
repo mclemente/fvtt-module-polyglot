@@ -139,7 +139,6 @@
 		"GameMasterHasAssignedCharacter": "Jesteś {GM} i masz przypisaną postać. Z tego powodu Polyglot będzie się dziwnie zachowywać. Rozważ usunięcie tej postaci ze swojego użytkownika.",
 		"PF2E": {
 			"TargetedParty": {
-				"title": "Drużyna docelowa",
 				"hint": "Jeśli gra ma wielu użytkowników, wskaźnik głośnika może stać się zbyt zatłoczony. Możesz filtrować listę, ograniczając ją do użytkowników, którzy posiadają postacie należące do docelowego aktora drużyny."
 			},
 			"replaceLanguages.hint": "Usuwa domyślne języki systemowe. Musisz mieć co najmniej jeden język homebrew ustawiony w menu Homebrew Elements, w przeciwnym razie języki inne niż Common nie zostaną usunięte. Jeśli wyłączyłeś to ustawienie i chcesz przywrócić domyślne ustawienia rzadkości, sprawdź wiki modułu."
