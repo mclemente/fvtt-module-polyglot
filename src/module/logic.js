@@ -207,6 +207,18 @@ export class Polyglot {
 		let options = [];
 		let ownedActors = [];
 		if (game.user.isGM) {
+			options.push(...[
+				{
+					id: "known",
+					text: game.i18n.localize("POLYGLOT.KnownLanguages"),
+					children: []
+				},
+				{
+					id: "unknown",
+					text: game.i18n.localize("POLYGLOT.UnknownLanguages"),
+					children: []
+				}
+			]);
 			ownedActors = game.actors.filter((actor) => actor.hasPlayerOwner);
 			for (const actor of ownedActors) {
 				actor.knownLanguages = this.getUserLanguages([actor])[0];
@@ -243,7 +255,7 @@ export class Polyglot {
 						const { name, color, actorsOwnedByUser } = user;
 						users.push({ bgColor: color, userName: name, ownedActors: actorsOwnedByUser.join(", ") });
 					}
-					options.push({
+					options[0].children.push({
 						id: lang,
 						text: label,
 						users,
@@ -251,10 +263,14 @@ export class Polyglot {
 					continue;
 				}
 			}
-			options.push({
+			options[1].children.push({
 				id: lang,
 				text: label,
 			});
+		}
+		if (!options[1].children.length) {
+			options.pop();
+			options.push(...options.shift().children);
 		}
 
 		const select = html.find(".polyglot-lang-select select");
@@ -303,9 +319,7 @@ export class Polyglot {
 				console.error(error);
 			}
 		} finally {
-			$(".select2-selection__rendered").hover(function () {
-				$(this).removeAttr("title");
-			});
+			html.find(".select2-selection__rendered").on("hover", $(this).removeAttr("title"));
 
 			let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
 			if (!this.isLanguageKnown(selectedLanguage)) {

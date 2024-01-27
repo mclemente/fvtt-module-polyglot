@@ -12,6 +12,8 @@
     "Font": "Font",
     "Fonts": "Fonts",
     "FontSize": "Font Size (%)",
+    "KnownLanguages": "Known Languages",
+    "UnknownLanguages": "Unknown Languages",
     "AlphabeticOnly": "Only Alphabetic",
     "Logographical": "Logographical",
     "AllowOOC.hint": "Choose which users should have their messages scrambled. OOC = Out of Character.",

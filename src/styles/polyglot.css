@@ -69,6 +69,16 @@
 .select2-dropdown.polyglot-language {
   background: rgb(255, 255, 245);
 }
+.select2-results__option .tags {
+  margin: 0;
+}
+.select2-results__option .tags.paizo-style {
+  padding: 0;
+  max-width: fit-content;
+}
+.select2-results__option .tags.paizo-style .tag {
+  border: 0;
+}
 .polyglot-user-list {
   display: inline-flex;
   max-width: max-content;
