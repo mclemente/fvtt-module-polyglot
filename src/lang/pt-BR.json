@@ -139,7 +139,6 @@
 		"GameMasterHasAssignedCharacter": "Você é um {GM} e têm um personagem atribuído a você. Polyglot irá agir de forma estranha por causa disso. Considere desatribuir esse personagem do seu Usuário.",
 		"PF2E": {
 			"TargetedParty": {
-				"title": "Grupo Alvo",
 				"hint": "Se o seu jogo tem muitos usuários, o indicador de falantes de uma língua pode ficar muito cheio. Você pode filtrar a lista limitando-a para usuários que são donos de personagens que fazem parte do ator de Grupo escolhido."
 			},
 			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma caseiro definido no menu Homebrew Elements, caso contrário, os idiomas não comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
