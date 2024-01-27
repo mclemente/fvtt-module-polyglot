@@ -270,7 +270,9 @@ export class Polyglot {
 		}
 		if (!options[1].children.length) {
 			options.pop();
-			options.push(...options.shift().children);
+		}
+		if (!options[0].children.length) {
+			options.shift();
 		}
 
 		const select = html.find(".polyglot-lang-select select");
