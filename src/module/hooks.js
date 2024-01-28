@@ -107,7 +107,7 @@ export default class PolyglotHooks {
 
 		if (game.polyglot.languageProvider.requiresReady && !game.ready) {
 			Hooks.once("polyglot.languageProvider.ready", async () => {
-				await game.polyglot.renderChatMessage(message, html, data);
+				await PolyglotHooks.renderChatMessage(message, html, data);
 			});
 			return;
 		}
@@ -128,7 +128,7 @@ export default class PolyglotHooks {
 		}
 		const forceTranslation = message.polyglot_force || !message.polyglot_unknown;
 		const messageContent = html.find(".message-content");
-		const innerText = messageContent.text();
+		const innerText = messageContent.text().trim();
 
 		const content = $("<div>")
 			.addClass("polyglot-original-text")
