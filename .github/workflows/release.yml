@@ -148,3 +148,4 @@ jobs:
           method: "POST"
           customHeaders: '{"Content-Type": "application/json", "Authorization" : "${{ secrets.FOUNDRY_KEY }}"}'
           data: '{"id": "${{ steps.moduleID.outputs.prop }}", "release": {"version": "${{ steps.get_version.outputs.version-without-v }}", "manifest": "https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/${{ env.package_type }}.json", "notes": "https://github.com/${{ github.repository }}/releases/tag/${{ github.event.release.tag_name }}/", "compatibility" : {"minimum": "${{ steps.minimum.outputs.prop }}", "verified": "${{ steps.verified.outputs.prop }}"}}}'
+          preventFailureOnNoResponse: true
