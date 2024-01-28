@@ -194,11 +194,12 @@ export class Polyglot {
 	 * @var {Set} this.knownLanguages
 	 */
 	updateUserLanguages(html) {
+		if (game.polyglot.languageProvider.requiresReady && !game.ready) return;
 		[this.knownLanguages, this.literateLanguages] = this.getUserLanguages();
 		const defaultLanguage = this.defaultLanguage;
 		if (this.knownLanguages.size === 0) {
 			if (game.user.isGM) this.knownLanguages = new Set(Object.keys(this.languageProvider.languages).sort());
-			else if (defaultLanguage) this.knownLanguages.add(defaultLanguage);
+			else this.knownLanguages.add(defaultLanguage);
 		} else if (this.knownLanguages.has(this.omniglot)) {
 			this.knownLanguages = new Set(Object.keys(this.languageProvider.languages).sort());
 		}
