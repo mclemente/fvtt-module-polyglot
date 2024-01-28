@@ -8,6 +8,9 @@
 .polyglot.wfrp4e select {
   color: #e2e2e2;
 }
+.polyglot.wfrp4e select option {
+  color: fieldtext;
+}
 .polyglot.polyglot-general-settings .tab .form-group textarea {
   resize: vertical;
   min-height: 57px;
