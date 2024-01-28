@@ -239,40 +239,49 @@ export class Polyglot {
 				continue;
 			}
 			const label = this.languageProvider.languages[lang]?.label || lang.capitalize();
-			if (game.user.isGM && ownedActors.length) {
-				const usersThatKnowLang = filteredUsers.filter((u) =>
-					ownedActors.some((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER")),
-				);
-				const usersWithOwnedActors = usersThatKnowLang.map((u) => {
-					const actorsOwnedByUser = ownedActors
-						.filter((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER"))
-						.map((a) => a.name);
-					return { ...u, actorsOwnedByUser };
-				});
-				if (usersWithOwnedActors.length) {
-					let users = [];
-					for (let user of usersWithOwnedActors) {
-						const { name, color, actorsOwnedByUser } = user;
-						users.push({ bgColor: color, userName: name, ownedActors: actorsOwnedByUser.join(", ") });
-					}
-					options[0].children.push({
-						id: lang,
-						text: label,
-						users,
+			if (game.user.isGM) {
+				if (ownedActors.length) {
+					const usersThatKnowLang = filteredUsers.filter((u) =>
+						ownedActors.some((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER")),
+					);
+					const usersWithOwnedActors = usersThatKnowLang.map((u) => {
+						const actorsOwnedByUser = ownedActors
+							.filter((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER"))
+							.map((a) => a.name);
+						return { ...u, actorsOwnedByUser };
 					});
-					continue;
+					if (usersWithOwnedActors.length) {
+						let users = [];
+						for (let user of usersWithOwnedActors) {
+							const { name, color, actorsOwnedByUser } = user;
+							users.push({ bgColor: color, userName: name, ownedActors: actorsOwnedByUser.join(", ") });
+						}
+						options[0].children.push({
+							id: lang,
+							text: label,
+							users,
+						});
+						continue;
+					}
 				}
+				options[1].children.push({
+					id: lang,
+					text: label,
+				});
+			} else {
+				options.push({
+					id: lang,
+					text: label,
+				});
 			}
-			options[1].children.push({
-				id: lang,
-				text: label,
-			});
 		}
-		if (!options[1].children.length) {
-			options.pop();
-		}
-		if (!options[0].children.length) {
-			options.shift();
+		if (game.user.isGM) {
+			if (!options[1].children.length) {
+				options.pop();
+			}
+			if (!options[0].children.length) {
+				options.shift();
+			}
 		}
 
 		const select = html.find(".polyglot-lang-select select");
