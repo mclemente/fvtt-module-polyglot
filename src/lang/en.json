@@ -16,8 +16,10 @@
     "UnknownLanguages": "Unknown Languages",
     "AlphabeticOnly": "Only Alphabetic",
     "Logographical": "Logographical",
-    "AllowOOC.hint": "Choose which users should have their messages scrambled. OOC = Out of Character.",
-    "AllowOOC.title": "Scramble OOC Chat Messages",
+    "AllowOOC": {
+      "title": "Scramble Out of Character Chat Messages",
+      "hint": "Choose which users should have their Out of Character messages scrambled."
+    },
     "AllowOOCOptions": {
       "a": "All",
       "b": "GM Only",

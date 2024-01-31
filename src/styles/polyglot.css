@@ -15,6 +15,9 @@
   resize: vertical;
   min-height: 57px;
 }
+.polyglot.polyglot-general-settings .tab .form-group select[name="allowOOC"] {
+  flex: 1;
+}
 
 .polyglot-chat-bubble {
   font-family: var(--polyglot-chat-bubble-font);

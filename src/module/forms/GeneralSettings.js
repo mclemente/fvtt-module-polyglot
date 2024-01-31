@@ -9,7 +9,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 			title: "Polyglot General Settings",
 			template: "./modules/polyglot/templates/GeneralSettings.hbs",
 			classes,
-			tabs: [{ navSelector: ".tabs", contentSelector: ".content", initial: "general" }],
+			tabs: [{ navSelector: ".tabs", contentSelector: ".content", initial: "font" }],
 			width: 600,
 			height: "auto",
 			closeOnSubmit: true,
@@ -67,7 +67,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 		if (isGM) {
 			data = {
 				tabs: {
-					general: {
+					font: {
 						icon: "fas fa-cogs",
 						name: "POLYGLOT.Fonts",
 					},
@@ -85,7 +85,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 					},
 				},
 				settings: {
-					general: {
+					font: {
 						// Font Settings
 						RuneRegex: this._prepSetting("RuneRegex"),
 						enableAllFonts: this._prepSetting("enableAllFonts"),
