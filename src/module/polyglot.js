@@ -8,6 +8,7 @@ import {
 	renderPolyglotGeneralSettingsHandler,
 	renderSettingsConfigHandler,
 } from "./settings.js";
+import { registerTours } from "./tour.js";
 
 Hooks.once("init", () => {
 	CONFIG.TinyMCE.content_css.push("/modules/polyglot/styles/polyglot.css");
@@ -37,6 +38,7 @@ Hooks.on("setup", async () => {
 		);
 	}
 	registerProviderSettings();
+	registerTours();
 	await game.polyglot.languageProvider.setup();
 });
 Hooks.on("ready", () => {
