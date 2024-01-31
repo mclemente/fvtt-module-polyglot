@@ -331,7 +331,9 @@ export class Polyglot {
 				console.error(error);
 			}
 		} finally {
-			html.find(".select2-selection__rendered").on("hover", $(this).removeAttr("title"));
+			$(document).on("mouseenter", ".select2-selection__rendered", function () {
+				$(this).removeAttr("title");
+			});
 
 			let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
 			if (!this.isLanguageKnown(selectedLanguage)) {
