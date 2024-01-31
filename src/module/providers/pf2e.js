@@ -310,19 +310,14 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
-		if (actor.system?.details?.languages) {
-			for (let lang of actor.system.details.languages.value) {
-				if (lang === "common") {
-					const common = game.settings.get("pf2e", "homebrew.languageRarities").commonLanguage;
-					knownLanguages.add(common);
-				} else if (lang in CONFIG.PF2E.languages) {
+		const languageRarities = game.settings.get("pf2e", "homebrew.languageRarities");
+		const actorLanguages = actor.system?.details?.languages;
+		if (actorLanguages) {
+			for (let lang of actorLanguages.value) {
+				if (lang === "common" && languageRarities.commonLanguage) {
+					knownLanguages.add(languageRarities.commonLanguage);
+				} else if (lang in CONFIG.PF2E.languages && !languageRarities.unavailable.has(lang)) {
 					knownLanguages.add(lang);
-				}
-			}
-			if (actor.system.details.languages.custom) {
-				for (let lang of actor.system.details.languages.custom.split(/[,;]/)) {
-					const key = lang.trim().toLowerCase();
-					knownLanguages.add(key);
 				}
 			}
 		}
