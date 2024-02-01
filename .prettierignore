@@ -1,4 +1,5 @@
 dist
+module.json
 
 **/*.js
 **/*.mjs
