@@ -1,4 +1,4 @@
-import { FONTS } from "./Fonts.js";
+import { getFonts } from "./Fonts.js";
 import PolyglotHooks from "./hooks.js";
 import { libWrapper } from "./libs/libWrapper.js";
 
@@ -7,9 +7,10 @@ export class Polyglot {
 		this.knownLanguages = new Set();
 		this.literateLanguages = new Set();
 		this.refreshTimeout = null;
-		this.FONTS = FONTS;
+		this.FONTS = getFonts();
 		// TODO consider removing this variable and let LanguageProvider handle it instead
 		this.CustomFontSizes = game.settings.get("polyglot", "CustomFontSizes");
+		CONFIG.fontDefinitions = foundry.utils.mergeObject(CONFIG.fontDefinitions, this.FONTS);
 	}
 
 	init() {
@@ -393,7 +394,6 @@ export class Polyglot {
 	 * and loads the current languages set for Comprehend Languages Spells and Tongues Spell settings.
 	 */
 	ready() {
-		this.updateConfigFonts(game.settings.get("polyglot", "exportFonts"));
 		function checkChanges() {
 			const alphabetsSetting = game.settings.get("polyglot", "Alphabets");
 			const languagesSetting = game.settings.get("polyglot", "Languages");
@@ -485,24 +485,6 @@ export class Polyglot {
 			}
 		});
 		return toggleButton;
-	}
-
-	/**
-	 * Register fonts so they are available to other elements (such as Drawings).
-	 */
-	updateConfigFonts(value) {
-		const coreFonts = game.settings.get("core", "fonts");
-		if (value) {
-			for (let font in game.polyglot.FONTS) {
-				game.polyglot.FONTS[font].editor = true;
-			}
-			game.settings.set("core", "fonts", { ...coreFonts, ...game.polyglot.FONTS });
-		} else {
-			for (let font in game.polyglot.FONTS) {
-				delete coreFonts[font];
-			}
-			game.settings.set("core", "fonts", coreFonts);
-		}
 	}
 
 	isLanguageKnown(lang) {

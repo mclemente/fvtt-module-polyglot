@@ -42,7 +42,7 @@
       "hint": "Toggle this setting off to remove all the Foundry's fonts from Polyglot.",
       "title": "Add Foundry's fonts to Polyglot"
     },
-    "ExportFonts.hint": "Add Polyglot's fonts to Foundry's Additional Fonts menu. Toggle this setting off to remove all of the Polyglot's fonts from the menu.",
+    "ExportFonts.hint": "Add Polyglot's fonts to Foundry's features, such as Drawings.",
     "ExportFonts.title": "Add Polyglot's fonts to Foundry",
     "HideTranslation.hint": "Hides the Globe and the \"Translated from\" text from chat messages to players. Useful for when you don't want to show players which language you are speaking. Requires reload.",
     "HideTranslation.title": "Hide Indicators from Players",
