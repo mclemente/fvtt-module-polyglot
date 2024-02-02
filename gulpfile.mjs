@@ -5,8 +5,9 @@
 
 import fs from "fs-extra";
 import gulp from "gulp";
+import prefix from "gulp-autoprefixer";
+import sass from "gulp-dart-sass";
 import sourcemaps from "gulp-sourcemaps";
-import merge from "merge-stream";
 import path from "node:path";
 import buffer from "vinyl-buffer";
 import source from "vinyl-source-stream";
@@ -25,7 +26,7 @@ const packageId = "polyglot";
 const sourceDirectory = "./src";
 const distDirectory = "./dist";
 const stylesDirectory = `${sourceDirectory}/styles`;
-const stylesExtension = "css";
+const stylesExtension = "scss";
 const sourceFileExtension = "js";
 const staticFiles = ["assets", "fonts", "lang", "lib", "packs", "templates", "module.json"];
 
@@ -54,9 +55,12 @@ function buildCode() {
  * Build style sheets
  */
 function buildStyles() {
-	const packageStyle = gulp.src(`${stylesDirectory}/${packageId}.${stylesExtension}`).pipe(gulp.dest(`${distDirectory}/styles`));
-	const fontStyle = gulp.src(`${stylesDirectory}/fonts.${stylesExtension}`).pipe(gulp.dest(`${distDirectory}/styles`));
-	return merge(packageStyle, fontStyle);
+	return gulp.src([`${stylesDirectory}/**/*.${stylesExtension}`], { base: `${stylesDirectory}/` })
+		.pipe(sourcemaps.init({ loadMaps: true }))
+		.pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+		.pipe(prefix({ cascade: false }))
+		.pipe(sourcemaps.write("."))
+		.pipe(gulp.dest(`${distDirectory}/styles`));
 }
 
 /**

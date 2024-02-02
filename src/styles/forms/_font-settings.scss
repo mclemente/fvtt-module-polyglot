@@ -1,0 +1,42 @@
+&.polyglot-font-settings {
+  min-height: 255px;
+  min-width: 780px;
+
+  .polyglot-alphabet {
+    margin: auto;
+  }
+  .font-name {
+    flex: 0 0 150px;
+    margin: auto;
+  }
+
+  .window-content {
+    padding: 0;
+  }
+  form {
+    height: 100%;
+    section {
+      padding: 1rem;
+      overflow: hidden auto;
+    }
+    footer {
+      margin: 1rem;
+      flex: 0;
+    }
+  }
+  .polyglot-languages-list {
+    margin: 0;
+
+    li {
+      .font-name {
+        flex: 0 0 150px;
+        margin: auto;
+      }
+      .fontSize {
+        flex: 0 0 90px;
+        text-align: center;
+        margin: auto;
+      }
+    }
+  }
+}

@@ -64,7 +64,7 @@ export class Polyglot {
 							this._getFontStyle(lang).replace(/\d+%\s/g, ""),
 						);
 						if (cssClasses === undefined) cssClasses = [];
-						cssClasses.push("polyglot-chat-bubble");
+						cssClasses.push("polyglot", "polyglot-chat-bubble");
 					}
 				}
 				return wrapped(token, message, { cssClasses, requireVisible, pan });
@@ -305,7 +305,7 @@ export class Polyglot {
 				$state = $(
 					`<div class="flexrow">
 						<div>${text}</div>
-						<div class="polyglot-user-list">${userList.join("")}</div>
+						<div class="polyglot polyglot-user-list">${userList.join("")}</div>
 					</div>`.trim(),
 				);
 			}
