@@ -83,7 +83,7 @@ export default class wfrp4eLanguageProvider extends LanguageProvider {
 		}
 		const wfrp4eItemList = await wfrp4ePack.getIndex();
 		const languagesSetting = game.settings.get("polyglot", "Languages");
-		let myRegex = new RegExp(`${game.settings.get("polyglot", "LanguageRegex")}\\s*\\((.+)\\)`, "i");
+		let myRegex = new RegExp(`(?:Language|${game.settings.get("polyglot", "LanguageRegex")})\\s*\\((.+)\\)`, "i");
 		const langs = {};
 		for (let item of wfrp4eItemList) {
 			if (myRegex.test(item.name)) {

@@ -1,0 +1,13 @@
+&.polyglot-general-settings {
+  .tab {
+    .form-group {
+      textarea {
+        resize: vertical;
+        min-height: 57px;
+      }
+      select[name="allowOOC"] {
+        flex: 1;
+      }
+    }
+  }
+}

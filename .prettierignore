@@ -1,0 +1,7 @@
+dist
+module.json
+
+**/*.js
+**/*.mjs
+**/*.html
+**/*.hbs

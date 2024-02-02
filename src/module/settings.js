@@ -70,10 +70,6 @@ export function registerSettings() {
 		default: false,
 		type: Boolean,
 	});
-	addMenuSetting("IgnoreJournalFontSize", {
-		default: false,
-		type: Boolean,
-	});
 	addMenuSetting("enableAllFonts", {
 		name: "POLYGLOT.enableAllFonts.title",
 		hint: "POLYGLOT.enableAllFonts.hint",
@@ -81,13 +77,18 @@ export function registerSettings() {
 		type: Boolean,
 		requiresReload: true,
 	});
-
 	addMenuSetting("exportFonts", {
 		name: "POLYGLOT.ExportFonts.title",
 		hint: "POLYGLOT.ExportFonts.hint",
 		default: false,
 		type: Boolean,
 		requiresReload: true,
+	});
+
+	// Journal Settings
+	addMenuSetting("IgnoreJournalFontSize", {
+		default: false,
+		type: Boolean,
 	});
 	addMenuSetting("JournalHighlightColor", {
 		default: "#ffb400",

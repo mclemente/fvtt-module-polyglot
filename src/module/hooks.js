@@ -6,7 +6,7 @@ export default class PolyglotHooks {
 	static renderChatLog(chatlog, html, data) {
 		game.polyglot.renderChatLog = true;
 		html.find("#chat-controls").after(
-			`<div id='polyglot' class='polyglot-lang-select flexrow'>
+			`<div id='polyglot' class='polyglot polyglot-lang-select flexrow'>
 				<input name="polyglot-checkbox" type="checkbox" checked></input>
 				<label>${game.i18n.localize("POLYGLOT.LanguageLabel")}</label>
 				<select name='polyglot-language'></select>
@@ -107,7 +107,7 @@ export default class PolyglotHooks {
 
 		if (game.polyglot.languageProvider.requiresReady && !game.ready) {
 			Hooks.once("polyglot.languageProvider.ready", async () => {
-				await game.polyglot.renderChatMessage(message, html, data);
+				await PolyglotHooks.renderChatMessage(message, html, data);
 			});
 			return;
 		}
@@ -128,7 +128,7 @@ export default class PolyglotHooks {
 		}
 		const forceTranslation = message.polyglot_force || !message.polyglot_unknown;
 		const messageContent = html.find(".message-content");
-		const innerText = messageContent.text();
+		const innerText = messageContent.text().trim();
 
 		const content = $("<div>")
 			.addClass("polyglot-original-text")

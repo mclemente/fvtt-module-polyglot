@@ -1,4 +1,4 @@
-import { FONTS } from "./Fonts.js";
+import { getFonts } from "./Fonts.js";
 import PolyglotHooks from "./hooks.js";
 import { libWrapper } from "./libs/libWrapper.js";
 
@@ -7,9 +7,10 @@ export class Polyglot {
 		this.knownLanguages = new Set();
 		this.literateLanguages = new Set();
 		this.refreshTimeout = null;
-		this.FONTS = FONTS;
+		this.FONTS = getFonts();
 		// TODO consider removing this variable and let LanguageProvider handle it instead
 		this.CustomFontSizes = game.settings.get("polyglot", "CustomFontSizes");
+		CONFIG.fontDefinitions = foundry.utils.mergeObject(CONFIG.fontDefinitions, this.FONTS);
 	}
 
 	init() {
@@ -64,7 +65,7 @@ export class Polyglot {
 							this._getFontStyle(lang).replace(/\d+%\s/g, ""),
 						);
 						if (cssClasses === undefined) cssClasses = [];
-						cssClasses.push("polyglot-chat-bubble");
+						cssClasses.push("polyglot", "polyglot-chat-bubble");
 					}
 				}
 				return wrapped(token, message, { cssClasses, requireVisible, pan });
@@ -194,6 +195,7 @@ export class Polyglot {
 	 * @var {Set} this.knownLanguages
 	 */
 	updateUserLanguages(html) {
+		if (game.polyglot.languageProvider.requiresReady && !game.ready) return;
 		[this.knownLanguages, this.literateLanguages] = this.getUserLanguages();
 		const defaultLanguage = this.defaultLanguage;
 		if (this.knownLanguages.size === 0) {
@@ -239,40 +241,49 @@ export class Polyglot {
 				continue;
 			}
 			const label = this.languageProvider.languages[lang]?.label || lang.capitalize();
-			if (game.user.isGM && ownedActors.length) {
-				const usersThatKnowLang = filteredUsers.filter((u) =>
-					ownedActors.some((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER")),
-				);
-				const usersWithOwnedActors = usersThatKnowLang.map((u) => {
-					const actorsOwnedByUser = ownedActors
-						.filter((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER"))
-						.map((a) => a.name);
-					return { ...u, actorsOwnedByUser };
-				});
-				if (usersWithOwnedActors.length) {
-					let users = [];
-					for (let user of usersWithOwnedActors) {
-						const { name, color, actorsOwnedByUser } = user;
-						users.push({ bgColor: color, userName: name, ownedActors: actorsOwnedByUser.join(", ") });
-					}
-					options[0].children.push({
-						id: lang,
-						text: label,
-						users,
+			if (game.user.isGM) {
+				if (ownedActors.length) {
+					const usersThatKnowLang = filteredUsers.filter((u) =>
+						ownedActors.some((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER")),
+					);
+					const usersWithOwnedActors = usersThatKnowLang.map((u) => {
+						const actorsOwnedByUser = ownedActors
+							.filter((actor) => actor.knownLanguages.has(lang) && actor.testUserPermission(u, "OWNER"))
+							.map((a) => a.name);
+						return { ...u, actorsOwnedByUser };
 					});
-					continue;
+					if (usersWithOwnedActors.length) {
+						let users = [];
+						for (let user of usersWithOwnedActors) {
+							const { name, color, actorsOwnedByUser } = user;
+							users.push({ bgColor: color, userName: name, ownedActors: actorsOwnedByUser.join(", ") });
+						}
+						options[0].children.push({
+							id: lang,
+							text: label,
+							users,
+						});
+						continue;
+					}
 				}
+				options[1].children.push({
+					id: lang,
+					text: label,
+				});
+			} else {
+				options.push({
+					id: lang,
+					text: label,
+				});
 			}
-			options[1].children.push({
-				id: lang,
-				text: label,
-			});
 		}
-		if (!options[1].children.length) {
-			options.pop();
-		}
-		if (!options[0].children.length) {
-			options.shift();
+		if (game.user.isGM) {
+			if (!options[1].children.length) {
+				options.pop();
+			}
+			if (!options[0].children.length) {
+				options.shift();
+			}
 		}
 
 		const select = html.find(".polyglot-lang-select select");
@@ -295,7 +306,7 @@ export class Polyglot {
 				$state = $(
 					`<div class="flexrow">
 						<div>${text}</div>
-						<div class="polyglot-user-list">${userList.join("")}</div>
+						<div class="polyglot polyglot-user-list">${userList.join("")}</div>
 					</div>`.trim(),
 				);
 			}
@@ -321,7 +332,9 @@ export class Polyglot {
 				console.error(error);
 			}
 		} finally {
-			html.find(".select2-selection__rendered").on("hover", $(this).removeAttr("title"));
+			$(document).on("mouseenter", ".select2-selection__rendered", function () {
+				$(this).removeAttr("title");
+			});
 
 			let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
 			if (!this.isLanguageKnown(selectedLanguage)) {
@@ -381,7 +394,6 @@ export class Polyglot {
 	 * and loads the current languages set for Comprehend Languages Spells and Tongues Spell settings.
 	 */
 	ready() {
-		this.updateConfigFonts(game.settings.get("polyglot", "exportFonts"));
 		function checkChanges() {
 			const alphabetsSetting = game.settings.get("polyglot", "Alphabets");
 			const languagesSetting = game.settings.get("polyglot", "Languages");
@@ -473,24 +485,6 @@ export class Polyglot {
 			}
 		});
 		return toggleButton;
-	}
-
-	/**
-	 * Register fonts so they are available to other elements (such as Drawings).
-	 */
-	updateConfigFonts(value) {
-		const coreFonts = game.settings.get("core", "fonts");
-		if (value) {
-			for (let font in game.polyglot.FONTS) {
-				game.polyglot.FONTS[font].editor = true;
-			}
-			game.settings.set("core", "fonts", { ...coreFonts, ...game.polyglot.FONTS });
-		} else {
-			for (let font in game.polyglot.FONTS) {
-				delete coreFonts[font];
-			}
-			game.settings.set("core", "fonts", coreFonts);
-		}
 	}
 
 	isLanguageKnown(lang) {

@@ -15,7 +15,7 @@
 	},
 	"esmodules": ["module/polyglot.js"],
 	"scripts": ["lib/select2/select2.min.js"],
-	"styles": ["lib/select2/select2.min.css", "styles/polyglot.css", "styles/fonts.css"],
+	"styles": ["lib/select2/select2.min.css", "styles/polyglot.css"],
 	"languages": [
 		{
 			"lang": "en",

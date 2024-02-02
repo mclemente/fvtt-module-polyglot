@@ -176,6 +176,7 @@ module.exports = {
 	globals: {
 		globalThis: false,
 		GURPS: false,
+		Tour: false
 	},
 
 	overrides: [
