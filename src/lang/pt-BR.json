@@ -41,7 +41,7 @@
 			"c": "Nenhum ⚠️"
 		},
 		"ExportFonts.title": "Adicionar Fontes do Polyglot ao Foundry",
-		"ExportFonts.hint": "Adiciona as fontes do Polyglot ao menu de Fontes Adicionais do Foundry. Desativar esta configuração remover do menu todas as fontes do Polyglot.",
+		"ExportFonts.hint": "Adiciona as fontes do Polyglot às ferramentas do Foundry, como as Ferramentas de Desenho de texto.",
 		"DisplayTranslated.title": "Mostrar traduções",
 		"DisplayTranslated.hint": "Para linguagens que são traduzidas no chat, mostrar o texto original e a tradução em seguida.",
 		"HideTranslation.title": "Esconder Globo e texto \"Traduzido do\" dos jogadores",
