@@ -60,9 +60,9 @@
     },
     "LanguageProvider": {
       "choices": {
-        "module": "[Module] {name}",
-        "native": "Generic",
-        "system": "[System] {name}"
+      "module": "[Module] {name}",
+      "native": "Generic",
+      "system": "[System] {name}"
       },
       "hint": "Select who provides language information for alphabets and languages. More language providers can be made available via game systems and installed modules. The options below are dependent upon the language provider selected here. ⚠️ If you change the provider, you have to save and reopen these settings.",
       "name": "Language Settings Provider"
@@ -107,68 +107,68 @@
     "Runes": "Runes",
     "TOURS": {
       "Main": {
-        "title": "Getting Started With Polyglot",
-        "desc": "Understand Polyglot's interaction with Foundry's UI.",
-        "Canvas": {
-          "Title": "Welcome to Polyglot",
-          "Content": "This tour will guide you through the features Polyglot adds to UI and how they interact with Foundry, and some guidance for newcomers about the character selection."
-        },
-        "LanguageSelector": {
-          "Title": "Language Selector",
-          "Content": "The <span class='reference'>Language Selector</span> is where you can select which language you want to speak in, scrambling the messages sent while it is active."
-        },
-        "LanguageSelectorCheckbox": {
-          "Title": "Language Selector's Checkbox",
-          "Content": "The <span class='reference'>Checkbox</span> toggles the scrambling. Any user who unchecks it will speak as if the module was disabled."
-        },
-        "LanguageSelectorSelect": {
-          "Title": "Language Selector's Dropdown",
-          "Content": "The <span class='reference'>Dropdown</span> contains all the languages in your world.<br>Depending on your game system, the languages may have already been set, while in other game systems, you may need to configure them in the <span class='reference'>Game Settings</span>.<br>It will display languages between the ones Known and Unknown by your players' actors."
-        },
-        "LanguageSelectorPips": {
-          "Title": "Language Selector's Pips",
-          "Content": "A <span class='reference'>Pip</span>, similar to the ones shown on the Players List, will be displayed right next to known languages for each player who has at least one actor that understands it. Hovering over a Pip will display the user's name and the list of actors providing access to the language."
-        },
-        "ChatMessage": {
-          "Title": "Chat Messages",
-          "Content": "This is what a message looks like if it uses Polyglot."
-        },
-        "ChatMessageScrambled": {
-          "Title": "Scrambled Text",
-          "Content": "This is what players that don't understand the message's language see."
-        },
-        "ChatMessageTranslation": {
-          "Title": "Translated Text",
-          "Content": "This is what players that understand the message's language see.<br>There is a setting to disable the Scrambled Text from being shown to players that do understand it. Hovering over it will display the language's name."
-        },
-        "ChatMessageGlobe": {
-          "Title": "The Globe",
-          "Content": "This globe can have 3 colors: <ul><li><span style=\"color: green\">Green</span> for Known languages. Hovering over it will display the language's name.</li><li><span style=\"color: blue\">Blue</span> for languages that can be read but the player will have no idea which language it is.<li><span style=\"color: red\">Red</span> for Unknown languages.</li></li></ul>"
-        },
-        "ChatMessageEnding": {
-          "Title": "Chat Messages' Settings",
-          "Content": "Be sure to check out the module settings, where you can make changes to how the chat messages are displayed.<br>There is a particular thing about Foundry and Chat Messages that is related to the <span class='reference'>User Configuration</span>."
-        },
-        "PlayersList": {
-          "Title": "Players List",
-          "Content": "While Polyglot itself doesn't change anything related to it, you should be aware about Core Foundry behavior related to the <span class='reference'>User Configuration</span>. You can open it yourself by right-clicking an user's name on this list here."
-        },
-        "UserConfig": {
-          "Title": "User Configuration",
-          "Content": "This configuration opens up to non-GM users whenever they load into the world if they don't have <span class='reference'>selected a character</span>."
-        },
-        "UserConfigSelectCharacter": {
-          "Title": "Select Character",
-          "Content": "As a GM, you should never have a character selected, as this will make your messages to be sent as that character if it is ever present on a scene.<br>For the players, make sure they select their main character; otherwise, their messages will always be sent as the player instead of their character and they won't be able to read messages on languages their character understands unless its token is present on the canvas.<br>You can tell if a player has selected a character if their name on the Players List is followed by a character's name.<br>This is Core Foundry behavior, Polyglot only follows it."
-        },
-        "ActorOwnership": {
-          "Title": "Actor Ownership",
-          "Content": "About Actor Ownership, if you give a player the \"Owner\" or \"Observer\" permission to an actor, that player will be able to read and write messages as that actor if its token is present on the canvas. If there are more than one token, selecting the token on the canvas will change the player's actor.<br>This is also Core Foundry behavior, Polyglot only follows it."
-        },
-        "End": {
-          "Title": "Ending",
-          "Content": "This concludes this tour. I hope this has cleared some doubts about Polyglot's interaction with Core Foundry behavior.<br>If you want to get more in-depth with the module, check out its settings on the <span class='reference'>Game Settings</span>.<br>If this still proves insufficient, try checking the <a class=\"hyperlink\" href=\"https://github.com/mclemente/fvtt-module-polyglot/wiki\" target=\"_blank\" rel=\"nofollow noopener\">module's wiki</a> for more information."
-        }
+      "title": "Getting Started With Polyglot",
+      "desc": "Understand Polyglot's interaction with Foundry's UI.",
+      "Canvas": {
+        "Title": "Welcome to Polyglot",
+        "Content": "This tour will guide you through the features Polyglot adds to UI and how they interact with Foundry, and some guidance for newcomers about the character selection."
+      },
+      "LanguageSelector": {
+        "Title": "Language Selector",
+        "Content": "The <span class='reference'>Language Selector</span> is where you can select which language you want to speak in, scrambling the messages sent while it is active."
+      },
+      "LanguageSelectorCheckbox": {
+        "Title": "Language Selector's Checkbox",
+        "Content": "The <span class='reference'>Checkbox</span> toggles the scrambling. Any user who unchecks it will speak as if the module was disabled."
+      },
+      "LanguageSelectorSelect": {
+        "Title": "Language Selector's Dropdown",
+        "Content": "The <span class='reference'>Dropdown</span> contains all the languages in your world.<br>Depending on your game system, the languages may have already been set, while in other game systems, you may need to configure them in the <span class='reference'>Game Settings</span>.<br>It will display languages between the ones Known and Unknown by your players' actors."
+      },
+      "LanguageSelectorPips": {
+        "Title": "Language Selector's Pips",
+        "Content": "A <span class='reference'>Pip</span>, similar to the ones shown on the Players List, will be displayed right next to known languages for each player who has at least one actor that understands it. Hovering over a Pip will display the user's name and the list of actors providing access to the language."
+      },
+      "ChatMessage": {
+        "Title": "Chat Messages",
+        "Content": "This is what a message looks like if it uses Polyglot."
+      },
+      "ChatMessageScrambled": {
+        "Title": "Scrambled Text",
+        "Content": "This is what players that don't understand the message's language see."
+      },
+      "ChatMessageTranslation": {
+        "Title": "Translated Text",
+        "Content": "This is what players that understand the message's language see.<br>There is a setting to disable the Scrambled Text from being shown to players that do understand it. Hovering over it will display the language's name."
+      },
+      "ChatMessageGlobe": {
+        "Title": "The Globe",
+        "Content": "This globe can have 3 colors: <ul><li><span style=\"color: green\">Green</span> for Known languages. Hovering over it will display the language's name.</li><li><span style=\"color: blue\">Blue</span> for languages that can be read but the player will have no idea which language it is.<li><span style=\"color: red\">Red</span> for Unknown languages.</li></li></ul>"
+      },
+      "ChatMessageEnding": {
+        "Title": "Chat Messages' Settings",
+        "Content": "Be sure to check out the module settings, where you can make changes to how the chat messages are displayed.<br>There is a particular thing about Foundry and Chat Messages that is related to the <span class='reference'>User Configuration</span>."
+      },
+      "PlayersList": {
+        "Title": "Players List",
+        "Content": "While Polyglot itself doesn't change anything related to it, you should be aware about Core Foundry behavior related to the <span class='reference'>User Configuration</span>. You can open it yourself by right-clicking an user's name on this list here."
+      },
+      "UserConfig": {
+        "Title": "User Configuration",
+        "Content": "This configuration opens up to non-GM users whenever they load into the world if they don't have <span class='reference'>selected a character</span>."
+      },
+      "UserConfigSelectCharacter": {
+        "Title": "Select Character",
+        "Content": "As a GM, you should never have a character selected, as this will make your messages to be sent as that character if it is ever present on a scene.<br>For the players, make sure they select their main character; otherwise, their messages will always be sent as the player instead of their character and they won't be able to read messages on languages their character understands unless its token is present on the canvas.<br>You can tell if a player has selected a character if their name on the Players List is followed by a character's name.<br>This is Core Foundry behavior, Polyglot only follows it."
+      },
+      "ActorOwnership": {
+        "Title": "Actor Ownership",
+        "Content": "About Actor Ownership, if you give a player the \"Owner\" or \"Observer\" permission to an actor, that player will be able to read and write messages as that actor if its token is present on the canvas. If there are more than one token, selecting the token on the canvas will change the player's actor.<br>This is also Core Foundry behavior, Polyglot only follows it."
+      },
+      "End": {
+        "Title": "Ending",
+        "Content": "This concludes this tour. I hope this has cleared some doubts about Polyglot's interaction with Core Foundry behavior.<br>If you want to get more in-depth with the module, check out its settings on the <span class='reference'>Game Settings</span>.<br>If this still proves insufficient, try checking the <a class=\"hyperlink\" href=\"https://github.com/mclemente/fvtt-module-polyglot/wiki\" target=\"_blank\" rel=\"nofollow noopener\">module's wiki</a> for more information."
+      }
       }
     },
     "UESRPG.Language": "Language",
@@ -185,26 +185,22 @@
       "SpecialLanguages.title": "Replace Special Languages",
       "SpecialLanguages.hint": "Name of the language that will replace \"languages\" such as \"all the languages it knew in life\".",
       "TargetedParty": {
-        "title": "Target Group",
-        "hint": "If your game has a lot of users, the speaker indicator might become too crowded. You can filter the list by limiting it to users that own characters that are members of the target Group actor."
+      "title": "Target Group",
+      "hint": "If your game has a lot of users, the speaker indicator might become too crowded. You can filter the list by limiting it to users that own characters that are members of the target Group actor."
       }
     },
     "PF2E": {
-      "replaceLanguages.hint": "Removes the system's default languages. You must have at least one homebrew language set on the Homebrew Elements menu, otherwise the non-Common languages won't be removed. If you disable this setting and want to reset the rarities back to defaults, check the module's wiki.",
-      "TargetedParty": {
-        "title": "Target Party",
-        "hint": "If your game has a lot of users, the speaker indicator might become too crowded. You can filter the list by limiting it to users that own characters that are members of the target Party actor."
-      }
+      "replaceLanguages.hint": "Removes the system's default languages. You must have at least one homebrew language set on the Homebrew Elements menu, otherwise the non-Common languages won't be removed. If you disable this setting and want to reset the rarities back to defaults, check the module's wiki."
     },
     "SWADE": {
       "LanguageSkills": "Language",
       "AdditionalLanguageStat": {
-        "title": "Language Stat Key",
-        "hint": "It is possible to target an Additional Stat (which is set on the SWADE Settings Configurator). You need to input the Stat Key (case sensitive). Beware that setting this overrides the {setting} setting."
+      "title": "Language Stat Key",
+      "hint": "It is possible to target an Additional Stat (which is set on the SWADE Settings Configurator). You need to input the Stat Key (case sensitive). Beware that setting this overrides the {setting} setting."
       },
       "AdditionalLiterateStat": {
-        "title": "Literacy Stat Key",
-        "hint": "It is possible to limit reading journals by adding an Additional Stat. You need to input the Stat Key (case sensitive). This setting is independent from the {setting} setting."
+      "title": "Literacy Stat Key",
+      "hint": "It is possible to limit reading journals by adding an Additional Stat. You need to input the Stat Key (case sensitive). This setting is independent from the {setting} setting."
       }
     },
     "WFRP4E": {
