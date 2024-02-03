@@ -139,6 +139,8 @@
 		"GameMasterHasAssignedCharacter": "Jesteś {GM} i masz przypisaną postać. Z tego powodu Polyglot będzie się dziwnie zachowywać. Rozważ usunięcie tej postaci ze swojego użytkownika.",
 		"PF2E": {
 			"replaceLanguages.hint": "Usuwa domyślne języki systemowe. Musisz mieć co najmniej jeden język homebrew ustawiony w menu Homebrew Elements, w przeciwnym razie języki inne niż Common nie zostaną usunięte. Jeśli wyłączyłeś to ustawienie i chcesz przywrócić domyślne ustawienia rzadkości, sprawdź wiki modułu."
-		}
+		},
+		"KnownLanguages": "Znane Języki",
+		"UnknownLanguages": "Nieznane Języki"
 	}
 }
