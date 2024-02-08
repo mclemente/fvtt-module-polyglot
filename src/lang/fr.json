@@ -136,6 +136,8 @@
 		"General": "Général",
 		"AlphabeticOnly": "Alphabétique seulement",
 		"Logographical": "Logographique",
-		"GameMasterHasAssignedCharacter": "Vous êtes un {GM} et un personnage vous a été assigné. Polyglot se comportera bizarrement à cause de cela. Envisagez de ne plus être l'Utilisateur de ce personnage."
+		"GameMasterHasAssignedCharacter": "Vous êtes un {GM} et un personnage vous a été assigné. Polyglot se comportera bizarrement à cause de cela. Envisagez de ne plus être l'Utilisateur de ce personnage.",
+		"KnownLanguages": "Langues connues",
+		"UnknownLanguages": "Langues inconnues"
 	}
 }
