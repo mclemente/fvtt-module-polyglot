@@ -33,13 +33,13 @@
 			"c": "Brak ⚠️"
 		},
 		"ExportFonts.title": "Dodaj czcionki Polyglot do Foundry",
-		"ExportFonts.hint": "Dodaje czcionki Polyglot do menu dodatkowych czcionek Foundry. Wyłącz to ustawienie, aby usunąć wszystkie czcionki Polyglot z menu.",
+		"ExportFonts.hint": "Dodaj czcionki Polyglot do funkcji Foundry, takich jak Rysunki.",
 		"DisplayTranslated.title": "Wyświetlaj Tłumaczenia",
 		"DisplayTranslated.hint": "Dla języków, które zostaną przetłumaczone na czacie, wyświetlaj tekst oryginalny oraz tłumaczenie pod spodem.",
 		"HideTranslation.title": "Usuń powiadomienia dla Graczy",
 		"HideTranslation.hint": "Usuwa ikonę \"globu\" oraz tekst \"Przetłumaczono z:\" z wiadomości czatu. Idealne kiedy nie chcesz zdradzać graczom języka, którym się porozumiewasz. Wymaga przeładowania.",
-		"AllowOOC.title": "Szyfruj Wiadomości Czatu Poza Rolą",
-		"AllowOOC.hint": "Wybierz, którzy użytkownicy powinni mieć zakodowane wiadomości. OOC = poza charakterem.",
+		"AllowOOC.title": "Usuwanie wiadomości z czatu niezwiązanych z postacią",
+		"AllowOOC.hint": "Wybierz użytkowników, których wiadomości Out of Character mają być szyfrowane.",
 		"AllowOOCOptions": {
 			"a": "Wszyscy",
 			"b": "Tylko MG",
@@ -141,6 +141,72 @@
 			"replaceLanguages.hint": "Usuwa domyślne języki systemowe. Musisz mieć co najmniej jeden język homebrew ustawiony w menu Homebrew Elements, w przeciwnym razie języki inne niż Common nie zostaną usunięte. Jeśli wyłączyłeś to ustawienie i chcesz przywrócić domyślne ustawienia rzadkości, sprawdź wiki modułu."
 		},
 		"KnownLanguages": "Znane Języki",
-		"UnknownLanguages": "Nieznane Języki"
+		"UnknownLanguages": "Nieznane Języki",
+		"TOURS": {
+			"Main": {
+				"title": "Pierwsze kroki z Polyglot",
+				"desc": "Zrozumienie interakcji Polyglot z interfejsem użytkownika Foundry.",
+				"Canvas": {
+					"Title": "Witamy w Polyglot",
+					"Content": "Ta prezentacja poprowadzi cię przez funkcje, które Polyglot dodaje do interfejsu użytkownika i jak współdziałają one z Foundry, a także kilka wskazówek dla nowicjuszy dotyczących wyboru postaci."
+				},
+				"LanguageSelector": {
+					"Title": "Wybór Języka",
+					"Content": "<span class=\"reference\">Wybór Języka</span> to miejsce, w którym możesz wybrać język, w którym chcesz mówić, szyfrując wiadomości wysyłane, gdy jest on aktywny."
+				},
+				"LanguageSelectorCheckbox": {
+					"Title": "Pole Wyboru Języka",
+					"Content": "<span class=\"reference\">Pole Wyboru</span> przełącza szyfrowanie. Każdy użytkownik, który odznaczy to pole, będzie mówił tak, jakby moduł był wyłączony."
+				},
+				"LanguageSelectorSelect": {
+					"Title": "Rozwijane Menu Wyboru Języka",
+					"Content": "<span class='reference'>Menu Rozwijane</span> zawiera wszystkie języki w twoim świecie.<br>W zależności od systemu gry, języki mogą być już ustawione, podczas gdy w innych systemach gry może być konieczne skonfigurowanie ich w <span class='reference'>Ustawieniach Gry</span>.<br>Wyświetli języki pomiędzy tymi znanymi i nieznanymi przez aktorów graczy."
+				},
+				"LanguageSelectorPips": {
+					"Title": "Paski Wyboru Języka",
+					"Content": "<span class=\"reference\">Paski Wyboru Języka</span>, podobne do tych wyświetlanych na liście graczy, będzie wyświetlany tuż obok znanych języków dla każdego gracza, który ma co najmniej jednego aktora, który go rozumie. Najechanie kursorem na Pasek spowoduje wyświetlenie nazwy użytkownika i listy aktorów zapewniających dostęp do danego języka."
+				},
+				"ChatMessage": {
+					"Title": "Wiadomości Czatu",
+					"Content": "Tak wygląda wiadomość, która korzysta z Polyglot."
+				},
+				"ChatMessageScrambled": {
+					"Title": "Zakodowany Tekst",
+					"Content": "To właśnie widzą gracze, którzy nie rozumieją języka wiadomości."
+				},
+				"ChatMessageTranslation": {
+					"Title": "Przetłumaczony Tekst",
+					"Content": "To jest to, co widzą gracze, którzy rozumieją język wiadomości.<br>Istnieje ustawienie wyłączające wyświetlanie zakodowanego tekstu graczom, którzy go rozumieją. Najechanie kursorem na to ustawienie spowoduje wyświetlenie nazwy języka."
+				},
+				"ChatMessageGlobe": {
+					"Title": "Globus",
+					"Content": "Ten globus może mieć 3 kolory: <ul><li><span style=\"color: green\">Zielony</span> dla znanych języków. Najechanie na niego spowoduje wyświetlenie nazwy języka.</li><li><span style=\"color: blue\"> Niebieski</span> dla języków, które można odczytać, ale gracz nie będzie miał pojęcia, który to język.<li><span style=\"color: red\">Czerwony</span> dla nieznanych języków.</li></li></ul>"
+				},
+				"ChatMessageEnding": {
+					"Title": "Ustawienia Wiadomości Czatu",
+					"Content": "Pamiętaj, aby sprawdzić ustawienia modułu, gdzie możesz wprowadzić zmiany w sposobie wyświetlania wiadomości czatu.<br>Jest pewna szczególna rzecz dotycząca Foundry i wiadomości czatu, która jest związana z <span class='reference'>Konfiguracją Użytkownika</span>."
+				},
+				"PlayersList": {
+					"Title": "Lista Graczy",
+					"Content": "Podczas gdy sam Polyglot nie zmienia niczego z tym związanego, powinieneś być świadomy zachowania Core Foundry związanego z <span class='reference'>Konfiguracją Użytkownika</span> . Możesz ją otworzyć samodzielnie, klikając prawym przyciskiem myszy nazwę użytkownika na tej liście tutaj."
+				},
+				"UserConfig": {
+					"Title": "Konfiguracja Użytkownika",
+					"Content": "Ta konfiguracja otwiera się dla użytkowników za każdym razem, gdy wczytują świat, jeśli nie mają <span class='reference'>wybranej postaci</span>."
+				},
+				"UserConfigSelectCharacter": {
+					"Title": "Wybierz Postać",
+					"Content": "Jako MG nigdy nie powinieneś mieć wybranej postaci, ponieważ spowoduje to, że wiadomości będą wysyłane jako ta postać, jeśli kiedykolwiek będzie obecna na scenie.<br>Dla graczy upewnij się, że wybrali swoją główną postać; w przeciwnym razie ich wiadomości będą zawsze wysyłane jako gracz zamiast ich postaci i nie będą mogli czytać wiadomości w językach, które rozumie ich postać, chyba że jej token jest obecny na płótnie.<br>Możesz stwierdzić, czy gracz wybrał postać, jeśli po jego imieniu na liście graczy znajduje się imię postaci.<br>To jest zachowanie Core Foundry, Polyglot tylko je naśladuje."
+				},
+				"ActorOwnership": {
+					"Title": "Własność Aktora",
+					"Content": "Co do Własności Aktora, jeśli nadasz graczowi uprawnienie \"Właściciel\" lub \"Obserwator\" do aktora, gracz ten będzie mógł odczytywać i zapisywać wiadomości jako ten aktor, jeśli jego token jest obecny na scenie. Jeśli istnieje więcej niż jeden token, wybranie tokena na płótnie zmieni aktora gracza.<br>Jest to również zachowanie Core Foundry, Polyglot tylko je naśladuje."
+				},
+				"End": {
+					"Title": "Zakończenie",
+					"Content": "Na tym kończy się ta wycieczka. Mam nadzieję, że rozwiało to pewne wątpliwości dotyczące interakcji Polyglota z zachowaniem Core Foundry.<br>Jeśli chcesz bardziej zagłębić się w moduł, sprawdź jego ustawienia w <span class=\"reference\">Ustawieniach Gry</span>.<br>Jeśli to nadal okaże się niewystarczające, spróbuj sprawdzić <a class=\"hyperlink\" href=\"https://github.com/mclemente/fvtt-module-polyglot/wiki\" target=\"_blank\" rel=\"nofollow noopener\"> wiki modułu</a>, aby uzyskać więcej informacji."
+				}
+			}
+		}
 	}
 }
