@@ -205,7 +205,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 			new Dialog({
 				title: "Polyglot Changes",
 				content: `<div>
-					<p>Polyglot has updated to integrate some new features of PF2e, you can read all changes on <a class="hyperlink" href="https://github.com/mclemente/fvtt-module-polyglot/releases/tag/2.3.23" target="_blank" rel="nofollow noopener">this link</a>.</p>
+					<p>Polyglot has updated to integrate some new features of PF2e, you can read all changes on <a class="hyperlink" href="https://github.com/mclemente/fvtt-module-polyglot/releases/tag/2.3.24" target="_blank" rel="nofollow noopener">this link</a>.</p>
 					<p style="color: red"><b>These changes will render all chat messages written in Common unreadable for players that know Common. They need to be updated to a proper language.</b></p>
 					<p>Polyglot will update the language of the last ${messagesInCommon.length} Common messages to <b style="color: red">${pf2eDefaultLangString}</b>.</p>
 					<p>If you want to change them to another language on PF2e, you can do so by changing PF2e's "Common" language in the Homebrew Elements menu and reloading the page.</p>
