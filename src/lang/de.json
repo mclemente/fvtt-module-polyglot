@@ -10,16 +10,16 @@
 		"Truespeech.hint": "Lege eine Sprache fest, deren Sprecher alle gesprochenen Sprachen versteht (kann keine Notizbücher lesen) und die von allen Lebewesen verstanden wird. Ein Akteur wird in der Lage sein, alle Chat-Nachrichten zu lesen und Nachrichten in einer Sprache zu schreiben, die von allen verstanden wird.",
 		"DefaultLanguage.title": "Standardsprache",
 		"DefaultLanguage.hint": "Name der Standard Sprache. Leer lassen, um die Systemvorgaben zu nutzen.",
-		"ReplaceLanguages.title": "Systemsprachen ersetzen",
-		"ReplaceLanguages.hint": "Ersetzt die Standardsprachen des Systems durch deine benutzerdefinierten Sprachen. Die erste Sprache in der Liste wird die neue Standardsprache.",
+		"ReplaceLanguages.title": "Systemsprachen entfernen",
+		"ReplaceLanguages.hint": "Entfernt die Standardsprachen des Systems. Die erste Sprache in der Liste der benutzerdefinierten Sprachen wird zur neuen Standardsprache.",
 		"ScrambleGM.title": "Verschleiere Nachrichten für den SL",
 		"ScrambleGM.hint": "Übersetze den Text für den SL nicht (siehe die Farbe der Weltkugel für das Verständnis des Tokens). Erfordert Neuladen.",
 		"toggleRuneText.title": "Umschalten von Runen Text in Journals",
 		"toggleRuneText.hint": "Schaltet die Sichtbarkeit von \"Runen\" in den Journals um.",
 		"RandomizeRunes.title": "Runen zufällig auswählen",
 		"RandomizeRunes.hint": "Damit wird festgelegt, welche Art von RNG zur Generierung einer Phrase verwendet wird. ⚠️ Die Option \"Keine\" unterstützt nur alphanumerische Zeichen (keine Akzente).",
-		"ExportFonts.title": "Polyglot-Schriften zu Core hinzufügen",
-		"ExportFonts.hint": "Fügt die Polyglot-Schriftarten zum Menü {settingMenuLabel} hinzu. Schalten Sie diese Einstellung aus, um alle Polyglot-Schriften aus dem Menü zu entfernen.",
+		"ExportFonts.title": "Polyglot-Schriften zu Foundry hinzufügen",
+		"ExportFonts.hint": "Fügt die Schriften von Polyglot zu den Funktionen von Foundry hinzu, z. B. Zeichnungen.",
 		"DisplayTranslated.title": "Übersetzungen anzeigen",
 		"DisplayTranslated.hint": "Bei Sprachen, die im Chat-Fenster übersetzt werden, wird der Originaltext und darunter eine Übersetzung angezeigt.",
 		"HideTranslation.title": "Indikatoren vor Spielern verbergen",
@@ -43,14 +43,14 @@
 		"SWADE.LanguageSkills": "Sprache",
 		"WFRP4E.LanguageSkills": "Sprache",
 		"enableAllFonts": {
-			"title": "Schriftarten von Foundry zu {settingMenuLabel} hinzufügen",
+			"title": "Schriftarten von Foundry zu Polyglot hinzufügen",
 			"choices": {
 				"0": "keine",
 				"1": "Polyglott Schriftarten",
 				"2": "Zusätzliche Schriftarten von Core",
 				"3": "beide"
 			},
-			"hint": "Fügen die Foundry-Schriften zu {setting1} und {setting2} hinzu."
+			"hint": "Ausschalten, um alle Foundry-Schriften aus Polyglot zu entfernen."
 		},
 		"JournalHighlightColor": {
 			"hint": "Bestimmt die Farbe der Hervorhebung von Schriftarten in Notizbüchern.",
@@ -138,6 +138,35 @@
 		},
 		"GeneralSettings": "Allgemeine Einstellungen",
 		"AlphabeticOnly": "Nur Alphabetisch",
-		"Logographical": "Logografische"
+		"Logographical": "Logografische",
+		"KnownLanguages": "Bekannte Sprachen",
+		"UnknownLanguages": "Unbekannte Sprachen",
+		"TOURS": {
+			"Main": {
+				"title": "Erste Schritte mit Polyglot",
+				"Canvas": {
+					"Content": "Diese Tour führt durch die Funktionen, die Polyglot der Benutzeroberfläche hinzufügt und wie sie mit Foundry interagieren, sowie durch einige Hinweise für Neulinge zur Charakterauswahl.",
+					"Title": "Willkommen bei Polyglot"
+				},
+				"LanguageSelector": {
+					"Title": "Sprachauswahl",
+					"Content": "Unter <span class='reference'>Sprachauswahl</span> kann die Sprache gewählt werden, in der gesprochen wird, wobei die gesendeten Nachrichten verschlüsselt werden, solange die Funktion aktiviert ist."
+				},
+				"LanguageSelectorSelect": {
+					"Title": "Dropdown der Sprachauswahl"
+				},
+				"ChatMessage": {
+					"Title": "Chat-Nachrichten",
+					"Content": "So sieht eine Nachricht aus, wenn Polyglot verwendet wird."
+				},
+				"ChatMessageScrambled": {
+					"Title": "Verschlüsselter Text"
+				},
+				"LanguageSelectorCheckbox": {
+					"Title": "Kontrollkästchen für die Sprachauswahl",
+					"Content": "Das <span class='reference'>Kontrollkästchen</span> schaltet die Verschlüsselung ein und aus. Jeder Benutzer, der das Häkchen entfernt, spricht so, als ob das Modul deaktiviert wäre."
+				}
+			}
+		}
 	}
 }
