@@ -10,7 +10,7 @@
 		"Truespeech.hint": "Lege eine Sprache fest, deren Sprecher alle gesprochenen Sprachen versteht (kann keine Notizbücher lesen) und die von allen Lebewesen verstanden wird. Ein Akteur wird in der Lage sein, alle Chat-Nachrichten zu lesen und Nachrichten in einer Sprache zu schreiben, die von allen verstanden wird.",
 		"DefaultLanguage.title": "Standardsprache",
 		"DefaultLanguage.hint": "Name der Standard Sprache. Leer lassen, um die Systemvorgaben zu nutzen.",
-		"ReplaceLanguages.title": "Systemsprachen ersetzen",
+		"ReplaceLanguages.title": "Systemsprachen entfernen",
 		"ReplaceLanguages.hint": "Entfernt die Standardsprachen des Systems. Die erste Sprache in der Liste der benutzerdefinierten Sprachen wird zur neuen Standardsprache.",
 		"ScrambleGM.title": "Verschleiere Nachrichten für den SL",
 		"ScrambleGM.hint": "Übersetze den Text für den SL nicht (siehe die Farbe der Weltkugel für das Verständnis des Tokens). Erfordert Neuladen.",
@@ -43,7 +43,7 @@
 		"SWADE.LanguageSkills": "Sprache",
 		"WFRP4E.LanguageSkills": "Sprache",
 		"enableAllFonts": {
-			"title": "Schriftarten von Foundry zu {settingMenuLabel} hinzufügen",
+			"title": "Schriftarten von Foundry zu Polyglot hinzufügen",
 			"choices": {
 				"0": "keine",
 				"1": "Polyglott Schriftarten",
