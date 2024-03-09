@@ -202,9 +202,8 @@ export default class dnd5eLanguageProvider extends LanguageProvider {
 		const filtered = super.filterUsers(ownedActors);
 		const party = game.settings.get("dnd5e", "primaryParty")?.actor;
 		if (party?.system?.members.length) {
-			const members = Array.from(party.system.members.map((a) => a.id));
-			const users = filtered.filter((u) => ownedActors.some((actor) => members.includes(actor.id) && actor.testUserPermission(u, "OWNER"))
-			);
+			const members = Array.from(party.system.members.ids);
+			const users = filtered.filter((u) => ownedActors.some((actor) => members.includes(actor.id) && actor.testUserPermission(u, "OWNER")));
 			return users;
 		}
 		return filtered;
