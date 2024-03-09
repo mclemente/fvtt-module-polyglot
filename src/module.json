@@ -72,10 +72,15 @@
 			"name": "Svenska",
 			"path": "lang/sv.json"
 		},
-    {
-    	"lang": "de",
+		{
+			"lang": "de",
 			"name": "Deutsch",
 			"path": "lang/de.json"
+		},
+		{
+			"lang": "cn",
+			"name": "中文",
+			"path": "lang/zh_Hans.json"
 		}
 	],
 	"url": "This is auto replaced",
