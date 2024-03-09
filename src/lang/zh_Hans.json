@@ -1,0 +1,206 @@
+{
+	"POLYGLOT": {
+		"AllowOOCOptions": {
+			"c": "仅限PL",
+			"d": "无",
+			"a": "所有",
+			"b": "仅限GM"
+		},
+		"Omniglot": {
+			"title": "全能语言",
+			"hint": "设置一种语言，该语言的使用者可以理解并使用所有其他语言。无论是在聊天还是在日志中， actor 都能读写所有其他语言。"
+		},
+		"LanguageRegex": {
+			"title": "语言RegEx",
+			"hint": "你可以用它来将项目上搜索的术语从\"语言\"改为其他词，比如\"Tongue\"。这个设置对非英语使用者更有用。"
+		},
+		"TOURS": {
+			"Main": {
+				"UserConfig": {
+					"Title": "用户配置",
+					"Content": "如果非 GM 用户没有<span class='reference'>选择角色</span>，只要他们载入世界，该配置就会向他们开放。"
+				},
+				"UserConfigSelectCharacter": {
+					"Title": "选择角色",
+					"Content": "作为 GM，您不应该选择某个角色，因为如果该角色出现在某个场景中，您的信息就会以该角色的身份发送。<br>对于玩家，请确保他们选择了自己的主要角色；否则，他们的信息将始终以玩家而非角色的身份发送，而且除非画布上有角色的 token，否则他们将无法阅读角色所能理解语言的信息。<br>如果玩家列表中玩家的名字后面跟着一个角色的名字，就可以判断玩家是否选择了该角色。<br>这是 Core Foundry 的行为，Polyglot 只是遵循它。"
+				},
+				"title": "开始使用Polyglot",
+				"desc": "了解 Polyglot 与 Foundry 用户界面的交互。",
+				"Canvas": {
+					"Title": "欢迎来到Polyglot",
+					"Content": "本游览将引导您了解 Polyglot 为用户界面添加的功能及其与 Foundry 的交互方式，并为新手提供一些有关角色选择的指导。"
+				},
+				"LanguageSelector": {
+					"Title": "语言选择",
+					"Content": "<span class='reference'>语言选择</span>可让您选择想说的语言，并在激活时乱码发送的信息。"
+				},
+				"LanguageSelectorCheckbox": {
+					"Title": "语言选择复选框",
+					"Content": "<span class='reference'>复选框</span>切换乱码。任何取消复选的用户都会像禁用模块一样发言。"
+				},
+				"LanguageSelectorSelect": {
+					"Title": "语言选择下拉列表",
+					"Content": "<span class='reference'>下拉列表</span>包含您所在世界的所有语言。<br>根据您的游戏系统，语言可能已经设置好，而在其他游戏系统中，您可能需要在<span class='reference'>游戏设置</span>中配置这些语言。<br>它将显示pl角色已知和未知语言之间的语言。"
+				},
+				"LanguageSelectorPips": {
+					"Title": "语言选择Pip",
+					"Content": "与玩家列表中显示的程序类似，每个玩家的已知语言旁边都会显示一个 <span class='reference'>Pip</span>，该玩家至少有一个actor能听懂该语言。将鼠标悬停在一个 Pip 上，会显示用户的姓名和可以使用该语言的actor列表。"
+				},
+				"ChatMessage": {
+					"Title": "聊天信息",
+					"Content": "这就是使用 Polyglot 的信息的样子。"
+				},
+				"ChatMessageScrambled": {
+					"Title": "乱码文本",
+					"Content": "这就是不懂语言的玩家所看到的信息。"
+				},
+				"ChatMessageTranslation": {
+					"Title": "翻译文本",
+					"Content": "这就是理解语言的玩家所看到的信息。<br>有一个设置可以禁止向理解的玩家显示乱码文本。将鼠标悬停在上面会显示语言名称。"
+				},
+				"ChatMessageGlobe": {
+					"Title": "Globe",
+					"Content": "这个globe有 3 种颜色: <ul><li><span style=\"color: green\">绿色</span>适用于已知语言。将鼠标悬停在其上会显示语言名称。</li><li><span style=\"color: blue\">蓝色</span>为可读语言，但玩家不知道是哪种语言。 <li><span style=\"color: red\">红色</span>为未知语言</li></li></ul>"
+				},
+				"PlayersList": {
+					"Title": "Pl列表",
+					"Content": "虽然 Polyglot 本身不会改变任何相关内容，但您应该了解与<span class='reference'>用户配置</span>相关的 Core Foundry 行为。您可以右键单击此列表中的用户名来打开它。"
+				},
+				"ChatMessageEnding": {
+					"Title": "聊天信息设置",
+					"Content": "请务必查看模块设置，在这里您可以更改聊天信息的显示方式。<br>关于 Foundry 和聊天信息，有一件事与<span class='reference'>用户配置</span>用户配置有关。"
+				},
+				"ActorOwnership": {
+					"Title": "actor所有权",
+					"Content": "关于 actor 的所有权，如果你给某个玩家授予了 \"拥有\" 或 \"查看\" 权限，那么只要画布上有该 actor 的 token，该玩家就能以该 actor 的身份读写消息。如果有多个 token，选择画布上的 token 将改变玩家的 actor。<br>这也是 Core Foundry 的行为，Polyglot 只是沿用而已。"
+				},
+				"End": {
+					"Title": "尾声",
+					"Content": "本次导航到此结束。我希望这能消除一些关于 Polyglot 与 Core Foundry 行为交互的疑虑。<br>如果您想更深入地了解该模块，请查看<span class='reference'>游戏配置</span>中的模块设置。<br>如果这样做仍然不够，尝试点击<a class=\"hyperlink\" href=\"https://github.com/mclemente/fvtt-module-polyglot/wiki\" target=\"_blank\" rel=\"nofollow noopener\">module's wiki</a> for more information."
+				}
+			}
+		},
+		"PF2E": {
+			"replaceLanguages.hint": "Removes the system's default languages. You must have at least one homebrew language set on the Homebrew Elements menu, otherwise the non-Common languages won't be removed. If you disable this setting and want to reset the rarities back to defaults, check the module's wiki."
+		},
+		"SWADE": {
+			"LanguageSkills": "Language",
+			"AdditionalLanguageStat": {
+				"title": "Language Stat Key",
+				"hint": "It is possible to target an Additional Stat (which is set on the SWADE Settings Configurator). You need to input the Stat Key (case sensitive). Beware that setting this overrides the {setting} setting."
+			},
+			"AdditionalLiterateStat": {
+				"hint": "It is possible to limit reading journals by adding an Additional Stat. You need to input the Stat Key (case sensitive). This setting is independent from the {setting} setting.",
+				"title": "Literacy Stat Key"
+			}
+		},
+		"WFRP4E": {
+			"LanguageSkills": "Language"
+		},
+		"DefaultAlphabet": "默认字母",
+		"FontSettings": "字体设置",
+		"GeneralSettings": "常规设置",
+		"GameMasterHasAssignedCharacter": "您是一名 {GM}，并有一个角色分配给您。因此，Polyglot 的行为会很奇怪。请考虑将该角色从你的用户中移除。",
+		"LanguageSettings": "常规设置",
+		"ChatSettings": "聊天设置",
+		"General": "常规",
+		"Languages.title": "语言",
+		"Languages.hint": "更改语言所使用的字母。",
+		"Font": "字体",
+		"Fonts": "字体",
+		"FontSize": "字体大小 (%)",
+		"KnownLanguages": "已知语言",
+		"UnknownLanguages": "未知语言",
+		"AlphabeticOnly": "仅限字母",
+		"Logographical": "标识Logographical",
+		"AllowOOC": {
+			"title": "乱码OOC聊天消息",
+			"hint": "选择哪些用户的OOC信息应被乱码。"
+		},
+		"ComprehendLanguages.hint": "设置一种语言，该语言的使用者能听懂所有其他语言，但不能说或写。actor 将可以阅读所有聊天信息和日志文本。",
+		"ComprehendLanguages.title": "全知语言",
+		"CustomLanguages.hint": "定义要添加到系统中的自定义语言列表。它们必须用逗号或分号分隔。",
+		"CustomLanguages.title": "自定义语言",
+		"DefaultLanguage.title": "默认语言",
+		"DisplayTranslated.hint": "对于在聊天窗口中翻译的语言，会在下面显示原文和译文。",
+		"DisplayTranslated.title": "显示翻译",
+		"DefaultLanguage.hint": "要选择的默认语言名称。留空表示使用系统默认语言。",
+		"enableAllFonts": {
+			"hint": "关闭此设置可从 Polyglot 中移除所有 Foundry 字体。",
+			"title": "将 Foundry 字体添加到Polyglot中"
+		},
+		"ExportFonts.hint": "将 Polyglot 字体添加到 Foundry 功能中，如绘图Drawings。",
+		"ExportFonts.title": "将Polyglot字体添加到 Foundry",
+		"HideTranslation.hint": "隐藏玩家聊天信息中的Globe和'翻译'文本。当你不想向玩家显示你说的是哪种语言时，该功能很有用。需要重新加载。",
+		"IgnoreJournalFontSize": {
+			"title": "使用正常字体大小",
+			"hint": "忽略日志上 Polyglot 字体的大小，使其与普通文本大小相同。在日志格式重要时非常有用。"
+		},
+		"JournalHighlight": {
+			"hint": "定义日志上字体高亮部分的不透明度。",
+			"title": "高亮不透明度(%)"
+		},
+		"HideTranslation.title": "向玩家隐藏指示器",
+		"JournalHighlightColor": {
+			"hint": "定义日志上字体高亮部分的颜色。",
+			"title": "高亮颜色"
+		},
+		"LanguageProvider": {
+			"choices": {
+				"module": "[Module] {name}",
+				"native": "通用",
+				"system": "[System] {name}"
+			},
+			"hint": "选择由谁提供字母和语言的语言信息。可通过游戏系统和安装的模块提供更多语言提供者。以下选项取决于此处选择的语言提供者。⚠️ 如果更改提供者，则必须保存并重新打开这些设置。",
+			"name": "语言设置提供者"
+		},
+		"languageDataPath": {
+			"title": "语言数据路径",
+			"hint": "如果你的系统在 actor 的数据中设置了语言，但没有被正确加载，可能是使用了其他数据路径。请输入正确属性的数据路径（如 actor.system.languages 或 actor.system.speak）。此设置优先于 {setting} 设置。需要重新加载。"
+		},
+		"literacyDataPath": {
+			"title": "识字数据路径",
+			"hint": "与 {setting} 设置相同，但用于阅读日志。此设置需要 {setting} 设置。需要重新加载。"
+		},
+		"logographicalFontToggle.hint": "将使用标识 Logographical字体（如日文、中文）的短语大小减半。",
+		"logographicalFontToggle.title": "标识字体",
+		"RandomizeRunes.hint": "这将决定使用哪种类型的 RNG 来生成短语。⚠️ \"无\"选项仅支持字母数字字符（无口音no accents）。",
+		"RandomizeRunes.title": "随机符文",
+		"RandomizeRunesOptions": {
+			"a": "默认",
+			"b": "独特短语",
+			"c": "无⚠️"
+		},
+		"ReplaceLanguages.hint": "删除系统默认语言。自定义语言列表中的第一种语言将成为新的默认语言。",
+		"ReplaceLanguages.title": "删除系统语言",
+		"RuneRegex": {
+			"hint": "使随机化忽略非字母数字字符(e.g. !,.;:?#$\"')。这可能会产生不希望看到的效果，即在某些字体上将其中一些字符显示为正方形 (□)。",
+			"title": "只随机化字母数字"
+		},
+		"ScrambleGM.hint": "不要为 GM 翻译文本（参考globe的颜色来理解 token）。需要重新加载。",
+		"ScrambleGM.title": "为 GM 乱码信息",
+		"Truespeech.hint": "设置一种语言，该语言的使用者可以理解所有口语（无法阅读日志），并且所有生物都能理解。actor 将能阅读所有聊天信息，并能用所有人都能理解的语言编写信息。",
+		"Truespeech.title": "全能语言",
+		"Translation": "翻译",
+		"TranslatedFrom": "翻译自 ",
+		"LanguageLabel": "语言",
+		"AlphabetLabel": "字母表",
+		"LatinAlphabet": "拉丁字母表",
+		"ToggleRunes": "切换符文",
+		"Runes": "符文",
+		"UESRPG.Language": "语言",
+		"Generic": {
+			"Language": "语言"
+		},
+		"COC7": {
+			"LanguageOwn": "语言",
+			"LanguageAny": "语言",
+			"LanguageOther": "语言",
+			"LanguageSpec": "语言"
+		},
+		"DND5E": {
+			"SpecialLanguages.title": "替换特殊语言",
+			"SpecialLanguages.hint": "将取代\"语言\"的语言名称，例如\"它生前知道的所有语言all the languages it knew in life\"。"
+		}
+	}
+}
