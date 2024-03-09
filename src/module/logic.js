@@ -209,6 +209,7 @@ export class Polyglot {
 		let options = [];
 		let ownedActors = [];
 		if (game.user.isGM) {
+			// GM's list has optgroups separated between known and unknown.
 			options.push(...[
 				{
 					id: "known",
@@ -277,13 +278,20 @@ export class Polyglot {
 				});
 			}
 		}
+		// Remove childless lists. Otherwise, sort them by label
 		if (game.user.isGM) {
 			if (!options[1].children.length) {
 				options.pop();
+			} else {
+				options[1].children.sort((a, b) => a.text.localeCompare(b.text));
 			}
 			if (!options[0].children.length) {
 				options.shift();
+			} else {
+				options[0].children.sort((a, b) => a.text.localeCompare(b.text));
 			}
+		} else {
+			options.sort((a, b) => a.text.localeCompare(b.text));
 		}
 
 		const select = html.find(".polyglot-lang-select select");
