@@ -80,23 +80,11 @@ export default class dnd5eLanguageProvider extends LanguageProvider {
 	};
 
 	get settings() {
-		const parties = Object.fromEntries(game.actors.filter((a) => a.type === "group").map((a) => [a.id, a.name]));
 		return {
 			"DND5E.SpecialLanguages": {
 				type: String,
 				default: game.i18n.localize("DND5E.LanguagesCommon"),
-			},
-			"DND5E.TargetedParty": {
-				type: String,
-				default: Object.keys(parties).length ? Object.keys(parties)[0] : "none",
-				choices: {
-					none: "",
-					...parties,
-				},
-				onChange: () => {
-					game.polyglot.updateUserLanguages(game.polyglot.chatElement);
-				},
-			},
+			}
 		};
 	}
 
@@ -212,8 +200,8 @@ export default class dnd5eLanguageProvider extends LanguageProvider {
 
 	filterUsers(ownedActors) {
 		const filtered = super.filterUsers(ownedActors);
-		const party = game.actors.find((a) => a.id === game.settings.get("polyglot", "DND5E.TargetedParty"));
-		if (party?.system?.members.size) {
+		const party = game.settings.get("dnd5e", "primaryParty")?.actor;
+		if (party?.system?.members.length) {
 			const members = Array.from(party.system.members.map((a) => a.id));
 			const users = filtered.filter((u) => ownedActors.some((actor) => members.includes(actor.id) && actor.testUserPermission(u, "OWNER"))
 			);
