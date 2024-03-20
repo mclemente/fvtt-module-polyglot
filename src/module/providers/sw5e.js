@@ -322,6 +322,8 @@ export default class sw5eLanguageProvider extends LanguageProvider {
 		},
 	};
 
+	languageRarities = ["standard", "exotic"];
+
 	async getLanguages() {
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const langs = {};
@@ -340,9 +342,6 @@ export default class sw5eLanguageProvider extends LanguageProvider {
 				}
 			};
 
-			if (key in this.multiLanguages) {
-				processLanguage(game.i18n.localize(target[key].label));
-			}
 			if (target[key].children) {
 				Object.keys(target[key].children).forEach((kkey) => {
 					getLang(kkey, target[key].children);
