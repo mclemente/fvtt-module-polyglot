@@ -322,6 +322,47 @@ export default class sw5eLanguageProvider extends LanguageProvider {
 		},
 	};
 
+	async getLanguages() {
+		const languagesSetting = game.settings.get("polyglot", "Languages");
+		const langs = {};
+		if (this.replaceLanguages) {
+			CONFIG.SW5E.languages = {};
+		}
+		const systemLanguages = CONFIG.SW5E.languages;
+		const getLang = (key, target) => {
+			const processLanguage = (label) => {
+				if (label) {
+					langs[key] = {
+						label,
+						font: languagesSetting[key]?.font || this.languages[key]?.font || this.defaultFont,
+						rng: languagesSetting[key]?.rng ?? "default",
+					};
+				}
+			};
+
+			if (key in this.multiLanguages) {
+				processLanguage(game.i18n.localize(target[key].label));
+			}
+			if (target[key].children) {
+				Object.keys(target[key].children).forEach((kkey) => {
+					getLang(kkey, target[key].children);
+				});
+			} else {
+				processLanguage(game.i18n.localize(target[key]));
+			}
+		};
+		Object.keys(systemLanguages).forEach((key) => {
+			if (this.languageRarities.includes(key)) {
+				Object.keys(systemLanguages[key].children).forEach((kkey) => {
+					getLang(kkey, systemLanguages[key].children);
+				});
+			} else {
+				getLang(key, systemLanguages);
+			}
+		});
+		this.languages = langs;
+	}
+
 	getSystemDefaultLanguage() {
 		return "basic";
 	}
