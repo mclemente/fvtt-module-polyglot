@@ -7,7 +7,7 @@ export default class PolyglotHooks {
 		game.polyglot.renderChatLog = true;
 		html.find("#chat-controls").after(
 			`<div id='polyglot' class='polyglot polyglot-lang-select flexrow'>
-				<input name="polyglot-checkbox" type="checkbox" checked></input>
+				<input name="polyglot-checkbox" type="checkbox" ${game.settings.get("polyglot", "checkbox") ? "checked" : ""}></input>
 				<label>${game.i18n.localize("POLYGLOT.LanguageLabel")}</label>
 				<select name='polyglot-language'></select>
 			</div>`,
@@ -17,6 +17,10 @@ export default class PolyglotHooks {
 		select.change((ev) => {
 			const lang = ev.target.value;
 			game.polyglot.lastSelection = lang;
+		});
+		const input = html.find("input[name='polyglot-checkbox']");
+		input.change((ev) => {
+			game.settings.set("polyglot", "checkbox", ev.target.checked);
 		});
 		game.polyglot.updateUserLanguages(html);
 	}

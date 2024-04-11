@@ -201,6 +201,11 @@ export function registerSettings() {
 		default: CUSTOM_FONT_SIZES,
 		type: Object,
 	});
+	addMenuSetting("checkbox", {
+		default: true,
+		type: Boolean,
+		scope: "client"
+	});
 
 	Hooks.on("i18nInit", () => {
 		addMenuSetting("allowOOC", {
