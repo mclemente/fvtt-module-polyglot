@@ -174,6 +174,13 @@ export function registerSettings() {
 	});
 
 	// Chat Settings
+	addMenuSetting("displayCheckbox", {
+		name: "POLYGLOT.DisplayCheckbox.title",
+		hint: "POLYGLOT.DisplayCheckbox.hint",
+		default: true,
+		type: Boolean,
+		requiresReload: true,
+	});
 	addMenuSetting("display-translated", {
 		name: "POLYGLOT.DisplayTranslated.title",
 		hint: "POLYGLOT.DisplayTranslated.hint",

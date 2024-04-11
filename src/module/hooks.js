@@ -5,21 +5,21 @@ export default class PolyglotHooks {
 	 */
 	static renderChatLog(chatlog, html, data) {
 		game.polyglot.renderChatLog = true;
+		const input = game.settings.get("polyglot", "displayCheckbox")
+			? `<input name="polyglot-checkbox" type="checkbox" ${game.settings.get("polyglot", "checkbox") ? "checked" : ""}>`
+			: "";
 		html.find("#chat-controls").after(
 			`<div id='polyglot' class='polyglot polyglot-lang-select flexrow'>
-				<input name="polyglot-checkbox" type="checkbox" ${game.settings.get("polyglot", "checkbox") ? "checked" : ""}></input>
+				${input}
 				<label>${game.i18n.localize("POLYGLOT.LanguageLabel")}</label>
 				<select name='polyglot-language'></select>
 			</div>`,
 		);
-		const select = html.find(".polyglot-lang-select select");
-
-		select.change((ev) => {
+		html.find(".polyglot-lang-select select").change((ev) => {
 			const lang = ev.target.value;
 			game.polyglot.lastSelection = lang;
 		});
-		const input = html.find("input[name='polyglot-checkbox']");
-		input.change((ev) => {
+		html.find("input[name='polyglot-checkbox']").change((ev) => {
 			game.settings.set("polyglot", "checkbox", ev.target.checked);
 		});
 		game.polyglot.updateUserLanguages(html);
@@ -62,7 +62,8 @@ export default class PolyglotHooks {
 	 * @returns {Boolean}
 	 */
 	static preCreateChatMessage(message, data, options, userId) {
-		const isCheckboxEnabled = game.polyglot.chatElement.find("input[name=polyglot-checkbox]").prop("checked");
+		const isCheckboxEnabled = !game.settings.get("polyglot", "displayCheckbox")
+			|| game.polyglot.chatElement.find("input[name=polyglot-checkbox]").prop("checked");
 		const isMessageLink = game.polyglot._isMessageLink(data.content);
 		const isMessageInlineRoll = /\[\[(.*?)\]\]/g.test(data.content);
 		// Message preprended by /desc from either Cautious GM Tools or Narrator Tools modules

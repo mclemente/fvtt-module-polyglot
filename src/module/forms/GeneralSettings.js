@@ -108,6 +108,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 					},
 					chat: {
 						// Chat
+						displayCheckbox: this._prepSetting("displayCheckbox"),
 						"display-translated": this._prepSetting("display-translated"),
 						hideTranslation: this._prepSetting("hideTranslation"),
 						allowOOC: this._prepSetting("allowOOC"),
