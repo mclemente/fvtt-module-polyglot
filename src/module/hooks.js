@@ -197,62 +197,60 @@ export default class PolyglotHooks {
 	}
 
 	/**
-	 * Renders a journal entry, adding the scrambling button to its header in case user is the document's owner or a GM.
-	 *
-	 * @param {Document} journalSheet		A JournalSheet document.
-	 * @param {*} html
-	 */
-	static renderJournalSheet(journalSheet, html) {
-		CONFIG.TinyMCE.style_formats.find((f) => f.title === "Polyglot").items = game.polyglot.getLanguagesForEditor();
-		if (journalSheet.document?.isOwner || game.user.isGM) {
-			const toggleButton = game.polyglot.createJournalButton(journalSheet);
-			html.closest(".app").find(".polyglot-button").remove();
-			const titleElement = html.closest(".app").find(".window-title");
-			toggleButton.insertAfter(titleElement);
-		}
-	}
-
-	static renderStorySheet(journalSheet, html) {
-		PolyglotHooks.renderJournalSheet(journalSheet, html);
-	}
-
-	/**
-	 * Renders a page entry, adds the scrambling button to the journal's header in case user is the page's owner, scrambles the text of strings marked as under some language.
+	 * Adds the scrambling button to the document's header in case user is the owner and scrambles text written in languages.
+	 * Special case for Pages due to their ownership working a bit differently.
 	 *
 	 * @param {Document} journalTextPageSheet		A JournalTextPageSheet document.
 	 * @param {*} param1
 	 * @param {*} data
 	 * @returns
 	 */
-	static renderJournalTextPageSheet(journalTextPageSheet, [header, text, section], data) {
-		if (!(journalTextPageSheet.object.parent.isOwner || game.user.isGM || data.editable)) {
-			if (journalTextPageSheet.document.isOwner) {
-				const toggleButton = game.polyglot.createJournalButton(journalTextPageSheet.object.parent.sheet);
-				header
-					.closest(".app")
-					.querySelectorAll(".polyglot-button")
-					.forEach((container) => container.remove());
-				const titleElement = header.closest(".app").querySelector(".window-title");
-				toggleButton.insertAfter(titleElement);
-			} else {
-				const spans = section
-					? section.querySelectorAll("span.polyglot-journal")
-					: header.querySelectorAll("span.polyglot-journal");
-				spans.forEach((e) => {
-					const lang = e.dataset.language;
-					if (!lang) return;
-					let conditions =
-						!game.polyglot._isTruespeech(lang)
-						&& !game.polyglot.isLanguageKnown(game.polyglot.comprehendLanguages)
-						&& !game.polyglot.languageProvider.conditions(lang);
-					if (conditions) {
-						e.title = "????";
-						e.textContent = game.polyglot.scrambleString(e.textContent, journalTextPageSheet.id, lang);
-						e.style.font = game.polyglot._getFontStyle(lang);
-					}
-				});
-			}
+	static renderDocumentSheet(sheet, html, data) {
+		const isOwnerOrGM = sheet.document?.isOwner || game.user.isGM;
+		const isEditable = data.editable;
+		const isTextSheet = sheet instanceof JournalTextPageSheet;
+		const [header, text, section] = html;
+
+		if (isTextSheet && !(sheet.object.parent.isOwner || isOwnerOrGM || isEditable)) {
+			if (sheet.document.isOwner) game.polyglot.insertHeaderButton(sheet.object.parent.sheet, html);
+			else game.polyglot.scrambleSpans();
+		} else if (html.find(".polyglot-journal").length) {
+			if (isOwnerOrGM && html.find('[data-engine="prosemirror"]').length) game.polyglot.insertHeaderButton(sheet, html);
+			else if (!(isOwnerOrGM || isEditable)) game.polyglot.scrambleSpans();
 		}
+	}
+
+	/** @see renderDocumentSheet */
+	static renderActorSheet(sheet, html, data) {
+		PolyglotHooks.renderDocumentSheet(sheet, html, data);
+	}
+
+	/** @see renderDocumentSheet */
+	static renderItemSheet(sheet, html, data) {
+		PolyglotHooks.renderDocumentSheet(sheet, html, data);
+	}
+
+	/** @see renderDocumentSheet */
+	static renderJournalTextPageSheet(journalTextPageSheet, html, data) {
+		PolyglotHooks.renderDocumentSheet(journalTextPageSheet, html, data);
+	}
+
+	/**
+	 * Renders a journal entry, adding the scrambling button to its header in case user is the document's owner or a GM.
+	 *
+	 * @param {Document} sheet		A JournalSheet document.
+	 * @param {HTMLElement} html
+	 */
+	static renderJournalSheet(sheet, html) {
+		CONFIG.TinyMCE.style_formats.find((f) => f.title === "Polyglot").items = game.polyglot.getLanguagesForEditor();
+		if ((sheet.document?.isOwner || game.user.isGM) && sheet.document.pages.size) {
+			game.polyglot.insertHeaderButton(sheet, html);
+		}
+	}
+
+	/** @see renderJournalSheet */
+	static renderStorySheet(sheet, html) {
+		PolyglotHooks.renderJournalSheet(sheet, html);
 	}
 
 	static getProseMirrorMenuDropDowns(menu, items) {

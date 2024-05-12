@@ -432,11 +432,23 @@ export class Polyglot {
 	/* -------------------------------------------- */
 
 	/**
-	 * Creates the Header button for the Journal or Journal's Pages.
+	 *
+	 * @param {Document} document
+	 * @param {HTMLElement} html
+	 */
+	insertHeaderButton(document, html) {
+		const toggleButton = this.createHeaderButton(document);
+		html.closest(".app").find(".polyglot-button").remove();
+		const titleElement = html.closest(".app").find(".window-title");
+		toggleButton.insertAfter(titleElement);
+	}
+
+	/**
+	 * Creates the Header button for Documents.
 	 * @param {Document} document 	A JournalSheet or JournalTextPageSheet
 	 * @returns {} toggleButton
 	 */
-	createJournalButton(document) {
+	createHeaderButton(document) {
 		let runes = false;
 		let texts = [];
 		let styles = [];
@@ -493,6 +505,28 @@ export class Polyglot {
 			}
 		});
 		return toggleButton;
+	}
+
+	/**
+	 *
+	 * @param {Document} document
+	 * @param {HTMLElement} html
+	 */
+	scrambleSpans(document, html) {
+		const [header, text, section] = html;
+		const spans = section ? section.querySelectorAll("span.polyglot-journal") : header.querySelectorAll("span.polyglot-journal");
+		spans.forEach((e) => {
+			const lang = e.dataset.language;
+			if (!lang) return;
+			const conditions = !game.polyglot._isTruespeech(lang)
+				&& !game.polyglot.isLanguageKnown(game.polyglot.comprehendLanguages)
+				&& !game.polyglot.languageProvider.conditions(lang);
+			if (conditions) {
+				e.title = "????";
+				e.textContent = game.polyglot.scrambleString(e.textContent, document.id, lang);
+				e.style.font = game.polyglot._getFontStyle(lang);
+			}
+		});
 	}
 
 	isLanguageKnown(lang) {
