@@ -513,6 +513,7 @@ export class Polyglot {
 	 * @param {HTMLElement} html
 	 */
 	scrambleSpans(document, html) {
+		// eslint-disable-next-line no-unused-vars
 		const [header, text, section] = html;
 		const spans = section ? section.querySelectorAll("span.polyglot-journal") : header.querySelectorAll("span.polyglot-journal");
 		spans.forEach((e) => {

@@ -209,14 +209,13 @@ export default class PolyglotHooks {
 		const isOwnerOrGM = sheet.document?.isOwner || game.user.isGM;
 		const isEditable = data.editable;
 		const isTextSheet = sheet instanceof JournalTextPageSheet;
-		const [header, text, section] = html;
 
 		if (isTextSheet && !(sheet.object.parent.isOwner || isOwnerOrGM || isEditable)) {
 			if (sheet.document.isOwner) game.polyglot.insertHeaderButton(sheet.object.parent.sheet, html);
-			else game.polyglot.scrambleSpans();
+			else game.polyglot.scrambleSpans(sheet, html);
 		} else if (html.find(".polyglot-journal").length) {
 			if (isOwnerOrGM && html.find('[data-engine="prosemirror"]').length) game.polyglot.insertHeaderButton(sheet, html);
-			else if (!(isOwnerOrGM || isEditable)) game.polyglot.scrambleSpans();
+			else if (!(isOwnerOrGM || isEditable)) game.polyglot.scrambleSpans(sheet, html);
 		}
 	}
 
