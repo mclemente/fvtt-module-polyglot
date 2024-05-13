@@ -254,7 +254,6 @@ export default class PolyglotHooks {
 
 	static getProseMirrorMenuDropDowns(menu, items) {
 		if ("format" in items) {
-			console.log(items);
 			if ("format" in items) {
 				items.format.entries.push({
 					action: "polyglot",
