@@ -101,6 +101,8 @@ export default class dnd5eLanguageProvider extends LanguageProvider {
 		const langs = {};
 		if (this.replaceLanguages) {
 			CONFIG.DND5E.languages = {};
+			this.languageRarities = [];
+			this.multiLanguages = {};
 		}
 		const systemLanguages = CONFIG.DND5E.languages;
 		const getLang = (key, target) => {
