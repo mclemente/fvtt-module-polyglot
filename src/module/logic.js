@@ -697,7 +697,8 @@ export class Polyglot {
 					inline: "span",
 					classes: "polyglot-journal",
 					attributes: {
-						title: lang.label || "",
+						"data-tooltip": lang.label || "",
+						"data-tooltip-direction": "UP",
 						"data-language": key || "",
 					},
 				};
