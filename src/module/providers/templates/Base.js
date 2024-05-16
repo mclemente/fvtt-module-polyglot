@@ -397,8 +397,11 @@ export default class LanguageProvider {
 				this.fonts[font].fontSize = game.polyglot.CustomFontSizes[font];
 			}
 			if (fonts[font]) {
-				this.fonts[font].alphabeticOnly = fonts[font].alphabeticOnly;
-				this.fonts[font].logographical = fonts[font].logographical;
+				if (typeof fonts[font] === "string") delete this.fonts[font];
+				else {
+					this.fonts[font].alphabeticOnly = fonts[font]?.alphabeticOnly ?? false;
+					this.fonts[font].logographical = fonts[font]?.logographical ?? false;
+				}
 			}
 		}
 	}
