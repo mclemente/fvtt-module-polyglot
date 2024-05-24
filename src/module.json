@@ -10,8 +10,8 @@
 		}
 	],
 	"compatibility": {
-		"minimum": "11",
-		"verified": "11"
+		"minimum": "12",
+		"verified": "12"
 	},
 	"esmodules": ["module/polyglot.js"],
 	"scripts": ["lib/select2/select2.min.js"],
