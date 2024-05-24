@@ -72,8 +72,8 @@ export default class PolyglotHooks {
 			|| ["description", "narration", "notification"].includes(message.flags?.["narrator-tools"]?.type);
 		if (!isCheckboxEnabled || isMessageLink || isMessageInlineRoll || isDescMessage) return true;
 		if (
-			data.type === CONST.CHAT_MESSAGE_TYPES.IC
-			|| (game.polyglot._allowOOC() && game.polyglot._isMessageTypeOOC(data.type))
+			message.style === CONST.CHAT_MESSAGE_STYLES.IC
+			|| (message.style === CONST.CHAT_MESSAGE_STYLES.OOC && game.polyglot._allowOOC())
 		) {
 			let lang = game.polyglot.chatElement.find("select[name=polyglot-language]").val();
 			const language = data.lang || data.language;
@@ -190,10 +190,8 @@ export default class PolyglotHooks {
 	 * @returns {Boolean}
 	 */
 	static createChatMessage(message, options, userId) {
-		if (
-			game.polyglot._isMessageLink(message.content)
-			|| (message.type === CONST.CHAT_MESSAGE_TYPES.OOC && !game.polyglot._allowOOC())
-		) return false;
+		return !(game.polyglot._isMessageLink(message.content)
+			|| (message.style === CONST.CHAT_MESSAGE_STYLES.OOC && !game.polyglot._allowOOC()));
 	}
 
 	/**

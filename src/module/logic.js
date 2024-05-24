@@ -50,7 +50,7 @@ export class Polyglot {
 						.reverse()
 						.find((m) => m.content === message);
 					// Message was sent in-character (no /ooc or /emote)
-					if (gameMessages?.type === CONST.CHAT_MESSAGE_TYPES.IC) {
+					if (gameMessages?.type === CONST.CHAT_MESSAGE_STYLES.IC) {
 						lang = gameMessages.getFlag("polyglot", "language") || "";
 						randomId = gameMessages.id;
 					}
@@ -159,8 +159,8 @@ export class Polyglot {
 			.map((m) => game.messages.get(m.dataset.messageId));
 		for (const message of messages) {
 			if (
-				message.type === CONST.CHAT_MESSAGE_TYPES.IC
-				|| (this._isMessageTypeOOC(message.type) && message.getFlag("polyglot", "language"))
+				message.style === CONST.CHAT_MESSAGE_STYLES.IC
+				|| (message.style === CONST.CHAT_MESSAGE_STYLES.OOC && message.getFlag("polyglot", "language"))
 			) {
 				ui.chat.updateMessage(message);
 			}
@@ -375,7 +375,7 @@ export class Polyglot {
 		}
 
 		const salted_string = string + salt;
-		const seed = new MersenneTwister(this._hashCode(salted_string));
+		const seed = new foundry.dice.MersenneTwister(this._hashCode(salted_string));
 		const regex = game.settings.get("polyglot", "RuneRegex") ? /[a-zA-Z\d]/g : /\S/gu;
 		const characters = selectedFont.alphabeticOnly
 			? "abcdefghijklmnopqrstuvwxyz"
@@ -597,15 +597,6 @@ export class Polyglot {
 		return /@|https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/gi.test(
 			messageContent,
 		);
-	}
-
-	/**
-	 * Checks if a message is Out Of Character.
-	 * @param {Number} type
-	 * @returns {Boolean}
-	 */
-	_isMessageTypeOOC(type) {
-		return [CONST.CHAT_MESSAGE_TYPES.OOC, CONST.CHAT_MESSAGE_TYPES.WHISPER].includes(type);
 	}
 
 	_isOmniglot(lang) {

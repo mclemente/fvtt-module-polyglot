@@ -4,7 +4,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 		if (game.system.id === "wfrp4e") {
 			classes.push(game.system.id);
 		}
-		return mergeObject(super.defaultOptions, {
+		return foundry.utils.mergeObject(super.defaultOptions, {
 			id: "polyglot-general-form",
 			title: "Polyglot General Settings",
 			template: "./modules/polyglot/templates/GeneralSettings.hbs",
