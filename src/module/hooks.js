@@ -73,7 +73,7 @@ export default class PolyglotHooks {
 		if (!isCheckboxEnabled || isMessageLink || isMessageInlineRoll || isDescMessage) return true;
 		if (
 			message.style === CONST.CHAT_MESSAGE_STYLES.IC
-			|| (game.polyglot._allowOOC() && game.polyglot._isMessageTypeOOC(message.style))
+			|| (message.style === CONST.CHAT_MESSAGE_STYLES.OOC && game.polyglot._allowOOC())
 		) {
 			let lang = game.polyglot.chatElement.find("select[name=polyglot-language]").val();
 			const language = data.lang || data.language;

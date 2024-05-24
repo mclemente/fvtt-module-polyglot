@@ -160,7 +160,7 @@ export class Polyglot {
 		for (const message of messages) {
 			if (
 				message.style === CONST.CHAT_MESSAGE_STYLES.IC
-				|| (this._isMessageTypeOOC(message.style) && message.getFlag("polyglot", "language"))
+				|| (message.style === CONST.CHAT_MESSAGE_STYLES.OOC && message.getFlag("polyglot", "language"))
 			) {
 				ui.chat.updateMessage(message);
 			}
@@ -597,15 +597,6 @@ export class Polyglot {
 		return /@|https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/gi.test(
 			messageContent,
 		);
-	}
-
-	/**
-	 * Checks if a message is Out Of Character.
-	 * @param {Number} type
-	 * @returns {Boolean}
-	 */
-	_isMessageTypeOOC(type) {
-		return [CONST.CHAT_MESSAGE_STYLES.OOC, CONST.CHAT_MESSAGE_STYLES.WHISPER].includes(type);
 	}
 
 	_isOmniglot(lang) {
