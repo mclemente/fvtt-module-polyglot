@@ -190,10 +190,8 @@ export default class PolyglotHooks {
 	 * @returns {Boolean}
 	 */
 	static createChatMessage(message, options, userId) {
-		if (
-			game.polyglot._isMessageLink(message.content)
-			|| (message.style === CONST.CHAT_MESSAGE_STYLES.OOC && !game.polyglot._allowOOC())
-		) return false;
+		return !(game.polyglot._isMessageLink(message.content)
+			|| (message.style === CONST.CHAT_MESSAGE_STYLES.OOC && !game.polyglot._allowOOC()));
 	}
 
 	/**
