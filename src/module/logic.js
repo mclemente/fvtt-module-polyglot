@@ -375,7 +375,7 @@ export class Polyglot {
 		}
 
 		const salted_string = string + salt;
-		const seed = new MersenneTwister(this._hashCode(salted_string));
+		const seed = new foundry.dice.MersenneTwister(this._hashCode(salted_string));
 		const regex = game.settings.get("polyglot", "RuneRegex") ? /[a-zA-Z\d]/g : /\S/gu;
 		const characters = selectedFont.alphabeticOnly
 			? "abcdefghijklmnopqrstuvwxyz"
