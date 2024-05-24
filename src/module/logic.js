@@ -50,7 +50,7 @@ export class Polyglot {
 						.reverse()
 						.find((m) => m.content === message);
 					// Message was sent in-character (no /ooc or /emote)
-					if (gameMessages?.type === CONST.CHAT_MESSAGE_TYPES.IC) {
+					if (gameMessages?.type === CONST.CHAT_MESSAGE_STYLES.IC) {
 						lang = gameMessages.getFlag("polyglot", "language") || "";
 						randomId = gameMessages.id;
 					}
@@ -159,8 +159,8 @@ export class Polyglot {
 			.map((m) => game.messages.get(m.dataset.messageId));
 		for (const message of messages) {
 			if (
-				message.type === CONST.CHAT_MESSAGE_TYPES.IC
-				|| (this._isMessageTypeOOC(message.type) && message.getFlag("polyglot", "language"))
+				message.style === CONST.CHAT_MESSAGE_STYLES.IC
+				|| (this._isMessageTypeOOC(message.style) && message.getFlag("polyglot", "language"))
 			) {
 				ui.chat.updateMessage(message);
 			}
@@ -605,7 +605,7 @@ export class Polyglot {
 	 * @returns {Boolean}
 	 */
 	_isMessageTypeOOC(type) {
-		return [CONST.CHAT_MESSAGE_TYPES.OOC, CONST.CHAT_MESSAGE_TYPES.WHISPER].includes(type);
+		return [CONST.CHAT_MESSAGE_STYLES.OOC, CONST.CHAT_MESSAGE_STYLES.WHISPER].includes(type);
 	}
 
 	_isOmniglot(lang) {
