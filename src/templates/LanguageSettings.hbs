@@ -25,11 +25,14 @@
 				{{#each languages.value as |value key|}}
 					<li class="flexrow">
 						<div data-id="{{key}}">{{value.label}}</div>
-						<div style="display: none;"><input name="languages.{{key}}.label" value="{{value.label}}" /></div>
+						<div style="display: none;"><input
+								name="languages.{{key}}.label"
+								value="{{value.label}}"
+							/></div>
 						<div>
 							<select class="selectatr" name="languages.{{key}}.font" data-dtype="String">
 								{{#select value.font}}
-									{{#each ../alphabets.value as |font label|}}
+									{{#each @root.alphabets.value as |font label|}}
 										<option value="{{label}}">{{label}}</option>
 									{{/each}}
 								{{/select}}
@@ -47,7 +50,8 @@
 					</li>
 				{{/each}}
 			</ul>
-			<div class="polyglot-languages-warn">⚠️ If you change the provider, your language settings will be overwritten.</div>
+			<div class="polyglot-languages-warn">⚠️ If you change the provider, your language settings will be
+				overwritten.</div>
 		</div>
 	</section>
 

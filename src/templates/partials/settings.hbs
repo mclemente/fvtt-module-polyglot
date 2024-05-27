@@ -21,7 +21,14 @@
 		</select>
 	{{/if}}
 	{{#if (eq type "Range")}}
-		<input name="{{id}}" type="range" max="{{range.max}}" min="{{range.min}}" step="{{range.step}}" value="{{value}}" />
+		<input
+			name="{{id}}"
+			type="range"
+			max="{{range.max}}"
+			min="{{range.min}}"
+			step="{{range.step}}"
+			value="{{value}}"
+		/>
 		<span class="range-value">{{value}}</span>
 	{{/if}}
 	<p class="notes">{{localize hint}}</p>
