@@ -152,10 +152,8 @@ export class Polyglot {
 	 */
 	updateChatMessagesDelayed() {
 		this.refreshTimeout = null;
-		const messages = this.chatElement
-			.find(".message")
+		const messages = game.messages.contents
 			.slice(-100)
-			.toArray()
 			.map((m) => game.messages.get(m.dataset.messageId));
 		for (const message of messages) {
 			if (
@@ -194,7 +192,7 @@ export class Polyglot {
 	 *
 	 * @var {Set} this.knownLanguages
 	 */
-	updateUserLanguages(html) {
+	updateUserLanguages() {
 		if (game.polyglot.languageProvider.requiresReady && !game.ready) return;
 		[this.knownLanguages, this.literateLanguages] = this.getUserLanguages();
 		const defaultLanguage = this.defaultLanguage;
@@ -294,7 +292,7 @@ export class Polyglot {
 			options.sort((a, b) => a.text.localeCompare(b.text));
 		}
 
-		const select = html.find(".polyglot-lang-select select");
+		const select = this.chatElement.find(".polyglot-lang-select select");
 		const prevOption = select.val();
 
 		select.empty();
@@ -421,7 +419,7 @@ export class Polyglot {
 		}
 		if (this.languageProvider.requiresReady) {
 			Hooks.once("polyglot.languageProvider.ready", () => {
-				this.updateUserLanguages(this.chatElement);
+				this.updateUserLanguages();
 				checkChanges();
 			});
 		} else checkChanges();

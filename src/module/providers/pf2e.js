@@ -189,7 +189,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 		Hooks.on("closeHomebrewElements", async (homebrewElements, html) => {
 			await game.polyglot.languageProvider.getLanguages();
 			await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
-			game.polyglot.updateUserLanguages(game.polyglot.chatElement);
+			game.polyglot.updateUserLanguages();
 		});
 	}
 
@@ -197,7 +197,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 		if (game.user.isGM) {
 			const pf2eDefaultLanguage = game.settings.get("pf2e", "homebrew.languageRarities").commonLanguage;
 			const pf2eDefaultLangString = game.i18n.localize(CONFIG.PF2E.languages[pf2eDefaultLanguage]);
-			const messagesInCommon = Array.from(game.messages)
+			const messagesInCommon = game.messages.contents
 				.slice(-100)
 				.filter((m) => m.flags?.polyglot?.language === "common");
 			if (!messagesInCommon.length) return;

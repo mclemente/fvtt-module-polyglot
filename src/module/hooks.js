@@ -27,13 +27,13 @@ export default class PolyglotHooks {
 
 	static updateActor(actor, data, options, userId) {
 		if (actor.hasPlayerOwner && actor.testUserPermission(game.user, "OWNER")) {
-			game.polyglot.updateUserLanguages(game.polyglot.chatElement);
+			game.polyglot.updateUserLanguages();
 			game.polyglot.updateChatMessages();
 		}
 	}
 
 	static controlToken() {
-		game.polyglot.updateUserLanguages(game.polyglot.chatElement);
+		game.polyglot.updateUserLanguages();
 		game.polyglot.updateChatMessages();
 	}
 
@@ -117,7 +117,7 @@ export default class PolyglotHooks {
 			return;
 		}
 		// Skip for inline rolls
-		if (!game.polyglot.knownLanguages.size) game.polyglot.updateUserLanguages(game.polyglot.chatElement);
+		if (!game.polyglot.knownLanguages.size) game.polyglot.updateUserLanguages();
 		const metadata = html.find(".message-metadata");
 		const language = game.polyglot.languageProvider.languages?.[lang]?.label || lang;
 		const known = game.polyglot.isLanguageKnown(lang);
@@ -278,7 +278,7 @@ export default class PolyglotHooks {
 
 	// Re-checks the user languages for the GM when activating another party on the Actors sidebar.
 	static renderActorDirectoryPF2e(actors, html, data) {
-		game.polyglot.updateUserLanguages(game.polyglot.chatElement);
+		game.polyglot.updateUserLanguages();
 	}
 
 	/**
