@@ -5,11 +5,7 @@
 				<div class="form-group">
 					<label>{{name}}</label>
 					<select class="form-fields polyglot-{{this.id}}" name="{{this.id}}">
-						{{#select this.value}}
-							{{#each this.choices as |name k|}}
-								<option value="{{k}}">{{localize name}}</option>
-							{{/each}}
-						{{/select}}
+						{{selectOptions this.choices selected=this.value}}
 					</select>
 				</div>
 				<p class="notes">{{this.hint}}</p>
@@ -31,20 +27,12 @@
 							/></div>
 						<div>
 							<select class="selectatr" name="languages.{{key}}.font" data-dtype="String">
-								{{#select value.font}}
-									{{#each @root.alphabets.value as |font label|}}
-										<option value="{{label}}">{{label}}</option>
-									{{/each}}
-								{{/select}}
+								{{selectOptions @root.alphabets.value selected=value.font}}
 							</select>
 						</div>
 						<div>
 							<select class="selectatr" name="languages.{{key}}.rng" data-dtype="String">
-								{{#select value.rng}}
-									<option value="default">Default</option>
-									<option value="unique">Unique</option>
-									<option value="none">None</option>
-								{{/select}}
+								{{selectOptions @root.rng selected=value.rng localize=true}}
 							</select>
 						</div>
 					</li>

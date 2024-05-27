@@ -88,6 +88,11 @@ export class PolyglotLanguageSettings extends FormApplication {
 			data,
 			languages,
 			alphabets,
+			rng: {
+				default: "POLYGLOT.RandomizeRunesOptions.a",
+				unique: "POLYGLOT.RandomizeRunesOptions.b",
+				none: "POLYGLOT.RandomizeRunesOptions.c"
+			}
 		};
 	}
 
