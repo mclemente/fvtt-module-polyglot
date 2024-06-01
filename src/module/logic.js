@@ -45,14 +45,14 @@ export class Polyglot {
 					}
 				} else {
 					// Find the message out of the last 10 chat messages, last to first
-					const gameMessages = game.messages.contents
+					const messages = game.messages.contents
 						.slice(-10)
 						.reverse()
 						.find((m) => m.content === message);
 					// Message was sent in-character (no /ooc or /emote)
-					if (gameMessages?.type === CONST.CHAT_MESSAGE_STYLES.IC) {
-						lang = gameMessages.getFlag("polyglot", "language") || "";
-						randomId = gameMessages.id;
+					if (messages?.type === CONST.CHAT_MESSAGE_STYLES.IC) {
+						lang = messages.getFlag("polyglot", "language") || "";
+						randomId = messages.id;
 					}
 				}
 				if (lang) {
@@ -153,7 +153,7 @@ export class Polyglot {
 	updateChatMessagesDelayed() {
 		this.refreshTimeout = null;
 		const messages = game.messages.contents
-			.slice(-100)
+			.slice(-CONFIG.ChatMessage.batchSize)
 			.map((m) => game.messages.get(m.dataset.messageId));
 		for (const message of messages) {
 			if (
