@@ -198,7 +198,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 			const pf2eDefaultLanguage = game.settings.get("pf2e", "homebrew.languageRarities").commonLanguage;
 			const pf2eDefaultLangString = game.i18n.localize(CONFIG.PF2E.languages[pf2eDefaultLanguage]);
 			const messagesInCommon = game.messages.contents
-				.slice(-100)
+				.slice(-CONFIG.ChatMessage.batchSize)
 				.filter((m) => m.flags?.polyglot?.language === "common");
 			if (!messagesInCommon.length) return;
 
