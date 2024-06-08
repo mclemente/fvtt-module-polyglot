@@ -154,7 +154,7 @@ export class Polyglot {
 		this.refreshTimeout = null;
 		const messages = game.messages.contents
 			.slice(-CONFIG.ChatMessage.batchSize)
-			.map((m) => game.messages.get(m.dataset.messageId));
+			.map((m) => game.messages.get(m.id));
 		for (const message of messages) {
 			if (
 				message.style === CONST.CHAT_MESSAGE_STYLES.IC
