@@ -22,7 +22,7 @@
 		"ReplaceLanguages.title": "Usuń Języki Systemowe",
 		"ReplaceLanguages.hint": "Usuwa domyślne języki systemu. Pierwszy język na liście języków niestandardowych staje się nowym językiem domyślnym.",
 		"ScrambleGM.title": "Szyfruj Wiadomości dla MG",
-		"ScrambleGM.hint": "Nie tłumacz języków dla MG (aby określić zrozumienie języka przez żeton, odnieś się koloru ikonki globu). Wymaga przeładowania.",
+		"ScrambleGM.hint": "Nie tłumacz języków dla MG (aby określić zrozumienie języka przez żeton, odnieś się koloru ikonki globu).",
 		"enableAllFonts.title": "Dodaj czcionki Foundry do Polyglot",
 		"enableAllFonts.hint": "Przełącz to ustawienie, aby usunąć wszystkie czcionki Foundry z Polyglot.",
 		"RandomizeRunes.title": "Randomizacja Run",
@@ -30,14 +30,14 @@
 		"RandomizeRunesOptions": {
 			"a": "Domyślna",
 			"b": "Unikalne frazy",
-			"c": "Brak ⚠️"
+			"c": "Brak"
 		},
 		"ExportFonts.title": "Dodaj czcionki Polyglot do Foundry",
 		"ExportFonts.hint": "Dodaj czcionki Polyglot do funkcji Foundry, takich jak Rysunki.",
 		"DisplayTranslated.title": "Wyświetlaj Tłumaczenia",
 		"DisplayTranslated.hint": "Dla języków, które zostaną przetłumaczone na czacie, wyświetlaj tekst oryginalny oraz tłumaczenie pod spodem.",
 		"HideTranslation.title": "Usuń powiadomienia dla Graczy",
-		"HideTranslation.hint": "Usuwa ikonę \"globu\" oraz tekst \"Przetłumaczono z:\" z wiadomości czatu. Idealne kiedy nie chcesz zdradzać graczom języka, którym się porozumiewasz. Wymaga przeładowania.",
+		"HideTranslation.hint": "Usuwa ikonę \"globu\" oraz tekst \"Przetłumaczono z:\" z wiadomości czatu. Idealne kiedy nie chcesz zdradzać graczom języka, którym się porozumiewasz.",
 		"AllowOOC.title": "Usuwanie wiadomości z czatu niezwiązanych z postacią",
 		"AllowOOC.hint": "Wybierz użytkowników, których wiadomości Out of Character mają być szyfrowane.",
 		"AllowOOCOptions": {
@@ -106,11 +106,11 @@
 		},
 		"languageDataPath": {
 			"title": "Ścieżka Języków",
-			"hint": "Jeśli twój system ma języki ustawione w danych aktorów i nie są one poprawnie ładowane, być może używa innej ścieżki danych. Wprowadź ścieżkę danych do właściwego atrybutu (np. actor.system.languages lub actor.system.speak). To ustawienie ma pierwszeństwo przed ustawieniem {setting}. Wymaga przeładowania."
+			"hint": "Jeśli twój system ma języki ustawione w danych aktorów i nie są one poprawnie ładowane, być może używa innej ścieżki danych. Wprowadź ścieżkę danych do właściwego atrybutu (np. actor.system.languages lub actor.system.speak). To ustawienie ma pierwszeństwo przed ustawieniem {setting}."
 		},
 		"literacyDataPath": {
 			"title": "Ścieżka danych dotyczących alfabetyzacji",
-			"hint": "To samo, co ustawienie {setting}, ale dla odczytu dzienników. To ustawienie wymaga ustawienia {setting}. Wymaga przeładowania."
+			"hint": "To samo, co ustawienie {setting}, ale dla odczytu dzienników. To ustawienie wymaga ustawienia {setting}."
 		},
 		"RuneRegex": {
 			"title": "Randomizuj tylko alfanumeryczne",
@@ -207,6 +207,10 @@
 					"Content": "Na tym kończy się ta wycieczka. Mam nadzieję, że rozwiało to pewne wątpliwości dotyczące interakcji Polyglota z zachowaniem Core Foundry.<br>Jeśli chcesz bardziej zagłębić się w moduł, sprawdź jego ustawienia w <span class=\"reference\">Ustawieniach Gry</span>.<br>Jeśli to nadal okaże się niewystarczające, spróbuj sprawdzić <a class=\"hyperlink\" href=\"https://github.com/mclemente/fvtt-module-polyglot/wiki\" target=\"_blank\" rel=\"nofollow noopener\"> wiki modułu</a>, aby uzyskać więcej informacji."
 				}
 			}
+		},
+		"DisplayCheckbox": {
+			"hint": "Usuwa pole wyboru z sekcji czatu.",
+			"title": "Wyświetl pole wyboru"
 		}
 	}
 }
