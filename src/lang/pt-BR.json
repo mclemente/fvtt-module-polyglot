@@ -22,7 +22,7 @@
 		"ReplaceLanguages.title": "Remover Idiomas do Sistema",
 		"ReplaceLanguages.hint": "Remove os idiomas padrão do sistema. O primeiro idioma da lista de Idiomas Personalizados se tornará o novo idioma padrão.",
 		"ScrambleGM.title": "Embaralhar para o Mestre",
-		"ScrambleGM.hint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende). Recarregará o programa.",
+		"ScrambleGM.hint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
 		"enableAllFonts": {
 			"title": "Adicionar fontes do Foundry ao Polyglot",
 			"hint": "Desative essa configuração para remover do Polyglot todas as fontes do Foundry.",
@@ -38,14 +38,14 @@
 		"RandomizeRunesOptions": {
 			"a": "Padrão",
 			"b": "Frases únicas",
-			"c": "Nenhum ⚠️"
+			"c": "Nenhuma"
 		},
 		"ExportFonts.title": "Adicionar Fontes do Polyglot ao Foundry",
 		"ExportFonts.hint": "Adiciona as fontes do Polyglot às ferramentas do Foundry, como as Ferramentas de Desenho de texto.",
 		"DisplayTranslated.title": "Mostrar traduções",
 		"DisplayTranslated.hint": "Para linguagens que são traduzidas no chat, mostrar o texto original e a tradução em seguida.",
 		"HideTranslation.title": "Esconder Globo e texto \"Traduzido do\" dos jogadores",
-		"HideTranslation.hint": "Esconde o Globo e o texto \"Traduzido do\" de mensagens do chat para jogadores. Útil para quando você não quer mostrar aos jogadores que língua você está falando. Recarregará o programa.",
+		"HideTranslation.hint": "Esconde o Globo e o texto \"Traduzido do\" de mensagens do chat para jogadores. Útil para quando você não quer mostrar aos jogadores que língua você está falando.",
 		"AllowOOC.title": "Embaralhar mensagens de chat Fora de Personagem",
 		"AllowOOC.hint": "Escolha quais usuários podem ter suas mensagens Fora de Personagem embaralhadas.",
 		"AllowOOCOptions": {
@@ -122,11 +122,11 @@
 		},
 		"languageDataPath": {
 			"title": "Caminho de Dados dos Idiomas",
-			"hint": "Se o seu sistema tem idiomas definidos nos dados dos atores e não estão sendo carregados devidamente, ele pode estar em outro caminho de dados. Defina o caminho de dados para o atributo correto (ex.: actor.system.languages ou actor.system.speak). Esta configuração tem precedência sobre a configuração de {setting}. Recarregará o Foundry."
+			"hint": "Se o seu sistema tem idiomas definidos nos dados dos atores e não estão sendo carregados devidamente, ele pode estar em outro caminho de dados. Defina o caminho de dados para o atributo correto (ex.: actor.system.languages ou actor.system.speak). Esta configuração tem precedência sobre a configuração de {setting}."
 		},
 		"literacyDataPath": {
 			"title": "Caminho de Dados de Alfabetização",
-			"hint": "Igual à configuração de {setting}, mas para diários. Esta configuração requer a configuração de {setting}. Recarregará o Foundry."
+			"hint": "Igual à configuração de {setting}, mas para diários. Esta configuração requer a configuração de {setting}."
 		},
 		"GeneralSettings": "Configurações Gerais",
 		"General": "Geral",
@@ -141,6 +141,10 @@
 			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma caseiro definido no menu Homebrew Elements, caso contrário, os idiomas não comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
 		},
 		"UnknownLanguages": "Idiomas Desconhecidos",
-		"KnownLanguages": "Idiomas Conhecidos"
+		"KnownLanguages": "Idiomas Conhecidos",
+		"DisplayCheckbox": {
+			"hint": "Remove a caixa de seleção do chat.",
+			"title": "Mostrar Caixa de Seleção"
+		}
 	}
 }
