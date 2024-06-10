@@ -45,28 +45,29 @@ export class Polyglot {
 					}
 				} else {
 					// Find the message out of the last 10 chat messages, last to first
-					const messages = game.messages.contents
+					const msg = game.messages.contents
 						.slice(-10)
 						.reverse()
-						.find((m) => m.content === message);
+						.find(
+							(m) => m.content === message && m.style === CONST.CHAT_MESSAGE_STYLES.IC
+						);
 					// Message was sent in-character (no /ooc or /emote)
-					if (messages?.type === CONST.CHAT_MESSAGE_STYLES.IC) {
-						lang = messages.getFlag("polyglot", "language") || "";
-						randomId = messages.id;
+					if (msg) {
+						lang = msg.getFlag("polyglot", "language") || "";
+						randomId = msg.id;
 					}
 				}
-				if (lang) {
-					// Language isn't truespeech, isn't known and user isn't under Comprehend Languages effect
-					const unknown = !this.isLanguageknownOrUnderstood(lang);
-					if (unknown) {
-						message = this.scrambleString(message, randomId, lang);
-						document.documentElement.style.setProperty(
-							"--polyglot-chat-bubble-font",
-							this._getFontStyle(lang).replace(/\d+%\s/g, ""),
-						);
-						if (cssClasses === undefined) cssClasses = [];
-						cssClasses.push("polyglot", "polyglot-chat-bubble");
-					}
+				// Language isn't truespeech, isn't known and user isn't under Comprehend Languages effect
+				if (lang && !this.isLanguageknownOrUnderstood(lang)) {
+					message = this.scrambleString(message, randomId, lang);
+					document.documentElement.style.setProperty(
+						"--polyglot-chat-bubble-font",
+						this._getFontStyle(lang).replace(/\d+%\s/g, ""),
+					);
+					if (cssClasses === undefined) cssClasses = [];
+					// circumventing core issue https://github.com/foundryvtt/foundryvtt/issues/11178
+					// cssClasses.push("polyglot, polyglot-chat-bubble");
+					cssClasses.push("polyglot polyglot-chat-bubble");
 				}
 				return wrapped(token, message, { cssClasses, requireVisible, pan });
 			},
