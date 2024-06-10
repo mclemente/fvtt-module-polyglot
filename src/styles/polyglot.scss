@@ -3,19 +3,19 @@
 @import "chat";
 
 :root {
-  --polyglot-journal-color: 255, 180, 0;
-  --polyglot-journal-opacity: 0.25;
-  --polyglot-journal-color-temp: 255, 180, 0;
-  --polyglot-journal-opacity-temp: 0.25;
+	--polyglot-journal-color: 255, 180, 0;
+	--polyglot-journal-opacity: 0.25;
+	--polyglot-journal-color-temp: 255, 180, 0;
+	--polyglot-journal-opacity-temp: 0.25;
 }
 
 .polyglot {
-  .polyglot-chat-bubble {
-    font-family: $font-family_1;
-  }
+	.polyglot-chat-bubble {
+		font-family: $font-family_1;
+	}
 
-  @import "journal";
-  @import "forms";
-  @import "language-selector";
-  @import "system-specific";
+	@import "journal";
+	@import "forms";
+	@import "language-selector";
+	@import "system-specific";
 }

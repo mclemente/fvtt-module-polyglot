@@ -2,13 +2,7 @@ $color_1: #e2e2e2;
 $color_2: fieldtext;
 $color_3: red;
 $font-family_1: var(--polyglot-chat-bubble-font);
-$background-color_1: rgba(
-  var(--polyglot-journal-color),
-  var(--polyglot-journal-opacity)
-);
-$background-color_2: rgba(
-  var(--polyglot-journal-color-temp),
-  var(--polyglot-journal-opacity-temp)
-);
+$background-color_1: rgba(var(--polyglot-journal-color), var(--polyglot-journal-opacity));
+$background-color_2: rgba(var(--polyglot-journal-color-temp), var(--polyglot-journal-opacity-temp));
 $background-color_3: rgba(255, 255, 255, 0.4);
 $border-color_1: fieldtext transparent transparent transparent;

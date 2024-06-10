@@ -1,21 +1,21 @@
 & {
-  .polyglot-languages-list {
-    list-style: none;
-    padding: 0;
+	.polyglot-languages-list {
+		list-style: none;
+		padding: 0;
 
-    li {
-      &.flexrow {
-        flex-wrap: nowrap;
-      }
-    }
-  }
+		li {
+			&.flexrow {
+				flex-wrap: nowrap;
+			}
+		}
+	}
 
-  input.selectatr[type="number"] {
-    width: 30px;
-    height: 100%;
-    background: none;
-    border: none;
-    border-radius: 0;
-    border-bottom: 1px solid var(--color-border-light-tertiary);
-  }
+	input.selectatr[type="number"] {
+		width: 30px;
+		height: 100%;
+		background: none;
+		border: none;
+		border-radius: 0;
+		border-bottom: 1px solid var(--color-border-light-tertiary);
+	}
 }

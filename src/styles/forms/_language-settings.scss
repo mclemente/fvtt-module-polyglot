@@ -1,33 +1,33 @@
 &.polyglot-language-settings {
-  min-height: 265px;
-  min-width: 600px;
+	min-height: 265px;
+	min-width: 600px;
 
-  .font-name {
-    text-transform: capitalize;
-  }
-  .selectatr {
-    text-transform: capitalize;
-  }
-  .window-content {
-    padding: 0;
-  }
-  form {
-    height: 100%;
-    section {
-      padding: 1rem;
-      overflow: hidden auto;
-    }
-    footer {
-      margin: 1rem;
-      flex: 0;
-    }
-  }
+	.font-name {
+		text-transform: capitalize;
+	}
+	.selectatr {
+		text-transform: capitalize;
+	}
+	.window-content {
+		padding: 0;
+	}
+	form {
+		height: 100%;
+		section {
+			padding: 1rem;
+			overflow: hidden auto;
+		}
+		footer {
+			margin: 1rem;
+			flex: 0;
+		}
+	}
 
-  .polyglot-languages-warn {
-    font-weight: bold;
-    color: $color_3;
-    text-align: center;
-    margin-bottom: 0.5em;
-    display: none;
-  }
+	.polyglot-languages-warn {
+		font-weight: bold;
+		color: $color_3;
+		text-align: center;
+		margin-bottom: 0.5em;
+		display: none;
+	}
 }
