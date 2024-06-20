@@ -13,7 +13,7 @@
 		<textarea name="{{id}}" cols="4" data-dtype="String">{{value}}</textarea>
 	{{/if}}
 	{{#if (eq type "Color")}}
-		{{colorPicker name="JournalHighlightColor" value=value}}
+		<color-picker name="{{id}}" value="{{value}}"></color-picker>
 	{{/if}}
 	{{#if (eq type "Select")}}
 		<select name="{{id}}" class="form-fields">
