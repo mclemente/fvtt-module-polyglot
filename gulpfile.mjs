@@ -28,7 +28,7 @@ const distDirectory = "./dist";
 const stylesDirectory = `${sourceDirectory}/styles`;
 const stylesExtension = "scss";
 const sourceFileExtension = "js";
-const staticFiles = ["assets", "fonts", "lang", "lib", "packs", "templates", "module.json"];
+const staticFiles = ["assets", "fonts", "lang", "lib", "packs", "styles/fonts.css", "templates", "module.json"];
 
 /********************/
 /*      BUILD       */
@@ -57,7 +57,7 @@ function buildCode() {
 function buildStyles() {
 	return gulp.src([`${stylesDirectory}/**/*.${stylesExtension}`], { base: `${stylesDirectory}/` })
 		.pipe(sourcemaps.init({ loadMaps: true }))
-		.pipe(sass({ outputStyle: "expanded" }).on("error", sass.logError))
+		.pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
 		.pipe(prefix({ cascade: false }))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest(`${distDirectory}/styles`));
@@ -102,11 +102,7 @@ export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, se
  * Remove built files from `dist` folder while ignoring source files
  */
 export async function clean() {
-	const files = [...staticFiles, "module"];
-
-	if (fs.existsSync(`${stylesDirectory}/${packageId}.${stylesExtension}`)) {
-		files.push("styles");
-	}
+	const files = [...staticFiles, "styles", "module"];
 
 	console.log(" ", "Files to clean:");
 	console.log("   ", files.join("\n    "));
