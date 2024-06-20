@@ -192,4 +192,21 @@ export default class pf1LanguageProvider extends LanguageProvider {
 			font: "Qijomi",
 		},
 	};
+
+	getUserLanguages(actor) {
+		let knownLanguages = new Set();
+		let literateLanguages = new Set();
+		if (actor.system?.traits?.languages) {
+			for (let lang of actor.system.traits.languages.value) {
+				knownLanguages.add(lang);
+			}
+			if (actor.system.traits.languages.customTotal) {
+				for (let lang of actor.system.traits.languages.customTotal) {
+					const key = lang.trim().toLowerCase();
+					knownLanguages.add(key);
+				}
+			}
+		}
+		return [knownLanguages, literateLanguages];
+	}
 }
