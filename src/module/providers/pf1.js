@@ -197,7 +197,7 @@ export default class pf1LanguageProvider extends LanguageProvider {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
 		if (actor.system?.traits?.languages) {
-			for (let lang of actor.system.traits.languages.value) {
+			for (let lang of actor.system.traits.languages.total) {
 				knownLanguages.add(lang);
 			}
 			if (actor.system.traits.languages.customTotal) {
