@@ -65,9 +65,7 @@ export class Polyglot {
 						this._getFontStyle(lang).replace(/\d+%\s/g, ""),
 					);
 					if (cssClasses === undefined) cssClasses = [];
-					// circumventing core issue https://github.com/foundryvtt/foundryvtt/issues/11178
-					// cssClasses.push("polyglot, polyglot-chat-bubble");
-					cssClasses.push("polyglot polyglot-chat-bubble");
+					cssClasses.push("polyglot", "polyglot-chat-bubble");
 				}
 				return wrapped(token, message, { cssClasses, requireVisible, pan });
 			},
