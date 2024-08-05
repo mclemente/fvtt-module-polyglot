@@ -43,7 +43,7 @@
 		"DisplayTranslated.hint": "For languages that are translated in the chat window, display the original text and a translation below.",
 		"DisplayTranslated.title": "Display Translations",
 		"enableAllFonts": {
-			"hint": "Toggle this setting off to remove all the Foundry's fonts from Polyglot.",
+			"hint": "Adds Foundry's fonts, including Additional Fonts, to Polyglot.",
 			"title": "Add Foundry's fonts to Polyglot"
 		},
 		"ExportFonts.hint": "Add Polyglot's fonts to Foundry's features, such as Drawings.",
