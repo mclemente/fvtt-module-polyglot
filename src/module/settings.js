@@ -55,12 +55,10 @@ export function registerSettings() {
 		restricted: true,
 	});
 	addMenuSetting("Alphabets", {
-		config: false,
 		default: {},
 		type: Object,
 	});
 	addMenuSetting("Languages", {
-		config: false,
 		default: {},
 		type: Object,
 	});
