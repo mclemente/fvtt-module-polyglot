@@ -1,7 +1,13 @@
-&-journal {
+.polyglot-journal {
 	background-color: $background-color_1;
 
 	&-temp {
 		background-color: $background-color_2;
+	}
+}
+li[data-action="polyglot"] {
+	ul {
+		max-height: 100vh;
+		overflow: auto;
 	}
 }

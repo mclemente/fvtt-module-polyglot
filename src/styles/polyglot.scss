@@ -8,12 +8,13 @@
 	--polyglot-journal-opacity-temp: 0.25;
 }
 
+@import "journal";
+
 .polyglot {
 	&.polyglot-chat-bubble {
 		font-family: $font-family_1;
 	}
 
-	@import "journal";
 	@import "forms";
 	@import "language-selector";
 	@import "system-specific";
