@@ -389,9 +389,6 @@ export default class LanguageProvider {
 				}
 			}
 		}
-		for (let font in fonts) {
-			if (!this.fonts[font]) this.fonts[font] = fonts[font];
-		}
 		for (let font in this.fonts) {
 			if (game.polyglot.CustomFontSizes[font]) {
 				this.fonts[font].fontSize = game.polyglot.CustomFontSizes[font];
