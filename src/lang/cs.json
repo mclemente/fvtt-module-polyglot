@@ -55,6 +55,14 @@
 		"ReplaceLanguages.title": "Nahrazení jazyků systému",
 		"LanguageRegex": {
 			"title": "Jazyk RegEx"
-		}
+		},
+		"FontSettings": "Nastavení Písma",
+		"DefaultAlphabet": "Základní Abeceda",
+		"Languages.hint": "Změní abecedu použitou pro jazyky",
+		"KnownLanguages": "Známé Jazyky",
+		"UnknownLanguages": "Neznámé Jazyky",
+		"GeneralSettings": "Obecné Nastavení",
+		"General": "Obecné",
+		"AlphabeticOnly": "Pouze Abecedně"
 	}
 }
