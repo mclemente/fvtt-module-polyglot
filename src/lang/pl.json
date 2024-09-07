@@ -24,7 +24,7 @@
 		"ScrambleGM.title": "Szyfruj Wiadomości dla MG",
 		"ScrambleGM.hint": "Nie tłumacz języków dla MG (aby określić zrozumienie języka przez żeton, odnieś się koloru ikonki globu).",
 		"enableAllFonts.title": "Dodaj czcionki Foundry do Polyglot",
-		"enableAllFonts.hint": "Przełącz to ustawienie, aby usunąć wszystkie czcionki Foundry z Polyglot.",
+		"enableAllFonts.hint": "Dodaje czcionki Foundry, w tym czcionki dodatkowe, do Polyglot.",
 		"RandomizeRunes.title": "Randomizacja Run",
 		"RandomizeRunes.hint": "Określa jaki rodzaj randomizacji używany jest do tworzenia fraz. ⚠️ Opcja \"Brak\" wspiera tylko znaki alfanumeryczne (bez akcentów).",
 		"RandomizeRunesOptions": {
