@@ -209,7 +209,12 @@
 			}
 		},
 		"WFRP4E": {
-			"LanguageSkills": "Language"
+			"LanguageSkills": "Language",
+			"ReadWrite": {
+				"hint": "The name of the Read/Write talent.",
+				"title": "Read/Write Talent",
+				"default": "Read/Write"
+			}
 		}
 	}
 }

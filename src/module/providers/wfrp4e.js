@@ -63,6 +63,12 @@ export default class wfrp4eLanguageProvider extends LanguageProvider {
 				type: String,
 				default: game.i18n.localize("POLYGLOT.WFRP4E.LanguageSkills"),
 			},
+			ReadWrite: {
+				name: game.i18n.localize("POLYGLOT.WFRP4E.ReadWrite.title"),
+				hint: game.i18n.localize("POLYGLOT.WFRP4E.ReadWrite.hint"),
+				type: String,
+				default: game.i18n.localize("POLYGLOT.WFRP4E.ReadWrite.default"),
+			},
 		};
 	}
 
@@ -103,7 +109,8 @@ export default class wfrp4eLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
-		const isLiterate = actor.items.filter((item) => item.name === "Read/Write" && item.type === "talent").length > 0;
+		const readWrite = game.settings.get("polyglot", "ReadWrite");
+		const isLiterate = actor.items.find((item) => item.name === readWrite && item.type === "talent").length > 0;
 		let myRegex = new RegExp(`${game.settings.get("polyglot", "LanguageRegex")}\\s*\\((.+)\\)`, "i");
 		for (let item of actor.items) {
 			// adding only the descriptive language name, not "Language (XYZ)"
