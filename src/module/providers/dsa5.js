@@ -276,17 +276,11 @@ export default class dsa5LanguageProvider extends LanguageProvider {
 				const languageRegex = new RegExp(`${game.i18n.localize("LocalizedIDs.language")}\\s*\\((.+)\\)`, "i");
 				const literacyRegex = new RegExp(`${game.i18n.localize("LocalizedIDs.literacy")}\\s*\\((.+)\\)`, "i");
 				const languagesSetting = game.settings.get("polyglot", "Languages");
-				for (const item of dsa5ItemList) {
-					if (languageRegex.test(item.name)) {
-						const label = item.name.match(languageRegex)[1].trim();
-						const key = label.toLowerCase();
-						languages[key] = {
-							label,
-							font: languagesSetting[key]?.font || this.languages[key]?.font || this.defaultFont,
-							rng: languagesSetting[key]?.rng ?? "default",
-						};
-					} else if (literacyRegex.test(item.name)) {
-						const label = item.name.match(literacyRegex)[1].trim();
+
+				const setLanguageInfo = (item, regex) => {
+					const match = item.name.match(regex);
+					if (match) {
+						const label = match[1].trim();
 						const key = label.toLowerCase();
 						languages[key] = {
 							label,
@@ -294,6 +288,11 @@ export default class dsa5LanguageProvider extends LanguageProvider {
 							rng: languagesSetting[key]?.rng ?? "default",
 						};
 					}
+				};
+
+				for (const item of dsa5ItemList) {
+					if (languageRegex.test(item.name)) setLanguageInfo(item, languageRegex);
+					else if (literacyRegex.test(item.name)) setLanguageInfo(item, literacyRegex);
 				}
 				this.languages = languages;
 			} else {
