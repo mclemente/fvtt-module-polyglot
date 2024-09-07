@@ -83,6 +83,10 @@
 			"hint": "You can use this to change the term searched on items from \"Language\" to something else, like \"Tongue\". This setting is more useful for non-English speakers.",
 			"title": "Language RegEx"
 		},
+		"LiteracyRegex": {
+			"hint": "Same as Language Regex, but for written languages.",
+			"title": "Literacy RegEx"
+		},
 		"logographicalFontToggle.hint": "Halves the size of phrases using Logographical fonts (e.g. Japanese, Chinese characters).",
 		"logographicalFontToggle.title": "Logographical Fonts",
 		"RandomizeRunes.hint": "This determines which type of RNG is used to generate a phrase. ⚠️ The \"None\" option only supports Alphanumeric characters (no accents).",
@@ -177,7 +181,8 @@
 		},
 		"UESRPG.Language": "Language",
 		"Generic": {
-			"Language": "Language"
+			"Language": "Language",
+			"Read": "Read"
 		},
 		"COC7": {
 			"LanguageOwn": "Language",

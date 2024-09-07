@@ -35,10 +35,8 @@ export default class earthdawn4eLanguageProvider extends LanguageProvider {
 				default: game.i18n.localize("POLYGLOT.Generic.Language"),
 			},
 			LiteracyRegex: {
-				name: "Literacy Regex",
-				hint: "Same as Language Regex, but for written languages.",
 				type: String,
-				default: "Speak",
+				default: game.i18n.localize("POLYGLOT.Generic.Read"),
 			},
 		};
 	}
