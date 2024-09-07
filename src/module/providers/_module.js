@@ -4,6 +4,7 @@ export { default as GenericLanguageProvider } from "./templates/Generic.js";
 
 export { default as a5eLanguageProvider } from "./a5e.js";
 export { default as ariaLanguageProvider } from "./aria.js";
+export { default as arsLanguageProvider } from "./ars.js";
 export { default as coc7LanguageProvider } from "./coc7.js";
 export { default as cyberpunkRedLanguageProvider } from "./cyberpunk-red-core.js";
 export { default as d35eLanguageProvider } from "./d35e.js";
