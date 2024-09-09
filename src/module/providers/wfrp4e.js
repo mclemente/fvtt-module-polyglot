@@ -110,7 +110,7 @@ export default class wfrp4eLanguageProvider extends LanguageProvider {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
 		const readWrite = game.settings.get("polyglot", "ReadWrite");
-		const isLiterate = actor.items.find((item) => item.name === readWrite && item.type === "talent").length > 0;
+		const isLiterate = actor.items.find((item) => item.name === readWrite && item.type === "talent") != null;
 		let myRegex = new RegExp(`${game.settings.get("polyglot", "LanguageRegex")}\\s*\\((.+)\\)`, "i");
 		for (let item of actor.items) {
 			// adding only the descriptive language name, not "Language (XYZ)"
