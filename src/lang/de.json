@@ -23,8 +23,8 @@
 		"DisplayTranslated.title": "Übersetzungen anzeigen",
 		"DisplayTranslated.hint": "Bei Sprachen, die im Chat-Fenster übersetzt werden, wird der Originaltext und darunter eine Übersetzung angezeigt.",
 		"HideTranslation.title": "Indikatoren vor Spielern verbergen",
-		"HideTranslation.hint": "Versteckt die Weltkugel und \"Übersetzt von\" Text von Chatnachrichten vor Spielern. Perfekt wenn du nicht möchtest, dass die Spieler sehen welche Sprache du sprichst.",
-		"AllowOOC.title": "Verschleiere OOC Chat-Nachrichten",
+		"HideTranslation.hint": "Versteckt den Globus und den Text „Übersetzt aus“ in Chatnachrichten an Spieler. Nützlich, wenn Sie Spielern nicht zeigen möchten, welche Sprache Sie sprechen",
+		"AllowOOC.title": "Verschlüsseln von verfremdeten Chat-Nachrichten",
 		"AllowOOC.hint": "Erlaubt dem GM den Text zu verschlüsseln wenn Out Of Charakter Nachrichten geschickt werden.",
 		"Translation": "Übersetzung",
 		"TranslatedFrom": "Übersetzt von ",
@@ -167,6 +167,9 @@
 					"Content": "Das <span class='reference'>Kontrollkästchen</span> schaltet die Verschlüsselung ein und aus. Jeder Benutzer, der das Häkchen entfernt, spricht so, als ob das Modul deaktiviert wäre."
 				}
 			}
+		},
+		"DisplayCheckbox": {
+			"hint": "Entfernt das Kontrollkästchen aus dem Chat-Bereich."
 		}
 	}
 }
