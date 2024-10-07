@@ -520,7 +520,7 @@ export class Polyglot {
 				&& !game.polyglot.isLanguageKnown(game.polyglot.comprehendLanguages)
 				&& !game.polyglot.languageProvider.conditions(lang);
 			if (conditions) {
-				e.title = "????";
+				e.dataset.tooltip = "????";
 				e.textContent = game.polyglot.scrambleString(e.textContent, document.id, lang);
 				e.style.font = game.polyglot._getFontStyle(lang);
 			}
