@@ -1,7 +1,7 @@
 export function getFonts() {
 	const editor = game.settings.get("polyglot", "exportFonts");
 	return {
-		"Ar Ciela": {
+		ArCiela: {
 			editor,
 			fonts: [
 				{
@@ -51,7 +51,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Dark Eldar": {
+		DarkEldar: {
 			editor,
 			fonts: [
 				{
@@ -81,7 +81,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Dragon Alphabet": {
+		DragonAlphabet: {
 			editor,
 			fonts: [
 				{
@@ -91,7 +91,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Elder Futhark": {
+		ElderFuthark: {
 			editor,
 			fonts: [
 				{
@@ -131,7 +131,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Finger Alphabet": {
+		FingerAlphabet: {
 			editor,
 			fonts: [
 				{
@@ -141,7 +141,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"High Drowic": {
+		HighDrowic: {
 			editor,
 			fonts: [
 				{
@@ -151,7 +151,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Highschool Runes": {
+		HighschoolRunes: {
 			editor,
 			fonts: [
 				{
@@ -181,7 +181,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Jungle Slang": {
+		JungleSlang: {
 			editor,
 			fonts: [
 				{
@@ -201,7 +201,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Kremlin Premier": {
+		KremlinPremier: {
 			editor,
 			fonts: [
 				{
@@ -211,7 +211,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Mage Script": {
+		MageScript: {
 			editor,
 			fonts: [
 				{
@@ -221,7 +221,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Maras Eye": {
+		MarasEye: {
 			editor,
 			fonts: [
 				{
@@ -231,7 +231,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Meroitic Demotic": {
+		MeroiticDemotic: {
 			editor,
 			fonts: [
 				{
@@ -241,7 +241,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Miroslav Normal": {
+		MiroslavNormal: {
 			editor,
 			fonts: [
 				{
@@ -261,7 +261,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Ny Stormning": {
+		NyStormning: {
 			editor,
 			fonts: [
 				{
@@ -271,7 +271,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Olde English": {
+		OldeEnglish: {
 			editor,
 			fonts: [
 				{
@@ -281,7 +281,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Olde Espruar": {
+		OldeEspruar: {
 			editor,
 			fonts: [
 				{
@@ -291,7 +291,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Olde Thorass": {
+		OldeThorass: {
 			editor,
 			fonts: [
 				{
@@ -331,7 +331,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Ork Glyphs": {
+		OrkGlyphs: {
 			editor,
 			fonts: [
 				{
@@ -381,7 +381,7 @@ export function getFonts() {
 				},
 			],
 		},
-		"Scrapbook Chinese": {
+		ScrapbookChinese: {
 			editor,
 			fonts: [
 				{
