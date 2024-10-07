@@ -64,7 +64,8 @@
 		"Runes": "Runy",
 		"UESRPG.Language": "Język",
 		"Generic": {
-			"Language": "Język"
+			"Language": "Język",
+			"Read": "Czytaj"
 		},
 		"COC7": {
 			"LanguageOwn": "Język",
@@ -84,7 +85,12 @@
 			}
 		},
 		"WFRP4E": {
-			"LanguageSkills": "Język"
+			"LanguageSkills": "Język",
+			"ReadWrite": {
+				"hint": "Nazwa talentu odczytu/zapisu.",
+				"title": "Oczytaj/Zapisz talent",
+				"default": "Odczyt/zapis"
+			}
 		},
 		"JournalHighlightColor": {
 			"hint": "Określa kolor podświetlenia czcionek w dzienniku.",
@@ -211,6 +217,10 @@
 		"DisplayCheckbox": {
 			"hint": "Usuwa pole wyboru z sekcji czatu.",
 			"title": "Wyświetl pole wyboru"
+		},
+		"LiteracyRegex": {
+			"hint": "To samo co Language Regex, ale dla języków pisanych.",
+			"title": "Literacki RegEx"
 		}
 	}
 }
