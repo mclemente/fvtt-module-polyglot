@@ -8,17 +8,17 @@
 	"POLYGLOT.DefaultLanguage.title": "Langue par défaut",
 	"POLYGLOT.DefaultLanguage.hint": "Nom de la langue par défaut. Laisser vide pour choisir la langue du système.",
 	"POLYGLOT.ScrambleGM.title": "Crypter pour le MJ",
-	"POLYGLOT.ScrambleGM.hint": "Désactivez cette option pour toujours montrer le texte au MJ (se référer à la couleur du globle pour la compréhension normale de la langue). Nécessite un rechargement.",
+	"POLYGLOT.ScrambleGM.hint": "Ne pas traduire le texte pour le MJ (se référer à la couleur du globe pour la compréhension du jeton).",
 	"POLYGLOT.toggleRuneText.title": "Activer/Désactiver les runes pour les Journaux",
 	"POLYGLOT.toggleRuneText.hint": "Active/Désactive la visibilité des runes dans les Journaux.",
 	"POLYGLOT.RandomizeRunes.title": "Runes aléatoires",
 	"POLYGLOT.RandomizeRunes.hint": "Activer cette option fera apparaître un texte crypté différent chaque fois, même si le texte initial est le même.",
-	"POLYGLOT.ExportFonts.title": "Ajouter les Polices de Polyglot au logiciel",
-	"POLYGLOT.ExportFonts.hint": "Rendre les polices de Polyglot disponibles dans le menu {settingMenuLabel} de Foundry. Désactiver ce réglage retire toutes les polices de Polyglot du menu.",
+	"POLYGLOT.ExportFonts.title": "Ajouter les polices de 'Polyglot' à Foundry",
+	"POLYGLOT.ExportFonts.hint": "Ajoute les polices de 'Polyglot' aux fonctionnalités de Foundry comme \"Dessiner\".",
 	"POLYGLOT.DisplayTranslated.title": "Afficher les traductions",
 	"POLYGLOT.DisplayTranslated.hint": "Pour les langues traduites dans les messages de tchat, afficher le texte original et sa traduction.",
-	"POLYGLOT.AllowOOC.title": "Crypter les messages du chat HRP",
-	"POLYGLOT.AllowOOC.hint": "Choisissez les utilisateurs dont les messages doivent être cryptés. OOC = hors role play.",
+	"POLYGLOT.AllowOOC.title": "Crypter les messages HRP de la conversation",
+	"POLYGLOT.AllowOOC.hint": "Choisissez quel utilisateurs dont les messages HRP doivent être cryptés. HRP = hors role play.",
 	"POLYGLOT.Translation": "Traduction",
 	"POLYGLOT.TranslatedFrom": "Traduit de ",
 	"POLYGLOT.LanguageLabel": "Langue",
@@ -59,7 +59,7 @@
 		"Fonts": "Polices",
 		"FontSize": "Taille de Police (%)",
 		"logographicalFontToggle.title": "Polices Logographiques",
-		"ReplaceLanguages.title": "Remplacer les Langues du Système",
+		"ReplaceLanguages.title": "Retirer les Langues du système",
 		"DefaultAlphabet": "Alphabet Défault",
 		"Font": "Police",
 		"enableAllFonts": {
@@ -69,13 +69,13 @@
 				"1": "Polices Polyglottes",
 				"2": "Polices supplémentaires du Core"
 			},
-			"hint": "Ajoute les polices de Foundry aux {setting1} et {setting2}.",
-			"title": "Ajouter les polices aux {settingMenuLabel}"
+			"hint": "Ajoute les polices de Foundry, y compris les polices supplémentaires, à 'Polyglot'.",
+			"title": "Ajouter les polices de Foundry à 'Polyglot'"
 		},
 		"RandomizeRunesOptions": {
 			"a": "Défault",
 			"b": "Phrases uniques",
-			"c": "Rien ⚠️"
+			"c": "Rien"
 		},
 		"AllowOOCOptions": {
 			"a": "Tous",
@@ -103,22 +103,22 @@
 			"title": "RegEx de langue",
 			"hint": "Vous pouvez l'utiliser pour changer le terme recherché sur les éléments de \"Langue\" à autre chose, comme \"Langage\"."
 		},
-		"ReplaceLanguages.hint": "Remplace les langues par défaut du système par vos langues personnalisées. La première langue de la liste devient la nouvelle langue par défaut.",
+		"ReplaceLanguages.hint": "Retire les langues par défaut du système. La première langue de la liste des Langues personnalisées devient la nouvelle langue par défaut.",
 		"JournalHighlight.hint": "Définit l'opacité du surlignage sur les polices du journal.",
 		"JournalHighlight.title": "Opacité du surlignage (%)",
 		"logographicalFontToggle.hint": "Réduire de moitié la taille des phrases à l'aide de polices logographiques (par exemple, caractères japonais, chinois).",
-		"HideTranslation.hint": "Masque le globe et le texte \"Traduit de\" des messages de chat aux joueurs. Utile lorsque vous ne voulez pas montrer aux joueurs quelle langue vous parlez. Déclenche un rechargement.",
+		"HideTranslation.hint": "Masque le globe et le texte \"à partir duquel il est traduit\" des messages de la conversation pour les joueurs. Utile lorsque vous ne voulez pas montrer aux joueurs quelle langue vous parlez.",
 		"JournalHighlightColor": {
 			"hint": "Définit la couleur de surlignage sur les polices dans le journal.",
 			"title": "Couleur du surlignage"
 		},
 		"languageDataPath": {
 			"title": "Chemin des données de langue",
-			"hint": "Si les langues de votre système sont définies dans les données des acteurs et ne sont pas chargées correctement, il se peut qu'un autre chemin de données soit utilisé. Saisissez le chemin de données vers l'attribut correct (par exemple actor.system.languages ou actor.system.speak). Ce paramètre est prioritaire sur le paramètre {setting}. Nécessite un rechargement."
+			"hint": "Si les langues de votre système sont définies dans les données des acteurs et ne sont pas chargées correctement, il se peut qu'un autre chemin de données soit utilisé. Saisissez le chemin de données vers l'attribut correct (par exemple actor.system.languages ou actor.system.speak). Ce paramètre est prioritaire sur le paramètre {setting}."
 		},
 		"literacyDataPath": {
 			"title": "Parcours de données sur l'alphabétisation",
-			"hint": "Identique au paramètre {setting}, mais pour la lecture des journaux. Ce paramètre nécessite le paramètre {setting}. Nécessite un rechargement."
+			"hint": "Identique au paramètre {setting}, mais pour la lecture des journaux. Ce paramètre nécessite le paramètre {setting}."
 		},
 		"RuneRegex": {
 			"hint": "Faire en sorte que la génération aléatoire ignore les caractères qui ne sont pas alphanumériques (ex : !,.;:?#$\"'). Cela pourrait avoir un effet non désiré en montrant des caractères sous forme de carrés (□) sur certaines polices.",
@@ -138,6 +138,93 @@
 		"Logographical": "Logographique",
 		"GameMasterHasAssignedCharacter": "Vous êtes un {GM} et un personnage vous a été assigné. Polyglot se comportera bizarrement à cause de cela. Envisagez de ne plus être l'Utilisateur de ce personnage.",
 		"KnownLanguages": "Langues connues",
-		"UnknownLanguages": "Langues inconnues"
+		"UnknownLanguages": "Langues inconnues",
+		"PF2E": {
+			"replaceLanguages.hint": "Supprime les langues par défaut du système. Vous devez avoir au moins une langue maison définie dans le menu Éléments maison. Autrement les langues non courantes ne seront pas supprimées. Si vous désactivez ce paramètre et souhaitez réinitialiser les raretés aux valeurs par défaut, consultez le wiki du module."
+		},
+		"DisplayCheckbox": {
+			"hint": "Supprime la case à cocher de la partie conversation.",
+			"title": "Afficher la case à cocher"
+		},
+		"TOURS": {
+			"Main": {
+				"ChatMessageScrambled": {
+					"Content": "C'est ce que voient les joueurs qui ne comprennent pas la langue du message.",
+					"Title": "Texte brouillé"
+				},
+				"ChatMessageTranslation": {
+					"Title": "Texte traduit",
+					"Content": "C'est ce que les joueurs qui comprennent le message voient. <br>Il existe un réglage pour déactiver l'affichage du texte brouillé pour les joueurs qui le comprennent. En survolant le texte brouillé, le nom de la langue s'affiche."
+				},
+				"ChatMessage": {
+					"Content": "C'est ce à quoi ressemble un message s'il utilise 'Polyglot'.",
+					"Title": "Messages de la conversation"
+				},
+				"ChatMessageEnding": {
+					"Title": "Paramètres des messages de la conversation",
+					"Content": "N'oubliez pas de consulter les paramètres du module, où vous pouvez modifier la manière dont s'afficheront les messages.<br>Il y a une chose particulière à propos de Foundry et des messages de la conversation en lien avec la <span class='reference'>Configuration de l'utilisateur</span>."
+				},
+				"PlayersList": {
+					"Title": "Liste des joueurs",
+					"Content": "Bien que 'Polyglot' en tant que tel ne change rien à ce sujet, vous devez être conscient du comportement de Foundry lié à la <span class='reference'>configuration de l'utilisateur </span> . Vous pouvez l'ouvrir vous-même en faisant un clic droit sur le nom d'un utilisateur dans cette liste ici."
+				},
+				"ChatMessageGlobe": {
+					"Content": "Ce globe peut avoir 3 couleurs : <ul><li><span style=\"color: green\">Vert</span> pour les langues connues. En passant la souris dessus, le nom de la langue s'affichera.</li><li><span style=\"color: blue\"> Bleu</span> pour les langues qui peuvent être lues mais dont le joueur n'a aucune idée de la langue utilisée.<li><span style=\"color: red\">Rouge</span> pour les langues inconnues.</li></li></ul>",
+					"Title": "Le Globe"
+				},
+				"title": "Débuter avec Polyglot",
+				"desc": "Comprendre l'interaction de 'Polyglot' avec l'interface utilisateur de Foundry.",
+				"Canvas": {
+					"Title": "Bienvenue dans 'Polyglot'",
+					"Content": "Cette visite vous guidera à travers les fonctionnalités que 'Polyglot' ajoute à l'interface utilisateur et comment elles interagissent avec Foundry, ainsi que quelques conseils pour les nouveaux venus à propos de la sélection des personnages."
+				},
+				"LanguageSelector": {
+					"Title": "Sélecteur de langue",
+					"Content": "Le <span class='reference'>sélecteur de langue</span> est l'endroit où vous pouvez sélectionner la langue dans laquelle vous voulez parler, en brouillant les messages envoyés lorsqu'elle est actif."
+				},
+				"LanguageSelectorPips": {
+					"Title": "Points du sélecteur de langue",
+					"Content": "Un <span class='reference'>Point</span> , similaire à celui affiché sur la liste des joueurs, sera affiché à côté des langues connues pour chaque joueur dont au moins un acteur comprend cette langue. En survolant un Point, le nom de l'utilisateur et la liste des acteurs ayant accès à la langue s'afficheront."
+				},
+				"UserConfig": {
+					"Title": "Configuration de l'utilisateur",
+					"Content": "Cette configuration s'ouvre aux utilisateurs qui ne sont pas MJ à chaque fois qu'ils chargent le monde s'ils n'ont pas <span class='reference'>sélectionné un personnage</span>."
+				},
+				"End": {
+					"Title": "Terminer",
+					"Content": "Ceci conclut cette visite. J'espère que cela a levé quelques doutes sur l'interaction de 'Polyglot' avec le comportement de Foundry.<br>Si vous voulez aller plus en profondeur avec le module, vérifiez ses paramètres dans les <span class='reference'>Paramètres du jeu</span>.<br>Si cela s'avère toujours insuffisant, essayez de consulter le <a class=\"hyperlink\" href=\"https://github.com/mclemente/fvtt-module-polyglot/wiki\" target=\"_blank\" rel=\"nofollow noopener\">wiki du module</a> pour plus d'informations."
+				},
+				"ActorOwnership": {
+					"Content": "En ce qui concerne la propriété de l'acteur, si vous donnez à un joueur la permission \"Propriétaire\" ou \"Observateur\" sur un acteur, ce joueur sera capable de lire et écrire des messages en tant qu'acteur si son jeton est présent sur le canevas. S'il y a plus d'un jeton, sélectionner le jeton sur le canevas changera l'acteur du joueur.<br>C'est aussi le comportement de Foundry. 'Polyglot' se borne à le suivre.",
+					"Title": "Propriété de l'acteur"
+				},
+				"LanguageSelectorCheckbox": {
+					"Title": "Case à cocher du sélecteur de langue",
+					"Content": "La <span class='reference'>case à cocher</span> permet d'activer le brouillage. Tout utilisateur qui la décoche parlera comme si le module était désactivé."
+				},
+				"LanguageSelectorSelect": {
+					"Title": "Liste déroulante du sélecteur de langue",
+					"Content": "La <span class='reference'>Liste déroulante</span> contient toutes les langues de votre monde.<br>En fonction de votre système de jeu, les langues peuvent avoir déjà été définies, tandis que dans d'autres systèmes de jeu, vous pourriez avoir besoin de les configurer dans les <span class='reference'>Paramètres du jeu</span>.<br>Elle affichera les langues en différentiant celles qui sont connues et celles qui sont inconnues par les acteurs de vos joueurs."
+				},
+				"UserConfigSelectCharacter": {
+					"Title": "Sélectionner un personnage",
+					"Content": "En tant que MJ, vous ne devriez jamais avoir un personnage sélectionné car cela fera que vos messages seront envoyés comme si vous étiez ce personnage si jamais il est présent sur une scène.<br>Pour les joueurs, assurez-vous qu'ils sélectionnent leur personnage principal. Autrement, leurs messages seront toujours envoyés en tant que joueur au lieu de leur personnage et ils ne pourront pas lire les messages dans les langues que leur personnage comprend à moins que son jeton ne soit présent sur le canevas.<br>Vous pouvez savoir si un joueur a sélectionné un personnage si son nom dans la liste des joueurs est suivi du nom d'un personnage.<br>C'est le comportement de Foundry, 'Polyglot' se borne à le suivre."
+				}
+			}
+		},
+		"LiteracyRegex": {
+			"hint": "Identique à 'Language Regex', mais pour les langues écrites.",
+			"title": "Alphabétisation RegEx"
+		},
+		"Generic": {
+			"Read": "Lire"
+		},
+		"WFRP4E": {
+			"ReadWrite": {
+				"hint": "Le nom du talent de lecture/écriture.",
+				"title": "Talent de Lecture/écriture",
+				"default": "Lecture/écriture"
+			}
+		}
 	}
 }
