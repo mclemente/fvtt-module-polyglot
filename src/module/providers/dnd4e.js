@@ -35,22 +35,22 @@ export default class dnd4eLanguageProvider extends LanguageProvider {
 	};
 
 	addToConfig(key, lang) {
-		CONFIG.DND4EBETA.spoken[key] = lang;
+		CONFIG.DND4E.spoken[key] = lang;
 	}
 
 	removeFromConfig(key) {
-		delete CONFIG.DND4EBETA.spoken[key];
+		delete CONFIG.DND4E.spoken[key];
 	}
 
 	async getLanguages() {
 		const langs = {};
 		if (this.replaceLanguages) {
-			CONFIG.DND4EBETA.spoken = {};
+			CONFIG.DND4E.spoken = {};
 		}
 		const languagesSetting = game.settings.get("polyglot", "Languages");
-		for (let lang in CONFIG.DND4EBETA.spoken) {
+		for (let lang in CONFIG.DND4E.spoken) {
 			langs[lang] = {
-				label: CONFIG.DND4EBETA.spoken[lang],
+				label: CONFIG.DND4E.spoken[lang],
 				font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
 				rng: languagesSetting[lang]?.rng ?? "default",
 			};
