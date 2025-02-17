@@ -20,7 +20,7 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Install node
-              uses: actions/setup-node@v4.0.0
+              uses: actions/setup-node@v4
               with:
                   node-version: ${{ env.node_version }}
 
@@ -46,7 +46,7 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Install node
-              uses: actions/setup-node@v4.0.0
+              uses: actions/setup-node@v4
               with:
                   node-version: ${{ env.node_version }}
 
@@ -81,7 +81,7 @@ jobs:
               run: npm run build
 
             - name: Archive production artifacts
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                   name: dist
                   path: dist
@@ -96,7 +96,7 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Download production artifacts for publication
-              uses: actions/download-artifact@v3
+              uses: actions/download-artifact@v4
               with:
                   name: dist
                   path: dist
