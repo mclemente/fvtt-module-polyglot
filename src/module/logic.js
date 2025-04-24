@@ -14,11 +14,25 @@ export class Polyglot {
 	}
 
 	init() {
-		for (let hook of Object.getOwnPropertyNames(PolyglotHooks)) {
-			if (!["length", "name", "prototype"].includes(hook)) {
-				Hooks.on(hook, PolyglotHooks[hook]);
-			}
+		if (game.settings.get("polyglot", "enableChatFeatures")) {
+			Hooks.on("renderChatLog", PolyglotHooks.renderChatLog);
+			Hooks.on("updateActor", PolyglotHooks.updateActor);
+			Hooks.on("controlToken", PolyglotHooks.controlToken);
+			Hooks.on("updateUser", PolyglotHooks.updateUser);
+			Hooks.on("updateActiveEffect", PolyglotHooks.updateActiveEffect);
+			Hooks.on("preCreateChatMessage", PolyglotHooks.preCreateChatMessage);
+			Hooks.on("renderChatMessage", PolyglotHooks.renderChatMessage);
+			Hooks.on("createChatMessage", PolyglotHooks.createChatMessage);
+			Hooks.on("renderActorDirectoryPF2e", PolyglotHooks.renderActorDirectoryPF2e);
+			Hooks.on("vinoPrepareChatDisplayData", PolyglotHooks.vinoPrepareChatDisplayData);
 		}
+		Hooks.on("renderDocumentSheet", PolyglotHooks.renderDocumentSheet);
+		Hooks.on("renderActorSheet", PolyglotHooks.renderActorSheet);
+		Hooks.on("renderItemSheet", PolyglotHooks.renderItemSheet);
+		Hooks.on("renderJournalTextPageSheet", PolyglotHooks.renderJournalTextPageSheet);
+		Hooks.on("renderJournalSheet", PolyglotHooks.renderJournalSheet);
+		Hooks.on("renderStorySheet", PolyglotHooks.renderStorySheet);
+		Hooks.on("getProseMirrorMenuDropDowns", PolyglotHooks.getProseMirrorMenuDropDowns);
 		Polyglot.handleTinyMCE();
 
 		libWrapper.register(

@@ -36,6 +36,10 @@
 		"CustomLanguages.title": "Custom Languages",
 		"DefaultLanguage.hint": "Name of the default language to select. Keep empty to use system default.",
 		"DefaultLanguage.title": "Default Language",
+		"EnableChatFeatures": {
+			"hint": "Enables all the chat features, such as the language selector in the chat and message scrambling.",
+			"title": "Enable Chat Features"
+		},
 		"DisplayCheckbox": {
 			"hint": "Removes the checkbox from the chat section.",
 			"title": "Display Checkbox"
