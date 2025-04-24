@@ -83,7 +83,7 @@ export default class dnd5eLanguageProvider extends LanguageProvider {
 		return {
 			"DND5E.SpecialLanguages": {
 				type: String,
-				default: game.i18n.localize("DND5E.LanguagesCommon"),
+				default: game.i18n.localize("DND5E.Language.Language.Common"),
 			}
 		};
 	}
