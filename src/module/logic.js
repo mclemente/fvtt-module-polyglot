@@ -305,7 +305,7 @@ export class Polyglot {
 			options.sort((a, b) => a.text.localeCompare(b.text));
 		}
 
-		const select = this.chatElement.find(".polyglot-lang-select select");
+		const select = $(this.chatElement.querySelector(".polyglot-lang-select select"));
 		const prevOption = select.val();
 
 		select.empty();

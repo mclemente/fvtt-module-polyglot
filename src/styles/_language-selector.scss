@@ -4,9 +4,7 @@
 	align-items: center;
 	input {
 		margin-left: 0;
-		&:checked {
-			accent-color: rgb(255, 255, 245);
-		}
+		flex: 0;
 	}
 	label {
 		flex: 0;

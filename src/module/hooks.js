@@ -6,20 +6,22 @@ export default class PolyglotHooks {
 	static renderChatLog(chatlog, html, data) {
 		game.polyglot.renderChatLog = true;
 		const input = game.settings.get("polyglot", "displayCheckbox")
-			? `<input name="polyglot-checkbox" type="checkbox" ${game.settings.get("polyglot", "checkbox") ? "checked" : ""}>`
+			? `<input id="polyglot-checkbox" type="checkbox" ${game.settings.get("polyglot", "checkbox") ? "checked" : ""}>`
 			: "";
-		html.find("#chat-controls").after(
-			`<div id='polyglot' class='polyglot polyglot-lang-select flexrow'>
-				${input}
-				<label>${game.i18n.localize("POLYGLOT.LanguageLabel")}</label>
-				<select name='polyglot-language'></select>
-			</div>`,
-		);
-		html.find(".polyglot-lang-select select").change((ev) => {
+		const polyglotDiv = document.createElement("div");
+		polyglotDiv.setAttribute("id", "polyglot");
+		polyglotDiv.classList.add("polyglot", "polyglot-lang-select", "flexrow");
+		polyglotDiv.innerHTML = `
+			${input}
+			<label for="polyglot-checkbox">${game.i18n.localize("POLYGLOT.LanguageLabel")}</label>
+			<select name='polyglot-language'></select>
+		`;
+		html.querySelector(".chat-controls").insertAdjacentElement("afterend", polyglotDiv);
+		html.querySelector(".polyglot-lang-select select").addEventListener("change", (ev) => {
 			const lang = ev.target.value;
 			game.polyglot.lastSelection = lang;
 		});
-		html.find("input[name='polyglot-checkbox']").change((ev) => {
+		html.querySelector("input[id='polyglot-checkbox']").addEventListener("change", (ev) => {
 			game.settings.set("polyglot", "checkbox", ev.target.checked);
 		});
 		game.polyglot.updateUserLanguages(html);

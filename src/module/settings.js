@@ -216,7 +216,7 @@ export function registerSettings() {
 	addMenuSetting("checkbox", {
 		default: true,
 		type: Boolean,
-		scope: "client"
+		scope: "user"
 	});
 
 	Hooks.on("i18nInit", () => {
