@@ -108,14 +108,20 @@ export class PolyglotGeneralSettings extends FormApplication {
 					},
 					chat: {
 						// Chat
-						displayCheckbox: this._prepSetting("displayCheckbox"),
-						"display-translated": this._prepSetting("display-translated"),
-						hideTranslation: this._prepSetting("hideTranslation"),
-						allowOOC: this._prepSetting("allowOOC"),
-						runifyGM: this._prepSetting("runifyGM"),
+						enableChatFeatures: this._prepSetting("enableChatFeatures")
 					},
 				},
 			};
+			if (game.settings.get("polyglot", "enableChatFeatures")) {
+				data.settings.chat = {
+					...data.settings.chat,
+					displayCheckbox: this._prepSetting("displayCheckbox"),
+					"display-translated": this._prepSetting("display-translated"),
+					hideTranslation: this._prepSetting("hideTranslation"),
+					allowOOC: this._prepSetting("allowOOC"),
+					runifyGM: this._prepSetting("runifyGM"),
+				};
+			}
 		} else {
 			data = {
 				tabs: {
@@ -164,6 +170,8 @@ export class PolyglotGeneralSettings extends FormApplication {
 						"omniglot",
 						"comprehendLanguages",
 						"truespeech",
+						"enableChatFeatures",
+						"displayCheckbox",
 						"display-translated",
 						"hideTranslation",
 						"allowOOC",
