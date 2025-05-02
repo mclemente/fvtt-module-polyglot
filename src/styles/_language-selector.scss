@@ -54,6 +54,9 @@
 		}
 	}
 	.ts-wrapper {
+		&.disabled {
+			text-decoration: line-through;
+		}
 		.ts-control {
 			background: rgba(0, 0, 0, 0.1);
 			border: none;

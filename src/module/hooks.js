@@ -5,19 +5,22 @@ export default class PolyglotHooks {
 	 */
 	static renderChatLog(chatlog, html, data) {
 		game.polyglot.renderChatLog = true;
-		const input = game.settings.get("polyglot", "displayCheckbox")
-			? `<input id="polyglot-checkbox" type="checkbox" ${game.settings.get("polyglot", "checkbox") ? "checked" : ""}>`
-			: "";
 		const polyglotDiv = document.createElement("div");
 		polyglotDiv.setAttribute("id", "polyglot");
 		polyglotDiv.classList.add("polyglot", "polyglot-lang-select", "flexrow");
-		polyglotDiv.innerHTML = `${input}<select id='polyglot-language' name='polyglot-language'></select>`;
+		polyglotDiv.innerHTML = "<select id='polyglot-language' name='polyglot-language'></select>";
+		polyglotDiv.addEventListener("contextmenu", (event) => {
+			const setting = !game.settings.get("polyglot", "checkbox");
+			game.settings.set("polyglot", "checkbox", setting);
+			if (setting) game.polyglot.tomSelect.enable();
+			else game.polyglot.tomSelect.disable();
+		});
 		html.querySelector(".chat-controls").insertAdjacentElement("afterend", polyglotDiv);
 		html.querySelector(".polyglot-lang-select select").addEventListener("change", (ev) => {
 			const lang = ev.target.value;
 			game.polyglot.lastSelection = lang;
 		});
-		html.querySelector("input[id='polyglot-checkbox']").addEventListener("change", (ev) => {
+		html.querySelector("input[id='polyglot-checkbox']")?.addEventListener("change", (ev) => {
 			game.settings.set("polyglot", "checkbox", ev.target.checked);
 		});
 		game.polyglot.updateUserLanguages(html);
@@ -60,8 +63,7 @@ export default class PolyglotHooks {
 	 * @returns {Boolean}
 	 */
 	static preCreateChatMessage(message, data, options, userId) {
-		const isCheckboxEnabled = !game.settings.get("polyglot", "displayCheckbox")
-			|| game.polyglot.chatElement.querySelector("input#polyglot-checkbox").checked;
+		const isCheckboxEnabled = !game.settings.get("polyglot", "checkbox");
 		const isMessageLink = game.polyglot._isMessageLink(data.content);
 		const isMessageInlineRoll = /\[\[(.*?)\]\]/g.test(data.content);
 		// Message preprended by /desc from either Cautious GM Tools or Narrator Tools modules

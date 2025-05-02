@@ -319,6 +319,7 @@ export class Polyglot {
 					console.log(dropdown);
 				}
 			});
+			if (!game.settings.get("polyglot", "checkbox")) this.tomSelect.disable();
 		} else {
 			this.tomSelect.close();
 			this.tomSelect.clearOptions();

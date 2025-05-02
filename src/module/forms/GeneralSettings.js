@@ -115,7 +115,6 @@ export class PolyglotGeneralSettings extends FormApplication {
 			if (game.settings.get("polyglot", "enableChatFeatures")) {
 				data.settings.chat = {
 					...data.settings.chat,
-					displayCheckbox: this._prepSetting("displayCheckbox"),
 					"display-translated": this._prepSetting("display-translated"),
 					hideTranslation: this._prepSetting("hideTranslation"),
 					allowOOC: this._prepSetting("allowOOC"),
@@ -171,7 +170,6 @@ export class PolyglotGeneralSettings extends FormApplication {
 						"comprehendLanguages",
 						"truespeech",
 						"enableChatFeatures",
-						"displayCheckbox",
 						"display-translated",
 						"hideTranslation",
 						"allowOOC",

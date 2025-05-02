@@ -40,10 +40,6 @@
 			"hint": "Enables all the chat features, such as the language selector in the chat and message scrambling.",
 			"title": "Enable Chat Features"
 		},
-		"DisplayCheckbox": {
-			"hint": "Displays a checkbox next to the language selector in the chat.",
-			"title": "Display Checkbox"
-		},
 		"DisplayTranslated.hint": "For languages that are translated in the chat window, display the original text and a translation below.",
 		"DisplayTranslated.title": "Display Translations",
 		"enableAllFonts": {
