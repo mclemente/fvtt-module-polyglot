@@ -21,7 +21,7 @@ export class Polyglot {
 			Hooks.on("updateUser", PolyglotHooks.updateUser);
 			Hooks.on("updateActiveEffect", PolyglotHooks.updateActiveEffect);
 			Hooks.on("preCreateChatMessage", PolyglotHooks.preCreateChatMessage);
-			Hooks.on("renderChatMessage", PolyglotHooks.renderChatMessage);
+			Hooks.on("renderChatMessageHTML", PolyglotHooks.renderChatMessageHTML);
 			Hooks.on("createChatMessage", PolyglotHooks.createChatMessage);
 			Hooks.on("renderActorDirectoryPF2e", PolyglotHooks.renderActorDirectoryPF2e);
 			Hooks.on("vinoPrepareChatDisplayData", PolyglotHooks.vinoPrepareChatDisplayData);
@@ -435,7 +435,7 @@ export class Polyglot {
 		const IgnoreJournalFontSize = game.settings.get("polyglot", "IgnoreJournalFontSize");
 		toggleButton.click((ev) => {
 			ev.preventDefault();
-			let button = ev.currentTarget.firstChild;
+			let button = ev.currentTarget.firstElementChild;
 			runes = !runes;
 			button.className = runes ? "fas fa-link" : "fas fa-unlink";
 			const spans = document.element.find("span.polyglot-journal");
