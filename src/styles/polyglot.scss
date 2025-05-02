@@ -20,8 +20,37 @@
 	@import "system-specific";
 }
 
-.polyglot-language {
-	.select2-results__option {
-		color: fieldtext;
+#interface {
+	&.theme-dark {
+		.polyglot.polyglot-lang-select {
+			.ts-wrapper {
+				.ts-control {
+					color: var(--color-light-1);
+				}
+				.ts-dropdown {
+					background: var(--color-cool-4);
+					.optgroup-header {
+						border-bottom: solid 1px;
+					}
+					.option.active {
+						background: var(--color-cool-3);
+						color: var(--color-light-2);
+					}
+					.optgroup-header, .option {
+						background: var(--color-cool-4);
+						color: var(--color-light-1);
+					}
+				}
+			}
+		}
+	}
+	&.theme-light {
+		.polyglot.polyglot-lang-select {
+			.ts-wrapper {
+				.ts-control {
+					background: rgba(255, 255, 255, 0.6)
+				}
+			}
+		}
 	}
 }

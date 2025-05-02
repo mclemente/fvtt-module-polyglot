@@ -74,15 +74,20 @@ async function copyFiles() {
 	}
 }
 
-function select2() {
-	return gulp.src(["node_modules/select2/dist/js/select2.min.js", "node_modules/select2/dist/css/select2.min.css"]).pipe(gulp.dest("dist/lib/select2"));
+function tomSelect() {
+	return gulp.src([
+		"node_modules/tom-select/dist/js/tom-select.complete.min.js",
+		"node_modules/tom-select/dist/js/tom-select.complete.min.js.map",
+		"node_modules/tom-select/dist/css/tom-select.min.css",
+		"node_modules/tom-select/dist/css/tom-select.min.css.map",
+	]).pipe(gulp.dest("dist/lib/tom-select"));;
 }
 
 /**
  * Watch for changes for each build step
  */
 export function watch() {
-	select2();
+	tomSelect();
 	gulp.watch(`${sourceDirectory}/**/*.${sourceFileExtension}`, { ignoreInitial: false }, buildCode);
 	gulp.watch(`${stylesDirectory}/**/*.${stylesExtension}`, { ignoreInitial: false }, buildStyles);
 	gulp.watch(
@@ -92,7 +97,7 @@ export function watch() {
 	);
 }
 
-export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, select2, copyFiles));
+export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, tomSelect, copyFiles));
 
 /********************/
 /*      CLEAN       */

@@ -178,6 +178,7 @@ module.exports = {
 		GURPS: false,
 		JournalTextPageSheet: false,
 		ProseMirror: false,
+		TomSelect: false,
 		Tour: false,
 	},
 
