@@ -59,7 +59,7 @@ export function registerTours() {
 			title: "POLYGLOT.TOURS.Main.title",
 			description: "POLYGLOT.TOURS.Main.desc",
 			restricted: true,
-			display: true,
+			display: game.settings.get("polyglot", "enableChatFeatures"),
 			canBeResumed: true,
 			steps: [
 				{
