@@ -179,13 +179,6 @@ export function registerSettings() {
 		type: Boolean,
 		requiresReload: true,
 	});
-	addMenuSetting("displayCheckbox", {
-		name: "POLYGLOT.DisplayCheckbox.title",
-		hint: "POLYGLOT.DisplayCheckbox.hint",
-		default: true,
-		type: Boolean,
-		requiresReload: true,
-	});
 	addMenuSetting("display-translated", {
 		name: "POLYGLOT.DisplayTranslated.title",
 		hint: "POLYGLOT.DisplayTranslated.hint",
@@ -216,7 +209,7 @@ export function registerSettings() {
 	addMenuSetting("checkbox", {
 		default: true,
 		type: Boolean,
-		scope: "client"
+		scope: "user"
 	});
 
 	Hooks.on("i18nInit", () => {

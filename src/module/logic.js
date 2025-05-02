@@ -21,7 +21,7 @@ export class Polyglot {
 			Hooks.on("updateUser", PolyglotHooks.updateUser);
 			Hooks.on("updateActiveEffect", PolyglotHooks.updateActiveEffect);
 			Hooks.on("preCreateChatMessage", PolyglotHooks.preCreateChatMessage);
-			Hooks.on("renderChatMessage", PolyglotHooks.renderChatMessage);
+			Hooks.on("renderChatMessageHTML", PolyglotHooks.renderChatMessageHTML);
 			Hooks.on("createChatMessage", PolyglotHooks.createChatMessage);
 			Hooks.on("renderActorDirectoryPF2e", PolyglotHooks.renderActorDirectoryPF2e);
 			Hooks.on("vinoPrepareChatDisplayData", PolyglotHooks.vinoPrepareChatDisplayData);
@@ -90,6 +90,8 @@ export class Polyglot {
 	get chatElement() {
 		return ui.sidebar.popouts.chat?.element || ui.chat.element;
 	}
+
+	tomSelect;
 
 	/**
 	 * @returns {object}
@@ -217,22 +219,12 @@ export class Polyglot {
 		}
 
 		if (!game.polyglot.renderChatLog) return;
-		let options = [];
+		const options = [];
+		const optgroups = [
+			{ $order: 1, id: "known", name: game.i18n.localize("POLYGLOT.KnownLanguages") },
+			{ $order: 2, id: "unknown", name: game.i18n.localize("POLYGLOT.UnknownLanguages") }];
 		let ownedActors = [];
 		if (game.user.isGM) {
-			// GM's list has optgroups separated between known and unknown.
-			options.push(...[
-				{
-					id: "known",
-					text: game.i18n.localize("POLYGLOT.KnownLanguages"),
-					children: []
-				},
-				{
-					id: "unknown",
-					text: game.i18n.localize("POLYGLOT.UnknownLanguages"),
-					children: []
-				}
-			]);
 			ownedActors = game.actors.filter((actor) => actor.hasPlayerOwner);
 			for (const actor of ownedActors) {
 				actor.knownLanguages = this.getUserLanguages([actor])[0];
@@ -252,7 +244,12 @@ export class Polyglot {
 			if (!this._isTruespeech(lang) && (lang === this.omniglot || lang === this.comprehendLanguages)) {
 				continue;
 			}
-			const label = this.languageProvider.languages[lang]?.label || lang.capitalize();
+			const option = {
+				id: lang,
+				group: "known",
+				label: this.languageProvider.languages[lang]?.label || lang.capitalize(),
+				$order: lang === defaultLanguage ? 1 : 1000 // Sorting Order
+			};
 			if (game.user.isGM) {
 				if (ownedActors.length) {
 					const usersThatKnowLang = filteredUsers.filter((u) =>
@@ -270,98 +267,66 @@ export class Polyglot {
 							const { name, color, actorsOwnedByUser } = user;
 							users.push({ bgColor: color, userName: name, ownedActors: actorsOwnedByUser.join(", ") });
 						}
-						options[0].children.push({
-							id: lang,
-							text: label,
-							users,
-						});
-						continue;
+						option.users = users;
+					} else option.group = "unknown";
+				} else option.group = "unknown";
+			}
+			options.push(option);
+		}
+
+		const select = this.chatElement.querySelector(".polyglot-lang-select select");
+		const selectedLanguage = this.lastSelection || select.value || defaultLanguage;
+
+		if (!this.tomSelect) {
+			this.tomSelect = new TomSelect("#polyglot-language", {
+				options,
+				optgroups,
+				labelField: "label",
+				valueField: "id",
+				optgroupField: "group",
+				optgroupLabelField: "name",
+				optgroupValueField: "id",
+				lockOptgroupOrder: true,
+				searchField: ["label"],
+				sortField: [{ field: "$order" }, { field: "label" }],
+				plugins: ["optgroup_columns"],
+
+				create: false,
+				controlInput: null,
+				render: {
+					option: (data, escape) => {
+						if (data.users) {
+							const userList = [];
+							for (const user of data.users) {
+								const { bgColor, userName, ownedActors } = user;
+								const tooltip = `${userName} (${ownedActors})`;
+								userList.push(
+									`<div style="background-color: ${bgColor};" data-tooltip="${tooltip}" data-tooltip-direction="UP"></div>`,
+								);
+							}
+							return `<div class="flexrow">
+								<div>${escape(data.label)}</div>
+								<div class="polyglot polyglot-user-list">${userList.join("")}</div>
+							</div>`.trim();
+						}
+						return `<div>${escape(data.label)}</div>`;
+					},
+					item: (data, escape) => {
+						return `<div>${game.i18n.format("POLYGLOT.SpeakingIn", { language: escape(data.label)})}</div>`;
 					}
+				},
+				onDropdownClose: (dropdown) => {
+					console.log(dropdown);
 				}
-				options[1].children.push({
-					id: lang,
-					text: label,
-				});
-			} else {
-				options.push({
-					id: lang,
-					text: label,
-				});
-			}
-		}
-		// Remove childless lists. Otherwise, sort them by label
-		if (game.user.isGM) {
-			if (!options[1].children.length) {
-				options.pop();
-			} else {
-				options[1].children.sort((a, b) => a.text.localeCompare(b.text));
-			}
-			if (!options[0].children.length) {
-				options.shift();
-			} else {
-				options[0].children.sort((a, b) => a.text.localeCompare(b.text));
-			}
+			});
+			if (!game.settings.get("polyglot", "checkbox")) this.tomSelect.disable();
 		} else {
-			options.sort((a, b) => a.text.localeCompare(b.text));
+			this.tomSelect.close();
+			this.tomSelect.clearOptions();
+			this.tomSelect.addOptions(options);
 		}
-
-		const select = this.chatElement.find(".polyglot-lang-select select");
-		const prevOption = select.val();
-
-		select.empty();
-
-		const formatState = (state) => {
-			const { id, text, users } = state;
-			let $state = text;
-			if (id && users) {
-				let userList = [];
-				for (let user of users) {
-					const { bgColor, userName, ownedActors } = user;
-					const tooltip = `${userName} (${ownedActors})`;
-					userList.push(
-						`<div style="background-color: ${bgColor};" data-tooltip="${tooltip}" data-tooltip-direction="UP"></div>`,
-					);
-				}
-				$state = $(
-					`<div class="flexrow">
-						<div>${text}</div>
-						<div class="polyglot polyglot-user-list">${userList.join("")}</div>
-					</div>`.trim(),
-				);
-			}
-			return $state;
-		};
-
-		// This is needed in case a system or another module already defined select2 under version 4.1, which doesn't accept dropdownCssClass
-		try {
-			select.select2({
-				data: options,
-				dropdownCssClass: "polyglot-language",
-				templateResult: formatState,
-				templateSelection: formatState,
-			});
-		} catch(error) {
-			if (error.message.includes("No select2/compat/dropdownCss")) {
-				select.select2({
-					data: options,
-					templateResult: formatState,
-					templateSelection: formatState,
-				});
-			} else {
-				console.error(error);
-			}
-		} finally {
-			$(document).on("mouseenter", ".select2-selection__rendered", function () {
-				$(this).removeAttr("title");
-			});
-
-			let selectedLanguage = this.lastSelection || prevOption || defaultLanguage;
-			if (!this.isLanguageKnown(selectedLanguage)) {
-				if (this.isLanguageKnown(defaultLanguage)) selectedLanguage = defaultLanguage;
-				else selectedLanguage = [...this.knownLanguages][0];
-			}
-			select.val(selectedLanguage).trigger("change.select2");
-		}
+		if (this.knows(selectedLanguage)) this.tomSelect.addItem(selectedLanguage);
+		else this.tomSelect.addItem(this.knows(defaultLanguage) ? defaultLanguage : [...this.knownLanguages][0]);
 	}
 
 	/**
@@ -471,7 +436,7 @@ export class Polyglot {
 		const IgnoreJournalFontSize = game.settings.get("polyglot", "IgnoreJournalFontSize");
 		toggleButton.click((ev) => {
 			ev.preventDefault();
-			let button = ev.currentTarget.firstChild;
+			let button = ev.currentTarget.firstElementChild;
 			runes = !runes;
 			button.className = runes ? "fas fa-link" : "fas fa-unlink";
 			const spans = document.element.find("span.polyglot-journal");
@@ -541,6 +506,10 @@ export class Polyglot {
 		});
 	}
 
+	knows(lang) {
+		return this.knownLanguages.has(lang);
+	}
+
 	isLanguageKnown(lang) {
 		return this.knownLanguages.has(lang);
 	}
@@ -561,7 +530,7 @@ export class Polyglot {
 	 * @returns {Boolean}
 	 */
 	isLanguageknownOrUnderstood(lang) {
-		return this.isLanguageKnown(lang) || this.isLanguageUnderstood(lang);
+		return this.knows(lang) || this.isLanguageUnderstood(lang);
 	}
 
 	/* -------------------------------------------- */

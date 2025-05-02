@@ -12,8 +12,8 @@
 		"Font": "Font",
 		"Fonts": "Fonts",
 		"FontSize": "Font Size (%)",
-		"KnownLanguages": "Known Languages",
-		"UnknownLanguages": "Unknown Languages",
+		"KnownLanguages": "Known",
+		"UnknownLanguages": "Unknown",
 		"AlphabeticOnly": "Only Alphabetic",
 		"Logographical": "Logographical",
 		"AllowOOC": {
@@ -39,10 +39,6 @@
 		"EnableChatFeatures": {
 			"hint": "Enables all the chat features, such as the language selector in the chat and message scrambling.",
 			"title": "Enable Chat Features"
-		},
-		"DisplayCheckbox": {
-			"hint": "Removes the checkbox from the chat section.",
-			"title": "Display Checkbox"
 		},
 		"DisplayTranslated.hint": "For languages that are translated in the chat window, display the original text and a translation below.",
 		"DisplayTranslated.title": "Display Translations",
@@ -108,6 +104,7 @@
 		},
 		"ScrambleGM.hint": "Don't translate the text for the GM (refer to the globe's color for the token's understanding).",
 		"ScrambleGM.title": "Scramble Messages for GM",
+		"SpeakingIn": "Speaking in {language}",
 		"Truespeech.hint": "Set a language whose speaker understands all spoken languages (can't read Journals) and which is understood by all creatures. An actor will be able to read all chat messages and to write messages in a language that is understood by all.",
 		"Truespeech.title": "Omnispeech Language",
 		"Translation": "Translation",
@@ -129,13 +126,13 @@
 					"Title": "Language Selector",
 					"Content": "The <span class='reference'>Language Selector</span> is where you can select which language you want to speak in, scrambling the messages sent while it is active."
 				},
-				"LanguageSelectorCheckbox": {
-					"Title": "Language Selector's Checkbox",
-					"Content": "The <span class='reference'>Checkbox</span> toggles the scrambling. Any user who unchecks it will speak as if the module was disabled."
-				},
 				"LanguageSelectorSelect": {
 					"Title": "Language Selector's Dropdown",
 					"Content": "The <span class='reference'>Dropdown</span> contains all the languages in your world.<br>Depending on your game system, the languages may have already been set, while in other game systems, you may need to configure them in the <span class='reference'>Game Settings</span>.<br>It will display languages between the ones Known and Unknown by your players' actors."
+				},
+				"LanguageSelectorSelect2": {
+					"Title": "Language Selector's Dropdown",
+					"Content": "Right-clicking the <span class='reference'>Dropdown</span> toggles the scrambling, allowing users to speak as if the module was disabled."
 				},
 				"LanguageSelectorPips": {
 					"Title": "Language Selector's Pips",

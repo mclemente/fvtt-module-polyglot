@@ -115,7 +115,6 @@ export class PolyglotGeneralSettings extends FormApplication {
 			if (game.settings.get("polyglot", "enableChatFeatures")) {
 				data.settings.chat = {
 					...data.settings.chat,
-					displayCheckbox: this._prepSetting("displayCheckbox"),
 					"display-translated": this._prepSetting("display-translated"),
 					hideTranslation: this._prepSetting("hideTranslation"),
 					allowOOC: this._prepSetting("allowOOC"),
@@ -171,7 +170,6 @@ export class PolyglotGeneralSettings extends FormApplication {
 						"comprehendLanguages",
 						"truespeech",
 						"enableChatFeatures",
-						"displayCheckbox",
 						"display-translated",
 						"hideTranslation",
 						"allowOOC",
@@ -208,8 +206,8 @@ export class PolyglotGeneralSettings extends FormApplication {
 			let s = game.settings.settings.get(`polyglot.${k}`);
 			let current = game.user.isGM ? game.settings.get(s.namespace, s.key) : game.user.getFlag("polyglot", k);
 			if (v === current) continue;
-			requiresClientReload ||= s.scope === "client" && s.requiresReload;
-			requiresWorldReload ||= s.scope === "world" && s.requiresReload;
+			requiresClientReload ||= (s.scope !== CONST.SETTING_SCOPES.WORLD) && s.requiresReload;
+			requiresWorldReload ||= (s.scope === CONST.SETTING_SCOPES.WORLD) && s.requiresReload;
 			if (game.user.isGM) {
 				await game.settings.set(s.namespace, s.key, v);
 			} else {

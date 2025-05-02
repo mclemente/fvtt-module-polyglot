@@ -5,22 +5,20 @@ export default class PolyglotHooks {
 	 */
 	static renderChatLog(chatlog, html, data) {
 		game.polyglot.renderChatLog = true;
-		const input = game.settings.get("polyglot", "displayCheckbox")
-			? `<input name="polyglot-checkbox" type="checkbox" ${game.settings.get("polyglot", "checkbox") ? "checked" : ""}>`
-			: "";
-		html.find("#chat-controls").after(
-			`<div id='polyglot' class='polyglot polyglot-lang-select flexrow'>
-				${input}
-				<label>${game.i18n.localize("POLYGLOT.LanguageLabel")}</label>
-				<select name='polyglot-language'></select>
-			</div>`,
-		);
-		html.find(".polyglot-lang-select select").change((ev) => {
+		const polyglotDiv = document.createElement("div");
+		polyglotDiv.setAttribute("id", "polyglot");
+		polyglotDiv.classList.add("polyglot", "polyglot-lang-select", "flexrow");
+		polyglotDiv.innerHTML = "<select id='polyglot-language' name='polyglot-language'></select>";
+		polyglotDiv.addEventListener("contextmenu", (event) => {
+			const setting = !game.settings.get("polyglot", "checkbox");
+			game.settings.set("polyglot", "checkbox", setting);
+			if (setting) game.polyglot.tomSelect.enable();
+			else game.polyglot.tomSelect.disable();
+		});
+		html.querySelector(".chat-controls").insertAdjacentElement("afterend", polyglotDiv);
+		html.querySelector(".polyglot-lang-select select").addEventListener("change", (ev) => {
 			const lang = ev.target.value;
 			game.polyglot.lastSelection = lang;
-		});
-		html.find("input[name='polyglot-checkbox']").change((ev) => {
-			game.settings.set("polyglot", "checkbox", ev.target.checked);
 		});
 		game.polyglot.updateUserLanguages(html);
 	}
@@ -62,8 +60,7 @@ export default class PolyglotHooks {
 	 * @returns {Boolean}
 	 */
 	static preCreateChatMessage(message, data, options, userId) {
-		const isCheckboxEnabled = !game.settings.get("polyglot", "displayCheckbox")
-			|| game.polyglot.chatElement.find("input[name=polyglot-checkbox]").prop("checked");
+		const isCheckboxEnabled = !game.settings.get("polyglot", "checkbox");
 		const isMessageLink = game.polyglot._isMessageLink(data.content);
 		const isMessageInlineRoll = /\[\[(.*?)\]\]/g.test(data.content);
 		// Message preprended by /desc from either Cautious GM Tools or Narrator Tools modules
@@ -75,7 +72,7 @@ export default class PolyglotHooks {
 			message.style === CONST.CHAT_MESSAGE_STYLES.IC
 			|| (message.style === CONST.CHAT_MESSAGE_STYLES.OOC && game.polyglot._allowOOC())
 		) {
-			let lang = game.polyglot.chatElement.find("select[name=polyglot-language]").val();
+			let lang = game.polyglot.chatElement.querySelector("select#polyglot-language").value;
 			const language = data.lang || data.language;
 			if (language) {
 				if (game.polyglot.languageProvider.languages[language]) {
@@ -101,24 +98,24 @@ export default class PolyglotHooks {
 	 * and adding the indicators ("Translated From" text and the globe icon).
 	 *
 	 * @param {ChatMessage} message		The ChatMessage document being rendered
-	 * @param {JQuery} html 			The pending HTML as a jQuery object
+	 * @param {HTMLElement} html 			The pending HTML as a HTMLElement object
 	 * @param {Object} data 					The input data provided for template rendering
 	 *
 	 * @var {Boolean} known				Determines if the actor actually knows the language, rather than being affected by Comprehend Languages or Tongues
 	 */
-	static async renderChatMessage(message, html, data) {
+	static async renderChatMessageHTML(message, html, data) {
 		const lang = message.getFlag("polyglot", "language");
 		if (!lang) return;
 
 		if (game.polyglot.languageProvider.requiresReady && !game.ready) {
 			Hooks.once("polyglot.languageProvider.ready", async () => {
-				await PolyglotHooks.renderChatMessage(message, html, data);
+				await PolyglotHooks.renderChatMessageHTML(message, html, data);
 			});
 			return;
 		}
 		// Skip for inline rolls
 		if (!game.polyglot.knownLanguages.size) game.polyglot.updateUserLanguages();
-		const metadata = html.find(".message-metadata");
+		const metadata = html.querySelector(".message-metadata");
 		const language = game.polyglot.languageProvider.languages?.[lang]?.label || lang;
 		const known = game.polyglot.isLanguageKnown(lang);
 		const understood = game.polyglot.isLanguageUnderstood(lang);
@@ -132,24 +129,26 @@ export default class PolyglotHooks {
 				!game.polyglot._isTruespeech(lang) && !known && (game.user.character || isGM ? !understood : true);
 		}
 		const forceTranslation = message.polyglot_force || !message.polyglot_unknown;
-		const messageContent = html.find(".message-content");
-		const innerText = messageContent.text().trim();
+		const messageContent = html.querySelector(".message-content");
+		const innerText = messageContent.innerText.trim();
 
-		const content = $("<div>")
-			.addClass("polyglot-original-text")
-			.css({ font: game.polyglot._getFontStyle(lang) })
-			.html(game.polyglot.scrambleString(innerText, message.id, lang));
-		const translation = $("<div>")
-			.addClass("polyglot-translation-text")
-			.attr("data-tooltip", language)
-			.attr("data-tooltip-direction", "UP")
-			.html(message.content);
+		const content = document.createElement("div");
+		content.classList.add("polyglot-original-text");
+		content.style.font = game.polyglot._getFontStyle(lang);
+		content.innerHTML = game.polyglot.scrambleString(innerText, message.id, lang);
+
+		const translation = document.createElement("div");
+		translation.classList.add("polyglot-translation-text");
+		translation.setAttribute("data-tooltip", language);
+		translation.setAttribute("data-tooltip-direction", "UP");
+		translation.innerHTML = message.content;
 
 		if (
 			displayTranslated
 			&& (lang !== game.polyglot.languageProvider.defaultLanguage || message.polyglot_unknown)
 		) {
-			messageContent.empty().append(content);
+			messageContent.innerText = "";
+			messageContent.append(content);
 
 			if (
 				forceTranslation
@@ -165,18 +164,21 @@ export default class PolyglotHooks {
 			let color = "red";
 			if ((isGM && !runifyGM) || known) color = "green";
 			else if (understood) color = "blue";
-			const title =
-				isGM || known || game.polyglot._isTruespeech(lang)
-					? `data-tooltip="${language}" data-tooltip-direction="LEFT"`
-					: "";
 			const clickable = isGM && (runifyGM || !displayTranslated);
-			const button = $(`<a class="polyglot-message-language ${clickable ? "" : "unclickable"}" ${title}>
-				<i class="fas fa-globe" style="color:${color}"></i>
-			</a>`);
-			metadata.find(".polyglot-message-language").remove();
+			const button = document.createElement("a");
+			button.className = `polyglot-message-language ${clickable ? "" : "unclickable"}`;
+			button.innerHTML = `<i class="fas fa-globe" style="color:${color}"></i>`;
+			if (isGM || known || game.polyglot._isTruespeech(lang)) {
+				button.dataset.tooltip = language;
+				button.dataset.tooltipDirection = "LEFT";
+			}
+
+			const existing = metadata.querySelector(".polyglot-message-language");
+			if (existing) metadata.removeChild(existing);
+
 			metadata.append(button);
 			if (clickable) {
-				button.on("click", game.polyglot._onGlobeClick.bind(this));
+				button.addEventListener("click", game.polyglot._onGlobeClick.bind(this));
 			}
 		}
 	}
