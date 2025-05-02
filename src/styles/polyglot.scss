@@ -19,3 +19,9 @@
 	@import "language-selector";
 	@import "system-specific";
 }
+
+.polyglot-language {
+	.select2-results__option {
+		color: fieldtext;
+	}
+}
