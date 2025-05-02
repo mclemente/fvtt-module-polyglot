@@ -20,9 +20,6 @@ export default class PolyglotHooks {
 			const lang = ev.target.value;
 			game.polyglot.lastSelection = lang;
 		});
-		html.querySelector("input[id='polyglot-checkbox']")?.addEventListener("change", (ev) => {
-			game.settings.set("polyglot", "checkbox", ev.target.checked);
-		});
 		game.polyglot.updateUserLanguages(html);
 	}
 

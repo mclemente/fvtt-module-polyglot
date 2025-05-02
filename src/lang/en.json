@@ -126,13 +126,13 @@
 					"Title": "Language Selector",
 					"Content": "The <span class='reference'>Language Selector</span> is where you can select which language you want to speak in, scrambling the messages sent while it is active."
 				},
-				"LanguageSelectorCheckbox": {
-					"Title": "Language Selector's Checkbox",
-					"Content": "The <span class='reference'>Checkbox</span> toggles the scrambling. Any user who unchecks it will speak as if the module was disabled."
-				},
 				"LanguageSelectorSelect": {
 					"Title": "Language Selector's Dropdown",
 					"Content": "The <span class='reference'>Dropdown</span> contains all the languages in your world.<br>Depending on your game system, the languages may have already been set, while in other game systems, you may need to configure them in the <span class='reference'>Game Settings</span>.<br>It will display languages between the ones Known and Unknown by your players' actors."
+				},
+				"LanguageSelectorSelect2": {
+					"Title": "Language Selector's Dropdown",
+					"Content": "Right-clicking the <span class='reference'>Dropdown</span> toggles the scrambling, allowing users to speak as if the module was disabled."
 				},
 				"LanguageSelectorPips": {
 					"Title": "Language Selector's Pips",
