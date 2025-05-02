@@ -40,6 +40,9 @@
 						background: var(--color-cool-4);
 						color: var(--color-light-1);
 					}
+					.ts-dropdown-content {
+						scrollbar-width: none;
+					}
 				}
 			}
 		}
