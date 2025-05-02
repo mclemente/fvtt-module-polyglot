@@ -244,7 +244,12 @@ export class Polyglot {
 			if (!this._isTruespeech(lang) && (lang === this.omniglot || lang === this.comprehendLanguages)) {
 				continue;
 			}
-			const label = this.languageProvider.languages[lang]?.label || lang.capitalize();
+			const option = {
+				id: lang,
+				group: "known",
+				label: this.languageProvider.languages[lang]?.label || lang.capitalize(),
+				$order: lang === defaultLanguage ? 1 : 1000 // Sorting Order
+			};
 			if (game.user.isGM) {
 				if (ownedActors.length) {
 					const usersThatKnowLang = filteredUsers.filter((u) =>
@@ -262,17 +267,12 @@ export class Polyglot {
 							const { name, color, actorsOwnedByUser } = user;
 							users.push({ bgColor: color, userName: name, ownedActors: actorsOwnedByUser.join(", ") });
 						}
-						options.push({ id: lang, group: "known", label, users });
-						continue;
-					}
-				}
-				options.push({ id: lang, group: "unknown", label });
-			} else {
-				options.push({ id: lang, group: "known", label });
+						option.users = users;
+					} else option.group = "unknown";
+				} else option.group = "unknown";
 			}
+			options.push(option);
 		}
-		options.sort((a, b) => a.label.localeCompare(b.label));
-		options.unshift({ id: "", group: "known", label: "None" });
 
 		const select = this.chatElement.querySelector(".polyglot-lang-select select");
 		const selectedLanguage = this.lastSelection || select.value || defaultLanguage;
@@ -288,9 +288,9 @@ export class Polyglot {
 				optgroupValueField: "id",
 				lockOptgroupOrder: true,
 				searchField: ["label"],
+				sortField: [{ field: "$order" }, { field: "label" }],
 				plugins: ["optgroup_columns"],
 
-				allowEmptyOption: true,
 				create: false,
 				controlInput: null,
 				render: {
