@@ -52,14 +52,14 @@
 			.ts-wrapper {
 				.ts-control {
 					background: rgba(255, 255, 255, 0.6);
-					&:hover {
-						background: rgba(255, 255, 255, 0.85);
-					}
 				}
 				.ts-dropdown {
 					.optgroup-header {
 						border-bottom: solid 1px;
 					}
+				}
+				&.focus .ts-control, .ts-control:hover {
+					background: rgba(255, 255, 255, 0.85);
 				}
 			}
 		}

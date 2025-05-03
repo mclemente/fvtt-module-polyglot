@@ -4,13 +4,10 @@
 			text-decoration: line-through;
 		}
 		.ts-control {
-			background: rgba(0, 0, 0, 0.1);
+			background: var(--color-cool-5-75);
 			border: none;
 			border-radius: 4px;
 			padding: 1px 8px;
-			&:hover {
-				background: rgba(0, 0, 0, 0.35);
-			}
 		}
 		.ts-dropdown {
 			bottom: 100%;
@@ -18,6 +15,9 @@
 			.optgroup-header, .option {
 				padding: 1px 8px;
 			}
+		}
+		&.focus .ts-control, .ts-control:hover {
+			background: var(--color-cool-5);
 		}
 		&.input-active .ts-control {
 			cursor: pointer;
