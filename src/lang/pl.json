@@ -146,8 +146,8 @@
 		"PF2E": {
 			"replaceLanguages.hint": "Usuwa domyślne języki systemowe. Musisz mieć co najmniej jeden język homebrew ustawiony w menu Homebrew Elements, w przeciwnym razie języki inne niż Common nie zostaną usunięte. Jeśli wyłączyłeś to ustawienie i chcesz przywrócić domyślne ustawienia rzadkości, sprawdź wiki modułu."
 		},
-		"KnownLanguages": "Znane Języki",
-		"UnknownLanguages": "Nieznane Języki",
+		"KnownLanguages": "Znane",
+		"UnknownLanguages": "Nieznane",
 		"TOURS": {
 			"Main": {
 				"title": "Pierwsze kroki z Polyglot",
@@ -211,6 +211,10 @@
 				"End": {
 					"Title": "Zakończenie",
 					"Content": "Na tym kończy się ta wycieczka. Mam nadzieję, że rozwiało to pewne wątpliwości dotyczące interakcji Polyglota z zachowaniem Core Foundry.<br>Jeśli chcesz bardziej zagłębić się w moduł, sprawdź jego ustawienia w <span class=\"reference\">Ustawieniach Gry</span>.<br>Jeśli to nadal okaże się niewystarczające, spróbuj sprawdzić <a class=\"hyperlink\" href=\"https://github.com/mclemente/fvtt-module-polyglot/wiki\" target=\"_blank\" rel=\"nofollow noopener\"> wiki modułu</a>, aby uzyskać więcej informacji."
+				},
+				"LanguageSelectorSelect2": {
+					"Title": "Lista rozwijana wyboru języka",
+					"Content": "Kliknięcie prawym przyciskiem myszy na <span class='reference'>Listę rozwijalną</span> powoduje przełączenie szyfrowania, umożliwiając użytkownikom mówienie tak, jakby moduł był wyłączony."
 				}
 			}
 		},
@@ -221,6 +225,11 @@
 		"LiteracyRegex": {
 			"hint": "To samo co Language Regex, ale dla języków pisanych.",
 			"title": "Literacki RegEx"
-		}
+		},
+		"EnableChatFeatures": {
+			"title": "Włącz funkcje czatu",
+			"hint": "Włącza wszystkie funkcje czatu, takie jak wybór języka w czacie i kodowanie wiadomości."
+		},
+		"SpeakingIn": "Mówi w języku {language}"
 	}
 }
