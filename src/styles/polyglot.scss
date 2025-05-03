@@ -53,6 +53,11 @@
 				.ts-control {
 					background: rgba(255, 255, 255, 0.6)
 				}
+				.ts-dropdown {
+					.optgroup-header {
+						border-bottom: solid 1px;
+					}
+				}
 			}
 		}
 	}
