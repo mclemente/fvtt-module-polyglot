@@ -28,7 +28,7 @@
 					color: var(--color-light-1);
 				}
 				.ts-dropdown {
-					background: var(--color-cool-4);
+					background: var(--color-cool-5);
 					.optgroup-header {
 						border-bottom: solid 1px;
 					}
@@ -37,7 +37,7 @@
 						color: var(--color-light-2);
 					}
 					.optgroup-header, .option {
-						background: var(--color-cool-4);
+						background: var(--color-cool-5);
 						color: var(--color-light-1);
 					}
 					.ts-dropdown-content {
@@ -57,6 +57,9 @@
 					.optgroup-header {
 						border-bottom: solid 1px;
 					}
+				}
+				.option.active {
+					background: #e0eef7;
 				}
 				&.focus .ts-control, .ts-control:hover {
 					background: rgba(255, 255, 255, 0.85);
