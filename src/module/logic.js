@@ -37,7 +37,7 @@ export class Polyglot {
 
 		libWrapper.register(
 			"polyglot",
-			"ChatBubbles.prototype.say",
+			"foundry.canvas.animation.ChatBubbles.prototype.say",
 			async (wrapped, token, message, { cssClasses, requireVisible = false, pan = true, language = "" } = {}) => {
 				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
 					return wrapped(token, message, { cssClasses, requireVisible, pan });

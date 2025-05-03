@@ -10,5 +10,5 @@ export async function preloadTemplates() {
 		"modules/polyglot/templates/LanguageSettings.hbs",
 	];
 
-	return loadTemplates(templatePaths);
+	return foundry.applications.handlebars.loadTemplates(templatePaths);
 }

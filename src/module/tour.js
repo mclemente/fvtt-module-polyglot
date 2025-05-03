@@ -1,5 +1,5 @@
 
-class PolyglotTour extends Tour {
+class PolyglotTour extends foundry.nue.Tour {
 	async _preStep() {
 		await super._preStep();
 
