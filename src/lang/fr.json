@@ -137,8 +137,8 @@
 		"AlphabeticOnly": "Alphabétique seulement",
 		"Logographical": "Logographique",
 		"GameMasterHasAssignedCharacter": "Vous êtes un {GM} et un personnage vous a été assigné. Polyglot se comportera bizarrement à cause de cela. Envisagez de ne plus être l'Utilisateur de ce personnage.",
-		"KnownLanguages": "Langues connues",
-		"UnknownLanguages": "Langues inconnues",
+		"KnownLanguages": "connues",
+		"UnknownLanguages": "Inconnues",
 		"PF2E": {
 			"replaceLanguages.hint": "Supprime les langues par défaut du système. Vous devez avoir au moins une langue maison définie dans le menu Éléments maison. Autrement les langues non courantes ne seront pas supprimées. Si vous désactivez ce paramètre et souhaitez réinitialiser les raretés aux valeurs par défaut, consultez le wiki du module."
 		},
@@ -169,7 +169,7 @@
 					"Content": "Bien que 'Polyglot' en tant que tel ne change rien à ce sujet, vous devez être conscient du comportement de Foundry lié à la <span class='reference'>configuration de l'utilisateur </span> . Vous pouvez l'ouvrir vous-même en faisant un clic droit sur le nom d'un utilisateur dans cette liste ici."
 				},
 				"ChatMessageGlobe": {
-					"Content": "Ce globe peut avoir 3 couleurs : <ul><li><span style=\"color: green\">Vert</span> pour les langues connues. En passant la souris dessus, le nom de la langue s'affichera.</li><li><span style=\"color: blue\"> Bleu</span> pour les langues qui peuvent être lues mais dont le joueur n'a aucune idée de la langue utilisée.<li><span style=\"color: red\">Rouge</span> pour les langues inconnues.</li></li></ul>",
+					"Content": "Ce globe peut avoir 3 couleurs : <ul><li><span style=\"color : green\">Vert</span> pour les langues connues. En passant la souris dessus, le nom de la langue s'affichera.</li><li><span style=\"color : blue\"> Bleu</span> pour les langues qui peuvent être lues mais dont le joueur n'a aucune idée de la langue utilisée.<li><span style=\"color : red\">Rouge</span> pour les langues inconnues.</li></li></ul>",
 					"Title": "Le Globe"
 				},
 				"title": "Débuter avec Polyglot",
@@ -209,12 +209,16 @@
 				"UserConfigSelectCharacter": {
 					"Title": "Sélectionner un personnage",
 					"Content": "En tant que MJ, vous ne devriez jamais avoir un personnage sélectionné car cela fera que vos messages seront envoyés comme si vous étiez ce personnage si jamais il est présent sur une scène.<br>Pour les joueurs, assurez-vous qu'ils sélectionnent leur personnage principal. Autrement, leurs messages seront toujours envoyés en tant que joueur au lieu de leur personnage et ils ne pourront pas lire les messages dans les langues que leur personnage comprend à moins que son jeton ne soit présent sur le canevas.<br>Vous pouvez savoir si un joueur a sélectionné un personnage si son nom dans la liste des joueurs est suivi du nom d'un personnage.<br>C'est le comportement de Foundry, 'Polyglot' se borne à le suivre."
+				},
+				"LanguageSelectorSelect2": {
+					"Title": "Liste déroulante du sélecteur de langue",
+					"Content": "Un clic droit sur la <span class='reference'>liste déroulante</span> permet de désactiver le brouillage, ce qui permet aux utilisateurs de parler comme si le module était désactivé."
 				}
 			}
 		},
 		"LiteracyRegex": {
 			"hint": "Identique à 'Language Regex', mais pour les langues écrites.",
-			"title": "Alphabétisation RegEx"
+			"title": "RegEx littérale"
 		},
 		"Generic": {
 			"Read": "Lire"
@@ -225,6 +229,11 @@
 				"title": "Talent de Lecture/écriture",
 				"default": "Lecture/écriture"
 			}
-		}
+		},
+		"EnableChatFeatures": {
+			"title": "Activer les fonctions dans la conversation",
+			"hint": "Active toutes les fonctionnalités de la conversation, telles que le sélecteur de langue dans la conversation et le brouillage du message."
+		},
+		"SpeakingIn": "Parler en {language}"
 	}
 }
