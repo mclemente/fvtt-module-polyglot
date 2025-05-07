@@ -26,13 +26,13 @@ export default class PolyglotHooks {
 	static updateActor(actor, data, options, userId) {
 		if (actor.hasPlayerOwner && actor.testUserPermission(game.user, "OWNER")) {
 			game.polyglot.updateUserLanguages();
-			game.polyglot.updateChatMessages();
+			if (game.polyglot._enableChatFeatures) game.polyglot.updateChatMessages();
 		}
 	}
 
 	static controlToken() {
 		game.polyglot.updateUserLanguages();
-		game.polyglot.updateChatMessages();
+		if (game.polyglot._enableChatFeatures) game.polyglot.updateChatMessages();
 	}
 
 	/**
@@ -209,29 +209,18 @@ export default class PolyglotHooks {
 		const isOwnerOrGM = sheet.document?.isOwner || game.user.isGM;
 		const isEditable = data.editable;
 		const isTextSheet = sheet instanceof JournalTextPageSheet;
+		const isJQuery = html instanceof jQuery;
 
 		if (isTextSheet && !(sheet.object.parent.isOwner || isOwnerOrGM || isEditable)) {
 			if (sheet.document.isOwner) game.polyglot.insertHeaderButton(sheet.object.parent.sheet, html);
 			else game.polyglot.scrambleSpans(sheet, html);
-		} else if (html.find(".polyglot-journal").length) {
+		} else if (isJQuery && html.find(".polyglot-journal").length) {
 			if (isOwnerOrGM && html.find('[data-engine="prosemirror"]').length) game.polyglot.insertHeaderButton(sheet, html);
 			else if (!(isOwnerOrGM || isEditable)) game.polyglot.scrambleSpans(sheet, html);
+		} else if (!isJQuery && html.querySelectorAll(".polyglot-journal").length) {
+			if (isOwnerOrGM && html.querySelectorAll('[data-engine="prosemirror"]').length) game.polyglot.insertHeaderButton(sheet, html);
+			else if (!(isOwnerOrGM || isEditable)) game.polyglot.scrambleSpansV2(sheet, html);
 		}
-	}
-
-	/** @see renderDocumentSheet */
-	static renderActorSheet(sheet, html, data) {
-		PolyglotHooks.renderDocumentSheet(sheet, html, data);
-	}
-
-	/** @see renderDocumentSheet */
-	static renderItemSheet(sheet, html, data) {
-		PolyglotHooks.renderDocumentSheet(sheet, html, data);
-	}
-
-	/** @see renderDocumentSheet */
-	static renderJournalTextPageSheet(journalTextPageSheet, html, data) {
-		PolyglotHooks.renderDocumentSheet(journalTextPageSheet, html, data);
 	}
 
 	/**
@@ -245,11 +234,6 @@ export default class PolyglotHooks {
 		if ((sheet.document?.isOwner || game.user.isGM) && sheet.document.pages.size) {
 			game.polyglot.insertHeaderButton(sheet, html);
 		}
-	}
-
-	/** @see renderJournalSheet */
-	static renderStorySheet(sheet, html) {
-		PolyglotHooks.renderJournalSheet(sheet, html);
 	}
 
 	static getProseMirrorMenuDropDowns(menu, items) {

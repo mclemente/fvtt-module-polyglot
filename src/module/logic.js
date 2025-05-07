@@ -14,24 +14,27 @@ export class Polyglot {
 	}
 
 	init() {
-		if (game.settings.get("polyglot", "enableChatFeatures")) {
+		this._enableChatFeatures = game.settings.get("polyglot", "enableChatFeatures");
+		if (this._enableChatFeatures) {
 			Hooks.on("renderChatLog", PolyglotHooks.renderChatLog);
-			Hooks.on("updateActor", PolyglotHooks.updateActor);
-			Hooks.on("controlToken", PolyglotHooks.controlToken);
-			Hooks.on("updateUser", PolyglotHooks.updateUser);
-			Hooks.on("updateActiveEffect", PolyglotHooks.updateActiveEffect);
 			Hooks.on("preCreateChatMessage", PolyglotHooks.preCreateChatMessage);
 			Hooks.on("renderChatMessageHTML", PolyglotHooks.renderChatMessageHTML);
 			Hooks.on("createChatMessage", PolyglotHooks.createChatMessage);
 			Hooks.on("renderActorDirectoryPF2e", PolyglotHooks.renderActorDirectoryPF2e);
 			Hooks.on("vinoPrepareChatDisplayData", PolyglotHooks.vinoPrepareChatDisplayData);
 		}
+		Hooks.on("updateActor", PolyglotHooks.updateActor);
+		Hooks.on("controlToken", PolyglotHooks.controlToken);
+		Hooks.on("updateUser", PolyglotHooks.updateUser);
+		Hooks.on("updateActiveEffect", PolyglotHooks.updateActiveEffect);
+		Hooks.on("renderDocumentSheetV2", PolyglotHooks.renderDocumentSheet);
 		Hooks.on("renderDocumentSheet", PolyglotHooks.renderDocumentSheet);
-		Hooks.on("renderActorSheet", PolyglotHooks.renderActorSheet);
-		Hooks.on("renderItemSheet", PolyglotHooks.renderItemSheet);
-		Hooks.on("renderJournalTextPageSheet", PolyglotHooks.renderJournalTextPageSheet);
+		Hooks.on("renderActorSheet", PolyglotHooks.renderDocumentSheet);
+		Hooks.on("renderItemSheet", PolyglotHooks.renderDocumentSheet);
+		Hooks.on("renderJournalTextPageSheet", PolyglotHooks.renderDocumentSheet);
 		Hooks.on("renderJournalSheet", PolyglotHooks.renderJournalSheet);
-		Hooks.on("renderStorySheet", PolyglotHooks.renderStorySheet);
+		Hooks.on("renderStorySheet", PolyglotHooks.renderJournalSheet);
+		Hooks.on("renderJournalEntryPageSheet", PolyglotHooks.renderDocumentSheet);
 		Hooks.on("getProseMirrorMenuDropDowns", PolyglotHooks.getProseMirrorMenuDropDowns);
 		Polyglot.handleTinyMCE();
 
@@ -493,6 +496,21 @@ export class Polyglot {
 		const [header, text, section] = html;
 		const spans = section ? section.querySelectorAll("span.polyglot-journal") : header.querySelectorAll("span.polyglot-journal");
 		spans.forEach((e) => {
+			const lang = e.dataset.language;
+			if (!lang) return;
+			const conditions = !game.polyglot._isTruespeech(lang)
+				&& !game.polyglot.isLanguageKnown(game.polyglot.comprehendLanguages)
+				&& !game.polyglot.languageProvider.conditions(lang);
+			if (conditions) {
+				e.dataset.tooltip = "????";
+				e.textContent = game.polyglot.scrambleString(e.textContent, document.id, lang);
+				e.style.font = game.polyglot._getFontStyle(lang);
+			}
+		});
+	}
+
+	scrambleSpansV2(document, html) {
+		html.querySelectorAll("span.polyglot-journal").forEach((e) => {
 			const lang = e.dataset.language;
 			if (!lang) return;
 			const conditions = !game.polyglot._isTruespeech(lang)
