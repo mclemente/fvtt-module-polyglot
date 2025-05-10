@@ -25,7 +25,7 @@
 		"ScrambleGM.hint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
 		"enableAllFonts": {
 			"title": "Adicionar fontes do Foundry ao Polyglot",
-			"hint": "Desative essa configuração para remover do Polyglot todas as fontes do Foundry.",
+			"hint": "Adiciona as fontes do Foundry ao Polyglot, incluindo as Fontes Adicionais.",
 			"choices": {
 				"0": "Nenhuma",
 				"1": "Fontes do Polyglot",
@@ -82,7 +82,7 @@
 		},
 		"FontSize": "Tamanho da Fonte (%)",
 		"LanguageRegex": {
-			"title": "RegEx da Idioma",
+			"title": "RegEx de Idioma",
 			"hint": "Define o termo pesquisado entre os itens de atores para determinar os seus idiomas falados."
 		},
 		"DND5E": {
@@ -140,11 +140,20 @@
 		"PF2E": {
 			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma caseiro definido no menu Homebrew Elements, caso contrário, os idiomas não comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
 		},
-		"UnknownLanguages": "Idiomas Desconhecidos",
-		"KnownLanguages": "Idiomas Conhecidos",
+		"UnknownLanguages": "Desconhecidos",
+		"KnownLanguages": "Conhecidos",
 		"DisplayCheckbox": {
 			"hint": "Remove a caixa de seleção do chat.",
 			"title": "Mostrar Caixa de Seleção"
+		},
+		"EnableChatFeatures": {
+			"title": "Habilitar Recursos do Chat",
+			"hint": "Habilita todas os recursos de chat do Polyglot, como o seletor de idiomas e o embaralhamento de mensagens."
+		},
+		"SpeakingIn": "Falando em {language}",
+		"LiteracyRegex": {
+			"hint": "Igual ao Regex de Idioma, mas para idiomas escritas.",
+			"title": "RegEx de Alfabetização"
 		}
 	}
 }
