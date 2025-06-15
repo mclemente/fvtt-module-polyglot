@@ -1,45 +1,37 @@
-<form class="flexcol" autocomplete="off" onsubmit="event.preventDefault()">
-	<section class="content">
-		<div class="settings-list">
-			<ul class="polyglot-languages-list">
-				<li class="flexrow">
-					<div class="font-name">{{localize "POLYGLOT.Font"}}</div>
-					<div class="fontSize">{{localize "POLYGLOT.FontSize"}}</div>
-					<div class="fontSize">{{localize "POLYGLOT.AlphabeticOnly"}}</div>
-					<div class="fontSize">{{localize "POLYGLOT.Logographical"}}</div>
-					<div class="polyglot-alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
-				</li>
-				<hr />
-				{{#each fonts}}
-					<li class="flexrow">
-						<div class="font-name">{{this.label}}</div>
-						<div class="fontSize">
-							<input class="selectatr" type="number" value="{{this.size}}" min="50" max="350" step="10" />
-						</div>
-						<div class="fontSize">
-							<input class="alphabeticOnly" type="checkbox" {{checked this.alphabeticOnly}} />
-						</div>
-						<div class="fontSize">
-							<input class="logographical" type="checkbox" {{checked this.logographical}} />
-						</div>
-						<div
-							class="polyglot-alphabet"
-							style="font-size: {{this.size}}%; font-family: {{this.family}}"
-						>ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
-					</li>
-				{{/each}}
-			</ul>
-		</div>
-	</section>
-
-	<footer class="sheet-footer flexrow">
-		<button type="submit" name="submit">
-			<i class="far fa-save"></i>
-			{{localize "SETTINGS.Save"}}
-		</button>
-		<button type="button" data-action="reset">
-			<i class="fas fa-undo"></i>
-			{{localize "SETTINGS.Reset"}}
-		</button>
-	</footer>
+<form class="standard-form scrollable">
+	<ul class="polyglot-languages-list">
+		<li class="flexrow">
+			<div class="font-name">{{localize "POLYGLOT.Font"}}</div>
+			<div class="fontSize">{{localize "POLYGLOT.FontSize"}}</div>
+			<div class="fontSize">{{localize "POLYGLOT.AlphabeticOnly"}}</div>
+			<div class="fontSize">{{localize "POLYGLOT.Logographical"}}</div>
+			<div class="polyglot-alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+		</li>
+		<hr />
+		{{#each fonts}}
+			<li class="flexrow">
+				<div class="font-name">{{this.label}}</div>
+				<div class="fontSize">
+					{{formInput
+						@root.fields.fontSize
+						value=this.size
+						name=""
+						classes="selectatr"
+						type="number"
+						step=10
+					}}
+				</div>
+				<div class="fontSize">
+					{{formInput @root.fields.alphabeticOnly value=this.alphabeticOnly name="" classes="alphabeticOnly"}}
+				</div>
+				<div class="fontSize">
+					{{formInput @root.fields.logographical value=this.logographical name="" classes="logographical"}}
+				</div>
+				<div
+					class="polyglot-alphabet"
+					style="font-size: {{this.size}}%; font-family: {{this.family}}"
+				>ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+			</li>
+		{{/each}}
+	</ul>
 </form>

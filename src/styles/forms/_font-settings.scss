@@ -2,6 +2,10 @@
 	min-height: 255px;
 	min-width: 780px;
 
+	input.selectatr[type="number"] {
+		width: 40px;
+	}
+
 	.polyglot-alphabet {
 		margin: auto;
 	}
@@ -10,20 +14,6 @@
 		margin: auto;
 	}
 
-	.window-content {
-		padding: 0;
-	}
-	form {
-		height: 100%;
-		section {
-			padding: 1rem;
-			overflow: hidden auto;
-		}
-		footer {
-			margin: 1rem;
-			flex: 0;
-		}
-	}
 	.polyglot-languages-list {
 		margin: 0;
 
