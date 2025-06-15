@@ -235,7 +235,16 @@ export function registerSettings() {
 	// Used Internally
 	addMenuSetting("CustomFontSizes", {
 		default: CUSTOM_FONT_SIZES,
-		type: Object,
+		type: new TypedObjectField(
+			new NumberField({
+				required: true,
+				nullable: false,
+				min: 50,
+				max: 350,
+				integer: true,
+				initial: 100,
+			})
+		)
 	});
 	addMenuSetting("checkbox", {
 		default: true,
