@@ -54,13 +54,44 @@ export function registerSettings() {
 		type: PolyglotLanguageSettings,
 		restricted: true,
 	});
+	const { BooleanField, NumberField, SchemaField, StringField, TypedObjectField } = foundry.data.fields;
 	addMenuSetting("Alphabets", {
 		default: {},
-		type: Object,
+		type: new TypedObjectField(
+			new SchemaField({
+				fontFamily: new StringField({ required: true, blank: false, initial: "" }),
+				fontSize: new NumberField({
+					required: true,
+					nullable: false,
+					min: 50,
+					max: 350,
+					integer: true,
+					initial: 100,
+				}),
+				alphabeticOnly: new BooleanField(),
+				logographical: new BooleanField(),
+			})
+		)
 	});
 	addMenuSetting("Languages", {
 		default: {},
-		type: Object,
+		// type: Object,
+		type: new TypedObjectField(
+			new SchemaField({
+				label: new StringField({ required: true, blank: false, initial: "" }),
+				font: new StringField({
+					required: true,
+					blank: false,
+					initial: () => game.polyglot.languageProvider.defaultFont,
+					choices: () => game.settings.get("polyglot", "Alphabets")
+				}),
+				rng: new StringField({ required: true, blank: false, initial: "default", choices: {
+					default: "POLYGLOT.RandomizeRunesOptions.a",
+					unique: "POLYGLOT.RandomizeRunesOptions.b",
+					none: "POLYGLOT.RandomizeRunesOptions.c"
+				}}),
+			})
+		)
 	});
 
 	// Font Settings
