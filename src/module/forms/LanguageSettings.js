@@ -64,22 +64,20 @@ export class PolyglotLanguageSettings extends FormApplication {
 			return { value, name, hint };
 		}
 
-		const asArray = Object.entries(game.settings.get("polyglot", "Languages")).sort();
-
-		const { name, hint } = game.settings.settings.get("polyglot.Languages");
-		const filtered = asArray.filter(([key]) => {
-			return (
-				key !== game.polyglot.omniglot
-				&& key !== game.polyglot.comprehendLanguages
-				&& key !== game.polyglot.truespeech
-			);
-		});
-		const value = Object.fromEntries(filtered);
+		const { name, hint, type } = game.settings.settings.get("polyglot.Languages");
+		const value = Object.fromEntries(
+			Object.entries(game.settings.get("polyglot", "Languages"))
+				.sort()
+				.filter(([key]) =>
+					![game.polyglot.omniglot, game.polyglot.comprehendLanguages, game.polyglot.truespeech].includes(key)
+				)
+		);
 
 		const languages = {
 			name,
 			hint,
 			value,
+			fields: type.element.fields
 		};
 
 		const alphabets = prepSetting("Alphabets");

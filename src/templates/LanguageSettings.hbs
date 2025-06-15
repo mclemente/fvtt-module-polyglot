@@ -21,19 +21,29 @@
 				{{#each languages.value as |value key|}}
 					<li class="flexrow">
 						<div data-id="{{key}}">{{value.label}}</div>
-						<div style="display: none;"><input
-								name="languages.{{key}}.label"
-								value="{{value.label}}"
-							/></div>
-						<div>
-							<select class="selectatr" name="languages.{{key}}.font" data-dtype="String">
-								{{selectOptions @root.alphabets.value selected=value.font}}
-							</select>
+						<div style="display: none;">
+							{{formInput
+								@root.languages.fields.label
+								value=value.label
+								name=(concat "languages." key ".label")
+							}}
 						</div>
 						<div>
-							<select class="selectatr" name="languages.{{key}}.rng" data-dtype="String">
-								{{selectOptions @root.rng selected=value.rng localize=true}}
-							</select>
+							{{formInput
+								@root.languages.fields.font
+								value=value.font
+								name=(concat "languages." key ".font")
+								classes="selectatr"
+							}}
+						</div>
+						<div>
+							{{formInput
+								@root.languages.fields.rng
+								value=value.rng
+								name=(concat "languages." key ".rng")
+								classes="selectatr"
+								localize=true
+							}}
 						</div>
 					</li>
 				{{/each}}
