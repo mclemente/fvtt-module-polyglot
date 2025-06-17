@@ -292,6 +292,7 @@ export class Polyglot {
 				lockOptgroupOrder: true,
 				searchField: ["label"],
 				sortField: [{ field: "$order" }, { field: "label" }],
+				maxOptions: null,
 				plugins: ["optgroup_columns"],
 
 				create: false,
