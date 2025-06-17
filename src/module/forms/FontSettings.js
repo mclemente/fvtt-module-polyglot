@@ -23,9 +23,9 @@ export class PolyglotFontSettings extends HandlebarsApplicationMixin(Application
 			width: 780,
 			height: 680,
 		},
-		tag: "form", // The default is "div"
+		tag: "form",
 		window: {
-			icon: "fas fa-font", // You can now add an icon to the header
+			icon: "fas fa-font",
 			title: "Font Settings",
 			contentClasses: ["standard-form"],
 			resizable: true,
