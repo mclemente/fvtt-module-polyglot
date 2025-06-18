@@ -237,29 +237,26 @@ export default class PolyglotHooks {
 	}
 
 	static getProseMirrorMenuDropDowns(menu, items) {
-		if ("format" in items) {
-			if ("format" in items) {
-				items.format.entries.push({
-					action: "polyglot",
-					title: "Polyglot",
-					children: game.polyglot.getLanguagesForEditor()
-						.map((l) => {
-							return {
-								action: l.attributes["data-language"],
-								title: l.title,
-								mark: menu.schema.marks.span,
-								attrs: { class: "polyglot-journal", ...l.attributes },
-								cmd: ProseMirror.commands.toggleMark(menu.schema.marks.span, {
-									_preserve: {
-										class: "polyglot-journal",
-										...l.attributes
-									}
-								})
-							};
+		if (!items?.format) return;
+		items.format.entries.push({
+			action: "polyglot",
+			title: "Polyglot",
+			children: game.polyglot.getLanguagesForEditor()
+				.map((l) => {
+					return {
+						action: l.attributes["data-language"],
+						title: l.title,
+						mark: menu.schema.marks.span,
+						attrs: { class: "polyglot-journal", ...l.attributes },
+						cmd: ProseMirror.commands.toggleMark(menu.schema.marks.span, {
+							_preserve: {
+								class: "polyglot-journal",
+								...l.attributes
+							}
 						})
-				});
-			}
-		}
+					};
+				})
+		});
 	}
 
 	// Re-checks the user languages for the GM when activating another party on the Actors sidebar.
