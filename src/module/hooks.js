@@ -2,8 +2,14 @@
 export default class PolyglotHooks {
 	/**
 	 * Adds the Languages selector to the chatlog.
+	 * @returns {void}
 	 */
-	static renderChatLog(chatlog, html, data) {
+	static renderChatInput(chatlog, elements) {
+		if (!ui.sidebar.expanded) return game.polyglot.updateUserLanguages();
+		const chatControls = elements["#chat-controls"];
+		const polyglotSelect = chatlog.element.querySelector(".polyglot-lang-select");
+		if (polyglotSelect) return chatControls.insertAdjacentElement("afterend", polyglotSelect);
+
 		game.polyglot.renderChatLog = true;
 		const polyglotDiv = document.createElement("div");
 		polyglotDiv.setAttribute("id", "polyglot");
@@ -15,12 +21,12 @@ export default class PolyglotHooks {
 			if (setting) game.polyglot.tomSelect.enable();
 			else game.polyglot.tomSelect.disable();
 		});
-		html.querySelector("#chat-controls").insertAdjacentElement("afterend", polyglotDiv);
-		html.querySelector(".polyglot-lang-select select").addEventListener("change", (ev) => {
+		chatControls.insertAdjacentElement("afterend", polyglotDiv);
+		polyglotDiv.querySelector("select").addEventListener("change", (ev) => {
 			const lang = ev.target.value;
 			game.polyglot.lastSelection = lang;
 		});
-		game.polyglot.updateUserLanguages(html);
+		game.polyglot.updateUserLanguages();
 	}
 
 	static updateActor(actor, data, options, userId) {

@@ -16,7 +16,7 @@ export class Polyglot {
 	init() {
 		this._enableChatFeatures = game.settings.get("polyglot", "enableChatFeatures");
 		if (this._enableChatFeatures) {
-			Hooks.on("renderChatLog", PolyglotHooks.renderChatLog);
+			Hooks.on("renderChatInput", PolyglotHooks.renderChatInput);
 			Hooks.on("preCreateChatMessage", PolyglotHooks.preCreateChatMessage);
 			Hooks.on("renderChatMessageHTML", PolyglotHooks.renderChatMessageHTML);
 			Hooks.on("createChatMessage", PolyglotHooks.createChatMessage);
@@ -204,12 +204,6 @@ export class Polyglot {
 		return [knownLanguages, literateLanguages];
 	}
 
-	/**
-	 *
-	 * @param {*} html
-	 *
-	 * @var {Set} this.knownLanguages
-	 */
 	updateUserLanguages() {
 		if (game.polyglot.languageProvider.requiresReady && !game.ready) return;
 		[this.knownLanguages, this.literateLanguages] = this.getUserLanguages();

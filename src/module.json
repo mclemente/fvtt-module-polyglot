@@ -10,7 +10,7 @@
 		}
 	],
 	"compatibility": {
-		"minimum": "13",
+		"minimum": "13.347",
 		"verified": "13"
 	},
 	"esmodules": ["module/polyglot.js"],
