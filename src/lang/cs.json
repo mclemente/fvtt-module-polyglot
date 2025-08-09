@@ -1,68 +1,221 @@
 {
-	"POLYGLOT.CustomLanguages.title": "Vlastní Jazyky",
-	"POLYGLOT.CustomLanguages.hint": "Specifikuj seznam vlastních, čárkou oddělených jazyků, které se přidají do systému.",
-	"POLYGLOT.ComprehendLanguages.title": "Kouzlo Porozumění Jazykům",
-	"POLYGLOT.ComprehendLanguages.hint": "Kouzlo jako např. Porozumění Jazykům z D&D. Vlož vlastní jazyk, který jsi specifikoval. Nebude možné jím mluvit nebo psát, ale umožní porozumět všem ostatním jazykům.",
-	"POLYGLOT.Truespeech.title": "Kouzlo Jazyků",
-	"POLYGLOT.Truespeech.hint": "Jako např. kouzlo Jazyky z D&D. Vlož vlastní jazyk, který jsi specifikoval. Ten, kdo jim mluvím bude rozumět všem mluveným jazykům (neumí číst Žurnály) a rozumí mu všechna stvoření.",
-	"POLYGLOT.DefaultLanguage.title": "Základní Jazyk",
-	"POLYGLOT.DefaultLanguage.hint": "Název základního jazyka. Nech prázdný pro ponechání systémového základu.",
-	"POLYGLOT.ScrambleGM.title": "Zašifrovat pro GM",
-	"POLYGLOT.ScrambleGM.hint": "Deaktivuj tuto volbu, aby se vždy zobrazil text pro GM (podívej se na barvu glóbu, aby jsi zjistil, zda token rozumí).",
-	"POLYGLOT.toggleRuneText.title": "Přepnout Runový Text v Žurnálu",
-	"POLYGLOT.toggleRuneText.hint": "Přepne viditelnost\"Run\" v Žurnálu.",
-	"POLYGLOT.RandomizeRunes.title": "Náhodné Runy",
-	"POLYGLOT.RandomizeRunes.hint": "Zapnutí této volby způsobí, že šifrovaný text se objeví pokaždé jinak, i v případě, že se jedná o tu samou zprávu.",
-	"POLYGLOT.ExportFonts.title": "Udělat fonty dostupné",
-	"POLYGLOT.ExportFonts.hint": "Udělá Polyglot fonty dostupné k použití ve Foundry (např. v Kreslení).",
-	"POLYGLOT.DisplayTranslated.title": "Zobrazit překladový box",
-	"POLYGLOT.DisplayTranslated.hint": "Pro jazyky, které jsou přeloženy v chatovém okně, zobraz originální text a pod ním překlad.",
-	"POLYGLOT.HideTranslation.title": "Schovej hráčům Globus a text \"Přeloženo z\"",
-	"POLYGLOT.HideTranslation.hint": "Schová Globus a text \"Přeloženo z\" ze zpráv hráčů. Ideální, pokud nechceš hráčům ukázat, kterým jazykem hovoříš.",
-	"POLYGLOT.AllowOOC.title": "Šifrování v OOC zprávách chatu",
-	"POLYGLOT.AllowOOC.hint": "Dovolí GM šifrovat text, když posílá Out Of Character zprávy",
-	"POLYGLOT.Translation": "Překlad",
-	"POLYGLOT.TranslatedFrom": "Přeloženo z ",
-	"POLYGLOT.LanguageLabel": "Jazyk",
-	"POLYGLOT.ToggleRunes": "Přepnout Runy",
-	"POLYGLOT.Runes": "Runy",
-	"POLYGLOT.Generic": {
-		"Language": "Jazyk"
-	},
-	"POLYGLOT.WFRP4E.LanguageSkills": "Jazyk",
 	"POLYGLOT": {
-		"source": {
-			"forgevtt": "Forge",
-			"data": "Data",
-			"s3": "Amazon S3"
-		},
-		"enableAllFonts": {
-			"title": "Přidání písem do nastavení písma a jazyka"
-		},
-		"DND5E": {
-			"SpecialLanguages.title": "Nahradit speciální jazyky"
-		},
-		"LanguageSettings": "Nastavení jazyka",
+		"GameMasterHasAssignedCharacter": "Jsi {GM} a máš propojenou postavu. Polyglot se kvůli tomu může chovat podivně. Zvaž odpojení této postavy.",
+		"DefaultAlphabet": "Výchozí abeceda",
+		"FontSettings": "Nastavení písem",
+		"GeneralSettings": "Obecná nastavení",
+		"LanguageSettings": "Nastavení jazyků",
 		"ChatSettings": "Nastavení chatu",
+		"General": "Obecné",
 		"Languages.title": "Jazyky",
+		"Languages.hint": "Mění abecedu používanou pro dané jazyky.",
 		"Font": "Písmo",
 		"Fonts": "Písma",
 		"FontSize": "Velikost písma (%)",
-		"directory": {
-			"name": "Adresář vlastních písem"
+		"KnownLanguages": "Zná jazyky",
+		"UnknownLanguages": "Nezná jazyky",
+		"AlphabeticOnly": "Pouze abecedně",
+		"Logographical": "Logografické",
+		"AllowOOC": {
+			"title": "Zkomolit zprávy mimo roli (OOC)",
+			"hint": "Zvol, kterým uživatelům se mají zprávy mimo roli komolit."
 		},
-		"logographicalFontToggle.title": "Logografická písma",
-		"ReplaceLanguages.title": "Nahrazení jazyků systému",
+		"AllowOOCOptions": {
+			"a": "Všem",
+			"b": "Jen GM",
+			"c": "Jen hráčům",
+			"d": "Nikomu"
+		},
+		"Omniglot": {
+			"title": "Absolutní jazyk",
+			"hint": "Nastaví jazyk, jehož mluvčí rozumí a mluví všemi ostatními jazyky. Postava bude moci číst i psát ve všech ostatních jazycích, jak v chatu, tak v denících."
+		},
+		"ComprehendLanguages.hint": "Nastaví jazyk, jehož mluvčí rozumí všem ostatním jazykům, ale nemůže jím mluvit ani psát. Postava bude moci číst všechny zprávy v chatu i text v denících.",
+		"ComprehendLanguages.title": "Všerozumějící jazyk",
+		"CustomLanguages.hint": "Definuj seznam vlastních jazyků, které se mají přidat do systému. Odděluj je čárkami či středníky.",
+		"CustomLanguages.title": "Vlastní jazyky",
+		"DefaultLanguage.hint": "Název výchozího jazyka k výběru. Nech prázdné pro použití výchozího jazyka systému.",
+		"DefaultLanguage.title": "Výchozí jazyk",
+		"EnableChatFeatures": {
+			"hint": "Povolí všechny funkce chatu, jako je výběr jazyka v chatu a komolení zpráv.",
+			"title": "Povolit funkce chatu?"
+		},
+		"DisplayTranslated.hint": "U jazyků, které jsou v chatu překládány, zobrazí původní text a pod ním překlad.",
+		"DisplayTranslated.title": "Zobrazovat překlady?",
+		"enableAllFonts": {
+			"hint": "Přidá do Polyglotu písma Foundry, včetně dodatečných písem.",
+			"title": "Přidat písma Foundry do Polyglotu?"
+		},
+		"ExportFonts.hint": "Přidá písma Polyglotu do funkcí Foundry, třeba kaligrafická.",
+		"ExportFonts.title": "Přidat písma Polyglotu do Foundry?",
+		"HideTranslation.hint": "Skryje ikonu glóbu a text „Přeloženo z“ ve zprávách chatu pro hráče. Užitečné, pokud nechceš odhalit, kterým jazykem právě mluvíš.",
+		"HideTranslation.title": "Skrýt ukazatele před hráči?",
+		"IgnoreJournalFontSize": {
+			"hint": "Ignoruje velikost písma Polyglotu v denících a použije stejnou velikost jako běžný text. Užitečné, pokud záleží na formátování deníku.",
+			"title": "Používat běžnou velikost písma?"
+		},
+		"JournalHighlight": {
+			"hint": "Určuje průhlednost zvýraznění písma v denících.",
+			"title": "Průhlednost zvýraznění (%)"
+		},
+		"JournalHighlightColor": {
+			"hint": "Určuje barvu zvýraznění písma v denících.",
+			"title": "Barva zvýraznění"
+		},
+		"LanguageProvider": {
+			"choices": {
+				"module": "[Modul] {name}",
+				"native": "Obecné",
+				"system": "[Systém] {name}"
+			},
+			"hint": "Zvol, kdo poskytuje jazykové informace o abecedách a jazycích. Další poskytovatelé jazyků mohou být dostupní přes herní systémy a nainstalované moduly. Možnosti níže závisí na zvoleném poskytovateli jazyků. ⚠️ Po změně poskytovatele je nutné nastavení uložit a znovu otevřít.",
+			"name": "Poskytovatel jazykových nastavení"
+		},
+		"languageDataPath": {
+			"title": "Cesta k jazykovým datům",
+			"hint": "Pokud má tvůj systém jazyky nastavené v datech postav, ale nejsou správně načítány, může používat jinou datovou cestu. Zadej datovou cestu ke správnému atributu (např. actor.system.languages či actor.system.speak). Toto nastavení má přednost před nastavením {setting}."
+		},
+		"literacyDataPath": {
+			"title": "Cesta k datům čtení",
+			"hint": "Stejné jako nastavení {setting}, ale pro čtení deníků. Toto nastavení vyžaduje aktivní nastavení {setting}."
+		},
 		"LanguageRegex": {
+			"hint": "Tímto lze změnit hledaný výraz v itemech z \"Language\" na něco jiného, například \"Tongue\". Užitečné především pro neanglicky mluvící uživatele.",
 			"title": "Jazyk RegEx"
 		},
-		"FontSettings": "Nastavení Písma",
-		"DefaultAlphabet": "Základní Abeceda",
-		"Languages.hint": "Změní abecedu použitou pro jazyky",
-		"KnownLanguages": "Známé Jazyky",
-		"UnknownLanguages": "Neznámé Jazyky",
-		"GeneralSettings": "Obecné Nastavení",
-		"General": "Obecné",
-		"AlphabeticOnly": "Pouze Abecedně"
+		"LiteracyRegex": {
+			"hint": "Stejné jako RegEx, ale pro psané jazyky.",
+			"title": "Čtení RegEx"
+		},
+		"logographicalFontToggle.hint": "Zmenší na polovinu velikost frází používajících logografická písma (např. japonské či čínské znaky).",
+		"logographicalFontToggle.title": "Logografická písma",
+		"RandomizeRunes.hint": "Určuje, jaký typ náhodného generování se použije při tvorbě frází. ⚠️ Volba „Žádné“ podporuje pouze alfanumerické znaky (bez diakritiky).",
+		"RandomizeRunes.title": "Náhodné runy",
+		"RandomizeRunesOptions": {
+			"a": "Výchozí",
+			"b": "Unikátní fráze",
+			"c": "Žádné"
+		},
+		"ReplaceLanguages.hint": "Odstraní výchozí jazyky systému. První jazyk ze seznamu ´Vlastních jazyků´ se stane novým výchozím jazykem.",
+		"ReplaceLanguages.title": "Odstranit jazyky systému?",
+		"RuneRegex": {
+			"hint": "Zajistí, že se při náhodném generování ignorují nealfanumerické znaky (např. !,.;:?#$\"'). Může však vést k tomu, že se u některých písem některé znaky zobrazí jako čtvereček (□).",
+			"title": "Pouze náhodné alfanumerické znaky?"
+		},
+		"ScrambleGM.hint": "Neprovádí překlad textu pro GM (pro určení, zda postava rozumí, se řiď barvou glóbu).",
+		"ScrambleGM.title": "Komolit zprávy i pro GM?",
+		"SpeakingIn": "Mluví jazykem {language}",
+		"Truespeech.hint": "Nastaví jazyk, jehož mluvčí rozumí všem mluveným jazykům (ale neumí číst deníky) a kterému rozumí všechny bytosti. Postava bude moci číst všechny zprávy v chatu a psát zprávy, kterým každý porozumí.",
+		"Truespeech.title": "Všechápající jazyk",
+		"Translation": "Překlad",
+		"TranslatedFrom": "Přeloženo z ",
+		"LanguageLabel": "Jazyk",
+		"AlphabetLabel": "Abeceda",
+		"LatinAlphabet": "Latinská abeceda",
+		"ToggleRunes": "Přepínač run",
+		"Runes": "Runy",
+		"TOURS": {
+			"Main": {
+				"title": "Začínáme s modulem Polyglot",
+				"desc": "Seznam se s tím, jak Polyglot spolupracuje s rozhraním Foundry.",
+				"Canvas": {
+					"Title": "Vítej v Polyglotu",
+					"Content": "Tato prohlídka tě provede funkcemi, které Polyglot přidává do uživatelského rozhraní, jak interagují s Foundry a poskytne základní rady ohledně výběru postavy pro nové uživatele."
+				},
+				"LanguageSelector": {
+					"Title": "Výběr jazyka",
+					"Content": "<span class='reference'>Výběr jazyka</span> slouží k určení, jakým jazykem chceš mluvit. Aktivní jazyk způsobí zkomolení zpráv."
+				},
+				"LanguageSelectorSelect": {
+					"Title": "Rozbalovací seznam výběru jazyka",
+					"Content": "<span class='reference'>Rozbalovací seznam</span> obsahuje všechny jazyky v daném světě.<br>V závislosti na herním systému mohou být jazyky již nastavené, v jiných systémech je možná budeš muset nastavit v <span class='reference'>Nastavení hry</span>.<br>Zobrazuje jazyky podle toho, zda je aktéři hráče znají, či nikoliv."
+				},
+				"LanguageSelectorSelect2": {
+					"Title": "Rozbalovací nabídka Výběru jazyka",
+					"Content": "Kliknutí pravým tlačítkem na <span class='reference'>rozbalovací nabídku</span> přepne komolení, což umožňuje uživatelům mluvit, jako by byl modul deaktivován."
+				},
+				"LanguageSelectorPips": {
+					"Title": "Indikátory výběru jazyka",
+					"Content": "<span class='reference'>Indikátory</span> podobné těm v seznamu hráčů se zobrazí vedle známých jazyků pro každého hráče, který má alespoň jednu postavu, jež danému jazyku rozumí. Přejetím kurzorem nad indikátorem se zobrazí jméno hráče a seznam aktérů, které daný jazyk ovládají."
+				},
+				"ChatMessage": {
+					"Title": "Zprávy v chatu",
+					"Content": "Takto vypadá zpráva, když používá Polyglot."
+				},
+				"ChatMessageScrambled": {
+					"Title": "Zkomolený text",
+					"Content": "Takto vypadá zpráva pro hráče, kteří jazyku nerozumí."
+				},
+				"ChatMessageTranslation": {
+					"Title": "Přeložený text",
+					"Content": "Takto vypadá zpráva pro hráče, jenž jazyku rozumí.<br>V nastavení lze zakázat zobrazování zkomoleného textu pro postavy, které zprávě rozumějí. Přejetím kurzorem se zobrazí název jazyka."
+				},
+				"ChatMessageGlobe": {
+					"Title": "Glóbus",
+					"Content": "Glóbus může mít tři barvy: <ul><li><span style=\"color: green\">Zelená</span> pro známé jazyky. Přejetím se zobrazí název jazyka.</li><li><span style=\"color: blue\">Modrá</span> pro jazyky, které lze přečíst, ale hráč neví, jaký jazyk to je.</li><li><span style=\"color: red\">Červená</span> pro neznámé jazyky.</li></ul>"
+				},
+				"ChatMessageEnding": {
+					"Title": "Nastavení zpráv v chatu",
+					"Content": "Podívej se do nastavení modulu, kde lze upravit způsob zobrazování zpráv v chatu.<br>Existuje specifická vlastnost Foundry týkající se chatu ve <span class='reference'>Správě uživatelů</span>."
+				},
+				"PlayersList": {
+					"Title": "Seznam hráčů",
+					"Content": "Polyglot sám o sobě nemění nic v seznamu hráčů, ale je dobré znát chování základního systému Foundry související se <span class='reference'>Správou uživatelů</span>. Můžeš ji otevřít kliknutím pravým tlačítkem na jméno hráče v tomto seznamu."
+				},
+				"UserConfig": {
+					"Title": "Správě uživatele",
+					"Content": "Toto nastavení se otevře pro ne-GM uživatele při načtení světa, pokud nemají <span class='reference'>vybranou postavu</span>."
+				},
+				"UserConfigSelectCharacter": {
+					"Title": "Výběr postavy",
+					"Content": "GM by nikdy neměl mít vybranou postavu, protože pak budou jeho zprávy odesílány jako z té postavy, pokud bude přítomna ve scéně.<br>Hráči by si měli vybrat svou hlavní postavu, jinak budou jejich zprávy odesílány jako od hráče a nebudou moci číst zprávy v jazycích, kterým rozumí jejich postava, pokud její token není na plátně.<br>Pozná se to tak, že je jméno hráče v seznamu hráčů následováno jménem postavy.<br>Je to základní chování Foundry, Polyglot jej pouze respektuje."
+				},
+				"ActorOwnership": {
+					"Title": "Vlastnictví aktéra",
+					"Content": "Pokud dáč hráči k postavě oprávnění \"Vlastník\" nebo \"Pozorovatel\", bude moci číst a psát zprávy jako ta postava, pokud je její token na plátně. Pokud je tokenů víc, výběr tokenu na plátně změní aktivní postavu hráče.<br>I to je rovněž základní chování Foundry, které Polyglot jen následuje."
+				},
+				"End": {
+					"Title": "Závěr",
+					"Content": "Tímto prohlídka končí. Doufám, že ti pomohla pochopit, jak Polyglot spolupracuje se základním chováním Foundry.<br>Pokud se chceš ponořit hlouběji do možností modulu, podívej se do <span class='reference'>Nastavení hry</span>.<br>Pokud ti to stále nestačí, navštiv pro více informací <a class=\"hyperlink\" href=\"https://github.com/mclemente/fvtt-module-polyglot/wiki\" target=\"_blank\" rel=\"nofollow noopener\">wiki modulu</a>."
+				}
+			}
+		},
+		"UESRPG.Language": "Jazyk",
+		"Generic": {
+			"Language": "Jazyk",
+			"Read": "Čtení"
+		},
+		"COC7": {
+			"LanguageOwn": "Jazyk",
+			"LanguageAny": "Jazyk",
+			"LanguageOther": "Jazyk",
+			"LanguageSpec": "Jazyk"
+		},
+		"DND5E": {
+			"SpecialLanguages.title": "Nahrazení zvláštních jazyků",
+			"SpecialLanguages.hint": "Jazyk, který nahradí \"languages\", jako např. \"všechny jazyky, které ovládal/a za živa\"."
+		},
+		"PF2E": {
+			"replaceLanguages.hint": "Odstraní výchozí jazyky systému. Musíš mít alespoň jeden vlastní jazyk nastavený v nabídce Vlastních prvků, jinak nebudou neobecné jazyky odstraněny. Pokud toto nastavení deaktivuješ a chceš obnovit výchozí, podívej se do wiki modulu."
+		},
+		"SWADE": {
+			"LanguageSkills": "Jazyk",
+			"AdditionalLanguageStat": {
+				"title": "Klíč statistiky jazyka",
+				"hint": "Je možné cílit na dodatečnou statistiku (nastavuje se v nastavení SWADE). Je nutné zadat klíč statistiky (rozlišuje malá a velká písmena). Upozornění: nastavení přepíše nastavení {setting}."
+			},
+			"AdditionalLiterateStat": {
+				"title": "Klíč statistiky čtení",
+				"hint": "Je možné omezit čtení deníků přidáním další statistiky. Je nutné zadat klíč statistiky (rozlišuje malá a velká písmena). Toto nastavení je nezávislé na nastavení {setting}."
+			}
+		},
+		"WFRP4E": {
+			"LanguageSkills": "Jazyk",
+			"ReadWrite": {
+				"hint": "Název dovednosti Čtení/Psaní.",
+				"title": "Dovednost Čtení/Psaní",
+				"default": "Čtení/Psaní"
+			}
+		}
 	}
 }
