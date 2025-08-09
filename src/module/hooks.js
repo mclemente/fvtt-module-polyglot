@@ -15,11 +15,10 @@ export default class PolyglotHooks {
 		polyglotDiv.setAttribute("id", "polyglot");
 		polyglotDiv.classList.add("polyglot", "polyglot-lang-select", "flexrow");
 		polyglotDiv.innerHTML = "<select id='polyglot-language' name='polyglot-language'></select>";
-		polyglotDiv.addEventListener("contextmenu", (event) => {
+		polyglotDiv.addEventListener("contextmenu", async () => {
 			const setting = !game.settings.get("polyglot", "checkbox");
-			game.settings.set("polyglot", "checkbox", setting);
-			if (setting) game.polyglot.tomSelect.enable();
-			else game.polyglot.tomSelect.disable();
+			await game.settings.set("polyglot", "checkbox", setting);
+			game.polyglot.toggleSelector();
 		});
 		chatControls.insertAdjacentElement("afterend", polyglotDiv);
 		polyglotDiv.querySelector("select").addEventListener("change", (ev) => {

@@ -317,7 +317,7 @@ export class Polyglot {
 					console.log(dropdown);
 				}
 			});
-			if (!game.settings.get("polyglot", "checkbox")) this.tomSelect.disable();
+			this.toggleSelector();
 		} else {
 			this.tomSelect.close();
 			this.tomSelect.clearOptions();
@@ -325,6 +325,19 @@ export class Polyglot {
 		}
 		if (this.knows(selectedLanguage)) this.tomSelect.addItem(selectedLanguage);
 		else this.tomSelect.addItem(this.knows(defaultLanguage) ? defaultLanguage : [...this.knownLanguages][0]);
+	}
+
+	toggleSelector() {
+		const select = ui.chat.element.querySelector(".polyglot-lang-select");
+		if (!game.settings.get("polyglot", "checkbox")) {
+			this.tomSelect.disable();
+			select.dataset.tooltip = "POLYGLOT.RightClickToEnable";
+			select.dataset.tooltipDirection = "LEFT";
+		} else {
+			this.tomSelect.enable();
+			select.dataset.tooltip = "";
+			if (game.tooltip.element === select) game.tooltip.deactivate();
+		}
 	}
 
 	/**
