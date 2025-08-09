@@ -15,7 +15,7 @@ export default class PolyglotHooks {
 			if (setting) game.polyglot.tomSelect.enable();
 			else game.polyglot.tomSelect.disable();
 		});
-		html.querySelector(".chat-controls").insertAdjacentElement("afterend", polyglotDiv);
+		html.querySelector("#chat-controls").insertAdjacentElement("afterend", polyglotDiv);
 		html.querySelector(".polyglot-lang-select select").addEventListener("change", (ev) => {
 			const lang = ev.target.value;
 			game.polyglot.lastSelection = lang;
