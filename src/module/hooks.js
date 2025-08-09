@@ -5,10 +5,15 @@ export default class PolyglotHooks {
 	 * @returns {void}
 	 */
 	static renderChatInput(chatlog, elements) {
-		if (!ui.sidebar.expanded) return game.polyglot.updateUserLanguages();
 		const chatControls = elements["#chat-controls"];
 		const polyglotSelect = chatlog.element.querySelector(".polyglot-lang-select");
-		if (polyglotSelect) return chatControls.insertAdjacentElement("afterend", polyglotSelect);
+		if (!ui.sidebar.expanded || !chatlog.active) {
+			if (polyglotSelect) polyglotSelect.hidden = true;
+			return game.polyglot.updateUserLanguages();
+		} else if (polyglotSelect) {
+			polyglotSelect.hidden = false;
+			return chatControls.insertAdjacentElement("afterend", polyglotSelect);
+		}
 
 		game.polyglot.renderChatLog = true;
 		const polyglotDiv = document.createElement("div");
