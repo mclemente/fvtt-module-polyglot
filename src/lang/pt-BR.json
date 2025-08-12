@@ -16,7 +16,7 @@
 		"JournalHighlight.title": "Opacidade do Marcador (%)",
 		"JournalHighlight.hint": "Define a opacidade do marcador sobre as fontes no diário.",
 		"logographicalFontToggle.title": "Fontes Logográficas",
-		"logographicalFontToggle.hint": "Reduz pela metade o tamanho de frases usando fontes logográficas (ex.: caracteres Japoneses ou Chineses).",
+		"logographicalFontToggle.hint": "Reduz pela metade o tamanho de frases usando fontes logográficas (ex.: caracteres japoneses ou chineses).",
 		"DefaultLanguage.title": "Idioma Padrão",
 		"DefaultLanguage.hint": "Nome do idioma padrão para ser escolhido. Deixe vazio para usar o padrão do sistema.",
 		"ReplaceLanguages.title": "Remover Idiomas do Sistema",
