@@ -5,7 +5,7 @@
 		"LanguageSettings": "Configurações de Idioma",
 		"ChatSettings": "Configurações de Chat",
 		"Languages.title": "Idiomas",
-		"Languages.hint": "Muda o alfabeto usado para os idiomas.",
+		"Languages.hint": "Altera o alfabeto usado para os idiomas.",
 		"Fonts": "Fontes",
 		"CustomLanguages.title": "Idiomas Personalizados",
 		"CustomLanguages.hint": "Defina uma lista de idiomas personalizados para adicionar ao sistema, separados por vírgula ou por ponto e vírgula.",
@@ -22,7 +22,7 @@
 		"ReplaceLanguages.title": "Remover Idiomas do Sistema",
 		"ReplaceLanguages.hint": "Remove os idiomas padrão do sistema. O primeiro idioma da lista de Idiomas Personalizados se tornará o novo idioma padrão.",
 		"ScrambleGM.title": "Embaralhar para o Mestre",
-		"ScrambleGM.hint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
+		"ScrambleGM.hint": "Não traduz o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
 		"enableAllFonts": {
 			"title": "Adicionar fontes do Foundry ao Polyglot",
 			"hint": "Adiciona as fontes do Foundry ao Polyglot, incluindo as Fontes Adicionais.",
@@ -34,20 +34,20 @@
 			}
 		},
 		"RandomizeRunes.title": "Randomizar Runas",
-		"RandomizeRunes.hint": "Texto embaralhado sempre irá parecer diferente, mesmo se a mesma mensagem for repetida. ⚠️ A opção \"Nenhum\" suporta apenas caracteres alfanuméricos (sem acentos).",
+		"RandomizeRunes.hint": "Isso determina qual tipo de RNG é usado para gerar uma frase. ⚠️ A opção \"Nenhum\" suporta apenas caracteres Alfanuméricos (sem acentos).",
 		"RandomizeRunesOptions": {
 			"a": "Padrão",
 			"b": "Frases únicas",
 			"c": "Nenhuma"
 		},
-		"ExportFonts.title": "Adicionar Fontes do Polyglot ao Foundry",
+		"ExportFonts.title": "Adicionar fontes do Polyglot ao Foundry",
 		"ExportFonts.hint": "Adiciona as fontes do Polyglot às ferramentas do Foundry, como as Ferramentas de Desenho de texto.",
 		"DisplayTranslated.title": "Mostrar traduções",
-		"DisplayTranslated.hint": "Para linguagens que são traduzidas no chat, mostrar o texto original e a tradução em seguida.",
-		"HideTranslation.title": "Esconder Globo e texto \"Traduzido do\" dos jogadores",
+		"DisplayTranslated.hint": "Para linguagens traduzidos no chat, mostrar o texto original e a tradução em seguida.",
+		"HideTranslation.title": "Ocultar indicadores dos jogadores",
 		"HideTranslation.hint": "Esconde o Globo e o texto \"Traduzido do\" de mensagens do chat para jogadores. Útil para quando você não quer mostrar aos jogadores que língua você está falando.",
-		"AllowOOC.title": "Embaralhar mensagens de chat Fora de Personagem",
-		"AllowOOC.hint": "Escolha quais usuários podem ter suas mensagens Fora de Personagem embaralhadas.",
+		"AllowOOC.title": "Embaralhar mensagens \"fora de personagem\"",
+		"AllowOOC.hint": "Escolha quais usuários devem ter suas mensagens Fora de Personagem embaralhadas.",
 		"AllowOOCOptions": {
 			"a": "Todos",
 			"b": "Apenas Mestre",
@@ -71,7 +71,8 @@
 		"ToggleRunes": "Alternar Runas",
 		"Runes": "Runas",
 		"Generic": {
-			"Language": "Idioma"
+			"Language": "Idioma",
+			"Read": "Ler"
 		},
 		"UESRPG.Language": "Língua",
 		"COC7": {
@@ -83,7 +84,7 @@
 		"FontSize": "Tamanho da Fonte (%)",
 		"LanguageRegex": {
 			"title": "RegEx de Idioma",
-			"hint": "Define o termo pesquisado entre os itens de atores para determinar os seus idiomas falados."
+			"hint": "Você pode usar isso para alterar o termo pesquisado nos itens de \"Idioma\" para algo diferente, como \"Língua\"."
 		},
 		"DND5E": {
 			"SpecialLanguages.title": "Substituir Idiomas Especiais",
@@ -114,7 +115,7 @@
 		},
 		"RuneRegex": {
 			"title": "Randomizar apenas alfanuméricos",
-			"hint": "Faz com que a randomização ignore caracteres não alfanuméricos (por exemplo !,...;?#$\"''). Isso pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes."
+			"hint": "Faz com que a randomização ignore caracteres não-alfanuméricos (ex: !,.;:?#$\"'). Isso pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes."
 		},
 		"JournalHighlightColor": {
 			"title": "Cor do Marcador",
@@ -138,7 +139,7 @@
 		"Logographical": "Logográfica",
 		"GameMasterHasAssignedCharacter": "Você é um {GM} e têm um personagem atribuído a você. Polyglot irá agir de forma estranha por causa disso. Considere desatribuir esse personagem do seu Usuário.",
 		"PF2E": {
-			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma caseiro definido no menu Homebrew Elements, caso contrário, os idiomas não comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
+			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma caseiro definido no menu de Material Caseiro, caso contrário, os idiomas não comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
 		},
 		"UnknownLanguages": "Desconhecidos",
 		"KnownLanguages": "Conhecidos",
@@ -148,12 +149,79 @@
 		},
 		"EnableChatFeatures": {
 			"title": "Habilitar Recursos do Chat",
-			"hint": "Habilita todas os recursos de chat do Polyglot, como o seletor de idiomas e o embaralhamento de mensagens."
+			"hint": "Habilita todos os recursos de chat, como o seletor de idiomas e o embaralhamento de mensagens."
 		},
 		"SpeakingIn": "Falando em {language}",
 		"LiteracyRegex": {
-			"hint": "Igual ao Regex de Idioma, mas para idiomas escritas.",
+			"hint": "Igual ao Regex de Idioma, mas para idiomas escritos.",
 			"title": "RegEx de Alfabetização"
-		}
+		},
+		"TOURS": {
+			"Main": {
+				"Canvas": {
+					"Title": "Bem-vindo ao Polyglot",
+					"Content": "Este tour irá guiá-lo através dos recursos que o Polyglot adiciona à interface e como eles interagem com o Foundry, além de algumas orientações para iniciantes sobre a seleção de personagens."
+				},
+				"LanguageSelector": {
+					"Title": "Seletor de Idioma",
+					"Content": "O <span class='reference'>Seletor de Idioma</span> é onde você pode selecionar o idioma que deseja falar, embaralhando as mensagens enviadas enquanto ele estiver ativo."
+				},
+				"title": "Introdução ao Polyglot",
+				"desc": "Entenda a interação do Polyglot com a interface do Foundry.",
+				"LanguageSelectorSelect": {
+					"Title": "Lista do Seletor de Idiomas",
+					"Content": "A <span class='reference'>Lista</span> contém todos os idiomas do seu mundo.<br>Dependendo do seu sistema de jogo, os idiomas podem já ter sido definidos, enquanto em outros sistemas de jogo, pode ser necessário configurá-los nas <span class='reference'>Configurações do Jogo</span>.<br>Ele exibirá idiomas entre os conhecidos e os desconhecidos pelos atores dos seus jogadores."
+				},
+				"ActorOwnership": {
+					"Title": "Propriedade do Ator",
+					"Content": "Sobre a Propriedade de Ator, se você conceder a um jogador a permissão de \"Dono\" ou \"Observador\" para um ator, esse jogador poderá ler e escrever mensagens como esse ator se seu token estiver presente na tela. Se houver mais de um token, selecionar o token na tela alterará o ator do jogador.<br>Este também é um comportamento do Foundry, Polyglot apenas o segue."
+				},
+				"ChatMessageGlobe": {
+					"Content": "Este globo pode ter 3 cores: <ul><li><span style=\"color: green\">Verde</span> para idiomas Conhecidos. Passar o mouse sobre ele exibirá o nome do idioma.</li><li><span style=\"color: blue\">Azul</span> para idiomas que podem ser lidos, mas o jogador não terá ideia de qual idioma é.<li><span style=\"color: red\">Vermelho</span> para idiomas Desconhecidos.</li></li></ul>",
+					"Title": "O Globo"
+				},
+				"UserConfigSelectCharacter": {
+					"Content": "Como Mestre, você nunca deve ter um personagem selecionado, pois isso fará com que suas mensagens sejam enviadas como aquele personagem se ele estiver presente em uma cena.<br>Para os jogadores, certifique-se de que eles selecionem seu personagem principal; caso contrário, suas mensagens sempre serão enviadas como o jogador em vez de seu personagem e eles não poderão ler mensagens em idiomas que seu personagem entende, a menos que seu token esteja presente na tela.<br>Você pode dizer se um jogador selecionou um personagem se seu nome na Lista de Jogadores for seguido pelo nome de um personagem.<br>Este é o comportamento do Foundry, o Polyglot apenas o segue.",
+					"Title": "Selecionar Personagem"
+				},
+				"LanguageSelectorSelect2": {
+					"Content": "Clicar com o botão direito na <span class='reference'>Lista</span> alterna o embaralhamento, permitindo que os usuários falem como se o módulo estivesse desabilitado.",
+					"Title": "Lista do Seletor de Idiomas"
+				},
+				"ChatMessageTranslation": {
+					"Title": "Texto Traduzido",
+					"Content": "Isto é o que os jogadores que entendem o idioma da mensagem veem.<br>Há uma configuração para desativar a exibição do Texto Embaralhado para jogadores que o entendem. Passar o mouse sobre ele exibirá o nome do idioma."
+				},
+				"ChatMessageEnding": {
+					"Title": "Configurações de Mensagens de Chat",
+					"Content": "Não deixe de conferir as configurações do módulo, onde você pode fazer alterações em como as mensagens de chat são exibidas.<br>Há algo específico sobre o Foundry e as Mensagens de Chat que está relacionado à <span class='reference'>Configuração do Usuário</span>."
+				},
+				"PlayersList": {
+					"Title": "Lista de Jogadores",
+					"Content": "Embora o Polyglot em si não altere nada relacionado a ele, você deve estar ciente do comportamento do Foundry em relação à <span class='reference'>Configuração do Usuário</span>. Você pode abri-lo clicando com o botão direito do mouse no nome de um usuário nesta lista aqui."
+				},
+				"UserConfig": {
+					"Title": "Configuração do Usuário",
+					"Content": "Esta configuração é aberta para usuários que não são o Mestre, sempre que eles entram no mundo, se não tiverem <span class='reference'>selecionado um personagem</span>."
+				},
+				"LanguageSelectorPips": {
+					"Title": "Pontos do Seletor de Idiomas",
+					"Content": "Um <span class='reference'>Ponto</span>, semelhante aos exibidos na Lista de Jogadores, será exibido ao lado dos idiomas conhecidos para cada jogador que tiver pelo menos um ator que o entenda. Ao passar o mouse sobre um Ponto, o nome do usuário e a lista de atores que fornecem acesso ao idioma serão exibidos."
+				},
+				"ChatMessage": {
+					"Title": "Mensagens do Chat",
+					"Content": "É assim que uma mensagem se parece se ela usar o Polyglot."
+				},
+				"ChatMessageScrambled": {
+					"Title": "Texto Embaralhado",
+					"Content": "Isto é o que os jogadores que não entendem a linguagem da mensagem veem."
+				},
+				"End": {
+					"Content": "Isso conclui este tour. Espero ter esclarecido algumas dúvidas sobre a interação do Polyglot com o comportamento do Foundry.<br>Se quiser se aprofundar mais no módulo, confira suas configurações nas <span class='reference'>Configurações do Jogo</span>.<br>Se isso ainda não for suficiente, tente consultar a <a class=\"hyperlink\" href=\"https://github.com/mclemente/fvtt-module-polyglot/wiki\" target=\"_blank\" rel=\"nofollow noopener\">wiki do módulo</a> para mais informações.",
+					"Title": "Final"
+				}
+			}
+		},
+		"RightClickToEnable": "Clique direito para ativar"
 	}
 }
