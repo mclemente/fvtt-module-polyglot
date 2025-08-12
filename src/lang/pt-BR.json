@@ -5,7 +5,7 @@
 		"LanguageSettings": "Configurações de Idioma",
 		"ChatSettings": "Configurações de Chat",
 		"Languages.title": "Idiomas",
-		"Languages.hint": "Muda o alfabeto usado para os idiomas.",
+		"Languages.hint": "Altera o alfabeto usado para os idiomas.",
 		"Fonts": "Fontes",
 		"CustomLanguages.title": "Idiomas Personalizados",
 		"CustomLanguages.hint": "Defina uma lista de idiomas personalizados para adicionar ao sistema, separados por vírgula ou por ponto e vírgula.",
@@ -16,15 +16,15 @@
 		"JournalHighlight.title": "Opacidade do Marcador (%)",
 		"JournalHighlight.hint": "Define a opacidade do marcador sobre as fontes no diário.",
 		"logographicalFontToggle.title": "Fontes Logográficas",
-		"logographicalFontToggle.hint": "Reduz pela metade o tamanho de frases usando fontes logográficas (ex.: caracteres japoneses ou chineses).",
+		"logographicalFontToggle.hint": "Reduz pela metade o tamanho de frases usando fontes logográficas (ex.: caracteres Japoneses ou Chineses).",
 		"DefaultLanguage.title": "Idioma Padrão",
 		"DefaultLanguage.hint": "Nome do idioma padrão para ser escolhido. Deixe vazio para usar o padrão do sistema.",
 		"ReplaceLanguages.title": "Remover Idiomas do Sistema",
 		"ReplaceLanguages.hint": "Remove os idiomas padrão do sistema. O primeiro idioma da lista de Idiomas Personalizados se tornará o novo idioma padrão.",
 		"ScrambleGM.title": "Embaralhar para o Mestre",
-		"ScrambleGM.hint": "Não traduzir o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
+		"ScrambleGM.hint": "Não traduz o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
 		"enableAllFonts": {
-			"title": "Adicionar fontes do Foundry ao Polyglot",
+			"title": "Adicionar Fontes do Foundry ao Polyglot",
 			"hint": "Adiciona as fontes do Foundry ao Polyglot, incluindo as Fontes Adicionais.",
 			"choices": {
 				"0": "Nenhuma",
@@ -34,20 +34,20 @@
 			}
 		},
 		"RandomizeRunes.title": "Randomizar Runas",
-		"RandomizeRunes.hint": "Texto embaralhado sempre irá parecer diferente, mesmo se a mesma mensagem for repetida. ⚠️ A opção \"Nenhum\" suporta apenas caracteres alfanuméricos (sem acentos).",
+		"RandomizeRunes.hint": "Isso determina qual tipo de RNG é usado para gerar uma frase. ⚠️ A opção \"Nenhum\" suporta apenas caracteres Alfanuméricos (sem acentos).",
 		"RandomizeRunesOptions": {
 			"a": "Padrão",
-			"b": "Frases únicas",
+			"b": "Frases Únicas",
 			"c": "Nenhuma"
 		},
 		"ExportFonts.title": "Adicionar Fontes do Polyglot ao Foundry",
 		"ExportFonts.hint": "Adiciona as fontes do Polyglot às ferramentas do Foundry, como as Ferramentas de Desenho de texto.",
-		"DisplayTranslated.title": "Mostrar traduções",
-		"DisplayTranslated.hint": "Para linguagens que são traduzidas no chat, mostrar o texto original e a tradução em seguida.",
-		"HideTranslation.title": "Esconder Globo e texto \"Traduzido do\" dos jogadores",
+		"DisplayTranslated.title": "Mostrar Traduções",
+		"DisplayTranslated.hint": "Para linguagens traduzidos no chat, mostrar o texto original e a tradução em seguida.",
+		"HideTranslation.title": "Ocultar Indicadores dos jogadores",
 		"HideTranslation.hint": "Esconde o Globo e o texto \"Traduzido do\" de mensagens do chat para jogadores. Útil para quando você não quer mostrar aos jogadores que língua você está falando.",
-		"AllowOOC.title": "Embaralhar mensagens de chat Fora de Personagem",
-		"AllowOOC.hint": "Escolha quais usuários podem ter suas mensagens Fora de Personagem embaralhadas.",
+		"AllowOOC.title": "Embaralhar Mensagens Fora de Personagem",
+		"AllowOOC.hint": "Escolha quais usuários devem ter suas mensagens Fora de Personagem embaralhadas.",
 		"AllowOOCOptions": {
 			"a": "Todos",
 			"b": "Apenas Mestre",
@@ -83,7 +83,7 @@
 		"FontSize": "Tamanho da Fonte (%)",
 		"LanguageRegex": {
 			"title": "RegEx de Idioma",
-			"hint": "Define o termo pesquisado entre os itens de atores para determinar os seus idiomas falados."
+			"hint": "Você pode usar isso para alterar o termo pesquisado nos itens de \"Idioma\" para algo diferente, como \"Língua\"."
 		},
 		"DND5E": {
 			"SpecialLanguages.title": "Substituir Idiomas Especiais",
@@ -109,12 +109,12 @@
 			"LanguageSkills": "Idioma"
 		},
 		"IgnoreJournalFontSize": {
-			"title": "Usar tamanho de fonte normal",
+			"title": "Usar Tamanho de Fonte Normal",
 			"hint": "Ignora o tamanho das fontes do Polyglot nos diários, fazendo com que elas tenham o mesmo tamanho que o texto normal teria. Útil para quando a formatação do diário importa."
 		},
 		"RuneRegex": {
-			"title": "Randomizar apenas alfanuméricos",
-			"hint": "Faz com que a randomização ignore caracteres não alfanuméricos (por exemplo !,...;?#$\"''). Isso pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes."
+			"title": "Randomizar Apenas Alfanuméricos",
+			"hint": "Faz com que a randomização ignore caracteres não-alfanuméricos (ex: !,.;:?#$\"'). Isso pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes."
 		},
 		"JournalHighlightColor": {
 			"title": "Cor do Marcador",
@@ -148,12 +148,29 @@
 		},
 		"EnableChatFeatures": {
 			"title": "Habilitar Recursos do Chat",
-			"hint": "Habilita todas os recursos de chat do Polyglot, como o seletor de idiomas e o embaralhamento de mensagens."
+			"hint": "Habilita todas os recursos de chat, como o seletor de idiomas e o embaralhamento de mensagens."
 		},
 		"SpeakingIn": "Falando em {language}",
 		"LiteracyRegex": {
-			"hint": "Igual ao Regex de Idioma, mas para idiomas escritas.",
+			"hint": "Igual ao Regex de Idioma, mas para idiomas escritos.",
 			"title": "RegEx de Alfabetização"
+		},
+		"TOURS": {
+			"Main": {
+				"Canvas": {
+					"Title": "Bem-vindo ao Polyglot",
+					"Content": "Este tour irá guiá-lo através dos recursos que o Polyglot adiciona à interface e como eles interagem com o Foundry, além de algumas orientações para iniciantes sobre a seleção de personagens."
+				},
+				"LanguageSelector": {
+					"Title": "Seletor de Idioma",
+					"Content": "O <span class='reference'>Seletor de Idioma</span> é onde você pode selecionar o idioma que deseja falar, embaralhando as mensagens enviadas enquanto ele estiver ativo."
+				},
+				"title": "Introdução ao Polyglot",
+				"desc": "Entenda a interação do Polyglot com a interface do Foundry.",
+				"LanguageSelectorSelect": {
+					"Title": "Lista do Seletor de Idioma"
+				}
+			}
 		}
 	}
 }
