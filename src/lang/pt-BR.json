@@ -168,7 +168,51 @@
 				"title": "Introdução ao Polyglot",
 				"desc": "Entenda a interação do Polyglot com a interface do Foundry.",
 				"LanguageSelectorSelect": {
-					"Title": "Lista do Seletor de Idioma"
+					"Title": "Lista do Seletor de Idiomas",
+					"Content": "A <span class='reference'>Lista</span> contém todos os idiomas do seu mundo.<br>Dependendo do seu sistema de jogo, os idiomas podem já ter sido definidos, enquanto em outros sistemas de jogo, pode ser necessário configurá-los nas <span class='reference'>Configurações do Jogo</span>.<br>Ele exibirá idiomas entre os conhecidos e os desconhecidos pelos atores dos seus jogadores."
+				},
+				"ActorOwnership": {
+					"Title": "Propriedade do Ator"
+				},
+				"ChatMessageGlobe": {
+					"Content": "Este globo pode ter 3 cores: <ul><li><span style=\"color: green\">Verde</span> para idiomas Conhecidos. Passar o mouse sobre ele exibirá o nome do idioma.</li><li><span style=\"color: blue\">Azul</span> para idiomas que podem ser lidos, mas o jogador não terá ideia de qual idioma é.<li><span style=\"color: red\">Vermelho</span> para idiomas Desconhecidos.</li></li></ul>",
+					"Title": "O Globo"
+				},
+				"UserConfigSelectCharacter": {
+					"Content": "Como Mestre, você nunca deve ter um personagem selecionado, pois isso fará com que suas mensagens sejam enviadas como aquele personagem se ele estiver presente em uma cena.<br>Para os jogadores, certifique-se de que eles selecionem seu personagem principal; caso contrário, suas mensagens sempre serão enviadas como o jogador em vez de seu personagem e eles não poderão ler mensagens em idiomas que seu personagem entende, a menos que seu token esteja presente na tela.<br>Você pode dizer se um jogador selecionou um personagem se seu nome na Lista de Jogadores for seguido pelo nome de um personagem.<br>Este é o comportamento do Foundry, o Polyglot apenas o segue.",
+					"Title": "Selecionar Personagem"
+				},
+				"LanguageSelectorSelect2": {
+					"Content": "Clicar com o botão direito na <span class='reference'>Lista</span> alterna o embaralhamento, permitindo que os usuários falem como se o módulo estivesse desabilitado.",
+					"Title": "Lista do Seletor de Idiomas"
+				},
+				"ChatMessageTranslation": {
+					"Title": "Texto Traduzido",
+					"Content": "Isto é o que os jogadores que entendem o idioma da mensagem veem.<br>Há uma configuração para desativar a exibição do Texto Embaralhado para jogadores que o entendem. Passar o mouse sobre ele exibirá o nome do idioma."
+				},
+				"ChatMessageEnding": {
+					"Title": "Configurações de Mensagens de Chat",
+					"Content": "Não deixe de conferir as configurações do módulo, onde você pode fazer alterações em como as mensagens de chat são exibidas.<br>Há algo específico sobre o Foundry e as Mensagens de Chat que está relacionado à <span class='reference'>Configuração do Usuário</span>."
+				},
+				"PlayersList": {
+					"Title": "Lista de Jogadores",
+					"Content": "Embora o Polyglot em si não altere nada relacionado a ele, você deve estar ciente do comportamento do Foundry em relação à <span class='reference'>Configuração do Usuário</span>. Você pode abri-lo clicando com o botão direito do mouse no nome de um usuário nesta lista aqui."
+				},
+				"UserConfig": {
+					"Title": "Configuração do Usuário",
+					"Content": "Esta configuração é aberta para usuários que não são o Mestre, sempre que eles entram no mundo, se não tiverem <span class='reference'>selecionado um personagem</span>."
+				},
+				"LanguageSelectorPips": {
+					"Title": "Pontos do Seletor de Idiomas",
+					"Content": "Um <span class='reference'>Ponto</span>, semelhante aos exibidos na Lista de Jogadores, será exibido ao lado dos idiomas conhecidos para cada jogador que tiver pelo menos um ator que o entenda. Ao passar o mouse sobre um Ponto, o nome do usuário e a lista de atores que fornecem acesso ao idioma serão exibidos."
+				},
+				"ChatMessage": {
+					"Title": "Mensagens do Chat",
+					"Content": "É assim que uma mensagem se parece se ela usar o Polyglot."
+				},
+				"ChatMessageScrambled": {
+					"Title": "Texto Embaralhado",
+					"Content": "Isto é o que os jogadores que não entendem a linguagem da mensagem veem."
 				}
 			}
 		}
