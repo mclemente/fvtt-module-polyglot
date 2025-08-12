@@ -109,8 +109,8 @@
 		"WFRP4E": {
 			"LanguageSkills": "Idioma",
 			"ReadWrite": {
-				"hint": "O nome do talento Read/Write.",
-				"title": "Talento Read/Write",
+				"hint": "",
+				"title": "",
 				"default": ""
 			}
 		},
@@ -226,6 +226,7 @@
 					"Title": "Final"
 				}
 			}
-		}
+		},
+		"RightClickToEnable": "Clique direito para ativar"
 	}
 }
