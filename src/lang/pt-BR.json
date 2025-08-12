@@ -71,7 +71,8 @@
 		"ToggleRunes": "Alternar Runas",
 		"Runes": "Runas",
 		"Generic": {
-			"Language": "Idioma"
+			"Language": "Idioma",
+			"Read": "Ler"
 		},
 		"UESRPG.Language": "Língua",
 		"COC7": {
@@ -106,7 +107,12 @@
 		},
 		"Font": "Fonte",
 		"WFRP4E": {
-			"LanguageSkills": "Idioma"
+			"LanguageSkills": "Idioma",
+			"ReadWrite": {
+				"hint": "O nome do talento Read/Write.",
+				"title": "Talento Read/Write",
+				"default": ""
+			}
 		},
 		"IgnoreJournalFontSize": {
 			"title": "Usar Tamanho de Fonte Normal",
@@ -138,7 +144,7 @@
 		"Logographical": "Logográfica",
 		"GameMasterHasAssignedCharacter": "Você é um {GM} e têm um personagem atribuído a você. Polyglot irá agir de forma estranha por causa disso. Considere desatribuir esse personagem do seu Usuário.",
 		"PF2E": {
-			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma caseiro definido no menu Homebrew Elements, caso contrário, os idiomas não comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
+			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma homebrew definido no menu Homebrew Elements, caso contrário, os idiomas não-Comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
 		},
 		"UnknownLanguages": "Desconhecidos",
 		"KnownLanguages": "Conhecidos",
@@ -172,7 +178,8 @@
 					"Content": "A <span class='reference'>Lista</span> contém todos os idiomas do seu mundo.<br>Dependendo do seu sistema de jogo, os idiomas podem já ter sido definidos, enquanto em outros sistemas de jogo, pode ser necessário configurá-los nas <span class='reference'>Configurações do Jogo</span>.<br>Ele exibirá idiomas entre os conhecidos e os desconhecidos pelos atores dos seus jogadores."
 				},
 				"ActorOwnership": {
-					"Title": "Propriedade do Ator"
+					"Title": "Propriedade do Ator",
+					"Content": "Sobre a Propriedade de Ator, se você conceder a um jogador a permissão de \"Dono\" ou \"Observador\" para um ator, esse jogador poderá ler e escrever mensagens como esse ator se seu token estiver presente na tela. Se houver mais de um token, selecionar o token na tela alterará o ator do jogador.<br>Este também é um comportamento do Foundry, Polyglot apenas o segue."
 				},
 				"ChatMessageGlobe": {
 					"Content": "Este globo pode ter 3 cores: <ul><li><span style=\"color: green\">Verde</span> para idiomas Conhecidos. Passar o mouse sobre ele exibirá o nome do idioma.</li><li><span style=\"color: blue\">Azul</span> para idiomas que podem ser lidos, mas o jogador não terá ideia de qual idioma é.<li><span style=\"color: red\">Vermelho</span> para idiomas Desconhecidos.</li></li></ul>",
@@ -213,6 +220,10 @@
 				"ChatMessageScrambled": {
 					"Title": "Texto Embaralhado",
 					"Content": "Isto é o que os jogadores que não entendem a linguagem da mensagem veem."
+				},
+				"End": {
+					"Content": "Isso conclui este tour. Espero ter esclarecido algumas dúvidas sobre a interação do Polyglot com o comportamento do Foundry.<br>Se quiser se aprofundar mais no módulo, confira suas configurações nas <span class='reference'>Configurações do Jogo</span>.<br>Se isso ainda não for suficiente, tente consultar a <a class=\"hyperlink\" href=\"https://github.com/mclemente/fvtt-module-polyglot/wiki\" target=\"_blank\" rel=\"nofollow noopener\">wiki do módulo</a> para mais informações.",
+					"Title": "Final"
 				}
 			}
 		}
