@@ -24,7 +24,7 @@
 		"ScrambleGM.title": "Embaralhar para o Mestre",
 		"ScrambleGM.hint": "Não traduz o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
 		"enableAllFonts": {
-			"title": "Adicionar Fontes do Foundry ao Polyglot",
+			"title": "Adicionar fontes do Foundry ao Polyglot",
 			"hint": "Adiciona as fontes do Foundry ao Polyglot, incluindo as Fontes Adicionais.",
 			"choices": {
 				"0": "Nenhuma",
@@ -37,16 +37,16 @@
 		"RandomizeRunes.hint": "Isso determina qual tipo de RNG é usado para gerar uma frase. ⚠️ A opção \"Nenhum\" suporta apenas caracteres Alfanuméricos (sem acentos).",
 		"RandomizeRunesOptions": {
 			"a": "Padrão",
-			"b": "Frases Únicas",
+			"b": "Frases únicas",
 			"c": "Nenhuma"
 		},
-		"ExportFonts.title": "Adicionar Fontes do Polyglot ao Foundry",
+		"ExportFonts.title": "Adicionar fontes do Polyglot ao Foundry",
 		"ExportFonts.hint": "Adiciona as fontes do Polyglot às ferramentas do Foundry, como as Ferramentas de Desenho de texto.",
-		"DisplayTranslated.title": "Mostrar Traduções",
+		"DisplayTranslated.title": "Mostrar traduções",
 		"DisplayTranslated.hint": "Para linguagens traduzidos no chat, mostrar o texto original e a tradução em seguida.",
-		"HideTranslation.title": "Ocultar Indicadores dos jogadores",
+		"HideTranslation.title": "Ocultar indicadores dos jogadores",
 		"HideTranslation.hint": "Esconde o Globo e o texto \"Traduzido do\" de mensagens do chat para jogadores. Útil para quando você não quer mostrar aos jogadores que língua você está falando.",
-		"AllowOOC.title": "Embaralhar Mensagens Fora de Personagem",
+		"AllowOOC.title": "Embaralhar mensagens \"fora de personagem\"",
 		"AllowOOC.hint": "Escolha quais usuários devem ter suas mensagens Fora de Personagem embaralhadas.",
 		"AllowOOCOptions": {
 			"a": "Todos",
@@ -110,11 +110,11 @@
 			"LanguageSkills": "Idioma"
 		},
 		"IgnoreJournalFontSize": {
-			"title": "Usar Tamanho de Fonte Normal",
+			"title": "Usar tamanho de fonte normal",
 			"hint": "Ignora o tamanho das fontes do Polyglot nos diários, fazendo com que elas tenham o mesmo tamanho que o texto normal teria. Útil para quando a formatação do diário importa."
 		},
 		"RuneRegex": {
-			"title": "Randomizar Apenas Alfanuméricos",
+			"title": "Randomizar apenas alfanuméricos",
 			"hint": "Faz com que a randomização ignore caracteres não-alfanuméricos (ex: !,.;:?#$\"'). Isso pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes."
 		},
 		"JournalHighlightColor": {
@@ -139,7 +139,7 @@
 		"Logographical": "Logográfica",
 		"GameMasterHasAssignedCharacter": "Você é um {GM} e têm um personagem atribuído a você. Polyglot irá agir de forma estranha por causa disso. Considere desatribuir esse personagem do seu Usuário.",
 		"PF2E": {
-			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma homebrew definido no menu Homebrew Elements, caso contrário, os idiomas não-Comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
+			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma caseiro definido no menu de Material Caseiro, caso contrário, os idiomas não comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
 		},
 		"UnknownLanguages": "Desconhecidos",
 		"KnownLanguages": "Conhecidos",
@@ -149,7 +149,7 @@
 		},
 		"EnableChatFeatures": {
 			"title": "Habilitar Recursos do Chat",
-			"hint": "Habilita todas os recursos de chat, como o seletor de idiomas e o embaralhamento de mensagens."
+			"hint": "Habilita todos os recursos de chat, como o seletor de idiomas e o embaralhamento de mensagens."
 		},
 		"SpeakingIn": "Falando em {language}",
 		"LiteracyRegex": {
