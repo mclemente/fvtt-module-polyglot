@@ -107,12 +107,7 @@
 		},
 		"Font": "Fonte",
 		"WFRP4E": {
-			"LanguageSkills": "Idioma",
-			"ReadWrite": {
-				"hint": "",
-				"title": "",
-				"default": ""
-			}
+			"LanguageSkills": "Idioma"
 		},
 		"IgnoreJournalFontSize": {
 			"title": "Usar Tamanho de Fonte Normal",
