@@ -1,3 +1,5 @@
+import { providerKeys } from "../providers/_shared.js";
+
 export class PolyglotLanguageSettings extends FormApplication {
 	/**
 	 * Default Options for this FormApplication
@@ -31,7 +33,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 			const type = provider.id.substring(0, dotPosition);
 			const id = provider.id.substring(dotPosition + 1);
 			if (type === "native") {
-				let title = id === game.system.id ? game.system.title : id;
+				let title = id === game.system.id || id === providerKeys[game.system.id] ? game.system.title : id;
 				provider.selectTitle = (`${game.i18n.localize("POLYGLOT.LanguageProvider.choices.native")} ${title}`).trim();
 			} else {
 				const name = type === "module" ? game.modules.get(id).title : game.system.title;
