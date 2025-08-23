@@ -1,7 +1,7 @@
 import LanguageProvider from "./templates/Base.js";
 
 export default class drawSteelLanguageProvider extends LanguageProvider {
-	// requiresReady = true;
+	requiresReady = true;
 
 	languages = {
 		// ancestry languages
