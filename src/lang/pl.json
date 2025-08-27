@@ -230,6 +230,7 @@
 			"title": "Włącz funkcje czatu",
 			"hint": "Włącza wszystkie funkcje czatu, takie jak wybór języka w czacie i kodowanie wiadomości."
 		},
-		"SpeakingIn": "Mówi w języku {language}"
+		"SpeakingIn": "Mówi w języku {language}",
+		"RightClickToEnable": "Kliknij prawym przyciskiem myszy, aby włączyć"
 	}
 }
