@@ -107,7 +107,12 @@
 		},
 		"Font": "Fonte",
 		"WFRP4E": {
-			"LanguageSkills": "Idioma"
+			"LanguageSkills": "Idioma",
+			"ReadWrite": {
+				"title": "Talento Read/Write",
+				"hint": "O nome do Talento Read/Write.",
+				"default": "Read/Write"
+			}
 		},
 		"IgnoreJournalFontSize": {
 			"title": "Usar tamanho de fonte normal",
