@@ -70,14 +70,14 @@ export default class PolyglotHooks {
 	 * @returns {Boolean}
 	 */
 	static preCreateChatMessage(message, data, options, userId) {
-		const isCheckboxEnabled = !game.polyglot.tomSelect.isDisabled;
+		const isCheckboxDisabled = game.polyglot.tomSelect?.isDisabled ?? true;
 		const isMessageLink = game.polyglot._isMessageLink(data.content);
 		const isMessageInlineRoll = /\[\[(.*?)\]\]/g.test(data.content);
 		// Message preprended by /desc from either Cautious GM Tools or Narrator Tools modules
 		const isDescMessage =
 			message.flags?.cgmp?.subType === 1
 			|| ["description", "narration", "notification"].includes(message.flags?.["narrator-tools"]?.type);
-		if (!isCheckboxEnabled || isMessageLink || isMessageInlineRoll || isDescMessage) return true;
+		if (isCheckboxDisabled || isMessageLink || isMessageInlineRoll || isDescMessage) return true;
 		if (
 			message.style === CONST.CHAT_MESSAGE_STYLES.IC
 			|| (message.style === CONST.CHAT_MESSAGE_STYLES.OOC && game.polyglot._allowOOC())
