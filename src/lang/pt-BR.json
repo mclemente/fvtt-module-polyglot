@@ -24,7 +24,7 @@
 		"ScrambleGM.title": "Embaralhar para o Mestre",
 		"ScrambleGM.hint": "Não traduz o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
 		"enableAllFonts": {
-			"title": "Adicionar fontes do Foundry ao Polyglot",
+			"title": "Adicionar Fontes do Foundry ao Polyglot",
 			"hint": "Adiciona as fontes do Foundry ao Polyglot, incluindo as Fontes Adicionais.",
 			"choices": {
 				"0": "Nenhuma",
@@ -40,13 +40,13 @@
 			"b": "Frases únicas",
 			"c": "Nenhuma"
 		},
-		"ExportFonts.title": "Adicionar fontes do Polyglot ao Foundry",
+		"ExportFonts.title": "Adicionar Fontes do Polyglot ao Foundry",
 		"ExportFonts.hint": "Adiciona as fontes do Polyglot às ferramentas do Foundry, como as Ferramentas de Desenho de texto.",
-		"DisplayTranslated.title": "Mostrar traduções",
+		"DisplayTranslated.title": "Mostrar Traduções",
 		"DisplayTranslated.hint": "Para linguagens traduzidos no chat, mostrar o texto original e a tradução em seguida.",
-		"HideTranslation.title": "Ocultar indicadores dos jogadores",
+		"HideTranslation.title": "Ocultar Indicadores dos Jogadores",
 		"HideTranslation.hint": "Esconde o Globo e o texto \"Traduzido do\" de mensagens do chat para jogadores. Útil para quando você não quer mostrar aos jogadores que língua você está falando.",
-		"AllowOOC.title": "Embaralhar mensagens \"fora de personagem\"",
+		"AllowOOC.title": "Embaralhar Mensagens Fora de Personagem",
 		"AllowOOC.hint": "Escolha quais usuários devem ter suas mensagens Fora de Personagem embaralhadas.",
 		"AllowOOCOptions": {
 			"a": "Todos",
@@ -115,11 +115,11 @@
 			}
 		},
 		"IgnoreJournalFontSize": {
-			"title": "Usar tamanho de fonte normal",
+			"title": "Usar Tamanho de Fonte Normal",
 			"hint": "Ignora o tamanho das fontes do Polyglot nos diários, fazendo com que elas tenham o mesmo tamanho que o texto normal teria. Útil para quando a formatação do diário importa."
 		},
 		"RuneRegex": {
-			"title": "Randomizar apenas alfanuméricos",
+			"title": "Randomizar Apenas Alfanuméricos",
 			"hint": "Faz com que a randomização ignore caracteres não-alfanuméricos (ex: !,.;:?#$\"'). Isso pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes."
 		},
 		"JournalHighlightColor": {
