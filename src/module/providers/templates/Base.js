@@ -273,45 +273,46 @@ export default class LanguageProvider {
 	// Hooks //
 	// /////////
 
+	async initSequence() {
+		await this.getLanguages();
+		this.loadFonts();
+		this.loadLanguages();
+		this.loadCustomFonts();
+		this.reloadLanguages();
+	}
+
+	async setupSequence() {
+		this.getDefaultLanguage();
+	}
+
 	init() {}
 
-	i18nInit() {}
-
-	/**
-	 * Loads everything that can't be loaded on the constructor due to async/await.
-	 * It Hooks on ready if the system depends on reading compendiums.
-	 */
-	async setup() {
-		game.polyglot.omniglot = game.settings.get("polyglot", "omniglot");
-		game.polyglot.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
-		game.polyglot.truespeech = game.settings.get("polyglot", "truespeech");
-
-		const setupSteps = async () => {
-			await this.getLanguages();
-			this.loadFonts();
-			this.loadLanguages();
-			this.loadCustomFonts();
-			this.reloadLanguages();
-			this.getDefaultLanguage();
-		};
-		if (this.requiresReady) {
-			if (game.modules.get("babele")?.active) {
-				Hooks.on("babele.ready", async () => {
-					await setupSteps();
-					Hooks.callAll("polyglot.languageProvider.ready");
-				});
-			} else {
-				Hooks.on("ready", async () => {
-					await setupSteps();
-					Hooks.callAll("polyglot.languageProvider.ready");
-				});
-			}
-		} else {
-			await setupSteps();
+	async i18nInit() {
+		if (!this.requiresReady) {
+			await this.initSequence();
 		}
 	}
 
-	ready() {}
+	async setup() {
+		if (!this.requiresReady) {
+			await this.setupSequence();
+		} else if (game.modules.get("babele")?.active) {
+			// This is set during the setup hook because babele.ready will already have fired during the ready hook
+			Hooks.on("babele.ready", async () => {
+				await this.initSequence();
+				await this.setupSequence();
+				Hooks.callAll("polyglot.languageProvider.ready");
+			});
+		}
+	}
+
+	async ready() {
+		if (this.requiresReady && !game.modules.get("babele")?.active) {
+			await this.initSequence();
+			await this.setupSequence();
+			Hooks.callAll("polyglot.languageProvider.ready");
+		}
+	}
 
 	/**
 	 * Even though the base method doesn't have an await, some providers might need it to look into compendiums.

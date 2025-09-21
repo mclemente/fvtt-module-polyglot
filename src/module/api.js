@@ -67,6 +67,9 @@ export class PolyglotAPI {
 		const configuredProvider = game.settings.get("polyglot", "languageProvider");
 		const fallbackProvider = game.settings.settings.get("polyglot.languageProvider").default;
 		this.polyglot.languageProvider = this.providers[configuredProvider] || this.providers[fallbackProvider];
+		this.polyglot.omniglot = game.settings.get("polyglot", "omniglot");
+		this.polyglot.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
+		this.polyglot.truespeech = game.settings.get("polyglot", "truespeech");
 	}
 
 	/**

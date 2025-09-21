@@ -26,10 +26,11 @@ Hooks.once("init", () => {
 });
 
 Hooks.once("i18nInit", () => {
+	registerProviderSettings();
 	game.polyglot.languageProvider.i18nInit();
 });
 
-Hooks.on("setup", async () => {
+Hooks.on("setup", () => {
 	if (game.user.isGM && game.user.character) {
 		console.warn(
 			`Polyglot | ${game.i18n.format("POLYGLOT.GameMasterHasAssignedCharacter", {
@@ -37,14 +38,13 @@ Hooks.on("setup", async () => {
 			})}`,
 		);
 	}
-	registerProviderSettings();
 	registerTours();
-	await game.polyglot.languageProvider.setup();
+	game.polyglot.languageProvider.setup();
 });
-Hooks.on("ready", () => {
-	game.polyglot.ready();
+Hooks.on("ready", async () => {
+	await game.polyglot.ready();
 	Hooks.callAll("polyglot.ready", LanguageProvider);
-	game.polyglot.languageProvider.ready();
+	await game.polyglot.languageProvider.ready();
 });
 Hooks.on("renderSettingsConfig", renderSettingsConfigHandler);
 Hooks.on("renderPolyglotGeneralSettings", renderPolyglotGeneralSettingsHandler);
