@@ -135,9 +135,10 @@ export default class drawSteelLanguageProvider extends LanguageProvider {
 	async getLanguages() {
 		if (this.replaceLanguages) {
 			this.languages = {};
+			return;
 		}
 		const languagesSetting = game.settings.get("polyglot", "Languages");
-		this.languages = Object.keys(this.languages).reduce((outputLangs, lang) => {
+		this.languages = Object.keys(CONFIG.DRAW_STEEL.languages).reduce((outputLangs, lang) => {
 			outputLangs[lang] = {
 				label: CONFIG.DRAW_STEEL.languages[lang].label,
 				font: languagesSetting[lang]?.font || this.languages[lang]?.font || this.defaultFont,
