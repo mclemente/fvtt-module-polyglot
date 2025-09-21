@@ -1,3 +1,4 @@
+
 export class PolyglotLanguageSettings extends FormApplication {
 	/**
 	 * Default Options for this FormApplication

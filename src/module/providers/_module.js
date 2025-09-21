@@ -13,6 +13,7 @@ export { default as dccLanguageProvider } from "./dcc.js";
 export { default as demonlordLanguageProvider } from "./demonlord.js";
 export { default as dnd4eLanguageProvider } from "./dnd4e.js";
 export { default as dnd5eLanguageProvider } from "./dnd5e.js";
+export { default as drawSteelLanguageProvider } from "./draw-steel.js";
 export { default as dsa5LanguageProvider } from "./dsa5.js";
 export { default as earthdawn4eLanguageProvider } from "./earthdawn4e.js";
 export { default as fggLanguageProvider } from "./fgg.js";
