@@ -33,7 +33,7 @@
 				"3": "Ambas"
 			}
 		},
-		"RandomizeRunes.title": "Randomizar Runas",
+		"RandomizeRunes.title": "Aleatorizar Runas",
 		"RandomizeRunes.hint": "Isso determina qual tipo de RNG é usado para gerar uma frase. ⚠️ A opção \"Nenhum\" suporta apenas caracteres Alfanuméricos (sem acentos).",
 		"RandomizeRunesOptions": {
 			"a": "Padrão",
@@ -119,7 +119,7 @@
 			"hint": "Ignora o tamanho das fontes do Polyglot nos diários, fazendo com que elas tenham o mesmo tamanho que o texto normal teria. Útil para quando a formatação do diário importa."
 		},
 		"RuneRegex": {
-			"title": "Randomizar Apenas Alfanuméricos",
+			"title": "Aleatorizar Apenas Alfanuméricos",
 			"hint": "Faz com que a randomização ignore caracteres não-alfanuméricos (ex: !,.;:?#$\"'). Isso pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes."
 		},
 		"JournalHighlightColor": {
