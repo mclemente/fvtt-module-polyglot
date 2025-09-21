@@ -30,7 +30,7 @@ export default class wfrp4eLanguageProvider extends LanguageProvider {
 			font: "Elder Futhark",
 		},
 		bretonnian: {
-			font: "romance",
+			font: "Elder Futhark",
 		},
 		druhir: {
 			font: "Dark Eldar",
