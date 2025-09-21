@@ -388,8 +388,8 @@ export class Polyglot {
 	 * Registers settings, adjusts the bubble dimensions so the message is displayed correctly,
 	 * and loads the current languages set for Comprehend Languages Spells and Tongues Spell settings.
 	 */
-	ready() {
-		function checkChanges() {
+	async ready() {
+		async function checkChanges() {
 			const alphabetsSetting = game.settings.get("polyglot", "Alphabets");
 			const languagesSetting = game.settings.get("polyglot", "Languages");
 			const { fonts, languages } = game.polyglot.languageProvider;
@@ -397,21 +397,21 @@ export class Polyglot {
 				!foundry.utils.isEmpty(foundry.utils.diffObject(alphabetsSetting, fonts))
 				|| !foundry.utils.isEmpty(foundry.utils.diffObject(fonts, alphabetsSetting))
 			) {
-				game.settings.set("polyglot", "Alphabets", fonts);
+				await game.settings.set("polyglot", "Alphabets", fonts);
 			}
 			if (
 				!foundry.utils.isEmpty(foundry.utils.diffObject(languagesSetting, languages))
 				|| !foundry.utils.isEmpty(foundry.utils.diffObject(languages, languagesSetting))
 			) {
-				game.settings.set("polyglot", "Languages", languages);
+				await game.settings.set("polyglot", "Languages", languages);
 			}
 		}
 		if (this.languageProvider.requiresReady) {
-			Hooks.once("polyglot.languageProvider.ready", () => {
+			Hooks.once("polyglot.languageProvider.ready", async () => {
 				this.updateUserLanguages();
-				checkChanges();
+				await checkChanges();
 			});
-		} else checkChanges();
+		} else await checkChanges();
 	}
 
 	/* -------------------------------------------- */
