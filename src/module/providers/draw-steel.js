@@ -159,6 +159,10 @@ export default class drawSteelLanguageProvider extends LanguageProvider {
 		return [known_languages, literate_languages];
 	}
 
+	getSystemDefaultLanguage() {
+		return "caelian";
+	}
+
 	addToConfig(key, lang) {
 		if (CONFIG.DRAW_STEEL.languages) {
 			CONFIG.DRAW_STEEL.languages[key] = { label: lang };
