@@ -349,8 +349,7 @@ export class Polyglot {
 	 * @return {string}			The message's text with its characters scrambled by the PRNG.
 	 */
 	scrambleString(string, salt, lang) {
-		let language = this.languageProvider.languages[lang];
-		const rng = language?.rng ?? "default";
+		const { rng = "default" } = this.languageProvider.languages[lang];
 		if (rng === "none") return string;
 		if (rng === "default") salt = lang;
 		// const font = this._getFontStyle(lang).replace(/\d+%\s/g, "");
