@@ -20,7 +20,7 @@
 		"gulp-dart-sass": "^1.1.0",
 		"gulp-sourcemaps": "^3.0.0",
 		"husky": "^8.0.3",
-		"lint-staged": "^14.0.1",
+		"lint-staged": "^16.2.3",
 		"rollup": "^2.79.2",
 		"tom-select": "^2.4.3",
 		"vinyl-buffer": "^1.0.1",
