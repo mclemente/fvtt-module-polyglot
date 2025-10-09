@@ -19,7 +19,7 @@
 		"gulp-autoprefixer": "^10.0.0",
 		"gulp-dart-sass": "^1.1.0",
 		"gulp-sourcemaps": "^3.0.0",
-		"husky": "^8.0.3",
+		"husky": "^9.1.7",
 		"lint-staged": "^16.2.3",
 		"rollup": "^2.79.2",
 		"tom-select": "^2.4.3",
