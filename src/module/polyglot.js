@@ -5,8 +5,7 @@ import { LanguageProvider } from "./providers/_module.js";
 import {
 	registerProviderSettings,
 	registerSettings,
-	renderPolyglotGeneralSettingsHandler,
-	renderSettingsConfigHandler,
+	renderPolyglotGeneralSettingsHandler
 } from "./settings.js";
 import { registerTours } from "./tour.js";
 
@@ -46,5 +45,4 @@ Hooks.on("ready", async () => {
 	Hooks.callAll("polyglot.ready", LanguageProvider);
 	await game.polyglot.languageProvider.ready();
 });
-Hooks.on("renderSettingsConfig", renderSettingsConfigHandler);
 Hooks.on("renderPolyglotGeneralSettings", renderPolyglotGeneralSettingsHandler);

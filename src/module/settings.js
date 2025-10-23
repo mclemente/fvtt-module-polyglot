@@ -300,25 +300,6 @@ export async function renderPolyglotGeneralSettingsHandler(settingsConfig, html)
 	});
 }
 
-export async function renderSettingsConfigHandler(settingsConfig, html) {
-	if (game.settings.settings.has("polyglot.languageDataPath")) {
-		const languageDataPath = game.settings.get("polyglot", "languageDataPath");
-		const languageDataPathInput = html.find('input[name="polyglot.languageDataPath"]');
-		const LanguageRegexInput = html.find('input[name="polyglot.LanguageRegex"]');
-		const literacyDataPathInput = html.find('input[name="polyglot.literacyDataPath"]');
-		if (languageDataPath) disableCheckbox(LanguageRegexInput, true);
-		else disableCheckbox(literacyDataPathInput, true);
-		languageDataPathInput.on("change", (event) => {
-			disableCheckbox(LanguageRegexInput, event.target.value.length);
-			disableCheckbox(literacyDataPathInput, !event.target.value.length);
-		});
-	}
-}
-
-export function disableCheckbox(checkbox, boolean) {
-	checkbox.prop("disabled", boolean);
-}
-
 export function getNestedData(data, path) {
 	if (!RegExp(/^([\w_-]+\.)*([\w_-]+)$/).test(path)) {
 		return null;
