@@ -17,6 +17,7 @@ export class Polyglot {
 		this._enableChatFeatures = game.settings.get("polyglot", "enableChatFeatures");
 		if (this._enableChatFeatures) {
 			Hooks.on("renderChatInput", PolyglotHooks.renderChatInput);
+			Hooks.on("closeChatLog", PolyglotHooks.closeChatLog);
 			Hooks.on("preCreateChatMessage", PolyglotHooks.preCreateChatMessage);
 			Hooks.on("renderChatMessageHTML", PolyglotHooks.renderChatMessageHTML);
 			Hooks.on("createChatMessage", PolyglotHooks.createChatMessage);

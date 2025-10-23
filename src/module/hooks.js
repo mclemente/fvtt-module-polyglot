@@ -7,7 +7,7 @@ export default class PolyglotHooks {
 	static renderChatInput(chatlog, elements) {
 		const chatMessage = elements["#chat-message"];
 		const polyglotSelect = document.querySelector(".polyglot-lang-select");
-		if (!ui.sidebar.expanded || !chatlog.active) {
+		if ((!ui.sidebar.expanded && !chatlog.isPopout) || !chatlog.active) {
 			if (polyglotSelect) polyglotSelect.hidden = true;
 			return game.polyglot.updateUserLanguages();
 		} else if (polyglotSelect) {
@@ -31,6 +31,11 @@ export default class PolyglotHooks {
 			game.polyglot.lastSelection = lang;
 		});
 		game.polyglot.updateUserLanguages();
+	}
+
+	static closeChatLog(chatlog) {
+		const polyglotSelect = document.querySelector(".polyglot-lang-select");
+		if (!ui.sidebar.expanded && polyglotSelect) polyglotSelect.hidden = true;
 	}
 
 	static updateActor(actor, data, options, userId) {
