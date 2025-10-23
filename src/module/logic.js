@@ -312,9 +312,6 @@ export class Polyglot {
 					item: (data, escape) => {
 						return `<div>${game.i18n.format("POLYGLOT.SpeakingIn", { language: escape(data.label)})}</div>`;
 					}
-				},
-				onDropdownClose: (dropdown) => {
-					console.log(dropdown);
 				}
 			});
 			this.toggleSelector();
