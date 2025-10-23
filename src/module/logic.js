@@ -120,7 +120,7 @@ export class Polyglot {
 	}
 
 	get omniglot() {
-		return this._omniglot.trim().toLowerCase().replace(/[\s']/g, "_");
+		return this._omniglot.slugify({ replacement: "_" });
 	}
 
 	set omniglot(lang) {
@@ -131,7 +131,7 @@ export class Polyglot {
 	}
 
 	get comprehendLanguages() {
-		return this._comprehendLanguages.trim().toLowerCase().replace(/[\s']/g, "_");
+		return this._comprehendLanguages.slugify({ replacement: "_" });
 	}
 
 	set comprehendLanguages(lang) {
@@ -142,7 +142,7 @@ export class Polyglot {
 	}
 
 	get truespeech() {
-		return this._truespeech.trim().toLowerCase().replace(/[\s']/g, "_");
+		return this._truespeech.slugify({ replacement: "_" });
 	}
 
 	set truespeech(lang) {

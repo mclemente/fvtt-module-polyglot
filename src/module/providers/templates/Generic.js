@@ -23,6 +23,10 @@ export default class GenericLanguageProvider extends LanguageProvider {
 				type: String,
 				default: game.i18n.localize("POLYGLOT.Generic.Language"),
 			},
+			LiteracyRegex: {
+				type: String,
+				default: game.i18n.localize("POLYGLOT.Generic.Literacy"),
+			},
 		};
 	}
 

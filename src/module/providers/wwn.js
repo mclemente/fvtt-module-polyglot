@@ -29,7 +29,7 @@ export default class wwnLanguageProvider extends LanguageProvider {
 			game.settings.set("wwn", "languageList", languages);
 		}
 		lang = lang.trim();
-		const key = lang.toLowerCase().replace(/[\s']/g, "_");
+		const key = lang.slugify({ replacement: "_" });
 		this.languages[key] = {
 			label: lang,
 			font: languagesSetting[key]?.font ?? this.defaultFont,
@@ -44,14 +44,14 @@ export default class wwnLanguageProvider extends LanguageProvider {
 			languages.replace(new RegExp(`,\\s*${lang}`), "");
 			game.settings.set("wwn", "languageList", languages);
 		}
-		const key = lang.trim().toLowerCase().replace(/[\s']/g, "_");
+		const key = lang.slugify({ replacement: "_" });
 		delete this.languages[key];
 	}
 
 	async getLanguages() {
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		for (let lang of game.settings.get("wwn", "languageList").split(",")) {
-			const key = lang.toLowerCase().replace(/[\s']/g, "_");
+			const key = lang.slugify({ replacement: "_" });
 			this.languages[key] = {
 				label: lang,
 				font: languagesSetting[key]?.font || this.defaultFont,

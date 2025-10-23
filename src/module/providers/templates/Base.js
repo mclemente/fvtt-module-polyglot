@@ -502,7 +502,7 @@ export default class LanguageProvider {
 	addLanguage(lang, options = {}) {
 		if (!lang) return;
 
-		const key = lang.toLowerCase().replace(/[\s']/g, "_");
+		const key = lang.slugify({ replacement: "_" });
 		const languagesSetting = game.settings.get("polyglot", "Languages");
 		const defaultOptions = {
 			font: languagesSetting[key]?.font ?? this.defaultFont,
@@ -524,7 +524,7 @@ export default class LanguageProvider {
 		if (!lang) return;
 		const customLanguages = game.settings.get("polyglot", "customLanguages");
 		if (customLanguages.includes(lang)) return;
-		const key = lang.trim().toLowerCase().replace(/[\s']/g, "_");
+		const key = lang.slugify({ replacement: "_" });
 		delete this.languages[key];
 		this.removeFromConfig(key);
 	}
@@ -645,12 +645,19 @@ export default class LanguageProvider {
 			}
 		} else if (game.settings.settings.has("polyglot.LanguageRegex")) {
 			const languageRegex = game.settings.get("polyglot", "LanguageRegex");
-			let myRegex = new RegExp(`${languageRegex}\\s*\\((.+)\\)`, "i");
+			let literacyRegex;
+			if (game.settings.settings.has("polyglot.LiteracyRegex")) {
+				literacyRegex = game.settings.get("polyglot", "LiteracyRegex");
+			}
+			const langRegex = new RegExp(`${languageRegex}\\s*\\((.+)\\)`, "i");
+			const litRegex = new RegExp(`${literacyRegex} \\((.+)\\)`, "i");
 			for (let item of actor.items) {
 				const name = item?.flags?.babele?.originalName || item.name;
 				// adding only the descriptive language name, not "Language (XYZ)"
-				if (myRegex.test(name)) {
-					knownLanguages.add(name.match(myRegex)[1].trim().toLowerCase());
+				if (langRegex.test(name)) {
+					knownLanguages.add(name.match(langRegex)[1].slugify({ replacement: "_" }));
+				} else if (literacyRegex && litRegex.test(name)) {
+					literateLanguages.add(name.match(litRegex)[1].slugify({ replacement: "_" }));
 				}
 			}
 		}
