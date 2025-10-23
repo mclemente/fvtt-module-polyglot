@@ -20,7 +20,8 @@
 	@import "system-specific";
 }
 
-#interface {
+#interface,
+.application.chat-sidebar {
 	&.theme-dark {
 		.polyglot.polyglot-lang-select {
 			.ts-wrapper {
