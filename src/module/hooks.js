@@ -5,14 +5,14 @@ export default class PolyglotHooks {
 	 * @returns {void}
 	 */
 	static renderChatInput(chatlog, elements) {
-		const chatControls = elements["#chat-controls"];
-		const polyglotSelect = chatlog.element.querySelector(".polyglot-lang-select");
+		const chatMessage = elements["#chat-message"];
+		const polyglotSelect = document.querySelector(".polyglot-lang-select");
 		if (!ui.sidebar.expanded || !chatlog.active) {
 			if (polyglotSelect) polyglotSelect.hidden = true;
 			return game.polyglot.updateUserLanguages();
 		} else if (polyglotSelect) {
 			polyglotSelect.hidden = false;
-			return chatControls.insertAdjacentElement("afterend", polyglotSelect);
+			return chatMessage.insertAdjacentElement("beforebegin", polyglotSelect);
 		}
 
 		game.polyglot.renderChatLog = true;
@@ -25,7 +25,7 @@ export default class PolyglotHooks {
 			await game.settings.set("polyglot", "checkbox", setting);
 			game.polyglot.toggleSelector();
 		});
-		chatControls.insertAdjacentElement("afterend", polyglotDiv);
+		chatMessage.insertAdjacentElement("beforebegin", polyglotDiv);
 		polyglotDiv.querySelector("select").addEventListener("change", (ev) => {
 			const lang = ev.target.value;
 			game.polyglot.lastSelection = lang;
