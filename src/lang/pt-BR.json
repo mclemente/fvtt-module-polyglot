@@ -1,130 +1,76 @@
 {
 	"POLYGLOT": {
+		"GameMasterHasAssignedCharacter": "Você é um {GM} e têm um personagem atribuído a você. Polyglot irá agir de forma estranha por causa disso. Considere desatribuir esse personagem do seu Usuário.",
 		"DefaultAlphabet": "Alfabeto Padrão",
 		"FontSettings": "Configurações de Fonte",
+		"GeneralSettings": "Configurações Gerais",
 		"LanguageSettings": "Configurações de Idioma",
 		"ChatSettings": "Configurações de Chat",
+		"General": "Geral",
 		"Languages.title": "Idiomas",
 		"Languages.hint": "Altera o alfabeto usado para os idiomas.",
+		"Font": "Fonte",
 		"Fonts": "Fontes",
-		"CustomLanguages.title": "Idiomas Personalizados",
-		"CustomLanguages.hint": "Defina uma lista de idiomas personalizados para adicionar ao sistema, separados por vírgula ou por ponto e vírgula.",
-		"ComprehendLanguages.title": "Idioma Omnisciente",
-		"ComprehendLanguages.hint": "Define um idioma cujo falante entende todos os idiomas, mas não pode ser escrito ou falado. Um ator poderá ler todas as mensagens do chat e todos os textos de diários.",
-		"Truespeech.title": "Idioma de Omnifala",
-		"Truespeech.hint": "Define um idioma cujo falante entende todas as línguas faladas (mas não escritas em Diários) e que é entendido por todas as criaturas. Um ator poderá ler todas as mensagens de chat e escrever mensagens em um idioma que é entendido por todos.",
-		"JournalHighlight.title": "Opacidade do Marcador (%)",
-		"JournalHighlight.hint": "Define a opacidade do marcador sobre as fontes no diário.",
-		"logographicalFontToggle.title": "Fontes Logográficas",
-		"logographicalFontToggle.hint": "Reduz pela metade o tamanho de frases usando fontes logográficas (ex.: caracteres japoneses ou chineses).",
-		"DefaultLanguage.title": "Idioma Padrão",
-		"DefaultLanguage.hint": "Nome do idioma padrão para ser escolhido. Deixe vazio para usar o padrão do sistema.",
-		"ReplaceLanguages.title": "Remover Idiomas do Sistema",
-		"ReplaceLanguages.hint": "Remove os idiomas padrão do sistema. O primeiro idioma da lista de Idiomas Personalizados se tornará o novo idioma padrão.",
-		"ScrambleGM.title": "Embaralhar para o Mestre",
-		"ScrambleGM.hint": "Não traduz o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
-		"enableAllFonts": {
-			"title": "Adicionar Fontes do Foundry ao Polyglot",
-			"hint": "Adiciona as fontes do Foundry ao Polyglot, incluindo as Fontes Adicionais.",
-			"choices": {
-				"0": "Nenhuma",
-				"1": "Fontes do Polyglot",
-				"2": "Todas as Fontes Adicionais",
-				"3": "Ambas"
-			}
+		"FontSize": "Tamanho da Fonte (%)",
+		"KnownLanguages": "Conhecidos",
+		"UnknownLanguages": "Desconhecidos",
+		"RightClickToEnable": "Clique direito para ativar",
+		"AlphabeticOnly": "Apenas Alfabética",
+		"Logographical": "Logográfica",
+		"AllowOOC": {
+			"title": "Embaralhar Mensagens Fora de Personagem",
+			"hint": "Escolha quais usuários devem ter suas mensagens Fora de Personagem embaralhadas."
 		},
-		"RandomizeRunes.title": "Aleatorizar Runas",
-		"RandomizeRunes.hint": "Isso determina qual tipo de RNG é usado para gerar uma frase. ⚠️ A opção \"Nenhum\" suporta apenas caracteres Alfanuméricos (sem acentos).",
-		"RandomizeRunesOptions": {
-			"a": "Padrão",
-			"b": "Frases únicas",
-			"c": "Nenhuma"
-		},
-		"ExportFonts.title": "Adicionar Fontes do Polyglot ao Foundry",
-		"ExportFonts.hint": "Adiciona as fontes do Polyglot às ferramentas do Foundry, como as Ferramentas de Desenho de texto.",
-		"DisplayTranslated.title": "Mostrar Traduções",
-		"DisplayTranslated.hint": "Para linguagens traduzidos no chat, mostrar o texto original e a tradução em seguida.",
-		"HideTranslation.title": "Ocultar Indicadores dos Jogadores",
-		"HideTranslation.hint": "Esconde o Globo e o texto \"Traduzido do\" de mensagens do chat para jogadores. Útil para quando você não quer mostrar aos jogadores que língua você está falando.",
-		"AllowOOC.title": "Embaralhar Mensagens Fora de Personagem",
-		"AllowOOC.hint": "Escolha quais usuários devem ter suas mensagens Fora de Personagem embaralhadas.",
 		"AllowOOCOptions": {
 			"a": "Todos",
 			"b": "Apenas Mestre",
 			"c": "Apenas Jogadores",
 			"d": "Ninguém"
 		},
+		"Omniglot": {
+			"title": "Idioma Omniglota",
+			"hint": "Define um idioma cujo falante entende e fala todos os outros idiomas. Um ator poderá ler e escrever em todos os outros idiomas, tanto no chat quanto em diários."
+		},
+		"ComprehendLanguages.hint": "Define um idioma cujo falante entende todos os idiomas, mas não pode ser escrito ou falado. Um ator poderá ler todas as mensagens do chat e todos os textos de diários.",
+		"ComprehendLanguages.title": "Idioma Omnisciente",
+		"CustomLanguages.hint": "Defina uma lista de idiomas personalizados para adicionar ao sistema, separados por vírgula ou por ponto e vírgula.",
+		"CustomLanguages.title": "Idiomas Personalizados",
+		"DefaultLanguage.hint": "Nome do idioma padrão para ser escolhido. Deixe vazio para usar o padrão do sistema.",
+		"DefaultLanguage.title": "Idioma Padrão",
+		"EnableChatFeatures": {
+			"hint": "Habilita todos os recursos de chat, como o seletor de idiomas e o embaralhamento de mensagens.",
+			"title": "Habilitar Recursos do Chat"
+		},
+		"DisplayTranslated.hint": "Para linguagens traduzidos no chat, mostrar o texto original e a tradução em seguida.",
+		"DisplayTranslated.title": "Mostrar Traduções",
+		"enableAllFonts": {
+			"hint": "Adiciona as fontes do Foundry ao Polyglot, incluindo as Fontes Adicionais.",
+			"title": "Adicionar Fontes do Foundry ao Polyglot"
+		},
+		"ExportFonts.hint": "Adiciona as fontes do Polyglot às ferramentas do Foundry, como as Ferramentas de Desenho de texto.",
+		"ExportFonts.title": "Adicionar Fontes do Polyglot ao Foundry",
+		"HideTranslation.hint": "Esconde o Globo e o texto \"Traduzido do\" de mensagens do chat para jogadores. Útil para quando você não quer mostrar aos jogadores que língua você está falando.",
+		"HideTranslation.title": "Ocultar Indicadores dos Jogadores",
+		"IgnoreJournalFontSize": {
+			"hint": "Ignora o tamanho das fontes do Polyglot nos diários, fazendo com que elas tenham o mesmo tamanho que o texto normal teria. Útil para quando a formatação do diário importa.",
+			"title": "Usar Tamanho de Fonte Normal"
+		},
+		"JournalHighlight": {
+			"hint": "Define a opacidade do marcador sobre as fontes no diário.",
+			"title": "Opacidade do Marcador (%)"
+		},
+		"JournalHighlightColor": {
+			"hint": "Define a cor do marcador sobre as fontes no diário.",
+			"title": "Cor do Marcador"
+		},
 		"LanguageProvider": {
-			"name": "Provedor de Configuração de Idioma",
-			"hint": "Escolha quem providencia a informação de idioma para Alfabetos e Idiomas. Mais provedores de idioma podem ser disponibilizados por sistemas de jogo ou módulos instalados. As opções abaixo dependem do provedor escolhido aqui. ⚠️ Se você mudar o provedor, você precisa salvar e reabrir esta configuração.",
 			"choices": {
 				"module": "[Módulo] {name}",
 				"native": "Genérico",
 				"system": "[Sistema] {name}"
-			}
-		},
-		"Translation": "Tradução",
-		"TranslatedFrom": "Traduzido do ",
-		"LanguageLabel": "Idioma",
-		"AlphabetLabel": "Alfabeto",
-		"LatinAlphabet": "Alfabeto Latino",
-		"ToggleRunes": "Alternar Runas",
-		"Runes": "Runas",
-		"Generic": {
-			"Language": "Idioma",
-			"Read": "Ler"
-		},
-		"UESRPG.Language": "Língua",
-		"COC7": {
-			"LanguageOwn": "Língua Nativa",
-			"LanguageAny": "Outra Língua",
-			"LanguageOther": "Outra Língua",
-			"LanguageSpec": "Línguas"
-		},
-		"FontSize": "Tamanho da Fonte (%)",
-		"LanguageRegex": {
-			"title": "RegEx de Idioma",
-			"hint": "Você pode usar isso para alterar o termo pesquisado nos itens de \"Idioma\" para algo diferente, como \"Língua\"."
-		},
-		"DND5E": {
-			"SpecialLanguages.title": "Substituir Idiomas Especiais",
-			"SpecialLanguages.hint": "Nome do idioma que irá substituir \"idiomas\" como em \"todos os idiomas que ele conhecia em vida\".",
-			"TargetedParty": {
-				"title": "Grupo Alvo",
-				"hint": "Se o seu jogo tem muitos usuários, o indicador de falantes de uma língua pode ficar muito cheio. Você pode filtrar a lista limitando-a para usuários que são donos de personagens que fazem parte do ator de Grupo escolhido."
-			}
-		},
-		"SWADE": {
-			"LanguageSkills": "Idioma",
-			"AdditionalLanguageStat": {
-				"title": "Chave de Atributo de Idioma",
-				"hint": "É possível escolher uma Característica Adicional (que é defina nas Configurações Gerais do SWADE). Você precisa colocar a Chave do Atributo (diferencia maiúsculas e minúsculas). Note que esta configuração sobrepõe a configuração de {setting}."
 			},
-			"AdditionalLiterateStat": {
-				"title": "Chave de Atributo de Alfabetização",
-				"hint": "É possível escolher uma Característica Adicional. Você precisa colocar a Chave do Atributo (diferencia maiúsculas e minúsculas). Esta configuração é independente da configuração de {setting}."
-			}
-		},
-		"Font": "Fonte",
-		"WFRP4E": {
-			"LanguageSkills": "Idioma",
-			"ReadWrite": {
-				"title": "Talento Read/Write",
-				"hint": "O nome do Talento Read/Write.",
-				"default": "Read/Write"
-			}
-		},
-		"IgnoreJournalFontSize": {
-			"title": "Usar Tamanho de Fonte Normal",
-			"hint": "Ignora o tamanho das fontes do Polyglot nos diários, fazendo com que elas tenham o mesmo tamanho que o texto normal teria. Útil para quando a formatação do diário importa."
-		},
-		"RuneRegex": {
-			"title": "Aleatorizar Apenas Alfanuméricos",
-			"hint": "Faz com que a randomização ignore caracteres não-alfanuméricos (ex: !,.;:?#$\"'). Isso pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes."
-		},
-		"JournalHighlightColor": {
-			"title": "Cor do Marcador",
-			"hint": "Define a cor do marcador sobre as fontes no diário."
+			"hint": "Escolha quem providencia a informação de idioma para Alfabetos e Idiomas. Mais provedores de idioma podem ser disponibilizados por sistemas de jogo ou módulos instalados. As opções abaixo dependem do provedor escolhido aqui. ⚠️ Se você mudar o provedor, você precisa salvar e reabrir esta configuração.",
+			"name": "Provedor de Configuração de Idioma"
 		},
 		"languageDataPath": {
 			"title": "Caminho de Dados dos Idiomas",
@@ -134,35 +80,45 @@
 			"title": "Caminho de Dados de Alfabetização",
 			"hint": "Igual à configuração de {setting}, mas para diários. Esta configuração requer a configuração de {setting}."
 		},
-		"GeneralSettings": "Configurações Gerais",
-		"General": "Geral",
-		"Omniglot": {
-			"title": "Idioma Omniglota",
-			"hint": "Define um idioma cujo falante entende e fala todos os outros idiomas. Um ator poderá ler e escrever em todos os outros idiomas, tanto no chat quanto em diários."
+		"LanguageRegex": {
+			"hint": "Você pode usar isso para alterar o termo pesquisado nos itens de \"Idioma\" para algo diferente, como \"Língua\".",
+			"title": "RegEx de Idioma"
 		},
-		"AlphabeticOnly": "Apenas Alfabética",
-		"Logographical": "Logográfica",
-		"GameMasterHasAssignedCharacter": "Você é um {GM} e têm um personagem atribuído a você. Polyglot irá agir de forma estranha por causa disso. Considere desatribuir esse personagem do seu Usuário.",
-		"PF2E": {
-			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma caseiro definido no menu de Material Caseiro, caso contrário, os idiomas não comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
-		},
-		"UnknownLanguages": "Desconhecidos",
-		"KnownLanguages": "Conhecidos",
-		"DisplayCheckbox": {
-			"hint": "Remove a caixa de seleção do chat.",
-			"title": "Mostrar Caixa de Seleção"
-		},
-		"EnableChatFeatures": {
-			"title": "Habilitar Recursos do Chat",
-			"hint": "Habilita todos os recursos de chat, como o seletor de idiomas e o embaralhamento de mensagens."
-		},
-		"SpeakingIn": "Falando em {language}",
 		"LiteracyRegex": {
 			"hint": "Igual ao Regex de Idioma, mas para idiomas escritos.",
 			"title": "RegEx de Alfabetização"
 		},
+		"logographicalFontToggle.hint": "Reduz pela metade o tamanho de frases usando fontes logográficas (ex.: caracteres japoneses ou chineses).",
+		"logographicalFontToggle.title": "Fontes Logográficas",
+		"RandomizeRunes.hint": "Isso determina qual tipo de RNG é usado para gerar uma frase. ⚠️ A opção \"Nenhum\" suporta apenas caracteres Alfanuméricos (sem acentos).",
+		"RandomizeRunes.title": "Aleatorizar Runas",
+		"RandomizeRunesOptions": {
+			"a": "Padrão",
+			"b": "Frases únicas",
+			"c": "Nenhuma"
+		},
+		"ReplaceLanguages.hint": "Remove os idiomas padrão do sistema. O primeiro idioma da lista de Idiomas Personalizados se tornará o novo idioma padrão.",
+		"ReplaceLanguages.title": "Remover Idiomas do Sistema",
+		"RuneRegex": {
+			"hint": "Faz com que a randomização ignore caracteres não-alfanuméricos (ex: !,.;:?#$\"'). Isso pode ter o efeito indesejado de mostrar alguns desses caracteres como um quadrado (□) em algumas fontes.",
+			"title": "Aleatorizar Apenas Alfanuméricos"
+		},
+		"ScrambleGM.hint": "Não traduz o texto para o Mestre (cheque a cor do globo para ver o que o token entende).",
+		"ScrambleGM.title": "Embaralhar para o Mestre",
+		"SpeakingIn": "Falando em {language}",
+		"Truespeech.hint": "Define um idioma cujo falante entende todas as línguas faladas (mas não escritas em Diários) e que é entendido por todas as criaturas. Um ator poderá ler todas as mensagens de chat e escrever mensagens em um idioma que é entendido por todos.",
+		"Truespeech.title": "Idioma de Omnifala",
+		"Translation": "Tradução",
+		"TranslatedFrom": "Traduzido do ",
+		"LanguageLabel": "Idioma",
+		"AlphabetLabel": "Alfabeto",
+		"LatinAlphabet": "Alfabeto Latino",
+		"ToggleRunes": "Alternar Runas",
+		"Runes": "Runas",
 		"TOURS": {
 			"Main": {
+				"title": "Introdução ao Polyglot",
+				"desc": "Entenda a interação do Polyglot com a interface do Foundry.",
 				"Canvas": {
 					"Title": "Bem-vindo ao Polyglot",
 					"Content": "Este tour irá guiá-lo através dos recursos que o Polyglot adiciona à interface e como eles interagem com o Foundry, além de algumas orientações para iniciantes sobre a seleção de personagens."
@@ -171,43 +127,13 @@
 					"Title": "Seletor de Idioma",
 					"Content": "O <span class='reference'>Seletor de Idioma</span> é onde você pode selecionar o idioma que deseja falar, embaralhando as mensagens enviadas enquanto ele estiver ativo."
 				},
-				"title": "Introdução ao Polyglot",
-				"desc": "Entenda a interação do Polyglot com a interface do Foundry.",
 				"LanguageSelectorSelect": {
 					"Title": "Lista do Seletor de Idiomas",
 					"Content": "A <span class='reference'>Lista</span> contém todos os idiomas do seu mundo.<br>Dependendo do seu sistema de jogo, os idiomas podem já ter sido definidos, enquanto em outros sistemas de jogo, pode ser necessário configurá-los nas <span class='reference'>Configurações do Jogo</span>.<br>Ele exibirá idiomas entre os conhecidos e os desconhecidos pelos atores dos seus jogadores."
 				},
-				"ActorOwnership": {
-					"Title": "Propriedade do Ator",
-					"Content": "Sobre a Propriedade de Ator, se você conceder a um jogador a permissão de \"Dono\" ou \"Observador\" para um ator, esse jogador poderá ler e escrever mensagens como esse ator se seu token estiver presente na tela. Se houver mais de um token, selecionar o token na tela alterará o ator do jogador.<br>Este também é um comportamento do Foundry, Polyglot apenas o segue."
-				},
-				"ChatMessageGlobe": {
-					"Content": "Este globo pode ter 3 cores: <ul><li><span style=\"color: green\">Verde</span> para idiomas Conhecidos. Passar o mouse sobre ele exibirá o nome do idioma.</li><li><span style=\"color: blue\">Azul</span> para idiomas que podem ser lidos, mas o jogador não terá ideia de qual idioma é.<li><span style=\"color: red\">Vermelho</span> para idiomas Desconhecidos.</li></li></ul>",
-					"Title": "O Globo"
-				},
-				"UserConfigSelectCharacter": {
-					"Content": "Como Mestre, você nunca deve ter um personagem selecionado, pois isso fará com que suas mensagens sejam enviadas como aquele personagem se ele estiver presente em uma cena.<br>Para os jogadores, certifique-se de que eles selecionem seu personagem principal; caso contrário, suas mensagens sempre serão enviadas como o jogador em vez de seu personagem e eles não poderão ler mensagens em idiomas que seu personagem entende, a menos que seu token esteja presente na tela.<br>Você pode dizer se um jogador selecionou um personagem se seu nome na Lista de Jogadores for seguido pelo nome de um personagem.<br>Este é o comportamento do Foundry, o Polyglot apenas o segue.",
-					"Title": "Selecionar Personagem"
-				},
 				"LanguageSelectorSelect2": {
-					"Content": "Clicar com o botão direito na <span class='reference'>Lista</span> alterna o embaralhamento, permitindo que os usuários falem como se o módulo estivesse desabilitado.",
-					"Title": "Lista do Seletor de Idiomas"
-				},
-				"ChatMessageTranslation": {
-					"Title": "Texto Traduzido",
-					"Content": "Isto é o que os jogadores que entendem o idioma da mensagem veem.<br>Há uma configuração para desativar a exibição do Texto Embaralhado para jogadores que o entendem. Passar o mouse sobre ele exibirá o nome do idioma."
-				},
-				"ChatMessageEnding": {
-					"Title": "Configurações de Mensagens de Chat",
-					"Content": "Não deixe de conferir as configurações do módulo, onde você pode fazer alterações em como as mensagens de chat são exibidas.<br>Há algo específico sobre o Foundry e as Mensagens de Chat que está relacionado à <span class='reference'>Configuração do Usuário</span>."
-				},
-				"PlayersList": {
-					"Title": "Lista de Jogadores",
-					"Content": "Embora o Polyglot em si não altere nada relacionado a ele, você deve estar ciente do comportamento do Foundry em relação à <span class='reference'>Configuração do Usuário</span>. Você pode abri-lo clicando com o botão direito do mouse no nome de um usuário nesta lista aqui."
-				},
-				"UserConfig": {
-					"Title": "Configuração do Usuário",
-					"Content": "Esta configuração é aberta para usuários que não são o Mestre, sempre que eles entram no mundo, se não tiverem <span class='reference'>selecionado um personagem</span>."
+					"Title": "Lista do Seletor de Idiomas",
+					"Content": "Clicar com o botão direito na <span class='reference'>Lista</span> alterna o embaralhamento, permitindo que os usuários falem como se o módulo estivesse desabilitado."
 				},
 				"LanguageSelectorPips": {
 					"Title": "Pontos do Seletor de Idiomas",
@@ -221,12 +147,77 @@
 					"Title": "Texto Embaralhado",
 					"Content": "Isto é o que os jogadores que não entendem a linguagem da mensagem veem."
 				},
+				"ChatMessageTranslation": {
+					"Title": "Texto Traduzido",
+					"Content": "Isto é o que os jogadores que entendem o idioma da mensagem veem.<br>Há uma configuração para desativar a exibição do Texto Embaralhado para jogadores que o entendem. Passar o mouse sobre ele exibirá o nome do idioma."
+				},
+				"ChatMessageGlobe": {
+					"Title": "O Globo",
+					"Content": "Este globo pode ter 3 cores: <ul><li><span style=\"color: green\">Verde</span> para idiomas Conhecidos. Passar o mouse sobre ele exibirá o nome do idioma.</li><li><span style=\"color: blue\">Azul</span> para idiomas que podem ser lidos, mas o jogador não terá ideia de qual idioma é.<li><span style=\"color: red\">Vermelho</span> para idiomas Desconhecidos.</li></li></ul>"
+				},
+				"ChatMessageEnding": {
+					"Title": "Configurações de Mensagens de Chat",
+					"Content": "Não deixe de conferir as configurações do módulo, onde você pode fazer alterações em como as mensagens de chat são exibidas.<br>Há algo específico sobre o Foundry e as Mensagens de Chat que está relacionado à <span class='reference'>Configuração do Usuário</span>."
+				},
+				"PlayersList": {
+					"Title": "Lista de Jogadores",
+					"Content": "Embora o Polyglot em si não altere nada relacionado a ele, você deve estar ciente do comportamento do Foundry em relação à <span class='reference'>Configuração do Usuário</span>. Você pode abri-lo clicando com o botão direito do mouse no nome de um usuário nesta lista aqui."
+				},
+				"UserConfig": {
+					"Title": "Configuração do Usuário",
+					"Content": "Esta configuração é aberta para usuários que não são o Mestre, sempre que eles entram no mundo, se não tiverem <span class='reference'>selecionado um personagem</span>."
+				},
+				"UserConfigSelectCharacter": {
+					"Title": "Selecionar Personagem",
+					"Content": "Como Mestre, você nunca deve ter um personagem selecionado, pois isso fará com que suas mensagens sejam enviadas como aquele personagem se ele estiver presente em uma cena.<br>Para os jogadores, certifique-se de que eles selecionem seu personagem principal; caso contrário, suas mensagens sempre serão enviadas como o jogador em vez de seu personagem e eles não poderão ler mensagens em idiomas que seu personagem entende, a menos que seu token esteja presente na tela.<br>Você pode dizer se um jogador selecionou um personagem se seu nome na Lista de Jogadores for seguido pelo nome de um personagem.<br>Este é o comportamento do Foundry, o Polyglot apenas o segue."
+				},
+				"ActorOwnership": {
+					"Title": "Propriedade do Ator",
+					"Content": "Sobre a Propriedade de Ator, se você conceder a um jogador a permissão de \"Dono\" ou \"Observador\" para um ator, esse jogador poderá ler e escrever mensagens como esse ator se seu token estiver presente na tela. Se houver mais de um token, selecionar o token na tela alterará o ator do jogador.<br>Este também é um comportamento do Foundry, Polyglot apenas o segue."
+				},
 				"End": {
-					"Content": "Isso conclui este tour. Espero ter esclarecido algumas dúvidas sobre a interação do Polyglot com o comportamento do Foundry.<br>Se quiser se aprofundar mais no módulo, confira suas configurações nas <span class='reference'>Configurações do Jogo</span>.<br>Se isso ainda não for suficiente, tente consultar a <a class=\"hyperlink\" href=\"https://github.com/mclemente/fvtt-module-polyglot/wiki\" target=\"_blank\" rel=\"nofollow noopener\">wiki do módulo</a> para mais informações.",
-					"Title": "Final"
+					"Title": "Final",
+					"Content": "Isso conclui este tour. Espero ter esclarecido algumas dúvidas sobre a interação do Polyglot com o comportamento do Foundry.<br>Se quiser se aprofundar mais no módulo, confira suas configurações nas <span class='reference'>Configurações do Jogo</span>.<br>Se isso ainda não for suficiente, tente consultar a <a class=\"hyperlink\" href=\"https://github.com/mclemente/fvtt-module-polyglot/wiki\" target=\"_blank\" rel=\"nofollow noopener\">wiki do módulo</a> para mais informações."
 				}
 			}
 		},
-		"RightClickToEnable": "Clique direito para ativar"
+		"UESRPG.Language": "Língua",
+		"Generic": {
+			"Language": "Idioma",
+			"Literacy": "Alfabetização",
+			"Read": "Ler"
+		},
+		"COC7": {
+			"LanguageOwn": "Língua Nativa",
+			"LanguageAny": "Outra Língua",
+			"LanguageOther": "Outra Língua",
+			"LanguageSpec": "Línguas"
+		},
+		"DND5E": {
+			"SpecialLanguages.title": "Substituir Idiomas Especiais",
+			"SpecialLanguages.hint": "Nome do idioma que irá substituir \"idiomas\" como em \"todos os idiomas que ele conhecia em vida\"."
+		},
+		"PF2E": {
+			"replaceLanguages.hint": "Remove os idiomas padrão do sistema. Você deve ter pelo menos um idioma caseiro definido no menu de Material Caseiro, caso contrário, os idiomas não comuns não serão removidos. Se você desativar essa configuração e quiser redefinir as raridades de volta ao padrão, consulte o wiki do módulo."
+		},
+		"SWADE": {
+			"LanguageSkills": "Idioma",
+			"AdditionalLanguageStat": {
+				"title": "Chave de Atributo de Idioma",
+				"hint": "É possível escolher uma Característica Adicional (que é defina nas Configurações Gerais do SWADE). Você precisa colocar a Chave do Atributo (diferencia maiúsculas e minúsculas). Note que esta configuração sobrepõe a configuração de {setting}."
+			},
+			"AdditionalLiterateStat": {
+				"title": "Chave de Atributo de Alfabetização",
+				"hint": "É possível escolher uma Característica Adicional. Você precisa colocar a Chave do Atributo (diferencia maiúsculas e minúsculas). Esta configuração é independente da configuração de {setting}."
+			}
+		},
+		"WFRP4E": {
+			"LanguageSkills": "Idioma",
+			"ReadWrite": {
+				"hint": "O nome do Talento Read/Write.",
+				"title": "Talento Read/Write",
+				"default": "Read/Write"
+			}
+		}
 	}
 }
