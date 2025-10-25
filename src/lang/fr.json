@@ -221,7 +221,8 @@
 			"title": "RegEx littérale"
 		},
 		"Generic": {
-			"Read": "Lire"
+			"Read": "Lire",
+			"Literacy": "Alphabétisation"
 		},
 		"WFRP4E": {
 			"ReadWrite": {
@@ -234,6 +235,7 @@
 			"title": "Activer les fonctions dans la conversation",
 			"hint": "Active toutes les fonctionnalités de la conversation, telles que le sélecteur de langue dans la conversation et le brouillage du message."
 		},
-		"SpeakingIn": "Parler en {language}"
+		"SpeakingIn": "Parler en {language}",
+		"RightClickToEnable": "Clic-droit pour activer"
 	}
 }
