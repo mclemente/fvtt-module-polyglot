@@ -23,6 +23,10 @@ export default class GenericLanguageProvider extends LanguageProvider {
 				type: String,
 				default: game.i18n.localize("POLYGLOT.Generic.Language"),
 			},
+			useLiteracy: {
+				type: Boolean,
+				default: false,
+			},
 			LiteracyRegex: {
 				type: String,
 				default: game.i18n.localize("POLYGLOT.Generic.Literacy"),
@@ -36,5 +40,12 @@ export default class GenericLanguageProvider extends LanguageProvider {
 		if (this.languageDataPath.startsWith("actor.")) this.languageDataPath = this.languageDataPath.slice(6);
 		if (this.literacyDataPath.startsWith("actor.")) this.literacyDataPath = this.literacyDataPath.slice(6);
 		super.setup();
+	}
+
+	conditions(lang) {
+		if (game.settings.get("polyglot", "useLiteracy")) {
+			return game.polyglot.literateLanguages.has(lang);
+		}
+		return super.conditions(lang);
 	}
 }

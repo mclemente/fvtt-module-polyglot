@@ -84,6 +84,10 @@
 			"hint": "You can use this to change the term searched on items from \"Language\" to something else, like \"Tongue\". This setting is more useful for non-English speakers.",
 			"title": "Language RegEx"
 		},
+		"useLiteracy": {
+			"hint": "Sets journals to only be readable if knows how to read a language.",
+			"title": "Use Literacy"
+		},
 		"LiteracyRegex": {
 			"hint": "Same as Language Regex, but for written languages.",
 			"title": "Literacy RegEx"
