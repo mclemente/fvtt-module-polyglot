@@ -82,7 +82,7 @@ export function registerSettings() {
 				font: new StringField({
 					required: true,
 					blank: false,
-					initial: "Thorass",
+					initial: () => game?.polyglot?.languageProvider?.defaultFont || "Thorass",
 					choices: () => game.settings.get("polyglot", "Alphabets")
 				}),
 				rng: new StringField({ required: true, blank: false, initial: "default", choices: {
