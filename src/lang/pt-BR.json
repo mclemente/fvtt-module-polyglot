@@ -84,6 +84,10 @@
 			"hint": "Você pode usar isso para alterar o termo pesquisado nos itens de \"Idioma\" para algo diferente, como \"Língua\".",
 			"title": "RegEx de Idioma"
 		},
+    "useLiteracy": {
+      "hint": "Configura os diários para que só possam ser lidos por quem souber ler o idioma.",
+      "title": "Usar Alfabetização"
+    },
 		"LiteracyRegex": {
 			"hint": "Igual ao Regex de Idioma, mas para idiomas escritos.",
 			"title": "RegEx de Alfabetização"
