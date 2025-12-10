@@ -60,12 +60,16 @@ export default class shadowdarkLanguageProvider extends LanguageProvider {
 		},
 	};
 
+	// required to load compendium languages
+	requiresReady = true;
+
 	async getLanguages() {
 		if (this.replaceLanguages) {
 			this.languages = {};
 			return;
 		}
 		const languagesSetting = game.settings.get("polyglot", "Languages");
+		// eslint-disable-next-line no-undef
 		const languages = await shadowdark.compendiums.languages();
 		languages.map((i) => i.name).forEach((lang) => {
 			const langIndex = lang.slugify();
@@ -83,6 +87,7 @@ export default class shadowdarkLanguageProvider extends LanguageProvider {
 		const actorLanguages = actor.system?.languages;
 		if (actorLanguages) {
 			for (let lang of actorLanguages) {
+				// eslint-disable-next-line no-undef
 				let langObj = fromUuidSync(lang);
 				knownLanguages.add(langObj.name.slugify());
 			}
