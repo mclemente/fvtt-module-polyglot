@@ -245,7 +245,6 @@ export default class PolyglotHooks {
 	 * @param {HTMLElement} html
 	 */
 	static renderJournalSheet(sheet, html) {
-		CONFIG.TinyMCE.style_formats.find((f) => f.title === "Polyglot").items = game.polyglot.getLanguagesForEditor();
 		if ((sheet.document?.isOwner || game.user.isGM) && sheet.document.pages.size) {
 			game.polyglot.insertHeaderButton(sheet, html);
 		}

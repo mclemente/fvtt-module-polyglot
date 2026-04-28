@@ -10,8 +10,8 @@
 		}
 	],
 	"compatibility": {
-		"minimum": "13.347",
-		"verified": "13"
+		"minimum": "14",
+		"verified": "14"
 	},
 	"esmodules": ["module/polyglot.js"],
 	"scripts": ["lib/tom-select/tom-select.complete.min.js"],

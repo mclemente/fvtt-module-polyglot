@@ -37,7 +37,6 @@ export class Polyglot {
 		Hooks.on("renderStorySheet", PolyglotHooks.renderJournalSheet);
 		Hooks.on("renderJournalEntryPageSheet", PolyglotHooks.renderDocumentSheet);
 		Hooks.on("getProseMirrorMenuDropDowns", PolyglotHooks.getProseMirrorMenuDropDowns);
-		Polyglot.handleTinyMCE();
 
 		libWrapper.register(
 			"polyglot",
@@ -639,32 +638,6 @@ export class Polyglot {
 	/* -------------------------------------------- */
 	/*  Journal Editor		                        */
 	/* -------------------------------------------- */
-
-	static handleTinyMCE() {
-		// Add Polyglot to TinyMCE's menu
-		CONFIG.TinyMCE.style_formats.push({
-			title: "Polyglot",
-			items: {},
-		});
-		// Add custom config to remove spans from polyglot when needed
-		const removeFormat = [
-			{
-				selector: "span",
-				classes: "polyglot-journal",
-				attributes: ["title", "class", "data-language"],
-				remove: "all",
-				split: true,
-				expand: false,
-				deep: true,
-			},
-		];
-		if (!CONFIG.TinyMCE.formats) {
-			CONFIG.TinyMCE.formats = {
-				removeformat: removeFormat,
-			};
-		} else if (!CONFIG.TinyMCE.formats.removeformat) CONFIG.TinyMCE.formats.removeformat = [...removeFormat];
-		else CONFIG.TinyMCE.formats.removeformat.push(...removeFormat);
-	}
 
 	getLanguagesForEditor() {
 		let langs = this.languageProvider.languages;
