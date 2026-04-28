@@ -11,11 +11,12 @@
 		"Languages.hint": "Mění abecedu používanou pro dané jazyky.",
 		"Font": "Písmo",
 		"Fonts": "Písma",
-		"FontSize": "Velikost písma (%)",
-		"KnownLanguages": "Zná jazyky",
-		"UnknownLanguages": "Nezná jazyky",
-		"AlphabeticOnly": "Pouze abecedně",
-		"Logographical": "Logografické",
+		"FontSize": "Velikost (%)",
+		"KnownLanguages": "Známý jazyk",
+		"UnknownLanguages": "Neznámý jazyk",
+		"RightClickToEnable": "Zapnout pravým kliknutím",		
+		"AlphabeticOnly": "Abecedně?",
+		"Logographical": "Logografické?",
 		"AllowOOC": {
 			"title": "Zkomolit zprávy mimo roli (OOC)",
 			"hint": "Zvol, kterým uživatelům se mají zprávy mimo roli komolit."
@@ -28,9 +29,9 @@
 		},
 		"Omniglot": {
 			"title": "Absolutní jazyk",
-			"hint": "Nastaví jazyk, jehož mluvčí rozumí a mluví všemi ostatními jazyky. Postava bude moci číst i psát ve všech ostatních jazycích, jak v chatu, tak v denících."
+			"hint": "Nastaví jazyk, jehož mluvčí rozumí a mluví všemi ostatními jazyky. Postava bude moci číst i psát ve všech ostatních jazycích, jak v chatu, tak v záznamech."
 		},
-		"ComprehendLanguages.hint": "Nastaví jazyk, jehož mluvčí rozumí všem ostatním jazykům, ale nemůže jím mluvit ani psát. Postava bude moci číst všechny zprávy v chatu i text v denících.",
+		"ComprehendLanguages.hint": "Nastaví jazyk, jehož mluvčí rozumí všem ostatním jazykům, ale nemůže jím mluvit ani psát. Postava bude moci číst všechny zprávy v chatu i text v záznamech.",
 		"ComprehendLanguages.title": "Všerozumějící jazyk",
 		"CustomLanguages.hint": "Definuj seznam vlastních jazyků, které se mají přidat do systému. Odděluj je čárkami či středníky.",
 		"CustomLanguages.title": "Vlastní jazyky",
@@ -51,15 +52,15 @@
 		"HideTranslation.hint": "Skryje ikonu glóbu a text „Přeloženo z“ ve zprávách chatu pro hráče. Užitečné, pokud nechceš odhalit, kterým jazykem právě mluvíš.",
 		"HideTranslation.title": "Skrýt ukazatele před hráči?",
 		"IgnoreJournalFontSize": {
-			"hint": "Ignoruje velikost písma Polyglotu v denících a použije stejnou velikost jako běžný text. Užitečné, pokud záleží na formátování deníku.",
+			"hint": "Ignoruje velikost písma Polyglotu v záznamech a použije stejnou velikost jako běžný text. Užitečné, pokud záleží na formátování deníku.",
 			"title": "Používat běžnou velikost písma?"
 		},
 		"JournalHighlight": {
-			"hint": "Určuje průhlednost zvýraznění písma v denících.",
+			"hint": "Určuje průhlednost zvýraznění písma v záznamech.",
 			"title": "Průhlednost zvýraznění (%)"
 		},
 		"JournalHighlightColor": {
-			"hint": "Určuje barvu zvýraznění písma v denících.",
+			"hint": "Určuje barvu zvýraznění písma v záznamech.",
 			"title": "Barva zvýraznění"
 		},
 		"LanguageProvider": {
@@ -68,7 +69,7 @@
 				"native": "Obecné",
 				"system": "[Systém] {name}"
 			},
-			"hint": "Zvol, kdo poskytuje jazykové informace o abecedách a jazycích. Další poskytovatelé jazyků mohou být dostupní přes herní systémy a nainstalované moduly. Možnosti níže závisí na zvoleném poskytovateli jazyků. ⚠️ Po změně poskytovatele je nutné nastavení uložit a znovu otevřít.",
+			"hint": "Zvol, kdo poskytuje informace o abecedách a jazycích. Další poskytovatelé jazyků mohou být dostupní přes nainstalované herní systémy a moduly. Možnosti níže závisí na zvoleném poskytovateli jazyků. ⚠️ Po změně poskytovatele je nutné toto nastavení uložit a znovu otevřít.",
 			"name": "Poskytovatel jazykových nastavení"
 		},
 		"languageDataPath": {
@@ -83,6 +84,10 @@
 			"hint": "Tímto lze změnit hledaný výraz v itemech z \"Language\" na něco jiného, například \"Tongue\". Užitečné především pro neanglicky mluvící uživatele.",
 			"title": "Jazyk RegEx"
 		},
+		"useLiteracy": {
+			"hint": "Nastaví záznamy tak, aby byly čitelné pouze v případě, že zná jazyk.",
+			"title": "Používání gramotnosti"
+		},
 		"LiteracyRegex": {
 			"hint": "Stejné jako RegEx, ale pro psané jazyky.",
 			"title": "Čtení RegEx"
@@ -96,7 +101,7 @@
 			"b": "Unikátní fráze",
 			"c": "Žádné"
 		},
-		"ReplaceLanguages.hint": "Odstraní výchozí jazyky systému. První jazyk ze seznamu ´Vlastních jazyků´ se stane novým výchozím jazykem.",
+		"ReplaceLanguages.hint": "Odstraní výchozí jazyky systému. První jazyk ze seznamu 'Vlastní jazyky' se stane novým výchozím jazykem.",
 		"ReplaceLanguages.title": "Odstranit jazyky systému?",
 		"RuneRegex": {
 			"hint": "Zajistí, že se při náhodném generování ignorují nealfanumerické znaky (např. !,.;:?#$\"'). Může však vést k tomu, že se u některých písem některé znaky zobrazí jako čtvereček (□).",
@@ -105,13 +110,13 @@
 		"ScrambleGM.hint": "Neprovádí překlad textu pro GM (pro určení, zda postava rozumí, se řiď barvou glóbu).",
 		"ScrambleGM.title": "Komolit zprávy i pro GM?",
 		"SpeakingIn": "Mluví jazykem {language}",
-		"Truespeech.hint": "Nastaví jazyk, jehož mluvčí rozumí všem mluveným jazykům (ale neumí číst deníky) a kterému rozumí všechny bytosti. Postava bude moci číst všechny zprávy v chatu a psát zprávy, kterým každý porozumí.",
+		"Truespeech.hint": "Nastaví jazyk, jehož mluvčí rozumí všem mluveným jazykům (ale neumí číst deníky), a kterému rozumí všechny bytosti. Postava bude moci číst všechny zprávy v chatu a psát zprávy, kterým každý porozumí.",
 		"Truespeech.title": "Všechápající jazyk",
 		"Translation": "Překlad",
 		"TranslatedFrom": "Přeloženo z ",
 		"LanguageLabel": "Jazyk",
 		"AlphabetLabel": "Abeceda",
-		"LatinAlphabet": "Latinská abeceda",
+		"LatinAlphabet": "Latinka",
 		"ToggleRunes": "Přepínač run",
 		"Runes": "Runy",
 		"TOURS": {
@@ -168,11 +173,11 @@
 				},
 				"UserConfigSelectCharacter": {
 					"Title": "Výběr postavy",
-					"Content": "GM by nikdy neměl mít vybranou postavu, protože pak budou jeho zprávy odesílány jako z té postavy, pokud bude přítomna ve scéně.<br>Hráči by si měli vybrat svou hlavní postavu, jinak budou jejich zprávy odesílány jako od hráče a nebudou moci číst zprávy v jazycích, kterým rozumí jejich postava, pokud její token není na plátně.<br>Pozná se to tak, že je jméno hráče v seznamu hráčů následováno jménem postavy.<br>Je to základní chování Foundry, Polyglot jej pouze respektuje."
+					"Content": "GM by nikdy neměl mít vybranou postavu, protože pak budou jeho zprávy odesílány jako z té postavy, pokud bude přítomna ve scéně.<br>Hráči by si měli vždy vybrat svou hlavní postavu, jinak budou jejich zprávy odesílány jako od hráče a nebudou moci číst zprávy v jazycích, kterým rozumí jejich postava, pokud její token není na plátně.<br>Pozná se to tak, že je jméno hráče v seznamu hráčů následováno jménem postavy.<br>Je to základní chování Foundry, Polyglot jej pouze respektuje."
 				},
 				"ActorOwnership": {
 					"Title": "Vlastnictví aktéra",
-					"Content": "Pokud dáč hráči k postavě oprávnění \"Vlastník\" nebo \"Pozorovatel\", bude moci číst a psát zprávy jako ta postava, pokud je její token na plátně. Pokud je tokenů víc, výběr tokenu na plátně změní aktivní postavu hráče.<br>I to je rovněž základní chování Foundry, které Polyglot jen následuje."
+					"Content": "Pokud dáč hráči k postavě oprávnění \"Vlastník\" či \"Pozorovatel\", bude moci číst a psát zprávy jako ta postava, pokud je její token na plátně. Pokud je tokenů víc, výběr tokenu na plátně změní aktivní postavu hráče.<br>I to je rovněž základní chování Foundry, které Polyglot jen následuje."
 				},
 				"End": {
 					"Title": "Závěr",
@@ -183,6 +188,7 @@
 		"UESRPG.Language": "Jazyk",
 		"Generic": {
 			"Language": "Jazyk",
+			"Literacy": "Gramotnost",
 			"Read": "Čtení"
 		},
 		"COC7": {
@@ -193,7 +199,7 @@
 		},
 		"DND5E": {
 			"SpecialLanguages.title": "Nahrazení zvláštních jazyků",
-			"SpecialLanguages.hint": "Jazyk, který nahradí \"languages\", jako např. \"všechny jazyky, které ovládal/a za živa\"."
+			"SpecialLanguages.hint": "Jazyk, který nahradí \"languages\", jako např. \"všechny jazyky ovládané zaživa\"."
 		},
 		"PF2E": {
 			"replaceLanguages.hint": "Odstraní výchozí jazyky systému. Musíš mít alespoň jeden vlastní jazyk nastavený v nabídce Vlastních prvků, jinak nebudou neobecné jazyky odstraněny. Pokud toto nastavení deaktivuješ a chceš obnovit výchozí, podívej se do wiki modulu."
