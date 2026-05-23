@@ -65,7 +65,8 @@
 		"UESRPG.Language": "Język",
 		"Generic": {
 			"Language": "Język",
-			"Read": "Czytaj"
+			"Read": "Czytaj",
+			"Literacy": "Piśmienność"
 		},
 		"COC7": {
 			"LanguageOwn": "Język",
