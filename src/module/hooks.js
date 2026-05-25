@@ -223,30 +223,19 @@ export default class PolyglotHooks {
 	static renderDocumentSheet(sheet, html, data) {
 		const isOwnerOrGM = sheet.document?.isOwner || game.user.isGM;
 		const isEditable = data.editable;
-		const isTextSheet = sheet instanceof JournalTextPageSheet;
-		const isJQuery = html instanceof jQuery;
+		const hasPolyglotSelector = html.querySelectorAll("span.polyglot-journal").length;
 
-		if (isTextSheet && !(sheet.object.parent.isOwner || isOwnerOrGM || isEditable)) {
-			if (sheet.document.isOwner) game.polyglot.insertHeaderButton(sheet.object.parent.sheet, html);
-			else game.polyglot.scrambleSpans(sheet, html);
-		} else if (isJQuery && html.find(".polyglot-journal").length) {
-			if (isOwnerOrGM && html.find('[data-engine="prosemirror"]').length) game.polyglot.insertHeaderButton(sheet, html);
-			else if (!(isOwnerOrGM || isEditable)) game.polyglot.scrambleSpans(sheet, html);
-		} else if (!isJQuery && html.querySelectorAll(".polyglot-journal").length) {
-			if (isOwnerOrGM && html.querySelectorAll('[data-engine="prosemirror"]').length) game.polyglot.insertHeaderButton(sheet, html);
-			else if (!(isOwnerOrGM || isEditable)) game.polyglot.scrambleSpansV2(sheet, html);
+		if (hasPolyglotSelector && !isOwnerOrGM && !isEditable) {
+			game.polyglot.scrambleSpansV2(sheet, html);
 		}
 	}
 
-	/**
-	 * Renders a journal entry, adding the scrambling button to its header in case user is the document's owner or a GM.
-	 *
-	 * @param {Document} sheet		A JournalSheet document.
-	 * @param {HTMLElement} html
-	 */
-	static renderJournalSheet(sheet, html) {
-		if ((sheet.document?.isOwner || game.user.isGM) && sheet.document.pages.size) {
-			game.polyglot.insertHeaderButton(sheet, html);
+	static getHeaderControlsApplicationV2(app, controls) {
+		if (!app.document?.isOwner && !game.user.isGM) return;
+		const isJournal = app.document?.constructor.metadata.name === "JournalEntry";
+		const hasPolyglotSelector = app.element.querySelectorAll("span.polyglot-journal").length;
+		if ((isJournal && app.document.pages.size) || hasPolyglotSelector) {
+			game.polyglot.insertHeaderButton(app, controls);
 		}
 	}
 

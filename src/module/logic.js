@@ -28,14 +28,8 @@ export class Polyglot {
 		Hooks.on("controlToken", PolyglotHooks.controlToken);
 		Hooks.on("updateUser", PolyglotHooks.updateUser);
 		Hooks.on("updateActiveEffect", PolyglotHooks.updateActiveEffect);
+		Hooks.on("getHeaderControlsApplicationV2", PolyglotHooks.getHeaderControlsApplicationV2);
 		Hooks.on("renderDocumentSheetV2", PolyglotHooks.renderDocumentSheet);
-		Hooks.on("renderDocumentSheet", PolyglotHooks.renderDocumentSheet);
-		Hooks.on("renderActorSheet", PolyglotHooks.renderDocumentSheet);
-		Hooks.on("renderItemSheet", PolyglotHooks.renderDocumentSheet);
-		Hooks.on("renderJournalTextPageSheet", PolyglotHooks.renderDocumentSheet);
-		Hooks.on("renderJournalSheet", PolyglotHooks.renderJournalSheet);
-		Hooks.on("renderStorySheet", PolyglotHooks.renderJournalSheet);
-		Hooks.on("renderJournalEntryPageSheet", PolyglotHooks.renderDocumentSheet);
 		Hooks.on("getProseMirrorMenuDropDowns", PolyglotHooks.getProseMirrorMenuDropDowns);
 
 		libWrapper.register(
@@ -418,40 +412,24 @@ export class Polyglot {
 	/* -------------------------------------------- */
 
 	/**
-	 *
-	 * @param {Document} document
-	 * @param {HTMLElement} html
-	 */
-	insertHeaderButton(document, html) {
-		const toggleButton = this.createHeaderButton(document);
-		html.closest(".app").find(".polyglot-button").remove();
-		const titleElement = html.closest(".app").find(".window-title");
-		toggleButton.insertAfter(titleElement);
-	}
-
-	/**
 	 * Creates the Header button for Documents.
-	 * @param {Document} document 	A JournalSheet or JournalTextPageSheet
-	 * @returns {} toggleButton
+	 * @param {Document} document
+	 * @param {ApplicationHeaderControlsEntry} controls
 	 */
-	createHeaderButton(document) {
-		let runes = false;
-		let texts = [];
-		let styles = [];
-		const toggleString = `<a class='polyglot-button'
-			data-tooltip='Polyglot: ${game.i18n.localize("POLYGLOT.ToggleRunes")}' data-tooltip-direction="UP">
-			<i class='fas fa-unlink'></i>
-		</a>`;
-		const toggleButton = $(toggleString);
+	insertHeaderButton(document, controls) {
+		document.polyglot ??= {
+			runes: false,
+			texts: [],
+			styles: []
+		};
+		const { runes, texts, styles } = document.polyglot;
 		const IgnoreJournalFontSize = game.settings.get("polyglot", "IgnoreJournalFontSize");
-		toggleButton.click((ev) => {
+		document.options.actions.polyglotToggleRunes = (ev, target) => {
 			ev.preventDefault();
-			let button = ev.currentTarget.firstElementChild;
-			runes = !runes;
-			button.className = runes ? "fas fa-link" : "fas fa-unlink";
-			const spans = document.element.find("span.polyglot-journal");
-			if (runes) {
-				for (let span of spans.toArray()) {
+			document.polyglot.runes = !document.polyglot.runes;
+			const spans = document.element.querySelectorAll("span.polyglot-journal");
+			if (document.polyglot.runes) {
+				for (let span of spans) {
 					const lang = span.dataset.language;
 					if (!lang) continue;
 					texts.push(span.textContent);
@@ -474,7 +452,7 @@ export class Polyglot {
 				}
 			} else {
 				let i = 0;
-				for (let span of spans.toArray()) {
+				for (let span of spans) {
 					const lang = span.dataset.language;
 					if (!lang) continue;
 					span.textContent = texts[i];
@@ -486,11 +464,16 @@ export class Polyglot {
 					}
 					i++;
 				}
-				texts = [];
-				styles = [];
+				document.polyglot.texts = [];
+				document.polyglot.styles = [];
 			}
+		};
+		controls.push({
+			action: "polyglotToggleRunes",
+			icon: runes ? "fas fa-link" : "fas fa-unlink",
+			label: "POLYGLOT.ToggleRunes",
+			visible: true
 		});
-		return toggleButton;
 	}
 
 	/**
