@@ -272,7 +272,7 @@ export class Polyglot {
 		}
 
 		const select = this.chatElement.querySelector(".polyglot-lang-select select");
-		const selectedLanguage = this.lastSelection || select.value || defaultLanguage;
+		let selectedLanguage = this.lastSelection || select.value || defaultLanguage;
 
 		if (!this.tomSelect) {
 			this.tomSelect = new TomSelect("#polyglot-language", {
@@ -320,8 +320,10 @@ export class Polyglot {
 			this.tomSelect.clearOptions();
 			this.tomSelect.addOptions(options);
 		}
-		if (this.knows(selectedLanguage)) this.tomSelect.addItem(selectedLanguage);
-		else this.tomSelect.addItem(this.knows(defaultLanguage) ? defaultLanguage : [...this.knownLanguages][0]);
+		if (!this.knows(selectedLanguage)) {
+			selectedLanguage = this.knows(defaultLanguage) ? defaultLanguage : [...this.knownLanguages][0];
+		}
+		this.tomSelect.addItem(selectedLanguage);
 	}
 
 	toggleSelector() {
