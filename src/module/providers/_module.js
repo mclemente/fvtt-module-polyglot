@@ -21,6 +21,7 @@ export { default as gurpsLanguageProvider } from "./gurps.js";
 export { default as oseLanguageProvider } from "./ose.js";
 export { default as pf1LanguageProvider } from "./pf1.js";
 export { default as pf2eLanguageProvider } from "./pf2e.js";
+export { default as sf2eLanguageProvider } from "./sf2e.js";
 export { default as sfrpgLanguageProvider } from "./sfrpg.js";
 export { default as shadowdarkLanguageProvider } from "./shadowdark.js";
 export { default as shadowrun5eLanguageProvider } from "./shadowrun5e.js";
