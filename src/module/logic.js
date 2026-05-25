@@ -172,6 +172,7 @@ export class Polyglot {
 		this.refreshTimeout = null;
 		const messages = game.messages.contents
 			.slice(-CONFIG.ChatMessage.batchSize)
+			.filter((m) => m.visible)
 			.map((m) => game.messages.get(m.id));
 		for (const message of messages) {
 			if (
