@@ -1,4 +1,4 @@
-import { LanguageProvider } from "./_module.js";
+import LanguageProvider from "./templates/Base.js";
 
 export default class sf2eLanguageProvider extends LanguageProvider {
 	languages = {};
