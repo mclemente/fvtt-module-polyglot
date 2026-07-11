@@ -77,35 +77,41 @@ export default class PolyglotHooks {
 	static preCreateChatMessage(message, data, options, userId) {
 		const isCheckboxDisabled = game.polyglot.tomSelect?.isDisabled ?? true;
 		const isMessageLink = game.polyglot._isMessageLink(data.content);
-		const isMessageInlineRoll = /\[\[(.*?)\]\]/g.test(data.content);
+		const messageHasRolls = /\[\[(.*?)\]\]/g.test(data.content) || message.rolls?.length;
+		// Meant for systems with odd message handling (e.g. PF2e)
+		const invalidMessageMode = "messageMode" in options && options.messageMode === undefined;
+		const isNonICMessage =
+			message.style !== CONST.CHAT_MESSAGE_STYLES.IC
+			&& (message.style !== CONST.CHAT_MESSAGE_STYLES.OOC || !game.polyglot._allowOOC());
 		// Message preprended by /desc from either Cautious GM Tools or Narrator Tools modules
 		const isDescMessage =
 			message.flags?.cgmp?.subType === 1
 			|| ["description", "narration", "notification"].includes(message.flags?.["narrator-tools"]?.type);
-		if (isCheckboxDisabled || isMessageLink || isMessageInlineRoll || isDescMessage) return true;
 		if (
-			message.style === CONST.CHAT_MESSAGE_STYLES.IC
-			|| (message.style === CONST.CHAT_MESSAGE_STYLES.OOC && game.polyglot._allowOOC())
-		) {
-			let lang = game.polyglot.chatElement.querySelector("select#polyglot-language").value;
-			const language = data.lang || data.language;
-			if (language) {
-				if (game.polyglot.languageProvider.languages[language]) {
-					lang = language;
-				} else {
-					Object.values(game.polyglot.languageProvider.languages).every((l) => {
-						if (language === l.label) {
-							lang = language;
-							return false;
-						}
-						return true;
-					});
-				}
-			}
-			if (lang) {
-				message.updateSource({ "flags.polyglot.language": lang });
+			isCheckboxDisabled
+			|| isMessageLink
+			|| messageHasRolls
+			|| invalidMessageMode
+			|| isNonICMessage
+			|| isDescMessage
+		) return true;
+
+		let lang = game.polyglot.chatElement.querySelector("select#polyglot-language").value;
+		const language = data.lang || data.language;
+		if (language) {
+			if (game.polyglot.languageProvider.languages[language]) {
+				lang = language;
+			} else {
+				Object.values(game.polyglot.languageProvider.languages).every((l) => {
+					if (language === l.label) {
+						lang = language;
+						return false;
+					}
+					return true;
+				});
 			}
 		}
+		if (lang) message.updateSource({ "flags.polyglot.language": lang });
 	}
 
 	/**
