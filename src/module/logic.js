@@ -322,7 +322,7 @@ export class Polyglot {
 	}
 
 	toggleSelector() {
-		const select = ui.chat.element.querySelector(".polyglot-lang-select");
+		const select = this.chatElement.querySelector(".polyglot-lang-select");
 		if (!game.settings.get("polyglot", "checkbox")) {
 			this.tomSelect.disable();
 			select.dataset.tooltip = "POLYGLOT.RightClickToEnable";
