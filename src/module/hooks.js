@@ -79,7 +79,7 @@ export default class PolyglotHooks {
 		const isMessageLink = game.polyglot._isMessageLink(data.content);
 		const messageHasRolls = /\[\[(.*?)\]\]/g.test(data.content) || message.rolls?.length;
 		// Meant for systems with odd message handling (e.g. PF2e)
-		const invalidMessageMode = "messageMode" in options && options.messageMode === undefined;
+		const invalidMessageMode = Object.hasOwn(options, "messageMode") && options.messageMode === undefined;
 		const isNonICMessage =
 			message.style !== CONST.CHAT_MESSAGE_STYLES.IC
 			&& (message.style !== CONST.CHAT_MESSAGE_STYLES.OOC || !game.polyglot._allowOOC());
