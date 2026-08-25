@@ -230,6 +230,9 @@ export function registerSettings() {
 		default: false,
 		type: Boolean,
 		requiresReload: true,
+		onChange: (value) => {
+			game.polyglot.runifyGM = value;
+		}
 	});
 
 	// Used Internally

@@ -1,6 +1,6 @@
+import PolyglotChatBubbles from "./ChatBubbles.js";
 import { getFonts } from "./Fonts.js";
 import PolyglotHooks from "./hooks.js";
-import { libWrapper } from "./libs/libWrapper.js";
 
 export class Polyglot {
 	constructor() {
@@ -11,6 +11,7 @@ export class Polyglot {
 		// TODO consider removing this variable and let LanguageProvider handle it instead
 		this.CustomFontSizes = game.settings.get("polyglot", "CustomFontSizes");
 		CONFIG.fontDefinitions = foundry.utils.mergeObject(CONFIG.fontDefinitions, this.FONTS);
+		this.runifyGM = game.settings.get("polyglot", "runifyGM");
 	}
 
 	init() {
@@ -32,56 +33,7 @@ export class Polyglot {
 		Hooks.on("renderDocumentSheetV2", PolyglotHooks.renderDocumentSheet);
 		Hooks.on("getProseMirrorMenuDropDowns", PolyglotHooks.getProseMirrorMenuDropDowns);
 
-		libWrapper.register(
-			"polyglot",
-			"foundry.canvas.animation.ChatBubbles.prototype.say",
-			async (wrapped, token, message, { cssClasses, requireVisible = false, pan = true, language = "" } = {}) => {
-				if (game.user.isGM && !game.settings.get("polyglot", "runifyGM")) {
-					return wrapped(token, message, { cssClasses, requireVisible, pan });
-				}
-				let lang = "";
-				let randomId = "";
-				if (language) {
-					randomId = foundry.utils.randomID(16);
-					if (this.languageProvider.languages[language]) {
-						lang = language;
-					} else {
-						Object.values(this.languageProvider.languages).every((l) => {
-							if (language === l.label) {
-								lang = language;
-								return false;
-							}
-							return true;
-						});
-					}
-				} else {
-					// Find the message out of the last 10 chat messages, last to first
-					const msg = game.messages.contents
-						.slice(-10)
-						.reverse()
-						.find(
-							(m) => m.content === message && m.style === CONST.CHAT_MESSAGE_STYLES.IC
-						);
-					// Message was sent in-character (no /ooc or /emote)
-					if (msg) {
-						lang = msg.getFlag("polyglot", "language") || "";
-						randomId = msg.id;
-					}
-				}
-				// Language isn't truespeech, isn't known and user isn't under Comprehend Languages effect
-				if (lang && !this.isLanguageknownOrUnderstood(lang)) {
-					message = this.scrambleString(message, randomId, lang);
-					document.documentElement.style.setProperty(
-						"--polyglot-chat-bubble-font",
-						this._getFontStyle(lang).replace(/\d+%\s/g, ""),
-					);
-					if (cssClasses === undefined) cssClasses = [];
-					cssClasses.push("polyglot", "polyglot-chat-bubble");
-				}
-				return wrapped(token, message, { cssClasses, requireVisible, pan });
-			},
-			"WRAPPER",
-		);
+		CONFIG.Canvas.chatBubblesClass = PolyglotChatBubbles;
 	}
 
 	get chatElement() {
@@ -356,7 +308,7 @@ export class Polyglot {
 
 		const salted_string = string + salt;
 		const seed = new foundry.dice.MersenneTwister(this._hashCode(salted_string));
-		const regex = game.settings.get("polyglot", "RuneRegex") ? /[a-zA-Z\d]/g : /\S/gu;
+		const regex = game.settings.get("polyglot", "RuneRegex") ? /<[^>]*>|([a-zA-Z\d])/g : /<[^>]*>|(\S)/gu;
 		const characters = selectedFont.alphabeticOnly
 			? "abcdefghijklmnopqrstuvwxyz"
 			: "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -370,7 +322,8 @@ export class Polyglot {
 		if (selectedFont.logographical) {
 			string = string.substring(0, Math.round(string.length / 2));
 		}
-		return string.replace(regex, () => {
+		return string.replace(regex, (match) => {
+			if (match.length > 1) return match;
 			const c = characters.charAt(Math.floor(seed.random() * characters.length));
 			const upper = Boolean(Math.round(seed.random()));
 			return upper ? c.toUpperCase() : c;

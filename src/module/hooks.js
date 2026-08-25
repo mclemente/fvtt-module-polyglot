@@ -96,22 +96,8 @@ export default class PolyglotHooks {
 			|| isDescMessage
 		) return true;
 
-		let lang = game.polyglot.chatElement.querySelector("select#polyglot-language").value;
-		const language = data.lang || data.language;
-		if (language) {
-			if (game.polyglot.languageProvider.languages[language]) {
-				lang = language;
-			} else {
-				Object.values(game.polyglot.languageProvider.languages).every((l) => {
-					if (language === l.label) {
-						lang = language;
-						return false;
-					}
-					return true;
-				});
-			}
-		}
-		if (lang) message.updateSource({ "flags.polyglot.language": lang });
+		const lang = game.polyglot.chatElement.querySelector("select#polyglot-language").value;
+		if (lang && !data.flags?.polyglot.language) message.updateSource({ "flags.polyglot.language": lang });
 	}
 
 	/**
@@ -156,7 +142,7 @@ export default class PolyglotHooks {
 		const content = document.createElement("div");
 		content.classList.add("polyglot-original-text");
 		content.style.font = game.polyglot._getFontStyle(lang);
-		content.innerHTML = game.polyglot.scrambleString(innerText, message.id, lang);
+		content.innerHTML = game.polyglot.scrambleString(message.content, message.id, lang);
 
 		const translation = document.createElement("div");
 		translation.classList.add("polyglot-translation-text");
