@@ -190,12 +190,12 @@ export class PolyglotGeneralSettings extends FormApplication {
 				this.close();
 			} else if (dataset?.key) {
 				const key = dataset.key;
-				game.polyglot.languageProvider.settings?.[key].button?.(event);
+				game.polyglot.provider.settings?.[key].button?.(event);
 			}
 		});
 		html.find(".form-group button[name]").on("click", async (event) => {
 			const name = event.currentTarget.name;
-			game.polyglot.languageProvider.settings?.[name].button?.(event);
+			game.polyglot.provider.settings?.[name].button?.(event);
 		});
 	}
 

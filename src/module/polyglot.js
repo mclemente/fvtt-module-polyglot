@@ -3,7 +3,7 @@ import { Polyglot } from "./logic.js";
 import { preloadTemplates } from "./preloadTemplates.js";
 import { LanguageProvider } from "./providers/_module.js";
 import {
-	registerProviderSettings,
+	addSetting,
 	registerSettings,
 	renderPolyglotGeneralSettingsHandler
 } from "./settings.js";
@@ -19,13 +19,15 @@ Hooks.once("init", () => {
 	Hooks.callAll("polyglot.init", LanguageProvider);
 	api.defaultProvider();
 	api.updateProvider();
-	game.polyglot.languageProvider.init();
+	game.polyglot.provider.init();
 	return preloadTemplates();
 });
 
 Hooks.once("i18nInit", () => {
-	registerProviderSettings();
-	game.polyglot.languageProvider.i18nInit();
+	for (let [key, data] of Object.entries(game.polyglot.provider.settings)) {
+		addSetting(key, data);
+	}
+	game.polyglot.provider.i18nInit();
 });
 
 Hooks.on("setup", () => {
@@ -37,11 +39,11 @@ Hooks.on("setup", () => {
 		);
 	}
 	registerTours();
-	game.polyglot.languageProvider.setup();
+	game.polyglot.provider.setup();
 });
 Hooks.on("ready", async () => {
 	await game.polyglot.ready();
 	Hooks.callAll("polyglot.ready", LanguageProvider);
-	await game.polyglot.languageProvider.ready();
+	await game.polyglot.provider.ready();
 });
 Hooks.on("renderPolyglotGeneralSettings", renderPolyglotGeneralSettingsHandler);

@@ -14,6 +14,10 @@ export class Polyglot {
 		this.runifyGM = game.settings.get("polyglot", "runifyGM");
 	}
 
+	provider;
+
+	tomSelect;
+
 	init() {
 		this._enableChatFeatures = game.settings.get("polyglot", "enableChatFeatures");
 		if (this._enableChatFeatures) {
@@ -40,29 +44,11 @@ export class Polyglot {
 		return ui.sidebar.popouts.chat?.element || ui.chat.element;
 	}
 
-	tomSelect;
-
-	/**
-	 * @returns {object}
-	 */
-	get alphabets() {
-		return this.languageProvider.alphabets;
-	}
-
-	/**
-	 * Returns an object or array, based on the game system's own data structure.
-	 *
-	 * @returns {object|array}
-	 */
-	get languages() {
-		return this.languageProvider.languages;
-	}
-
 	/**
 	 * @returns {String}
 	 */
 	get defaultLanguage() {
-		return this.languageProvider.defaultLanguage;
+		return this.provider.defaultLanguage;
 	}
 
 	get omniglot() {
@@ -71,8 +57,8 @@ export class Polyglot {
 
 	set omniglot(lang) {
 		if (lang === this._omniglot) return;
-		this.languageProvider.removeLanguage(this._omniglot);
-		this.languageProvider.addLanguage(lang);
+		this.provider.removeLanguage(this._omniglot);
+		this.provider.addLanguage(lang);
 		this._omniglot = lang;
 	}
 
@@ -82,8 +68,8 @@ export class Polyglot {
 
 	set comprehendLanguages(lang) {
 		if (lang === this._comprehendLanguages) return;
-		this.languageProvider.removeLanguage(this._comprehendLanguages);
-		this.languageProvider.addLanguage(lang);
+		this.provider.removeLanguage(this._comprehendLanguages);
+		this.provider.addLanguage(lang);
 		this._comprehendLanguages = lang;
 	}
 
@@ -93,8 +79,8 @@ export class Polyglot {
 
 	set truespeech(lang) {
 		if (lang === this._truespeech) return;
-		this.languageProvider.removeLanguage(this._truespeech);
-		this.languageProvider.addLanguage(lang);
+		this.provider.removeLanguage(this._truespeech);
+		this.provider.addLanguage(lang);
 		this._truespeech = lang;
 	}
 
@@ -131,35 +117,38 @@ export class Polyglot {
 	}
 
 	getUserLanguages(actors = []) {
-		let knownLanguages = new Set();
-		let literateLanguages = new Set();
-		if (actors.length === 0) {
-			if (canvas && canvas.tokens) {
-				for (let token of canvas.tokens.controlled) {
-					if (token.actor) actors.push(token.actor);
-				}
+		let spokenLanguages = new Set();
+		let writtenLanguages = new Set();
+
+		if (!actors.length) {
+			for (const token of canvas?.tokens?.controlled ?? []) {
+				if (token.actor) actors.push(token.actor);
 			}
-			if (actors.length === 0 && game.user.character) actors.push(game.user.character);
+			if (game.user.character) actors.push(game.user.character);
 		}
+
 		for (let actor of actors) {
 			try {
-				[knownLanguages, literateLanguages] = this.languageProvider.getUserLanguages(actor);
+				const [spoken, written] = this.provider.getUserLanguages(actor);
+				spokenLanguages = spokenLanguages.union(spoken);
+				writtenLanguages = writtenLanguages.union(written);
 			} catch(err) {
 				console.error(`Polyglot | Failed to get languages from actor "${actor.name}".`, err);
 			}
 		}
-		return [knownLanguages, literateLanguages];
+
+		return [spokenLanguages, writtenLanguages];
 	}
 
 	updateUserLanguages() {
-		if (game.polyglot.languageProvider.requiresReady && !game.ready) return;
+		if (game.polyglot.provider.requiresReady && !game.ready) return;
 		[this.knownLanguages, this.literateLanguages] = this.getUserLanguages();
 		const defaultLanguage = this.defaultLanguage;
 		if (this.knownLanguages.size === 0) {
-			if (game.user.isGM) this.knownLanguages = new Set(Object.keys(this.languageProvider.languages).sort());
+			if (game.user.isGM) this.knownLanguages = new Set(Object.keys(this.provider.languages).sort());
 			else this.knownLanguages.add(defaultLanguage);
 		} else if (this.knownLanguages.has(this.omniglot)) {
-			this.knownLanguages = new Set(Object.keys(this.languageProvider.languages).sort());
+			this.knownLanguages = new Set(Object.keys(this.provider.languages).sort());
 		}
 
 		if (!game.polyglot.renderChatLog) return;
@@ -177,13 +166,13 @@ export class Polyglot {
 					|| actor.knownLanguages.has(this.truespeech)
 					|| actor.knownLanguages.has(this.comprehendLanguages)
 				) {
-					actor.knownLanguages = new Set(Object.keys(this.languageProvider.languages).sort());
+					actor.knownLanguages = new Set(Object.keys(this.provider.languages).sort());
 				} else if (this.truespeech) {
 					actor.knownLanguages.add(this.truespeech);
 				}
 			}
 		}
-		const filteredUsers = this.languageProvider.filterUsers(ownedActors);
+		const filteredUsers = this.provider.filterUsers(ownedActors);
 		for (let lang of this.knownLanguages) {
 			if (!this._isTruespeech(lang) && (lang === this.omniglot || lang === this.comprehendLanguages)) {
 				continue;
@@ -191,7 +180,7 @@ export class Polyglot {
 			const option = {
 				id: lang,
 				group: "known",
-				label: this.languageProvider.languages[lang]?.label || lang.capitalize(),
+				label: this.provider.languages[lang]?.label || lang.capitalize(),
 				$order: lang === defaultLanguage ? 1 : 1000 // Sorting Order
 			};
 			if (game.user.isGM) {
@@ -295,12 +284,12 @@ export class Polyglot {
 	 * @return {string}			The message's text with its characters scrambled by the PRNG.
 	 */
 	scrambleString(string, salt, lang) {
-		const { rng = "default" } = this.languageProvider.languages[lang] ?? {};
+		const { rng = "default" } = this.provider.languages[lang] ?? {};
 		if (rng === "none") return string;
 		if (rng === "default") salt = lang;
 		// const font = this._getFontStyle(lang).replace(/\d+%\s/g, "");
-		const font = this.languageProvider.getLanguageFont(lang);
-		const selectedFont = this.languageProvider.fonts[font];
+		const font = this.provider.getLanguageFont(lang);
+		const selectedFont = this.provider.fonts[font];
 		if (!selectedFont) {
 			console.error(`Invalid font style '${font}'`);
 			return string;
@@ -338,7 +327,7 @@ export class Polyglot {
 		async function checkChanges() {
 			const alphabetsSetting = game.settings.get("polyglot", "Alphabets");
 			const languagesSetting = game.settings.get("polyglot", "Languages");
-			const { fonts, languages } = game.polyglot.languageProvider;
+			const { fonts, languages } = game.polyglot.provider;
 			if (
 				!foundry.utils.isEmpty(foundry.utils.diffObject(alphabetsSetting, fonts))
 				|| !foundry.utils.isEmpty(foundry.utils.diffObject(fonts, alphabetsSetting))
@@ -352,7 +341,7 @@ export class Polyglot {
 				await game.settings.set("polyglot", "Languages", languages);
 			}
 		}
-		if (this.languageProvider.requiresReady) {
+		if (this.provider.requiresReady) {
 			Hooks.once("polyglot.languageProvider.ready", async () => {
 				this.updateUserLanguages();
 				await checkChanges();
@@ -443,7 +432,7 @@ export class Polyglot {
 			if (!lang) return;
 			const conditions = !game.polyglot._isTruespeech(lang)
 				&& !game.polyglot.isLanguageKnown(game.polyglot.comprehendLanguages)
-				&& !game.polyglot.languageProvider.conditions(lang);
+				&& !game.polyglot.provider.conditions(lang);
 			if (conditions) {
 				e.dataset.tooltip = "????";
 				e.textContent = game.polyglot.scrambleString(e.textContent, document.id, lang);
@@ -458,7 +447,7 @@ export class Polyglot {
 			if (!lang) return;
 			const conditions = !game.polyglot._isTruespeech(lang)
 				&& !game.polyglot.isLanguageKnown(game.polyglot.comprehendLanguages)
-				&& !game.polyglot.languageProvider.conditions(lang);
+				&& !game.polyglot.provider.conditions(lang);
 			if (conditions) {
 				e.dataset.tooltip = "????";
 				e.textContent = game.polyglot.scrambleString(e.textContent, document.id, lang);
@@ -568,9 +557,9 @@ export class Polyglot {
 	 * @returns 				The alphabet of the lang or the default alphabet.
 	 */
 	_getFontStyle(lang) {
-		const langFont = this.languageProvider.getLanguageFont(lang);
-		const defaultFont = this.languageProvider.defaultFont;
-		const font = this.languageProvider.fonts[langFont] || this.languageProvider.fonts[defaultFont];
+		const langFont = this.provider.getLanguageFont(lang);
+		const defaultFont = this.provider.defaultFont;
+		const font = this.provider.fonts[langFont] || this.provider.fonts[defaultFont];
 		return `${font.fontSize}% ${font.fontFamily}`;
 	}
 
@@ -579,19 +568,19 @@ export class Polyglot {
 	/* -------------------------------------------- */
 
 	getLanguagesForEditor() {
-		let langs = this.languageProvider.languages;
+		let langs = this.provider.languages;
 		if (!game.user.isGM) {
 			langs = {};
 			for (let lang of this.knownLanguages) {
-				const data = this.languageProvider.languages[lang];
+				const data = this.provider.languages[lang];
 				if (data) {
-					langs[lang] = this.languageProvider.languages[lang];
+					langs[lang] = this.provider.languages[lang];
 				}
 			}
 			for (let lang of this.literateLanguages) {
-				const data = this.languageProvider.languages[lang];
+				const data = this.provider.languages[lang];
 				if (data) {
-					langs[lang] = this.languageProvider.languages[lang];
+					langs[lang] = this.provider.languages[lang];
 				}
 			}
 		}
@@ -639,6 +628,10 @@ export class Polyglot {
 	}
 
 	get LanguageProvider() {
-		return this.languageProvider;
+		return this.provider;
+	}
+
+	get languageProvider() {
+		return this.provider;
 	}
 }

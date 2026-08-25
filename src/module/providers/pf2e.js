@@ -187,8 +187,8 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 			};
 		}
 		Hooks.on("closeHomebrewElements", async (homebrewElements, html) => {
-			await game.polyglot.languageProvider.getLanguages();
-			await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
+			await game.polyglot.provider.getLanguages();
+			await game.settings.set("polyglot", "Languages", game.polyglot.provider.languages);
 			game.polyglot.updateUserLanguages();
 		});
 	}

@@ -58,7 +58,7 @@ export default class PolyglotHooks {
 			PolyglotHooks.controlToken();
 		}
 		if (data.flags?.polyglot) {
-			game.polyglot.languageProvider.getDefaultLanguage();
+			game.polyglot.provider.getDefaultLanguage();
 		}
 	}
 
@@ -114,7 +114,7 @@ export default class PolyglotHooks {
 		const lang = message.getFlag("polyglot", "language");
 		if (!lang || !message.visible) return;
 
-		if (game.polyglot.languageProvider.requiresReady && !game.ready) {
+		if (game.polyglot.provider.requiresReady && !game.ready) {
 			Hooks.once("polyglot.languageProvider.ready", async () => {
 				await PolyglotHooks.renderChatMessageHTML(message, html, data);
 			});
@@ -123,7 +123,7 @@ export default class PolyglotHooks {
 		// Skip for inline rolls
 		if (!game.polyglot.knownLanguages.size) game.polyglot.updateUserLanguages();
 		const metadata = html.querySelector(".message-metadata");
-		const language = game.polyglot.languageProvider.languages?.[lang]?.label || lang;
+		const language = game.polyglot.provider.languages?.[lang]?.label || lang;
 		const known = game.polyglot.isLanguageKnown(lang);
 		const understood = game.polyglot.isLanguageUnderstood(lang);
 		const isGM = game.user.isGM;
@@ -152,7 +152,7 @@ export default class PolyglotHooks {
 
 		if (
 			displayTranslated
-			&& (lang !== game.polyglot.languageProvider.defaultLanguage || message.polyglot_unknown)
+			&& (lang !== game.polyglot.provider.defaultLanguage || message.polyglot_unknown)
 		) {
 			messageContent.innerText = "";
 			messageContent.append(content);

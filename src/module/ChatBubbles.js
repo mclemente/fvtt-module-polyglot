@@ -8,10 +8,10 @@ export default class PolyglotChatBubbles extends CONFIG.Canvas.chatBubblesClass 
 		let randomId = "";
 		if (language) {
 			randomId = foundry.utils.randomID(16);
-			if (game.polyglot.languageProvider.languages[language]) {
+			if (game.polyglot.provider.languages[language]) {
 				lang = language;
 			} else {
-				Object.values(game.polyglot.languageProvider.languages).every((l) => {
+				Object.values(game.polyglot.provider.languages).every((l) => {
 					if (language === l.label) {
 						lang = language;
 						return false;

@@ -82,7 +82,7 @@ export function registerSettings() {
 				font: new StringField({
 					required: true,
 					blank: false,
-					initial: () => game?.polyglot?.languageProvider?.defaultFont || "Thorass",
+					initial: () => game?.polyglot?.provider?.defaultFont || "Thorass",
 					choices: () => game.settings.get("polyglot", "Alphabets")
 				}),
 				rng: new StringField({ required: true, blank: false, initial: "default", choices: {
@@ -154,9 +154,9 @@ export function registerSettings() {
 		type: Boolean,
 		requiresReload: true,
 		onChange: async () => {
-			await game.polyglot.languageProvider.getLanguages();
-			game.polyglot.languageProvider.loadLanguages();
-			game.polyglot.languageProvider.reloadLanguages();
+			await game.polyglot.provider.getLanguages();
+			game.polyglot.provider.loadLanguages();
+			game.polyglot.provider.reloadLanguages();
 		},
 	});
 	addMenuSetting("defaultLanguage", {
@@ -165,7 +165,7 @@ export function registerSettings() {
 		default: "",
 		type: String,
 		onChange: () => {
-			game.polyglot.languageProvider.getDefaultLanguage();
+			game.polyglot.provider.getDefaultLanguage();
 		},
 	});
 	addMenuSetting("customLanguages", {
@@ -176,8 +176,8 @@ export function registerSettings() {
 		hasTextarea: true,
 		requiresReload: true,
 		onChange: () => {
-			game.polyglot.languageProvider.loadLanguages();
-			game.polyglot.languageProvider.reloadLanguages();
+			game.polyglot.provider.loadLanguages();
+			game.polyglot.provider.reloadLanguages();
 		},
 	});
 	addMenuSetting("omniglot", {
@@ -269,16 +269,6 @@ export function registerSettings() {
 			type: String,
 		});
 	});
-}
-
-// Language Provider Settings
-export function registerProviderSettings() {
-	const systemSpecificSettings = game.polyglot.languageProvider.settings;
-	if (Object.keys(systemSpecificSettings).length) {
-		for (let [key, data] of Object.entries(systemSpecificSettings)) {
-			addSetting(key, data);
-		}
-	}
 }
 
 export async function renderPolyglotGeneralSettingsHandler(settingsConfig, html) {

@@ -3,10 +3,9 @@ import { providerKeys } from "./providers/_shared.js";
 import { addSetting } from "./settings.js";
 
 export class PolyglotAPI {
-	constructor() {
-		this.providers = {};
-		this.polyglot = null;
-	}
+	parent;
+
+	providers = {};
 
 	init() {
 		// Assumes the first class in the file is the actual LanguageProvider class. This is better than adding an if-clause in the loop
@@ -25,19 +24,19 @@ export class PolyglotAPI {
 	}
 
 	get languageProvider() {
-		return this.polyglot.languageProvider;
+		return this.parent.provider;
 	}
 
 	/**
 	 * @param {String} provider
 	 */
 	set languageProvider(provider) {
-		this.polyglot.languageProvider = this.providers[provider];
+		this.parent.provider = this.providers[provider];
 	}
 
 	attach() {
 		game.polyglot.api = this;
-		this.polyglot = game.polyglot;
+		this.parent = game.polyglot;
 	}
 
 	defaultProvider() {
@@ -66,10 +65,10 @@ export class PolyglotAPI {
 		// If the configured provider is registered use that one. If not use the default provider
 		const configuredProvider = game.settings.get("polyglot", "languageProvider");
 		const fallbackProvider = game.settings.settings.get("polyglot.languageProvider").default;
-		this.polyglot.languageProvider = this.providers[configuredProvider] || this.providers[fallbackProvider];
-		this.polyglot.omniglot = game.settings.get("polyglot", "omniglot");
-		this.polyglot.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
-		this.polyglot.truespeech = game.settings.get("polyglot", "truespeech");
+		this.parent.provider = this.providers[configuredProvider] || this.providers[fallbackProvider];
+		this.parent.omniglot = game.settings.get("polyglot", "omniglot");
+		this.parent.comprehendLanguages = game.settings.get("polyglot", "comprehendLanguages");
+		this.parent.truespeech = game.settings.get("polyglot", "truespeech");
 	}
 
 	/**

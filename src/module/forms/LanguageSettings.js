@@ -23,7 +23,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 
 	getData() {
 		const data = {};
-		const selectedProvider = game.polyglot.languageProvider.id;
+		const selectedProvider = game.polyglot.provider.id;
 		// Insert all speed providers into the template data
 		data.providers = Object.values(game.polyglot.api.providers).map((languageProvider) => {
 			const provider = {};
@@ -107,7 +107,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 		});
 		html.find(".polyglot-alphabet").each(function () {
 			const font = this.previousSibling.previousSibling.children[0].value; // selectatr's value
-			this.style.font = game.polyglot.languageProvider.fonts[font];
+			this.style.font = game.polyglot.provider.fonts[font];
 		});
 		html.find(".selectatr").on("change", (event) => {
 			const font = event.target.value;
@@ -115,7 +115,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 			const nextSibling = parentElement.nextSibling;
 			if (nextSibling && nextSibling.nextSibling) {
 				const elementToChange = nextSibling.nextSibling;
-				const alphabet = game.polyglot.languageProvider.fonts[font];
+				const alphabet = game.polyglot.provider.fonts[font];
 				elementToChange.style.font = alphabet;
 			}
 		});
@@ -123,7 +123,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 			if (event.currentTarget?.dataset?.action === "reset") {
 				const current = game.settings.get("polyglot", "Languages");
 				await game.settings.set("polyglot", "Languages", {});
-				const defaultProvider = new game.polyglot.languageProvider.constructor();
+				const defaultProvider = new game.polyglot.provider.constructor();
 				defaultProvider.getLanguages();
 				const diff = foundry.utils.diffObject(defaultProvider.languages, current);
 				await game.settings.set("polyglot", "Languages", defaultProvider.languages);
@@ -143,14 +143,14 @@ export class PolyglotLanguageSettings extends FormApplication {
 		if (languageProvider !== formData.languageProvider) {
 			await game.settings.set("polyglot", "languageProvider", formData.languageProvider);
 			game.polyglot.api.updateProvider();
-			await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
-			await game.settings.set("polyglot", "Languages", game.polyglot.languageProvider.languages);
+			await game.settings.set("polyglot", "Alphabets", game.polyglot.provider.fonts);
+			await game.settings.set("polyglot", "Languages", game.polyglot.provider.languages);
 		} else {
 			const languages = foundry.utils.expandObject(formData).languages;
 			const current = game.settings.get("polyglot", "Languages");
 			const diff = foundry.utils.diffObject(current, languages);
 			if (!Object.keys(diff).length) return;
-			game.polyglot.languageProvider.languages = languages;
+			game.polyglot.provider.languages = languages;
 			await game.settings.set("polyglot", "Languages", languages);
 		}
 		SettingsConfig.reloadConfirm({ world: true });
