@@ -10,10 +10,11 @@ export default class PolyglotHooks {
 			?? chatlog.element.querySelector(".polyglot-lang-select");
 		if ((!ui.sidebar.expanded && !chatlog.isPopout) || !chatlog.active) {
 			if (polyglotSelect) polyglotSelect.hidden = true;
-			return game.polyglot.updateUserLanguages();
+			return;
 		} else if (polyglotSelect) {
 			polyglotSelect.hidden = false;
-			return chatMessage.insertAdjacentElement("beforebegin", polyglotSelect);
+			chatMessage.insertAdjacentElement("beforebegin", polyglotSelect);
+			return;
 		}
 
 		game.polyglot.renderChatLog = true;

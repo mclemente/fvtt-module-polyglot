@@ -346,7 +346,10 @@ export class Polyglot {
 				this.updateUserLanguages();
 				await checkChanges();
 			});
-		} else await checkChanges();
+		} else {
+			this.updateUserLanguages();
+			await checkChanges();
+		}
 	}
 
 	/* -------------------------------------------- */
