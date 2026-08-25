@@ -46,4 +46,9 @@ Hooks.on("ready", async () => {
 	Hooks.callAll("polyglot.ready", LanguageProvider);
 	await game.polyglot.provider.ready();
 });
+Hooks.on("babele.ready", async () => {
+	await game.polyglot.provider.initSequence();
+	await game.polyglot.provider.setupSequence();
+	Hooks.callAll("polyglot.languageProvider.ready");
+});
 Hooks.on("renderPolyglotGeneralSettings", renderPolyglotGeneralSettingsHandler);
