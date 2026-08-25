@@ -1,6 +1,6 @@
 export default class PolyglotChatBubbles extends CONFIG.Canvas.chatBubblesClass {
 	async say(token, message, options={}) {
-		if (game.user.isGM && !game.polyglot.runifyGM) {
+		if (game.user.isGM && !game.polyglot.settings.runifyGM) {
 			return super.say(token, message, options);
 		}
 		const { language = "" } = options;

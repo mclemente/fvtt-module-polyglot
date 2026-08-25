@@ -209,6 +209,9 @@ export function registerSettings() {
 		default: true,
 		type: Boolean,
 		requiresReload: true,
+		onChange: (value) => {
+			game.polyglot.settings.enableChatFeatures = value;
+		}
 	});
 	addMenuSetting("display-translated", {
 		name: "POLYGLOT.DisplayTranslated.title",
@@ -231,7 +234,7 @@ export function registerSettings() {
 		type: Boolean,
 		requiresReload: true,
 		onChange: (value) => {
-			game.polyglot.runifyGM = value;
+			game.polyglot.settings.runifyGM = value;
 		}
 	});
 

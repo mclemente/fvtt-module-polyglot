@@ -112,7 +112,7 @@ export class PolyglotGeneralSettings extends FormApplication {
 					},
 				},
 			};
-			if (game.settings.get("polyglot", "enableChatFeatures")) {
+			if (game.polyglot.settings.enableChatFeatures) {
 				data.settings.chat = {
 					...data.settings.chat,
 					"display-translated": this._prepSetting("display-translated"),

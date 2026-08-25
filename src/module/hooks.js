@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export default class PolyglotHooks {
 	/**
 	 * Adds the Languages selector to the chatlog.
@@ -43,13 +42,13 @@ export default class PolyglotHooks {
 	static updateActor(actor, data, options, userId) {
 		if (actor.hasPlayerOwner && actor.testUserPermission(game.user, "OWNER")) {
 			game.polyglot.updateUserLanguages();
-			if (game.polyglot._enableChatFeatures) game.polyglot.updateChatMessages();
+			if (game.polyglot.settings.enableChatFeatures) game.polyglot.updateChatMessages();
 		}
 	}
 
 	static controlToken() {
 		game.polyglot.updateUserLanguages();
-		if (game.polyglot._enableChatFeatures) game.polyglot.updateChatMessages();
+		if (game.polyglot.settings.enableChatFeatures) game.polyglot.updateChatMessages();
 	}
 
 	/**
@@ -129,7 +128,7 @@ export default class PolyglotHooks {
 		const known = game.polyglot.isLanguageKnown(lang);
 		const understood = game.polyglot.isLanguageUnderstood(lang);
 		const isGM = game.user.isGM;
-		const runifyGM = game.settings.get("polyglot", "runifyGM");
+		const runifyGM = game.polyglot.settings.runifyGM;
 		const displayTranslated = game.settings.get("polyglot", "display-translated");
 		const hideTranslation = game.settings.get("polyglot", "hideTranslation");
 		if (isGM && !runifyGM) message.polyglot_unknown = false;
@@ -139,7 +138,6 @@ export default class PolyglotHooks {
 		}
 		const forceTranslation = message.polyglot_force || !message.polyglot_unknown;
 		const messageContent = html.querySelector(".message-content");
-		const innerText = messageContent.innerText.trim();
 
 		const content = document.createElement("div");
 		content.classList.add("polyglot-original-text");

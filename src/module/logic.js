@@ -15,7 +15,11 @@ export class Polyglot {
 		// TODO consider removing this variable and let LanguageProvider handle it instead
 		this.CustomFontSizes = game.settings.get("polyglot", "CustomFontSizes");
 		CONFIG.fontDefinitions = foundry.utils.mergeObject(CONFIG.fontDefinitions, this.FONTS);
-		this.runifyGM = game.settings.get("polyglot", "runifyGM");
+		this.settings = {
+			enableChatFeatures: game.settings.get("polyglot", "enableChatFeatures"),
+			runeRegex: game.settings.get("polyglot", "RuneRegex"),
+			runifyGM: game.settings.get("polyglot", "runifyGM"),
+		};
 	}
 
 	api = {
@@ -26,6 +30,8 @@ export class Polyglot {
 	provider;
 
 	providers = {};
+
+	settings = {};
 
 	tomSelect;
 
@@ -44,8 +50,7 @@ export class Polyglot {
 		const providerId = `native${providerString !== "Generic" ? `.${providerString}` : ""}`;
 		this.providers[providerId] = new providers[`${providerString}LanguageProvider`](providerId);
 
-		this._enableChatFeatures = game.settings.get("polyglot", "enableChatFeatures");
-		if (this._enableChatFeatures) {
+		if (this.settings.enableChatFeatures) {
 			Hooks.on("renderChatInput", PolyglotHooks.renderChatInput);
 			Hooks.on("closeChatLog", PolyglotHooks.closeChatLog);
 			Hooks.on("preCreateChatMessage", PolyglotHooks.preCreateChatMessage);
@@ -349,7 +354,7 @@ export class Polyglot {
 
 		const salted_string = string + salt;
 		const seed = new foundry.dice.MersenneTwister(this._hashCode(salted_string));
-		const regex = game.settings.get("polyglot", "RuneRegex") ? /<[^>]*>|([a-zA-Z\d])/g : /<[^>]*>|(\S)/gu;
+		const regex = game.polyglot.settings.runeRegex ? /<[^>]*>|([a-zA-Z\d])/g : /<[^>]*>|(\S)/gu;
 		const characters = selectedFont.alphabeticOnly
 			? "abcdefghijklmnopqrstuvwxyz"
 			: "abcdefghijklmnopqrstuvwxyz0123456789";
