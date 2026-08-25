@@ -25,7 +25,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 		const data = {};
 		const selectedProvider = game.polyglot.provider.id;
 		// Insert all speed providers into the template data
-		data.providers = Object.values(game.polyglot.api.providers).map((languageProvider) => {
+		data.providers = Object.values(game.polyglot.providers).map((languageProvider) => {
 			const provider = {};
 			provider.id = languageProvider.id;
 			let dotPosition = provider.id.indexOf(".");
@@ -142,7 +142,7 @@ export class PolyglotLanguageSettings extends FormApplication {
 		const languageProvider = game.settings.get("polyglot", "languageProvider");
 		if (languageProvider !== formData.languageProvider) {
 			await game.settings.set("polyglot", "languageProvider", formData.languageProvider);
-			game.polyglot.api.updateProvider();
+			game.polyglot.updateProvider();
 			await game.settings.set("polyglot", "Alphabets", game.polyglot.provider.fonts);
 			await game.settings.set("polyglot", "Languages", game.polyglot.provider.languages);
 		} else {
