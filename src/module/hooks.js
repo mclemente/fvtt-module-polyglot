@@ -6,7 +6,8 @@ export default class PolyglotHooks {
 	 */
 	static renderChatInput(chatlog, elements) {
 		const chatMessage = elements["#chat-message"];
-		const polyglotSelect = document.querySelector(".polyglot-lang-select");
+		const polyglotSelect = document.querySelector(".polyglot-lang-select")
+			?? chatlog.element.querySelector(".polyglot-lang-select");
 		if ((!ui.sidebar.expanded && !chatlog.isPopout) || !chatlog.active) {
 			if (polyglotSelect) polyglotSelect.hidden = true;
 			return game.polyglot.updateUserLanguages();
