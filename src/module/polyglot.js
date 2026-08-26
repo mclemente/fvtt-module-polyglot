@@ -78,10 +78,6 @@ export class Polyglot {
 		this._truespeech = lang;
 	}
 
-	/* -------------------------------------------- */
-	/*  Hooks	                                    */
-	/* -------------------------------------------- */
-
 	/**
 	 * Updates the chat messages.
 	 * It has a delay because switching tokens could cause a controlToken(false) then controlToken(true) very fast.
