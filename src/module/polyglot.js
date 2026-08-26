@@ -26,12 +26,16 @@ export class Polyglot {
 		registerSystem: this.#registerSystem
 	};
 
+	/** @type {LanguageProvider} */
 	provider;
 
+	/** @type {Record<string, LanguageProvider>} */
 	providers = {};
 
+	/** @type {Record<string, unknown>} */
 	settings = {};
 
+	/** @type {TomSelect} */
 	tomSelect;
 
 	get chatElement() {
