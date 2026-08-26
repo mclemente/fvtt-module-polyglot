@@ -10,7 +10,7 @@ import { registerTours } from "./tour.js";
 Hooks.once("init", () => {
 	registerSettings();
 	game.polyglot = new Polyglot();
-	game.polyglot.init();
+	Polyglot.init.call(game.polyglot);
 	game.polyglot.provider.init();
 	return preloadTemplates();
 });
@@ -21,7 +21,6 @@ Hooks.once("i18nInit", () => {
 	}
 	game.polyglot.provider.i18nInit();
 });
-
 Hooks.on("setup", () => {
 	if (game.user.isGM && game.user.character) {
 		console.warn(
@@ -34,7 +33,7 @@ Hooks.on("setup", () => {
 	game.polyglot.provider.setup();
 });
 Hooks.on("ready", async () => {
-	await game.polyglot.ready();
+	await Polyglot.ready.call(game.polyglot);
 	await game.polyglot.provider.ready();
 });
 Hooks.on("babele.ready", async () => {
