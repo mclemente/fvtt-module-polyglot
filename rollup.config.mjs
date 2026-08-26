@@ -6,7 +6,7 @@
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 
 export default () => ({
-	input: "src/module/polyglot.js",
+	input: "src/module/main.js",
 	output: {
 		dir: "dist/module",
 		format: "es",

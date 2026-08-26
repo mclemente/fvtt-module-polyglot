@@ -296,13 +296,6 @@ export default class LanguageProvider {
 	async setup() {
 		if (!this.requiresReady) {
 			await this.setupSequence();
-		} else if (game.modules.get("babele")?.active) {
-			// This is set during the setup hook because babele.ready will already have fired during the ready hook
-			Hooks.on("babele.ready", async () => {
-				await this.initSequence();
-				await this.setupSequence();
-				Hooks.callAll("polyglot.languageProvider.ready");
-			});
 		}
 	}
 

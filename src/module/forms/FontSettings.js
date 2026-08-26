@@ -113,9 +113,9 @@ export class PolyglotFontSettings extends HandlebarsApplicationMixin(Application
 	}
 
 	static async reset() {
-		const defaultAlphabets = new game.polyglot.languageProvider.constructor().fonts;
-		game.polyglot.languageProvider.fonts = defaultAlphabets;
-		await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
+		const defaultAlphabets = new game.polyglot.provider.constructor().fonts;
+		game.polyglot.provider.fonts = defaultAlphabets;
+		await game.settings.set("polyglot", "Alphabets", game.polyglot.provider.fonts);
 		const defaultCustomFontSizes = game.settings.settings.get("polyglot.CustomFontSizes").default;
 		await game.settings.set("polyglot", "CustomFontSizes", defaultCustomFontSizes);
 		this.close();
@@ -126,15 +126,15 @@ export class PolyglotFontSettings extends HandlebarsApplicationMixin(Application
 		const customFontSizes = {};
 		for (const [key, font] of Object.entries(this.fonts)) {
 			customFontSizes[key] = font.size;
-			game.polyglot.languageProvider.fonts[key].alphabeticOnly = font.alphabeticOnly;
-			game.polyglot.languageProvider.fonts[key].logographical = font.logographical;
+			game.polyglot.provider.fonts[key].alphabeticOnly = font.alphabeticOnly;
+			game.polyglot.provider.fonts[key].logographical = font.logographical;
 		}
 		let current = game.settings.get("polyglot", "Alphabets");
-		await game.settings.set("polyglot", "Alphabets", game.polyglot.languageProvider.fonts);
+		await game.settings.set("polyglot", "Alphabets", game.polyglot.provider.fonts);
 		current = game.settings.get("polyglot", "CustomFontSizes");
 		game.polyglot.CustomFontSizes = customFontSizes;
 		await game.settings.set("polyglot", "CustomFontSizes", game.polyglot.CustomFontSizes);
-		const changes = !foundry.utils.isEmpty(foundry.utils.diffObject(current, game.polyglot.languageProvider.fonts))
+		const changes = !foundry.utils.isEmpty(foundry.utils.diffObject(current, game.polyglot.provider.fonts))
 			|| !foundry.utils.isEmpty(foundry.utils.diffObject(current, customFontSizes));
 		if (changes) SettingsConfig.reloadConfirm({ world: true });
 	}

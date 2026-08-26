@@ -147,16 +147,16 @@ export default class drawSteelLanguageProvider extends LanguageProvider {
 	}
 
 	getUserLanguages(actor) {
-		let known_languages = new Set();
-		let literate_languages = new Set();
+		let knownLanguages = new Set();
+		let literateLanguages = new Set();
 
 		const actorLangs = Array.from(actor.system.biography?.languages);
 
 		if (actorLangs) {
-			known_languages = new Set(actorLangs);
+			knownLanguages = new Set(actorLangs);
 		}
 
-		return [known_languages, literate_languages];
+		return [knownLanguages, literateLanguages];
 	}
 
 	getSystemDefaultLanguage() {
