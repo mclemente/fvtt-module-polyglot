@@ -1,166 +1,73 @@
 import LanguageProvider from "./templates/Base.js";
 
 export default class pf2eLanguageProvider extends LanguageProvider {
+	constructor(id) {
+		super(id);
+		// This provider is shared between PF2e and SF2e
+		if (game.system.id === "pf2e") {
+			this.languages = {
+				...this.languages,
+				"anadi": {"font": "Jungle Slang"},
+				"arboreal": {"font": "Olde Espruar"},
+				"boggard": {"font": "Semphari"},
+				"caligni": {"font": "High Drowic"},
+				"cyclops": {"font": "Meroitic Demotic"},
+				"destrachan": {"font": "Ar Ciela"},
+				"dziriak": {"font": "Pulsian"},
+				"erutaki": {"font": "Tuzluca"},
+				"garundi": {"font": "Qijomi"},
+				"grippli": {"font": "Semphari"},
+				"hallit": {"font": "Tengwar"},
+				"iruxi": {"font": "Semphari"},
+				"jistkan": {"font": "Valmaric"},
+				"jyoti": {"font": "Celestial"},
+				"kelish": {"font": "Highschool Runes"},
+				"kholo": {"font": "Kargi"},
+				"mwangi": {"font": "Tengwar"},
+				"protean": {"font": "Barazhad"},
+				"sakvroth": {"font": "High Drowic"},
+				"shoanti": {"font": "Tengwar"},
+				"shoony": {"font": "Dethek"},
+				"skald": {"font": "Valmaric"},
+				"sphinx": {"font": "Reanaarian"},
+				"strix": {"font": "Infernal"},
+				"sylvan": {"font": "Olde Espruar"},
+				"taldane": {"font": "Tengwar"},
+				"tengu": {"font": "Oriental"},
+				"thassilonian": {"font": "Thassilonian"},
+				"tien": {"font": "Oriental"},
+				"varisian": {"font": "Tengwar"},
+				"vudrani": {"font": "Qijomi"},
+				"wildsong": {"font": "Jungle Slang"}
+			}
+		} else {
+			this.languages["pact-common"] = { font: "Tengwar" };
+		}
+	}
+
+	// Common languages between PF2e and SF2e
 	languages = {
-		chthonian: {
-			font: "Barazhad",
-		},
-		aklo: {
-			font: "Ophidian",
-		},
-		alghollthu: {
-			font: "Ar Ciela",
-		},
-		anadi: {
-			font: "Jungle Slang",
-		},
-		thalassic: {
-			font: "Olde Thorass",
-		},
-		arboreal: {
-			font: "Olde Espruar",
-		},
-		sussuran: {
-			font: "Olde Thorass",
-		},
-		azlanti: {
-			font: "Tengwar",
-		},
-		boggard: {
-			font: "Semphari",
-		},
-		caligni: {
-			font: "High Drowic",
-		},
-		empyrean: {
-			font: "Celestial",
-		},
-		cyclops: {
-			font: "Meroitic Demotic",
-		},
-		daemonic: {
-			font: "Infernal",
-		},
-		destrachan: {
-			font: "Ar Ciela",
-		},
-		draconic: {
-			font: "Iokharic",
-		},
-		wildsong: {
-			font: "Jungle Slang",
-		},
-		dwarven: {
-			font: "Dethek",
-		},
-		dziriak: {
-			font: "Pulsian",
-		},
-		elven: {
-			font: "Espruar",
-		},
-		erutaki: {
-			font: "Tuzluca",
-		},
-		garundi: {
-			font: "Qijomi",
-		},
-		kholo: {
-			font: "Kargi",
-		},
-		gnomish: {
-			font: "Dethek",
-		},
-		goblin: {
-			font: "Kargi",
-		},
-		grippli: {
-			font: "Semphari",
-		},
-		hallit: {
-			font: "Tengwar",
-		},
-		pyric: {
-			font: "Dethek",
-		},
-		iruxi: {
-			font: "Semphari",
-		},
-		jistkan: {
-			font: "Valmaric",
-		},
-		jotun: {
-			font: "Meroitic Demotic",
-		},
-		jyoti: {
-			font: "Celestial",
-		},
-		diabolic: {
-			font: "Infernal",
-		},
-		kelish: {
-			font: "Highschool Runes",
-		},
-		mwangi: {
-			font: "Tengwar",
-		},
-		necril: {
-			font: "High Drowic",
-		},
-		orcish: {
-			font: "Dethek",
-		},
-		protean: {
-			font: "Barazhad",
-		},
-		requian: {
-			font: "Reanaarian",
-		},
-		shoanti: {
-			font: "Tengwar",
-		},
-		skald: {
-			font: "Valmaric",
-		},
-		sphinx: {
-			font: "Reanaarian",
-		},
-		strix: {
-			font: "Infernal",
-		},
-		sylvan: {
-			font: "Olde Espruar",
-		},
-		shoony: {
-			font: "Dethek",
-		},
-		taldane: {
-			font: "Tengwar",
-		},
-		tengu: {
-			font: "Oriental",
-		},
-		petran: {
-			font: "Dethek",
-		},
-		thassilonian: {
-			font: "Thassilonian",
-		},
-		tien: {
-			font: "Oriental",
-		},
-		sakvroth: {
-			font: "High Drowic",
-		},
-		utopian: {
-			font: "Maras Eye",
-		},
-		varisian: {
-			font: "Tengwar",
-		},
-		vudrani: {
-			font: "Qijomi",
-		},
+		"aklo": {"font": "Ophidian"},
+		"alghollthu": {"font": "Ar Ciela"},
+		"azlanti": {"font": "Tengwar"},
+		"chthonian": {"font": "Barazhad"},
+		"daemonic": {"font": "Infernal"},
+		"diabolic": {"font": "Infernal"},
+		"draconic": {"font": "Iokharic"},
+		"dwarven": {"font": "Dethek"},
+		"elven": {"font": "Espruar"},
+		"empyrean": {"font": "Celestial"},
+		"gnomish": {"font": "Dethek"},
+		"goblin": {"font": "Kargi"},
+		"jotun": {"font": "Meroitic Demotic"},
+		"necril": {"font": "High Drowic"},
+		"orcish": {"font": "Dethek"},
+		"petran": {"font": "Dethek"},
+		"pyric": {"font": "Dethek"},
+		"requian": {"font": "Reanaarian"},
+		"sussuran": {"font": "Olde Thorass"},
+		"thalassic": {"font": "Olde Thorass"},
+		"utopian": {"font": "Maras Eye"}
 	};
 
 	get settings() {
@@ -193,49 +100,8 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 		});
 	}
 
-	ready() {
-		if (game.user.isGM) {
-			const pf2eDefaultLanguage = game.settings.get("pf2e", "homebrew.languageRarities").commonLanguage;
-			const pf2eDefaultLangString = game.i18n.localize(CONFIG.PF2E.languages[pf2eDefaultLanguage]);
-			const messagesInCommon = game.messages.contents
-				.slice(-CONFIG.ChatMessage.batchSize)
-				.filter((m) => m.flags?.polyglot?.language === "common");
-			if (!messagesInCommon.length) return;
-
-			new Dialog({
-				title: "Polyglot Changes",
-				content: `<div>
-					<p>Polyglot has updated to integrate some new features of PF2e, you can read all changes on <a class="hyperlink" href="https://github.com/mclemente/fvtt-module-polyglot/releases/tag/2.3.24" target="_blank" rel="nofollow noopener">this link</a>.</p>
-					<p style="color: red"><b>These changes will render all chat messages written in Common unreadable for players that know Common. They need to be updated to a proper language.</b></p>
-					<p>Polyglot will update the language of the last ${messagesInCommon.length} Common messages to <b style="color: red">${pf2eDefaultLangString}</b>.</p>
-					<p>If you want to change them to another language on PF2e, you can do so by changing PF2e's "Common" language in the Homebrew Elements menu and reloading the page.</p>
-				</div>`,
-				buttons: {
-					site: {
-						label: "Polyglot Wiki",
-						icon: '<i class="fas fa-landmark"></i>',
-						callback: () => window.open("https://github.com/mclemente/fvtt-module-polyglot/wiki/%5BPF2e%5D-Languages")
-					},
-					update: {
-						label: `Update to ${pf2eDefaultLangString}`,
-						icon: '<i class="fa-solid fa-wrench"></i>',
-						callback: () => {
-							const changed = messagesInCommon.map((m) => {
-								return {
-									_id: m._id,
-									"flags.polyglot.language": pf2eDefaultLanguage
-								};
-							});
-							ChatMessage.updateDocuments(changed);
-						}
-					}
-				}
-			}, { width: 500 }).render(true);
-		}
-	}
-
 	async getLanguages() {
-		const customSystemLanguages = game.settings.get("pf2e", "homebrew.languages");
+		const customSystemLanguages = game.settings.get(game.system.id, "homebrew.languages");
 		if (this.replaceLanguages) {
 			CONFIG.PF2E.languages = {
 				common: "PF2E.Actor.Creature.Language.common"
@@ -271,7 +137,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 	removeLanguage() {}
 
 	getSystemDefaultLanguage() {
-		return game.settings.get("pf2e", "homebrew.languageRarities").commonLanguage;
+		return game.settings.get(game.system.id, "homebrew.languageRarities").commonLanguage;
 	}
 
 	getDefaultLanguage() {
@@ -310,7 +176,7 @@ export default class pf2eLanguageProvider extends LanguageProvider {
 	getUserLanguages(actor) {
 		let knownLanguages = new Set();
 		let literateLanguages = new Set();
-		const languageRarities = game.settings.get("pf2e", "homebrew.languageRarities");
+		const languageRarities = game.settings.get(game.system.id, "homebrew.languageRarities");
 		const actorLanguages = actor.system?.details?.languages;
 		if (actorLanguages) {
 			for (let lang of actorLanguages.value) {
