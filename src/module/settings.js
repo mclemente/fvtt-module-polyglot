@@ -258,19 +258,20 @@ export function registerSettings() {
 		scope: "user"
 	});
 
-	Hooks.on("i18nInit", () => {
-		addMenuSetting("allowOOC", {
-			name: "POLYGLOT.AllowOOC.title",
-			hint: "POLYGLOT.AllowOOC.hint",
-			choices: {
-				a: game.i18n.localize("POLYGLOT.AllowOOCOptions.a"),
-				b: game.i18n.localize("POLYGLOT.AllowOOCOptions.b"),
-				c: game.i18n.localize("POLYGLOT.AllowOOCOptions.c"),
-				d: game.i18n.localize("POLYGLOT.AllowOOCOptions.d"),
-			},
-			default: "b",
-			type: String,
-		});
+	addMenuSetting("allowOOC", {
+		name: "POLYGLOT.AllowOOC.title",
+		hint: "POLYGLOT.AllowOOC.hint",
+		choices: {
+			a: "POLYGLOT.AllowOOCOptions.a",
+			b: "POLYGLOT.AllowOOCOptions.b",
+			c: "POLYGLOT.AllowOOCOptions.c",
+			d: "POLYGLOT.AllowOOCOptions.d",
+		},
+		default: "b",
+		type: String,
+		onChange: (value) => {
+			game.polyglot.settings.allowOOC = value;
+		}
 	});
 }
 

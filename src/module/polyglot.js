@@ -18,6 +18,7 @@ export class Polyglot {
 			enableChatFeatures: game.settings.get("polyglot", "enableChatFeatures"),
 			runeRegex: game.settings.get("polyglot", "RuneRegex"),
 			runifyGM: game.settings.get("polyglot", "runifyGM"),
+			allowOOC: game.settings.get("polyglot", "allowOOC")
 		};
 	}
 
@@ -452,7 +453,7 @@ export class Polyglot {
 	/* -------------------------------------------- */
 
 	_allowOOC() {
-		switch (game.settings.get("polyglot", "allowOOC")) {
+		switch (this.settings.allowOOC) {
 			case "a":
 				return true;
 			case "b":
