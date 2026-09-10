@@ -795,29 +795,24 @@ export class Polyglot {
 	 * @returns {Boolean}
 	 */
 	static preCreateChatMessage(message, data, options, userId) {
-		const isCheckboxDisabled = this.tomSelect?.isDisabled ?? true;
-		const isMessageLink = this._isMessageLink(data.content);
-		const messageHasRolls = /\[\[(.*?)\]\]/g.test(data.content) || message.rolls?.length;
+		const { flags, rolls, style } = message;
+		const { IC, OOC } = CONST.CHAT_MESSAGE_STYLES;
+
+		if (!this.tomSelect || this.tomSelect.isDisabled) return true;
+		if (this._isMessageLink(data.content)) return true;
+		if (/\[\[(.*?)\]\]/g.test(data.content) || rolls?.length) return true;
+		if (style !== IC && (style !== OOC || !this._allowOOC())) return true;
+
 		// Meant for systems with odd message handling (e.g. PF2e)
-		const invalidMessageMode = Object.hasOwn(options, "messageMode") && options.messageMode === undefined;
-		const isNonICMessage =
-			message.style !== CONST.CHAT_MESSAGE_STYLES.IC
-			&& (message.style !== CONST.CHAT_MESSAGE_STYLES.OOC || !this._allowOOC());
+		if (Object.hasOwn(options, "messageMode") && options.messageMode === undefined) return true;
+
 		// Message preprended by /desc from either Cautious GM Tools or Narrator Tools modules
-		const isDescMessage =
-			message.flags?.cgmp?.subType === 1
-			|| ["description", "narration", "notification"].includes(message.flags?.["narrator-tools"]?.type);
-		if (
-			isCheckboxDisabled
-			|| isMessageLink
-			|| messageHasRolls
-			|| invalidMessageMode
-			|| isNonICMessage
-			|| isDescMessage
-		) return true;
+		if (flags?.cgmp?.subType === 1) return true;
+		if (["description", "narration", "notification"].includes(flags?.["narrator-tools"]?.type)) return true;
 
 		const lang = this.chatElement.querySelector("select#polyglot-language").value;
-		if (lang && !data.flags?.polyglot.language) message.updateSource({ "flags.polyglot.language": lang });
+		if (lang && !data.flags?.polyglot?.language) message.updateSource({ "flags.polyglot.language": lang });
+		return true;
 	}
 
 	/**
