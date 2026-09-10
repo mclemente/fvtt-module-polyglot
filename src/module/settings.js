@@ -98,6 +98,9 @@ export function registerSettings() {
 	addMenuSetting("RuneRegex", {
 		default: false,
 		type: Boolean,
+		onChange: (value) => {
+			game.polyglot.settings.RuneRegex = value;
+		}
 	});
 	addMenuSetting("enableAllFonts", {
 		name: "POLYGLOT.enableAllFonts.title",
@@ -253,9 +256,14 @@ export function registerSettings() {
 		)
 	});
 	addMenuSetting("checkbox", {
-		default: true,
-		type: Boolean,
-		scope: "user"
+		type: new SchemaField({
+			enabled: new BooleanField({ initial: true }),
+			timestamp: new NumberField({nullable: false, initial: Date.now() })
+		}),
+		scope: "user",
+		onChange: (value) => {
+			game.polyglot.settings.checkbox = value;
+		}
 	});
 
 	addMenuSetting("allowOOC", {

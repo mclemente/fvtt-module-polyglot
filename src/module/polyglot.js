@@ -14,12 +14,11 @@ export class Polyglot {
 		// TODO consider removing this variable and let LanguageProvider handle it instead
 		this.CustomFontSizes = game.settings.get("polyglot", "CustomFontSizes");
 		CONFIG.fontDefinitions = foundry.utils.mergeObject(CONFIG.fontDefinitions, this.FONTS);
-		this.settings = {
-			enableChatFeatures: game.settings.get("polyglot", "enableChatFeatures"),
-			runeRegex: game.settings.get("polyglot", "RuneRegex"),
-			runifyGM: game.settings.get("polyglot", "runifyGM"),
-			allowOOC: game.settings.get("polyglot", "allowOOC")
-		};
+		this.settings = Object.fromEntries(
+			["RuneRegex", "allowOOC", "checkbox", "enableChatFeatures", "runifyGM"]
+				.map((key) => [key, game.settings.get("polyglot", key)])
+		);
+		Object.defineProperty(this.settings, "runeRegex", { get: () => this.settings.RuneRegex });
 	}
 
 	api = {
@@ -245,7 +244,11 @@ export class Polyglot {
 					}
 				}
 			});
-			this.toggleSelector();
+			if (!game.polyglot.settings.checkbox.enabled) {
+				const dt = Date.now() - game.polyglot.settings.checkbox.timestamp;
+				if (dt/3600000 < 8) this.toggleSelector();
+				else game.settings.set("polyglot", "checkbox", { enabled: true, timestamp: Date.now() });
+			}
 		} else {
 			this.tomSelect.close();
 			this.tomSelect.clearOptions();
@@ -259,7 +262,7 @@ export class Polyglot {
 
 	toggleSelector() {
 		const select = this.chatElement.querySelector(".polyglot-lang-select");
-		if (!game.settings.get("polyglot", "checkbox")) {
+		if (!game.polyglot.settings.checkbox.enabled) {
 			this.tomSelect.disable();
 			select.dataset.tooltip = "POLYGLOT.RightClickToEnable";
 			select.dataset.tooltipDirection = "LEFT";
@@ -745,8 +748,8 @@ export class Polyglot {
 		polyglotDiv.classList.add("polyglot", "polyglot-lang-select", "flexrow");
 		polyglotDiv.innerHTML = "<select id='polyglot-language' name='polyglot-language'></select>";
 		polyglotDiv.addEventListener("contextmenu", async () => {
-			const setting = !game.settings.get("polyglot", "checkbox");
-			await game.settings.set("polyglot", "checkbox", setting);
+			const setting = !game.polyglot.settings.checkbox.enabled;
+			await game.settings.set("polyglot", "checkbox", { enabled: setting, timestamp: Date.now() });
 			this.toggleSelector();
 		});
 		chatMessage.insertAdjacentElement("beforebegin", polyglotDiv);
