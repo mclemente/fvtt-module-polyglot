@@ -4,20 +4,15 @@ export default class PolyglotChatBubbles extends CONFIG.Canvas.chatBubblesClass 
 			return super.say(token, message, options);
 		}
 		const { language = "" } = options;
+		const { languages } = game.polyglot.provider;
 		let lang = "";
 		let randomId = "";
 		if (language) {
 			randomId = foundry.utils.randomID(16);
 			if (game.polyglot.provider.languages[language]) {
 				lang = language;
-			} else {
-				Object.values(game.polyglot.provider.languages).every((l) => {
-					if (language === l.label) {
-						lang = language;
-						return false;
-					}
-					return true;
-				});
+			} else if (Object.values(languages).some((l) => l.label === language)) {
+				lang = language;
 			}
 		} else {
 			// Find the message out of the last 10 chat messages, last to first
