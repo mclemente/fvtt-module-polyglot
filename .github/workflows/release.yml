@@ -142,7 +142,7 @@ jobs:
               uses: battila7/get-version-action@v2
 
             - name: Foundry Release API
-              uses: fjogeleit/http-request-action@v1
+              uses: fjogeleit/http-request-action@v2
               with:
                   url: "https://api.foundryvtt.com/_api/packages/release_version"
                   method: "POST"
