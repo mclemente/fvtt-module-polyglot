@@ -881,7 +881,7 @@ export class Polyglot {
 				messageContent.append(translation);
 			}
 		} else if (!forceTranslation && message.polyglot_unknown) {
-			messageContent.empty().append(content);
+			messageContent.replaceChildren(content);
 		}
 
 		if (isGM || ((known || understood) && !hideTranslation)) {
