@@ -57,28 +57,54 @@ export default class tormenta20LanguageProvider extends LanguageProvider {
 	}
 
 	async getLanguages() {
-		const languagesSetting = game.settings.get("polyglot", "Languages");
-		const langs = {};
-		if (this.replaceLanguages) {
-			CONFIG.T20.idiomas = {};
-		}
-		Object.keys(CONFIG.T20.idiomas).forEach((key) => {
-			const label = CONFIG.T20.idiomas[key];
-			if (label) {
-				langs[key] = {
-					label,
-					font: languagesSetting[key]?.font || this.languages[key]?.font || this.defaultFont,
-					rng: languagesSetting[key]?.rng ?? "default",
-				};
+		const settings = game.settings.get("polyglot", "Languages");
+		const languages = {};
+
+		if (!this.replaceLanguages) {
+			for (const [id, systemLabel] of Object.entries(CONFIG.T20.idiomas ?? {})) {
+				if (!systemLabel) continue;
+
+				// Prefer a label configured through Polyglot.
+				const label = settings[id]?.label?.trim() || systemLabel;
+
+				languages[id] = {label, font: settings[id]?.font || this.languages[id]?.font || this.defaultFont, rng: settings[id]?.rng ?? "default"};
+
+				// Make the label available to the T20 sheet.
+				CONFIG.T20.idiomas[id] = label;
 			}
-		});
-		this.languages = langs;
+		}
+
+		this.languages = languages;
+	}
+
+	addToConfig(key, label) {
+		CONFIG.T20.idiomas ??= {};
+		CONFIG.T20.idiomas[key] = label;
+	}
+
+	removeFromConfig(key) {
+		if (CONFIG.T20.idiomas) {
+			delete CONFIG.T20.idiomas[key];
+		}
 	}
 
 	getUserLanguages(actor) {
-		let knownLanguages = new Set();
-		let literateLanguages = new Set();
-		for (let lang of actor.system.tracos.idiomas.value) knownLanguages.add(lang);
+		const traits = actor?.system?.tracos?.idiomas;
+
+		const knownLanguages = new Set(traits?.value ?? []);
+		const literateLanguages = new Set();
+
+		const custom = traits?.custom ?? "";
+
+		for (const language of custom.split(/[,;]/)) {
+			const name = language.trim();
+			if (!name) continue;
+
+			const id = name.slugify({replacement: "_"});
+
+			knownLanguages.add(id);
+		}
+
 		return [knownLanguages, literateLanguages];
 	}
 }
